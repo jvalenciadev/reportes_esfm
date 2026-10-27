@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TrendingUpIcon, CalendarIcon } from '../ui/Icons';
 
 export interface YearDataPoint {
@@ -34,6 +34,19 @@ export function YearProgression({
     sortedData[sortedData.length - 1]?.year ?? 2026
   );
 
+  useEffect(() => {
+    if (!isExpanded) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsExpanded(false);
+    };
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isExpanded]);
+
   if (sortedData.length === 0) return null;
 
   const maxValue = Math.max(...sortedData.map((d) => d.value), 1);
@@ -50,14 +63,8 @@ export function YearProgression({
     growthRate = Math.round(((currentItem.value - previousItem.value) / previousItem.value) * 1000) / 10;
   }
 
-  return (
-    <div
-      className={`bg-white rounded-2xl border transition-all duration-300 p-5 shadow-xs ${
-        isExpanded
-          ? 'col-span-full border-[#c9a751] shadow-md ring-1 ring-[#c9a751]/30'
-          : 'border-slate-200/90'
-      }`}
-    >
+  const renderContent = (fullscreen: boolean) => (
+    <div className="w-full flex flex-col justify-between">
       <div className="flex flex-col gap-3 mb-4 pb-3 border-b border-slate-100">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0 flex-1">
@@ -204,7 +211,7 @@ export function YearProgression({
                 </span>
               </div>
 
-              <div className={`w-full ${isExpanded ? 'h-3' : 'h-2'} rounded-full bg-slate-100 overflow-hidden`}>
+              <div className={`w-full ${fullscreen ? 'h-3' : 'h-2'} rounded-full bg-slate-100 overflow-hidden`}>
                 <div
                   className="h-full rounded-full transition-all duration-300"
                   style={{
@@ -218,5 +225,25 @@ export function YearProgression({
         })}
       </div>
     </div>
+  );
+
+  return (
+    <>
+      <div className="bg-white rounded-2xl border border-slate-200/90 transition-all duration-300 p-5 shadow-xs flex flex-col justify-between">
+        {renderContent(false)}
+      </div>
+
+      {isExpanded && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-8 bg-slate-950/80 backdrop-blur-md animate-in fade-in duration-200">
+          <div
+            className="fixed inset-0 -z-10"
+            onClick={() => setIsExpanded(false)}
+          />
+          <div className="relative z-10 w-full max-w-7xl max-h-[92vh] overflow-y-auto bg-white rounded-2xl p-6 sm:p-8 shadow-2xl border-2 border-[#c9a751] my-auto flex flex-col justify-between">
+            {renderContent(true)}
+          </div>
+        </div>
+      )}
+    </>
   );
 }

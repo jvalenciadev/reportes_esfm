@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 
 export interface TrendSeries {
   id: string;
@@ -129,70 +129,100 @@ export function TrendLineChart({
     });
   };
 
-  return (
-    <div
-      className={`bg-white rounded-2xl border transition-all duration-300 p-5 shadow-xs flex flex-col justify-between ${
-        isExpanded
-          ? 'col-span-full border-[#c9a751] shadow-md ring-1 ring-[#c9a751]/30'
-          : 'border-slate-200'
-      }`}
-    >
-      {/* Encabezado con Botón Dinámico de Agrandar / Restaurar */}
-      <div className="flex flex-col gap-3 mb-4 pb-3 border-b border-slate-100">
-        <div className="flex items-start justify-between gap-3">
-          <div className="min-w-0 flex-1">
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#c9a751] shrink-0" />
-              <h3 className={`font-black text-slate-900 tracking-tight leading-snug ${isExpanded ? 'text-lg sm:text-xl' : 'text-base'}`}>
-                {title}
-              </h3>
+  useEffect(() => {
+    if (!isExpanded) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsExpanded(false);
+    };
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isExpanded]);
+
+  const renderContent = (fullscreen: boolean) => {
+    const chartHeight = fullscreen ? 460 : height;
+    const chartWidth = fullscreen ? 1050 : 850;
+    const chartInnerWidth = chartWidth - padding.left - padding.right;
+    const chartInnerHeight = chartHeight - padding.top - padding.bottom;
+
+    const calcX = (year: number) => {
+      if (allYears.length <= 1) return padding.left;
+      const min = allYears[0];
+      const max = allYears[allYears.length - 1];
+      return padding.left + ((year - min) / (max - min)) * chartInnerWidth;
+    };
+
+    const calcY = (val: number) => {
+      if (valueRange === 0) return padding.top + chartInnerHeight / 2;
+      return padding.top + chartInnerHeight - ((val - minValue) / valueRange) * chartInnerHeight;
+    };
+
+    return (
+      <div className="w-full flex flex-col justify-between">
+        {/* Encabezado con Botón Dinámico de Agrandar / Restaurar */}
+        <div className="flex flex-col gap-3 mb-4 pb-3 border-b border-slate-100">
+          <div className="flex items-start justify-between gap-3">
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#c9a751] shrink-0" />
+                <h3 className={`font-black text-slate-900 tracking-tight leading-snug ${fullscreen ? 'text-xl sm:text-2xl' : 'text-base'}`}>
+                  {title}
+                </h3>
+                {fullscreen && (
+                  <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-[#faf5e8] text-[#7d6325] border border-[#e5d5a6] font-mono">
+                    Modo Presentación Pantalla Completa
+                  </span>
+                )}
+              </div>
+              {subtitle && <p className="text-xs text-slate-500 mt-1">{subtitle}</p>}
             </div>
-            {subtitle && <p className="text-xs text-slate-500 mt-1">{subtitle}</p>}
+
+            {/* Botón dinámico Agrandar / Restaurar cuadro */}
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold border transition-all flex items-center gap-1.5 shrink-0 ${
+                fullscreen
+                  ? 'bg-[#faf5e8] text-[#7d6325] border-[#c9a751] shadow-xs ring-1 ring-[#c9a751]'
+                  : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100 hover:text-slate-900'
+              }`}
+              title={fullscreen ? 'Cerrar pantalla completa (Esc)' : 'Agrandar a pantalla completa'}
+            >
+              <span>{fullscreen ? '✕ Salir Pantalla Completa (Esc)' : '⛶ Agrandar'}</span>
+            </button>
           </div>
 
-          {/* Botón dinámico Agrandar / Restaurar cuadro */}
-          <button
-            onClick={() => setIsExpanded(!isExpanded)}
-            className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-all flex items-center gap-1 shrink-0 ${
-              isExpanded
-                ? 'bg-[#faf5e8] text-[#7d6325] border-[#c9a751] shadow-2xs ring-1 ring-[#c9a751]'
-                : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100 hover:text-slate-900'
-            }`}
-            title={isExpanded ? 'Restaurar tamaño normal' : 'Agrandar este cuadro dinámicamente'}
-          >
-            <span>{isExpanded ? '✕ Restaurar' : '⛶ Agrandar'}</span>
-          </button>
+          {/* Controles de Leyenda de Series */}
+          {series.length > 0 && (
+            <div className="flex items-center gap-1.5 flex-wrap pt-0.5">
+              {series.map((s) => {
+                const isActive = activeSeries[s.id];
+                return (
+                  <button
+                    key={s.id}
+                    onClick={() => toggleSeries(s.id)}
+                    className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold border transition-all ${
+                      isActive
+                        ? 'bg-slate-50 border-slate-300 text-slate-800 shadow-2xs'
+                        : 'bg-white border-slate-200 text-slate-400 opacity-60 line-through'
+                    }`}
+                  >
+                    <span
+                      className="w-2.5 h-2.5 rounded-full shrink-0"
+                      style={{ backgroundColor: s.color }}
+                    />
+                    <span className="truncate max-w-[220px]">{s.name}</span>
+                  </button>
+                );
+              })}
+            </div>
+          )}
         </div>
 
-        {/* Controles de Leyenda de Series */}
-        {series.length > 0 && (
-          <div className="flex items-center gap-1.5 flex-wrap pt-0.5">
-            {series.map((s) => {
-              const isActive = activeSeries[s.id];
-              return (
-                <button
-                  key={s.id}
-                  onClick={() => toggleSeries(s.id)}
-                  className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold border transition-all ${
-                    isActive
-                      ? 'bg-slate-50 border-slate-300 text-slate-800 shadow-2xs'
-                      : 'bg-white border-slate-200 text-slate-400 opacity-60 line-through'
-                  }`}
-                >
-                  <span
-                    className="w-2.5 h-2.5 rounded-full shrink-0"
-                    style={{ backgroundColor: s.color }}
-                  />
-                  <span className="truncate max-w-[200px]">{s.name}</span>
-                </button>
-              );
-            })}
-          </div>
-        )}
-      </div>
-
-      {/* Gráfico SVG en Alta Resolución */}
-      <div className="relative w-full pt-1 pb-1">
+        {/* Gráfico SVG en Alta Resolución */}
+        <div className="relative w-full pt-1 pb-1">
         <svg
           viewBox={`0 0 ${width} ${dynamicHeight}`}
           className="w-full h-auto select-none overflow-visible"
@@ -446,41 +476,69 @@ export function TrendLineChart({
         })()}
       </div>
 
-      {/* Tabla Cronológica Detallada que aparece cuando el usuario agranda el cuadro */}
-      {isExpanded && (
-        <div className="mt-4 pt-4 border-t border-slate-100 overflow-x-auto">
-          <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 block mb-2 font-mono">
-            Tabla Completa de Datos por Año (Modo Exposición):
-          </span>
-          <table className="w-full text-left border-collapse text-xs font-mono">
-            <thead>
-              <tr className="bg-slate-50 border-b border-slate-200 text-slate-600 font-bold">
-                <th className="py-2 px-3">Gestión</th>
-                {visibleSeries.map((s) => (
-                  <th key={s.id} className="py-2 px-3 text-right" style={{ color: s.color }}>
-                    {s.name}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100">
-              {allYears.map((year) => (
-                <tr key={year} className="hover:bg-slate-50/70">
-                  <td className="py-2 px-3 font-bold text-slate-900">{year}</td>
-                  {visibleSeries.map((s) => {
-                    const row = s.data.find((d) => d.year === year);
-                    return (
-                      <td key={s.id} className="py-2 px-3 text-right font-black text-slate-800">
-                        {row ? `${row.value.toLocaleString('es-BO')} ${unit}` : '-'}
-                      </td>
-                    );
-                  })}
+        {/* Tabla Cronológica Detallada que aparece cuando el usuario agranda el cuadro */}
+        {fullscreen && (
+          <div className="mt-5 pt-4 border-t border-slate-200 overflow-x-auto">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[11px] font-black uppercase tracking-wider text-slate-500 font-mono">
+                Tabla Completa de Datos Censales por Gestión (Modo Exposición):
+              </span>
+              <span className="text-xs text-slate-400 font-mono">
+                {allYears.length} Gestiones registradas
+              </span>
+            </div>
+            <table className="w-full text-left border-collapse text-xs font-mono">
+              <thead>
+                <tr className="bg-slate-50 border-b border-slate-200 text-slate-600 font-bold">
+                  <th className="py-2.5 px-3">Gestión</th>
+                  {visibleSeries.map((s) => (
+                    <th key={s.id} className="py-2.5 px-3 text-right" style={{ color: s.color }}>
+                      {s.name}
+                    </th>
+                  ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {allYears.map((year) => (
+                  <tr key={year} className="hover:bg-slate-50/70 transition-colors">
+                    <td className="py-2 px-3 font-bold text-slate-900">{year}</td>
+                    {visibleSeries.map((s) => {
+                      const row = s.data.find((d) => d.year === year);
+                      return (
+                        <td key={s.id} className="py-2 px-3 text-right font-black text-slate-800">
+                          {row ? `${row.value.toLocaleString('es-BO')} ${unit}` : '-'}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  return (
+    <>
+      {/* Contenedor Normal en el Grid */}
+      <div className="bg-white rounded-2xl border border-slate-200 transition-all duration-300 p-5 shadow-xs flex flex-col justify-between">
+        {renderContent(false)}
+      </div>
+
+      {/* Modal Pantalla Completa Absoluta (Agrandar Completo) */}
+      {isExpanded && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-8 bg-slate-950/80 backdrop-blur-md animate-in fade-in duration-200">
+          <div
+            className="fixed inset-0 -z-10"
+            onClick={() => setIsExpanded(false)}
+          />
+          <div className="relative z-10 w-full max-w-7xl max-h-[92vh] overflow-y-auto bg-white rounded-2xl p-6 sm:p-8 shadow-2xl border-2 border-[#c9a751] my-auto flex flex-col justify-between">
+            {renderContent(true)}
+          </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
