@@ -20,9 +20,9 @@ export function SieTerritorialExplorer({ data }: SieTerritorialExplorerProps) {
     data.forEach((r) => {
       const isUrb = (r.area || '').toLowerCase().includes('urb');
       if (isUrb) {
-        mapUrb.set(r.anio, (mapUrb.get(r.anio) || 0) + (r.cantidad || 0));
+        mapUrb.set(r.anio, r.cantidad);
       } else {
-        mapRur.set(r.anio, (mapRur.get(r.anio) || 0) + (r.cantidad || 0));
+        mapRur.set(r.anio, r.cantidad);
       }
     });
 

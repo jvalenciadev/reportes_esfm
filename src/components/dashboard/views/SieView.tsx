@@ -82,24 +82,32 @@ export function SieView({ data }: SieViewProps) {
     }));
   }, [data.matricula_rural_urbana]);
 
-  // 5. Serie Lineal Histórica: Rural vs Urbana vs Total (2000 - 2025)
-  const ruralUrbanaLineSeries: TrendSeries[] = useMemo(() => {
+  // 5. Mapeo Único y Limpio Rural-Urbano (Corrige la duplicación de 2018 del archivo censal fuente)
+  const cleanRuralUrbana = useMemo(() => {
     const mapUrb = new Map<number, number>();
     const mapRur = new Map<number, number>();
     const mapTot = new Map<number, number>();
 
     data.matricula_rural_urbana.forEach((r) => {
-      const isUrb = r.area.toLowerCase().includes('urb');
+      const isUrb = (r.area || '').toLowerCase().includes('urb');
       if (isUrb) {
-        mapUrb.set(r.anio, (mapUrb.get(r.anio) || 0) + (r.cantidad || 0));
+        mapUrb.set(r.anio, r.cantidad);
       } else {
-        mapRur.set(r.anio, (mapRur.get(r.anio) || 0) + (r.cantidad || 0));
+        mapRur.set(r.anio, r.cantidad);
       }
-      mapTot.set(r.anio, (mapTot.get(r.anio) || 0) + (r.cantidad || 0));
     });
 
     const years = Array.from(new Set(data.matricula_rural_urbana.map((r) => r.anio))).sort((a, b) => a - b);
+    years.forEach((y) => {
+      mapTot.set(y, (mapUrb.get(y) || 0) + (mapRur.get(y) || 0));
+    });
 
+    return { mapUrb, mapRur, mapTot, years };
+  }, [data.matricula_rural_urbana]);
+
+  // 5a. Serie Lineal Histórica: Rural vs Urbana vs Total (2000 - 2025)
+  const ruralUrbanaLineSeries: TrendSeries[] = useMemo(() => {
+    const { mapUrb, mapRur, mapTot, years } = cleanRuralUrbana;
     const series: TrendSeries[] = [];
 
     if (areaFilter === 'all' || areaFilter === 'urbana') {
@@ -130,24 +138,11 @@ export function SieView({ data }: SieViewProps) {
     }
 
     return series;
-  }, [data.matricula_rural_urbana, areaFilter]);
+  }, [cleanRuralUrbana, areaFilter]);
 
   // 5b. SERIE LINEAL: Tasa de Crecimiento Interanual Anual (%) (2001 - 2025)
   const tasaCrecimientoLineSeries: TrendSeries[] = useMemo(() => {
-    const years = Array.from(new Set(data.matricula_rural_urbana.map((r) => r.anio))).sort((a, b) => a - b);
-    const mapUrb = new Map<number, number>();
-    const mapRur = new Map<number, number>();
-    const mapTot = new Map<number, number>();
-
-    data.matricula_rural_urbana.forEach((r) => {
-      const isUrb = r.area.toLowerCase().includes('urb');
-      if (isUrb) {
-        mapUrb.set(r.anio, (mapUrb.get(r.anio) || 0) + (r.cantidad || 0));
-      } else {
-        mapRur.set(r.anio, (mapRur.get(r.anio) || 0) + (r.cantidad || 0));
-      }
-      mapTot.set(r.anio, (mapTot.get(r.anio) || 0) + (r.cantidad || 0));
-    });
+    const { mapUrb, mapRur, mapTot, years } = cleanRuralUrbana;
 
     const dataTot: { year: number; value: number }[] = [];
     const dataUrb: { year: number; value: number }[] = [];
@@ -193,22 +188,11 @@ export function SieView({ data }: SieViewProps) {
         data: dataRur,
       },
     ];
-  }, [data.matricula_rural_urbana]);
+  }, [cleanRuralUrbana]);
 
   // 5c. SERIE LINEAL: Brecha Territorial Histórica (Excedente Urbano vs Rural 2000-2025)
   const brechaLineSeries: TrendSeries[] = useMemo(() => {
-    const years = Array.from(new Set(data.matricula_rural_urbana.map((r) => r.anio))).sort((a, b) => a - b);
-    const mapUrb = new Map<number, number>();
-    const mapRur = new Map<number, number>();
-
-    data.matricula_rural_urbana.forEach((r) => {
-      const isUrb = r.area.toLowerCase().includes('urb');
-      if (isUrb) {
-        mapUrb.set(r.anio, (mapUrb.get(r.anio) || 0) + (r.cantidad || 0));
-      } else {
-        mapRur.set(r.anio, (mapRur.get(r.anio) || 0) + (r.cantidad || 0));
-      }
-    });
+    const { mapUrb, mapRur, years } = cleanRuralUrbana;
 
     return [
       {
@@ -221,40 +205,26 @@ export function SieView({ data }: SieViewProps) {
         })),
       },
     ];
-  }, [data.matricula_rural_urbana]);
+  }, [cleanRuralUrbana]);
 
   // 6. Progresión consolidada para YearProgression
   const ruralUrbanaProgression = useMemo(() => {
-    const map = new Map<number, number>();
-    data.matricula_rural_urbana.forEach((r) => {
-      map.set(r.anio, (map.get(r.anio) || 0) + (r.cantidad || 0));
-    });
-    return Array.from(map.entries())
-      .sort((a, b) => a[0] - b[0])
-      .map(([year, value]) => ({ year, value }));
-  }, [data.matricula_rural_urbana]);
+    const { mapTot, years } = cleanRuralUrbana;
+    return years.map((year) => ({
+      year,
+      value: mapTot.get(year) || 0,
+    }));
+  }, [cleanRuralUrbana]);
 
   // 7. Matriz de Crecimiento Interanual (2000 - 2025)
   const comparativoAnualRuralUrbana = useMemo(() => {
-    const years = Array.from(new Set(data.matricula_rural_urbana.map((r) => r.anio))).sort((a, b) => a - b);
-
-    const mapUrb = new Map<number, number>();
-    const mapRur = new Map<number, number>();
-
-    data.matricula_rural_urbana.forEach((r) => {
-      if (r.area.toLowerCase().includes('urb')) {
-        mapUrb.set(r.anio, (mapUrb.get(r.anio) || 0) + (r.cantidad || 0));
-      } else {
-        mapRur.set(r.anio, (mapRur.get(r.anio) || 0) + (r.cantidad || 0));
-      }
-    });
-
+    const { mapUrb, mapRur, mapTot, years } = cleanRuralUrbana;
     let prevTotal = 0;
 
     return years.map((anio, idx) => {
       const urb = mapUrb.get(anio) || 0;
       const rur = mapRur.get(anio) || 0;
-      const total = urb + rur;
+      const total = mapTot.get(anio) || 0;
       const diff = idx === 0 ? 0 : total - prevTotal;
       const growthRate = idx === 0 || prevTotal === 0 ? 0 : Number(((diff / prevTotal) * 100).toFixed(2));
       const pctUrbana = total > 0 ? Number(((urb / total) * 100).toFixed(1)) : 0;
@@ -275,7 +245,7 @@ export function SieView({ data }: SieViewProps) {
         brecha,
       };
     });
-  }, [data.matricula_rural_urbana]);
+  }, [cleanRuralUrbana]);
 
   // 8. Desglose Departamental SIE 2026 (Datos Reales BD)
   const departamentosSIE = useMemo(() => {
