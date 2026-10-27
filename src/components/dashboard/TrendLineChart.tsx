@@ -138,21 +138,35 @@ export function TrendLineChart({
       }`}
     >
       {/* Encabezado con Botón Dinámico de Agrandar / Restaurar */}
-      <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-3 mb-4 pb-3 border-b border-slate-100">
-        <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#c9a751] shrink-0" />
-            <h3 className={`font-black text-slate-900 tracking-tight leading-snug ${isExpanded ? 'text-lg sm:text-xl' : 'text-base'}`}>
-              {title}
-            </h3>
+      <div className="flex flex-col gap-3 mb-4 pb-3 border-b border-slate-100">
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#c9a751] shrink-0" />
+              <h3 className={`font-black text-slate-900 tracking-tight leading-snug ${isExpanded ? 'text-lg sm:text-xl' : 'text-base'}`}>
+                {title}
+              </h3>
+            </div>
+            {subtitle && <p className="text-xs text-slate-500 mt-1">{subtitle}</p>}
           </div>
-          {subtitle && <p className="text-xs text-slate-500 mt-0.5">{subtitle}</p>}
+
+          {/* Botón dinámico Agrandar / Restaurar cuadro */}
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-all flex items-center gap-1 shrink-0 ${
+              isExpanded
+                ? 'bg-[#faf5e8] text-[#7d6325] border-[#c9a751] shadow-2xs ring-1 ring-[#c9a751]'
+                : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100 hover:text-slate-900'
+            }`}
+            title={isExpanded ? 'Restaurar tamaño normal' : 'Agrandar este cuadro dinámicamente'}
+          >
+            <span>{isExpanded ? '✕ Restaurar' : '⛶ Agrandar'}</span>
+          </button>
         </div>
 
-        {/* Controles: Leyenda y Botón Agrandar */}
-        <div className="flex items-center gap-2 flex-wrap shrink-0">
-          {/* Botones de series */}
-          <div className="flex items-center gap-1.5 flex-wrap">
+        {/* Controles de Leyenda de Series */}
+        {series.length > 0 && (
+          <div className="flex items-center gap-1.5 flex-wrap pt-0.5">
             {series.map((s) => {
               const isActive = activeSeries[s.id];
               return (
@@ -169,25 +183,12 @@ export function TrendLineChart({
                     className="w-2.5 h-2.5 rounded-full shrink-0"
                     style={{ backgroundColor: s.color }}
                   />
-                  <span className="truncate max-w-[140px]">{s.name}</span>
+                  <span className="truncate max-w-[200px]">{s.name}</span>
                 </button>
               );
             })}
           </div>
-
-          {/* Botón dinámico Agrandar / Restaurar cuadro */}
-          <button
-            onClick={() => setIsExpanded(!isExpanded)}
-            className={`px-3 py-1 rounded-xl text-xs font-bold border transition-all flex items-center gap-1 ${
-              isExpanded
-                ? 'bg-[#faf5e8] text-[#7d6325] border-[#c9a751] shadow-2xs ring-1 ring-[#c9a751]'
-                : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100 hover:text-slate-900'
-            }`}
-            title={isExpanded ? 'Restaurar tamaño normal' : 'Agrandar este cuadro dinámicamente'}
-          >
-            <span>{isExpanded ? '✕ Restaurar' : '⛶ Agrandar'}</span>
-          </button>
-        </div>
+        )}
       </div>
 
       {/* Gráfico SVG en Alta Resolución */}

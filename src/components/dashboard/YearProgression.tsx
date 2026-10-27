@@ -58,48 +58,23 @@ export function YearProgression({
           : 'border-slate-200/90'
       }`}
     >
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-slate-100">
-        <div>
-          <div className="flex items-center gap-2">
-            <span className="p-1.5 rounded-lg bg-[#faf5e8] text-[#7d6325] border border-[#e5d5a6]">
-              <TrendingUpIcon size={16} />
-            </span>
-            <h3 className={`font-black text-slate-900 tracking-tight ${isExpanded ? 'text-lg sm:text-xl' : 'text-base'}`}>
-              {title}
-            </h3>
-          </div>
-          {subtitle && <p className="text-xs text-slate-500 mt-0.5">{subtitle}</p>}
-        </div>
-
-        {/* Indicadores rápidos y botón Agrandar */}
-        <div className="flex items-center gap-2 shrink-0 flex-wrap">
-          <div className="flex items-center gap-3 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2">
-            <div>
-              <span className="text-[10px] uppercase font-bold text-slate-400 block tracking-wider font-mono">
-                Año {currentItem.year}
+      <div className="flex flex-col gap-3 mb-4 pb-3 border-b border-slate-100">
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-2">
+              <span className="p-1.5 rounded-lg bg-[#faf5e8] text-[#7d6325] border border-[#e5d5a6] shrink-0">
+                <TrendingUpIcon size={16} />
               </span>
-              <span className="text-lg sm:text-xl font-black text-slate-900 font-mono">
-                {currentItem.value.toLocaleString('es-BO')} {unit}
-              </span>
+              <h3 className={`font-black text-slate-900 tracking-tight leading-snug ${isExpanded ? 'text-lg sm:text-xl' : 'text-base'}`}>
+                {title}
+              </h3>
             </div>
-
-            {growthRate !== null && (
-              <div
-                className={`px-2.5 py-1 rounded-lg text-xs font-bold border font-mono ${
-                  growthRate >= 0
-                    ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
-                    : 'bg-rose-50 text-rose-800 border-rose-200'
-                }`}
-              >
-                {growthRate >= 0 ? `+${growthRate}%` : `${growthRate}%`}
-                <span className="block text-[9px] font-normal text-slate-500">vs año anterior</span>
-              </div>
-            )}
+            {subtitle && <p className="text-xs text-slate-500 mt-1">{subtitle}</p>}
           </div>
 
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className={`px-3 py-2 rounded-xl text-xs font-bold border transition-all ${
+            className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-all shrink-0 ${
               isExpanded
                 ? 'bg-[#faf5e8] text-[#7d6325] border-[#c9a751] shadow-2xs ring-1 ring-[#c9a751]'
                 : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100 hover:text-slate-900'
@@ -108,6 +83,31 @@ export function YearProgression({
           >
             {isExpanded ? '✕ Restaurar' : '⛶ Agrandar'}
           </button>
+        </div>
+
+        {/* Indicador rápido del año activo */}
+        <div className="flex items-center gap-3 bg-slate-50 border border-slate-200/80 rounded-xl px-3.5 py-1.5 self-start">
+          <div>
+            <span className="text-[10px] uppercase font-bold text-slate-400 block tracking-wider font-mono">
+              Gestión {currentItem.year}
+            </span>
+            <span className="text-base sm:text-lg font-black text-slate-900 font-mono">
+              {currentItem.value.toLocaleString('es-BO')} {unit}
+            </span>
+          </div>
+
+          {growthRate !== null && (
+            <div
+              className={`px-2 py-0.5 rounded-lg text-xs font-bold border font-mono ${
+                growthRate >= 0
+                  ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
+                  : 'bg-rose-50 text-rose-800 border-rose-200'
+              }`}
+            >
+              {growthRate >= 0 ? `+${growthRate}%` : `${growthRate}%`}
+              <span className="block text-[8px] font-normal opacity-80">vs año anterior</span>
+            </div>
+          )}
         </div>
       </div>
 
