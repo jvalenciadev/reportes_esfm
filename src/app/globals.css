@@ -1,26 +1,44 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --institutional-gold: #c9a751;
+  --institutional-gold-dark: #a08035;
+  --institutional-gold-light: #faf5e8;
+  --institutional-gold-border: #e5d5a6;
+  --institutional-navy: #0f2942;
+  --institutional-navy-dark: #0a1c2d;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-gold: #c9a751;
+  --color-navy: #0f2942;
+  --font-serif: 'Cinzel', 'Times New Roman', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f8fafc;
+  color: #0f172a;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  letter-spacing: -0.011em;
+}
+
+/* Clases tipográficas institucionales creativas */
+.font-heraldic {
+  font-family: 'Cinzel', 'Times New Roman', Georgia, serif;
+  letter-spacing: 0.04em;
+}
+
+.font-statistical {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-feature-settings: "tnum" 1, "zero" 1;
+}
+
+.tracking-institutional {
+  letter-spacing: 0.08em;
 }
