@@ -4,7 +4,7 @@ import React, { useState, useMemo } from 'react';
 import { DashboardDataset } from '@/types/stats';
 import { StatCard } from '../StatCard';
 import { TrendLineChart, TrendSeries } from '../TrendLineChart';
-import { CourseProgressionLineChart } from '../CourseProgressionLineChart';
+import { CourseProgressionLineChart, CourseChartPoint } from '../CourseProgressionLineChart';
 import { SourceBadge } from '../SourceBadge';
 import {
   TrendingUpIcon,
@@ -354,41 +354,38 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
     ];
   }, []);
 
-  // Datos para el Gráfico Lineal por Cursos (Eje X: 14 Cursos del SEP) para el año focoYear
-  const courseProgressionData = useMemo(() => {
-    const row = projectionMatrix.find((r) => r.year === focoYear) || projectionMatrix[0];
-    if (!row) return [];
+  // Función para obtener puntos de los 14 cursos para cualquier combinación de año y departamento
+  const getCourseProgressionPoints = React.useCallback((year: number, dept: string): CourseChartPoint[] => {
+    const isNac = dept === 'all';
+    const deptInfo = !isNac ? DEPT_PARAMS[dept] : null;
 
     return CURSOS_SEP.map((curso) => {
-      const cell = row.cursos[curso.id];
+      const rawIneItem = data.ine_proyeccion_edad.find(
+        (d) => d.anio === year && d.edad === curso.edadNormativa
+      );
+      const pobNac = rawIneItem ? rawIneItem.cantidad : 240000;
+      const pobIne = isNac
+        ? pobNac
+        : Math.round(pobNac * ((deptInfo?.pctPoblacionNacional || 10) / 100));
+
+      const tasa = curso.tasaEscolarizacionNacional / 100;
+      const matriculaTotal = Math.round(pobIne * tasa);
+
+      const pctPub = isNac ? 0.894 : (deptInfo?.pctPublico || 89.4) / 100;
+      const publico = Math.round(matriculaTotal * pctPub);
+      const privado = matriculaTotal - publico;
+      const noEstudian = pobIne - matriculaTotal;
+
       return {
         curso,
-        matricula: cell?.matriculaTotal || 0,
-        publico: cell?.publico || 0,
-        privado: cell?.privado || 0,
-        noEstudian: cell?.noEstudian || 0,
-        poblacionIne: cell?.poblacionIne || 0,
+        matricula: matriculaTotal,
+        publico,
+        privado,
+        noEstudian,
+        poblacionIne: pobIne,
       };
     });
-  }, [projectionMatrix, focoYear]);
-
-  // Datos del año base 2026 para la comparativa de la curva de cursos
-  const base2026CourseData = useMemo(() => {
-    const row2026 = projectionMatrix.find((r) => r.year === 2026);
-    if (!row2026) return undefined;
-
-    return CURSOS_SEP.map((curso) => {
-      const cell = row2026.cursos[curso.id];
-      return {
-        curso,
-        matricula: cell?.matriculaTotal || 0,
-        publico: cell?.publico || 0,
-        privado: cell?.privado || 0,
-        noEstudian: cell?.noEstudian || 0,
-        poblacionIne: cell?.poblacionIne || 0,
-      };
-    });
-  }, [projectionMatrix]);
+  }, [data.ine_proyeccion_edad]);
 
   // Series dinámicas para el gráfico lineal según la métrica elegida
   const dynamicLineSeries: TrendSeries[] = useMemo(() => {
@@ -1080,20 +1077,16 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
       </div>
 
       {/* =========================================================================
-          NUEVO CONTENEDOR DEDICADO: GRÁFICO LINEAL POR CURSOS (EJE X: CURSOS SEP)
-          Año seleccionable, Departamento seleccionable, Eje Y: Cantidad de Estudiantes
+          CONTENEDOR DE DISTRIBUCIÓN LINEAL POR GRADOS (EJE X: CURSOS SEP)
+          Comparaciones interanuales y departamentales creativas
          ========================================================================= */}
       <CourseProgressionLineChart
-        selectedYear={focoYear}
-        onYearChange={(y) => setFocoYear(y)}
         availableYears={ANIOS_PROYECCION_TODOS}
-        selectedDept={selectedDept}
-        onDeptChange={(d) => setSelectedDept(d)}
         deptList={deptList}
-        data={courseProgressionData}
-        base2026Data={base2026CourseData}
-        selectedLayer={selectedLayer}
-        onLayerChange={(layer) => setSelectedLayer(layer)}
+        getPoints={getCourseProgressionPoints}
+        initialYear={focoYear}
+        initialDept={selectedDept}
+        initialLayer={selectedLayer}
       />
 
       {/* =========================================================================
