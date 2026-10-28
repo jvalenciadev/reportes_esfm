@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { TrendingUpIcon, CalendarIcon } from '../ui/Icons';
+import { TrendingUpIcon, CalendarIcon, MaximizeIcon, MinimizeIcon } from '../ui/Icons';
 
 export interface YearDataPoint {
   year: number;
@@ -69,10 +69,10 @@ export function YearProgression({
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2">
-              <span className="p-1.5 rounded-lg bg-[#faf5e8] text-[#7d6325] border border-[#e5d5a6] shrink-0">
+              <span className="p-1.5 rounded-lg bg-[#faf5e8] text-[#c9a751] border border-[#e5d5a6] shrink-0">
                 <TrendingUpIcon size={16} />
               </span>
-              <h3 className={`font-black text-slate-900 tracking-tight leading-snug ${isExpanded ? 'text-lg sm:text-xl' : 'text-base'}`}>
+              <h3 className={`font-semibold text-slate-900 tracking-tight leading-snug ${isExpanded ? 'text-lg sm:text-xl' : 'text-base'}`}>
                 {title}
               </h3>
             </div>
@@ -81,31 +81,41 @@ export function YearProgression({
 
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-all shrink-0 ${
+            className={`px-3 py-1.5 rounded-xl text-xs font-medium border transition-all shrink-0 flex items-center gap-1.5 ${
               isExpanded
-                ? 'bg-[#faf5e8] text-[#7d6325] border-[#c9a751] shadow-2xs ring-1 ring-[#c9a751]'
+                ? 'bg-[#faf5e8] text-[#c9a751] border-[#c9a751] shadow-2xs ring-1 ring-[#c9a751]'
                 : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100 hover:text-slate-900'
             }`}
             title={isExpanded ? 'Restaurar tamaño normal' : 'Agrandar este cuadro dinámicamente'}
           >
-            {isExpanded ? '✕ Restaurar' : '⛶ Agrandar'}
+            {isExpanded ? (
+              <>
+                <MinimizeIcon size={13} />
+                <span>Restaurar</span>
+              </>
+            ) : (
+              <>
+                <MaximizeIcon size={13} />
+                <span>Agrandar</span>
+              </>
+            )}
           </button>
         </div>
 
         {/* Indicador rápido del año activo */}
         <div className="flex items-center gap-3 bg-slate-50 border border-slate-200/80 rounded-xl px-3.5 py-1.5 self-start">
           <div>
-            <span className="text-[10px] uppercase font-bold text-slate-400 block tracking-wider font-mono">
+            <span className="text-[10px] uppercase font-medium text-slate-400 block tracking-wider">
               Gestión {currentItem.year}
             </span>
-            <span className="text-base sm:text-lg font-black text-slate-900 font-mono">
+            <span className="text-base sm:text-lg font-semibold text-slate-900">
               {currentItem.value.toLocaleString('es-BO')} {unit}
             </span>
           </div>
 
           {growthRate !== null && (
             <div
-              className={`px-2 py-0.5 rounded-lg text-xs font-bold border font-mono ${
+              className={`px-2 py-0.5 rounded-lg text-xs font-medium border ${
                 growthRate >= 0
                   ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
                   : 'bg-rose-50 text-rose-800 border-rose-200'
@@ -120,7 +130,7 @@ export function YearProgression({
 
       {/* Selector de Años / Botonera de Exposición */}
       <div className="mb-5 overflow-x-auto pb-2">
-        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-1.5 font-mono">
+        <span className="text-[11px] font-medium uppercase tracking-wider text-slate-400 block mb-1.5">
           Seleccionar año para exponer detalle:
         </span>
         <div className="flex items-center gap-1.5 flex-nowrap min-w-max">
@@ -130,7 +140,7 @@ export function YearProgression({
               <button
                 key={d.year}
                 onClick={() => setSelectedYear(d.year)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all font-mono ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                   isSelected
                     ? 'bg-slate-900 text-white shadow-xs scale-105'
                     : 'bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900'
@@ -144,26 +154,26 @@ export function YearProgression({
       </div>
 
       {/* Tarjetas de Promedios */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4 text-xs font-mono">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4 text-xs">
         <div className="p-3 bg-slate-50 rounded-xl border border-slate-200/80">
-          <span className="text-[10px] text-slate-400 font-bold block uppercase">Promedio Anual</span>
-          <strong className="text-sm sm:text-base font-black text-slate-900">
+          <span className="text-[10px] text-slate-400 font-medium block uppercase">Promedio Anual</span>
+          <strong className="text-sm sm:text-base font-semibold text-slate-900">
             {averageValue.toLocaleString('es-BO')} {unit}
           </strong>
         </div>
         <div className="p-3 bg-slate-50 rounded-xl border border-slate-200/80">
-          <span className="text-[10px] text-slate-400 font-bold block uppercase">Máximo Registrado</span>
-          <strong className="text-sm sm:text-base font-black text-slate-900">
+          <span className="text-[10px] text-slate-400 font-medium block uppercase">Máximo Registrado</span>
+          <strong className="text-sm sm:text-base font-semibold text-slate-900">
             {maxValue.toLocaleString('es-BO')} {unit}
           </strong>
         </div>
         <div className="p-3 bg-slate-50 rounded-xl border border-slate-200/80">
-          <span className="text-[10px] text-slate-400 font-bold block uppercase">Gestiones Analizadas</span>
-          <strong className="text-sm sm:text-base font-black text-slate-900">{sortedData.length} años</strong>
+          <span className="text-[10px] text-slate-400 font-medium block uppercase">Gestiones Analizadas</span>
+          <strong className="text-sm sm:text-base font-semibold text-slate-900">{sortedData.length} años</strong>
         </div>
         <div className="p-3 bg-slate-50 rounded-xl border border-slate-200/80">
-          <span className="text-[10px] text-slate-400 font-bold block uppercase">Total Acumulado</span>
-          <strong className="text-sm sm:text-base font-black text-slate-900">
+          <span className="text-[10px] text-slate-400 font-medium block uppercase">Total Acumulado</span>
+          <strong className="text-sm sm:text-base font-semibold text-slate-900">
             {totalValue.toLocaleString('es-BO')} {unit}
           </strong>
         </div>
@@ -189,14 +199,14 @@ export function YearProgression({
                   : 'hover:bg-slate-50 border border-transparent'
               }`}
             >
-              <div className="flex items-center justify-between text-xs mb-1 font-mono">
+              <div className="flex items-center justify-between text-xs mb-1">
                 <div className="flex items-center gap-2">
-                  <span className={`font-bold ${isSelected ? 'text-[#7d6325] text-sm' : 'text-slate-800'}`}>
+                  <span className={`font-medium ${isSelected ? 'text-[#c9a751] text-sm' : 'text-slate-800'}`}>
                     {item.year}
                   </span>
                   {diffPercent !== null && (
                     <span
-                      className={`text-[10px] font-bold px-1.5 py-0.2 rounded ${
+                      className={`text-[10px] font-medium px-1.5 py-0.2 rounded ${
                         diffPercent >= 0
                           ? 'text-emerald-800 bg-emerald-50'
                           : 'text-rose-800 bg-rose-50'
@@ -206,7 +216,7 @@ export function YearProgression({
                     </span>
                   )}
                 </div>
-                <span className="font-black text-slate-900 text-sm">
+                <span className="font-semibold text-slate-900 text-sm">
                   {item.value.toLocaleString('es-BO')} {unit}
                 </span>
               </div>

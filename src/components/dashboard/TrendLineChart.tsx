@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useMemo, useEffect } from 'react';
+import { MaximizeIcon, MinimizeIcon, XIcon } from '../ui/Icons';
 
 export interface TrendSeries {
   id: string;
@@ -18,6 +19,7 @@ interface TrendLineChartProps {
   showPoints?: boolean;
   showArea?: boolean;
   defaultExpanded?: boolean;
+  xLabelFormatter?: (val: number) => string;
 }
 
 export function TrendLineChart({
@@ -29,6 +31,7 @@ export function TrendLineChart({
   showPoints = true,
   showArea = true,
   defaultExpanded = false,
+  xLabelFormatter,
 }: TrendLineChartProps) {
   const [isExpanded, setIsExpanded] = useState<boolean>(defaultExpanded);
 
@@ -69,7 +72,7 @@ export function TrendLineChart({
   const innerWidth = width - padding.left - padding.right;
   const innerHeight = dynamicHeight - padding.top - padding.bottom;
 
-  // Rango de valores (min y max)
+  // Rango de valores (min y max) adaptativo con soporte para negativos
   const { minValue, maxValue } = useMemo(() => {
     let min = Infinity;
     let max = -Infinity;
@@ -80,14 +83,33 @@ export function TrendLineChart({
       });
     });
     if (min === Infinity) return { minValue: 0, maxValue: 100 };
-    const margin = (max - min) * 0.1 || max * 0.1 || 10;
+    const span = Math.abs(max - min) || Math.abs(max) || 10;
+    const margin = span * 0.12;
+
+    const hasNegatives = min < 0;
+    const computedMin = hasNegatives
+      ? Math.floor((min - margin) * 10) / 10
+      : Math.max(0, Math.floor((min - margin) * 10) / 10);
+    const computedMax = Math.ceil((max + margin) * 10) / 10;
+
     return {
-      minValue: Math.max(0, Math.floor(min - margin)),
-      maxValue: Math.ceil(max + margin),
+      minValue: computedMin,
+      maxValue: computedMax === computedMin ? computedMin + 10 : computedMax,
     };
   }, [visibleSeries]);
 
   const valueRange = maxValue - minValue || 1;
+
+  // Sincronizar series activas cuando cambia la lista de series
+  useEffect(() => {
+    setActiveSeries((prev) => {
+      const next: Record<string, boolean> = {};
+      series.forEach((s) => {
+        next[s.id] = prev[s.id] !== undefined ? prev[s.id] : true;
+      });
+      return next;
+    });
+  }, [series]);
 
   // Funciones de escala
   const getX = (year: number) => {
@@ -103,13 +125,14 @@ export function TrendLineChart({
     return padding.top + innerHeight - fraction * innerHeight;
   };
 
-  // Ticks eje Y
+  // Ticks eje Y adaptables (incluyendo valores negativos)
   const yTicksCount = isExpanded ? 6 : 5;
   const yAxisTicks = useMemo(() => {
-    const ticks = [];
+    const ticks: number[] = [];
     for (let i = 0; i <= yTicksCount; i++) {
-      const val = Math.round(minValue + (valueRange * i) / yTicksCount);
-      ticks.push(val);
+      const val = minValue + (valueRange * i) / yTicksCount;
+      const formatted = Math.abs(valueRange) < 20 ? Math.round(val * 10) / 10 : Math.round(val);
+      ticks.push(formatted);
     }
     return ticks;
   }, [minValue, valueRange, yTicksCount]);
@@ -168,11 +191,11 @@ export function TrendLineChart({
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#c9a751] shrink-0" />
-                <h3 className={`font-black text-slate-900 tracking-tight leading-snug ${fullscreen ? 'text-xl sm:text-2xl' : 'text-base'}`}>
+                <h3 className={`font-semibold text-slate-900 tracking-tight leading-snug ${fullscreen ? 'text-xl sm:text-2xl' : 'text-base'}`}>
                   {title}
                 </h3>
                 {fullscreen && (
-                  <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-[#faf5e8] text-[#7d6325] border border-[#e5d5a6] font-mono">
+                  <span className="text-[10px] uppercase font-medium tracking-wider px-2 py-0.5 rounded bg-[#faf5e8] text-[#c9a751] border border-[#e5d5a6]">
                     Modo Presentación Pantalla Completa
                   </span>
                 )}
@@ -183,14 +206,24 @@ export function TrendLineChart({
             {/* Botón dinámico Agrandar / Restaurar cuadro */}
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold border transition-all flex items-center gap-1.5 shrink-0 ${
+              className={`px-3 py-1.5 rounded-xl text-xs font-medium border transition-all flex items-center gap-1.5 shrink-0 ${
                 fullscreen
-                  ? 'bg-[#faf5e8] text-[#7d6325] border-[#c9a751] shadow-xs ring-1 ring-[#c9a751]'
+                  ? 'bg-[#faf5e8] text-[#c9a751] border-[#c9a751] shadow-xs ring-1 ring-[#c9a751]'
                   : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100 hover:text-slate-900'
               }`}
               title={fullscreen ? 'Cerrar pantalla completa (Esc)' : 'Agrandar a pantalla completa'}
             >
-              <span>{fullscreen ? '✕ Salir Pantalla Completa (Esc)' : '⛶ Agrandar'}</span>
+              {fullscreen ? (
+                <>
+                  <XIcon size={14} />
+                  <span>Salir Pantalla Completa</span>
+                </>
+              ) : (
+                <>
+                  <MaximizeIcon size={14} />
+                  <span>Agrandar</span>
+                </>
+              )}
             </button>
           </div>
 
@@ -203,7 +236,7 @@ export function TrendLineChart({
                   <button
                     key={s.id}
                     onClick={() => toggleSeries(s.id)}
-                    className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold border transition-all ${
+                    className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium border transition-all ${
                       isActive
                         ? 'bg-slate-50 border-slate-300 text-slate-800 shadow-2xs'
                         : 'bg-white border-slate-200 text-slate-400 opacity-60 line-through'
@@ -295,15 +328,38 @@ export function TrendLineChart({
                   y={padding.top + innerHeight + 18}
                   textAnchor="middle"
                   fontSize={isExpanded ? '11' : '10'}
-                  fontWeight="700"
+                  fontWeight="500"
                   fill="#475569"
-                  fontFamily="monospace"
                 >
-                  {year}
+                  {xLabelFormatter ? xLabelFormatter(year) : year}
                 </text>
               </g>
             );
           })}
+
+          {/* Línea cero de referencia cuando hay valores negativos */}
+          {minValue < 0 && maxValue > 0 && (
+            <g>
+              <line
+                x1={padding.left}
+                y1={getY(0)}
+                x2={width - padding.right}
+                y2={getY(0)}
+                stroke="#64748B"
+                strokeWidth="1.5"
+                strokeDasharray="4 4"
+              />
+              <text
+                x={width - padding.right + 6}
+                y={getY(0) + 3.5}
+                fontSize="10"
+                fontWeight="600"
+                fill="#475569"
+              >
+                0{unit}
+              </text>
+            </g>
+          )}
 
           {/* Línea base X */}
           <line
@@ -330,10 +386,11 @@ export function TrendLineChart({
               .map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`)
               .join(' ');
 
+            const baselineY = minValue < 0 && maxValue > 0 ? getY(0) : (padding.top + innerHeight);
             const areaPath = `
               ${linePath}
-              L ${points[points.length - 1].x.toFixed(1)} ${padding.top + innerHeight}
-              L ${points[0].x.toFixed(1)} ${padding.top + innerHeight}
+              L ${points[points.length - 1].x.toFixed(1)} ${baselineY.toFixed(1)}
+              L ${points[0].x.toFixed(1)} ${baselineY.toFixed(1)}
               Z
             `;
 
@@ -436,7 +493,7 @@ export function TrendLineChart({
                 marginTop,
               }}
             >
-              <div className="flex items-center gap-1.5 mb-1.5 pb-1 border-b border-slate-700/80 text-[10px] text-slate-300 font-bold uppercase">
+              <div className="flex items-center gap-1.5 mb-1.5 pb-1 border-b border-slate-700/80 text-[10px] text-slate-300 font-medium uppercase">
                 <span
                   className="w-2.5 h-2.5 rounded-full shrink-0"
                   style={{ backgroundColor: hoveredPoint.seriesColor }}
@@ -445,8 +502,10 @@ export function TrendLineChart({
               </div>
 
               <div className="flex items-baseline justify-between gap-3">
-                <span className="text-slate-400 text-[11px] font-medium">Gestión {hoveredPoint.year}:</span>
-                <strong className="text-white font-mono text-sm font-black">
+                <span className="text-slate-400 text-[11px] font-medium">
+                  {xLabelFormatter ? xLabelFormatter(hoveredPoint.year) : `Gestión ${hoveredPoint.year}`}:
+                </span>
+                <strong className="text-white text-sm font-semibold">
                   {hoveredPoint.value.toLocaleString('es-BO')} {unit}
                 </strong>
               </div>
@@ -455,7 +514,7 @@ export function TrendLineChart({
                 <div className="mt-1.5 pt-1.5 border-t border-slate-800 flex items-center justify-between text-[10px]">
                   <span className="text-slate-400">Variación anual:</span>
                   <span
-                    className={`font-black font-mono ${
+                    className={`font-semibold ${
                       hoveredPoint.value >= hoveredPoint.prevValue
                         ? 'text-emerald-400'
                         : 'text-rose-400'
@@ -480,17 +539,17 @@ export function TrendLineChart({
         {fullscreen && (
           <div className="mt-5 pt-4 border-t border-slate-200 overflow-x-auto">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[11px] font-black uppercase tracking-wider text-slate-500 font-mono">
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
                 Tabla Completa de Datos Censales por Gestión (Modo Exposición):
               </span>
-              <span className="text-xs text-slate-400 font-mono">
-                {allYears.length} Gestiones registradas
+              <span className="text-xs text-slate-400">
+                {allYears.length} {xLabelFormatter ? 'puntos en comparación' : 'Gestiones registradas'}
               </span>
             </div>
-            <table className="w-full text-left border-collapse text-xs font-mono">
+            <table className="w-full text-left border-collapse text-xs">
               <thead>
-                <tr className="bg-slate-50 border-b border-slate-200 text-slate-600 font-bold">
-                  <th className="py-2.5 px-3">Gestión</th>
+                <tr className="bg-slate-50 border-b border-slate-200 text-slate-600 font-medium">
+                  <th className="py-2.5 px-3">{xLabelFormatter ? 'Referencia / Categoría' : 'Gestión'}</th>
                   {visibleSeries.map((s) => (
                     <th key={s.id} className="py-2.5 px-3 text-right" style={{ color: s.color }}>
                       {s.name}
@@ -501,11 +560,11 @@ export function TrendLineChart({
               <tbody className="divide-y divide-slate-100">
                 {allYears.map((year) => (
                   <tr key={year} className="hover:bg-slate-50/70 transition-colors">
-                    <td className="py-2 px-3 font-bold text-slate-900">{year}</td>
+                    <td className="py-2 px-3 font-medium text-slate-900">{xLabelFormatter ? xLabelFormatter(year) : year}</td>
                     {visibleSeries.map((s) => {
                       const row = s.data.find((d) => d.year === year);
                       return (
-                        <td key={s.id} className="py-2 px-3 text-right font-black text-slate-800">
+                        <td key={s.id} className="py-2 px-3 text-right font-semibold text-slate-800">
                           {row ? `${row.value.toLocaleString('es-BO')} ${unit}` : '-'}
                         </td>
                       );

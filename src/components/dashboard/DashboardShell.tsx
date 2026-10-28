@@ -3,20 +3,20 @@
 import React, { useState, useMemo } from 'react';
 import { DashboardDataset, SourceTab } from '@/types/stats';
 import { Sidebar } from './Sidebar';
-import { OverviewView } from './views/OverviewView';
+import { ProyeccionesView } from './views/ProyeccionesView';
 import { DgfmView } from './views/DgfmView';
 import { IneView } from './views/IneView';
 import { SieView } from './views/SieView';
 import { SeieView } from './views/SeieView';
-import { BoliviaCoatIcon } from '../ui/Icons';
+import Image from 'next/image';
 
 interface DashboardShellProps {
   initialData: DashboardDataset;
 }
 
 export function DashboardShell({ initialData }: DashboardShellProps) {
-  const [currentTab, setCurrentTab] = useState<SourceTab>('overview');
-  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [currentTab, setCurrentTab] = useState<SourceTab>('proyecciones');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   // Conteos por fuente
   const counts = useMemo(() => {
@@ -37,10 +37,10 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
   }, [initialData]);
 
   const titles: Record<SourceTab, { title: string; subtitle: string; tag: string }> = {
-    overview: {
-      title: 'Panel General Integrado',
-      subtitle: 'Consolidación de las 4 fuentes estadísticas oficiales de Bolivia',
-      tag: 'CONSOLIDADO INTEGRADO',
+    proyecciones: {
+      title: 'Proyecciones Escolares (2026 - 2031)',
+      subtitle: 'Modelo demográfico normativo INE y escolar SIE desagregado por curso',
+      tag: 'PROYECCIONES SEP',
     },
     dgfm: {
       title: 'DGFM · Formación de Maestros',
@@ -66,93 +66,93 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 flex">
-      {/* Sidebar fijo institucional */}
+      {/* Sidebar colapsable institucional */}
       <Sidebar
         currentTab={currentTab}
         onSelectTab={setCurrentTab}
         counts={counts}
-        isOpenMobile={isMobileOpen}
-        onCloseMobile={() => setIsMobileOpen(false)}
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
       />
 
-      {/* Contenido principal */}
-      <div className="flex-1 lg:pl-72 flex flex-col min-w-0">
+      {/* Contenido principal con transición fluida de ancho */}
+      <div
+        className={`flex-1 flex flex-col min-w-0 transition-[padding] duration-300 ease-in-out ${isSidebarOpen ? 'lg:pl-72' : 'lg:pl-0'
+          }`}
+      >
         {/* Barra Superior Institucional con acento #c9a751 */}
         <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-xs border-b border-slate-200/90 px-4 sm:px-8 py-3 flex items-center justify-between gap-4 shadow-2xs">
           <div className="flex items-center gap-3">
             <button
-              onClick={() => setIsMobileOpen(true)}
-              className="lg:hidden p-2 rounded-lg border border-slate-200 hover:bg-slate-100 text-slate-600"
-              aria-label="Abrir menú lateral"
+              onClick={() => setIsSidebarOpen((prev) => !prev)}
+              className="p-2 rounded-lg border border-slate-200 hover:bg-slate-100 text-slate-600 transition-colors flex items-center gap-1.5 cursor-pointer"
+              aria-label={isSidebarOpen ? 'Ocultar menú lateral' : 'Mostrar menú lateral'}
+              title={isSidebarOpen ? 'Ocultar menú lateral' : 'Mostrar menú lateral'}
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
+              {!isSidebarOpen && (
+                <span className="hidden md:inline-block text-xs font-medium text-slate-600">Menú</span>
+              )}
             </button>
 
-            <div className="flex items-center gap-2">
-              <span className="hidden sm:inline-block">
-                <BoliviaCoatIcon size={20} />
-              </span>
-              <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-[#faf5e8] text-[#7d6325] border border-[#e5d5a6] tracking-wider">
+            <div className="flex items-center gap-2.5">
+              <Image src="/minedu_2025.png" alt="MINEDU" width={72} height={30} className="hidden sm:inline-block h-6 w-auto object-contain" />
+              <span className="text-[10px] font-medium uppercase px-2 py-0.5 rounded bg-[#c9a751]/10 text-[#c9a751] border border-[#c9a751]/30 tracking-wider">
                 {titles[currentTab].tag}
               </span>
               <span className="text-xs font-semibold text-slate-300">/</span>
-              <span className="text-xs font-bold text-slate-800 truncate max-w-xs sm:max-w-md">
+              <span className="text-xs font-medium text-slate-800 truncate max-w-xs sm:max-w-md">
                 {titles[currentTab].title}
               </span>
             </div>
           </div>
 
           {/* Selector de pestañas rápido con color principal #c9a751 */}
-          <div className="hidden sm:flex items-center gap-1 bg-slate-100/90 p-1 rounded-xl border border-slate-200 text-xs font-bold">
+          <div className="hidden sm:flex items-center gap-1 bg-slate-100/90 p-1 rounded-xl border border-slate-200 text-xs font-medium">
             <button
-              onClick={() => setCurrentTab('overview')}
-              className={`px-3 py-1.5 rounded-lg transition-all ${
-                currentTab === 'overview'
-                  ? 'bg-white text-slate-900 shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
+              onClick={() => setCurrentTab('proyecciones')}
+              className={`px-3 py-1.5 rounded-lg transition-all ${currentTab === 'proyecciones'
+                ? 'bg-[#c9a751] text-slate-900 shadow-xs ring-1 ring-[#c9a751]/50 font-semibold'
+                : 'text-slate-600 hover:text-slate-900'
+                }`}
             >
-              General
+              Proyecciones
             </button>
             <button
               onClick={() => setCurrentTab('dgfm')}
-              className={`px-3 py-1.5 rounded-lg transition-all ${
-                currentTab === 'dgfm'
-                  ? 'bg-[#c9a751] text-slate-900 shadow-xs ring-1 ring-[#c9a751]/50'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
+              className={`px-3 py-1.5 rounded-lg transition-all ${currentTab === 'dgfm'
+                ? 'bg-[#c9a751] text-slate-900 shadow-xs ring-1 ring-[#c9a751]/50 font-semibold'
+                : 'text-slate-600 hover:text-slate-900'
+                }`}
             >
               DGFM
             </button>
             <button
               onClick={() => setCurrentTab('ine')}
-              className={`px-3 py-1.5 rounded-lg transition-all ${
-                currentTab === 'ine'
-                  ? 'bg-[#c9a751] text-slate-900 shadow-xs ring-1 ring-[#c9a751]/50'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
+              className={`px-3 py-1.5 rounded-lg transition-all ${currentTab === 'ine'
+                ? 'bg-[#c9a751] text-slate-900 shadow-xs ring-1 ring-[#c9a751]/50 font-semibold'
+                : 'text-slate-600 hover:text-slate-900'
+                }`}
             >
               INE
             </button>
             <button
               onClick={() => setCurrentTab('sie')}
-              className={`px-3 py-1.5 rounded-lg transition-all ${
-                currentTab === 'sie'
-                  ? 'bg-[#c9a751] text-slate-900 shadow-xs ring-1 ring-[#c9a751]/50'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
+              className={`px-3 py-1.5 rounded-lg transition-all ${currentTab === 'sie'
+                ? 'bg-[#c9a751] text-slate-900 shadow-xs ring-1 ring-[#c9a751]/50 font-semibold'
+                : 'text-slate-600 hover:text-slate-900'
+                }`}
             >
               SIE
             </button>
             <button
               onClick={() => setCurrentTab('seie')}
-              className={`px-3 py-1.5 rounded-lg transition-all ${
-                currentTab === 'seie'
-                  ? 'bg-[#c9a751] text-slate-900 shadow-xs ring-1 ring-[#c9a751]/50'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
+              className={`px-3 py-1.5 rounded-lg transition-all ${currentTab === 'seie'
+                ? 'bg-[#c9a751] text-slate-900 shadow-xs ring-1 ring-[#c9a751]/50 font-semibold'
+                : 'text-slate-600 hover:text-slate-900'
+                }`}
             >
               SEIE
             </button>
@@ -161,12 +161,7 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
 
         {/* Cuerpo de la vista seleccionada */}
         <main className="flex-1 p-4 sm:p-8 max-w-7xl w-full mx-auto">
-          {currentTab === 'overview' && (
-            <OverviewView
-              data={initialData}
-              onNavigate={(tab) => setCurrentTab(tab)}
-            />
-          )}
+          {currentTab === 'proyecciones' && <ProyeccionesView data={initialData} />}
           {currentTab === 'dgfm' && <DgfmView data={initialData} />}
           {currentTab === 'ine' && <IneView data={initialData} />}
           {currentTab === 'sie' && <SieView data={initialData} />}

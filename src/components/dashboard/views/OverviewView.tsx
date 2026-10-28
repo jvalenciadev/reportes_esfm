@@ -7,12 +7,12 @@ import { BarVisual } from '../BarVisual';
 import { PieChart, PieSlice } from '../PieChart';
 import { YearProgression } from '../YearProgression';
 import { SourceBadge } from '../SourceBadge';
+import Image from 'next/image';
 import {
   GraduationCapIcon,
   ChartBarIcon,
   SchoolIcon,
   AccessibilityIcon,
-  BoliviaCoatIcon,
 } from '../../ui/Icons';
 
 interface OverviewViewProps {
@@ -103,13 +103,13 @@ export function OverviewView({ data, onNavigate }: OverviewViewProps) {
       <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 shadow-xs">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="max-w-3xl">
-            <div className="flex items-center gap-2.5 mb-2">
-              <BoliviaCoatIcon size={26} className="drop-shadow-2xs" />
-              <span className="text-xs font-black uppercase tracking-widest text-[#7d6325] font-heraldic">
+            <div className="flex items-center gap-3 mb-2">
+              <Image src="/minedu_2025.png" alt="MINEDU" width={110} height={46} className="h-8 w-auto object-contain" />
+              <span className="text-xs font-medium uppercase tracking-wider text-[#c9a751]">
                 Estado Plurinacional de Bolivia · Ministerio de Educación
               </span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-tight font-heraldic">
+            <h1 className="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight leading-tight">
               Sistema Integrado de Estadística para la Admisión ESFM
             </h1>
             <p className="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed font-sans">
@@ -121,13 +121,13 @@ export function OverviewView({ data, onNavigate }: OverviewViewProps) {
           <div className="flex flex-col sm:flex-row gap-2 shrink-0">
             <button
               onClick={() => onNavigate('dgfm')}
-              className="px-4 py-2.5 rounded-xl bg-blue-700 text-white font-bold text-xs hover:bg-blue-800 transition-all shadow-xs"
+              className="px-4 py-2.5 rounded-xl bg-blue-700 text-white font-medium text-xs hover:bg-blue-800 transition-all shadow-xs"
             >
               Ver Admisiones DGFM →
             </button>
             <button
               onClick={() => onNavigate('ine')}
-              className="px-4 py-2.5 rounded-xl bg-slate-100 text-slate-700 font-bold text-xs hover:bg-slate-200 transition-all border border-slate-200"
+              className="px-4 py-2.5 rounded-xl bg-slate-100 text-slate-700 font-medium text-xs hover:bg-slate-200 transition-all border border-slate-200"
             >
               Ver Censos INE →
             </button>

@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import { getDashboardData } from '@/services/statsService';
 import { DashboardShell } from '@/components/dashboard/DashboardShell';
+import { AlertTriangleIcon } from '@/components/ui/Icons';
 
 export const dynamic = 'force-dynamic';
 
@@ -12,16 +13,16 @@ async function DashboardLoader() {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6 text-slate-800">
         <div className="max-w-md w-full bg-white rounded-2xl border border-red-200 p-8 shadow-xs text-center">
-          <div className="w-12 h-12 rounded-full bg-red-50 text-red-600 flex items-center justify-center mx-auto mb-4 text-xl font-bold">
-            ⚠
+          <div className="w-12 h-12 rounded-full bg-red-50 text-red-600 flex items-center justify-center mx-auto mb-4">
+            <AlertTriangleIcon size={24} />
           </div>
-          <h2 className="text-lg font-bold text-slate-900">
+          <h2 className="text-lg font-medium text-slate-900">
             Error al conectar con Supabase
           </h2>
           <p className="text-xs text-slate-500 mt-2">
             No se pudieron recuperar las estadísticas. Verifique la conexión de red o el proxy corporativo.
           </p>
-          <div className="mt-4 p-3 bg-slate-50 rounded-lg text-left text-xs font-mono text-red-600 overflow-x-auto">
+          <div className="mt-4 p-3 bg-slate-50 rounded-lg text-left text-xs text-red-600 overflow-x-auto">
             {error?.message || String(error)}
           </div>
         </div>

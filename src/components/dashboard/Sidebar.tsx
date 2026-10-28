@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { SourceTab } from '@/types/stats';
 import {
   BuildingIcon,
@@ -9,7 +10,7 @@ import {
   SchoolIcon,
   AccessibilityIcon,
   LayersIcon,
-  BoliviaCoatIcon,
+  TrendingUpIcon,
 } from '../ui/Icons';
 
 interface SidebarProps {
@@ -22,27 +23,27 @@ interface SidebarProps {
     seie: number;
     total: number;
   };
-  isOpenMobile: boolean;
-  onCloseMobile: () => void;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 export function Sidebar({
   currentTab,
   onSelectTab,
   counts,
-  isOpenMobile,
-  onCloseMobile,
+  isOpen,
+  onClose,
 }: SidebarProps) {
   const menuItems = [
     {
-      id: 'overview' as SourceTab,
-      label: 'Visión General',
-      sublabel: 'Consolidado Integrado',
-      badge: 'SIIE',
-      badgeColor: 'bg-slate-100 text-slate-700 border-slate-200',
-      count: counts.total,
-      tables: '10 tablas estadísticas',
-      icon: <LayersIcon size={18} className="text-slate-700" />,
+      id: 'proyecciones' as SourceTab,
+      label: 'Proyecciones',
+      sublabel: 'Matrícula por Curso',
+      badge: '2026-2031',
+      badgeColor: 'bg-[#faf5e8] text-[#c9a751] border-[#e5d5a6]',
+      count: counts.ine,
+      tables: 'INE Edades & SIE Cursos',
+      icon: <TrendingUpIcon size={18} className="text-[#c9a751]" />,
     },
     {
       id: 'dgfm' as SourceTab,
@@ -88,52 +89,60 @@ export function Sidebar({
 
   const handleSelect = (tab: SourceTab) => {
     onSelectTab(tab);
-    onCloseMobile();
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+      onClose();
+    }
   };
 
   return (
     <>
       {/* Overlay para móviles */}
-      {isOpenMobile && (
+      {isOpen && (
         <div
-          onClick={onCloseMobile}
+          onClick={onClose}
           className="fixed inset-0 bg-slate-900/30 backdrop-blur-xs z-40 lg:hidden"
         />
       )}
 
-      {/* Sidebar contenedor */}
+      {/* Sidebar contenedor colapsable */}
       <aside
-        className={`fixed top-0 bottom-0 left-0 z-50 w-72 bg-white border-r border-slate-200 shadow-xs flex flex-col transition-transform duration-300 ease-in-out lg:translate-x-0 ${
-          isOpenMobile ? 'translate-x-0' : '-translate-x-full'
+        className={`fixed top-0 bottom-0 left-0 z-50 w-72 bg-white border-r border-slate-200/90 shadow-xs flex flex-col transition-transform duration-300 ease-in-out ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         {/* Cabecera Institucional del Estado Plurinacional */}
-        <div className="p-4 border-b border-slate-200 bg-slate-50/70">
-          <div className="flex items-center gap-3">
-            <BoliviaCoatIcon size={32} className="shrink-0 drop-shadow-2xs" />
-            <div className="min-w-0">
-              <span className="text-[9px] font-black uppercase tracking-widest text-slate-500 block leading-tight font-heraldic">
-                Estado Plurinacional de Bolivia
-              </span>
-              <h2 className="text-xs font-black text-slate-900 leading-tight uppercase truncate font-heraldic tracking-wide">
-                Ministerio de Educación
-              </h2>
-              <span className="text-[9px] font-extrabold text-[#7d6325] uppercase tracking-wider block font-mono">
+        <div className="p-4 border-b border-slate-200 bg-white">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex flex-col">
+              <Image
+                src="/minedu_2025.png"
+                alt="Ministerio de Educación"
+                width={160}
+                height={67}
+                className="h-10 w-auto object-contain"
+                priority
+              />
+              <span className="text-[10px] font-medium text-[#c9a751] uppercase tracking-wider mt-1.5 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#c9a751]" />
                 SIIE · Admisión ESFM
               </span>
             </div>
             <button
-              onClick={onCloseMobile}
-              className="lg:hidden ml-auto p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100"
+              onClick={onClose}
+              title="Ocultar menú lateral"
+              className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+              aria-label="Ocultar menú lateral"
             >
-              ✕
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+              </svg>
             </button>
           </div>
         </div>
 
         {/* Lista de Navegación por Fuentes Institucionales */}
         <div className="flex-1 overflow-y-auto p-3 space-y-1.5">
-          <div className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+          <div className="px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-slate-400">
             Sistemas y Fuentes Oficiales
           </div>
 
@@ -159,11 +168,11 @@ export function Sidebar({
 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between gap-1">
-                    <span className="font-extrabold text-sm truncate text-slate-900">
+                    <span className="font-medium text-sm truncate text-slate-900">
                       {item.label}
                     </span>
                     <span
-                      className={`text-[9px] font-extrabold px-1.5 py-0.5 rounded border uppercase ${item.badgeColor}`}
+                      className={`text-[9px] font-medium px-1.5 py-0.5 rounded border uppercase ${item.badgeColor}`}
                     >
                       {item.badge}
                     </span>
@@ -173,7 +182,7 @@ export function Sidebar({
                   </p>
                   <div className="mt-1.5 flex items-center justify-between text-[10px] text-slate-400">
                     <span className="truncate max-w-[120px]">{item.tables}</span>
-                    <span className="font-mono font-semibold text-slate-600">
+                    <span className="font-semibold text-slate-600">
                       {item.count.toLocaleString('es-BO')} reg.
                     </span>
                   </div>
@@ -186,14 +195,14 @@ export function Sidebar({
         {/* Pie de Sidebar Institucional */}
         <div className="p-3.5 border-t border-slate-200 bg-slate-50/60">
           <div className="rounded-xl bg-white p-3 border border-slate-200/90 text-xs text-slate-600 space-y-1 shadow-2xs">
-            <div className="flex items-center justify-between font-bold text-slate-800 text-[11px]">
+            <div className="flex items-center justify-between font-medium text-slate-800 text-[11px]">
               <span>Base Central Supabase</span>
-              <span className="inline-flex items-center gap-1 text-[9px] text-emerald-800 font-bold bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
+              <span className="inline-flex items-center gap-1 text-[9px] text-emerald-800 font-medium bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
                 ● En Línea
               </span>
             </div>
             <p className="text-[10px] text-slate-500 font-medium">
-              Datos auditados: <strong className="text-slate-800 font-mono">{counts.total.toLocaleString('es-BO')}</strong> registros
+              Datos auditados: <strong className="text-slate-800">{counts.total.toLocaleString('es-BO')}</strong> registros
             </p>
           </div>
         </div>

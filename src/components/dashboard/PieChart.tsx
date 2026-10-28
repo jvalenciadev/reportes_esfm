@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { MaximizeIcon, MinimizeIcon } from '../ui/Icons';
 
 export interface PieSlice {
   label: string;
@@ -96,7 +97,7 @@ export function PieChart({
       {/* Cabecera con Botón Dinámico de Agrandar */}
       <div className="flex items-start justify-between gap-2 mb-3 pb-2 border-b border-slate-100 min-w-0">
         <div className="min-w-0 flex-1 pr-2">
-          <h3 className={`font-black text-slate-900 leading-snug line-clamp-2 ${isExpanded ? 'text-lg sm:text-xl' : 'text-sm sm:text-base'}`} title={title}>
+          <h3 className={`font-semibold text-slate-900 leading-snug line-clamp-2 ${isExpanded ? 'text-lg sm:text-xl' : 'text-sm sm:text-base'}`} title={title}>
             {title}
           </h3>
           {subtitle && <p className="text-xs text-slate-500 mt-0.5 line-clamp-1">{subtitle}</p>}
@@ -104,20 +105,30 @@ export function PieChart({
 
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className={`px-2.5 py-1 rounded-xl text-xs font-bold border transition-all shrink-0 ${
+          className={`px-2.5 py-1 rounded-xl text-xs font-medium border transition-all shrink-0 flex items-center gap-1.5 ${
             isExpanded
-              ? 'bg-[#faf5e8] text-[#7d6325] border-[#c9a751] shadow-2xs ring-1 ring-[#c9a751]'
+              ? 'bg-[#faf5e8] text-[#c9a751] border-[#c9a751] shadow-2xs ring-1 ring-[#c9a751]'
               : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100 hover:text-slate-900'
           }`}
           title={isExpanded ? 'Restaurar tamaño normal' : 'Agrandar gráfico al ancho completo'}
         >
-          {isExpanded ? '✕ Restaurar' : '⛶ Agrandar'}
+          {isExpanded ? (
+            <>
+              <MinimizeIcon size={13} />
+              <span>Restaurar</span>
+            </>
+          ) : (
+            <>
+              <MaximizeIcon size={13} />
+              <span>Agrandar</span>
+            </>
+          )}
         </button>
       </div>
 
-      {/* Cuerpo del Gráfico y Leyenda */}
-      <div className={`flex flex-col items-center justify-center gap-5 my-2 min-w-0 w-full ${
-        isExpanded ? 'lg:flex-row lg:gap-8' : '2xl:flex-row'
+      {/* Cuerpo del Gráfico y Leyenda con disposición horizontal responsiva */}
+      <div className={`flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-6 my-2 min-w-0 w-full ${
+        isExpanded ? 'lg:gap-8' : ''
       }`}>
         {/* Gráfico SVG Circular con contención estricta */}
         <div
@@ -165,22 +176,22 @@ export function PieChart({
             >
               {activeSlice ? (
                 <>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 line-clamp-1 font-mono">
+                  <span className="text-[10px] font-medium uppercase tracking-wider text-slate-500 line-clamp-1">
                     {activeSlice.label}
                   </span>
-                  <span className="text-base sm:text-lg font-black text-slate-900 leading-tight font-mono">
+                  <span className="text-base sm:text-lg font-semibold text-slate-900 leading-tight">
                     {activeSlice.percent}%
                   </span>
-                  <span className="text-[10px] text-slate-600 font-mono font-bold truncate max-w-full">
+                  <span className="text-[10px] text-slate-600 font-medium truncate max-w-full">
                     {activeSlice.value.toLocaleString('es-BO')}
                   </span>
                 </>
               ) : (
                 <>
-                  <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400 font-mono">
+                  <span className="text-[9px] font-medium uppercase tracking-wider text-slate-400">
                     Total
                   </span>
-                  <span className={`font-black text-slate-900 leading-tight font-mono px-1 ${
+                  <span className={`font-semibold text-slate-900 leading-tight px-1 ${
                     total >= 10000000 ? 'text-xs sm:text-sm' : total >= 1000000 ? 'text-sm' : 'text-base'
                   }`}>
                     {total.toLocaleString('es-BO')}
@@ -213,7 +224,7 @@ export function PieChart({
                     style={{ backgroundColor: slice.color }}
                   />
                   <div className="min-w-0 flex-1">
-                    <span className="font-bold text-slate-900 truncate block text-xs" title={slice.label}>
+                    <span className="font-medium text-slate-900 truncate block text-xs" title={slice.label}>
                       {slice.label}
                     </span>
                     {slice.sublabel && (
@@ -224,11 +235,11 @@ export function PieChart({
                   </div>
                 </div>
 
-                <div className="text-right shrink-0 font-mono pl-1">
-                  <span className="font-black text-slate-900 text-xs block">
+                <div className="text-right shrink-0 pl-1">
+                  <span className="font-semibold text-slate-900 text-xs block">
                     {slice.value.toLocaleString('es-BO')}
                   </span>
-                  <span className="text-[10px] font-black text-[#7d6325] bg-[#faf5e8] px-1.5 py-0.5 rounded border border-[#e5d5a6] inline-block mt-0.5">
+                  <span className="text-[10px] font-semibold text-[#c9a751] bg-[#faf5e8] px-1.5 py-0.5 rounded border border-[#e5d5a6] inline-block mt-0.5">
                     {slice.percent}%
                   </span>
                 </div>

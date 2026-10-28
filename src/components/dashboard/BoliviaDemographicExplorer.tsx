@@ -2,7 +2,8 @@
 
 import React, { useState, useMemo } from 'react';
 import { InePoblacion } from '@/types/stats';
-import { TrendingUpIcon, CalendarIcon, UsersIcon, BoliviaCoatIcon } from '../ui/Icons';
+import Image from 'next/image';
+import { TrendingUpIcon, CalendarIcon, UsersIcon } from '../ui/Icons';
 
 interface BoliviaDemographicExplorerProps {
   data: InePoblacion[];
@@ -51,7 +52,7 @@ export function BoliviaDemographicExplorer({ data }: BoliviaDemographicExplorerP
     } else if (year <= 2026) {
       return {
         stage: 'Pico Máximo del Bono Demográfico',
-        color: 'text-[#7d6325] bg-[#faf5e8] border-[#e5d5a6]',
+        color: 'text-[#c9a751] bg-[#faf5e8] border-[#e5d5a6]',
         summary: 'Mayor contingente histórico de jóvenes entre 15 y 24 años.',
         impact: 'Máxima concentración de bachilleres aspirantes a las 46 ESFMs del país. Momento estratégico para seleccionar a los mejores perfiles docentes.',
       };
@@ -118,13 +119,13 @@ export function BoliviaDemographicExplorer({ data }: BoliviaDemographicExplorerP
       {/* Encabezado Creativo e Institucional */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-100">
         <div>
-          <div className="flex items-center gap-2 mb-1">
-            <BoliviaCoatIcon size={20} />
-            <span className="text-[10px] font-black uppercase tracking-wider text-[#7d6325] bg-[#faf5e8] border border-[#e5d5a6] px-2 py-0.5 rounded">
+          <div className="flex items-center gap-2.5 mb-1">
+            <Image src="/minedu_2025.png" alt="MINEDU" width={60} height={25} className="h-5 w-auto object-contain" />
+            <span className="text-[10px] font-medium uppercase tracking-wider text-[#c9a751] bg-[#c9a751]/10 border border-[#c9a751]/30 px-2 py-0.5 rounded">
               INE · Transición Demográfica Oficial
             </span>
           </div>
-          <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight font-heraldic">
+          <h2 className="text-xl sm:text-2xl font-semibold text-slate-900 tracking-tight">
             Evolución Demográfica de Bolivia (2000 - 2050): Análisis de Impacto en ESFM
           </h2>
           <p className="text-xs text-slate-500 mt-0.5 max-w-3xl">
@@ -136,14 +137,14 @@ export function BoliviaDemographicExplorer({ data }: BoliviaDemographicExplorerP
         {/* Crecimiento General Acumulado */}
         <div className="flex items-center gap-3 bg-slate-50 border border-slate-200/80 rounded-xl px-4 py-2.5 shrink-0">
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
+            <span className="text-[10px] font-medium uppercase tracking-wider text-slate-400 block">
               Crecimiento 2000 → 2050
             </span>
-            <span className="text-base font-black text-slate-900 font-mono">
+            <span className="text-base font-semibold text-slate-900">
               +{(sortedData[sortedData.length - 1].poblacion - basePob).toLocaleString('es-BO')} hab.
             </span>
           </div>
-          <div className="px-2 py-1 rounded-lg bg-[#faf5e8] border border-[#e5d5a6] text-[#7d6325] text-xs font-black font-mono">
+          <div className="px-2 py-1 rounded-lg bg-[#faf5e8] border border-[#e5d5a6] text-[#c9a751] text-xs font-semibold">
             +{Math.round(((sortedData[sortedData.length - 1].poblacion - basePob) / basePob) * 100)}%
           </div>
         </div>
@@ -312,7 +313,7 @@ export function BoliviaDemographicExplorer({ data }: BoliviaDemographicExplorerP
       {/* Botonera de Hitos Clave para Exposición Rápida */}
       <div className="space-y-2">
         <div className="flex items-center justify-between text-xs">
-          <span className="font-bold text-slate-500 uppercase tracking-wider text-[11px]">
+          <span className="font-medium text-slate-500 uppercase tracking-wider text-[11px]">
             Hitos Censales y Momentos Demográficos Clave:
           </span>
           <span className="text-[11px] font-medium text-slate-400">
@@ -334,11 +335,11 @@ export function BoliviaDemographicExplorer({ data }: BoliviaDemographicExplorerP
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-mono font-black text-xs text-slate-900">
+                  <span className="font-semibold text-xs text-slate-900">
                     {m.year}
                   </span>
                   <span
-                    className={`text-[9px] font-bold px-1.5 py-0.2 rounded font-mono ${
+                    className={`text-[9px] font-medium px-1.5 py-0.2 rounded ${
                       isSelected
                         ? 'bg-[#c9a751] text-slate-900'
                         : 'bg-slate-200 text-slate-700'
@@ -358,9 +359,9 @@ export function BoliviaDemographicExplorer({ data }: BoliviaDemographicExplorerP
 
       {/* Slider Temporal / Scrubber Dinámico */}
       <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2">
-        <div className="flex items-center justify-between text-xs font-bold text-slate-700">
+        <div className="flex items-center justify-between text-xs font-medium text-slate-700">
           <span>Línea Temporal Interactiva (2000 - 2050):</span>
-          <span className="font-mono text-base font-black text-slate-900 bg-white px-3 py-1 rounded-lg border border-slate-200 shadow-2xs">
+          <span className="text-base font-semibold text-slate-900 bg-white px-3 py-1 rounded-lg border border-slate-200 shadow-2xs">
             Gestión {selectedYear}
           </span>
         </div>
@@ -372,7 +373,7 @@ export function BoliviaDemographicExplorer({ data }: BoliviaDemographicExplorerP
           onChange={(e) => setSelectedYear(Number(e.target.value))}
           className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#c9a751]"
         />
-        <div className="flex justify-between text-[10px] text-slate-400 font-mono font-semibold">
+        <div className="flex justify-between text-[10px] text-slate-400 font-semibold">
           <span>2000 (8.7M)</span>
           <span>2012 (10.4M)</span>
           <span>2024 (11.9M)</span>
@@ -385,16 +386,16 @@ export function BoliviaDemographicExplorer({ data }: BoliviaDemographicExplorerP
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* KPI 1: Habitantes y Crecimiento Neto */}
         <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-2xs">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">
+          <span className="text-[10px] font-medium uppercase tracking-wider text-slate-400 block mb-1">
             Población en {selectedYear}
           </span>
-          <div className="text-2xl font-black text-slate-900 font-mono">
+          <div className="text-2xl font-semibold text-slate-900">
             {currentItem.poblacion.toLocaleString('es-BO')}
             <span className="text-xs font-semibold text-slate-500 ml-1">hab.</span>
           </div>
           <div className="mt-2 pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
             <span className="text-slate-500">Crecimiento desde el 2000:</span>
-            <strong className="text-emerald-700 font-mono font-bold">
+            <strong className="text-emerald-700 font-medium">
               +{cumulativePercent}% (+{cumulativeGrowth.toLocaleString('es-BO')})
             </strong>
           </div>
@@ -402,17 +403,17 @@ export function BoliviaDemographicExplorer({ data }: BoliviaDemographicExplorerP
 
         {/* KPI 2: Variación Anual de ese Año */}
         <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-2xs">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">
+          <span className="text-[10px] font-medium uppercase tracking-wider text-slate-400 block mb-1">
             Incremento Anual (Gestión {selectedYear})
           </span>
-          <div className="text-2xl font-black text-slate-900 font-mono">
+          <div className="text-2xl font-semibold text-slate-900">
             {diffFromPrev >= 0 ? `+${diffFromPrev.toLocaleString('es-BO')}` : diffFromPrev.toLocaleString('es-BO')}
             <span className="text-xs font-semibold text-slate-500 ml-1">hab/año</span>
           </div>
           <div className="mt-2 pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
             <span className="text-slate-500">Ritmo de Crecimiento Anual:</span>
             <span
-              className={`font-black font-mono px-2 py-0.5 rounded text-[11px] ${
+              className={`font-semibold px-2 py-0.5 rounded text-[11px] ${
                 growthRate >= 1.0
                   ? 'bg-emerald-50 text-emerald-800'
                   : 'bg-amber-50 text-amber-800'
@@ -426,10 +427,10 @@ export function BoliviaDemographicExplorer({ data }: BoliviaDemographicExplorerP
         {/* KPI 3: Diagnóstico de Etapa Demográfica */}
         <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-2xs flex flex-col justify-between">
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">
+            <span className="text-[10px] font-medium uppercase tracking-wider text-slate-400 block mb-1">
               Etapa Demográfica Nacional
             </span>
-            <span className={`inline-block px-2.5 py-1 rounded-lg text-xs font-bold border ${currentStage.color}`}>
+            <span className={`inline-block px-2.5 py-1 rounded-lg text-xs font-medium border ${currentStage.color}`}>
               {currentStage.stage}
             </span>
           </div>
@@ -442,8 +443,8 @@ export function BoliviaDemographicExplorer({ data }: BoliviaDemographicExplorerP
       {/* Recuadro de Impacto Estratégico en las ESFM (Para el expositor) */}
       <div className="p-4 sm:p-5 rounded-xl bg-[#faf5e8]/80 border border-[#e5d5a6] text-xs">
         <div className="flex items-center gap-2 mb-2">
-          <TrendingUpIcon size={16} className="text-[#7d6325]" />
-          <h4 className="font-extrabold text-[#7d6325] text-xs uppercase tracking-wider">
+          <TrendingUpIcon size={16} className="text-[#c9a751]" />
+          <h4 className="font-medium text-[#c9a751] text-xs uppercase tracking-wider">
             Relevancia para la Planificación Académica de las ESFM (Gestión {selectedYear}):
           </h4>
         </div>

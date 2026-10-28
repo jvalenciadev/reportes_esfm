@@ -29,7 +29,7 @@ export function SourceBadge({
           <span className="p-1 rounded bg-slate-200/80 text-slate-700">
             <DatabaseIcon size={14} />
           </span>
-          <span className="font-bold text-slate-900 text-xs uppercase tracking-wider">
+          <span className="font-medium text-slate-900 text-xs uppercase tracking-wider">
             Ficha Técnica de Fuente Oficial · {sourceName}
           </span>
         </div>
@@ -45,7 +45,7 @@ export function SourceBadge({
       )}
 
       <div>
-        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1.5">
+        <span className="text-[10px] font-medium uppercase tracking-wider text-slate-400 block mb-1.5">
           Enlaces y Portales Oficiales de Verificación:
         </span>
         <div className="flex flex-wrap gap-2">
@@ -60,7 +60,7 @@ export function SourceBadge({
               <ExternalLinkIcon size={12} className="text-slate-400 shrink-0" />
               <span className="truncate max-w-[280px]">{link.title}</span>
               {link.period && (
-                <span className="text-[9px] bg-slate-100 px-1 py-0.2 rounded font-mono text-slate-500">
+                <span className="text-[9px] bg-slate-100 px-1 py-0.2 rounded text-slate-500">
                   {link.period}
                 </span>
               )}

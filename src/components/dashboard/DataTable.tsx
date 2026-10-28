@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
+import { SearchIcon, XIcon } from '../ui/Icons';
 
 export interface ColumnDef<T> {
   key: string;
@@ -63,7 +64,7 @@ export function DataTable<T extends Record<string, any>>({
       {/* Table Header Controls */}
       <div className="p-4 sm:p-5 border-b border-slate-200/80 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h3 className="text-base font-bold text-slate-900">{title}</h3>
+          <h3 className="text-base font-medium text-slate-900">{title}</h3>
           {subtitle && <p className="text-xs text-slate-500 mt-0.5">{subtitle}</p>}
         </div>
 
@@ -77,17 +78,19 @@ export function DataTable<T extends Record<string, any>>({
                 setCurrentPage(1);
               }}
               placeholder={searchPlaceholder}
-              className="w-48 sm:w-64 text-xs bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+              className="w-48 sm:w-64 text-xs bg-slate-50 border border-slate-200 rounded-lg pl-8 pr-7 py-1.5 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
             />
+            <SearchIcon size={14} className="absolute left-2.5 top-2.5 text-slate-400 pointer-events-none" />
             {searchTerm && (
               <button
                 onClick={() => {
                   setSearchTerm('');
                   setCurrentPage(1);
                 }}
-                className="absolute right-2 top-1.5 text-slate-400 hover:text-slate-600 text-xs font-bold"
+                className="absolute right-2 top-2 text-slate-400 hover:text-slate-600 transition-colors"
+                aria-label="Limpiar búsqueda"
               >
-                ✕
+                <XIcon size={13} />
               </button>
             )}
           </div>
@@ -149,7 +152,7 @@ export function DataTable<T extends Record<string, any>>({
                       key={col.key}
                       className={`py-2.5 px-4 font-normal ${
                         col.align === 'right'
-                          ? 'text-right font-mono font-medium text-slate-900'
+                          ? 'text-right font-medium text-slate-900'
                           : col.align === 'center'
                           ? 'text-center'
                           : 'text-left'

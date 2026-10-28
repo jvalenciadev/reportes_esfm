@@ -15,6 +15,10 @@ import {
   TrendingUpIcon,
   CalendarIcon,
   FilterIcon,
+  SearchIcon,
+  XIcon,
+  ScaleIcon,
+  MapPinIcon,
 } from '../../ui/Icons';
 
 interface IneViewProps {
@@ -24,11 +28,38 @@ interface IneViewProps {
 export function IneView({ data }: IneViewProps) {
   const [activeTab, setActiveTab] = useState<'lineas' | 'comparativo_anual' | 'tablas'>('lineas');
   const [poblacionFilter, setPoblacionFilter] = useState<'all' | 'hist' | 'proy'>('all');
+  const [selectedDeptId, setSelectedDeptId] = useState<number | 'all'>('all');
+  const [chartMode, setChartMode] = useState<'desglose' | 'comparativa_dept'>('desglose');
+  const [deptSearchTerm, setDeptSearchTerm] = useState<string>('');
+
+  // Lista única de departamentos extraída de ine_matricula
+  const departamentosList = useMemo(() => {
+    const map = new Map<number, string>();
+    data.ine_matricula.forEach((r) => {
+      const name = r.departamentos?.nombre || `Departamento ${r.departamento_id}`;
+      map.set(r.departamento_id, name);
+    });
+    return Array.from(map.entries())
+      .map(([id, nombre]) => ({ id, nombre }))
+      .sort((a, b) => a.nombre.localeCompare(b.nombre));
+  }, [data.ine_matricula]);
+
+  const activeDeptName = useMemo(() => {
+    if (selectedDeptId === 'all') return 'Total Nacional';
+    const found = departamentosList.find((d) => d.id === selectedDeptId);
+    return found ? found.nombre : `Departamento #${selectedDeptId}`;
+  }, [selectedDeptId, departamentosList]);
+
+  // Datos de matrícula filtrados por departamento seleccionado
+  const filteredMatricula = useMemo(() => {
+    if (selectedDeptId === 'all') return data.ine_matricula;
+    return data.ine_matricula.filter((r) => r.departamento_id === selectedDeptId);
+  }, [data.ine_matricula, selectedDeptId]);
 
   // Cálculos estadísticos
   const totalMatricula = useMemo(
-    () => data.ine_matricula.reduce((acc, r) => acc + (r.cantidad || 0), 0),
-    [data.ine_matricula]
+    () => filteredMatricula.reduce((acc, r) => acc + (r.cantidad || 0), 0),
+    [filteredMatricula]
   );
 
   const poblacion2026 = useMemo(() => {
@@ -62,7 +93,7 @@ export function IneView({ data }: IneViewProps) {
     const mapPub = new Map<number, number>();
     const mapPriv = new Map<number, number>();
 
-    data.ine_matricula.forEach((r) => {
+    filteredMatricula.forEach((r) => {
       const isPub = (r.tipo || '').toLowerCase().includes('públ') || (r.tipo || '').toLowerCase().includes('publ');
       if (isPub) {
         mapPub.set(r.anio, (mapPub.get(r.anio) || 0) + (r.cantidad || 0));
@@ -71,23 +102,23 @@ export function IneView({ data }: IneViewProps) {
       }
     });
 
-    const years = Array.from(new Set(data.ine_matricula.map((r) => r.anio))).sort((a, b) => a - b);
+    const years = Array.from(new Set(filteredMatricula.map((r) => r.anio))).sort((a, b) => a - b);
 
     return [
       {
         id: 'publico',
-        name: 'Sector Público',
+        name: `Sector Público (${activeDeptName})`,
         color: '#c9a751',
         data: years.map((y) => ({ year: y, value: mapPub.get(y) || 0 })),
       },
       {
         id: 'privado',
-        name: 'Sector Privado',
+        name: `Sector Privado (${activeDeptName})`,
         color: '#475569',
         data: years.map((y) => ({ year: y, value: mapPriv.get(y) || 0 })),
       },
     ];
-  }, [data.ine_matricula]);
+  }, [filteredMatricula, activeDeptName]);
 
   // 3. SERIE LINEAL: Matrícula Escolar INE 2011-2025 (INICIAL vs PRIMARIA vs SECUNDARIA)
   const nivelesLineSeries: TrendSeries[] = useMemo(() => {
@@ -95,7 +126,7 @@ export function IneView({ data }: IneViewProps) {
     const mapPrim = new Map<number, number>();
     const mapSecu = new Map<number, number>();
 
-    data.ine_matricula.forEach((r) => {
+    filteredMatricula.forEach((r) => {
       const niv = (r.nivel || '').toLowerCase();
       const cant = r.cantidad || 0;
       if (niv.includes('inic')) mapInic.set(r.anio, (mapInic.get(r.anio) || 0) + cant);
@@ -103,28 +134,67 @@ export function IneView({ data }: IneViewProps) {
       else if (niv.includes('secu')) mapSecu.set(r.anio, (mapSecu.get(r.anio) || 0) + cant);
     });
 
-    const years = Array.from(new Set(data.ine_matricula.map((r) => r.anio))).sort((a, b) => a - b);
+    const years = Array.from(new Set(filteredMatricula.map((r) => r.anio))).sort((a, b) => a - b);
 
     return [
       {
         id: 'primaria',
-        name: 'Nivel Primaria',
+        name: `Nivel Primaria (${activeDeptName})`,
         color: '#059669',
         data: years.map((y) => ({ year: y, value: mapPrim.get(y) || 0 })),
       },
       {
         id: 'secundaria',
-        name: 'Nivel Secundaria',
+        name: `Nivel Secundaria (${activeDeptName})`,
         color: '#2563EB',
         data: years.map((y) => ({ year: y, value: mapSecu.get(y) || 0 })),
       },
       {
         id: 'inicial',
-        name: 'Nivel Inicial',
+        name: `Nivel Inicial (${activeDeptName})`,
         color: '#c9a751',
         data: years.map((y) => ({ year: y, value: mapInic.get(y) || 0 })),
       },
     ];
+  }, [filteredMatricula, activeDeptName]);
+
+  // 3b. SERIE LINEAL COMPARATIVA DEPARTAMENTAL (2011 - 2025)
+  const comparativaDeptSeries: TrendSeries[] = useMemo(() => {
+    const deptColors: Record<string, string> = {
+      'La Paz': '#2563EB',
+      'Santa Cruz': '#059669',
+      'Cochabamba': '#c9a751',
+      'Potosí': '#7C3AED',
+      'Chuquisaca': '#DC2626',
+      'Oruro': '#D97706',
+      'Tarija': '#0891B2',
+      'Beni': '#10B981',
+      'Pando': '#64748B',
+    };
+
+    const years = Array.from(new Set(data.ine_matricula.map((r) => r.anio))).sort((a, b) => a - b);
+    const deptsMap = new Map<number, { nombre: string; byYear: Map<number, number> }>();
+
+    data.ine_matricula.forEach((r) => {
+      const id = r.departamento_id;
+      const nombre = r.departamentos?.nombre || `Dep #${id}`;
+      if (!deptsMap.has(id)) {
+        deptsMap.set(id, { nombre, byYear: new Map() });
+      }
+      const entry = deptsMap.get(id)!;
+      entry.byYear.set(r.anio, (entry.byYear.get(r.anio) || 0) + (r.cantidad || 0));
+    });
+
+    const palette = ['#2563eb', '#059669', '#c9a751', '#7c3aed', '#dc2626', '#d97706', '#0891b2', '#10b981', '#64748b'];
+
+    return Array.from(deptsMap.entries())
+      .sort((a, b) => a[1].nombre.localeCompare(b[1].nombre))
+      .map(([deptId, { nombre, byYear }], idx) => ({
+        id: `dept_${deptId}`,
+        name: nombre,
+        color: deptColors[nombre] || palette[idx % palette.length],
+        data: years.map((y) => ({ year: y, value: byYear.get(y) || 0 })),
+      }));
   }, [data.ine_matricula]);
 
   // 4. SERIE LINEAL: Proyección por Edades (2024 - 2034) - Cohortes Clave para ESFM
@@ -213,27 +283,27 @@ export function IneView({ data }: IneViewProps) {
     });
   }, [data.ine_matricula]);
 
-  // Torta: Proporción Público vs Privado acumulada (datos reales INE 2011-2025)
+  // Torta: Proporción Público vs Privado (INE 2011-2025 para el departamento seleccionado)
   const pubPrivPieData: PieSlice[] = useMemo(() => {
     let pub = 0;
     let priv = 0;
-    data.ine_matricula.forEach((r) => {
+    filteredMatricula.forEach((r) => {
       const isPub = (r.tipo || '').toLowerCase().includes('públ') || (r.tipo || '').toLowerCase().includes('publ');
       if (isPub) pub += r.cantidad || 0;
       else priv += r.cantidad || 0;
     });
     return [
-      { label: 'Sector Público', value: pub, color: '#c9a751', sublabel: 'Unidades educativas estatales' },
-      { label: 'Sector Privado', value: priv, color: '#475569', sublabel: 'Unidades educativas particulares' },
+      { label: 'Sector Público', value: pub, color: '#c9a751', sublabel: activeDeptName },
+      { label: 'Sector Privado', value: priv, color: '#475569', sublabel: activeDeptName },
     ];
-  }, [data.ine_matricula]);
+  }, [filteredMatricula, activeDeptName]);
 
-  // Torta: Matrícula por Niveles
+  // Torta: Matrícula por Niveles (para el departamento seleccionado)
   const nivelesPieData: PieSlice[] = useMemo(() => {
     let inic = 0;
     let prim = 0;
     let secu = 0;
-    data.ine_matricula.forEach((r) => {
+    filteredMatricula.forEach((r) => {
       const niv = (r.nivel || '').toLowerCase();
       const cant = r.cantidad || 0;
       if (niv.includes('inic')) inic += cant;
@@ -241,11 +311,11 @@ export function IneView({ data }: IneViewProps) {
       else if (niv.includes('secu')) secu += cant;
     });
     return [
-      { label: 'Nivel Primaria', value: prim, color: '#059669', sublabel: 'Mayor población' },
-      { label: 'Nivel Secundaria', value: secu, color: '#2563EB', sublabel: 'Bachilleres potenciales' },
-      { label: 'Nivel Inicial', value: inic, color: '#c9a751', sublabel: 'Primera infancia' },
+      { label: 'Nivel Primaria', value: prim, color: '#059669', sublabel: activeDeptName },
+      { label: 'Nivel Secundaria', value: secu, color: '#2563EB', sublabel: activeDeptName },
+      { label: 'Nivel Inicial', value: inic, color: '#c9a751', sublabel: activeDeptName },
     ];
-  }, [data.ine_matricula]);
+  }, [filteredMatricula, activeDeptName]);
 
   return (
     <div className="space-y-6">
@@ -253,11 +323,11 @@ export function IneView({ data }: IneViewProps) {
       <div className="bg-white rounded-xl border border-slate-200 p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xs">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[10px] font-black uppercase tracking-wider bg-[#faf5e8] text-[#7d6325] border border-[#e5d5a6] px-2.5 py-0.5 rounded-md">
+            <span className="text-[10px] font-semibold uppercase tracking-wider bg-[#faf5e8] text-[#c9a751] border border-[#e5d5a6] px-2.5 py-0.5 rounded-md">
               INE · Instituto Nacional de Estadística
             </span>
           </div>
-          <h1 className="text-2xl font-black text-slate-900 tracking-tight">
+          <h1 className="text-2xl font-semibold text-slate-900 tracking-tight">
             Tendencias Temporales Lineales y Demografía Oficial
           </h1>
           <p className="text-xs text-slate-500 mt-1">
@@ -266,7 +336,7 @@ export function IneView({ data }: IneViewProps) {
         </div>
 
         {/* Selector de Vistas de Análisis */}
-        <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs font-bold shrink-0">
+        <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs font-medium shrink-0">
           <button
             onClick={() => setActiveTab('lineas')}
             className={`px-3 py-1.5 rounded-lg transition-all ${activeTab === 'lineas'
@@ -335,54 +405,201 @@ export function IneView({ data }: IneViewProps) {
 
       {/* VISTA 1: GRÁFICOS LINEALES DE TENDENCIAS EN EL TIEMPO */}
       {activeTab === 'lineas' && (
-        <div className="space-y-6">
-          {/* 1. EXPLORADOR DEMOGRÁFICO CREATIVO: POBLACIÓN DE BOLIVIA (2000 - 2050) */}
-          <BoliviaDemographicExplorer data={data.ine_poblacion} />
+        <div className="space-y-8">
+          {/* =========================================================================
+              GRUPO 1: SERIES Y COMPARATIVAS DEPARTAMENTALES (INE 2011 - 2025)
+             ========================================================================= */}
+          <div className="space-y-6">
+            <div className="flex items-center gap-2 border-b border-slate-200 pb-3">
+              <MapPinIcon size={20} className="text-[#c9a751]" />
+              <div>
+                <h2 className="text-base font-semibold text-slate-900 tracking-tight">
+                  Gráficos Departamentales: Matrícula Escolar y Comparativas (2011 - 2025)
+                </h2>
+                <p className="text-xs text-slate-500">
+                  Seleccione un departamento o active el comparador para analizar curvas entre regiones.
+                </p>
+              </div>
+            </div>
 
-          {/* 2 y 3. LÍNEAS DE MATRÍCULA ESCOLAR: PÚBLICO VS PRIVADO & NIVELES EDUCATIVOS */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-            <TrendLineChart
-              title="Matrícula Escolar: Sector Público vs Sector Privado (2011-2025)"
-              subtitle="Evolución real de la matrícula escolar según el registro INE por tipo de dependencia"
-              series={publicoVsPrivadoSeries}
-              unit="estudiantes"
-              height={300}
-              showArea={false}
-            />
+            {/* Panel de Búsqueda, Selección y Comparación Departamental */}
+            <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs space-y-3.5">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#c9a751]" />
+                  <h3 className="text-sm font-semibold text-slate-900 tracking-tight">
+                    Filtro Departamental Activo:
+                  </h3>
+                  <span className="text-[10px] font-medium px-2 py-0.5 rounded bg-[#c9a751]/10 text-[#c9a751] border border-[#c9a751]/30">
+                    {activeDeptName}
+                  </span>
+                </div>
 
-            <TrendLineChart
-              title="Matrícula por Nivel: Inicial vs Primaria vs Secundaria"
-              subtitle="Tendencia temporal desagregada por los tres niveles del subsistema regular (2011-2025)"
-              series={nivelesLineSeries}
-              unit="estudiantes"
-              height={300}
-              showArea={false}
-            />
+                {/* Selector de Modo con Iconos */}
+                <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs font-medium self-start md:self-auto">
+                  <button
+                    onClick={() => setChartMode('desglose')}
+                    className={`px-3 py-1.5 rounded-lg transition-all ${
+                      chartMode === 'desglose'
+                        ? 'bg-white text-slate-900 shadow-xs'
+                        : 'text-slate-600 hover:text-slate-900'
+                    }`}
+                  >
+                    Detalle por Nivel y Dependencia
+                  </button>
+                  <button
+                    onClick={() => setChartMode('comparativa_dept')}
+                    className={`px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 ${
+                      chartMode === 'comparativa_dept'
+                        ? 'bg-[#c9a751] text-slate-900 shadow-xs'
+                        : 'text-slate-600 hover:text-slate-900'
+                    }`}
+                  >
+                    <ScaleIcon size={14} className={chartMode === 'comparativa_dept' ? 'text-slate-900' : 'text-[#c9a751]'} />
+                    <span>Comparador entre Departamentos</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Buscador de Departamentos con Iconos SVG */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 pt-2 border-t border-slate-100">
+                <div className="relative min-w-[220px]">
+                  <input
+                    type="text"
+                    placeholder="Buscar departamento..."
+                    value={deptSearchTerm}
+                    onChange={(e) => setDeptSearchTerm(e.target.value)}
+                    className="w-full text-xs px-3 py-1.5 pl-8 rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#c9a751]"
+                  />
+                  <SearchIcon size={14} className="absolute left-2.5 top-2.5 text-slate-400 pointer-events-none" />
+                  {deptSearchTerm && (
+                    <button
+                      onClick={() => setDeptSearchTerm('')}
+                      className="absolute right-2.5 top-2 text-slate-400 hover:text-slate-600"
+                      aria-label="Limpiar búsqueda"
+                    >
+                      <XIcon size={13} />
+                    </button>
+                  )}
+                </div>
+
+                <div className="flex items-center gap-1.5 flex-wrap flex-1 overflow-x-auto py-0.5">
+                  <button
+                    onClick={() => setSelectedDeptId('all')}
+                    className={`text-xs px-3 py-1 rounded-lg border transition-all ${
+                      selectedDeptId === 'all'
+                        ? 'bg-slate-900 text-white border-slate-900 shadow-xs'
+                        : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
+                    }`}
+                  >
+                    Bolivia (Consolidado)
+                  </button>
+                  {departamentosList
+                    .filter((d) => d.nombre.toLowerCase().includes(deptSearchTerm.toLowerCase()))
+                    .map((dept) => {
+                      const isSelected = selectedDeptId === dept.id;
+                      return (
+                        <button
+                          key={dept.id}
+                          onClick={() => {
+                            setSelectedDeptId(dept.id);
+                            setChartMode('desglose');
+                          }}
+                          className={`text-xs px-2.5 py-1 rounded-lg border transition-all flex items-center gap-1.5 ${
+                            isSelected
+                              ? 'bg-[#c9a751] text-slate-900 border-[#c9a751] shadow-xs'
+                              : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
+                          }`}
+                        >
+                          {dept.nombre}
+                        </button>
+                      );
+                    })}
+                </div>
+              </div>
+            </div>
+
+            {/* Gráficos de este grupo: Modo Comparativo vs Modo Detalle */}
+            {chartMode === 'comparativa_dept' ? (
+              <div className="space-y-4">
+                <TrendLineChart
+                  title="Comparativa Histórica de Matrícula entre Departamentos (2011 - 2025)"
+                  subtitle="Curvas simultáneas de los 9 departamentos. Haga clic en los nombres de la leyenda para activar, aislar o comparar departamentos específicos."
+                  series={comparativaDeptSeries}
+                  unit="estudiantes"
+                  height={380}
+                  showArea={false}
+                  defaultExpanded={false}
+                />
+              </div>
+            ) : (
+              <>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+                  <TrendLineChart
+                    title={`Matrícula Escolar: Público vs Privado (${activeDeptName})`}
+                    subtitle={`Evolución temporal desagregada por tipo de dependencia en ${activeDeptName} (2011-2025)`}
+                    series={publicoVsPrivadoSeries}
+                    unit="estudiantes"
+                    height={300}
+                    showArea={false}
+                  />
+
+                  <TrendLineChart
+                    title={`Matrícula por Nivel: Inicial, Primaria y Secundaria (${activeDeptName})`}
+                    subtitle={`Distribución por etapas escolares en ${activeDeptName} (2011-2025)`}
+                    series={nivelesLineSeries}
+                    unit="estudiantes"
+                    height={300}
+                    showArea={false}
+                  />
+                </div>
+
+                {/* Tortas de Distribución del departamento seleccionado */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+                  <div className="min-w-0">
+                    <PieChart
+                      title={`Proporción Público vs Privado (${activeDeptName})`}
+                      subtitle={`Participación porcentual histórica en ${activeDeptName}`}
+                      data={pubPrivPieData}
+                      donut={true}
+                      unit="estudiantes"
+                    />
+                  </div>
+                  <div className="min-w-0">
+                    <PieChart
+                      title={`Distribución por Nivel Escolar (${activeDeptName})`}
+                      subtitle={`Concentración de estudiantes en ${activeDeptName}`}
+                      data={nivelesPieData}
+                      donut={true}
+                      unit="estudiantes"
+                    />
+                  </div>
+                </div>
+              </>
+            )}
           </div>
 
-          {/* 4. EXPLORADOR DETALLADO DE PROYECCIÓN POR EDAD CON RANGO SELECCIONABLE (2024 - 2034) */}
-          <AgeProjectionExplorer data={data.ine_proyeccion_edad} />
+          {/* =========================================================================
+              GRUPO 2: DEMOGRAFÍA NACIONAL Y PROYECCIONES POR EDAD (2000 - 2050)
+             ========================================================================= */}
+          <div className="space-y-6 pt-4 border-t border-slate-200/80">
+            <div className="flex items-center gap-2 border-b border-slate-200 pb-3">
+              <TrendingUpIcon size={20} className="text-[#c9a751]" />
+              <div>
+                <h2 className="text-base font-semibold text-slate-900 tracking-tight">
+                  Demografía Nacional y Proyección de Cohortes (INE 2000 - 2050)
+                </h2>
+                <p className="text-xs text-slate-500">
+                  Población global del Estado Plurinacional y pirámide de edades de egreso para la admisión ESFM.
+                </p>
+              </div>
+            </div>
 
-          {/* Tortas de Distribución */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-            <div className="min-w-0">
-              <PieChart
-                title="Proporción Acumulada: Sector Público vs Sector Privado"
-                subtitle="Participación porcentual en las series históricas INE (2011-2025)"
-                data={pubPrivPieData}
-                donut={true}
-                unit="estudiantes"
-              />
-            </div>
-            <div className="min-w-0">
-              <PieChart
-                title="Distribución Acumulada por Nivel Escolar"
-                subtitle="Concentración en Inicial, Primaria y Secundaria"
-                data={nivelesPieData}
-                donut={true}
-                unit="estudiantes"
-              />
-            </div>
+            {/* Explorador Demográfico Población Bolivia */}
+            <BoliviaDemographicExplorer data={data.ine_poblacion} />
+
+            {/* Explorador de Proyección por Edad (2024 - 2034) */}
+            <AgeProjectionExplorer data={data.ine_proyeccion_edad} />
           </div>
         </div>
       )}
@@ -392,7 +609,7 @@ export function IneView({ data }: IneViewProps) {
         <div className="space-y-6">
           <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-xs">
             <div className="mb-4">
-              <h3 className="text-lg font-black text-slate-900 tracking-tight">
+              <h3 className="text-lg font-semibold text-slate-900 tracking-tight">
                 Matriz Comparativa Interanual: Cuánto Crece la Matrícula Año por Año
               </h3>
               <p className="text-xs text-slate-500 mt-0.5">
@@ -403,12 +620,12 @@ export function IneView({ data }: IneViewProps) {
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse text-xs">
                 <thead>
-                  <tr className="bg-slate-50 border-b border-slate-200 text-slate-600 font-bold uppercase text-[11px]">
+                  <tr className="bg-slate-50 border-b border-slate-200 text-slate-600 font-medium uppercase text-[11px]">
                     <th className="py-3 px-3">Gestión</th>
                     <th className="py-3 px-3 text-right">Matrícula Total</th>
                     <th className="py-3 px-3 text-center">Variación Anual</th>
                     <th className="py-3 px-3 text-right">Tasa Crecimiento (%)</th>
-                    <th className="py-3 px-3 text-right text-[#7d6325]">Sector Público</th>
+                    <th className="py-3 px-3 text-right text-[#c9a751]">Sector Público</th>
                     <th className="py-3 px-3 text-right text-slate-500">Sector Privado</th>
                     <th className="py-3 px-3 text-right text-emerald-700">Primaria</th>
                     <th className="py-3 px-3 text-right text-blue-700">Secundaria</th>
@@ -418,10 +635,10 @@ export function IneView({ data }: IneViewProps) {
                 <tbody className="divide-y divide-slate-100">
                   {comparativoAnualMatricula.map((row, idx) => (
                     <tr key={row.anio} className="hover:bg-slate-50/80 transition-colors">
-                      <td className="py-3 px-3 font-bold font-mono text-slate-900 text-sm">
+                      <td className="py-3 px-3 font-medium text-slate-900 text-sm">
                         {row.anio}
                       </td>
-                      <td className="py-3 px-3 text-right font-black font-mono text-slate-900 text-sm">
+                      <td className="py-3 px-3 text-right font-semibold text-slate-900 text-sm">
                         {row.total.toLocaleString('es-BO')}
                       </td>
                       <td className="py-3 px-3 text-center">
@@ -429,7 +646,7 @@ export function IneView({ data }: IneViewProps) {
                           <span className="text-[10px] text-slate-400 font-medium">Año base</span>
                         ) : (
                           <span
-                            className={`font-mono font-bold px-2 py-0.5 rounded text-[11px] ${row.diff >= 0
+                            className={`font-medium px-2 py-0.5 rounded text-[11px] ${row.diff >= 0
                               ? 'bg-emerald-50 text-emerald-800'
                               : 'bg-rose-50 text-rose-800'
                               }`}
@@ -443,26 +660,26 @@ export function IneView({ data }: IneViewProps) {
                           <span className="text-slate-400">-</span>
                         ) : (
                           <span
-                            className={`font-mono font-black text-xs ${row.growthRate >= 0 ? 'text-emerald-700' : 'text-rose-700'
+                            className={`font-semibold text-xs ${row.growthRate >= 0 ? 'text-emerald-700' : 'text-rose-700'
                               }`}
                           >
                             {row.growthRate >= 0 ? `+${row.growthRate}%` : `${row.growthRate}%`}
                           </span>
                         )}
                       </td>
-                      <td className="py-3 px-3 text-right font-mono font-semibold text-slate-800">
+                      <td className="py-3 px-3 text-right font-semibold text-slate-800">
                         {row.pub.toLocaleString('es-BO')}
                       </td>
-                      <td className="py-3 px-3 text-right font-mono text-slate-600">
+                      <td className="py-3 px-3 text-right text-slate-600">
                         {row.priv.toLocaleString('es-BO')}
                       </td>
-                      <td className="py-3 px-3 text-right font-mono text-emerald-800 font-semibold">
+                      <td className="py-3 px-3 text-right text-emerald-800 font-semibold">
                         {row.prim.toLocaleString('es-BO')}
                       </td>
-                      <td className="py-3 px-3 text-right font-mono text-blue-800 font-semibold">
+                      <td className="py-3 px-3 text-right text-blue-800 font-semibold">
                         {row.secu.toLocaleString('es-BO')}
                       </td>
-                      <td className="py-3 px-3 text-right font-mono text-amber-800 font-semibold">
+                      <td className="py-3 px-3 text-right text-amber-800 font-semibold">
                         {row.inic.toLocaleString('es-BO')}
                       </td>
                     </tr>
@@ -501,7 +718,7 @@ export function IneView({ data }: IneViewProps) {
                   header: 'Cantidad',
                   align: 'right',
                   render: (r: IneMatricula) => (
-                    <span className="font-bold text-slate-900 font-mono">
+                    <span className="font-medium text-slate-900">
                       {(r.cantidad || 0).toLocaleString('es-BO')}
                     </span>
                   ),
@@ -527,7 +744,7 @@ export function IneView({ data }: IneViewProps) {
                   header: 'Población Total Habitantes',
                   align: 'right',
                   render: (r) => (
-                    <span className="font-bold text-slate-900 font-mono text-sm">
+                    <span className="font-medium text-slate-900 text-sm">
                       {r.poblacion.toLocaleString('es-BO')} hab.
                     </span>
                   ),
@@ -548,7 +765,7 @@ export function IneView({ data }: IneViewProps) {
                   header: 'Cantidad Proyectada',
                   align: 'right',
                   render: (r) => (
-                    <span className="font-bold text-slate-900 font-mono">
+                    <span className="font-medium text-slate-900">
                       {r.cantidad.toLocaleString('es-BO')}
                     </span>
                   ),

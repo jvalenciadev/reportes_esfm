@@ -84,7 +84,7 @@ export function SieTerritorialExplorer({ data }: SieTerritorialExplorerProps) {
     } else if (year <= 2014) {
       return {
         title: 'Aceleración de la Urbanización Escolar',
-        color: 'text-[#7d6325] bg-[#faf5e8] border-[#e5d5a6]',
+        color: 'text-[#c9a751] bg-[#faf5e8] border-[#e5d5a6]',
         summary: 'La matrícula urbana superó por primera vez el 70% del total nacional.',
         detail: 'Crecimiento vertiginoso de unidades educativas en El Alto, Santa Cruz de la Sierra y Cochabamba. Alta demanda de maestros para infraestructura secundaria.',
       };
@@ -147,15 +147,15 @@ export function SieTerritorialExplorer({ data }: SieTerritorialExplorerProps) {
       <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4 border-b border-slate-100 pb-5">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[10px] font-black uppercase tracking-wider bg-[#faf5e8] text-[#7d6325] border border-[#e5d5a6] px-2.5 py-0.5 rounded-md flex items-center gap-1.5">
+            <span className="text-[10px] font-semibold uppercase tracking-wider bg-[#faf5e8] text-[#c9a751] border border-[#e5d5a6] px-2.5 py-0.5 rounded-md flex items-center gap-1.5">
               <MapPinIcon size={12} className="text-[#a08035]" />
               Explorador Territorial de Matrícula (2000 - 2025)
             </span>
-            <span className="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md border border-slate-200">
+            <span className="text-[10px] font-medium text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md border border-slate-200">
               Serie Censal SIE 26 Años
             </span>
           </div>
-          <h2 className="text-xl font-black text-slate-900 tracking-tight">
+          <h2 className="text-xl font-semibold text-slate-900 tracking-tight">
             Tendencia Histórica: Concentración Urbana vs Retención Rural
           </h2>
           <p className="text-xs text-slate-500 mt-0.5">
@@ -169,13 +169,13 @@ export function SieTerritorialExplorer({ data }: SieTerritorialExplorerProps) {
             <button
               key={m.year}
               onClick={() => setSelectedYear(m.year)}
-              className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0 border ${
+              className={`px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all shrink-0 border ${
                 selectedYear === m.year
                   ? 'bg-[#c9a751] text-slate-900 border-[#a08035] shadow-xs'
                   : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100'
               }`}
             >
-              <span className="block text-[11px] font-mono leading-none">{m.year}</span>
+              <span className="block text-[11px] leading-none">{m.year}</span>
               <span className="text-[9px] opacity-80 block mt-0.5">{m.badge}</span>
             </button>
           ))}
@@ -185,10 +185,10 @@ export function SieTerritorialExplorer({ data }: SieTerritorialExplorerProps) {
       {/* 4 Indicadores en Tiempo Real del Año Seleccionado */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         <div className="bg-[#faf5e8]/70 border border-[#e5d5a6] rounded-xl p-3.5">
-          <span className="text-[10px] uppercase font-bold text-[#7d6325] tracking-wider block">
+          <span className="text-[10px] uppercase font-medium text-[#c9a751] tracking-wider block">
             Matrícula Total ({selectedYear})
           </span>
-          <div className="text-xl font-black font-mono text-slate-900 mt-0.5">
+          <div className="text-xl font-semibold text-slate-900 mt-0.5">
             {currentItem.total.toLocaleString('es-BO')}
           </div>
           <span className="text-[11px] text-slate-600 mt-1 block">
@@ -198,14 +198,14 @@ export function SieTerritorialExplorer({ data }: SieTerritorialExplorerProps) {
 
         <div className="bg-amber-50/70 border border-amber-200 rounded-xl p-3.5">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] uppercase font-bold text-amber-900 tracking-wider">
+            <span className="text-[10px] uppercase font-medium text-amber-900 tracking-wider">
               Área Urbana
             </span>
-            <span className="text-[10px] font-black px-1.5 py-0.5 rounded bg-[#c9a751] text-slate-900 font-mono">
+            <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-[#c9a751] text-slate-900">
               {currentItem.pctUrb.toFixed(1)}%
             </span>
           </div>
-          <div className="text-xl font-black font-mono text-slate-900 mt-0.5">
+          <div className="text-xl font-semibold text-slate-900 mt-0.5">
             {currentItem.urb.toLocaleString('es-BO')}
           </div>
           <span className="text-[11px] text-slate-600 mt-1 block">
@@ -215,14 +215,14 @@ export function SieTerritorialExplorer({ data }: SieTerritorialExplorerProps) {
 
         <div className="bg-emerald-50/70 border border-emerald-200 rounded-xl p-3.5">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] uppercase font-bold text-emerald-900 tracking-wider">
+            <span className="text-[10px] uppercase font-medium text-emerald-900 tracking-wider">
               Área Rural
             </span>
-            <span className="text-[10px] font-black px-1.5 py-0.5 rounded bg-emerald-600 text-white font-mono">
+            <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-emerald-600 text-white">
               {currentItem.pctRur.toFixed(1)}%
             </span>
           </div>
-          <div className="text-xl font-black font-mono text-slate-900 mt-0.5">
+          <div className="text-xl font-semibold text-slate-900 mt-0.5">
             {currentItem.rur.toLocaleString('es-BO')}
           </div>
           <span className="text-[11px] text-slate-600 mt-1 block">
@@ -231,10 +231,10 @@ export function SieTerritorialExplorer({ data }: SieTerritorialExplorerProps) {
         </div>
 
         <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5">
-          <span className="text-[10px] uppercase font-bold text-slate-600 tracking-wider block">
+          <span className="text-[10px] uppercase font-medium text-slate-600 tracking-wider block">
             Brecha Urbano - Rural
           </span>
-          <div className="text-xl font-black font-mono text-slate-900 mt-0.5">
+          <div className="text-xl font-semibold text-slate-900 mt-0.5">
             +{currentItem.brecha.toLocaleString('es-BO')}
           </div>
           <span className="text-[11px] text-slate-600 mt-1 block">
@@ -249,19 +249,19 @@ export function SieTerritorialExplorer({ data }: SieTerritorialExplorerProps) {
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1.5">
               <span className="w-3 h-1 bg-[#1e293b] rounded"></span>
-              <span className="font-bold text-slate-800">Total Nacional</span>
+              <span className="font-medium text-slate-800">Total Nacional</span>
             </div>
             <div className="flex items-center gap-1.5">
               <span className="w-3 h-1 bg-[#c9a751] rounded"></span>
-              <span className="font-bold text-[#7d6325]">Área Urbana</span>
+              <span className="font-medium text-[#c9a751]">Área Urbana</span>
             </div>
             <div className="flex items-center gap-1.5">
               <span className="w-3 h-1 bg-[#059669] rounded"></span>
-              <span className="font-bold text-emerald-800">Área Rural</span>
+              <span className="font-medium text-emerald-800">Área Rural</span>
             </div>
           </div>
-          <span className="text-[11px] text-slate-500 font-mono">
-            Año seleccionado: <strong className="text-slate-900 font-bold">{selectedYear}</strong>
+          <span className="text-[11px] text-slate-500">
+            Año seleccionado: <strong className="text-slate-900 font-medium">{selectedYear}</strong>
           </span>
         </div>
 
@@ -404,7 +404,7 @@ export function SieTerritorialExplorer({ data }: SieTerritorialExplorerProps) {
         {/* Control Deslizante (Slider de Años) */}
         <div className="mt-4 pt-3 border-t border-slate-200">
           <div className="flex items-center justify-between gap-4">
-            <span className="text-[11px] font-bold text-slate-500 font-mono">2000</span>
+            <span className="text-[11px] font-medium text-slate-500">2000</span>
             <input
               type="range"
               min={minYear}
@@ -413,7 +413,7 @@ export function SieTerritorialExplorer({ data }: SieTerritorialExplorerProps) {
               onChange={(e) => setSelectedYear(Number(e.target.value))}
               className="w-full accent-[#c9a751] cursor-pointer h-2 bg-slate-200 rounded-lg"
             />
-            <span className="text-[11px] font-bold text-slate-500 font-mono">2025</span>
+            <span className="text-[11px] font-medium text-slate-500">2025</span>
           </div>
         </div>
       </div>
@@ -426,10 +426,10 @@ export function SieTerritorialExplorer({ data }: SieTerritorialExplorerProps) {
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-white/80 font-mono">
+              <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded bg-white/80">
                 Gestión {selectedYear}
               </span>
-              <h4 className="font-black text-sm">{currentContext.title}</h4>
+              <h4 className="font-semibold text-sm">{currentContext.title}</h4>
             </div>
             <p className="text-xs font-semibold mt-1 opacity-90">{currentContext.summary}</p>
             <p className="text-xs mt-1.5 opacity-80 leading-relaxed">{currentContext.detail}</p>

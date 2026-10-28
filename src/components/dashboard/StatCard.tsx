@@ -39,7 +39,7 @@ export function StatCard({
               </span>
             )}
           </div>
-          <div className="text-2xl lg:text-3xl font-extrabold text-slate-900 tracking-tight">
+          <div className="text-2xl lg:text-3xl font-medium text-slate-900 tracking-tight">
             {typeof value === 'number' ? value.toLocaleString('es-BO') : value}
           </div>
           {subtitle && (

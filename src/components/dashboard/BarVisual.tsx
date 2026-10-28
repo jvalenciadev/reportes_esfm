@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { MaximizeIcon, MinimizeIcon } from '../ui/Icons';
 
 export interface BarItem {
   label: string;
@@ -60,7 +61,7 @@ export function BarVisual({
     >
       <div className="flex items-center justify-between gap-3 mb-4 pb-2 border-b border-slate-100">
         <div>
-          <h3 className={`font-black text-slate-900 ${isExpanded ? 'text-lg sm:text-xl' : 'text-base'}`}>
+          <h3 className={`font-semibold text-slate-900 ${isExpanded ? 'text-lg sm:text-xl' : 'text-base'}`}>
             {title}
           </h3>
           {subtitle && <p className="text-xs text-slate-500 mt-0.5">{subtitle}</p>}
@@ -68,14 +69,24 @@ export function BarVisual({
 
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className={`px-3 py-1 rounded-xl text-xs font-bold border transition-all shrink-0 ${
+          className={`px-3 py-1 rounded-xl text-xs font-medium border transition-all shrink-0 flex items-center gap-1.5 ${
             isExpanded
-              ? 'bg-[#faf5e8] text-[#7d6325] border-[#c9a751] shadow-2xs ring-1 ring-[#c9a751]'
+              ? 'bg-[#faf5e8] text-[#c9a751] border-[#c9a751] shadow-2xs ring-1 ring-[#c9a751]'
               : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100 hover:text-slate-900'
           }`}
           title={isExpanded ? 'Restaurar tamaño normal' : 'Agrandar y mostrar todos los registros'}
         >
-          {isExpanded ? '✕ Restaurar' : '⛶ Agrandar'}
+          {isExpanded ? (
+            <>
+              <MinimizeIcon size={13} />
+              <span>Restaurar</span>
+            </>
+          ) : (
+            <>
+              <MaximizeIcon size={13} />
+              <span>Agrandar</span>
+            </>
+          )}
         </button>
       </div>
 
@@ -86,8 +97,8 @@ export function BarVisual({
             <div key={idx} className="group p-1.5 rounded-lg hover:bg-slate-50 transition-colors">
               <div className="flex items-center justify-between text-xs font-semibold text-slate-800 mb-1.5">
                 <span className="truncate max-w-[75%] flex items-center gap-1.5" title={item.label}>
-                  <span className="font-mono text-slate-400 font-bold text-[11px]">#{idx + 1}</span>
-                  <span className={isExpanded ? 'text-sm font-bold text-slate-900' : 'text-xs'}>
+                  <span className="text-slate-400 font-medium text-[11px]">#{idx + 1}</span>
+                  <span className={isExpanded ? 'text-sm font-medium text-slate-900' : 'text-xs'}>
                     {item.label}
                   </span>
                   {item.sublabel && (
@@ -96,7 +107,7 @@ export function BarVisual({
                     </span>
                   )}
                 </span>
-                <span className="font-mono font-black text-slate-900 shrink-0 ml-2 text-sm">
+                <span className="font-semibold text-slate-900 shrink-0 ml-2 text-sm">
                   {item.value.toLocaleString('es-BO')} {unit}
                 </span>
               </div>

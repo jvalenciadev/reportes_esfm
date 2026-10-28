@@ -2,7 +2,16 @@
 
 import React, { useState, useMemo } from 'react';
 import { IneProyeccionEdad } from '@/types/stats';
-import { UsersIcon, TrendingUpIcon, CalendarIcon, FilterIcon, GraduationCapIcon } from '../ui/Icons';
+import {
+  UsersIcon,
+  TrendingUpIcon,
+  CalendarIcon,
+  FilterIcon,
+  GraduationCapIcon,
+  MaximizeIcon,
+  MinimizeIcon,
+  LightbulbIcon,
+} from '../ui/Icons';
 
 interface AgeProjectionExplorerProps {
   data: IneProyeccionEdad[];
@@ -141,11 +150,11 @@ export function AgeProjectionExplorer({ data }: AgeProjectionExplorerProps) {
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-100">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[10px] font-black uppercase tracking-wider bg-[#faf5e8] text-[#7d6325] border border-[#e5d5a6] px-2.5 py-0.5 rounded-md font-mono">
+            <span className="text-[10px] font-semibold uppercase tracking-wider bg-[#faf5e8] text-[#c9a751] border border-[#e5d5a6] px-2.5 py-0.5 rounded-md">
               INE · Proyecciones de Población por Edad
             </span>
           </div>
-          <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight font-heraldic">
+          <h2 className="text-xl sm:text-2xl font-semibold text-slate-900 tracking-tight">
             Explorador Interactivo de Población por Rango de Edad (2024 - 2034)
           </h2>
           <p className="text-xs text-slate-500 mt-0.5 max-w-3xl">
@@ -154,7 +163,7 @@ export function AgeProjectionExplorer({ data }: AgeProjectionExplorerProps) {
         </div>
 
         {/* Botones de Control de Tamaño Dinámico (Agrandar / Dividido) */}
-        <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs font-bold shrink-0">
+        <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs font-medium shrink-0">
           <span className="text-[10px] text-slate-400 uppercase tracking-wider px-2">
             Vista:
           </span>
@@ -178,7 +187,10 @@ export function AgeProjectionExplorer({ data }: AgeProjectionExplorerProps) {
             }`}
             title="Agrandar la Tendencia Temporal al 100% de ancho"
           >
-            ⛶ Tendencia Grande (2024-2034)
+            <span className="flex items-center gap-1.5">
+              <MaximizeIcon size={13} />
+              <span>Tendencia Grande (2024-2034)</span>
+            </span>
           </button>
           <button
             onClick={() => setViewMode('dist_full')}
@@ -189,7 +201,10 @@ export function AgeProjectionExplorer({ data }: AgeProjectionExplorerProps) {
             }`}
             title="Agrandar el desglose de Edades al 100% de ancho"
           >
-            ⛶ Edades Detalladas
+            <span className="flex items-center gap-1.5">
+              <MaximizeIcon size={13} />
+              <span>Edades Detalladas</span>
+            </span>
           </button>
         </div>
       </div>
@@ -198,7 +213,7 @@ export function AgeProjectionExplorer({ data }: AgeProjectionExplorerProps) {
       <div className="space-y-3">
         {/* Presets Rápidos */}
         <div>
-          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-1.5 font-mono">
+          <span className="text-[11px] font-medium uppercase tracking-wider text-slate-400 block mb-1.5">
             Cohortes de Planificación Preconfiguradas:
           </span>
           <div className="flex flex-wrap gap-1.5">
@@ -208,7 +223,7 @@ export function AgeProjectionExplorer({ data }: AgeProjectionExplorerProps) {
                 <button
                   key={idx}
                   onClick={() => applyPreset(p.min, p.max)}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all border ${
+                  className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all border ${
                     isActive
                       ? 'bg-[#c9a751] text-slate-900 border-[#c9a751] shadow-2xs scale-105 ring-1 ring-[#c9a751]'
                       : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100 hover:text-slate-900'
@@ -224,9 +239,9 @@ export function AgeProjectionExplorer({ data }: AgeProjectionExplorerProps) {
         {/* Sliders Interactivos para Rango Personalizado */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-slate-50/80 p-4 rounded-xl border border-slate-200">
           <div>
-            <div className="flex justify-between text-xs font-bold text-slate-700 mb-1">
+            <div className="flex justify-between text-xs font-medium text-slate-700 mb-1">
               <span>Edad Mínima:</span>
-              <span className="font-mono text-[#7d6325] font-black">{minAge} años</span>
+              <span className="text-[#c9a751] font-semibold">{minAge} años</span>
             </div>
             <input
               type="range"
@@ -239,9 +254,9 @@ export function AgeProjectionExplorer({ data }: AgeProjectionExplorerProps) {
           </div>
 
           <div>
-            <div className="flex justify-between text-xs font-bold text-slate-700 mb-1">
+            <div className="flex justify-between text-xs font-medium text-slate-700 mb-1">
               <span>Edad Máxima:</span>
-              <span className="font-mono text-[#7d6325] font-black">{maxAge} años</span>
+              <span className="text-[#c9a751] font-semibold">{maxAge} años</span>
             </div>
             <input
               type="range"
@@ -255,16 +270,16 @@ export function AgeProjectionExplorer({ data }: AgeProjectionExplorerProps) {
 
           {/* Selector de Año */}
           <div>
-            <div className="flex justify-between text-xs font-bold text-slate-700 mb-1">
+            <div className="flex justify-between text-xs font-medium text-slate-700 mb-1">
               <span>Gestión Activa:</span>
-              <span className="font-mono text-slate-900 font-black">{selectedYear}</span>
+              <span className="text-slate-900 font-semibold">{selectedYear}</span>
             </div>
             <div className="flex items-center gap-1 overflow-x-auto pb-1">
               {availableYears.map((yr) => (
                 <button
                   key={yr}
                   onClick={() => setSelectedYear(yr)}
-                  className={`px-2 py-1 rounded text-[11px] font-bold font-mono transition-all shrink-0 ${
+                  className={`px-2 py-1 rounded text-[11px] font-medium transition-all shrink-0 ${
                     selectedYear === yr
                       ? 'bg-slate-900 text-white shadow-2xs'
                       : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
@@ -281,10 +296,10 @@ export function AgeProjectionExplorer({ data }: AgeProjectionExplorerProps) {
       {/* 4 Métricas Clave de la Cohorte */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         <div className="p-3.5 rounded-xl bg-white border border-slate-200 shadow-2xs">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
+          <span className="text-[10px] font-medium uppercase tracking-wider text-slate-400 block">
             Población en {selectedYear}
           </span>
-          <strong className="text-xl sm:text-2xl font-black text-slate-900 font-mono block mt-0.5">
+          <strong className="text-xl sm:text-2xl font-semibold text-slate-900 block mt-0.5">
             {totalCohortCurrentYear.toLocaleString('es-BO')}
           </strong>
           <span className="text-[10px] text-slate-500 font-medium">
@@ -293,10 +308,10 @@ export function AgeProjectionExplorer({ data }: AgeProjectionExplorerProps) {
         </div>
 
         <div className="p-3.5 rounded-xl bg-white border border-slate-200 shadow-2xs">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
+          <span className="text-[10px] font-medium uppercase tracking-wider text-slate-400 block">
             % del Total Nacional
           </span>
-          <strong className="text-xl sm:text-2xl font-black text-[#7d6325] font-mono block mt-0.5">
+          <strong className="text-xl sm:text-2xl font-semibold text-[#c9a751] block mt-0.5">
             {percentOfBolivia}%
           </strong>
           <span className="text-[10px] text-slate-500 font-medium">
@@ -305,10 +320,10 @@ export function AgeProjectionExplorer({ data }: AgeProjectionExplorerProps) {
         </div>
 
         <div className="p-3.5 rounded-xl bg-white border border-slate-200 shadow-2xs">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
+          <span className="text-[10px] font-medium uppercase tracking-wider text-slate-400 block">
             Edad Pico del Rango
           </span>
-          <strong className="text-xl sm:text-2xl font-black text-blue-700 font-mono block mt-0.5">
+          <strong className="text-xl sm:text-2xl font-semibold text-blue-700 block mt-0.5">
             {peakAge ? `${peakAge.edad} años` : '-'}
           </strong>
           <span className="text-[10px] text-slate-500 font-medium">
@@ -317,17 +332,17 @@ export function AgeProjectionExplorer({ data }: AgeProjectionExplorerProps) {
         </div>
 
         <div className="p-3.5 rounded-xl bg-white border border-slate-200 shadow-2xs">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
+          <span className="text-[10px] font-medium uppercase tracking-wider text-slate-400 block">
             Tendencia Década (2024-2034)
           </span>
           <strong
-            className={`text-xl sm:text-2xl font-black font-mono block mt-0.5 ${
+            className={`text-xl sm:text-2xl font-semibold block mt-0.5 ${
               netChangeDecade >= 0 ? 'text-emerald-700' : 'text-rose-700'
             }`}
           >
             {netChangeDecade >= 0 ? `+${percentChangeDecade}%` : `${percentChangeDecade}%`}
           </strong>
-          <span className="text-[10px] text-slate-500 font-medium font-mono">
+          <span className="text-[10px] text-slate-500 font-medium">
             {netChangeDecade >= 0 ? `+${netChangeDecade.toLocaleString('es-BO')}` : netChangeDecade.toLocaleString('es-BO')} hab.
           </span>
         </div>
@@ -345,7 +360,7 @@ export function AgeProjectionExplorer({ data }: AgeProjectionExplorerProps) {
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="w-2.5 h-2.5 rounded-full bg-[#c9a751]" />
-                    <h3 className="text-base sm:text-lg font-black text-slate-900 tracking-tight">
+                    <h3 className="text-base sm:text-lg font-semibold text-slate-900 tracking-tight">
                       Tendencia Temporal de esta Cohorte ({minAge} a {maxAge} Años, 2024 - 2034)
                     </h3>
                   </div>
@@ -356,7 +371,7 @@ export function AgeProjectionExplorer({ data }: AgeProjectionExplorerProps) {
 
                 <div className="flex items-center gap-2 shrink-0">
                   <span
-                    className={`text-xs font-mono font-bold px-2.5 py-1 rounded-lg border ${
+                    className={`text-xs font-medium px-2.5 py-1 rounded-lg border ${
                       netChangeDecade >= 0
                         ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
                         : 'bg-rose-50 text-rose-800 border-rose-200'
@@ -366,10 +381,20 @@ export function AgeProjectionExplorer({ data }: AgeProjectionExplorerProps) {
                   </span>
                   <button
                     onClick={() => setViewMode(isTrendFull ? 'split' : 'trend_full')}
-                    className="px-2.5 py-1 rounded-lg text-xs font-bold border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 transition-all"
+                    className="px-2.5 py-1 rounded-lg text-xs font-medium border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 transition-all flex items-center gap-1.5"
                     title={isTrendFull ? 'Restaurar a vista dividida' : 'Agrandar gráfico al ancho completo'}
                   >
-                    {isTrendFull ? '✕ Restaurar' : '⛶ Agrandar'}
+                    {isTrendFull ? (
+                      <>
+                        <MinimizeIcon size={13} />
+                        <span>Restaurar</span>
+                      </>
+                    ) : (
+                      <>
+                        <MaximizeIcon size={13} />
+                        <span>Agrandar</span>
+                      </>
+                    )}
                   </button>
                 </div>
               </div>
@@ -377,10 +402,10 @@ export function AgeProjectionExplorer({ data }: AgeProjectionExplorerProps) {
               {/* Indicador del Año Activo Destacado en Grande */}
               <div className="flex flex-wrap items-center justify-between gap-3 bg-[#faf5e8]/70 border border-[#e5d5a6] rounded-xl p-3 mb-4">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-xs font-bold text-[#7d6325] uppercase tracking-wider">
+                  <span className="text-xs font-medium text-[#c9a751] uppercase tracking-wider">
                     Gestión Seleccionada ({selectedYear}):
                   </span>
-                  <strong className="text-2xl sm:text-3xl font-black text-slate-900 font-mono">
+                  <strong className="text-2xl sm:text-3xl font-semibold text-slate-900">
                     {selectedPoint.total.toLocaleString('es-BO')}
                   </strong>
                   <span className="text-xs text-slate-500 font-semibold">jóvenes</span>
@@ -390,7 +415,7 @@ export function AgeProjectionExplorer({ data }: AgeProjectionExplorerProps) {
                   <div className="flex items-center gap-2 text-xs">
                     <span className="text-slate-500">Variación vs año previo:</span>
                     <span
-                      className={`font-black font-mono px-2 py-0.5 rounded text-xs ${
+                      className={`font-semibold px-2 py-0.5 rounded text-xs ${
                         selectedPoint.diff >= 0
                           ? 'bg-emerald-100 text-emerald-800'
                           : 'bg-rose-100 text-rose-800'
@@ -543,10 +568,10 @@ export function AgeProjectionExplorer({ data }: AgeProjectionExplorerProps) {
               {/* Tabla de detalle interanual completa cuando está en modo grande */}
               {isTrendFull && (
                 <div className="mt-5 pt-4 border-t border-slate-100 overflow-x-auto">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-2 font-mono">
+                  <span className="text-[10px] font-medium uppercase tracking-wider text-slate-400 block mb-2">
                     Detalle Anual de la Cohorte ({minAge} a {maxAge} Años):
                   </span>
-                  <div className="grid grid-cols-11 gap-1 text-center font-mono">
+                  <div className="grid grid-cols-11 gap-1 text-center">
                     {cohortTrendByYear.map((pt) => {
                       const isSel = pt.year === selectedYear;
                       return (
@@ -559,15 +584,15 @@ export function AgeProjectionExplorer({ data }: AgeProjectionExplorerProps) {
                               : 'bg-slate-50/70 border-slate-200 hover:bg-slate-100'
                           }`}
                         >
-                          <span className={`text-[10px] font-bold block ${isSel ? 'text-[#7d6325]' : 'text-slate-500'}`}>
+                          <span className={`text-[10px] font-medium block ${isSel ? 'text-[#c9a751]' : 'text-slate-500'}`}>
                             {pt.year}
                           </span>
-                          <strong className="text-xs font-black text-slate-900 block mt-0.5">
+                          <strong className="text-xs font-semibold text-slate-900 block mt-0.5">
                             {pt.total.toLocaleString('es-BO')}
                           </strong>
                           {pt.rate !== undefined && pt.year > 2024 && (
                             <span
-                              className={`text-[9px] font-bold block mt-0.5 ${
+                              className={`text-[9px] font-medium block mt-0.5 ${
                                 pt.diff >= 0 ? 'text-emerald-700' : 'text-rose-700'
                               }`}
                             >
@@ -590,7 +615,7 @@ export function AgeProjectionExplorer({ data }: AgeProjectionExplorerProps) {
             <div>
               <div className="flex items-center justify-between gap-2 mb-3 pb-2 border-b border-slate-100">
                 <div>
-                  <h3 className="text-base font-black text-slate-900">
+                  <h3 className="text-base font-semibold text-slate-900">
                     Distribución Detallada por Edad Simple (Gestión {selectedYear})
                   </h3>
                   <p className="text-xs text-slate-500">
@@ -599,10 +624,20 @@ export function AgeProjectionExplorer({ data }: AgeProjectionExplorerProps) {
                 </div>
                 <button
                   onClick={() => setViewMode(isDistFull ? 'split' : 'dist_full')}
-                  className="px-2.5 py-1 rounded-lg text-xs font-bold border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 transition-all shrink-0"
+                  className="px-2.5 py-1 rounded-lg text-xs font-medium border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 transition-all shrink-0 flex items-center gap-1.5"
                   title={isDistFull ? 'Restaurar a vista dividida' : 'Agrandar desglose de edades'}
                 >
-                  {isDistFull ? '✕ Restaurar' : '⛶ Agrandar'}
+                  {isDistFull ? (
+                    <>
+                      <MinimizeIcon size={13} />
+                      <span>Restaurar</span>
+                    </>
+                  ) : (
+                    <>
+                      <MaximizeIcon size={13} />
+                      <span>Agrandar</span>
+                    </>
+                  )}
                 </button>
               </div>
 
@@ -615,20 +650,20 @@ export function AgeProjectionExplorer({ data }: AgeProjectionExplorerProps) {
                   return (
                     <div key={item.edad} className="group p-1.5 rounded-lg hover:bg-slate-50 transition-colors">
                       <div className="flex items-center justify-between text-xs font-semibold mb-1">
-                        <span className="flex items-center gap-1.5 font-mono text-slate-800">
-                          <span className="text-sm font-bold">{item.edad} Años</span>
+                        <span className="flex items-center gap-1.5 text-slate-800">
+                          <span className="text-sm font-medium">{item.edad} Años</span>
                           {is18 && (
-                            <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.2 rounded bg-[#faf5e8] text-[#7d6325] border border-[#e5d5a6]">
+                            <span className="text-[9px] font-medium uppercase px-1.5 py-0.2 rounded bg-[#faf5e8] text-[#c9a751] border border-[#e5d5a6]">
                               Egreso / Admisión ESFM
                             </span>
                           )}
                           {isPeak && !is18 && (
-                            <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.2 rounded bg-blue-50 text-blue-700">
+                            <span className="text-[9px] font-medium uppercase px-1.5 py-0.2 rounded bg-blue-50 text-blue-700">
                               Pico
                             </span>
                           )}
                         </span>
-                        <span className="font-mono font-black text-slate-900 text-sm">
+                        <span className="font-semibold text-slate-900 text-sm">
                           {item.cantidad.toLocaleString('es-BO')}
                         </span>
                       </div>
@@ -653,12 +688,13 @@ export function AgeProjectionExplorer({ data }: AgeProjectionExplorerProps) {
 
       {/* Recuadro de Conclusión para Exposición Docente */}
       <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs">
-        <h4 className="font-extrabold text-slate-800 uppercase tracking-wider text-[11px] mb-1 font-mono">
-          💡 Conclusión Demográfica para la Exposición ({minAge} a {maxAge} Años):
+        <h4 className="font-medium text-slate-800 uppercase tracking-wider text-[11px] mb-1 flex items-center gap-1.5">
+          <LightbulbIcon size={14} className="text-[#c9a751]" />
+          <span>Conclusión Demográfica para la Exposición ({minAge} a {maxAge} Años):</span>
         </h4>
         <p className="text-slate-600 leading-relaxed">
           En la gestión <strong>{selectedYear}</strong>, Bolivia cuenta con{' '}
-          <strong className="text-slate-900 font-mono">{totalCohortCurrentYear.toLocaleString('es-BO')}</strong>{' '}
+          <strong className="text-slate-900">{totalCohortCurrentYear.toLocaleString('es-BO')}</strong>{' '}
           personas en este rango de edad ({percentOfBolivia}% de la población total). La proyección hasta 2034 muestra una tendencia de{' '}
           <strong className={netChangeDecade >= 0 ? 'text-emerald-700' : 'text-rose-700'}>
             {netChangeDecade >= 0 ? `crecimiento del +${percentChangeDecade}%` : `disminución del ${percentChangeDecade}%`}
