@@ -79,11 +79,42 @@ CREATE TABLE IF NOT EXISTS public.sie_total_estudiantes (
     nivel_texto VARCHAR(50) NOT NULL
 );
 
+-- 10. TABLA: SEIE DISCAPACIDAD POR DEPENDENCIA (2011-2025: Fiscal vs Privada)
+CREATE TABLE IF NOT EXISTS public.seie_discapacidad_dependencia (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    departamento_id INT NOT NULL REFERENCES public.departamentos(id) ON DELETE CASCADE,
+    dependencia VARCHAR(50) NOT NULL,
+    cantidad INT NOT NULL,
+    anio INT NOT NULL
+);
+
+-- 11. TABLA: SEIE DISCAPACIDAD POR ÁREA (2011-2025: Rural vs Urbana)
+CREATE TABLE IF NOT EXISTS public.seie_discapacidad_area (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    departamento_id INT NOT NULL REFERENCES public.departamentos(id) ON DELETE CASCADE,
+    area VARCHAR(50) NOT NULL,
+    cantidad INT NOT NULL,
+    anio INT NOT NULL
+);
+
+-- 12. TABLA: SIE DISCAPACIDAD GESTIÓN 2026 (Por Tipo de Discapacidad y Dependencia)
+CREATE TABLE IF NOT EXISTS public.sie_discapacidad_2026 (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    departamento_id INT NOT NULL REFERENCES public.departamentos(id) ON DELETE CASCADE,
+    dependencia VARCHAR(50) NOT NULL,
+    tipo_discapacidad VARCHAR(100) NOT NULL,
+    cantidad INT NOT NULL,
+    anio INT NOT NULL DEFAULT 2026
+);
+
 -- ÍNDICES DE RENDIMIENTO PARA REPORTES Y FILTRADOS
 CREATE INDEX IF NOT EXISTS idx_ine_matricula_dep_anio ON public.ine_matricula(departamento_id, anio);
 CREATE INDEX IF NOT EXISTS idx_inscritos_esfm_dep_gestion ON public.inscritos_esfm(departamento_id, gestion);
 CREATE INDEX IF NOT EXISTS idx_inscritos_esfm_especialidad ON public.inscritos_esfm(especialidad_id);
 CREATE INDEX IF NOT EXISTS idx_sie_total_dep ON public.sie_total_estudiantes(departamento_id);
+CREATE INDEX IF NOT EXISTS idx_seie_disc_dep_anio ON public.seie_discapacidad_dependencia(anio, departamento_id);
+CREATE INDEX IF NOT EXISTS idx_seie_disc_area_anio ON public.seie_discapacidad_area(anio, departamento_id);
+CREATE INDEX IF NOT EXISTS idx_sie_disc_2026_dep ON public.sie_discapacidad_2026(departamento_id, tipo_discapacidad);
 
 -- HABILITAR RLS Y POLÍTICAS DE LECTURA PÚBLICA PARA DASHBOARDS
 DO $$
@@ -97,7 +128,8 @@ BEGIN
           AND table_name IN (
             'departamentos', 'especialidades', 'discapacidad_seie',
             'ine_matricula', 'ine_poblacion', 'ine_proyeccion_edad',
-            'inscritos_esfm', 'matricula_rural_urbana', 'sie_total_estudiantes'
+            'inscritos_esfm', 'matricula_rural_urbana', 'sie_total_estudiantes',
+            'seie_discapacidad_dependencia', 'seie_discapacidad_area', 'sie_discapacidad_2026'
           )
     LOOP
         EXECUTE format('ALTER TABLE public.%I ENABLE ROW LEVEL SECURITY;', tbl);

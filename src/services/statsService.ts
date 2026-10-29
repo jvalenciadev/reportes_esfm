@@ -76,6 +76,9 @@ export async function getDashboardData(): Promise<DashboardDataset> {
     matricula_rural_urbana,
     sie_total_estudiantes,
     discapacidad_seie,
+    seie_discapacidad_dependencia,
+    seie_discapacidad_area,
+    sie_discapacidad_2026,
   ] = await Promise.all([
     fetchAllRows<DashboardDataset['departamentos'][0]>(
       'departamentos?select=*&order=id.asc',
@@ -117,6 +120,18 @@ export async function getDashboardData(): Promise<DashboardDataset> {
       'discapacidad_seie?select=*&order=id.asc',
       (fallbackData.discapacidad_seie || []) as DashboardDataset['discapacidad_seie']
     ),
+    fetchAllRows<DashboardDataset['seie_discapacidad_dependencia'][0]>(
+      'seie_discapacidad_dependencia?select=id,departamento_id,dependencia,cantidad,anio,departamentos(nombre)&order=anio.asc,departamento_id.asc',
+      (fallbackData.seie_discapacidad_dependencia || []) as DashboardDataset['seie_discapacidad_dependencia']
+    ),
+    fetchAllRows<DashboardDataset['seie_discapacidad_area'][0]>(
+      'seie_discapacidad_area?select=id,departamento_id,area,cantidad,anio,departamentos(nombre)&order=anio.asc,departamento_id.asc',
+      (fallbackData.seie_discapacidad_area || []) as DashboardDataset['seie_discapacidad_area']
+    ),
+    fetchAllRows<DashboardDataset['sie_discapacidad_2026'][0]>(
+      'sie_discapacidad_2026?select=id,departamento_id,dependencia,tipo_discapacidad,cantidad,anio,departamentos(nombre)&order=departamento_id.asc,tipo_discapacidad.asc',
+      (fallbackData.sie_discapacidad_2026 || []) as DashboardDataset['sie_discapacidad_2026']
+    ),
   ]);
 
   return {
@@ -130,5 +145,8 @@ export async function getDashboardData(): Promise<DashboardDataset> {
     matricula_rural_urbana,
     sie_total_estudiantes,
     discapacidad_seie,
+    seie_discapacidad_dependencia,
+    seie_discapacidad_area,
+    sie_discapacidad_2026,
   };
 }

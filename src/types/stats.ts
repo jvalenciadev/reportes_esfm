@@ -78,6 +78,34 @@ export interface DiscapacidadSeie {
   anio: number;
 }
 
+export interface SeieDiscapacidadDependencia {
+  id: number;
+  departamento_id: number;
+  dependencia: string;
+  cantidad: number;
+  anio: number;
+  departamentos?: { nombre: string };
+}
+
+export interface SeieDiscapacidadArea {
+  id: number;
+  departamento_id: number;
+  area: string;
+  cantidad: number;
+  anio: number;
+  departamentos?: { nombre: string };
+}
+
+export interface SieDiscapacidad2026 {
+  id: number;
+  departamento_id: number;
+  dependencia: string;
+  tipo_discapacidad: string;
+  cantidad: number;
+  anio: number;
+  departamentos?: { nombre: string };
+}
+
 export interface DashboardDataset {
   departamentos: Departamento[];
   especialidades: Especialidad[];
@@ -89,4 +117,7 @@ export interface DashboardDataset {
   matricula_rural_urbana: MatriculaRuralUrbana[];
   sie_total_estudiantes: SieTotalEstudiantes[];
   discapacidad_seie: DiscapacidadSeie[];
+  seie_discapacidad_dependencia: SeieDiscapacidadDependencia[];
+  seie_discapacidad_area: SeieDiscapacidadArea[];
+  sie_discapacidad_2026: SieDiscapacidad2026[];
 }
