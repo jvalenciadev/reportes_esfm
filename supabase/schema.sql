@@ -107,6 +107,21 @@ CREATE TABLE IF NOT EXISTS public.sie_discapacidad_2026 (
     anio INT NOT NULL DEFAULT 2026
 );
 
+-- 13. TABLA: UIE DÉFICIT DE HORAS Y CARGA HORARIA VS PLANILLA (2021-2025)
+CREATE TABLE IF NOT EXISTS public.uie_deficit_horas (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    gestion INT NOT NULL,
+    departamento_id INT NOT NULL REFERENCES public.departamentos(id) ON DELETE CASCADE,
+    departamento VARCHAR(50) NOT NULL,
+    dependencia VARCHAR(50) NOT NULL,
+    subsistema VARCHAR(100) NOT NULL,
+    nivel VARCHAR(150) NOT NULL,
+    cargo VARCHAR(150) NOT NULL,
+    horas_trabajadas INT NOT NULL,
+    horas_planilla INT NOT NULL,
+    deficit_horas INT NOT NULL
+);
+
 -- ÍNDICES DE RENDIMIENTO PARA REPORTES Y FILTRADOS
 CREATE INDEX IF NOT EXISTS idx_ine_matricula_dep_anio ON public.ine_matricula(departamento_id, anio);
 CREATE INDEX IF NOT EXISTS idx_inscritos_esfm_dep_gestion ON public.inscritos_esfm(departamento_id, gestion);
@@ -115,6 +130,9 @@ CREATE INDEX IF NOT EXISTS idx_sie_total_dep ON public.sie_total_estudiantes(dep
 CREATE INDEX IF NOT EXISTS idx_seie_disc_dep_anio ON public.seie_discapacidad_dependencia(anio, departamento_id);
 CREATE INDEX IF NOT EXISTS idx_seie_disc_area_anio ON public.seie_discapacidad_area(anio, departamento_id);
 CREATE INDEX IF NOT EXISTS idx_sie_disc_2026_dep ON public.sie_discapacidad_2026(departamento_id, tipo_discapacidad);
+CREATE INDEX IF NOT EXISTS idx_uie_deficit_gestion_dept ON public.uie_deficit_horas(gestion, departamento_id);
+CREATE INDEX IF NOT EXISTS idx_uie_deficit_subsistema ON public.uie_deficit_horas(subsistema, nivel);
+CREATE INDEX IF NOT EXISTS idx_uie_deficit_dependencia ON public.uie_deficit_horas(dependencia);
 
 -- HABILITAR RLS Y POLÍTICAS DE LECTURA PÚBLICA PARA DASHBOARDS
 DO $$
@@ -129,7 +147,8 @@ BEGIN
             'departamentos', 'especialidades', 'discapacidad_seie',
             'ine_matricula', 'ine_poblacion', 'ine_proyeccion_edad',
             'inscritos_esfm', 'matricula_rural_urbana', 'sie_total_estudiantes',
-            'seie_discapacidad_dependencia', 'seie_discapacidad_area', 'sie_discapacidad_2026'
+            'seie_discapacidad_dependencia', 'seie_discapacidad_area', 'sie_discapacidad_2026',
+            'uie_deficit_horas'
           )
     LOOP
         EXECUTE format('ALTER TABLE public.%I ENABLE ROW LEVEL SECURITY;', tbl);

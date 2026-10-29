@@ -106,6 +106,21 @@ export interface SieDiscapacidad2026 {
   departamentos?: { nombre: string };
 }
 
+export interface UieDeficitHoras {
+  id: number;
+  gestion: number;
+  departamento_id: number;
+  departamento: string;
+  dependencia: string;
+  subsistema: string;
+  nivel: string;
+  cargo: string;
+  horas_trabajadas: number;
+  horas_planilla: number;
+  deficit_horas: number;
+  departamentos?: { nombre: string };
+}
+
 export interface DashboardDataset {
   departamentos: Departamento[];
   especialidades: Especialidad[];
@@ -120,4 +135,5 @@ export interface DashboardDataset {
   seie_discapacidad_dependencia: SeieDiscapacidadDependencia[];
   seie_discapacidad_area: SeieDiscapacidadArea[];
   sie_discapacidad_2026: SieDiscapacidad2026[];
+  uie_deficit_horas?: UieDeficitHoras[];
 }
