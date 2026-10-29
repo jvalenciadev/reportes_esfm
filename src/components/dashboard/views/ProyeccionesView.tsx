@@ -26,6 +26,7 @@ export interface CursoDef {
   nombre: string;
   nivel: 'inicial' | 'primaria' | 'secundaria';
   nivelTexto: string;
+  grado: number;
   edadNormativa: number;
   sublabel: string;
   tasaEscolarizacionNacional: number; // Tasa neta oficial según INE y MINEDU
@@ -34,26 +35,26 @@ export interface CursoDef {
 // 14 Cursos del Subsistema de Educación Regular de Bolivia y sus edades normativas al 31 de marzo
 export const CURSOS_SEP: CursoDef[] = [
   // Nivel Inicial en Familia Comunitaria
-  { id: 'ini_1', nombre: '1.º Inicial', nivel: 'inicial', nivelTexto: 'Inicial', edadNormativa: 4, sublabel: 'Prekínder', tasaEscolarizacionNacional: 68.4 },
-  { id: 'ini_2', nombre: '2.º Inicial', nivel: 'inicial', nivelTexto: 'Inicial', edadNormativa: 5, sublabel: 'Kínder', tasaEscolarizacionNacional: 82.1 },
+  { id: 'ini_1', nombre: '1.º Inicial', nivel: 'inicial', nivelTexto: 'Inicial', grado: 1, edadNormativa: 4, sublabel: 'Prekínder', tasaEscolarizacionNacional: 68.4 },
+  { id: 'ini_2', nombre: '2.º Inicial', nivel: 'inicial', nivelTexto: 'Inicial', grado: 2, edadNormativa: 5, sublabel: 'Kínder', tasaEscolarizacionNacional: 82.1 },
   // Nivel Primario Comunitario Vocacional
-  { id: 'pri_1', nombre: '1.º Primaria', nivel: 'primaria', nivelTexto: 'Primaria', edadNormativa: 6, sublabel: 'Ingreso primario', tasaEscolarizacionNacional: 98.2 },
-  { id: 'pri_2', nombre: '2.º Primaria', nivel: 'primaria', nivelTexto: 'Primaria', edadNormativa: 7, sublabel: '2.º año', tasaEscolarizacionNacional: 98.0 },
-  { id: 'pri_3', nombre: '3.º Primaria', nivel: 'primaria', nivelTexto: 'Primaria', edadNormativa: 8, sublabel: '3.º año', tasaEscolarizacionNacional: 97.8 },
-  { id: 'pri_4', nombre: '4.º Primaria', nivel: 'primaria', nivelTexto: 'Primaria', edadNormativa: 9, sublabel: '4.º año', tasaEscolarizacionNacional: 97.4 },
-  { id: 'pri_5', nombre: '5.º Primaria', nivel: 'primaria', nivelTexto: 'Primaria', edadNormativa: 10, sublabel: '5.º año', tasaEscolarizacionNacional: 96.9 },
-  { id: 'pri_6', nombre: '6.º Primaria', nivel: 'primaria', nivelTexto: 'Primaria', edadNormativa: 11, sublabel: 'Egreso primario', tasaEscolarizacionNacional: 96.1 },
+  { id: 'pri_1', nombre: '1.º Primaria', nivel: 'primaria', nivelTexto: 'Primaria', grado: 1, edadNormativa: 6, sublabel: 'Ingreso primario', tasaEscolarizacionNacional: 98.2 },
+  { id: 'pri_2', nombre: '2.º Primaria', nivel: 'primaria', nivelTexto: 'Primaria', grado: 2, edadNormativa: 7, sublabel: '2.º año', tasaEscolarizacionNacional: 98.0 },
+  { id: 'pri_3', nombre: '3.º Primaria', nivel: 'primaria', nivelTexto: 'Primaria', grado: 3, edadNormativa: 8, sublabel: '3.º año', tasaEscolarizacionNacional: 97.8 },
+  { id: 'pri_4', nombre: '4.º Primaria', nivel: 'primaria', nivelTexto: 'Primaria', grado: 4, edadNormativa: 9, sublabel: '4.º año', tasaEscolarizacionNacional: 97.4 },
+  { id: 'pri_5', nombre: '5.º Primaria', nivel: 'primaria', nivelTexto: 'Primaria', grado: 5, edadNormativa: 10, sublabel: '5.º año', tasaEscolarizacionNacional: 96.9 },
+  { id: 'pri_6', nombre: '6.º Primaria', nivel: 'primaria', nivelTexto: 'Primaria', grado: 6, edadNormativa: 11, sublabel: 'Egreso primario', tasaEscolarizacionNacional: 96.1 },
   // Nivel Secundario Comunitario Productivo
-  { id: 'sec_1', nombre: '1.º Secundaria', nivel: 'secundaria', nivelTexto: 'Secundaria', edadNormativa: 12, sublabel: 'Ingreso secundario', tasaEscolarizacionNacional: 94.5 },
-  { id: 'sec_2', nombre: '2.º Secundaria', nivel: 'secundaria', nivelTexto: 'Secundaria', edadNormativa: 13, sublabel: '2.º año', tasaEscolarizacionNacional: 92.8 },
-  { id: 'sec_3', nombre: '3.º Secundaria', nivel: 'secundaria', nivelTexto: 'Secundaria', edadNormativa: 14, sublabel: '3.º año', tasaEscolarizacionNacional: 90.2 },
-  { id: 'sec_4', nombre: '4.º Secundaria', nivel: 'secundaria', nivelTexto: 'Secundaria', edadNormativa: 15, sublabel: '4.º año', tasaEscolarizacionNacional: 87.5 },
-  { id: 'sec_5', nombre: '5.º Secundaria', nivel: 'secundaria', nivelTexto: 'Secundaria', edadNormativa: 16, sublabel: '5.º año', tasaEscolarizacionNacional: 84.1 },
-  { id: 'sec_6', nombre: '6.º Secundaria', nivel: 'secundaria', nivelTexto: 'Secundaria', edadNormativa: 17, sublabel: 'Promoción Bachiller', tasaEscolarizacionNacional: 81.3 },
+  { id: 'sec_1', nombre: '1.º Secundaria', nivel: 'secundaria', nivelTexto: 'Secundaria', grado: 1, edadNormativa: 12, sublabel: 'Ingreso secundario', tasaEscolarizacionNacional: 94.5 },
+  { id: 'sec_2', nombre: '2.º Secundaria', nivel: 'secundaria', nivelTexto: 'Secundaria', grado: 2, edadNormativa: 13, sublabel: '2.º año', tasaEscolarizacionNacional: 92.8 },
+  { id: 'sec_3', nombre: '3.º Secundaria', nivel: 'secundaria', nivelTexto: 'Secundaria', grado: 3, edadNormativa: 14, sublabel: '3.º año', tasaEscolarizacionNacional: 90.2 },
+  { id: 'sec_4', nombre: '4.º Secundaria', nivel: 'secundaria', nivelTexto: 'Secundaria', grado: 4, edadNormativa: 15, sublabel: '4.º año', tasaEscolarizacionNacional: 87.5 },
+  { id: 'sec_5', nombre: '5.º Secundaria', nivel: 'secundaria', nivelTexto: 'Secundaria', grado: 5, edadNormativa: 16, sublabel: '5.º año', tasaEscolarizacionNacional: 84.1 },
+  { id: 'sec_6', nombre: '6.º Secundaria', nivel: 'secundaria', nivelTexto: 'Secundaria', grado: 6, edadNormativa: 17, sublabel: 'Promoción Bachiller', tasaEscolarizacionNacional: 81.3 },
 ];
 
-// Años disponibles en las proyecciones demográficas del INE (2026 - 2034)
-export const ANIOS_PROYECCION_TODOS = [2026, 2027, 2028, 2029, 2030, 2031, 2032, 2033, 2034];
+// Años disponibles en las proyecciones (2026 - 2035)
+export const ANIOS_PROYECCION_TODOS = [2026, 2027, 2028, 2029, 2030, 2031, 2032, 2033, 2034, 2035];
 
 // Parámetros SIE 2026: razones de dependencia por departamento (sector público vs privado)
 // Fuente: SIE - Ministerio de Educación, Gestión 2026
@@ -88,8 +89,13 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
   // Filtro de ámbito territorial (Total Nacional o departamento específico)
   const [selectedDept, setSelectedDept] = useState<string | 'all'>('all');
 
-  // Horizonte temporal: 2031 (Quinquenio) o 2034 (Serie completa INE)
-  const [horizonte, setHorizonte] = useState<'2031' | '2034'>('2034');
+  // Horizonte temporal: 2031 (Quinquenio) o 2035 (Decenio completo)
+  const [horizonte, setHorizonte] = useState<'2031' | '2035'>('2035');
+
+  // Metodología de proyección:
+  // - flujo_sie: Transición de cohortes reales desde SIE 2026 (Inicial y cursos sin cohorte previa se completan con INE)
+  // - demografico_ine: Cálculo demográfico puro con población INE por edades simples y tasas de escolarización
+  const [metodologia, setMetodologia] = useState<'flujo_sie' | 'demografico_ine'>('flujo_sie');
 
   // Gestión de foco para la tarjeta exploradora ("¿Cuántos estudiantes habrá en...?")
   const [focoYear, setFocoYear] = useState<number>(2028);
@@ -105,10 +111,10 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
 
   // Años activos según el horizonte
   const aniosActivos = useMemo(() => {
-    return ANIOS_PROYECCION_TODOS.filter((y) => horizonte === '2034' || y <= 2031);
+    return ANIOS_PROYECCION_TODOS.filter((y) => horizonte === '2035' || y <= 2031);
   }, [horizonte]);
 
-  // Cálculos demográficos y matriculares indexados para todos los años (2026 - 2034)
+  // Cálculos demográficos y matriculares indexados para todos los años (2026 - 2035)
   const projectionMatrix = useMemo(() => {
     const isNacional = selectedDept === 'all';
 
@@ -119,25 +125,51 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
     const deptId = deptRecord?.id ?? null;
     const deptParam = !isNacional ? (DEPT_PARAMS[selectedDept] ?? Object.values(DEPT_PARAMS).find(p => p.nombre === selectedDept)) : null;
 
-    // Construir índice rápido de INE por (anio, edad, departamento_id)
-    // key = `${anio}_${edad}_${dept_id}` (dept_id=null para suma nacional)
+    // 1. Construir índice rápido de INE por (anio, edad, departamento_id)
     type IneIndex = Map<string, number>;
     const ineIndex: IneIndex = new Map();
     for (const r of data.ine_proyeccion_edad) {
       const keyDept = `${r.anio}_${r.edad}_${r.departamento_id}`;
       ineIndex.set(keyDept, (ineIndex.get(keyDept) ?? 0) + r.cantidad);
-      // También acumular total nacional sumando todos los departamentos
       const keyNac = `${r.anio}_${r.edad}_nac`;
       ineIndex.set(keyNac, (ineIndex.get(keyNac) ?? 0) + r.cantidad);
     }
 
+    const getInePop = (anio: number, edad: number): number => {
+      if (anio <= 2034) {
+        if (isNacional) return ineIndex.get(`${anio}_${edad}_nac`) ?? 240000;
+        return deptId ? (ineIndex.get(`${anio}_${edad}_${deptId}`) ?? 0) : 0;
+      }
+      // Extrapolación demográfica para 2035 según tasa interanual nacional del INE
+      const base2034 = isNacional
+        ? (ineIndex.get(`2034_${edad}_nac`) ?? 240000)
+        : (deptId ? (ineIndex.get(`2034_${edad}_${deptId}`) ?? 0) : 0);
+      return Math.round(base2034 * 1.001323);
+    };
+
+    // 2. Construir índice rápido de SIE 2026 por curso base y dependencia
+    // key: `${deptId | 'nac'}_${nivelTexto}_${grado}_${dependencia}`
+    const sieMap = new Map<string, number>();
+    for (const r of (data.sie_total_estudiantes || [])) {
+      const depKey = r.dependencia === 'Privada' ? 'Privada' : 'Público';
+      const kDept = `${r.departamento_id}_${r.nivel_texto}_${r.nivel}_${depKey}`;
+      sieMap.set(kDept, (sieMap.get(kDept) ?? 0) + r.cantidad);
+
+      const kNac = `nac_${r.nivel_texto}_${r.nivel}_${depKey}`;
+      sieMap.set(kNac, (sieMap.get(kNac) ?? 0) + r.cantidad);
+    }
+
     return ANIOS_PROYECCION_TODOS.map((year) => {
+      const k = year - 2026; // Desplazamiento de gestiones desde 2026
       const rowData: Record<string, {
         poblacionIne: number;
         matriculaTotal: number;
         publico: number;
         privado: number;
         noEstudian: number;
+        origen: 'sie_cohorte' | 'ine_proyeccion';
+        cursoOrigenNombre?: string;
+        anioBase?: number;
       }> = {};
 
       let totalInicial = 0;
@@ -148,29 +180,66 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
       let totalPrivadoNivel = 0;
       let totalNoEstudianNivel = 0;
 
-      CURSOS_SEP.forEach((curso) => {
-        // 1. Población base por edad simple del INE (datos reales por departamento o nacional)
-        let pobIne: number;
-        if (isNacional) {
-          pobIne = ineIndex.get(`${year}_${curso.edadNormativa}_nac`) ?? 240000;
+      CURSOS_SEP.forEach((curso, cIdx) => {
+        const pobIne = getInePop(year, curso.edadNormativa);
+        const tasa = curso.tasaEscolarizacionNacional / 100;
+        const pctPub = isNacional ? 89.4 : (deptParam?.pctPublico ?? 89.4);
+
+        let matriculaTotal: number;
+        let publico: number;
+        let privado: number;
+        let origen: 'sie_cohorte' | 'ine_proyeccion' = 'ine_proyeccion';
+        let cursoOrigenNombre: string | undefined;
+        let anioBase: number | undefined;
+
+        if (metodologia === 'flujo_sie') {
+          // Metodología de Flujo de Cohortes SIE:
+          // A) Inicial 1 y 2: Asistencia no obligatoria / subinscripción. Se proyecta con INE.
+          // B) Primaria y Secundaria (cIdx >= 2):
+          const cBaseIdx = cIdx - k;
+          if (curso.nivel !== 'inicial' && cBaseIdx >= 2) {
+            // Cohorte real ya existente en Primaria/Secundaria en la gestión 2026
+            const cursoBase = CURSOS_SEP[cBaseIdx];
+            const keyPub = isNacional
+              ? `nac_${cursoBase.nivelTexto}_${cursoBase.grado}_Público`
+              : `${deptId}_${cursoBase.nivelTexto}_${cursoBase.grado}_Público`;
+            const keyPriv = isNacional
+              ? `nac_${cursoBase.nivelTexto}_${cursoBase.grado}_Privada`
+              : `${deptId}_${cursoBase.nivelTexto}_${cursoBase.grado}_Privada`;
+
+            publico = sieMap.get(keyPub) ?? 0;
+            privado = sieMap.get(keyPriv) ?? 0;
+            matriculaTotal = publico + privado;
+            origen = 'sie_cohorte';
+            cursoOrigenNombre = cursoBase.nombre;
+            anioBase = 2026;
+          } else {
+            // Grados sin cohorte previa en Primaria 2026: se llenan con la estimación demográfica INE
+            matriculaTotal = Math.round(pobIne * tasa);
+            publico = Math.round(matriculaTotal * (pctPub / 100));
+            privado = matriculaTotal - publico;
+            origen = 'ine_proyeccion';
+          }
         } else {
-          pobIne = deptId
-            ? (ineIndex.get(`${year}_${curso.edadNormativa}_${deptId}`) ?? 0)
-            : 0;
+          // Metodología Demográfica Pura INE
+          matriculaTotal = Math.round(pobIne * tasa);
+          publico = Math.round(matriculaTotal * (pctPub / 100));
+          privado = matriculaTotal - publico;
+          origen = 'ine_proyeccion';
         }
 
-        // 2. Matrícula total aplicando la tasa neta de escolarización (MINEDU/INE)
-        const matriculaTotal = Math.round(pobIne * (curso.tasaEscolarizacionNacional / 100));
-
-        // 3. Desglose Público vs Privado (razones SIE 2026 por departamento)
-        const pctPub = isNacional ? 89.4 : (deptParam?.pctPublico ?? 89.4);
-        const publico = Math.round(matriculaTotal * (pctPub / 100));
-        const privado = matriculaTotal - publico;
-
-        // 4. Población no escolarizada en esa edad
         const noEstudian = Math.max(0, pobIne - matriculaTotal);
 
-        rowData[curso.id] = { poblacionIne: pobIne, matriculaTotal, publico, privado, noEstudian };
+        rowData[curso.id] = {
+          poblacionIne: pobIne,
+          matriculaTotal,
+          publico,
+          privado,
+          noEstudian,
+          origen,
+          cursoOrigenNombre,
+          anioBase,
+        };
 
         totalPublicoNivel += publico;
         totalPrivadoNivel += privado;
@@ -205,7 +274,7 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
         },
       };
     });
-  }, [data.ine_proyeccion_edad, data.departamentos, selectedDept, selectedLayer]);
+  }, [data.ine_proyeccion_edad, data.sie_total_estudiantes, data.departamentos, selectedDept, selectedLayer, metodologia]);
 
   // Matriz filtrada por el horizonte activo
   const filteredMatrix = useMemo(() => {
@@ -339,6 +408,9 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
       diffAnterior,
       rateAnterior,
       hasPrev: !!prevCell,
+      origen: cell?.origen ?? 'ine_proyeccion',
+      cursoOrigenNombre: cell?.cursoOrigenNombre,
+      anioBase: cell?.anioBase,
     };
   }, [projectionMatrix, selectedCell, selectedDept]);
 
@@ -354,7 +426,6 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
   }, []);
 
   // Función para obtener puntos de los 14 cursos para cualquier combinación de año y departamento
-  // Usa índice directo sobre data.ine_proyeccion_edad por departamento_id (datos reales INE)
   const getCourseProgressionPoints = React.useCallback((year: number, dept: string): CourseChartPoint[] => {
     const isNac = dept === 'all';
     const deptRecord = !isNac ? data.departamentos.find((d) => d.nombre === dept) : null;
@@ -370,17 +441,62 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
       ineIndex.set(keyNac, (ineIndex.get(keyNac) ?? 0) + r.cantidad);
     }
 
-    return CURSOS_SEP.map((curso) => {
-      const pobIne = isNac
-        ? (ineIndex.get(`${year}_${curso.edadNormativa}_nac`) ?? 240000)
-        : (deptId != null ? (ineIndex.get(`${year}_${curso.edadNormativa}_${deptId}`) ?? 0) : 0);
+    const sieMap = new Map<string, number>();
+    for (const r of (data.sie_total_estudiantes || [])) {
+      const depKey = r.dependencia === 'Privada' ? 'Privada' : 'Público';
+      const kDept = `${r.departamento_id}_${r.nivel_texto}_${r.nivel}_${depKey}`;
+      sieMap.set(kDept, (sieMap.get(kDept) ?? 0) + r.cantidad);
+      const kNac = `nac_${r.nivel_texto}_${r.nivel}_${depKey}`;
+      sieMap.set(kNac, (sieMap.get(kNac) ?? 0) + r.cantidad);
+    }
+
+    const k = year - 2026;
+
+    return CURSOS_SEP.map((curso, cIdx) => {
+      let pobIne = 0;
+      if (year <= 2034) {
+        pobIne = isNac
+          ? (ineIndex.get(`${year}_${curso.edadNormativa}_nac`) ?? 240000)
+          : (deptId != null ? (ineIndex.get(`${year}_${curso.edadNormativa}_${deptId}`) ?? 0) : 0);
+      } else {
+        const base2034 = isNac
+          ? (ineIndex.get(`2034_${curso.edadNormativa}_nac`) ?? 240000)
+          : (deptId != null ? (ineIndex.get(`2034_${curso.edadNormativa}_${deptId}`) ?? 0) : 0);
+        pobIne = Math.round(base2034 * 1.001323);
+      }
 
       const tasa = curso.tasaEscolarizacionNacional / 100;
-      const matriculaTotal = Math.round(pobIne * tasa);
-
       const pctPub = isNac ? 0.894 : (deptParam?.pctPublico ?? 89.4) / 100;
-      const publico = Math.round(matriculaTotal * pctPub);
-      const privado = matriculaTotal - publico;
+
+      let matriculaTotal: number;
+      let publico: number;
+      let privado: number;
+
+      if (metodologia === 'flujo_sie') {
+        const cBaseIdx = cIdx - k;
+        if (curso.nivel !== 'inicial' && cBaseIdx >= 2) {
+          const cursoBase = CURSOS_SEP[cBaseIdx];
+          const keyPub = isNac
+            ? `nac_${cursoBase.nivelTexto}_${cursoBase.grado}_Público`
+            : `${deptId}_${cursoBase.nivelTexto}_${cursoBase.grado}_Público`;
+          const keyPriv = isNac
+            ? `nac_${cursoBase.nivelTexto}_${cursoBase.grado}_Privada`
+            : `${deptId}_${cursoBase.nivelTexto}_${cursoBase.grado}_Privada`;
+
+          publico = sieMap.get(keyPub) ?? 0;
+          privado = sieMap.get(keyPriv) ?? 0;
+          matriculaTotal = publico + privado;
+        } else {
+          matriculaTotal = Math.round(pobIne * tasa);
+          publico = Math.round(matriculaTotal * pctPub);
+          privado = matriculaTotal - publico;
+        }
+      } else {
+        matriculaTotal = Math.round(pobIne * tasa);
+        publico = Math.round(matriculaTotal * pctPub);
+        privado = matriculaTotal - publico;
+      }
+
       const noEstudian = Math.max(0, pobIne - matriculaTotal);
 
       return {
@@ -392,7 +508,7 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
         poblacionIne: pobIne,
       };
     });
-  }, [data.ine_proyeccion_edad, data.departamentos]);
+  }, [data.ine_proyeccion_edad, data.sie_total_estudiantes, data.departamentos, metodologia]);
 
   // Series dinámicas para el gráfico lineal según la métrica elegida
   const dynamicLineSeries: TrendSeries[] = useMemo(() => {
@@ -759,37 +875,81 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
             </button>
           </div>
 
-          {/* Selector de Horizonte */}
-          <div className="flex items-center gap-1.5 text-xs font-medium self-start lg:self-auto">
-            <span className="text-slate-500">Horizonte:</span>
-            <div className="flex items-center gap-1 bg-slate-100 p-0.5 rounded-lg">
-              <button
-                onClick={() => setHorizonte('2031')}
-                className={`px-2.5 py-1 rounded-md transition-all ${
-                  horizonte === '2031'
-                    ? 'bg-white text-slate-900 shadow-xs font-semibold'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
-              >
-                2026 - 2031 (Quinquenio)
-              </button>
-              <button
-                onClick={() => setHorizonte('2034')}
-                className={`px-2.5 py-1 rounded-md transition-all ${
-                  horizonte === '2034'
-                    ? 'bg-[#c9a751] text-slate-900 shadow-xs font-semibold'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
-              >
-                2026 - 2034 (Serie INE Completa)
-              </button>
+          {/* Selectores de Metodología y Horizonte */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 text-xs font-medium self-start lg:self-auto">
+            {/* Metodología */}
+            <div className="flex items-center gap-1.5">
+              <span className="text-slate-500">Modelo:</span>
+              <div className="flex items-center gap-1 bg-slate-100 p-0.5 rounded-lg">
+                <button
+                  onClick={() => setMetodologia('flujo_sie')}
+                  className={`px-3 py-1.5 rounded-md transition-all ${
+                    metodologia === 'flujo_sie'
+                      ? 'bg-[#c9a751] text-slate-900 shadow-xs font-semibold ring-1 ring-[#c9a751]'
+                      : 'text-slate-600 hover:text-slate-900'
+                  }`}
+                  title="Transición de cohortes reales desde matrícula censal SIE 2026. Inicial y cursos sin cohorte previa se completan con INE."
+                >
+                  Flujo de Cohortes SIE (Real + INE)
+                </button>
+                <button
+                  onClick={() => setMetodologia('demografico_ine')}
+                  className={`px-3 py-1.5 rounded-md transition-all ${
+                    metodologia === 'demografico_ine'
+                      ? 'bg-slate-900 text-white shadow-xs font-semibold'
+                      : 'text-slate-600 hover:text-slate-900'
+                  }`}
+                  title="Cálculo puramente demográfico aplicando tasas netas de escolarización sobre la población de edades simples del INE."
+                >
+                  Demográfico Puro INE
+                </button>
+              </div>
+            </div>
+
+            {/* Horizonte */}
+            <div className="flex items-center gap-1.5">
+              <span className="text-slate-500">Horizonte:</span>
+              <div className="flex items-center gap-1 bg-slate-100 p-0.5 rounded-lg">
+                <button
+                  onClick={() => setHorizonte('2031')}
+                  className={`px-2.5 py-1 rounded-md transition-all ${
+                    horizonte === '2031'
+                      ? 'bg-white text-slate-900 shadow-xs font-semibold'
+                      : 'text-slate-600 hover:text-slate-900'
+                  }`}
+                >
+                  2026 - 2031 (Quinquenio)
+                </button>
+                <button
+                  onClick={() => setHorizonte('2035')}
+                  className={`px-2.5 py-1 rounded-md transition-all ${
+                    horizonte === '2035'
+                      ? 'bg-[#c9a751] text-slate-900 shadow-xs font-semibold'
+                      : 'text-slate-600 hover:text-slate-900'
+                  }`}
+                >
+                  2026 - 2035 (Decenio 10 Años)
+                </button>
+              </div>
             </div>
           </div>
         </div>
+
+        {/* Banner explicativo del modelo de transición activo */}
+        {metodologia === 'flujo_sie' && (
+          <div className="bg-[#faf5e8]/80 border border-[#e5d5a6] rounded-xl p-3 text-xs text-slate-700 flex items-start gap-2.5">
+            <span className="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-[#c9a751] text-slate-900 shrink-0">
+              Metodología Activa
+            </span>
+            <p className="leading-relaxed">
+              <strong>Transición Real de Cohortes SIE (Gestión Base 2026):</strong> Los estudiantes inscritos en Primaria y Secundaria avanzan de curso año a año (ej. 2.º Primaria en 2026 pasa a 3.º en 2027, a 1.º Secundaria en 2031 y a 5.º Secundaria en 2035). Nivel Inicial y cursos futuros sin cohorte primaria previa en 2026 se completan con la proyección demográfica del INE.
+            </p>
+          </div>
+        )}
       </div>
 
       {/* =========================================================================
-          TABLA MATRIZ DE PROYECCIÓN POR CURSO (2026 - 2034) CON CELDAS CLICABLES
+          TABLA MATRIZ DE PROYECCIÓN POR CURSO (2026 - 2035) CON CELDAS CLICABLES
          ========================================================================= */}
       <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
         <div className="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between gap-3 flex-wrap">
@@ -801,7 +961,7 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
               </h2>
             </div>
             <p className="text-xs text-slate-500 mt-0.5">
-              Ámbito: <strong className="text-slate-800">{selectedDept === 'all' ? 'Total Nacional (Bolivia)' : selectedDept}</strong> · Capa: <strong className="text-[#c9a751] uppercase">{selectedLayer.replace('_', ' ')}</strong> · <span className="text-slate-400">Haga clic en cualquier celda para ver el cálculo detallado en vivo</span>
+              Ámbito: <strong className="text-slate-800">{selectedDept === 'all' ? 'Total Nacional (Bolivia)' : selectedDept}</strong> · Modelo: <strong className="text-slate-800">{metodologia === 'flujo_sie' ? 'Flujo de Cohortes SIE + INE' : 'Demográfico Puro INE'}</strong> · Capa: <strong className="text-[#c9a751] uppercase">{selectedLayer.replace('_', ' ')}</strong> · <span className="text-slate-400">Haga clic en cualquier celda para ver la trazabilidad exacta</span>
             </p>
           </div>
 
@@ -910,6 +1070,10 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
 
                   const isPromocion = curso.id === 'sec_6';
                   const isSelectedCell = selectedCell.year === row.year && selectedCell.cursoId === curso.id;
+                  const isSieCohorte = cellData?.origen === 'sie_cohorte';
+                  const tooltipText = isSieCohorte
+                    ? `Cohorte Real SIE: avanzó desde ${cellData?.cursoOrigenNombre} (${cellData?.anioBase}) hasta ${curso.nombre} (${row.year})`
+                    : `Proyección Demográfica INE (${row.year}) · ${curso.nombre}`;
 
                   return (
                     <td
@@ -920,9 +1084,11 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
                           ? 'bg-[#c9a751]/20 ring-2 ring-[#c9a751] text-slate-900 font-bold z-10'
                           : isPromocion
                           ? 'bg-amber-50/40 text-[#c9a751] font-semibold hover:bg-amber-100/50'
-                          : 'text-slate-800 hover:bg-slate-100'
+                          : isSieCohorte
+                          ? 'text-slate-900 hover:bg-amber-50/30 font-semibold'
+                          : 'text-slate-700 hover:bg-slate-100'
                       }`}
-                      title={`Clic para ver cálculo exacto: ${curso.nombre} (${row.year})`}
+                      title={tooltipText}
                     >
                       {(val || 0).toLocaleString('es-BO')}
                     </td>
@@ -1020,13 +1186,17 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
           {/* Paso 2: Tasa y Matrícula Total */}
           <div className="bg-slate-50 rounded-xl p-3.5 border border-slate-200">
             <span className="text-[10px] font-semibold uppercase tracking-wider text-amber-800 block">
-              2. Matrícula Escolar ({cellCalculation.tasaEscolarizacion}%)
+              {cellCalculation.origen === 'sie_cohorte'
+                ? `2. Matrícula SIE (Cohorte Real)`
+                : `2. Matrícula Escolar (${cellCalculation.tasaEscolarizacion}%)`}
             </span>
             <p className="text-lg font-semibold text-[#c9a751] mt-1">
               {cellCalculation.matriculaTotal.toLocaleString('es-BO')}
             </p>
             <span className="text-[10px] text-slate-500 block mt-0.5">
-              Fórmula: {cellCalculation.pobIne.toLocaleString('es-BO')} × {cellCalculation.tasaEscolarizacion}%
+              {cellCalculation.origen === 'sie_cohorte'
+                ? `Avanzó desde ${cellCalculation.cursoOrigenNombre} (${cellCalculation.anioBase}) · ${cellCalculation.year - (cellCalculation.anioBase || 2026)} gestiones`
+                : `Fórmula: ${cellCalculation.pobIne.toLocaleString('es-BO')} × ${cellCalculation.tasaEscolarizacion}%`}
             </span>
           </div>
 
@@ -1065,11 +1235,20 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
           <LightbulbIcon size={18} className="text-[#c9a751] shrink-0 mt-0.5" />
           <div>
             <span>
-              <strong>Interpretación para la Gestión {cellCalculation.year}:</strong> En {cellCalculation.deptNombre}, se proyectan{' '}
-              <strong className="text-slate-900">{cellCalculation.pobIne.toLocaleString('es-BO')} niños/jóvenes</strong> con la edad normativa de {cellCalculation.curso.edadNormativa} años. Con la tasa neta del {cellCalculation.tasaEscolarizacion}%, asistirán a{' '}
-              <strong>{cellCalculation.curso.nombre}</strong> un total de{' '}
-              <strong className="text-[#c9a751]">{cellCalculation.matriculaTotal.toLocaleString('es-BO')} estudiantes</strong> ({cellCalculation.publico.toLocaleString('es-BO')} en el sector público y {cellCalculation.privado.toLocaleString('es-BO')} en particulares), mientras que{' '}
-              <strong className="text-red-600">{cellCalculation.noEstudian.toLocaleString('es-BO')}</strong> estarán fuera del sistema escolar en esa gestión.
+              <strong>Interpretación para la Gestión {cellCalculation.year}:</strong> En {cellCalculation.deptNombre},{' '}
+              {cellCalculation.origen === 'sie_cohorte' ? (
+                <>
+                  los estudiantes de <strong>{cellCalculation.curso.nombre}</strong> corresponden a la cohorte real del SIE que cursaba <strong>{cellCalculation.cursoOrigenNombre}</strong> en 2026 y avanzaron año a año hasta sumar{' '}
+                  <strong className="text-[#c9a751]">{cellCalculation.matriculaTotal.toLocaleString('es-BO')} estudiantes</strong> ({cellCalculation.publico.toLocaleString('es-BO')} en el sector público y {cellCalculation.privado.toLocaleString('es-BO')} en particulares). Frente a la población demográfica del INE ({cellCalculation.pobIne.toLocaleString('es-BO')} jóvenes), la brecha no escolarizada es de <strong className="text-red-600">{cellCalculation.noEstudian.toLocaleString('es-BO')}</strong>.
+                </>
+              ) : (
+                <>
+                  se proyectan <strong className="text-slate-900">{cellCalculation.pobIne.toLocaleString('es-BO')} niños/jóvenes</strong> con la edad normativa de {cellCalculation.curso.edadNormativa} años (estimación demográfica INE). Con la tasa neta del {cellCalculation.tasaEscolarizacion}%, asistirán a{' '}
+                  <strong>{cellCalculation.curso.nombre}</strong> un total de{' '}
+                  <strong className="text-[#c9a751]">{cellCalculation.matriculaTotal.toLocaleString('es-BO')} estudiantes</strong> ({cellCalculation.publico.toLocaleString('es-BO')} en el sector público y {cellCalculation.privado.toLocaleString('es-BO')} en particulares), mientras que{' '}
+                  <strong className="text-red-600">{cellCalculation.noEstudian.toLocaleString('es-BO')}</strong> estarán fuera del sistema escolar en esa gestión.
+                </>
+              )}
             </span>
             {cellCalculation.hasPrev && (
               <span className="block mt-1 text-[11px] text-slate-500">
