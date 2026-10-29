@@ -356,10 +356,10 @@ export function IneView({ data }: IneViewProps) {
             </span>
           </div>
           <h1 className="text-2xl font-semibold text-slate-900 tracking-tight">
-            Tendencias Temporales Lineales y Demografía Oficial
+            Estadísticas Demográficas y Matrícula Escolar Oficial (INE)
           </h1>
           <p className="text-xs text-slate-500 mt-1">
-            Análisis lineal en el tiempo: Población (2000-2050), Matrícula Escolar Público vs Privado, Inicial-Primaria-Secundaria (2011-2025) y Cohortes por Edad.
+            Información del Instituto Nacional de Estadística: evolución de población total (2000-2050), matrícula del Subsistema Regular por dependencia y nivel (2011-2025), y proyecciones por edad.
           </p>
         </div>
 
@@ -442,10 +442,10 @@ export function IneView({ data }: IneViewProps) {
               <MapPinIcon size={20} className="text-[#c9a751]" />
               <div>
                 <h2 className="text-base font-semibold text-slate-900 tracking-tight">
-                  Gráficos Departamentales: Matrícula Escolar y Comparativas (2011 - 2025)
+                  Evolución Histórica de la Matrícula Escolar por Departamento (2011 - 2025)
                 </h2>
                 <p className="text-xs text-slate-500">
-                  Seleccione un departamento o active el comparador para analizar curvas entre regiones.
+                  Trayectorias de matrícula desagregadas por dependencia (Público vs Privado) y niveles de formación (Inicial, Primaria, Secundaria).
                 </p>
               </div>
             </div>
@@ -666,10 +666,10 @@ export function IneView({ data }: IneViewProps) {
           <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-xs">
             <div className="mb-4">
               <h3 className="text-lg font-semibold text-slate-900 tracking-tight">
-                Matriz Comparativa Interanual: Cuánto Crece la Matrícula Año por Año
+                Matriz de Crecimiento Interanual de la Matrícula Escolar (2011 - 2025)
               </h3>
               <p className="text-xs text-slate-500 mt-0.5">
-                Cálculo de variación interanual absoluta (+/- estudiantes) y tasa de crecimiento porcentual (%) anual.
+                Variación neta anual de estudiantes (+/-) y tasa de crecimiento porcentual anual consolidada en el Subsistema Regular.
               </p>
             </div>
 

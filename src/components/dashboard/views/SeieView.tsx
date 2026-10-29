@@ -420,17 +420,17 @@ export function SeieView({ data }: SeieViewProps) {
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="text-[10px] font-semibold uppercase tracking-wider bg-[#faf5e8] text-[#c9a751] border border-[#e5d5a6] px-2.5 py-0.5 rounded-md">
-              SEIE · Subsistema de Educación Especial
+              SEIE · Educación Especial e Inclusiva
             </span>
             <span className="text-[10px] font-medium text-slate-500">
               Cobertura e Inclusión Territorial
             </span>
           </div>
           <h1 className="text-2xl font-semibold text-slate-900 tracking-tight">
-            Inclusión de Estudiantes con Discapacidad (2011 - 2025)
+            Estadísticas de Educación Especial e Inclusiva (SEIE 2011 - 2025)
           </h1>
           <p className="text-xs text-slate-500 mt-1">
-            Matrícula y cobertura del Subsistema de Educación Especial en áreas urbana y rural para la planificación institucional en los 9 departamentos.
+            Matrícula oficial de estudiantes con discapacidad en Centros de Educación Especial (CEE), cobertura territorial y balance urbano-rural en los 9 departamentos.
           </p>
         </div>
       </div>
@@ -635,10 +635,10 @@ export function SeieView({ data }: SeieViewProps) {
             <MapPinIcon size={20} className="text-[#c9a751]" />
             <div>
               <h2 className="text-base font-semibold text-slate-900 tracking-tight">
-                Mapeo Departamental: Educación Especial e Inclusión Territorial
+                Cobertura Departamental de Educación Especial (Centros CEE)
               </h2>
               <p className="text-xs text-slate-500">
-                Seleccione un departamento o active el comparador gráfico lineal para contrastar matrícula, infraestructura CEE y ruralidad.
+                Análisis regional de matrícula en Educación Especial, centros de atención CEE habilitados y balance entre áreas urbanas y rurales.
               </p>
             </div>
           </div>
@@ -1001,10 +1001,10 @@ export function SeieView({ data }: SeieViewProps) {
             <CalendarIcon size={20} className="text-[#c9a751]" />
             <div>
               <h2 className="text-base font-semibold text-slate-900 tracking-tight">
-                Balance Anual Consolidado de Educación Especial (2011 - 2025)
+                Balance Histórico Interanual de Educación Especial (2011 - 2025)
               </h2>
               <p className="text-xs text-slate-500">
-                Matriz analítica de 15 gestiones consecutivas: variaciones absolutas, tasas interanuales y composición urbana/rural.
+                Matriz analítica de 15 gestiones consecutivas: variaciones absolutas (+/- estudiantes), tasas de crecimiento anual y distribución urbana vs rural.
               </p>
             </div>
           </div>

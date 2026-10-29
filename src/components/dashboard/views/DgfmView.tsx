@@ -450,10 +450,10 @@ export function DgfmView({ data }: DgfmViewProps) {
             </span>
           </div>
           <h1 className="text-2xl font-semibold text-slate-900 tracking-tight">
-            Estadísticas y Convocatorias de Admisión a ESFM (2016 - 2026)
+            Convocatorias y Demanda de Admisión a las ESFM (2016 - 2026)
           </h1>
           <p className="text-xs text-slate-500 mt-1">
-            Análisis multidimensional de demanda por carrera, departamento, apertura territorial y sedes formadoras en 11 gestiones académicas.
+            Registro histórico de postulantes y oferta de carreras en las 46 Escuelas Superiores de Formación de Maestros (ESFM) y Unidades Académicas (UA) en 11 gestiones académicas.
           </p>
         </div>
       </div>
@@ -787,10 +787,10 @@ export function DgfmView({ data }: DgfmViewProps) {
             <MapPinIcon size={20} className="text-[#c9a751]" />
             <div>
               <h2 className="text-base font-semibold text-slate-900 tracking-tight">
-                Matriz de Apertura Territorial de Carreras (¿En qué departamento se abrió?)
+                Matriz de Apertura Territorial de Especialidades Pedagógicas
               </h2>
               <p className="text-xs text-slate-500">
-                Inspeccione en qué departamentos tuvo convocatoria pública cada especialidad pedagógica por año académico.
+                Verificación departamental de la convocatoria y apertura de cada especialidad docente por gestión académica.
               </p>
             </div>
           </div>
@@ -960,10 +960,10 @@ export function DgfmView({ data }: DgfmViewProps) {
             <BuildingIcon size={20} className="text-[#c9a751]" />
             <div>
               <h2 className="text-base font-semibold text-slate-900 tracking-tight">
-                Análisis por Escuela Superior de Formación de Maestros (ESFM y UA)
+                Indicadores y Demanda por Sede Formadora (ESFM y UA)
               </h2>
               <p className="text-xs text-slate-500">
-                Seleccione un departamento y una sede institucional para visualizar su serie temporal de aspirantes y especialidades impartidas.
+                Historial de postulantes inscritos y catálogo de especialidades convocadas por institución educativa en cada departamento.
               </p>
             </div>
           </div>

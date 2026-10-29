@@ -560,10 +560,10 @@ export function SieView({ data }: SieViewProps) {
             </span>
           </div>
           <h1 className="text-2xl font-semibold text-slate-900 tracking-tight">
-            Matrícula Regular y Cobertura Territorial (2000 - 2026)
+            Estadísticas del Subsistema de Educación Regular (SIE 2000 - 2026)
           </h1>
           <p className="text-xs text-slate-500 mt-1">
-            Estadística del Subsistema de Educación Regular consolidada por el Ministerio de Educación del Estado Plurinacional de Bolivia.
+            Registro oficial del Ministerio de Educación: matrícula histórica, cobertura por departamento, grados escolares y balance urbano-rural.
           </p>
         </div>
 
@@ -667,10 +667,10 @@ export function SieView({ data }: SieViewProps) {
               <MapPinIcon size={20} className="text-[#c9a751]" />
               <div>
                 <h2 className="text-base font-semibold text-slate-900 tracking-tight">
-                  Gráficos Departamentales: Matrícula Escolar y Estructura Institucional (SIE 2026)
+                  Estructura Departamental de Matrícula y Dependencia (SIE 2026)
                 </h2>
                 <p className="text-xs text-slate-500">
-                  Seleccione un departamento para ver su estructura o active el comparador territorial.
+                  Análisis de matrícula por departamento, niveles formativos (Inicial, Primaria, Secundaria) y dependencia institucional.
                 </p>
               </div>
             </div>
@@ -1165,10 +1165,10 @@ export function SieView({ data }: SieViewProps) {
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5 border-b border-slate-100 pb-4">
               <div>
                 <h3 className="text-lg font-semibold text-slate-900 tracking-tight">
-                  Matriz Interanual: Cuánto Crece la Matrícula Escolar Año por Año (2000 - 2025)
+                  Matriz de Crecimiento Interanual: Matrícula Rural y Urbana (2000 - 2025)
                 </h3>
                 <p className="text-xs text-slate-500 mt-0.5">
-                  Serie histórica censal del SIE con variación absoluta anual (+/- estudiantes), tasa de crecimiento (%) y distribución urbana vs rural.
+                  Variación neta anual de estudiantes (+/-), tasa porcentual de crecimiento interanual y distribución comparativa urbano-rural.
                 </p>
               </div>
               <div className="flex items-center gap-3 text-xs">

@@ -524,10 +524,10 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
             </span>
           </div>
           <h1 className="text-2xl font-semibold text-slate-900 tracking-tight">
-            Proyecciones Escolares de Matrícula por Curso (2026 - 2034)
+            Matriz de Proyección de Matrícula Escolar (2026 - 2034)
           </h1>
           <p className="text-xs text-slate-500 mt-1">
-            Modelo normativo de población escolar por edad simple del INE articulado con la estructura matricular del SIE: Inicial, Primaria y Secundaria.
+            Modelo proyectivo multi-anual articulado entre la estructura matricular del SIE y las proyecciones demográficas por edad simple del INE.
           </p>
         </div>
       </div>
@@ -797,7 +797,7 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-[#c9a751]" />
               <h2 className="text-base font-semibold text-slate-900 tracking-tight">
-                Matriz Proyectada por Años de Escolaridad (2026 - {horizonte})
+                Matriz de Matrícula Proyectada por Grado de Escolaridad (2026 - {horizonte})
               </h2>
             </div>
             <p className="text-xs text-slate-500 mt-0.5">
