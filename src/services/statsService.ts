@@ -102,7 +102,7 @@ export async function getDashboardData(): Promise<DashboardDataset> {
       (fallbackData.ine_poblacion || []) as DashboardDataset['ine_poblacion']
     ),
     fetchAllRows<DashboardDataset['ine_proyeccion_edad'][0]>(
-      'ine_proyeccion_edad?select=*&order=id.asc',
+      'ine_proyeccion_edad?select=*,departamentos(nombre)&order=anio.asc,departamento_id.asc,edad.asc',
       (fallbackData.ine_proyeccion_edad || []) as DashboardDataset['ine_proyeccion_edad']
     ),
     fetchAllRows<DashboardDataset['matricula_rural_urbana'][0]>(

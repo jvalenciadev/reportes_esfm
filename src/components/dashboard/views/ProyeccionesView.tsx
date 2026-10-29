@@ -55,24 +55,24 @@ export const CURSOS_SEP: CursoDef[] = [
 // Años disponibles en las proyecciones demográficas del INE (2026 - 2034)
 export const ANIOS_PROYECCION_TODOS = [2026, 2027, 2028, 2029, 2030, 2031, 2032, 2033, 2034];
 
-// Parámetros censales y escolares por departamento (INE Demografía & SIE 2026)
+// Parámetros SIE 2026: razones de dependencia por departamento (sector público vs privado)
+// Fuente: SIE - Ministerio de Educación, Gestión 2026
 interface DeptParam {
   nombre: string;
-  pctPoblacionNacional: number; // Distribución demográfica INE
-  pctPublico: number;           // Razón real sector público según SIE 2026
-  pctPrivado: number;           // Razón real sector privado según SIE 2026
+  pctPublico: number;
+  pctPrivado: number;
 }
 
 const DEPT_PARAMS: Record<string, DeptParam> = {
-  'Santa Cruz': { nombre: 'Santa Cruz', pctPoblacionNacional: 29.5, pctPublico: 82.2, pctPrivado: 17.8 },
-  'La Paz': { nombre: 'La Paz', pctPoblacionNacional: 27.2, pctPublico: 88.5, pctPrivado: 11.5 },
-  'Cochabamba': { nombre: 'Cochabamba', pctPoblacionNacional: 18.5, pctPublico: 87.1, pctPrivado: 12.9 },
-  'Potosí': { nombre: 'Potosí', pctPoblacionNacional: 7.6, pctPublico: 96.8, pctPrivado: 3.2 },
-  'Chuquisaca': { nombre: 'Chuquisaca', pctPoblacionNacional: 5.4, pctPublico: 93.1, pctPrivado: 6.9 },
-  'Oruro': { nombre: 'Oruro', pctPoblacionNacional: 4.7, pctPublico: 92.4, pctPrivado: 7.6 },
-  'Tarija': { nombre: 'Tarija', pctPoblacionNacional: 4.3, pctPublico: 90.8, pctPrivado: 9.2 },
-  'Beni': { nombre: 'Beni', pctPoblacionNacional: 3.6, pctPublico: 91.5, pctPrivado: 8.5 },
-  'Pando': { nombre: 'Pando', pctPoblacionNacional: 1.1, pctPublico: 95.2, pctPrivado: 4.8 },
+  'Santa Cruz':  { nombre: 'Santa Cruz',  pctPublico: 82.2, pctPrivado: 17.8 },
+  'La Paz':      { nombre: 'La Paz',      pctPublico: 88.5, pctPrivado: 11.5 },
+  'Cochabamba':  { nombre: 'Cochabamba',  pctPublico: 87.1, pctPrivado: 12.9 },
+  'Potosí':      { nombre: 'Potosí',      pctPublico: 96.8, pctPrivado:  3.2 },
+  'Chuquisaca':  { nombre: 'Chuquisaca',  pctPublico: 93.1, pctPrivado:  6.9 },
+  'Oruro':       { nombre: 'Oruro',       pctPublico: 92.4, pctPrivado:  7.6 },
+  'Tarija':      { nombre: 'Tarija',      pctPublico: 90.8, pctPrivado:  9.2 },
+  'Beni':        { nombre: 'Beni',        pctPublico: 91.5, pctPrivado:  8.5 },
+  'Pando':       { nombre: 'Pando',       pctPublico: 95.2, pctPrivado:  4.8 },
 };
 
 interface ProyeccionesViewProps {
@@ -111,7 +111,25 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
   // Cálculos demográficos y matriculares indexados para todos los años (2026 - 2034)
   const projectionMatrix = useMemo(() => {
     const isNacional = selectedDept === 'all';
-    const deptInfo = !isNacional ? DEPT_PARAMS[selectedDept] : null;
+
+    // Resolver departamento_id desde el nombre seleccionado
+    const deptRecord = data.departamentos.find(
+      (d) => d.nombre === selectedDept || d.nombre.toLowerCase() === selectedDept.toLowerCase()
+    );
+    const deptId = deptRecord?.id ?? null;
+    const deptParam = !isNacional ? (DEPT_PARAMS[selectedDept] ?? Object.values(DEPT_PARAMS).find(p => p.nombre === selectedDept)) : null;
+
+    // Construir índice rápido de INE por (anio, edad, departamento_id)
+    // key = `${anio}_${edad}_${dept_id}` (dept_id=null para suma nacional)
+    type IneIndex = Map<string, number>;
+    const ineIndex: IneIndex = new Map();
+    for (const r of data.ine_proyeccion_edad) {
+      const keyDept = `${r.anio}_${r.edad}_${r.departamento_id}`;
+      ineIndex.set(keyDept, (ineIndex.get(keyDept) ?? 0) + r.cantidad);
+      // También acumular total nacional sumando todos los departamentos
+      const keyNac = `${r.anio}_${r.edad}_nac`;
+      ineIndex.set(keyNac, (ineIndex.get(keyNac) ?? 0) + r.cantidad);
+    }
 
     return ANIOS_PROYECCION_TODOS.map((year) => {
       const rowData: Record<string, {
@@ -131,35 +149,28 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
       let totalNoEstudianNivel = 0;
 
       CURSOS_SEP.forEach((curso) => {
-        // 1. Población base por edad simple del INE
-        const rawIneItem = data.ine_proyeccion_edad.find(
-          (d) => d.anio === year && d.edad === curso.edadNormativa
-        );
-        const pobNac = rawIneItem ? rawIneItem.cantidad : 240000;
+        // 1. Población base por edad simple del INE (datos reales por departamento o nacional)
+        let pobIne: number;
+        if (isNacional) {
+          pobIne = ineIndex.get(`${year}_${curso.edadNormativa}_nac`) ?? 240000;
+        } else {
+          pobIne = deptId
+            ? (ineIndex.get(`${year}_${curso.edadNormativa}_${deptId}`) ?? 0)
+            : 0;
+        }
 
-        // Ajuste demográfico por departamento si aplica
-        const pobIne = isNacional
-          ? pobNac
-          : Math.round(pobNac * ((deptInfo?.pctPoblacionNacional || 10) / 100));
-
-        // 2. Matrícula total aplicando la tasa neta de escolarización
+        // 2. Matrícula total aplicando la tasa neta de escolarización (MINEDU/INE)
         const matriculaTotal = Math.round(pobIne * (curso.tasaEscolarizacionNacional / 100));
 
-        // 3. Desglose Público vs Privado
-        const pctPub = isNacional ? 89.4 : deptInfo?.pctPublico || 89.4;
+        // 3. Desglose Público vs Privado (razones SIE 2026 por departamento)
+        const pctPub = isNacional ? 89.4 : (deptParam?.pctPublico ?? 89.4);
         const publico = Math.round(matriculaTotal * (pctPub / 100));
         const privado = matriculaTotal - publico;
 
         // 4. Población no escolarizada en esa edad
-        const noEstudian = pobIne - matriculaTotal;
+        const noEstudian = Math.max(0, pobIne - matriculaTotal);
 
-        rowData[curso.id] = {
-          poblacionIne: pobIne,
-          matriculaTotal,
-          publico,
-          privado,
-          noEstudian,
-        };
+        rowData[curso.id] = { poblacionIne: pobIne, matriculaTotal, publico, privado, noEstudian };
 
         totalPublicoNivel += publico;
         totalPrivadoNivel += privado;
@@ -167,15 +178,11 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
 
         // Acumular subtotales según la capa seleccionada
         const currentVal =
-          selectedLayer === 'matricula_total'
-            ? matriculaTotal
-            : selectedLayer === 'publico'
-            ? publico
-            : selectedLayer === 'privado'
-            ? privado
-            : selectedLayer === 'no_estudian'
-            ? noEstudian
-            : pobIne;
+          selectedLayer === 'matricula_total' ? matriculaTotal
+          : selectedLayer === 'publico'       ? publico
+          : selectedLayer === 'privado'       ? privado
+          : selectedLayer === 'no_estudian'   ? noEstudian
+          : pobIne;
 
         if (curso.nivel === 'inicial') totalInicial += currentVal;
         else if (curso.nivel === 'primaria') totalPrimaria += currentVal;
@@ -198,7 +205,7 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
         },
       };
     });
-  }, [data.ine_proyeccion_edad, selectedDept, selectedLayer]);
+  }, [data.ine_proyeccion_edad, data.departamentos, selectedDept, selectedLayer]);
 
   // Matriz filtrada por el horizonte activo
   const filteredMatrix = useMemo(() => {
@@ -295,13 +302,7 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
     const cell = row?.cursos[curso.id];
 
     const isNacional = selectedDept === 'all';
-    const deptInfo = !isNacional ? DEPT_PARAMS[selectedDept] : null;
-
-    // Obtener dato demográfico nacional puro del INE
-    const rawIneItem = data.ine_proyeccion_edad.find(
-      (d) => d.anio === selectedCell.year && d.edad === curso.edadNormativa
-    );
-    const pobNac = rawIneItem ? rawIneItem.cantidad : 240000;
+    const deptParam = !isNacional ? (DEPT_PARAMS[selectedDept]) : null;
 
     const pobIne = cell?.poblacionIne || 0;
     const matriculaTotal = cell?.matriculaTotal || 0;
@@ -309,8 +310,8 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
     const privado = cell?.privado || 0;
     const noEstudian = cell?.noEstudian || 0;
 
-    const pctPub = isNacional ? 89.4 : deptInfo?.pctPublico || 89.4;
-    const pctPriv = isNacional ? 10.6 : deptInfo?.pctPrivado || 10.6;
+    const pctPub = isNacional ? 89.4 : deptParam?.pctPublico ?? 89.4;
+    const pctPriv = isNacional ? 10.6 : deptParam?.pctPrivado ?? 10.6;
     const pctNoEst = (100 - curso.tasaEscolarizacionNacional).toFixed(1);
 
     // Comparativa con año anterior para esta misma celda
@@ -325,9 +326,7 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
       year: selectedCell.year,
       curso,
       isNacional,
-      deptNombre: isNacional ? 'Total Nacional (Bolivia)' : deptInfo?.nombre || selectedDept,
-      pctPoblacionNacional: deptInfo?.pctPoblacionNacional || 100,
-      pobNac,
+      deptNombre: isNacional ? 'Total Nacional (Bolivia)' : deptParam?.nombre || selectedDept,
       pobIne,
       tasaEscolarizacion: curso.tasaEscolarizacionNacional,
       matriculaTotal,
@@ -341,7 +340,7 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
       rateAnterior,
       hasPrev: !!prevCell,
     };
-  }, [projectionMatrix, selectedCell, selectedDept, data.ine_proyeccion_edad]);
+  }, [projectionMatrix, selectedCell, selectedDept]);
 
   // Lista normalizada de departamentos para selectores
   const deptList = useMemo(() => {
@@ -355,26 +354,34 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
   }, []);
 
   // Función para obtener puntos de los 14 cursos para cualquier combinación de año y departamento
+  // Usa índice directo sobre data.ine_proyeccion_edad por departamento_id (datos reales INE)
   const getCourseProgressionPoints = React.useCallback((year: number, dept: string): CourseChartPoint[] => {
     const isNac = dept === 'all';
-    const deptInfo = !isNac ? DEPT_PARAMS[dept] : null;
+    const deptRecord = !isNac ? data.departamentos.find((d) => d.nombre === dept) : null;
+    const deptId = deptRecord?.id ?? null;
+    const deptParam = !isNac ? DEPT_PARAMS[dept] : null;
+
+    // Construir índice: "anio_edad_deptId" -> cantidad  /  "anio_edad_nac" -> suma nacional
+    const ineIndex = new Map<string, number>();
+    for (const r of data.ine_proyeccion_edad) {
+      const keyDept = `${r.anio}_${r.edad}_${r.departamento_id}`;
+      ineIndex.set(keyDept, (ineIndex.get(keyDept) ?? 0) + r.cantidad);
+      const keyNac = `${r.anio}_${r.edad}_nac`;
+      ineIndex.set(keyNac, (ineIndex.get(keyNac) ?? 0) + r.cantidad);
+    }
 
     return CURSOS_SEP.map((curso) => {
-      const rawIneItem = data.ine_proyeccion_edad.find(
-        (d) => d.anio === year && d.edad === curso.edadNormativa
-      );
-      const pobNac = rawIneItem ? rawIneItem.cantidad : 240000;
       const pobIne = isNac
-        ? pobNac
-        : Math.round(pobNac * ((deptInfo?.pctPoblacionNacional || 10) / 100));
+        ? (ineIndex.get(`${year}_${curso.edadNormativa}_nac`) ?? 240000)
+        : (deptId != null ? (ineIndex.get(`${year}_${curso.edadNormativa}_${deptId}`) ?? 0) : 0);
 
       const tasa = curso.tasaEscolarizacionNacional / 100;
       const matriculaTotal = Math.round(pobIne * tasa);
 
-      const pctPub = isNac ? 0.894 : (deptInfo?.pctPublico || 89.4) / 100;
+      const pctPub = isNac ? 0.894 : (deptParam?.pctPublico ?? 89.4) / 100;
       const publico = Math.round(matriculaTotal * pctPub);
       const privado = matriculaTotal - publico;
-      const noEstudian = pobIne - matriculaTotal;
+      const noEstudian = Math.max(0, pobIne - matriculaTotal);
 
       return {
         curso,
@@ -385,7 +392,7 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
         poblacionIne: pobIne,
       };
     });
-  }, [data.ine_proyeccion_edad]);
+  }, [data.ine_proyeccion_edad, data.departamentos]);
 
   // Series dinámicas para el gráfico lineal según la métrica elegida
   const dynamicLineSeries: TrendSeries[] = useMemo(() => {
@@ -1006,7 +1013,7 @@ export function ProyeccionesView({ data }: ProyeccionesViewProps) {
             <span className="text-[10px] text-slate-500 block mt-0.5">
               {cellCalculation.isNacional
                 ? `Proyección oficial INE Bolivia (${cellCalculation.year})`
-                : `${cellCalculation.pctPoblacionNacional}% de la población nac. en ${cellCalculation.deptNombre}`}
+                : `Proyección oficial INE ${cellCalculation.year} · ${cellCalculation.deptNombre}`}
             </span>
           </div>
 

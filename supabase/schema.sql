@@ -45,8 +45,10 @@ CREATE TABLE IF NOT EXISTS public.ine_proyeccion_edad (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     edad INT NOT NULL,
     cantidad INT NOT NULL,
-    anio INT NOT NULL
+    anio INT NOT NULL,
+    departamento_id INT REFERENCES public.departamentos(id)
 );
+CREATE INDEX IF NOT EXISTS idx_ine_proy_edad_anio_dept ON public.ine_proyeccion_edad (anio, departamento_id, edad);
 
 -- 7. TABLA: INSCRITOS ESFM (2016-2026)
 CREATE TABLE IF NOT EXISTS public.inscritos_esfm (

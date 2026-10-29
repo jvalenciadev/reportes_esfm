@@ -50,6 +50,8 @@ export interface IneProyeccionEdad {
   edad: number;
   cantidad: number;
   anio: number;
+  departamento_id: number | null;
+  departamentos?: { nombre: string };
 }
 
 export interface MatriculaRuralUrbana {
