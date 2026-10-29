@@ -18,12 +18,34 @@ interface AgeProjectionExplorerProps {
 }
 
 export function AgeProjectionExplorer({ data }: AgeProjectionExplorerProps) {
+  // Ámbito territorial: 'all' (Total Nacional) o ID de departamento (1 a 9)
+  const [selectedDeptId, setSelectedDeptId] = useState<number | 'all'>('all');
+
   // Estados para rango de edad y año seleccionado
   const [minAge, setMinAge] = useState<number>(17);
   const [maxAge, setMaxAge] = useState<number>(22);
   const [selectedYear, setSelectedYear] = useState<number>(2026);
   // Modo de visualización: 'split' (dividido), 'trend_full' (tendencia temporal grande), 'dist_full' (distribución por edad grande)
   const [viewMode, setViewMode] = useState<'split' | 'trend_full' | 'dist_full'>('split');
+
+  // Lista de departamentos extraída de los datos reales del INE
+  const deptList = useMemo(() => {
+    const map = new Map<number, string>();
+    for (const r of data) {
+      if (r.departamento_id != null) {
+        map.set(r.departamento_id, r.departamentos?.nombre || `Departamento #${r.departamento_id}`);
+      }
+    }
+    return Array.from(map.entries())
+      .map(([id, nombre]) => ({ id, nombre }))
+      .sort((a, b) => a.nombre.localeCompare(b.nombre));
+  }, [data]);
+
+  const activeDeptName = useMemo(() => {
+    if (selectedDeptId === 'all') return 'Total Nacional (Bolivia)';
+    const found = deptList.find((d) => d.id === selectedDeptId);
+    return found ? found.nombre : `Departamento #${selectedDeptId}`;
+  }, [selectedDeptId, deptList]);
 
   // Años disponibles (2024 - 2034)
   const availableYears = useMemo(() => {
@@ -45,32 +67,51 @@ export function AgeProjectionExplorer({ data }: AgeProjectionExplorerProps) {
     setMaxAge(max);
   };
 
-  // Filtrar datos para el año seleccionado dentro del rango
+  // Filtrar y agrupar por edad simple para el año seleccionado dentro del rango
   const currentYearCohort = useMemo(() => {
-    return data
-      .filter((d) => d.anio === selectedYear && d.edad >= minAge && d.edad <= maxAge)
+    const ageMap = new Map<number, number>();
+    for (const d of data) {
+      if (d.anio === selectedYear && d.edad >= minAge && d.edad <= maxAge) {
+        if (selectedDeptId === 'all' || d.departamento_id === selectedDeptId) {
+          ageMap.set(d.edad, (ageMap.get(d.edad) || 0) + d.cantidad);
+        }
+      }
+    }
+    return Array.from(ageMap.entries())
+      .map(([edad, cantidad]) => ({ edad, cantidad }))
       .sort((a, b) => a.edad - b.edad);
-  }, [data, selectedYear, minAge, maxAge]);
+  }, [data, selectedYear, minAge, maxAge, selectedDeptId]);
 
   const totalCohortCurrentYear = useMemo(() => {
     return currentYearCohort.reduce((acc, d) => acc + d.cantidad, 0);
   }, [currentYearCohort]);
 
-  // Población total del país para ese año
+  // Población total del país o departamento para ese año
   const totalBoliviaYear = useMemo(() => {
-    return data
-      .filter((d) => d.anio === selectedYear)
-      .reduce((acc, d) => acc + d.cantidad, 0) || 12000000;
-  }, [data, selectedYear]);
+    let sum = 0;
+    for (const d of data) {
+      if (d.anio === selectedYear) {
+        if (selectedDeptId === 'all' || d.departamento_id === selectedDeptId) {
+          sum += d.cantidad;
+        }
+      }
+    }
+    return sum || 12000000;
+  }, [data, selectedYear, selectedDeptId]);
 
   const percentOfBolivia = Math.round((totalCohortCurrentYear / totalBoliviaYear) * 1000) / 10;
 
   // Evolución temporal del rango seleccionado año por año (2024 - 2034)
   const cohortTrendByYear = useMemo(() => {
     const raw = availableYears.map((yr) => {
-      const sum = data
-        .filter((d) => d.anio === yr && d.edad >= minAge && d.edad <= maxAge)
-        .reduce((acc, d) => acc + d.cantidad, 0);
+      let sum = 0;
+      for (const d of data) {
+        if (d.anio === yr && d.edad >= minAge && d.edad <= maxAge) {
+          if (selectedDeptId === 'all' || d.departamento_id === selectedDeptId) {
+            sum += d.cantidad;
+          }
+        }
+      }
       return { year: yr, total: sum };
     });
 
@@ -81,7 +122,7 @@ export function AgeProjectionExplorer({ data }: AgeProjectionExplorerProps) {
       const rate = prev && prev.total > 0 ? Math.round((diff / prev.total) * 1000) / 10 : 0;
       return { ...item, diff, rate };
     });
-  }, [data, availableYears, minAge, maxAge]);
+  }, [data, availableYears, minAge, maxAge, selectedDeptId]);
 
   // Crecimiento entre 2024 y 2034 para este rango
   const val2024 = cohortTrendByYear.find((d) => d.year === 2024)?.total || 1;
@@ -209,8 +250,43 @@ export function AgeProjectionExplorer({ data }: AgeProjectionExplorerProps) {
         </div>
       </div>
 
-      {/* Selector de Rango y Presets */}
+      {/* Selector de Rango, Presets y Ámbito Territorial */}
       <div className="space-y-3">
+        {/* Selector de Ámbito Territorial (Departamentos reales INE) */}
+        <div>
+          <span className="text-[11px] font-medium uppercase tracking-wider text-slate-400 block mb-1.5">
+            Ámbito Territorial (Datos Demográficos INE):
+          </span>
+          <div className="flex flex-wrap gap-1.5">
+            <button
+              onClick={() => setSelectedDeptId('all')}
+              className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all border ${
+                selectedDeptId === 'all'
+                  ? 'bg-slate-900 text-white border-slate-900 shadow-2xs'
+                  : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100 hover:text-slate-900'
+              }`}
+            >
+              Total Nacional (Bolivia)
+            </button>
+            {deptList.map((d) => {
+              const isSel = selectedDeptId === d.id;
+              return (
+                <button
+                  key={d.id}
+                  onClick={() => setSelectedDeptId(d.id)}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all border ${
+                    isSel
+                      ? 'bg-[#c9a751] text-slate-900 border-[#c9a751] font-semibold shadow-2xs ring-1 ring-[#c9a751]'
+                      : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100 hover:text-slate-900'
+                  }`}
+                >
+                  {d.nombre}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
         {/* Presets Rápidos */}
         <div>
           <span className="text-[11px] font-medium uppercase tracking-wider text-slate-400 block mb-1.5">
@@ -309,7 +385,7 @@ export function AgeProjectionExplorer({ data }: AgeProjectionExplorerProps) {
 
         <div className="p-3.5 rounded-xl bg-white border border-slate-200 shadow-2xs">
           <span className="text-[10px] font-medium uppercase tracking-wider text-slate-400 block">
-            % del Total Nacional
+            {selectedDeptId === 'all' ? '% del Total Nacional' : `% de ${activeDeptName}`}
           </span>
           <strong className="text-xl sm:text-2xl font-semibold text-[#c9a751] block mt-0.5">
             {percentOfBolivia}%

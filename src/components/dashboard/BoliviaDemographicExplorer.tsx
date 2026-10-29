@@ -20,7 +20,7 @@ export function BoliviaDemographicExplorer({ data }: BoliviaDemographicExplorerP
     { year: 2000, label: 'Inicio de Siglo', badge: '8.7M' },
     { year: 2012, label: 'Censo CNPV 2012', badge: '10.4M' },
     { year: 2024, label: 'Censo CPV 2024', badge: '11.9M' },
-    { year: 2026, label: 'Gestión Actual ESFM', badge: '11.98M' },
+    { year: 2026, label: 'Gestión Actual', badge: '11.98M' },
     { year: 2035, label: 'Meseta Poblacional', badge: '12.1M' },
     { year: 2050, label: 'Horizonte 2050', badge: '12.3M' },
   ];
@@ -126,11 +126,10 @@ export function BoliviaDemographicExplorer({ data }: BoliviaDemographicExplorerP
             </span>
           </div>
           <h2 className="text-xl sm:text-2xl font-semibold text-slate-900 tracking-tight">
-            Evolución Demográfica de Bolivia (2000 - 2050): Análisis de Impacto en ESFM
+            Evolución Demográfica de Bolivia (2000 - 2050): Población General
           </h2>
           <p className="text-xs text-slate-500 mt-0.5 max-w-3xl">
-            Herramienta analítica de 51 años de proyecciones censales para exponer el cambio demográfico
-            y su relación directa con la demanda futura de maestros en el Estado Plurinacional.
+            Herramienta analítica de 51 años de estimaciones censales y proyecciones oficiales de población general del Estado Plurinacional (INE).
           </p>
         </div>
 
@@ -445,7 +444,7 @@ export function BoliviaDemographicExplorer({ data }: BoliviaDemographicExplorerP
         <div className="flex items-center gap-2 mb-2">
           <TrendingUpIcon size={16} className="text-[#c9a751]" />
           <h4 className="font-medium text-[#c9a751] text-xs uppercase tracking-wider">
-            Relevancia para la Planificación Académica de las ESFM (Gestión {selectedYear}):
+            Contexto Demográfico y Tendencia (Gestión {selectedYear}):
           </h4>
         </div>
         <p className="text-slate-800 leading-relaxed font-medium">

@@ -31,6 +31,12 @@ export function IneView({ data }: IneViewProps) {
   const [selectedDeptId, setSelectedDeptId] = useState<number | 'all'>('all');
   const [chartMode, setChartMode] = useState<'desglose' | 'comparativa_dept'>('desglose');
   const [deptSearchTerm, setDeptSearchTerm] = useState<string>('');
+  const [pieYear, setPieYear] = useState<number>(2025);
+
+  // Años disponibles en la matrícula histórica (orden descendente: 2025 -> 2011)
+  const matriculaYears = useMemo(() => {
+    return Array.from(new Set(data.ine_matricula.map((r) => r.anio))).sort((a, b) => b - a);
+  }, [data.ine_matricula]);
 
   // Lista única de departamentos extraída de ine_matricula
   const departamentosList = useMemo(() => {
@@ -71,6 +77,19 @@ export function IneView({ data }: IneViewProps) {
     const item = data.ine_poblacion.find((p) => p.anio === 2050);
     return item ? item.poblacion : 14500000;
   }, [data.ine_poblacion]);
+
+  const jovenes18Poblacion = useMemo(() => {
+    return (
+      data.ine_proyeccion_edad
+        .filter(
+          (p) =>
+            p.anio === 2026 &&
+            p.edad === 18 &&
+            (selectedDeptId === 'all' || p.departamento_id === selectedDeptId)
+        )
+        .reduce((acc, p) => acc + p.cantidad, 0) || 245000
+    );
+  }, [data.ine_proyeccion_edad, selectedDeptId]);
 
   // 1. SERIE LINEAL: Población de Bolivia (2000 - 2050)
   const poblacionLineSeries: TrendSeries[] = useMemo(() => {
@@ -205,10 +224,11 @@ export function IneView({ data }: IneViewProps) {
     const map20 = new Map<number, number>();
 
     data.ine_proyeccion_edad.forEach((r) => {
-      if (r.edad === 17) map17.set(r.anio, r.cantidad);
-      else if (r.edad === 18) map18.set(r.anio, r.cantidad);
-      else if (r.edad === 19) map19.set(r.anio, r.cantidad);
-      else if (r.edad === 20) map20.set(r.anio, r.cantidad);
+      if (selectedDeptId !== 'all' && r.departamento_id !== selectedDeptId) return;
+      if (r.edad === 17) map17.set(r.anio, (map17.get(r.anio) || 0) + r.cantidad);
+      else if (r.edad === 18) map18.set(r.anio, (map18.get(r.anio) || 0) + r.cantidad);
+      else if (r.edad === 19) map19.set(r.anio, (map19.get(r.anio) || 0) + r.cantidad);
+      else if (r.edad === 20) map20.set(r.anio, (map20.get(r.anio) || 0) + r.cantidad);
     });
 
     const years = Array.from(new Set(data.ine_proyeccion_edad.map((r) => r.anio))).sort((a, b) => a - b);
@@ -216,30 +236,30 @@ export function IneView({ data }: IneViewProps) {
     return [
       {
         id: 'edad_18',
-        name: '18 Años (Edad ingreso ESFM)',
+        name: `18 Años - Admisión ESFM (${activeDeptName})`,
         color: '#c9a751',
         data: years.map((y) => ({ year: y, value: map18.get(y) || 0 })),
       },
       {
         id: 'edad_17',
-        name: '17 Años (Egreso Bachiller)',
+        name: `17 Años - Egreso Bachiller (${activeDeptName})`,
         color: '#2563EB',
         data: years.map((y) => ({ year: y, value: map17.get(y) || 0 })),
       },
       {
         id: 'edad_19',
-        name: '19 Años',
+        name: `19 Años (${activeDeptName})`,
         color: '#059669',
         data: years.map((y) => ({ year: y, value: map19.get(y) || 0 })),
       },
       {
         id: 'edad_20',
-        name: '20 Años',
+        name: `20 Años (${activeDeptName})`,
         color: '#9333EA',
         data: years.map((y) => ({ year: y, value: map20.get(y) || 0 })),
       },
     ];
-  }, [data.ine_proyeccion_edad]);
+  }, [data.ine_proyeccion_edad, selectedDeptId, activeDeptName]);
 
   // 5. TABLA COMPARATIVA DE CRECIMIENTO AÑO A AÑO
   const comparativoAnualMatricula = useMemo(() => {
@@ -283,39 +303,47 @@ export function IneView({ data }: IneViewProps) {
     });
   }, [data.ine_matricula]);
 
-  // Torta: Proporción Público vs Privado (INE 2011-2025 para el departamento seleccionado)
+  // Torta: Proporción Público vs Privado para la gestión seleccionada (Gestión específica pieYear)
   const pubPrivPieData: PieSlice[] = useMemo(() => {
     let pub = 0;
     let priv = 0;
-    filteredMatricula.forEach((r) => {
-      const isPub = (r.tipo || '').toLowerCase().includes('públ') || (r.tipo || '').toLowerCase().includes('publ');
-      if (isPub) pub += r.cantidad || 0;
-      else priv += r.cantidad || 0;
-    });
+    filteredMatricula
+      .filter((r) => r.anio === pieYear)
+      .forEach((r) => {
+        const isPub = (r.tipo || '').toLowerCase().includes('públ') || (r.tipo || '').toLowerCase().includes('publ');
+        if (isPub) pub += r.cantidad || 0;
+        else priv += r.cantidad || 0;
+      });
     return [
-      { label: 'Sector Público', value: pub, color: '#c9a751', sublabel: activeDeptName },
-      { label: 'Sector Privado', value: priv, color: '#475569', sublabel: activeDeptName },
+      { label: 'Sector Público', value: pub, color: '#c9a751', sublabel: `${activeDeptName} · ${pieYear}` },
+      { label: 'Sector Privado', value: priv, color: '#475569', sublabel: `${activeDeptName} · ${pieYear}` },
     ];
-  }, [filteredMatricula, activeDeptName]);
+  }, [filteredMatricula, pieYear, activeDeptName]);
 
-  // Torta: Matrícula por Niveles (para el departamento seleccionado)
+  // Torta: Matrícula por Niveles para la gestión seleccionada (Gestión específica pieYear)
   const nivelesPieData: PieSlice[] = useMemo(() => {
     let inic = 0;
     let prim = 0;
     let secu = 0;
-    filteredMatricula.forEach((r) => {
-      const niv = (r.nivel || '').toLowerCase();
-      const cant = r.cantidad || 0;
-      if (niv.includes('inic')) inic += cant;
-      else if (niv.includes('prim')) prim += cant;
-      else if (niv.includes('secu')) secu += cant;
-    });
+    filteredMatricula
+      .filter((r) => r.anio === pieYear)
+      .forEach((r) => {
+        const niv = (r.nivel || '').toLowerCase();
+        const cant = r.cantidad || 0;
+        if (niv.includes('inic')) inic += cant;
+        else if (niv.includes('prim')) prim += cant;
+        else if (niv.includes('secu')) secu += cant;
+      });
     return [
-      { label: 'Nivel Primaria', value: prim, color: '#059669', sublabel: activeDeptName },
-      { label: 'Nivel Secundaria', value: secu, color: '#2563EB', sublabel: activeDeptName },
-      { label: 'Nivel Inicial', value: inic, color: '#c9a751', sublabel: activeDeptName },
+      { label: 'Nivel Primaria', value: prim, color: '#059669', sublabel: `${activeDeptName} · ${pieYear}` },
+      { label: 'Nivel Secundaria', value: secu, color: '#2563EB', sublabel: `${activeDeptName} · ${pieYear}` },
+      { label: 'Nivel Inicial', value: inic, color: '#c9a751', sublabel: `${activeDeptName} · ${pieYear}` },
     ];
-  }, [filteredMatricula, activeDeptName]);
+  }, [filteredMatricula, pieYear, activeDeptName]);
+
+  const pieYearTotal = useMemo(() => {
+    return pubPrivPieData.reduce((acc, s) => acc + s.value, 0);
+  }, [pubPrivPieData]);
 
   return (
     <div className="space-y-6">
@@ -395,8 +423,8 @@ export function IneView({ data }: IneViewProps) {
         />
         <StatCard
           title="Jóvenes 18 Años (2026)"
-          value={data.ine_proyeccion_edad.find((p) => p.anio === 2026 && p.edad === 18)?.cantidad || 245000}
-          subtitle="Universo de egreso bachiller"
+          value={jovenes18Poblacion}
+          subtitle={`Universo de egreso bachiller · ${activeDeptName}`}
           sourceBadge="Postulantes"
           sourceColor="amber"
           icon={<CalendarIcon size={22} className="text-[#a08035]" />}
@@ -554,12 +582,40 @@ export function IneView({ data }: IneViewProps) {
                   />
                 </div>
 
+                {/* Cabecera y Selector de Gestión para las Tortas de Distribución */}
+                <div className="bg-slate-50/90 rounded-xl border border-slate-200 p-4 flex flex-col md:flex-row md:items-center justify-between gap-3 shadow-2xs">
+                  <div>
+                    <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 block">
+                      Estructura Escolar · Gestión {pieYear}
+                    </span>
+                    <p className="text-xs text-slate-600 mt-0.5">
+                      Visualizando matrícula de <strong className="text-slate-900 font-semibold">{activeDeptName}</strong> en el año <strong className="text-slate-900 font-semibold">{pieYear}</strong> ({pieYearTotal.toLocaleString('es-BO')} estudiantes).
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-1 overflow-x-auto pb-1 md:pb-0 shrink-0">
+                    <span className="text-xs text-slate-500 font-medium mr-1.5 shrink-0">Gestión:</span>
+                    {matriculaYears.map((yr) => (
+                      <button
+                        key={yr}
+                        onClick={() => setPieYear(yr)}
+                        className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all shrink-0 ${
+                          pieYear === yr
+                            ? 'bg-slate-900 text-white shadow-2xs'
+                            : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 hover:text-slate-900'
+                        }`}
+                      >
+                        {yr}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
                 {/* Tortas de Distribución del departamento seleccionado */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
                   <div className="min-w-0">
                     <PieChart
-                      title={`Proporción Público vs Privado (${activeDeptName})`}
-                      subtitle={`Participación porcentual histórica en ${activeDeptName}`}
+                      title={`Proporción Público vs Privado (${activeDeptName} · ${pieYear})`}
+                      subtitle={`Distribución sectorial en la gestión escolar ${pieYear}`}
                       data={pubPrivPieData}
                       donut={true}
                       unit="estudiantes"
@@ -567,8 +623,8 @@ export function IneView({ data }: IneViewProps) {
                   </div>
                   <div className="min-w-0">
                     <PieChart
-                      title={`Distribución por Nivel Escolar (${activeDeptName})`}
-                      subtitle={`Concentración de estudiantes en ${activeDeptName}`}
+                      title={`Distribución por Nivel Escolar (${activeDeptName} · ${pieYear})`}
+                      subtitle={`Concentración por nivel en la gestión escolar ${pieYear}`}
                       data={nivelesPieData}
                       donut={true}
                       unit="estudiantes"
@@ -587,10 +643,10 @@ export function IneView({ data }: IneViewProps) {
               <TrendingUpIcon size={20} className="text-[#c9a751]" />
               <div>
                 <h2 className="text-base font-semibold text-slate-900 tracking-tight">
-                  Demografía Nacional y Proyección de Cohortes (INE 2000 - 2050)
+                  Demografía Nacional y Proyección de Población (INE 2000 - 2050)
                 </h2>
                 <p className="text-xs text-slate-500">
-                  Población global del Estado Plurinacional y pirámide de edades de egreso para la admisión ESFM.
+                  Población general del Estado Plurinacional de Bolivia y pirámide de edades según datos oficiales del INE.
                 </p>
               </div>
             </div>
@@ -755,23 +811,32 @@ export function IneView({ data }: IneViewProps) {
 
             <DataTable
               title="Proyección de Población por Grupos de Edad (2024 - 2034)"
-              subtitle="Desglose por año y edad para la planificación educativa"
-              data={data.ine_proyeccion_edad}
+              subtitle="Desglose por departamento, año y edad según proyecciones oficiales del INE"
+              data={selectedDeptId === 'all' ? data.ine_proyeccion_edad : data.ine_proyeccion_edad.filter((r) => r.departamento_id === selectedDeptId)}
               columns={[
                 { key: 'anio', header: 'Año Proyectado', width: 'w-28', align: 'center' },
-                { key: 'edad', header: 'Edad (Años)', width: 'w-28', align: 'center' },
+                {
+                  key: 'departamento',
+                  header: 'Departamento',
+                  render: (r) => (
+                    <span className="font-medium text-slate-700">
+                      {r.departamentos?.nombre || (r.departamento_id ? departamentosList.find((d) => d.id === r.departamento_id)?.nombre : 'Nacional')}
+                    </span>
+                  ),
+                },
+                { key: 'edad', header: 'Edad (Años)', width: 'w-24', align: 'center' },
                 {
                   key: 'cantidad',
                   header: 'Cantidad Proyectada',
                   align: 'right',
                   render: (r) => (
-                    <span className="font-medium text-slate-900">
+                    <span className="font-semibold text-slate-900">
                       {r.cantidad.toLocaleString('es-BO')}
                     </span>
                   ),
                 },
               ]}
-              searchPlaceholder="Buscar por año o edad..."
+              searchPlaceholder="Buscar por año, edad o departamento..."
             />
           </div>
         )
