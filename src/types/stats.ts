@@ -1,4 +1,4 @@
-export type SourceTab = 'proyecciones' | 'dgfm' | 'ine' | 'sie' | 'seie';
+export type SourceTab = 'proyecciones' | 'dgfm' | 'ine' | 'sie' | 'seie' | 'uie';
 
 export interface Departamento {
   id: number;

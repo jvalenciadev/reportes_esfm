@@ -26,3 +26,4 @@ CREATE INDEX IF NOT EXISTS idx_uie_deficit_dependencia ON public.uie_deficit_hor
 ALTER TABLE public.uie_deficit_horas ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "allow_anon_all" ON public.uie_deficit_horas;
 CREATE POLICY "allow_anon_all" ON public.uie_deficit_horas FOR ALL TO anon, authenticated USING (true) WITH CHECK (true);
+

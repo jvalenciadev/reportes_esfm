@@ -1,0 +1,3558 @@
+{
+  "historico_nacional": [
+    {
+      "gestion": 2021,
+      "horas_trabajadas": 26440000,
+      "horas_planilla": 24634310,
+      "deficit_horas": 1805690,
+      "deficit_pct": 6.83,
+      "items_equiv_88h": 20519,
+      "registros_count": 2884
+    },
+    {
+      "gestion": 2022,
+      "horas_trabajadas": 14237584,
+      "horas_planilla": 13174402,
+      "deficit_horas": 1063182,
+      "deficit_pct": 7.47,
+      "items_equiv_88h": 12082,
+      "registros_count": 3008
+    },
+    {
+      "gestion": 2023,
+      "horas_trabajadas": 14848316,
+      "horas_planilla": 13901737,
+      "deficit_horas": 946579,
+      "deficit_pct": 6.37,
+      "items_equiv_88h": 10757,
+      "registros_count": 3283
+    },
+    {
+      "gestion": 2024,
+      "horas_trabajadas": 15835648,
+      "horas_planilla": 14780832,
+      "deficit_horas": 1054816,
+      "deficit_pct": 6.66,
+      "items_equiv_88h": 11987,
+      "registros_count": 4176
+    },
+    {
+      "gestion": 2025,
+      "horas_trabajadas": 16009284,
+      "horas_planilla": 15069687,
+      "deficit_horas": 939597,
+      "deficit_pct": 5.87,
+      "items_equiv_88h": 10677,
+      "registros_count": 3923
+    }
+  ],
+  "pronostico_nacional": [
+    {
+      "gestion": 2026,
+      "horas_trabajadas": 16808316,
+      "horas_planilla": 15872902,
+      "deficit_horas": 935414,
+      "deficit_pct": 5.57,
+      "items_equiv_88h": 10630,
+      "tipo": "pronostico"
+    },
+    {
+      "gestion": 2027,
+      "horas_trabajadas": 17438559,
+      "horas_planilla": 16529397,
+      "deficit_horas": 909162,
+      "deficit_pct": 5.21,
+      "items_equiv_88h": 10331,
+      "tipo": "pronostico"
+    },
+    {
+      "gestion": 2028,
+      "horas_trabajadas": 18068802,
+      "horas_planilla": 17185892,
+      "deficit_horas": 882910,
+      "deficit_pct": 4.89,
+      "items_equiv_88h": 10033,
+      "tipo": "pronostico"
+    },
+    {
+      "gestion": 2029,
+      "horas_trabajadas": 18699046,
+      "horas_planilla": 17842387,
+      "deficit_horas": 856659,
+      "deficit_pct": 4.58,
+      "items_equiv_88h": 9735,
+      "tipo": "pronostico"
+    },
+    {
+      "gestion": 2030,
+      "horas_trabajadas": 19329289,
+      "horas_planilla": 18498882,
+      "deficit_horas": 830407,
+      "deficit_pct": 4.3,
+      "items_equiv_88h": 9436,
+      "tipo": "pronostico"
+    },
+    {
+      "gestion": 2031,
+      "horas_trabajadas": 19959532,
+      "horas_planilla": 19155377,
+      "deficit_horas": 804155,
+      "deficit_pct": 4.03,
+      "items_equiv_88h": 9138,
+      "tipo": "pronostico"
+    },
+    {
+      "gestion": 2032,
+      "horas_trabajadas": 20589775,
+      "horas_planilla": 19811872,
+      "deficit_horas": 777903,
+      "deficit_pct": 3.78,
+      "items_equiv_88h": 8840,
+      "tipo": "pronostico"
+    },
+    {
+      "gestion": 2033,
+      "horas_trabajadas": 21220018,
+      "horas_planilla": 20468367,
+      "deficit_horas": 751651,
+      "deficit_pct": 3.54,
+      "items_equiv_88h": 8541,
+      "tipo": "pronostico"
+    },
+    {
+      "gestion": 2034,
+      "horas_trabajadas": 21850262,
+      "horas_planilla": 21124862,
+      "deficit_horas": 725400,
+      "deficit_pct": 3.32,
+      "items_equiv_88h": 8243,
+      "tipo": "pronostico"
+    },
+    {
+      "gestion": 2035,
+      "horas_trabajadas": 22480505,
+      "horas_planilla": 21781357,
+      "deficit_horas": 699148,
+      "deficit_pct": 3.11,
+      "items_equiv_88h": 7945,
+      "tipo": "pronostico"
+    }
+  ],
+  "por_grupo_cargo": [
+    {
+      "grupo": "Maestro de Aula / General",
+      "deficit_total": 3895099,
+      "trabajadas_total": 55015972,
+      "planilla_total": 51120873,
+      "deficit_pct": 7.08,
+      "items_equiv_88h": 44262,
+      "registros_count": 2878,
+      "por_gestion": {
+        "2021": {
+          "trabajadas": 19708836,
+          "planilla": 18473699,
+          "deficit": 1235137,
+          "items_equiv_88h": 14036
+        },
+        "2022": {
+          "trabajadas": 9513352,
+          "planilla": 8724690,
+          "deficit": 788662,
+          "items_equiv_88h": 8962
+        },
+        "2023": {
+          "trabajadas": 9481144,
+          "planilla": 8814039,
+          "deficit": 667105,
+          "items_equiv_88h": 7581
+        },
+        "2024": {
+          "trabajadas": 8384032,
+          "planilla": 7730486,
+          "deficit": 653546,
+          "items_equiv_88h": 7427
+        },
+        "2025": {
+          "trabajadas": 7928608,
+          "planilla": 7377959,
+          "deficit": 550649,
+          "items_equiv_88h": 6257
+        }
+      }
+    },
+    {
+      "grupo": "Matemáticas y Ciencias Exactas",
+      "deficit_total": 398598,
+      "trabajadas_total": 5775644,
+      "planilla_total": 5377046,
+      "deficit_pct": 6.9,
+      "items_equiv_88h": 4530,
+      "registros_count": 944,
+      "por_gestion": {
+        "2021": {
+          "trabajadas": 929092,
+          "planilla": 815518,
+          "deficit": 113574,
+          "items_equiv_88h": 1291
+        },
+        "2022": {
+          "trabajadas": 816216,
+          "planilla": 753826,
+          "deficit": 62390,
+          "items_equiv_88h": 709
+        },
+        "2023": {
+          "trabajadas": 968688,
+          "planilla": 903058,
+          "deficit": 65630,
+          "items_equiv_88h": 746
+        },
+        "2024": {
+          "trabajadas": 1458412,
+          "planilla": 1378782,
+          "deficit": 79630,
+          "items_equiv_88h": 905
+        },
+        "2025": {
+          "trabajadas": 1603236,
+          "planilla": 1525862,
+          "deficit": 77374,
+          "items_equiv_88h": 879
+        }
+      }
+    },
+    {
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 381477,
+      "trabajadas_total": 4066756,
+      "planilla_total": 3685279,
+      "deficit_pct": 9.38,
+      "items_equiv_88h": 4335,
+      "registros_count": 5987,
+      "por_gestion": {
+        "2021": {
+          "trabajadas": 860380,
+          "planilla": 771148,
+          "deficit": 89232,
+          "items_equiv_88h": 1014
+        },
+        "2022": {
+          "trabajadas": 543316,
+          "planilla": 507578,
+          "deficit": 35738,
+          "items_equiv_88h": 406
+        },
+        "2023": {
+          "trabajadas": 608036,
+          "planilla": 571195,
+          "deficit": 36841,
+          "items_equiv_88h": 419
+        },
+        "2024": {
+          "trabajadas": 976440,
+          "planilla": 865586,
+          "deficit": 110854,
+          "items_equiv_88h": 1260
+        },
+        "2025": {
+          "trabajadas": 1078584,
+          "planilla": 969772,
+          "deficit": 108812,
+          "items_equiv_88h": 1236
+        }
+      }
+    },
+    {
+      "grupo": "Ciencias Sociales y Humanidades",
+      "deficit_total": 346557,
+      "trabajadas_total": 6951384,
+      "planilla_total": 6604827,
+      "deficit_pct": 4.99,
+      "items_equiv_88h": 3938,
+      "registros_count": 1993,
+      "por_gestion": {
+        "2021": {
+          "trabajadas": 1453648,
+          "planilla": 1339667,
+          "deficit": 113981,
+          "items_equiv_88h": 1295
+        },
+        "2022": {
+          "trabajadas": 1057620,
+          "planilla": 1001934,
+          "deficit": 55686,
+          "items_equiv_88h": 633
+        },
+        "2023": {
+          "trabajadas": 1193012,
+          "planilla": 1140027,
+          "deficit": 52985,
+          "items_equiv_88h": 602
+        },
+        "2024": {
+          "trabajadas": 1565968,
+          "planilla": 1502880,
+          "deficit": 63088,
+          "items_equiv_88h": 717
+        },
+        "2025": {
+          "trabajadas": 1681136,
+          "planilla": 1620319,
+          "deficit": 60817,
+          "items_equiv_88h": 691
+        }
+      }
+    },
+    {
+      "grupo": "Lenguaje y Comunicación",
+      "deficit_total": 235330,
+      "trabajadas_total": 4131400,
+      "planilla_total": 3896070,
+      "deficit_pct": 5.7,
+      "items_equiv_88h": 2674,
+      "registros_count": 785,
+      "por_gestion": {
+        "2021": {
+          "trabajadas": 617220,
+          "planilla": 554224,
+          "deficit": 62996,
+          "items_equiv_88h": 716
+        },
+        "2022": {
+          "trabajadas": 572676,
+          "planilla": 539493,
+          "deficit": 33183,
+          "items_equiv_88h": 377
+        },
+        "2023": {
+          "trabajadas": 690424,
+          "planilla": 652406,
+          "deficit": 38018,
+          "items_equiv_88h": 432
+        },
+        "2024": {
+          "trabajadas": 1069944,
+          "planilla": 1018250,
+          "deficit": 51694,
+          "items_equiv_88h": 587
+        },
+        "2025": {
+          "trabajadas": 1181136,
+          "planilla": 1131697,
+          "deficit": 49439,
+          "items_equiv_88h": 562
+        }
+      }
+    },
+    {
+      "grupo": "Educación Física y Deportes",
+      "deficit_total": 161716,
+      "trabajadas_total": 3739276,
+      "planilla_total": 3577560,
+      "deficit_pct": 4.32,
+      "items_equiv_88h": 1838,
+      "registros_count": 938,
+      "por_gestion": {
+        "2021": {
+          "trabajadas": 1107300,
+          "planilla": 1047154,
+          "deficit": 60146,
+          "items_equiv_88h": 683
+        },
+        "2022": {
+          "trabajadas": 601640,
+          "planilla": 575942,
+          "deficit": 25698,
+          "items_equiv_88h": 292
+        },
+        "2023": {
+          "trabajadas": 642776,
+          "planilla": 617619,
+          "deficit": 25157,
+          "items_equiv_88h": 286
+        },
+        "2024": {
+          "trabajadas": 677940,
+          "planilla": 652398,
+          "deficit": 25542,
+          "items_equiv_88h": 290
+        },
+        "2025": {
+          "trabajadas": 709620,
+          "planilla": 684447,
+          "deficit": 25173,
+          "items_equiv_88h": 286
+        }
+      }
+    },
+    {
+      "grupo": "Ciencias Naturales y Biología",
+      "deficit_total": 149782,
+      "trabajadas_total": 2548432,
+      "planilla_total": 2398650,
+      "deficit_pct": 5.88,
+      "items_equiv_88h": 1702,
+      "registros_count": 535,
+      "por_gestion": {
+        "2021": {
+          "trabajadas": 383424,
+          "planilla": 341213,
+          "deficit": 42211,
+          "items_equiv_88h": 480
+        },
+        "2022": {
+          "trabajadas": 353816,
+          "planilla": 329734,
+          "deficit": 24082,
+          "items_equiv_88h": 274
+        },
+        "2023": {
+          "trabajadas": 422760,
+          "planilla": 398339,
+          "deficit": 24421,
+          "items_equiv_88h": 278
+        },
+        "2024": {
+          "trabajadas": 663008,
+          "planilla": 633305,
+          "deficit": 29703,
+          "items_equiv_88h": 338
+        },
+        "2025": {
+          "trabajadas": 725424,
+          "planilla": 696059,
+          "deficit": 29365,
+          "items_equiv_88h": 334
+        }
+      }
+    },
+    {
+      "grupo": "Educación Musical",
+      "deficit_total": 143196,
+      "trabajadas_total": 3029756,
+      "planilla_total": 2886560,
+      "deficit_pct": 4.73,
+      "items_equiv_88h": 1627,
+      "registros_count": 1151,
+      "por_gestion": {
+        "2021": {
+          "trabajadas": 860892,
+          "planilla": 807448,
+          "deficit": 53444,
+          "items_equiv_88h": 607
+        },
+        "2022": {
+          "trabajadas": 479812,
+          "planilla": 457173,
+          "deficit": 22639,
+          "items_equiv_88h": 257
+        },
+        "2023": {
+          "trabajadas": 522860,
+          "planilla": 501000,
+          "deficit": 21860,
+          "items_equiv_88h": 248
+        },
+        "2024": {
+          "trabajadas": 563368,
+          "planilla": 540305,
+          "deficit": 23063,
+          "items_equiv_88h": 262
+        },
+        "2025": {
+          "trabajadas": 602824,
+          "planilla": 580634,
+          "deficit": 22190,
+          "items_equiv_88h": 252
+        }
+      }
+    },
+    {
+      "grupo": "Artes Plásticas y Visuales",
+      "deficit_total": 70930,
+      "trabajadas_total": 1557824,
+      "planilla_total": 1486894,
+      "deficit_pct": 4.55,
+      "items_equiv_88h": 806,
+      "registros_count": 729,
+      "por_gestion": {
+        "2021": {
+          "trabajadas": 409532,
+          "planilla": 382730,
+          "deficit": 26802,
+          "items_equiv_88h": 305
+        },
+        "2022": {
+          "trabajadas": 254184,
+          "planilla": 242772,
+          "deficit": 11412,
+          "items_equiv_88h": 130
+        },
+        "2023": {
+          "trabajadas": 280648,
+          "planilla": 269362,
+          "deficit": 11286,
+          "items_equiv_88h": 128
+        },
+        "2024": {
+          "trabajadas": 299940,
+          "planilla": 289270,
+          "deficit": 10670,
+          "items_equiv_88h": 121
+        },
+        "2025": {
+          "trabajadas": 313520,
+          "planilla": 302760,
+          "deficit": 10760,
+          "items_equiv_88h": 122
+        }
+      }
+    },
+    {
+      "grupo": "Otras Especialidades",
+      "deficit_total": 16111,
+      "trabajadas_total": 228800,
+      "planilla_total": 212689,
+      "deficit_pct": 7.04,
+      "items_equiv_88h": 183,
+      "registros_count": 676,
+      "por_gestion": {
+        "2021": {
+          "trabajadas": 107152,
+          "planilla": 100197,
+          "deficit": 6955,
+          "items_equiv_88h": 79
+        },
+        "2022": {
+          "trabajadas": 43456,
+          "planilla": 40664,
+          "deficit": 2792,
+          "items_equiv_88h": 32
+        },
+        "2023": {
+          "trabajadas": 36196,
+          "planilla": 34320,
+          "deficit": 1876,
+          "items_equiv_88h": 21
+        },
+        "2024": {
+          "trabajadas": 25956,
+          "planilla": 23086,
+          "deficit": 2870,
+          "items_equiv_88h": 33
+        },
+        "2025": {
+          "trabajadas": 16040,
+          "planilla": 14422,
+          "deficit": 1618,
+          "items_equiv_88h": 18
+        }
+      }
+    },
+    {
+      "grupo": "Personal Directivo y Administrativo",
+      "deficit_total": 5944,
+      "trabajadas_total": 7480,
+      "planilla_total": 1536,
+      "deficit_pct": 79.47,
+      "items_equiv_88h": 68,
+      "registros_count": 62,
+      "por_gestion": {
+        "2021": {
+          "trabajadas": 2060,
+          "planilla": 840,
+          "deficit": 1220,
+          "items_equiv_88h": 14
+        },
+        "2022": {
+          "trabajadas": 1128,
+          "planilla": 228,
+          "deficit": 900,
+          "items_equiv_88h": 10
+        },
+        "2023": {
+          "trabajadas": 1500,
+          "planilla": 100,
+          "deficit": 1400,
+          "items_equiv_88h": 16
+        },
+        "2024": {
+          "trabajadas": 1600,
+          "planilla": 296,
+          "deficit": 1304,
+          "items_equiv_88h": 15
+        },
+        "2025": {
+          "trabajadas": 1192,
+          "planilla": 72,
+          "deficit": 1120,
+          "items_equiv_88h": 13
+        }
+      }
+    },
+    {
+      "grupo": "Educación Especial",
+      "deficit_total": 5124,
+      "trabajadas_total": 318108,
+      "planilla_total": 312984,
+      "deficit_pct": 1.61,
+      "items_equiv_88h": 58,
+      "registros_count": 596,
+      "por_gestion": {
+        "2021": {
+          "trabajadas": 464,
+          "planilla": 472,
+          "deficit": -8,
+          "items_equiv_88h": 0
+        },
+        "2022": {
+          "trabajadas": 368,
+          "planilla": 368,
+          "deficit": 0,
+          "items_equiv_88h": 0
+        },
+        "2023": {
+          "trabajadas": 272,
+          "planilla": 272,
+          "deficit": 0,
+          "items_equiv_88h": 0
+        },
+        "2024": {
+          "trabajadas": 149040,
+          "planilla": 146188,
+          "deficit": 2852,
+          "items_equiv_88h": 32
+        },
+        "2025": {
+          "trabajadas": 167964,
+          "planilla": 165684,
+          "deficit": 2280,
+          "items_equiv_88h": 26
+        }
+      }
+    }
+  ],
+  "por_departamento": [
+    {
+      "departamento_id": 7,
+      "departamento": "Santa Cruz",
+      "deficit_total": 1759320,
+      "trabajadas_total": 20205372,
+      "planilla_total": 18446052,
+      "deficit_pct": 8.71,
+      "items_equiv_88h": 19992,
+      "por_gestion": {
+        "2021": {
+          "trabajadas": 5987600,
+          "planilla": 5576185,
+          "deficit": 411415,
+          "items_equiv_88h": 4675
+        },
+        "2022": {
+          "trabajadas": 3380008,
+          "planilla": 3031921,
+          "deficit": 348087,
+          "items_equiv_88h": 3956
+        },
+        "2023": {
+          "trabajadas": 3448496,
+          "planilla": 3120625,
+          "deficit": 327871,
+          "items_equiv_88h": 3726
+        },
+        "2024": {
+          "trabajadas": 3685812,
+          "planilla": 3332406,
+          "deficit": 353406,
+          "items_equiv_88h": 4016
+        },
+        "2025": {
+          "trabajadas": 3703456,
+          "planilla": 3384915,
+          "deficit": 318541,
+          "items_equiv_88h": 3620
+        }
+      }
+    },
+    {
+      "departamento_id": 2,
+      "departamento": "La Paz",
+      "deficit_total": 1398747,
+      "trabajadas_total": 23734812,
+      "planilla_total": 22336065,
+      "deficit_pct": 5.89,
+      "items_equiv_88h": 15895,
+      "por_gestion": {
+        "2021": {
+          "trabajadas": 7154616,
+          "planilla": 6701197,
+          "deficit": 453419,
+          "items_equiv_88h": 5152
+        },
+        "2022": {
+          "trabajadas": 4003780,
+          "planilla": 3751851,
+          "deficit": 251929,
+          "items_equiv_88h": 2863
+        },
+        "2023": {
+          "trabajadas": 4007272,
+          "planilla": 3803957,
+          "deficit": 203315,
+          "items_equiv_88h": 2310
+        },
+        "2024": {
+          "trabajadas": 4248788,
+          "planilla": 3996541,
+          "deficit": 252247,
+          "items_equiv_88h": 2866
+        },
+        "2025": {
+          "trabajadas": 4320356,
+          "planilla": 4082519,
+          "deficit": 237837,
+          "items_equiv_88h": 2703
+        }
+      }
+    },
+    {
+      "departamento_id": 3,
+      "departamento": "Cochabamba",
+      "deficit_total": 870514,
+      "trabajadas_total": 15119108,
+      "planilla_total": 14248594,
+      "deficit_pct": 5.76,
+      "items_equiv_88h": 9892,
+      "por_gestion": {
+        "2021": {
+          "trabajadas": 4728160,
+          "planilla": 4458925,
+          "deficit": 269235,
+          "items_equiv_88h": 3059
+        },
+        "2022": {
+          "trabajadas": 2481576,
+          "planilla": 2308708,
+          "deficit": 172868,
+          "items_equiv_88h": 1964
+        },
+        "2023": {
+          "trabajadas": 2511988,
+          "planilla": 2366707,
+          "deficit": 145281,
+          "items_equiv_88h": 1651
+        },
+        "2024": {
+          "trabajadas": 2691384,
+          "planilla": 2532666,
+          "deficit": 158718,
+          "items_equiv_88h": 1804
+        },
+        "2025": {
+          "trabajadas": 2706000,
+          "planilla": 2581588,
+          "deficit": 124412,
+          "items_equiv_88h": 1414
+        }
+      }
+    },
+    {
+      "departamento_id": 5,
+      "departamento": "Potosí",
+      "deficit_total": 674987,
+      "trabajadas_total": 8311404,
+      "planilla_total": 7636417,
+      "deficit_pct": 8.12,
+      "items_equiv_88h": 7670,
+      "por_gestion": {
+        "2021": {
+          "trabajadas": 2329692,
+          "planilla": 2096221,
+          "deficit": 233471,
+          "items_equiv_88h": 2653
+        },
+        "2022": {
+          "trabajadas": 1439136,
+          "planilla": 1320790,
+          "deficit": 118346,
+          "items_equiv_88h": 1345
+        },
+        "2023": {
+          "trabajadas": 1466288,
+          "planilla": 1355050,
+          "deficit": 111238,
+          "items_equiv_88h": 1264
+        },
+        "2024": {
+          "trabajadas": 1529172,
+          "planilla": 1417588,
+          "deficit": 111584,
+          "items_equiv_88h": 1268
+        },
+        "2025": {
+          "trabajadas": 1547116,
+          "planilla": 1446768,
+          "deficit": 100348,
+          "items_equiv_88h": 1140
+        }
+      }
+    },
+    {
+      "departamento_id": 8,
+      "departamento": "Beni",
+      "deficit_total": 413208,
+      "trabajadas_total": 4750344,
+      "planilla_total": 4337136,
+      "deficit_pct": 8.7,
+      "items_equiv_88h": 4696,
+      "por_gestion": {
+        "2021": {
+          "trabajadas": 1538188,
+          "planilla": 1366155,
+          "deficit": 172033,
+          "items_equiv_88h": 1955
+        },
+        "2022": {
+          "trabajadas": 757924,
+          "planilla": 697094,
+          "deficit": 60830,
+          "items_equiv_88h": 691
+        },
+        "2023": {
+          "trabajadas": 770356,
+          "planilla": 717823,
+          "deficit": 52533,
+          "items_equiv_88h": 597
+        },
+        "2024": {
+          "trabajadas": 830772,
+          "planilla": 766813,
+          "deficit": 63959,
+          "items_equiv_88h": 727
+        },
+        "2025": {
+          "trabajadas": 853104,
+          "planilla": 789251,
+          "deficit": 63853,
+          "items_equiv_88h": 726
+        }
+      }
+    },
+    {
+      "departamento_id": 1,
+      "departamento": "Chuquisaca",
+      "deficit_total": 244014,
+      "trabajadas_total": 5040600,
+      "planilla_total": 4796586,
+      "deficit_pct": 4.84,
+      "items_equiv_88h": 2773,
+      "por_gestion": {
+        "2021": {
+          "trabajadas": 1694176,
+          "planilla": 1594318,
+          "deficit": 99858,
+          "items_equiv_88h": 1135
+        },
+        "2022": {
+          "trabajadas": 467840,
+          "planilla": 440484,
+          "deficit": 27356,
+          "items_equiv_88h": 311
+        },
+        "2023": {
+          "trabajadas": 909252,
+          "planilla": 869988,
+          "deficit": 39264,
+          "items_equiv_88h": 446
+        },
+        "2024": {
+          "trabajadas": 986564,
+          "planilla": 944327,
+          "deficit": 42237,
+          "items_equiv_88h": 480
+        },
+        "2025": {
+          "trabajadas": 982768,
+          "planilla": 947469,
+          "deficit": 35299,
+          "items_equiv_88h": 401
+        }
+      }
+    },
+    {
+      "departamento_id": 4,
+      "departamento": "Oruro",
+      "deficit_total": 226049,
+      "trabajadas_total": 4450496,
+      "planilla_total": 4224447,
+      "deficit_pct": 5.08,
+      "items_equiv_88h": 2569,
+      "por_gestion": {
+        "2021": {
+          "trabajadas": 1238184,
+          "planilla": 1154128,
+          "deficit": 84056,
+          "items_equiv_88h": 955
+        },
+        "2022": {
+          "trabajadas": 768764,
+          "planilla": 727691,
+          "deficit": 41073,
+          "items_equiv_88h": 467
+        },
+        "2023": {
+          "trabajadas": 775928,
+          "planilla": 742839,
+          "deficit": 33089,
+          "items_equiv_88h": 376
+        },
+        "2024": {
+          "trabajadas": 826932,
+          "planilla": 791729,
+          "deficit": 35203,
+          "items_equiv_88h": 400
+        },
+        "2025": {
+          "trabajadas": 840688,
+          "planilla": 808060,
+          "deficit": 32628,
+          "items_equiv_88h": 371
+        }
+      }
+    },
+    {
+      "departamento_id": 6,
+      "departamento": "Tarija",
+      "deficit_total": 119359,
+      "trabajadas_total": 4272420,
+      "planilla_total": 4153061,
+      "deficit_pct": 2.79,
+      "items_equiv_88h": 1356,
+      "por_gestion": {
+        "2021": {
+          "trabajadas": 1292032,
+          "planilla": 1241577,
+          "deficit": 50455,
+          "items_equiv_88h": 573
+        },
+        "2022": {
+          "trabajadas": 706040,
+          "planilla": 683090,
+          "deficit": 22950,
+          "items_equiv_88h": 261
+        },
+        "2023": {
+          "trabajadas": 716080,
+          "planilla": 698955,
+          "deficit": 17125,
+          "items_equiv_88h": 195
+        },
+        "2024": {
+          "trabajadas": 773644,
+          "planilla": 756168,
+          "deficit": 17476,
+          "items_equiv_88h": 199
+        },
+        "2025": {
+          "trabajadas": 784624,
+          "planilla": 773271,
+          "deficit": 11353,
+          "items_equiv_88h": 129
+        }
+      }
+    },
+    {
+      "departamento_id": 9,
+      "departamento": "Pando",
+      "deficit_total": 103666,
+      "trabajadas_total": 1486276,
+      "planilla_total": 1382610,
+      "deficit_pct": 6.97,
+      "items_equiv_88h": 1178,
+      "por_gestion": {
+        "2021": {
+          "trabajadas": 477352,
+          "planilla": 445604,
+          "deficit": 31748,
+          "items_equiv_88h": 361
+        },
+        "2022": {
+          "trabajadas": 232516,
+          "planilla": 212773,
+          "deficit": 19743,
+          "items_equiv_88h": 224
+        },
+        "2023": {
+          "trabajadas": 242656,
+          "planilla": 225793,
+          "deficit": 16863,
+          "items_equiv_88h": 192
+        },
+        "2024": {
+          "trabajadas": 262580,
+          "planilla": 242594,
+          "deficit": 19986,
+          "items_equiv_88h": 227
+        },
+        "2025": {
+          "trabajadas": 271172,
+          "planilla": 255846,
+          "deficit": 15326,
+          "items_equiv_88h": 174
+        }
+      }
+    }
+  ],
+  "top_cargos": [
+    {
+      "cargo": "DOCENTE",
+      "grupo": "Maestro de Aula / General",
+      "deficit_total": 1341859,
+      "trabajadas_total": 1523236,
+      "planilla_total": 181377,
+      "deficit_pct": 88.1,
+      "items_equiv_88h": 15248,
+      "deficit_2025": 247630,
+      "por_gestion_deficit": {
+        "2021": 138714,
+        "2022": 361583,
+        "2023": 272357,
+        "2024": 321575,
+        "2025": 247630
+      }
+    },
+    {
+      "cargo": "NORMALISTA MAESTRO DE AULA",
+      "grupo": "Maestro de Aula / General",
+      "deficit_total": 1055585,
+      "trabajadas_total": 24479700,
+      "planilla_total": 23424115,
+      "deficit_pct": 4.3,
+      "items_equiv_88h": 11995,
+      "deficit_2025": 268045,
+      "por_gestion_deficit": {
+        "2021": 167162,
+        "2022": 160983,
+        "2023": 185987,
+        "2024": 273408,
+        "2025": 268045
+      }
+    },
+    {
+      "cargo": "NORMALISTA PROF.CURSO",
+      "grupo": "Maestro de Aula / General",
+      "deficit_total": 688031,
+      "trabajadas_total": 16234196,
+      "planilla_total": 15546165,
+      "deficit_pct": 4.2,
+      "items_equiv_88h": 7819,
+      "deficit_2025": 2662,
+      "por_gestion_deficit": {
+        "2021": 425539,
+        "2022": 135279,
+        "2023": 113416,
+        "2024": 11135,
+        "2025": 2662
+      }
+    },
+    {
+      "cargo": "NORMALISTAS",
+      "grupo": "Maestro de Aula / General",
+      "deficit_total": 660359,
+      "trabajadas_total": 10413616,
+      "planilla_total": 9753257,
+      "deficit_pct": 6.3,
+      "items_equiv_88h": 7504,
+      "deficit_2025": 3394,
+      "por_gestion_deficit": {
+        "2021": 451578,
+        "2022": 108766,
+        "2023": 77414,
+        "2024": 19207,
+        "2025": 3394
+      }
+    },
+    {
+      "cargo": "NORMALISTA MATEMATICAS",
+      "grupo": "Matemáticas y Ciencias Exactas",
+      "deficit_total": 246808,
+      "trabajadas_total": 3634044,
+      "planilla_total": 3387236,
+      "deficit_pct": 6.8,
+      "items_equiv_88h": 2805,
+      "deficit_2025": 51198,
+      "por_gestion_deficit": {
+        "2021": 65404,
+        "2022": 36596,
+        "2023": 40280,
+        "2024": 53330,
+        "2025": 51198
+      }
+    },
+    {
+      "cargo": "NORMALISTA LENGUA CAST Y ORIGINARIA",
+      "grupo": "Lenguaje y Comunicación",
+      "deficit_total": 196717,
+      "trabajadas_total": 3195004,
+      "planilla_total": 2998287,
+      "deficit_pct": 6.2,
+      "items_equiv_88h": 2235,
+      "deficit_2025": 41364,
+      "por_gestion_deficit": {
+        "2021": 53408,
+        "2022": 26831,
+        "2023": 31148,
+        "2024": 43966,
+        "2025": 41364
+      }
+    },
+    {
+      "cargo": "NORMALISTA CIENCIAS SOCIALES",
+      "grupo": "Ciencias Sociales y Humanidades",
+      "deficit_total": 184572,
+      "trabajadas_total": 3085340,
+      "planilla_total": 2900768,
+      "deficit_pct": 6.0,
+      "items_equiv_88h": 2097,
+      "deficit_2025": 37659,
+      "por_gestion_deficit": {
+        "2021": 50187,
+        "2022": 28617,
+        "2023": 29692,
+        "2024": 38417,
+        "2025": 37659
+      }
+    },
+    {
+      "cargo": "NORMALISTA BIOLOGIA - GEOGRAFIA",
+      "grupo": "Ciencias Naturales y Biología",
+      "deficit_total": 124646,
+      "trabajadas_total": 2149512,
+      "planilla_total": 2024866,
+      "deficit_pct": 5.8,
+      "items_equiv_88h": 1416,
+      "deficit_2025": 26349,
+      "por_gestion_deficit": {
+        "2021": 30363,
+        "2022": 19728,
+        "2023": 21315,
+        "2024": 26891,
+        "2025": 26349
+      }
+    },
+    {
+      "cargo": "NORMALISTA ED FISICA Y DEPORTES",
+      "grupo": "Educación Física y Deportes",
+      "deficit_total": 109386,
+      "trabajadas_total": 2338808,
+      "planilla_total": 2229422,
+      "deficit_pct": 4.7,
+      "items_equiv_88h": 1243,
+      "deficit_2025": 24189,
+      "por_gestion_deficit": {
+        "2021": 26528,
+        "2022": 16082,
+        "2023": 18592,
+        "2024": 23995,
+        "2025": 24189
+      }
+    },
+    {
+      "cargo": "NORMALISTA TECNICA TECNOLOGICA EPJA",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 100532,
+      "trabajadas_total": 492380,
+      "planilla_total": 391848,
+      "deficit_pct": 20.4,
+      "items_equiv_88h": 1142,
+      "deficit_2025": 56010,
+      "por_gestion_deficit": {
+        "2021": 440,
+        "2022": 208,
+        "2023": 100,
+        "2024": 43774,
+        "2025": 56010
+      }
+    },
+    {
+      "cargo": "NORMALISTA ED. MUSICAL",
+      "grupo": "Educación Musical",
+      "deficit_total": 98774,
+      "trabajadas_total": 1973784,
+      "planilla_total": 1875010,
+      "deficit_pct": 5.0,
+      "items_equiv_88h": 1122,
+      "deficit_2025": 20669,
+      "por_gestion_deficit": {
+        "2021": 25842,
+        "2022": 14605,
+        "2023": 16769,
+        "2024": 20889,
+        "2025": 20669
+      }
+    },
+    {
+      "cargo": "NORMALISTA FISICA",
+      "grupo": "Matemáticas y Ciencias Exactas",
+      "deficit_total": 98324,
+      "trabajadas_total": 1305984,
+      "planilla_total": 1207660,
+      "deficit_pct": 7.5,
+      "items_equiv_88h": 1117,
+      "deficit_2025": 15944,
+      "por_gestion_deficit": {
+        "2021": 32400,
+        "2022": 16472,
+        "2023": 16918,
+        "2024": 16590,
+        "2025": 15944
+      }
+    },
+    {
+      "cargo": "NORMALISTA COSMOVISION, FIL. Y SICOLOGIA",
+      "grupo": "Ciencias Sociales y Humanidades",
+      "deficit_total": 61974,
+      "trabajadas_total": 1155516,
+      "planilla_total": 1093542,
+      "deficit_pct": 5.4,
+      "items_equiv_88h": 704,
+      "deficit_2025": 11926,
+      "por_gestion_deficit": {
+        "2021": 17844,
+        "2022": 10318,
+        "2023": 10184,
+        "2024": 11702,
+        "2025": 11926
+      }
+    },
+    {
+      "cargo": "NORMALISTA TECNICA TECNOLOGICA GRAL",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 52374,
+      "trabajadas_total": 831600,
+      "planilla_total": 779226,
+      "deficit_pct": 6.3,
+      "items_equiv_88h": 595,
+      "deficit_2025": 9946,
+      "por_gestion_deficit": {
+        "2021": 15022,
+        "2022": 8652,
+        "2023": 8706,
+        "2024": 10048,
+        "2025": 9946
+      }
+    },
+    {
+      "cargo": "NORMALISTA ARTES PLASTICAS Y VISUALES",
+      "grupo": "Artes Plásticas y Visuales",
+      "deficit_total": 49262,
+      "trabajadas_total": 1025868,
+      "planilla_total": 976606,
+      "deficit_pct": 4.8,
+      "items_equiv_88h": 560,
+      "deficit_2025": 9896,
+      "por_gestion_deficit": {
+        "2021": 13570,
+        "2022": 7502,
+        "2023": 8926,
+        "2024": 9368,
+        "2025": 9896
+      }
+    },
+    {
+      "cargo": "PROF. NORM.EDUC.FISICA",
+      "grupo": "Educación Física y Deportes",
+      "deficit_total": 43310,
+      "trabajadas_total": 1215560,
+      "planilla_total": 1172250,
+      "deficit_pct": 3.6,
+      "items_equiv_88h": 492,
+      "deficit_2025": 32,
+      "por_gestion_deficit": {
+        "2021": 29802,
+        "2022": 7628,
+        "2023": 5269,
+        "2024": 579,
+        "2025": 32
+      }
+    },
+    {
+      "cargo": "NORMALISTA VALORES ESP Y RELIGIONES",
+      "grupo": "Ciencias Sociales y Humanidades",
+      "deficit_total": 42012,
+      "trabajadas_total": 1297136,
+      "planilla_total": 1255124,
+      "deficit_pct": 3.2,
+      "items_equiv_88h": 477,
+      "deficit_2025": 9339,
+      "por_gestion_deficit": {
+        "2021": 8346,
+        "2022": 7657,
+        "2023": 7065,
+        "2024": 9605,
+        "2025": 9339
+      }
+    },
+    {
+      "cargo": "PROF. NORM.TECNICA TEC",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 42008,
+      "trabajadas_total": 686796,
+      "planilla_total": 644788,
+      "deficit_pct": 6.1,
+      "items_equiv_88h": 477,
+      "deficit_2025": 980,
+      "por_gestion_deficit": {
+        "2021": 23346,
+        "2022": 5696,
+        "2023": 3448,
+        "2024": 8538,
+        "2025": 980
+      }
+    },
+    {
+      "cargo": "NORMALISTA QUIMICA",
+      "grupo": "Matemáticas y Ciencias Exactas",
+      "deficit_total": 40308,
+      "trabajadas_total": 657640,
+      "planilla_total": 617332,
+      "deficit_pct": 6.1,
+      "items_equiv_88h": 458,
+      "deficit_2025": 8244,
+      "por_gestion_deficit": {
+        "2021": 11068,
+        "2022": 6488,
+        "2023": 6450,
+        "2024": 8058,
+        "2025": 8244
+      }
+    },
+    {
+      "cargo": "PROF. NORM.EDUC.MUSICA",
+      "grupo": "Educación Musical",
+      "deficit_total": 33837,
+      "trabajadas_total": 853712,
+      "planilla_total": 819875,
+      "deficit_pct": 4.0,
+      "items_equiv_88h": 385,
+      "deficit_2025": 60,
+      "por_gestion_deficit": {
+        "2021": 22636,
+        "2022": 6152,
+        "2023": 3897,
+        "2024": 1092,
+        "2025": 60
+      }
+    },
+    {
+      "cargo": "EGRESADO MAESTRO DE AULA",
+      "grupo": "Maestro de Aula / General",
+      "deficit_total": 31935,
+      "trabajadas_total": 715148,
+      "planilla_total": 683213,
+      "deficit_pct": 4.5,
+      "items_equiv_88h": 363,
+      "deficit_2025": 5581,
+      "por_gestion_deficit": {
+        "2021": 7850,
+        "2022": 7144,
+        "2023": 5772,
+        "2024": 5588,
+        "2025": 5581
+      }
+    },
+    {
+      "cargo": "NORMALISTA LENGUA EXTRANJERA",
+      "grupo": "Lenguaje y Comunicación",
+      "deficit_total": 31869,
+      "trabajadas_total": 796160,
+      "planilla_total": 764291,
+      "deficit_pct": 4.0,
+      "items_equiv_88h": 362,
+      "deficit_2025": 7083,
+      "por_gestion_deficit": {
+        "2021": 7320,
+        "2022": 5192,
+        "2023": 5490,
+        "2024": 6784,
+        "2025": 7083
+      }
+    },
+    {
+      "cargo": "PROF. NORM. VALORES.ESP.REL",
+      "grupo": "Ciencias Sociales y Humanidades",
+      "deficit_total": 31722,
+      "trabajadas_total": 944744,
+      "planilla_total": 913022,
+      "deficit_pct": 3.4,
+      "items_equiv_88h": 360,
+      "deficit_2025": 32,
+      "por_gestion_deficit": {
+        "2021": 22930,
+        "2022": 4874,
+        "2023": 2936,
+        "2024": 950,
+        "2025": 32
+      }
+    },
+    {
+      "cargo": "TODOS",
+      "grupo": "Maestro de Aula / General",
+      "deficit_total": 25809,
+      "trabajadas_total": 101572,
+      "planilla_total": 75763,
+      "deficit_pct": 25.4,
+      "items_equiv_88h": 293,
+      "deficit_2025": 3486,
+      "por_gestion_deficit": {
+        "2021": 3760,
+        "2022": 5152,
+        "2023": 5247,
+        "2024": 8164,
+        "2025": 3486
+      }
+    },
+    {
+      "cargo": "EGRESADO PROF.CURSO",
+      "grupo": "Maestro de Aula / General",
+      "deficit_total": 23344,
+      "trabajadas_total": 473544,
+      "planilla_total": 450200,
+      "deficit_pct": 4.9,
+      "items_equiv_88h": 265,
+      "deficit_2025": 172,
+      "por_gestion_deficit": {
+        "2021": 17364,
+        "2022": 3420,
+        "2023": 1756,
+        "2024": 632,
+        "2025": 172
+      }
+    },
+    {
+      "cargo": "O PROFESIONAL TECNICA TECNOLOGICA EPJA",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 22862,
+      "trabajadas_total": 120884,
+      "planilla_total": 98022,
+      "deficit_pct": 18.9,
+      "items_equiv_88h": 260,
+      "deficit_2025": 9658,
+      "por_gestion_deficit": {
+        "2021": 144,
+        "2022": 120,
+        "2023": 392,
+        "2024": 12548,
+        "2025": 9658
+      }
+    },
+    {
+      "cargo": "NORMALISTA SECUNDARIA EPJA",
+      "grupo": "Maestro de Aula / General",
+      "deficit_total": 22010,
+      "trabajadas_total": 367988,
+      "planilla_total": 345978,
+      "deficit_pct": 6.0,
+      "items_equiv_88h": 250,
+      "deficit_2025": 12383,
+      "por_gestion_deficit": {
+        "2021": 456,
+        "2022": 1284,
+        "2023": 832,
+        "2024": 7055,
+        "2025": 12383
+      }
+    },
+    {
+      "cargo": "NORMALISTA CIENCIAS NAT BIOLOGIA",
+      "grupo": "Ciencias Naturales y Biología",
+      "deficit_total": 20348,
+      "trabajadas_total": 316348,
+      "planilla_total": 296000,
+      "deficit_pct": 6.4,
+      "items_equiv_88h": 231,
+      "deficit_2025": 2468,
+      "por_gestion_deficit": {
+        "2021": 10012,
+        "2022": 3182,
+        "2023": 2358,
+        "2024": 2328,
+        "2025": 2468
+      }
+    },
+    {
+      "cargo": "NORMALISTA BTH SISTEMAS INFORMATICOS",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 18984,
+      "trabajadas_total": 170352,
+      "planilla_total": 151368,
+      "deficit_pct": 11.1,
+      "items_equiv_88h": 216,
+      "deficit_2025": 3770,
+      "por_gestion_deficit": {
+        "2021": 5904,
+        "2022": 2944,
+        "2023": 2776,
+        "2024": 3590,
+        "2025": 3770
+      }
+    },
+    {
+      "cargo": "PROF. NORM. ARTES PLASTICAS",
+      "grupo": "Artes Plásticas y Visuales",
+      "deficit_total": 17546,
+      "trabajadas_total": 442804,
+      "planilla_total": 425258,
+      "deficit_pct": 4.0,
+      "items_equiv_88h": 199,
+      "deficit_2025": 240,
+      "por_gestion_deficit": {
+        "2021": 11784,
+        "2022": 2860,
+        "2023": 1792,
+        "2024": 870,
+        "2025": 240
+      }
+    },
+    {
+      "cargo": "EGRESADOS",
+      "grupo": "Maestro de Aula / General",
+      "deficit_total": 14989,
+      "trabajadas_total": 202016,
+      "planilla_total": 187027,
+      "deficit_pct": 7.4,
+      "items_equiv_88h": 170,
+      "deficit_2025": 8,
+      "por_gestion_deficit": {
+        "2021": 12006,
+        "2022": 1379,
+        "2023": 844,
+        "2024": 752,
+        "2025": 8
+      }
+    },
+    {
+      "cargo": "PROF. NORM. TECNICA.TEC.ESP.",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 14068,
+      "trabajadas_total": 159232,
+      "planilla_total": 145164,
+      "deficit_pct": 8.8,
+      "items_equiv_88h": 160,
+      "deficit_2025": 766,
+      "por_gestion_deficit": {
+        "2021": 5528,
+        "2022": 1420,
+        "2023": 1508,
+        "2024": 4846,
+        "2025": 766
+      }
+    },
+    {
+      "cargo": "NORMALISTA BTH GASTRONOMIA",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 11953,
+      "trabajadas_total": 131300,
+      "planilla_total": 119347,
+      "deficit_pct": 9.1,
+      "items_equiv_88h": 136,
+      "deficit_2025": 2162,
+      "por_gestion_deficit": {
+        "2021": 4440,
+        "2022": 1524,
+        "2023": 1756,
+        "2024": 2071,
+        "2025": 2162
+      }
+    },
+    {
+      "cargo": "NORMALISTA BTH MECANICA AUTOMOTRIZ",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 10060,
+      "trabajadas_total": 88668,
+      "planilla_total": 78608,
+      "deficit_pct": 11.3,
+      "items_equiv_88h": 114,
+      "deficit_2025": 1696,
+      "por_gestion_deficit": {
+        "2021": 3628,
+        "2022": 1648,
+        "2023": 1448,
+        "2024": 1640,
+        "2025": 1696
+      }
+    },
+    {
+      "cargo": "NORMALISTA TECNICA TECNOLOGICA",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 9668,
+      "trabajadas_total": 286988,
+      "planilla_total": 277320,
+      "deficit_pct": 3.4,
+      "items_equiv_88h": 110,
+      "deficit_2025": 1552,
+      "por_gestion_deficit": {
+        "2021": 4310,
+        "2022": 1236,
+        "2023": 1052,
+        "2024": 1518,
+        "2025": 1552
+      }
+    },
+    {
+      "cargo": "NORMALISTA BTH TEXTILES Y CONFECCIONES",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 8760,
+      "trabajadas_total": 70344,
+      "planilla_total": 61584,
+      "deficit_pct": 12.5,
+      "items_equiv_88h": 100,
+      "deficit_2025": 1672,
+      "por_gestion_deficit": {
+        "2021": 1868,
+        "2022": 1108,
+        "2023": 1620,
+        "2024": 2492,
+        "2025": 1672
+      }
+    },
+    {
+      "cargo": "DIRECTOR UE NORMALISTA INSTITUCIONALIZAD",
+      "grupo": "Maestro de Aula / General",
+      "deficit_total": 6800,
+      "trabajadas_total": 22136,
+      "planilla_total": 15336,
+      "deficit_pct": 30.7,
+      "items_equiv_88h": 77,
+      "deficit_2025": 1140,
+      "por_gestion_deficit": {
+        "2021": 1956,
+        "2022": 828,
+        "2023": 1048,
+        "2024": 1828,
+        "2025": 1140
+      }
+    },
+    {
+      "cargo": "NORMALISTA COSMOVISIONES Y FILOSOFIA",
+      "grupo": "Ciencias Sociales y Humanidades",
+      "deficit_total": 6194,
+      "trabajadas_total": 106312,
+      "planilla_total": 100118,
+      "deficit_pct": 5.8,
+      "items_equiv_88h": 70,
+      "deficit_2025": 362,
+      "por_gestion_deficit": {
+        "2021": 3522,
+        "2022": 1076,
+        "2023": 646,
+        "2024": 588,
+        "2025": 362
+      }
+    },
+    {
+      "cargo": "TIT.POR ANTIG.PROF.CURSO",
+      "grupo": "Maestro de Aula / General",
+      "deficit_total": 5980,
+      "trabajadas_total": 148224,
+      "planilla_total": 142244,
+      "deficit_pct": 4.0,
+      "items_equiv_88h": 68,
+      "deficit_2025": 60,
+      "por_gestion_deficit": {
+        "2021": 3748,
+        "2022": 948,
+        "2023": 980,
+        "2024": 244,
+        "2025": 60
+      }
+    },
+    {
+      "cargo": "NORMALISTA BTH TRANSFORMAC DE ALIMENTOS",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 4940,
+      "trabajadas_total": 50620,
+      "planilla_total": 45680,
+      "deficit_pct": 9.8,
+      "items_equiv_88h": 56,
+      "deficit_2025": 1388,
+      "por_gestion_deficit": {
+        "2021": 1104,
+        "2022": 464,
+        "2023": 908,
+        "2024": 1076,
+        "2025": 1388
+      }
+    },
+    {
+      "cargo": "EGRESADO CIENCIAS SOCIALES",
+      "grupo": "Ciencias Sociales y Humanidades",
+      "deficit_total": 4676,
+      "trabajadas_total": 63188,
+      "planilla_total": 58512,
+      "deficit_pct": 7.4,
+      "items_equiv_88h": 53,
+      "deficit_2025": 654,
+      "por_gestion_deficit": {
+        "2021": 2172,
+        "2022": 680,
+        "2023": 614,
+        "2024": 556,
+        "2025": 654
+      }
+    },
+    {
+      "cargo": "EGRESADO ED FISICA Y DEPORTES",
+      "grupo": "Educación Física y Deportes",
+      "deficit_total": 4628,
+      "trabajadas_total": 81532,
+      "planilla_total": 76904,
+      "deficit_pct": 5.7,
+      "items_equiv_88h": 53,
+      "deficit_2025": 488,
+      "por_gestion_deficit": {
+        "2021": 2084,
+        "2022": 876,
+        "2023": 616,
+        "2024": 564,
+        "2025": 488
+      }
+    },
+    {
+      "cargo": "NORMALISTA BTH ELECTRICIDAD",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 4396,
+      "trabajadas_total": 45796,
+      "planilla_total": 41400,
+      "deficit_pct": 9.6,
+      "items_equiv_88h": 50,
+      "deficit_2025": 570,
+      "por_gestion_deficit": {
+        "2021": 1432,
+        "2022": 680,
+        "2023": 904,
+        "2024": 810,
+        "2025": 570
+      }
+    },
+    {
+      "cargo": "TIT X ANTIGUEDAD MAESTRO DE AULA",
+      "grupo": "Maestro de Aula / General",
+      "deficit_total": 4320,
+      "trabajadas_total": 136956,
+      "planilla_total": 132636,
+      "deficit_pct": 3.2,
+      "items_equiv_88h": 49,
+      "deficit_2025": 1156,
+      "por_gestion_deficit": {
+        "2021": 356,
+        "2022": 768,
+        "2023": 712,
+        "2024": 1328,
+        "2025": 1156
+      }
+    },
+    {
+      "cargo": "EGRESADO MATEMATICAS",
+      "grupo": "Matemáticas y Ciencias Exactas",
+      "deficit_total": 4140,
+      "trabajadas_total": 44464,
+      "planilla_total": 40324,
+      "deficit_pct": 9.3,
+      "items_equiv_88h": 47,
+      "deficit_2025": 584,
+      "por_gestion_deficit": {
+        "2021": 1804,
+        "2022": 804,
+        "2023": 440,
+        "2024": 508,
+        "2025": 584
+      }
+    },
+    {
+      "cargo": "O PROFESIONAL BTH SISTEMAS INFORMATICOS",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 4064,
+      "trabajadas_total": 43668,
+      "planilla_total": 39604,
+      "deficit_pct": 9.3,
+      "items_equiv_88h": 46,
+      "deficit_2025": 1592,
+      "por_gestion_deficit": {
+        "2021": 704,
+        "2022": 280,
+        "2023": 656,
+        "2024": 832,
+        "2025": 1592
+      }
+    },
+    {
+      "cargo": "EGRESADO ED. MUSICAL",
+      "grupo": "Educación Musical",
+      "deficit_total": 4062,
+      "trabajadas_total": 58416,
+      "planilla_total": 54354,
+      "deficit_pct": 7.0,
+      "items_equiv_88h": 46,
+      "deficit_2025": 314,
+      "por_gestion_deficit": {
+        "2021": 2098,
+        "2022": 892,
+        "2023": 508,
+        "2024": 250,
+        "2025": 314
+      }
+    },
+    {
+      "cargo": "NORMALISTA BTH AGROECOLOGIA",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 3784,
+      "trabajadas_total": 32856,
+      "planilla_total": 29072,
+      "deficit_pct": 11.5,
+      "items_equiv_88h": 43,
+      "deficit_2025": 688,
+      "por_gestion_deficit": {
+        "2021": 876,
+        "2022": 820,
+        "2023": 860,
+        "2024": 540,
+        "2025": 688
+      }
+    },
+    {
+      "cargo": "NORMALISTA BTH CONTABILIDAD",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 3611,
+      "trabajadas_total": 49300,
+      "planilla_total": 45689,
+      "deficit_pct": 7.3,
+      "items_equiv_88h": 41,
+      "deficit_2025": 472,
+      "por_gestion_deficit": {
+        "2021": 1416,
+        "2022": 566,
+        "2023": 484,
+        "2024": 673,
+        "2025": 472
+      }
+    },
+    {
+      "cargo": "NORMALISTA BTH MECANICA INDUSTRIAL",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 3456,
+      "trabajadas_total": 34436,
+      "planilla_total": 30980,
+      "deficit_pct": 10.0,
+      "items_equiv_88h": 39,
+      "deficit_2025": 740,
+      "por_gestion_deficit": {
+        "2021": 1136,
+        "2022": 552,
+        "2023": 392,
+        "2024": 636,
+        "2025": 740
+      }
+    },
+    {
+      "cargo": "PROF.TIT.POR.ANTIG.VALORES.ESP.REL",
+      "grupo": "Ciencias Sociales y Humanidades",
+      "deficit_total": 3416,
+      "trabajadas_total": 23560,
+      "planilla_total": 20144,
+      "deficit_pct": 14.5,
+      "items_equiv_88h": 39,
+      "deficit_2025": 0,
+      "por_gestion_deficit": {
+        "2021": 3264,
+        "2022": 80,
+        "2023": 52,
+        "2024": 20,
+        "2025": 0
+      }
+    },
+    {
+      "cargo": "CATEDRATICOS INSTITUTO SUPERIOR",
+      "grupo": "Otras Especialidades",
+      "deficit_total": 3308,
+      "trabajadas_total": 4912,
+      "planilla_total": 1604,
+      "deficit_pct": 67.3,
+      "items_equiv_88h": 38,
+      "deficit_2025": 360,
+      "por_gestion_deficit": {
+        "2021": 528,
+        "2022": 692,
+        "2023": 824,
+        "2024": 904,
+        "2025": 360
+      }
+    },
+    {
+      "cargo": "PROF. EGRESADOS ED.FIS.",
+      "grupo": "Maestro de Aula / General",
+      "deficit_total": 2884,
+      "trabajadas_total": 43872,
+      "planilla_total": 40988,
+      "deficit_pct": 6.6,
+      "items_equiv_88h": 33,
+      "deficit_2025": 0,
+      "por_gestion_deficit": {
+        "2021": 2124,
+        "2022": 492,
+        "2023": 184,
+        "2024": 84,
+        "2025": 0
+      }
+    },
+    {
+      "cargo": "EGRESADO LENGUA CAST Y ORIGINARIA",
+      "grupo": "Lenguaje y Comunicación",
+      "deficit_total": 2872,
+      "trabajadas_total": 43048,
+      "planilla_total": 40176,
+      "deficit_pct": 6.7,
+      "items_equiv_88h": 33,
+      "deficit_2025": 304,
+      "por_gestion_deficit": {
+        "2021": 1112,
+        "2022": 492,
+        "2023": 620,
+        "2024": 344,
+        "2025": 304
+      }
+    },
+    {
+      "cargo": "OTR. PROFESIONALES",
+      "grupo": "Otras Especialidades",
+      "deficit_total": 2428,
+      "trabajadas_total": 23896,
+      "planilla_total": 21468,
+      "deficit_pct": 10.2,
+      "items_equiv_88h": 28,
+      "deficit_2025": 264,
+      "por_gestion_deficit": {
+        "2021": 808,
+        "2022": 364,
+        "2023": 260,
+        "2024": 732,
+        "2025": 264
+      }
+    },
+    {
+      "cargo": "EGRESADO TECNICA TECNOLOGICA  EPJA",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 2388,
+      "trabajadas_total": 7004,
+      "planilla_total": 4616,
+      "deficit_pct": 34.1,
+      "items_equiv_88h": 27,
+      "deficit_2025": 1568,
+      "por_gestion_deficit": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 32,
+        "2024": 788,
+        "2025": 1568
+      }
+    },
+    {
+      "cargo": "TIT.POR.ANTIG",
+      "grupo": "Otras Especialidades",
+      "deficit_total": 2252,
+      "trabajadas_total": 77524,
+      "planilla_total": 75272,
+      "deficit_pct": 2.9,
+      "items_equiv_88h": 26,
+      "deficit_2025": 70,
+      "por_gestion_deficit": {
+        "2021": 1464,
+        "2022": 420,
+        "2023": 180,
+        "2024": 118,
+        "2025": 70
+      }
+    },
+    {
+      "cargo": "NORMALISTA PRIMARIA EPJA",
+      "grupo": "Maestro de Aula / General",
+      "deficit_total": 2248,
+      "trabajadas_total": 33676,
+      "planilla_total": 31428,
+      "deficit_pct": 6.7,
+      "items_equiv_88h": 26,
+      "deficit_2025": 1858,
+      "por_gestion_deficit": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 390,
+        "2025": 1858
+      }
+    },
+    {
+      "cargo": "NORMALISTA BTH AGROPECUARIA",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 2244,
+      "trabajadas_total": 29468,
+      "planilla_total": 27224,
+      "deficit_pct": 7.6,
+      "items_equiv_88h": 26,
+      "deficit_2025": 386,
+      "por_gestion_deficit": {
+        "2021": 692,
+        "2022": 240,
+        "2023": 512,
+        "2024": 414,
+        "2025": 386
+      }
+    },
+    {
+      "cargo": "EGRESADO BIOLOGIA - GEOGRAFIA",
+      "grupo": "Ciencias Naturales y Biología",
+      "deficit_total": 2176,
+      "trabajadas_total": 37420,
+      "planilla_total": 35244,
+      "deficit_pct": 5.8,
+      "items_equiv_88h": 25,
+      "deficit_2025": 316,
+      "por_gestion_deficit": {
+        "2021": 532,
+        "2022": 608,
+        "2023": 400,
+        "2024": 320,
+        "2025": 316
+      }
+    },
+    {
+      "cargo": "SECRETARIA U.E.",
+      "grupo": "Personal Directivo y Administrativo",
+      "deficit_total": 2148,
+      "trabajadas_total": 2148,
+      "planilla_total": 0,
+      "deficit_pct": 100.0,
+      "items_equiv_88h": 24,
+      "deficit_2025": 816,
+      "por_gestion_deficit": {
+        "2021": 192,
+        "2022": 152,
+        "2023": 204,
+        "2024": 784,
+        "2025": 816
+      }
+    },
+    {
+      "cargo": "OTR. PROFESIONA. ED. MUS.",
+      "grupo": "Otras Especialidades",
+      "deficit_total": 1944,
+      "trabajadas_total": 10744,
+      "planilla_total": 8800,
+      "deficit_pct": 18.1,
+      "items_equiv_88h": 22,
+      "deficit_2025": 0,
+      "por_gestion_deficit": {
+        "2021": 1388,
+        "2022": 392,
+        "2023": 164,
+        "2024": 0,
+        "2025": 0
+      }
+    },
+    {
+      "cargo": "O PROFESIONALES BTH GASTRONOMIA",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 1900,
+      "trabajadas_total": 17988,
+      "planilla_total": 16088,
+      "deficit_pct": 10.6,
+      "items_equiv_88h": 22,
+      "deficit_2025": 648,
+      "por_gestion_deficit": {
+        "2021": 400,
+        "2022": 232,
+        "2023": 152,
+        "2024": 468,
+        "2025": 648
+      }
+    },
+    {
+      "cargo": "NORMALISTA MATEMATICAS / NORMALISTA TECNICA TECNOLOGICA GRAL",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 1890,
+      "trabajadas_total": 29204,
+      "planilla_total": 27314,
+      "deficit_pct": 6.5,
+      "items_equiv_88h": 21,
+      "deficit_2025": 610,
+      "por_gestion_deficit": {
+        "2021": 112,
+        "2022": 232,
+        "2023": 348,
+        "2024": 588,
+        "2025": 610
+      }
+    },
+    {
+      "cargo": "NORMALISTA TECNICA TECNOLOGICA GRAL / PROF. NORM.TECNICA TEC",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 1838,
+      "trabajadas_total": 17448,
+      "planilla_total": 15610,
+      "deficit_pct": 10.5,
+      "items_equiv_88h": 21,
+      "deficit_2025": 16,
+      "por_gestion_deficit": {
+        "2021": 698,
+        "2022": 626,
+        "2023": 376,
+        "2024": 122,
+        "2025": 16
+      }
+    },
+    {
+      "cargo": "NORMALISTA TECNICA TECNOLOGICA GRAL / NORMALISTAS",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 1824,
+      "trabajadas_total": 24288,
+      "planilla_total": 22464,
+      "deficit_pct": 7.5,
+      "items_equiv_88h": 21,
+      "deficit_2025": 56,
+      "por_gestion_deficit": {
+        "2021": 804,
+        "2022": 564,
+        "2023": 336,
+        "2024": 64,
+        "2025": 56
+      }
+    },
+    {
+      "cargo": "NORMALISTA INTELECTUAL ED ESPECIAL",
+      "grupo": "Educación Especial",
+      "deficit_total": 1816,
+      "trabajadas_total": 175236,
+      "planilla_total": 173420,
+      "deficit_pct": 1.0,
+      "items_equiv_88h": 21,
+      "deficit_2025": 696,
+      "por_gestion_deficit": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 1120,
+        "2025": 696
+      }
+    },
+    {
+      "cargo": "NORMALISTA TECNICA TECNOLOGICA / NORMALISTA TECNICA TECNOLOGICA GRAL",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 1804,
+      "trabajadas_total": 24060,
+      "planilla_total": 22256,
+      "deficit_pct": 7.5,
+      "items_equiv_88h": 20,
+      "deficit_2025": 358,
+      "por_gestion_deficit": {
+        "2021": 1012,
+        "2022": 52,
+        "2023": 152,
+        "2024": 230,
+        "2025": 358
+      }
+    },
+    {
+      "cargo": "EGRESADO COSMOVISION, FIL Y SICOLOGIA",
+      "grupo": "Ciencias Sociales y Humanidades",
+      "deficit_total": 1786,
+      "trabajadas_total": 23144,
+      "planilla_total": 21358,
+      "deficit_pct": 7.7,
+      "items_equiv_88h": 20,
+      "deficit_2025": 202,
+      "por_gestion_deficit": {
+        "2021": 974,
+        "2022": 218,
+        "2023": 230,
+        "2024": 162,
+        "2025": 202
+      }
+    },
+    {
+      "cargo": "CATEDRATICO BTH",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 1782,
+      "trabajadas_total": 8836,
+      "planilla_total": 7054,
+      "deficit_pct": 20.2,
+      "items_equiv_88h": 20,
+      "deficit_2025": 192,
+      "por_gestion_deficit": {
+        "2021": 726,
+        "2022": 288,
+        "2023": 352,
+        "2024": 224,
+        "2025": 192
+      }
+    },
+    {
+      "cargo": "NORMALISTA ED FISICA Y DEPORTES / PROF. NORM.EDUC.FISICA",
+      "grupo": "Educación Física y Deportes",
+      "deficit_total": 1748,
+      "trabajadas_total": 50148,
+      "planilla_total": 48400,
+      "deficit_pct": 3.5,
+      "items_equiv_88h": 20,
+      "deficit_2025": 8,
+      "por_gestion_deficit": {
+        "2021": 548,
+        "2022": 592,
+        "2023": 492,
+        "2024": 108,
+        "2025": 8
+      }
+    },
+    {
+      "cargo": "NORMALISTA BTH ELECTRONICA",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 1724,
+      "trabajadas_total": 17332,
+      "planilla_total": 15608,
+      "deficit_pct": 9.9,
+      "items_equiv_88h": 20,
+      "deficit_2025": 168,
+      "por_gestion_deficit": {
+        "2021": 752,
+        "2022": 320,
+        "2023": 216,
+        "2024": 268,
+        "2025": 168
+      }
+    },
+    {
+      "cargo": "O PROFESIONALES BTH MECANICA AUTOMOTRIZ",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 1712,
+      "trabajadas_total": 16564,
+      "planilla_total": 14852,
+      "deficit_pct": 10.3,
+      "items_equiv_88h": 19,
+      "deficit_2025": 500,
+      "por_gestion_deficit": {
+        "2021": 48,
+        "2022": 64,
+        "2023": 540,
+        "2024": 560,
+        "2025": 500
+      }
+    },
+    {
+      "cargo": "EGRESADO FISICA",
+      "grupo": "Matemáticas y Ciencias Exactas",
+      "deficit_total": 1704,
+      "trabajadas_total": 18888,
+      "planilla_total": 17184,
+      "deficit_pct": 9.0,
+      "items_equiv_88h": 19,
+      "deficit_2025": 32,
+      "por_gestion_deficit": {
+        "2021": 1288,
+        "2022": 200,
+        "2023": 104,
+        "2024": 80,
+        "2025": 32
+      }
+    },
+    {
+      "cargo": "EGRESADO VALORES ESP Y RELIGIONES",
+      "grupo": "Ciencias Sociales y Humanidades",
+      "deficit_total": 1680,
+      "trabajadas_total": 40980,
+      "planilla_total": 39300,
+      "deficit_pct": 4.1,
+      "items_equiv_88h": 19,
+      "deficit_2025": 248,
+      "por_gestion_deficit": {
+        "2021": 732,
+        "2022": 208,
+        "2023": 312,
+        "2024": 180,
+        "2025": 248
+      }
+    },
+    {
+      "cargo": "PROF. EGRESADOS ED.MUS.",
+      "grupo": "Maestro de Aula / General",
+      "deficit_total": 1668,
+      "trabajadas_total": 32516,
+      "planilla_total": 30848,
+      "deficit_pct": 5.1,
+      "items_equiv_88h": 19,
+      "deficit_2025": 0,
+      "por_gestion_deficit": {
+        "2021": 1404,
+        "2022": 148,
+        "2023": 60,
+        "2024": 56,
+        "2025": 0
+      }
+    },
+    {
+      "cargo": "NORMALISTA FISICA / NORMALISTA QUIMICA",
+      "grupo": "Matemáticas y Ciencias Exactas",
+      "deficit_total": 1584,
+      "trabajadas_total": 20588,
+      "planilla_total": 19004,
+      "deficit_pct": 7.7,
+      "items_equiv_88h": 18,
+      "deficit_2025": 348,
+      "por_gestion_deficit": {
+        "2021": 236,
+        "2022": 300,
+        "2023": 388,
+        "2024": 312,
+        "2025": 348
+      }
+    },
+    {
+      "cargo": "NORMALISTA BTH CONSTRUCCION  CIVIL",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 1556,
+      "trabajadas_total": 5192,
+      "planilla_total": 3636,
+      "deficit_pct": 30.0,
+      "items_equiv_88h": 18,
+      "deficit_2025": 472,
+      "por_gestion_deficit": {
+        "2021": 300,
+        "2022": 136,
+        "2023": 492,
+        "2024": 156,
+        "2025": 472
+      }
+    },
+    {
+      "cargo": "NORMALISTA CIENCIAS SOCIALES / NORMALISTAS",
+      "grupo": "Ciencias Sociales y Humanidades",
+      "deficit_total": 1552,
+      "trabajadas_total": 31024,
+      "planilla_total": 29472,
+      "deficit_pct": 5.0,
+      "items_equiv_88h": 18,
+      "deficit_2025": 4,
+      "por_gestion_deficit": {
+        "2021": 736,
+        "2022": 472,
+        "2023": 268,
+        "2024": 72,
+        "2025": 4
+      }
+    },
+    {
+      "cargo": "NORMALISTAS / PROF. NORM.TECNICA TEC",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 1512,
+      "trabajadas_total": 24296,
+      "planilla_total": 22784,
+      "deficit_pct": 6.2,
+      "items_equiv_88h": 17,
+      "deficit_2025": 0,
+      "por_gestion_deficit": {
+        "2021": 1176,
+        "2022": 184,
+        "2023": 152,
+        "2024": 0,
+        "2025": 0
+      }
+    },
+    {
+      "cargo": "NORMALISTA ED. MUSICAL / PROF. NORM.EDUC.MUSICA",
+      "grupo": "Educación Musical",
+      "deficit_total": 1468,
+      "trabajadas_total": 33992,
+      "planilla_total": 32524,
+      "deficit_pct": 4.3,
+      "items_equiv_88h": 17,
+      "deficit_2025": 72,
+      "por_gestion_deficit": {
+        "2021": 818,
+        "2022": 214,
+        "2023": 226,
+        "2024": 138,
+        "2025": 72
+      }
+    },
+    {
+      "cargo": "O PROFESIONAL BTH TRANSFORM DE ALIMENTOS",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 1464,
+      "trabajadas_total": 16820,
+      "planilla_total": 15356,
+      "deficit_pct": 8.7,
+      "items_equiv_88h": 17,
+      "deficit_2025": 356,
+      "por_gestion_deficit": {
+        "2021": 336,
+        "2022": 80,
+        "2023": 292,
+        "2024": 400,
+        "2025": 356
+      }
+    },
+    {
+      "cargo": "NORMALISTA MATEMATICAS / NORMALISTAS",
+      "grupo": "Matemáticas y Ciencias Exactas",
+      "deficit_total": 1444,
+      "trabajadas_total": 22884,
+      "planilla_total": 21440,
+      "deficit_pct": 6.3,
+      "items_equiv_88h": 16,
+      "deficit_2025": 4,
+      "por_gestion_deficit": {
+        "2021": 468,
+        "2022": 580,
+        "2023": 316,
+        "2024": 76,
+        "2025": 4
+      }
+    },
+    {
+      "cargo": "NORMALISTA VALORES ESP Y RELIGIONES / PROF. NORM. VALORES.ESP.REL",
+      "grupo": "Ciencias Sociales y Humanidades",
+      "deficit_total": 1436,
+      "trabajadas_total": 42412,
+      "planilla_total": 40976,
+      "deficit_pct": 3.4,
+      "items_equiv_88h": 16,
+      "deficit_2025": 32,
+      "por_gestion_deficit": {
+        "2021": 752,
+        "2022": 240,
+        "2023": 300,
+        "2024": 112,
+        "2025": 32
+      }
+    },
+    {
+      "cargo": "NORMALISTA BTH ADMINISTRACION",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 1396,
+      "trabajadas_total": 12744,
+      "planilla_total": 11348,
+      "deficit_pct": 11.0,
+      "items_equiv_88h": 16,
+      "deficit_2025": 160,
+      "por_gestion_deficit": {
+        "2021": 692,
+        "2022": 200,
+        "2023": 200,
+        "2024": 144,
+        "2025": 160
+      }
+    },
+    {
+      "cargo": "NORMALIST BTH CARPINTERIA MADERA Y METAL",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 1392,
+      "trabajadas_total": 23500,
+      "planilla_total": 22108,
+      "deficit_pct": 5.9,
+      "items_equiv_88h": 16,
+      "deficit_2025": 420,
+      "por_gestion_deficit": {
+        "2021": 212,
+        "2022": 208,
+        "2023": 264,
+        "2024": 288,
+        "2025": 420
+      }
+    },
+    {
+      "cargo": "PROF. TIT.POR ANTIG.ED.MUS.",
+      "grupo": "Otras Especialidades",
+      "deficit_total": 1328,
+      "trabajadas_total": 45500,
+      "planilla_total": 44172,
+      "deficit_pct": 2.9,
+      "items_equiv_88h": 15,
+      "deficit_2025": 48,
+      "por_gestion_deficit": {
+        "2021": 1000,
+        "2022": 196,
+        "2023": 68,
+        "2024": 16,
+        "2025": 48
+      }
+    },
+    {
+      "cargo": "NORMALISTAS / PROF. NORM.EDUC.MUSICA",
+      "grupo": "Educación Musical",
+      "deficit_total": 1288,
+      "trabajadas_total": 14356,
+      "planilla_total": 13068,
+      "deficit_pct": 9.0,
+      "items_equiv_88h": 15,
+      "deficit_2025": 0,
+      "por_gestion_deficit": {
+        "2021": 1092,
+        "2022": 124,
+        "2023": 24,
+        "2024": 48,
+        "2025": 0
+      }
+    },
+    {
+      "cargo": "PROF. EGRESADOS TECNICA TEC",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 1268,
+      "trabajadas_total": 14724,
+      "planilla_total": 13456,
+      "deficit_pct": 8.6,
+      "items_equiv_88h": 14,
+      "deficit_2025": 0,
+      "por_gestion_deficit": {
+        "2021": 740,
+        "2022": 236,
+        "2023": 156,
+        "2024": 136,
+        "2025": 0
+      }
+    },
+    {
+      "cargo": "EGRESADO ARTES PLASTICAS Y VISUALES",
+      "grupo": "Artes Plásticas y Visuales",
+      "deficit_total": 1232,
+      "trabajadas_total": 26868,
+      "planilla_total": 25636,
+      "deficit_pct": 4.6,
+      "items_equiv_88h": 14,
+      "deficit_2025": 116,
+      "por_gestion_deficit": {
+        "2021": 572,
+        "2022": 380,
+        "2023": 40,
+        "2024": 124,
+        "2025": 116
+      }
+    },
+    {
+      "cargo": "NORMALISTA TECNICA TECNOLOGICA EPJA / PROF. NORM.TECNICA TEC",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 1186,
+      "trabajadas_total": 2400,
+      "planilla_total": 1214,
+      "deficit_pct": 49.4,
+      "items_equiv_88h": 13,
+      "deficit_2025": 516,
+      "por_gestion_deficit": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 670,
+        "2025": 516
+      }
+    },
+    {
+      "cargo": "EGRESADO BTH SISTEMAS INFORMATICOS",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 1164,
+      "trabajadas_total": 5708,
+      "planilla_total": 4544,
+      "deficit_pct": 20.4,
+      "items_equiv_88h": 13,
+      "deficit_2025": 48,
+      "por_gestion_deficit": {
+        "2021": 592,
+        "2022": 300,
+        "2023": 104,
+        "2024": 120,
+        "2025": 48
+      }
+    },
+    {
+      "cargo": "TIT X ANTIG  TECNICA TECNOLOGICA EPJA",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 1132,
+      "trabajadas_total": 10220,
+      "planilla_total": 9088,
+      "deficit_pct": 11.1,
+      "items_equiv_88h": 13,
+      "deficit_2025": 476,
+      "por_gestion_deficit": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 656,
+        "2025": 476
+      }
+    },
+    {
+      "cargo": "NORMALISTA BIOLOGIA - GEOGRAFIA / NORMALISTAS",
+      "grupo": "Ciencias Naturales y Biología",
+      "deficit_total": 1124,
+      "trabajadas_total": 19724,
+      "planilla_total": 18600,
+      "deficit_pct": 5.7,
+      "items_equiv_88h": 13,
+      "deficit_2025": 0,
+      "por_gestion_deficit": {
+        "2021": 656,
+        "2022": 236,
+        "2023": 172,
+        "2024": 60,
+        "2025": 0
+      }
+    },
+    {
+      "cargo": "O PROFESIONALES BTH MECANICA INDUSTRIAL",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 1052,
+      "trabajadas_total": 8848,
+      "planilla_total": 7796,
+      "deficit_pct": 11.9,
+      "items_equiv_88h": 12,
+      "deficit_2025": 452,
+      "por_gestion_deficit": {
+        "2021": 0,
+        "2022": 48,
+        "2023": 140,
+        "2024": 412,
+        "2025": 452
+      }
+    },
+    {
+      "cargo": "PROF.EGRESADOS.VALORES.ESP.REL",
+      "grupo": "Ciencias Sociales y Humanidades",
+      "deficit_total": 1024,
+      "trabajadas_total": 27392,
+      "planilla_total": 26368,
+      "deficit_pct": 3.7,
+      "items_equiv_88h": 12,
+      "deficit_2025": 0,
+      "por_gestion_deficit": {
+        "2021": 696,
+        "2022": 216,
+        "2023": 92,
+        "2024": 20,
+        "2025": 0
+      }
+    },
+    {
+      "cargo": "OTR. PROFESIONA. PROF. CURSO",
+      "grupo": "Otras Especialidades",
+      "deficit_total": 1023,
+      "trabajadas_total": 22380,
+      "planilla_total": 21357,
+      "deficit_pct": 4.6,
+      "items_equiv_88h": 12,
+      "deficit_2025": 12,
+      "por_gestion_deficit": {
+        "2021": 547,
+        "2022": 216,
+        "2023": 172,
+        "2024": 76,
+        "2025": 12
+      }
+    },
+    {
+      "cargo": "NORMALISTA BTH TURISMO Y HOTELERÍA",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 1012,
+      "trabajadas_total": 10000,
+      "planilla_total": 8988,
+      "deficit_pct": 10.1,
+      "items_equiv_88h": 12,
+      "deficit_2025": 320,
+      "por_gestion_deficit": {
+        "2021": 20,
+        "2022": 96,
+        "2023": 228,
+        "2024": 348,
+        "2025": 320
+      }
+    },
+    {
+      "cargo": "NORMALISTA LENGUA CAST Y ORIGINARIA / NORMALISTAS",
+      "grupo": "Lenguaje y Comunicación",
+      "deficit_total": 992,
+      "trabajadas_total": 23528,
+      "planilla_total": 22536,
+      "deficit_pct": 4.2,
+      "items_equiv_88h": 11,
+      "deficit_2025": 24,
+      "por_gestion_deficit": {
+        "2021": 504,
+        "2022": 168,
+        "2023": 232,
+        "2024": 64,
+        "2025": 24
+      }
+    },
+    {
+      "cargo": "NORMALISTA BTH VETERINARIA Y ZOOTECNIA",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 964,
+      "trabajadas_total": 13860,
+      "planilla_total": 12896,
+      "deficit_pct": 7.0,
+      "items_equiv_88h": 11,
+      "deficit_2025": 292,
+      "por_gestion_deficit": {
+        "2021": 368,
+        "2022": 24,
+        "2023": 144,
+        "2024": 136,
+        "2025": 292
+      }
+    },
+    {
+      "cargo": "EGRESADO QUIMICA",
+      "grupo": "Matemáticas y Ciencias Exactas",
+      "deficit_total": 960,
+      "trabajadas_total": 13520,
+      "planilla_total": 12560,
+      "deficit_pct": 7.1,
+      "items_equiv_88h": 11,
+      "deficit_2025": 204,
+      "por_gestion_deficit": {
+        "2021": 168,
+        "2022": 232,
+        "2023": 212,
+        "2024": 144,
+        "2025": 204
+      }
+    },
+    {
+      "cargo": "ASISTENTE DE AULA U.E.",
+      "grupo": "Personal Directivo y Administrativo",
+      "deficit_total": 940,
+      "trabajadas_total": 1328,
+      "planilla_total": 388,
+      "deficit_pct": 70.8,
+      "items_equiv_88h": 11,
+      "deficit_2025": 204,
+      "por_gestion_deficit": {
+        "2021": 96,
+        "2022": 360,
+        "2023": 136,
+        "2024": 144,
+        "2025": 204
+      }
+    },
+    {
+      "cargo": "NORMALISTA LENGUA CAST Y ORIGINARIA / NORMALISTA TECNICA TECNOLOGICA GRAL",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 934,
+      "trabajadas_total": 14212,
+      "planilla_total": 13278,
+      "deficit_pct": 6.6,
+      "items_equiv_88h": 11,
+      "deficit_2025": 108,
+      "por_gestion_deficit": {
+        "2021": 440,
+        "2022": 112,
+        "2023": 112,
+        "2024": 162,
+        "2025": 108
+      }
+    },
+    {
+      "cargo": "O PROFESIONALES BTH ELECTRICIDAD",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 932,
+      "trabajadas_total": 8220,
+      "planilla_total": 7288,
+      "deficit_pct": 11.3,
+      "items_equiv_88h": 11,
+      "deficit_2025": 344,
+      "por_gestion_deficit": {
+        "2021": 0,
+        "2022": 140,
+        "2023": 120,
+        "2024": 328,
+        "2025": 344
+      }
+    },
+    {
+      "cargo": "DIRECTORES NORMALISTA",
+      "grupo": "Maestro de Aula / General",
+      "deficit_total": 924,
+      "trabajadas_total": 9740,
+      "planilla_total": 8816,
+      "deficit_pct": 9.5,
+      "items_equiv_88h": 10,
+      "deficit_2025": 4,
+      "por_gestion_deficit": {
+        "2021": 76,
+        "2022": 164,
+        "2023": 128,
+        "2024": 552,
+        "2025": 4
+      }
+    },
+    {
+      "cargo": "O PROFESIONALES BTH TEXTILES Y CONFECCIO",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 880,
+      "trabajadas_total": 6396,
+      "planilla_total": 5516,
+      "deficit_pct": 13.8,
+      "items_equiv_88h": 10,
+      "deficit_2025": 332,
+      "por_gestion_deficit": {
+        "2021": 144,
+        "2022": 36,
+        "2023": 80,
+        "2024": 288,
+        "2025": 332
+      }
+    },
+    {
+      "cargo": "PROF. EGRESADOS ART.PLAST.",
+      "grupo": "Maestro de Aula / General",
+      "deficit_total": 860,
+      "trabajadas_total": 11512,
+      "planilla_total": 10652,
+      "deficit_pct": 7.5,
+      "items_equiv_88h": 10,
+      "deficit_2025": 0,
+      "por_gestion_deficit": {
+        "2021": 764,
+        "2022": 68,
+        "2023": 20,
+        "2024": 8,
+        "2025": 0
+      }
+    },
+    {
+      "cargo": "O PROFESIONALES MAESTRO DE AULA",
+      "grupo": "Maestro de Aula / General",
+      "deficit_total": 852,
+      "trabajadas_total": 19072,
+      "planilla_total": 18220,
+      "deficit_pct": 4.5,
+      "items_equiv_88h": 10,
+      "deficit_2025": 660,
+      "por_gestion_deficit": {
+        "2021": 0,
+        "2022": 32,
+        "2023": 20,
+        "2024": 140,
+        "2025": 660
+      }
+    },
+    {
+      "cargo": "NORMALISTA CIENCIAS SOCIALES / NORMALISTA TECNICA TECNOLOGICA GRAL",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 820,
+      "trabajadas_total": 10700,
+      "planilla_total": 9880,
+      "deficit_pct": 7.7,
+      "items_equiv_88h": 9,
+      "deficit_2025": 252,
+      "por_gestion_deficit": {
+        "2021": 12,
+        "2022": 98,
+        "2023": 134,
+        "2024": 324,
+        "2025": 252
+      }
+    },
+    {
+      "cargo": "NORMALISTA PROF.CURSO / PROF. NORM.EDUC.FISICA",
+      "grupo": "Educación Física y Deportes",
+      "deficit_total": 816,
+      "trabajadas_total": 5496,
+      "planilla_total": 4680,
+      "deficit_pct": 14.8,
+      "items_equiv_88h": 9,
+      "deficit_2025": 0,
+      "por_gestion_deficit": {
+        "2021": 768,
+        "2022": 32,
+        "2023": 16,
+        "2024": 0,
+        "2025": 0
+      }
+    },
+    {
+      "cargo": "TIT X ANTIGUEDAD ED. MUSICAL",
+      "grupo": "Educación Musical",
+      "deficit_total": 813,
+      "trabajadas_total": 26604,
+      "planilla_total": 25791,
+      "deficit_pct": 3.1,
+      "items_equiv_88h": 9,
+      "deficit_2025": 109,
+      "por_gestion_deficit": {
+        "2021": 192,
+        "2022": 204,
+        "2023": 84,
+        "2024": 224,
+        "2025": 109
+      }
+    },
+    {
+      "cargo": "NORMALISTA BTH TEXTILES Y CONFECCIONES / NORMALISTA TECNICA TECNOLOGICA GRAL",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 796,
+      "trabajadas_total": 3040,
+      "planilla_total": 2244,
+      "deficit_pct": 26.2,
+      "items_equiv_88h": 9,
+      "deficit_2025": 112,
+      "por_gestion_deficit": {
+        "2021": 384,
+        "2022": 80,
+        "2023": 108,
+        "2024": 112,
+        "2025": 112
+      }
+    },
+    {
+      "cargo": "NORMALISTA EDUCACION EN CASA ED ESPECIAL",
+      "grupo": "Educación Especial",
+      "deficit_total": 792,
+      "trabajadas_total": 4040,
+      "planilla_total": 3248,
+      "deficit_pct": 19.6,
+      "items_equiv_88h": 9,
+      "deficit_2025": 76,
+      "por_gestion_deficit": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 716,
+        "2025": 76
+      }
+    },
+    {
+      "cargo": "CATEDRATICO ESFM",
+      "grupo": "Otras Especialidades",
+      "deficit_total": 788,
+      "trabajadas_total": 5968,
+      "planilla_total": 5180,
+      "deficit_pct": 13.2,
+      "items_equiv_88h": 9,
+      "deficit_2025": 328,
+      "por_gestion_deficit": {
+        "2021": 100,
+        "2022": 96,
+        "2023": 0,
+        "2024": 264,
+        "2025": 328
+      }
+    },
+    {
+      "cargo": "SECRETARIAS U.E.",
+      "grupo": "Personal Directivo y Administrativo",
+      "deficit_total": 784,
+      "trabajadas_total": 864,
+      "planilla_total": 80,
+      "deficit_pct": 90.7,
+      "items_equiv_88h": 9,
+      "deficit_2025": 0,
+      "por_gestion_deficit": {
+        "2021": 512,
+        "2022": 96,
+        "2023": 144,
+        "2024": 32,
+        "2025": 0
+      }
+    },
+    {
+      "cargo": "TITX ANTIGUEDAD VALORES ESP Y RELIGIONES",
+      "grupo": "Ciencias Sociales y Humanidades",
+      "deficit_total": 783,
+      "trabajadas_total": 16612,
+      "planilla_total": 15829,
+      "deficit_pct": 4.7,
+      "items_equiv_88h": 9,
+      "deficit_2025": 63,
+      "por_gestion_deficit": {
+        "2021": 296,
+        "2022": 184,
+        "2023": 92,
+        "2024": 148,
+        "2025": 63
+      }
+    },
+    {
+      "cargo": "NORMALISTA BTH DISENO GRAFICO",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 780,
+      "trabajadas_total": 8988,
+      "planilla_total": 8208,
+      "deficit_pct": 8.7,
+      "items_equiv_88h": 9,
+      "deficit_2025": 272,
+      "por_gestion_deficit": {
+        "2021": 200,
+        "2022": 120,
+        "2023": 84,
+        "2024": 104,
+        "2025": 272
+      }
+    },
+    {
+      "cargo": "NORMALISTA\tMODULAR CIENCIA TECNOL Y PROD",
+      "grupo": "Maestro de Aula / General",
+      "deficit_total": 772,
+      "trabajadas_total": 5200,
+      "planilla_total": 4428,
+      "deficit_pct": 14.8,
+      "items_equiv_88h": 9,
+      "deficit_2025": 432,
+      "por_gestion_deficit": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 340,
+        "2025": 432
+      }
+    },
+    {
+      "cargo": "PROF. TIT.POR ANTIG.ED.FIS.",
+      "grupo": "Otras Especialidades",
+      "deficit_total": 752,
+      "trabajadas_total": 15176,
+      "planilla_total": 14424,
+      "deficit_pct": 5.0,
+      "items_equiv_88h": 9,
+      "deficit_2025": 8,
+      "por_gestion_deficit": {
+        "2021": 628,
+        "2022": 48,
+        "2023": 32,
+        "2024": 36,
+        "2025": 8
+      }
+    },
+    {
+      "cargo": "NORMALISTA BTH ELECTROMECANICA",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 736,
+      "trabajadas_total": 8260,
+      "planilla_total": 7524,
+      "deficit_pct": 8.9,
+      "items_equiv_88h": 8,
+      "deficit_2025": 60,
+      "por_gestion_deficit": {
+        "2021": 372,
+        "2022": 124,
+        "2023": 44,
+        "2024": 136,
+        "2025": 60
+      }
+    },
+    {
+      "cargo": "O PROFESIONALES BTH AGROPECUARIA",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 724,
+      "trabajadas_total": 5716,
+      "planilla_total": 4992,
+      "deficit_pct": 12.7,
+      "items_equiv_88h": 8,
+      "deficit_2025": 364,
+      "por_gestion_deficit": {
+        "2021": 0,
+        "2022": 8,
+        "2023": 104,
+        "2024": 248,
+        "2025": 364
+      }
+    },
+    {
+      "cargo": "NORMALISTA BIOLOGIA - GEOGRAFIA / NORMALISTA QUIMICA",
+      "grupo": "Matemáticas y Ciencias Exactas",
+      "deficit_total": 720,
+      "trabajadas_total": 13744,
+      "planilla_total": 13024,
+      "deficit_pct": 5.2,
+      "items_equiv_88h": 8,
+      "deficit_2025": 136,
+      "por_gestion_deficit": {
+        "2021": 52,
+        "2022": 234,
+        "2023": 102,
+        "2024": 196,
+        "2025": 136
+      }
+    },
+    {
+      "cargo": "REGENTES U.E.",
+      "grupo": "Personal Directivo y Administrativo",
+      "deficit_total": 704,
+      "trabajadas_total": 704,
+      "planilla_total": 0,
+      "deficit_pct": 100.0,
+      "items_equiv_88h": 8,
+      "deficit_2025": 0,
+      "por_gestion_deficit": {
+        "2021": 384,
+        "2022": 192,
+        "2023": 128,
+        "2024": 0,
+        "2025": 0
+      }
+    },
+    {
+      "cargo": "NORMALISTA\tMODULAR COMUNIDAD Y SOCIEDAD",
+      "grupo": "Maestro de Aula / General",
+      "deficit_total": 700,
+      "trabajadas_total": 3948,
+      "planilla_total": 3248,
+      "deficit_pct": 17.7,
+      "items_equiv_88h": 8,
+      "deficit_2025": 300,
+      "por_gestion_deficit": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 400,
+        "2025": 300
+      }
+    },
+    {
+      "cargo": "NORMALISTA BIOLOGIA - GEOGRAFIA / NORMALISTA TECNICA TECNOLOGICA GRAL",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 692,
+      "trabajadas_total": 12440,
+      "planilla_total": 11748,
+      "deficit_pct": 5.6,
+      "items_equiv_88h": 8,
+      "deficit_2025": 72,
+      "por_gestion_deficit": {
+        "2021": 284,
+        "2022": 52,
+        "2023": 152,
+        "2024": 132,
+        "2025": 72
+      }
+    },
+    {
+      "cargo": "TIT X ANTIGUEDAD ED FISICA Y DEPORTES",
+      "grupo": "Educación Física y Deportes",
+      "deficit_total": 648,
+      "trabajadas_total": 13860,
+      "planilla_total": 13212,
+      "deficit_pct": 4.7,
+      "items_equiv_88h": 7,
+      "deficit_2025": 128,
+      "por_gestion_deficit": {
+        "2021": 0,
+        "2022": 268,
+        "2023": 96,
+        "2024": 156,
+        "2025": 128
+      }
+    },
+    {
+      "cargo": "O PROFESIONALES BTH AGROECOLOGIA",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 640,
+      "trabajadas_total": 6348,
+      "planilla_total": 5708,
+      "deficit_pct": 10.1,
+      "items_equiv_88h": 7,
+      "deficit_2025": 272,
+      "por_gestion_deficit": {
+        "2021": 48,
+        "2022": 48,
+        "2023": 64,
+        "2024": 208,
+        "2025": 272
+      }
+    },
+    {
+      "cargo": "PROF.TIT.POR ANTIG. TECNICA TEC",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 632,
+      "trabajadas_total": 16256,
+      "planilla_total": 15624,
+      "deficit_pct": 3.9,
+      "items_equiv_88h": 7,
+      "deficit_2025": 12,
+      "por_gestion_deficit": {
+        "2021": 264,
+        "2022": 232,
+        "2023": 72,
+        "2024": 52,
+        "2025": 12
+      }
+    },
+    {
+      "cargo": "NORMALIS BTH TEXTILES, TEJIDO Y CONFECCI",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 632,
+      "trabajadas_total": 7152,
+      "planilla_total": 6520,
+      "deficit_pct": 8.8,
+      "items_equiv_88h": 7,
+      "deficit_2025": 96,
+      "por_gestion_deficit": {
+        "2021": 244,
+        "2022": 4,
+        "2023": 32,
+        "2024": 256,
+        "2025": 96
+      }
+    },
+    {
+      "cargo": "PROF. NORM. TECNICA.TEC.ESP. / PROF. NORM.TECNICA TEC",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 620,
+      "trabajadas_total": 7764,
+      "planilla_total": 7144,
+      "deficit_pct": 8.0,
+      "items_equiv_88h": 7,
+      "deficit_2025": 0,
+      "por_gestion_deficit": {
+        "2021": 408,
+        "2022": 72,
+        "2023": 64,
+        "2024": 76,
+        "2025": 0
+      }
+    },
+    {
+      "cargo": "PROFESIONAL",
+      "grupo": "Otras Especialidades",
+      "deficit_total": 588,
+      "trabajadas_total": 888,
+      "planilla_total": 300,
+      "deficit_pct": 66.2,
+      "items_equiv_88h": 7,
+      "deficit_2025": 220,
+      "por_gestion_deficit": {
+        "2021": 0,
+        "2022": 136,
+        "2023": 12,
+        "2024": 220,
+        "2025": 220
+      }
+    },
+    {
+      "cargo": "NORMALISTA FISICA / NORMALISTAS",
+      "grupo": "Matemáticas y Ciencias Exactas",
+      "deficit_total": 574,
+      "trabajadas_total": 7016,
+      "planilla_total": 6442,
+      "deficit_pct": 8.2,
+      "items_equiv_88h": 7,
+      "deficit_2025": 0,
+      "por_gestion_deficit": {
+        "2021": 398,
+        "2022": 108,
+        "2023": 64,
+        "2024": 4,
+        "2025": 0
+      }
+    },
+    {
+      "cargo": "NORMALISTA LENGUA EXTRANJERA / NORMALISTAS",
+      "grupo": "Lenguaje y Comunicación",
+      "deficit_total": 560,
+      "trabajadas_total": 13652,
+      "planilla_total": 13092,
+      "deficit_pct": 4.1,
+      "items_equiv_88h": 6,
+      "deficit_2025": 0,
+      "por_gestion_deficit": {
+        "2021": 200,
+        "2022": 104,
+        "2023": 224,
+        "2024": 32,
+        "2025": 0
+      }
+    },
+    {
+      "cargo": "EGRESADO CIENCIAS NAT BIOLOGIA",
+      "grupo": "Ciencias Naturales y Biología",
+      "deficit_total": 540,
+      "trabajadas_total": 6148,
+      "planilla_total": 5608,
+      "deficit_pct": 8.8,
+      "items_equiv_88h": 6,
+      "deficit_2025": 4,
+      "por_gestion_deficit": {
+        "2021": 388,
+        "2022": 84,
+        "2023": 44,
+        "2024": 20,
+        "2025": 4
+      }
+    },
+    {
+      "cargo": "EGRESADO TECNICA TECNOLOGICA GRAL",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 540,
+      "trabajadas_total": 9580,
+      "planilla_total": 9040,
+      "deficit_pct": 5.6,
+      "items_equiv_88h": 6,
+      "deficit_2025": 8,
+      "por_gestion_deficit": {
+        "2021": 288,
+        "2022": 160,
+        "2023": 88,
+        "2024": -4,
+        "2025": 8
+      }
+    },
+    {
+      "cargo": "NORMALISTA TECNICA TECNOLOGICA / PROF. NORM.TECNICA TEC",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 536,
+      "trabajadas_total": 11108,
+      "planilla_total": 10572,
+      "deficit_pct": 4.8,
+      "items_equiv_88h": 6,
+      "deficit_2025": 12,
+      "por_gestion_deficit": {
+        "2021": 232,
+        "2022": 108,
+        "2023": 136,
+        "2024": 48,
+        "2025": 12
+      }
+    },
+    {
+      "cargo": "O PROFESIONALES BTH CONTABILIDAD",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 536,
+      "trabajadas_total": 6768,
+      "planilla_total": 6232,
+      "deficit_pct": 7.9,
+      "items_equiv_88h": 6,
+      "deficit_2025": 272,
+      "por_gestion_deficit": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 96,
+        "2024": 168,
+        "2025": 272
+      }
+    },
+    {
+      "cargo": "NORMALISTA PROF.CURSO / PROF. NORM.TECNICA TEC",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 520,
+      "trabajadas_total": 21744,
+      "planilla_total": 21224,
+      "deficit_pct": 2.4,
+      "items_equiv_88h": 6,
+      "deficit_2025": 0,
+      "por_gestion_deficit": {
+        "2021": 448,
+        "2022": 24,
+        "2023": 24,
+        "2024": 24,
+        "2025": 0
+      }
+    },
+    {
+      "cargo": "O PROFESIONALES ED. MUSICAL",
+      "grupo": "Educación Musical",
+      "deficit_total": 520,
+      "trabajadas_total": 7828,
+      "planilla_total": 7308,
+      "deficit_pct": 6.6,
+      "items_equiv_88h": 6,
+      "deficit_2025": 492,
+      "por_gestion_deficit": {
+        "2021": 0,
+        "2022": 8,
+        "2023": 0,
+        "2024": 20,
+        "2025": 492
+      }
+    },
+    {
+      "cargo": "NORMALISTA BTH GASTRONOMIA / NORMALISTA TECNICA TECNOLOGICA GRAL",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 516,
+      "trabajadas_total": 5216,
+      "planilla_total": 4700,
+      "deficit_pct": 9.9,
+      "items_equiv_88h": 6,
+      "deficit_2025": 72,
+      "por_gestion_deficit": {
+        "2021": 384,
+        "2022": 0,
+        "2023": 0,
+        "2024": 60,
+        "2025": 72
+      }
+    },
+    {
+      "cargo": "NORMALISTA BTH TEXTILES Y CONFECCIONES / PROF. NORM.TECNICA TEC",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 516,
+      "trabajadas_total": 1600,
+      "planilla_total": 1084,
+      "deficit_pct": 32.2,
+      "items_equiv_88h": 6,
+      "deficit_2025": 0,
+      "por_gestion_deficit": {
+        "2021": 192,
+        "2022": 120,
+        "2023": 204,
+        "2024": 0,
+        "2025": 0
+      }
+    },
+    {
+      "cargo": "NORMALISTA MATEMATICAS / PROF. NORM.TECNICA TEC",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 496,
+      "trabajadas_total": 3940,
+      "planilla_total": 3444,
+      "deficit_pct": 12.6,
+      "items_equiv_88h": 6,
+      "deficit_2025": 0,
+      "por_gestion_deficit": {
+        "2021": 348,
+        "2022": 100,
+        "2023": 12,
+        "2024": 36,
+        "2025": 0
+      }
+    },
+    {
+      "cargo": "NORMALISTAS / PROF. NORM. VALORES.ESP.REL",
+      "grupo": "Ciencias Sociales y Humanidades",
+      "deficit_total": 496,
+      "trabajadas_total": 14612,
+      "planilla_total": 14116,
+      "deficit_pct": 3.4,
+      "items_equiv_88h": 6,
+      "deficit_2025": 0,
+      "por_gestion_deficit": {
+        "2021": 316,
+        "2022": 104,
+        "2023": 44,
+        "2024": 32,
+        "2025": 0
+      }
+    },
+    {
+      "cargo": "NORMALISTA COSMOVISION, FIL. Y SICOLOGIA / NORMALISTAS",
+      "grupo": "Ciencias Sociales y Humanidades",
+      "deficit_total": 484,
+      "trabajadas_total": 10876,
+      "planilla_total": 10392,
+      "deficit_pct": 4.5,
+      "items_equiv_88h": 6,
+      "deficit_2025": 0,
+      "por_gestion_deficit": {
+        "2021": 192,
+        "2022": 112,
+        "2023": 116,
+        "2024": 64,
+        "2025": 0
+      }
+    },
+    {
+      "cargo": "NORMALISTA\tMODULAR VIDA TIERRA TERRITORI",
+      "grupo": "Maestro de Aula / General",
+      "deficit_total": 484,
+      "trabajadas_total": 3232,
+      "planilla_total": 2748,
+      "deficit_pct": 15.0,
+      "items_equiv_88h": 6,
+      "deficit_2025": 248,
+      "por_gestion_deficit": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 236,
+        "2025": 248
+      }
+    },
+    {
+      "cargo": "NORMALISTA TECNICA TECNOLOGICA EPJA / PROF. NORM. TECNICA.TEC.ESP.",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 484,
+      "trabajadas_total": 1100,
+      "planilla_total": 616,
+      "deficit_pct": 44.0,
+      "items_equiv_88h": 6,
+      "deficit_2025": 224,
+      "por_gestion_deficit": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 260,
+        "2025": 224
+      }
+    },
+    {
+      "cargo": "EGRESADO LENGUA EXTRANJERA",
+      "grupo": "Lenguaje y Comunicación",
+      "deficit_total": 480,
+      "trabajadas_total": 12064,
+      "planilla_total": 11584,
+      "deficit_pct": 4.0,
+      "items_equiv_88h": 5,
+      "deficit_2025": 16,
+      "por_gestion_deficit": {
+        "2021": 276,
+        "2022": 160,
+        "2023": 24,
+        "2024": 4,
+        "2025": 16
+      }
+    },
+    {
+      "cargo": "PROF. NORM. ARTES PLASTICAS / PROF. NORM.TECNICA TEC",
+      "grupo": "Artes Plásticas y Visuales",
+      "deficit_total": 480,
+      "trabajadas_total": 10744,
+      "planilla_total": 10264,
+      "deficit_pct": 4.5,
+      "items_equiv_88h": 5,
+      "deficit_2025": 0,
+      "por_gestion_deficit": {
+        "2021": 292,
+        "2022": 120,
+        "2023": 68,
+        "2024": 0,
+        "2025": 0
+      }
+    },
+    {
+      "cargo": "O PROFESIONALES BTH TURISMO Y HOTELERÍA",
+      "grupo": "Técnica Tecnológica / BTH",
+      "deficit_total": 464,
+      "trabajadas_total": 3648,
+      "planilla_total": 3184,
+      "deficit_pct": 12.7,
+      "items_equiv_88h": 5,
+      "deficit_2025": 288,
+      "por_gestion_deficit": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 96,
+        "2024": 80,
+        "2025": 288
+      }
+    },
+    {
+      "cargo": "EGRESADO COSMOVISIONES Y FILOSOFIA",
+      "grupo": "Ciencias Sociales y Humanidades",
+      "deficit_total": 444,
+      "trabajadas_total": 2560,
+      "planilla_total": 2116,
+      "deficit_pct": 17.3,
+      "items_equiv_88h": 5,
+      "deficit_2025": 0,
+      "por_gestion_deficit": {
+        "2021": 424,
+        "2022": 20,
+        "2023": 0,
+        "2024": 0,
+        "2025": 0
+      }
+    }
+  ]
+}

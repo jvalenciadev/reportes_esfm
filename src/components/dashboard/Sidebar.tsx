@@ -11,6 +11,7 @@ import {
   AccessibilityIcon,
   LayersIcon,
   TrendingUpIcon,
+  ScaleIcon,
 } from '../ui/Icons';
 
 interface SidebarProps {
@@ -21,6 +22,7 @@ interface SidebarProps {
     ine: number;
     sie: number;
     seie: number;
+    uie?: number;
     total: number;
   };
   isOpen: boolean;
@@ -84,6 +86,16 @@ export function Sidebar({
       count: counts.seie,
       tables: 'Discapacidad Urbana/Rural',
       icon: <AccessibilityIcon size={18} className="text-purple-700" />,
+    },
+    {
+      id: 'uie' as SourceTab,
+      label: 'UIE',
+      sublabel: 'Déficit Docente y Horas',
+      badge: 'DÉFICIT',
+      badgeColor: 'bg-rose-50 text-rose-700 border-rose-200',
+      count: counts.uie ?? 17274,
+      tables: 'Carga Horaria vs Planilla',
+      icon: <ScaleIcon size={18} className="text-rose-700" />,
     },
   ];
 

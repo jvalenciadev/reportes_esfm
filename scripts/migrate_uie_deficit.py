@@ -198,3 +198,4 @@ if table_ready:
             print(f'   FALLO crítico en lote {batch_num}. Deteniendo.')
             break
     print(f'Migración finalizada: {inserted} de {total} registros migrados.')
+

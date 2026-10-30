@@ -8,6 +8,7 @@ import { DgfmView } from './views/DgfmView';
 import { IneView } from './views/IneView';
 import { SieView } from './views/SieView';
 import { SeieView } from './views/SeieView';
+import { UieDeficitView } from './views/UieDeficitView';
 import Image from 'next/image';
 
 interface DashboardShellProps {
@@ -32,8 +33,9 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
       initialData.sie_total_estudiantes.length +
       initialData.matricula_rural_urbana.length;
     const seie = initialData.discapacidad_seie.length;
-    const total = dgfm + ine + sie + seie + initialData.departamentos.length;
-    return { dgfm, ine, sie, seie, total };
+    const uie = 17274;
+    const total = dgfm + ine + sie + seie + uie + initialData.departamentos.length;
+    return { dgfm, ine, sie, seie, uie, total };
   }, [initialData]);
 
   const titles: Record<SourceTab, { title: string; subtitle: string; tag: string }> = {
@@ -61,6 +63,11 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
       title: 'SEIE · Educación Especial',
       subtitle: 'Inclusión de estudiantes con discapacidad por áreas urbana y rural',
       tag: 'EDUCACIÓN ESPECIAL',
+    },
+    uie: {
+      title: 'UIE · Déficit Docente y Carga Horaria',
+      subtitle: 'Balance de horas trabajadas vs planilla fiscal y pronóstico de demanda ESFM',
+      tag: 'DÉFICIT HORARIO',
     },
   };
 
@@ -156,6 +163,15 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
             >
               SEIE
             </button>
+            <button
+              onClick={() => setCurrentTab('uie')}
+              className={`px-3 py-1.5 rounded-lg transition-all ${currentTab === 'uie'
+                ? 'bg-[#c9a751] text-slate-900 shadow-xs ring-1 ring-[#c9a751]/50 font-semibold'
+                : 'text-slate-600 hover:text-slate-900'
+                }`}
+            >
+              UIE
+            </button>
           </div>
         </header>
 
@@ -166,6 +182,7 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
           {currentTab === 'ine' && <IneView data={initialData} />}
           {currentTab === 'sie' && <SieView data={initialData} />}
           {currentTab === 'seie' && <SeieView data={initialData} />}
+          {currentTab === 'uie' && <UieDeficitView data={initialData} />}
         </main>
       </div>
     </div>
