@@ -83,3 +83,4 @@ INNER JOIN public.relacion_especialidad r
 INNER JOIN public.especialidades_oficiales eo 
     ON eo.id = r.especialidad_id
 GROUP BY eo.id, eo.nombre, u.gestion;
+

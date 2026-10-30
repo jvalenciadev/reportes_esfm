@@ -3,11 +3,11 @@
 import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { DashboardDataset } from '@/types/stats';
 import summaryDataRaw from '@/data/uieDeficitSummary.json';
+import catalogoCargosRaw from '@/data/uieCargosCatalogo.json';
 import { StatCard } from '../StatCard';
 import { TrendLineChart, TrendSeries } from '../TrendLineChart';
 import { PieChart, PieSlice } from '../PieChart';
 import { YearProgression } from '../YearProgression';
-import { DataTable, ColumnDef } from '../DataTable';
 import { SourceBadge } from '../SourceBadge';
 import {
   ScaleIcon,
@@ -21,6 +21,9 @@ import {
   LayersIcon,
   GridIcon,
   SchoolIcon,
+  FilterIcon,
+  GraduationCapIcon,
+  BuildingIcon,
   AlertTriangleIcon,
 } from '../../ui/Icons';
 
@@ -30,18 +33,43 @@ interface UieDeficitViewProps {
 
 export function UieDeficitView({ data }: UieDeficitViewProps) {
   const summary = summaryDataRaw;
+  const catalogo = catalogoCargosRaw as any[];
 
-  const [activeTab, setActiveTab] = useState<'cargos' | 'pronostico' | 'departamentos' | 'matriz_anual' | 'registros_api'>('cargos');
+  const [activeTab, setActiveTab] = useState<'relaciones' | 'departamentos' | 'cargos' | 'pronostico' | 'matriz_anual' | 'registros_api'>('relaciones');
 
-  // Filtros Pestaña Cargos
+  // =========================================================================
+  // ESTADOS MÓDULO 1: CREADOR Y GESTOR DE RELACIONES (CARGO <-> ESPECIALIDAD)
+  // =========================================================================
+  const [especialidadesOficiales, setEspecialidadesOficiales] = useState<any[]>([]);
+  const [relacionesGuardadas, setRelacionesGuardadas] = useState<any[]>([]);
+  const [loadingRelaciones, setLoadingRelaciones] = useState<boolean>(false);
+  const [resumenDeficitEspecialidad, setResumenDeficitEspecialidad] = useState<any[]>([]);
+
+  // Filtros interactivos para el constructor
+  const [filterDependencia, setFilterDependencia] = useState<string>('all');
+  const [filterSubsistema, setFilterSubsistema] = useState<string>('all');
+  const [filterNivel, setFilterNivel] = useState<string>('all');
+  const [filterSearchCargo, setFilterSearchCargo] = useState<string>('');
+  const [targetEspecialidadId, setTargetEspecialidadId] = useState<number | ''>('');
+  const [selectedCargoItem, setSelectedCargoItem] = useState<any | null>(null);
+  const [actionMessage, setActionMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
+  // Filtro de gestión para el déficit de especialidad
+  const [selectedGestionEsp, setSelectedGestionEsp] = useState<string>('all');
+
+  // =========================================================================
+  // ESTADOS MÓDULO 2: DEPARTAMENTAL (TABLA Y GRÁFICO LINEAL POR GESTIÓN)
+  // =========================================================================
+  const [gestionDept, setGestionDept] = useState<string>('2025');
+  const [deptMetric, setDeptMetric] = useState<'todas' | 'deficit' | 'comparativa'>('comparativa');
+
+  // =========================================================================
+  // ESTADOS PESTAÑAS EXISTENTES (CARGOS, PRONÓSTICO, API)
+  // =========================================================================
   const [cargoMode, setCargoMode] = useState<'grupos' | 'individual'>('grupos');
   const [selectedGestionCargo, setSelectedGestionCargo] = useState<string>('all');
   const [selectedGrupoFilter, setSelectedGrupoFilter] = useState<string>('all');
   const [searchCargoTerm, setSearchCargoTerm] = useState<string>('');
-
-  // Filtros Pestaña Departamental
-  const [selectedDeptId, setSelectedDeptId] = useState<number | 'all'>('all');
-  const [selectedGestionDept, setSelectedGestionDept] = useState<string>('2025');
 
   // Estado Pestaña Explorador API Supabase (17.274 registros vivos)
   const [apiGestion, setApiGestion] = useState<string>('2025');
@@ -52,6 +80,59 @@ export function UieDeficitView({ data }: UieDeficitViewProps) {
   const [apiLoading, setApiLoading] = useState<boolean>(false);
   const [apiPage, setApiPage] = useState<number>(0);
   const limitPerPage = 50;
+
+  // Cargar Especialidades y Relaciones desde Supabase
+  const loadEspecialidades = useCallback(async () => {
+    try {
+      const res = await fetch('/api/relaciones-especialidad?action=especialidades');
+      if (res.ok) {
+        const json = await res.json();
+        setEspecialidadesOficiales(json || []);
+        if (json?.length > 0 && targetEspecialidadId === '') {
+          setTargetEspecialidadId(json[0].id);
+        }
+      }
+    } catch {
+      // ignore
+    }
+  }, [targetEspecialidadId]);
+
+  const loadRelaciones = useCallback(async () => {
+    setLoadingRelaciones(true);
+    try {
+      const res = await fetch('/api/relaciones-especialidad?limit=500');
+      if (res.ok) {
+        const json = await res.json();
+        setRelacionesGuardadas(json.data || []);
+      }
+    } catch {
+      // ignore
+    } finally {
+      setLoadingRelaciones(false);
+    }
+  }, []);
+
+  const loadResumenDeficit = useCallback(async () => {
+    try {
+      const params = new URLSearchParams({
+        action: 'resumen_deficit',
+        gestion: selectedGestionEsp,
+      });
+      const res = await fetch(`/api/relaciones-especialidad?${params.toString()}`);
+      if (res.ok) {
+        const json = await res.json();
+        setResumenDeficitEspecialidad(json || []);
+      }
+    } catch {
+      // ignore
+    }
+  }, [selectedGestionEsp]);
+
+  useEffect(() => {
+    loadEspecialidades();
+    loadRelaciones();
+    loadResumenDeficit();
+  }, [loadEspecialidades, loadRelaciones, loadResumenDeficit]);
 
   // Carga reactiva de API Supabase cuando se activa la pestaña de registros
   const fetchLiveRecords = useCallback(async () => {
@@ -84,20 +165,103 @@ export function UieDeficitView({ data }: UieDeficitViewProps) {
   }, [activeTab, fetchLiveRecords]);
 
   // =========================================================================
-  // 1. CÁLCULO DE KPIS GLOBALES (GESTIÓN 2025 Y HISTÓRICO)
+  // CATÁLOGO DINÁMICO DE FILTROS PARA EL CONSTRUCTOR
+  // =========================================================================
+  const dependenciasList = useMemo(() => {
+    return Array.from(new Set(catalogo.map((c) => c.dependencia))).sort();
+  }, [catalogo]);
+
+  const subsistemasList = useMemo(() => {
+    let items = catalogo;
+    if (filterDependencia !== 'all') {
+      items = items.filter((c) => c.dependencia === filterDependencia);
+    }
+    return Array.from(new Set(items.map((c) => c.subsistema))).sort();
+  }, [catalogo, filterDependencia]);
+
+  const nivelesList = useMemo(() => {
+    let items = catalogo;
+    if (filterDependencia !== 'all') items = items.filter((c) => c.dependencia === filterDependencia);
+    if (filterSubsistema !== 'all') items = items.filter((c) => c.subsistema === filterSubsistema);
+    return Array.from(new Set(items.map((c) => c.nivel))).sort();
+  }, [catalogo, filterDependencia, filterSubsistema]);
+
+  // Cargos filtrados según las selecciones de dependecia, subsistema y nivel
+  const cargosDisponiblesFiltrados = useMemo(() => {
+    return catalogo.filter((item) => {
+      if (filterDependencia !== 'all' && item.dependencia !== filterDependencia) return false;
+      if (filterSubsistema !== 'all' && item.subsistema !== filterSubsistema) return false;
+      if (filterNivel !== 'all' && item.nivel !== filterNivel) return false;
+      if (filterSearchCargo && !item.cargo.toLowerCase().includes(filterSearchCargo.toLowerCase())) return false;
+      return true;
+    });
+  }, [catalogo, filterDependencia, filterSubsistema, filterNivel, filterSearchCargo]);
+
+  // Mapa rápido de relaciones existentes: "cargo|nivel|subsistema|dependencia" -> Especialidad Nombre
+  const mapaRelacionesExistentes = useMemo(() => {
+    const map = new Map<string, string>();
+    relacionesGuardadas.forEach((r) => {
+      const dep = r.dependencia || '';
+      const sub = r.subsistema || '';
+      const niv = r.nivel || '';
+      const key = `${dep}|${sub}|${niv}|${r.cargo}`;
+      const espName = r.especialidades_oficiales?.nombre || `Especialidad ${r.especialidad_id}`;
+      map.set(key, espName);
+      // Fallback sólo por cargo
+      map.set(`cargo:${r.cargo}`, espName);
+    });
+    return map;
+  }, [relacionesGuardadas]);
+
+  // Guardar nueva relación en Supabase
+  const handleCrearRelacion = async () => {
+    if (!targetEspecialidadId || !selectedCargoItem) {
+      setActionMessage({ type: 'error', text: 'Selecciona una especialidad y un cargo de la lista' });
+      return;
+    }
+
+    try {
+      const payload = {
+        especialidad_id: Number(targetEspecialidadId),
+        dependencia: selectedCargoItem.dependencia,
+        subsistema: selectedCargoItem.subsistema,
+        nivel: selectedCargoItem.nivel,
+        cargo: selectedCargoItem.cargo,
+      };
+
+      const res = await fetch('/api/relaciones-especialidad', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (res.ok) {
+        setActionMessage({
+          type: 'success',
+          text: `Relación vinculada exitosamente con "${especialidadesOficiales.find((e) => e.id === Number(targetEspecialidadId))?.nombre}"`,
+        });
+        await loadRelaciones();
+        await loadResumenDeficit();
+        setTimeout(() => setActionMessage(null), 4000);
+      } else {
+        const err = await res.json();
+        setActionMessage({ type: 'error', text: `Error: ${err.error || 'No se pudo guardar la relación'}` });
+      }
+    } catch (e: any) {
+      setActionMessage({ type: 'error', text: `Excepción: ${e.message}` });
+    }
+  };
+
+  // =========================================================================
+  // CÁLCULO DE KPIS GLOBALES
   // =========================================================================
   const kpiStats = useMemo(() => {
     const hist2025 = summary.historico_nacional.find((h) => h.gestion === 2025);
-    const hist2021 = summary.historico_nacional.find((h) => h.gestion === 2021);
-
     const deficit2025 = hist2025?.deficit_horas || 939597;
     const trabajadas2025 = hist2025?.horas_trabajadas || 16009284;
     const planilla2025 = hist2025?.horas_planilla || 15069687;
     const deficitPct2025 = hist2025?.deficit_pct || 5.87;
     const items2025 = hist2025?.items_equiv_88h || 10677;
-
-    const deficitTotalHistorico = summary.historico_nacional.reduce((acc, h) => acc + h.deficit_horas, 0);
-    const itemsTotalHistorico = summary.historico_nacional.reduce((acc, h) => acc + h.items_equiv_88h, 0);
 
     const pron2026 = summary.pronostico_nacional.find((p) => p.gestion === 2026);
     const deficitPron2026 = pron2026?.deficit_horas || 935414;
@@ -109,28 +273,26 @@ export function UieDeficitView({ data }: UieDeficitViewProps) {
       planilla2025,
       deficitPct2025,
       items2025,
-      deficitTotalHistorico,
-      itemsTotalHistorico,
       deficitPron2026,
       itemsPron2026,
     };
   }, [summary]);
 
   // =========================================================================
-  // 2. DATOS DE GRUPOS DE CARGO (FAMILIAS) CON FILTRO DE GESTIÓN
+  // MÓDULO 2: DEPARTAMENTAL (HORAS TRABAJADAS, PLANILLA, DÉFICIT POR GESTIÓN)
   // =========================================================================
-  const dataGruposCargo = useMemo(() => {
-    return summary.por_grupo_cargo.map((g) => {
-      let def = g.deficit_total;
-      let trab = g.trabajadas_total;
-      let plan = g.planilla_total;
+  const tablaDepartamentalGestion = useMemo(() => {
+    return summary.por_departamento.map((d) => {
+      let def = d.deficit_total;
+      let trab = d.trabajadas_total;
+      let plan = d.planilla_total;
 
-      if (selectedGestionCargo !== 'all') {
-        const detG = (g.por_gestion as Record<string, { deficit: number; trabajadas: number; planilla: number; items_equiv_88h: number }>)[selectedGestionCargo];
-        if (detG) {
-          def = detG.deficit;
-          trab = detG.trabajadas;
-          plan = detG.planilla;
+      if (gestionDept !== 'all') {
+        const det = (d.por_gestion as Record<string, { deficit: number; trabajadas: number; planilla: number; items_equiv_88h: number }>)[gestionDept];
+        if (det) {
+          def = det.deficit;
+          trab = det.trabajadas;
+          plan = det.planilla;
         } else {
           def = 0;
           trab = 0;
@@ -142,69 +304,132 @@ export function UieDeficitView({ data }: UieDeficitViewProps) {
       const items = Math.round(def / 88);
 
       return {
-        grupo: g.grupo,
+        id: d.departamento_id,
+        departamento: d.departamento,
+        horas_trabajadas: trab,
+        horas_planilla: plan,
         deficit: def,
-        trabajadas: trab,
-        planilla: plan,
         deficit_pct: pct,
         items_equiv_88h: items,
       };
     }).sort((a, b) => b.deficit - a.deficit);
-  }, [summary.por_grupo_cargo, selectedGestionCargo]);
+  }, [summary.por_departamento, gestionDept]);
 
-  // Slices de Torta para Grupos de Cargo
-  const pieGruposCargo: PieSlice[] = useMemo(() => {
+  // Totales de la tabla departamental
+  const totalDepartamentalGestion = useMemo(() => {
+    const totTrab = tablaDepartamentalGestion.reduce((acc, d) => acc + d.horas_trabajadas, 0);
+    const totPlan = tablaDepartamentalGestion.reduce((acc, d) => acc + d.horas_planilla, 0);
+    const totDef = tablaDepartamentalGestion.reduce((acc, d) => acc + d.deficit, 0);
+    const totPct = totTrab > 0 ? Number(((totDef / totTrab) * 100).toFixed(2)) : 0;
+    const totItems = Math.round(totDef / 88);
+    return { totTrab, totPlan, totDef, totPct, totItems };
+  }, [tablaDepartamentalGestion]);
+
+  // Series para el Gráfico Lineal Departamental
+  const seriesLinealDepartamentos: TrendSeries[] = useMemo(() => {
+    if (deptMetric === 'deficit') {
+      return [
+        {
+          id: 'deficit',
+          name: 'Déficit de Horas',
+          color: '#e11d48',
+          data: tablaDepartamentalGestion.map((d, idx) => ({ year: idx + 1, value: d.deficit })),
+        },
+      ];
+    }
+
+    if (deptMetric === 'todas') {
+      return [
+        {
+          id: 'trabajadas',
+          name: 'Horas Trabajadas',
+          color: '#1e293b',
+          data: tablaDepartamentalGestion.map((d, idx) => ({ year: idx + 1, value: d.horas_trabajadas })),
+        },
+        {
+          id: 'planilla',
+          name: 'Horas en Planilla',
+          color: '#2563eb',
+          data: tablaDepartamentalGestion.map((d, idx) => ({ year: idx + 1, value: d.horas_planilla })),
+        },
+        {
+          id: 'deficit',
+          name: 'Déficit de Horas',
+          color: '#e11d48',
+          data: tablaDepartamentalGestion.map((d, idx) => ({ year: idx + 1, value: d.deficit })),
+        },
+      ];
+    }
+
+    // Modo Comparativa (Trabajadas vs Planilla vs Déficit)
+    return [
+      {
+        id: 'trabajadas',
+        name: 'Horas Trabajadas en Aula',
+        color: '#1e293b',
+        data: tablaDepartamentalGestion.map((d, idx) => ({ year: idx + 1, value: d.horas_trabajadas })),
+      },
+      {
+        id: 'planilla',
+        name: 'Horas Cubiertas en Planilla',
+        color: '#059669',
+        data: tablaDepartamentalGestion.map((d, idx) => ({ year: idx + 1, value: d.horas_planilla })),
+      },
+      {
+        id: 'deficit',
+        name: 'Déficit de Horas (Brecha)',
+        color: '#e11d48',
+        data: tablaDepartamentalGestion.map((d, idx) => ({ year: idx + 1, value: d.deficit })),
+      },
+    ];
+  }, [tablaDepartamentalGestion, deptMetric]);
+
+  // =========================================================================
+  // DÉFICIT CALCULADO POR ESPECIALIDAD OFICIAL (CONSOLIDADO)
+  // =========================================================================
+  const tablaEspecialidadesDeficit = useMemo(() => {
+    const map = new Map<number, { id: number; nombre: string; trabajadas: number; planilla: number; deficit: number; registros: number }>();
+
+    especialidadesOficiales.forEach((eo) => {
+      map.set(eo.id, { id: eo.id, nombre: eo.nombre, trabajadas: 0, planilla: 0, deficit: 0, registros: 0 });
+    });
+
+    resumenDeficitEspecialidad.forEach((r) => {
+      const e = map.get(r.especialidad_id);
+      if (e) {
+        e.trabajadas += r.total_horas_trabajadas || 0;
+        e.planilla += r.total_horas_planilla || 0;
+        e.deficit += r.total_deficit_horas || 0;
+        e.registros += r.registros_afectados || 0;
+      }
+    });
+
+    return Array.from(map.values())
+      .map((item) => {
+        const pct = item.trabajadas > 0 ? Number(((item.deficit / item.trabajadas) * 100).toFixed(2)) : 0;
+        const items = Math.round(item.deficit / 88);
+        return {
+          ...item,
+          deficit_pct: pct,
+          items_equiv_88h: items,
+        };
+      })
+      .sort((a, b) => b.deficit - a.deficit);
+  }, [especialidadesOficiales, resumenDeficitEspecialidad]);
+
+  // Slices de Torta para Especialidades Oficiales
+  const pieEspecialidadesDeficit: PieSlice[] = useMemo(() => {
     const palette = ['#e11d48', '#c9a751', '#2563eb', '#059669', '#d97706', '#7c3aed', '#0891b2', '#4b5563', '#ea580c', '#8b5cf6', '#10b981', '#64748b'];
-    return dataGruposCargo.slice(0, 8).map((item, idx) => ({
-      label: item.grupo,
+    return tablaEspecialidadesDeficit.slice(0, 8).map((item, idx) => ({
+      label: item.nombre,
       value: item.deficit,
       color: palette[idx % palette.length],
       sublabel: `${item.deficit_pct}% brecha (${item.items_equiv_88h.toLocaleString('es-BO')} ítems)`,
     }));
-  }, [dataGruposCargo]);
+  }, [tablaEspecialidadesDeficit]);
 
   // =========================================================================
-  // 3. DATOS DE CARGOS ESPECÍFICOS INDIVIDUALES (TOP 150)
-  // =========================================================================
-  const dataCargosIndividuales = useMemo(() => {
-    let list = summary.top_cargos;
-
-    if (selectedGrupoFilter !== 'all') {
-      list = list.filter((c) => c.grupo === selectedGrupoFilter);
-    }
-
-    if (searchCargoTerm) {
-      const q = searchCargoTerm.toLowerCase();
-      list = list.filter((c) => c.cargo.toLowerCase().includes(q) || c.grupo.toLowerCase().includes(q));
-    }
-
-    return list.map((c) => {
-      let def = c.deficit_total;
-      let trab = c.trabajadas_total;
-      let plan = c.planilla_total;
-
-      if (selectedGestionCargo !== 'all') {
-        const valG = (c.por_gestion_deficit as Record<string, number>)[selectedGestionCargo];
-        def = valG !== undefined ? valG : 0;
-      }
-
-      const pct = trab > 0 ? Number(((def / trab) * 100).toFixed(1)) : 0;
-      const items = Math.round(def / 88);
-
-      return {
-        cargo: c.cargo,
-        grupo: c.grupo,
-        deficit: def,
-        trabajadas: trab,
-        planilla: plan,
-        deficit_pct: pct,
-        items_equiv_88h: items,
-      };
-    }).sort((a, b) => b.deficit - a.deficit);
-  }, [summary.top_cargos, selectedGrupoFilter, searchCargoTerm, selectedGestionCargo]);
-
-  // =========================================================================
-  // 4. PRONÓSTICO TEMPORAL CONTINUO (2021 - 2035)
+  // PRONÓSTICO TEMPORAL CONTINUO (2021 - 2035)
   // =========================================================================
   const timelineCompleta = useMemo(() => {
     const hist = summary.historico_nacional.map((h) => ({
@@ -260,57 +485,6 @@ export function UieDeficitView({ data }: UieDeficitViewProps) {
     }));
   }, [timelineCompleta]);
 
-  // =========================================================================
-  // 5. DATOS DEPARTAMENTALES
-  // =========================================================================
-  const dataDepartamentos = useMemo(() => {
-    return summary.por_departamento.map((d) => {
-      let def = d.deficit_total;
-      let trab = d.trabajadas_total;
-      let plan = d.planilla_total;
-
-      if (selectedGestionDept !== 'all') {
-        const det = (d.por_gestion as Record<string, { deficit: number; trabajadas: number; planilla: number; items_equiv_88h: number }>)[selectedGestionDept];
-        if (det) {
-          def = det.deficit;
-          trab = det.trabajadas;
-          plan = det.planilla;
-        }
-      }
-
-      const pct = trab > 0 ? Number(((def / trab) * 100).toFixed(2)) : 0;
-      const items = Math.round(def / 88);
-
-      return {
-        id: d.departamento_id,
-        departamento: d.departamento,
-        deficit: def,
-        trabajadas: trab,
-        planilla: plan,
-        deficit_pct: pct,
-        items_equiv_88h: items,
-      };
-    }).sort((a, b) => b.deficit - a.deficit);
-  }, [summary.por_departamento, selectedGestionDept]);
-
-  // Series comparativa departamental
-  const seriesDeptDeficit: TrendSeries[] = useMemo(() => {
-    return [
-      {
-        id: 'deficit',
-        name: 'Déficit de Horas',
-        color: '#e11d48',
-        data: dataDepartamentos.map((d, i) => ({ year: i + 1, value: d.deficit })),
-      },
-      {
-        id: 'items',
-        name: 'Ítems Requeridos (×100 para escala)',
-        color: '#c9a751',
-        data: dataDepartamentos.map((d, i) => ({ year: i + 1, value: d.items_equiv_88h * 100 })),
-      },
-    ];
-  }, [dataDepartamentos]);
-
   return (
     <div className="space-y-6">
       {/* Header Institucional UIE */}
@@ -321,20 +495,42 @@ export function UieDeficitView({ data }: UieDeficitViewProps) {
               UIE · Balance y Auditoría de Carga Horaria SEP
             </span>
             <span className="text-[10px] font-medium text-slate-500">
-              17.274 Registros Consolidados (2021 - 2025) + Pronóstico 2026 - 2035
+              17.274 Registros Consolidados · Mapeador a Especialidades Oficiales ESFM
             </span>
           </div>
           <h1 className="text-2xl font-semibold text-slate-900 tracking-tight">
-            Déficit Docente por Cargo y Pronóstico de Necesidades ESFM
+            Módulo de Relaciones UIE, Déficit por Especialidad y Balance Departamental
           </h1>
           <p className="text-xs text-slate-500 mt-1 max-w-3xl">
-            Análisis de la brecha entre la carga horaria trabajada en aula y las horas pagadas por planilla fiscal. Permite agrupar los 807 cargos por familias pedagógicas y proyectar la demanda de nuevos maestros a ser admitidos en las ESFM.
+            Vincula los cargos docentes filtrados por Dependencia, Subsistema y Nivel con las 20 Especialidades Oficiales. Visualiza el déficit consolidado y analiza la comparativa departamental de Horas Trabajadas vs Horas en Planilla.
           </p>
         </div>
       </div>
 
       {/* Pestañas de Navegación del Módulo UIE */}
       <div className="flex items-center gap-1.5 overflow-x-auto pb-1 border-b border-slate-200">
+        <button
+          onClick={() => setActiveTab('relaciones')}
+          className={`flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-lg transition-colors whitespace-nowrap ${
+            activeTab === 'relaciones'
+              ? 'bg-[#c9a751] text-slate-900 shadow-xs'
+              : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+          }`}
+        >
+          <GraduationCapIcon size={16} />
+          Relaciones y Especialidades Oficiales
+        </button>
+        <button
+          onClick={() => setActiveTab('departamentos')}
+          className={`flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-lg transition-colors whitespace-nowrap ${
+            activeTab === 'departamentos'
+              ? 'bg-[#c9a751] text-slate-900 shadow-xs'
+              : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+          }`}
+        >
+          <MapPinIcon size={16} />
+          Tabla y Gráfico Departamental
+        </button>
         <button
           onClick={() => setActiveTab('cargos')}
           className={`flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-lg transition-colors whitespace-nowrap ${
@@ -344,7 +540,7 @@ export function UieDeficitView({ data }: UieDeficitViewProps) {
           }`}
         >
           <GridIcon size={16} />
-          Déficit por Cargo y Grupos
+          Déficit por Familias y Cargos
         </button>
         <button
           onClick={() => setActiveTab('pronostico')}
@@ -356,17 +552,6 @@ export function UieDeficitView({ data }: UieDeficitViewProps) {
         >
           <TrendingUpIcon size={16} />
           Pronóstico por Gestión (2026 - 2035)
-        </button>
-        <button
-          onClick={() => setActiveTab('departamentos')}
-          className={`flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-lg transition-colors whitespace-nowrap ${
-            activeTab === 'departamentos'
-              ? 'bg-[#c9a751] text-slate-900 shadow-xs'
-              : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
-          }`}
-        >
-          <MapPinIcon size={16} />
-          Distribución Departamental
         </button>
         <button
           onClick={() => setActiveTab('matriz_anual')}
@@ -388,7 +573,7 @@ export function UieDeficitView({ data }: UieDeficitViewProps) {
           }`}
         >
           <ChartBarIcon size={16} />
-          Base de Datos Supabase (17.274 Filas)
+          Base Supabase (17.274 Filas)
         </button>
       </div>
 
@@ -411,15 +596,15 @@ export function UieDeficitView({ data }: UieDeficitViewProps) {
           icon={<UsersIcon size={22} className="text-[#a08035]" />}
         />
         <StatCard
-          title="Carga Trabajada en Aula (2025)"
-          value={kpiStats.trabajadas2025}
-          subtitle={`Planilla fiscal cubre: ${kpiStats.planilla2025.toLocaleString('es-BO')} hrs`}
-          sourceBadge="Horas Aula"
+          title="Relaciones Mapeadas"
+          value={relacionesGuardadas.length}
+          subtitle={`${especialidadesOficiales.length} Especialidades Curriculares`}
+          sourceBadge="Mapeo UIE"
           sourceColor="purple"
-          icon={<SchoolIcon size={22} className="text-blue-600" />}
+          icon={<GraduationCapIcon size={22} className="text-blue-600" />}
         />
         <StatCard
-          title="Pronóstico Déficit Gestión 2026"
+          title="Pronóstico Déficit 2026"
           value={kpiStats.deficitPron2026}
           subtitle={`Demanda estimada: ~${kpiStats.itemsPron2026.toLocaleString('es-BO')} nuevos ítems`}
           sourceBadge="Forecast 2026"
@@ -429,23 +614,494 @@ export function UieDeficitView({ data }: UieDeficitViewProps) {
       </div>
 
       {/* =========================================================================
-          PESTAÑA 1: DÉFICIT POR CARGO Y AGRUPACIÓN
+          PESTAÑA 1: MÓDULO DE RELACIONES Y ESPECIALIDADES OFICIALES
+         ========================================================================= */}
+      {activeTab === 'relaciones' && (
+        <div className="space-y-6">
+          {/* Creador de Relaciones Interactivo */}
+          <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs space-y-4">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-100 pb-3">
+              <div>
+                <h2 className="text-base font-semibold text-slate-900 tracking-tight flex items-center gap-2">
+                  <FilterIcon size={18} className="text-[#c9a751]" />
+                  <span>Constructor de Relaciones: Cargo UIE $\longrightarrow$ Especialidad Oficial</span>
+                </h2>
+                <p className="text-xs text-slate-500">
+                  Selecciona la combinación exacta de Nivel, Subsistema y Dependencia para asignar el cargo a la Especialidad Oficial correcta.
+                </p>
+              </div>
+
+              {actionMessage && (
+                <div
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium border ${
+                    actionMessage.type === 'success'
+                      ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
+                      : 'bg-rose-50 text-rose-800 border-rose-200'
+                  }`}
+                >
+                  {actionMessage.text}
+                </div>
+              )}
+            </div>
+
+            {/* Selectores de Filtro de Criterio */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              <div>
+                <label className="block text-[11px] font-semibold text-slate-700 uppercase tracking-wider mb-1">
+                  1. Dependencia:
+                </label>
+                <select
+                  value={filterDependencia}
+                  onChange={(e) => setFilterDependencia(e.target.value)}
+                  className="w-full text-xs font-medium bg-slate-50 border border-slate-200 rounded-lg p-2 focus:outline-hidden focus:ring-1 focus:ring-[#c9a751] text-slate-900 cursor-pointer"
+                >
+                  <option value="all">Todas las Dependencias</option>
+                  {dependenciasList.map((d) => (
+                    <option key={d} value={d}>
+                      {d}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-semibold text-slate-700 uppercase tracking-wider mb-1">
+                  2. Subsistema:
+                </label>
+                <select
+                  value={filterSubsistema}
+                  onChange={(e) => setFilterSubsistema(e.target.value)}
+                  className="w-full text-xs font-medium bg-slate-50 border border-slate-200 rounded-lg p-2 focus:outline-hidden focus:ring-1 focus:ring-[#c9a751] text-slate-900 cursor-pointer"
+                >
+                  <option value="all">Todos los Subsistemas</option>
+                  {subsistemasList.map((s) => (
+                    <option key={s} value={s}>
+                      {s}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-semibold text-slate-700 uppercase tracking-wider mb-1">
+                  3. Nivel Escolar:
+                </label>
+                <select
+                  value={filterNivel}
+                  onChange={(e) => setFilterNivel(e.target.value)}
+                  className="w-full text-xs font-medium bg-slate-50 border border-slate-200 rounded-lg p-2 focus:outline-hidden focus:ring-1 focus:ring-[#c9a751] text-slate-900 cursor-pointer"
+                >
+                  <option value="all">Todos los Niveles</option>
+                  {nivelesList.map((n) => (
+                    <option key={n} value={n}>
+                      {n}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-semibold text-slate-700 uppercase tracking-wider mb-1">
+                  4. Buscar Cargo:
+                </label>
+                <div className="relative">
+                  <input
+                    type="text"
+                    value={filterSearchCargo}
+                    onChange={(e) => setFilterSearchCargo(e.target.value)}
+                    placeholder="Ej: Maestro Aula, Química..."
+                    className="w-full text-xs font-medium bg-slate-50 border border-slate-200 rounded-lg p-2 pr-7 focus:outline-hidden focus:ring-1 focus:ring-[#c9a751] text-slate-900"
+                  />
+                  {filterSearchCargo && (
+                    <button
+                      onClick={() => setFilterSearchCargo('')}
+                      className="absolute inset-y-0 right-0 pr-2 flex items-center text-slate-400 hover:text-slate-600"
+                    >
+                      <XIcon size={13} />
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Panel de Asignación y Selección de Cargo */}
+            <div className="pt-2 border-t border-slate-100 grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+              {/* Lista de cargos filtrados */}
+              <div className="lg:col-span-7 space-y-2">
+                <div className="flex items-center justify-between text-xs text-slate-600">
+                  <span className="font-medium">
+                    Cargos coincidentes ({cargosDisponiblesFiltrados.length}):
+                  </span>
+                  <span className="text-[11px] text-slate-500">Haz clic en un cargo para seleccionarlo</span>
+                </div>
+                <div className="max-h-64 overflow-y-auto rounded-xl border border-slate-200 divide-y divide-slate-100 bg-slate-50/50">
+                  {cargosDisponiblesFiltrados.length === 0 ? (
+                    <div className="p-4 text-center text-xs text-slate-400">
+                      No hay cargos con los filtros seleccionados
+                    </div>
+                  ) : (
+                    cargosDisponiblesFiltrados.slice(0, 80).map((item) => {
+                      const isSelected = selectedCargoItem?.key === item.key;
+                      const relacionNombre = mapaRelacionesExistentes.get(item.key) || mapaRelacionesExistentes.get(`cargo:${item.cargo}`);
+                      return (
+                        <div
+                          key={item.key}
+                          onClick={() => setSelectedCargoItem(item)}
+                          className={`p-2.5 text-xs cursor-pointer transition-colors flex items-center justify-between gap-3 ${
+                            isSelected
+                              ? 'bg-[#faf5e8] border-l-4 border-[#c9a751]'
+                              : 'hover:bg-slate-100'
+                          }`}
+                        >
+                          <div className="min-w-0">
+                            <p className="font-semibold text-slate-900 truncate">{item.cargo}</p>
+                            <p className="text-[10px] text-slate-500">
+                              {item.dependencia} · {item.subsistema} · {item.nivel}
+                            </p>
+                          </div>
+                          <div className="text-right shrink-0">
+                            {relacionNombre ? (
+                              <span className="inline-block px-2 py-0.5 rounded text-[10px] font-semibold bg-blue-50 text-blue-700 border border-blue-200">
+                                {relacionNombre}
+                              </span>
+                            ) : (
+                              <span className="inline-block px-1.5 py-0.5 rounded text-[10px] font-medium bg-slate-200 text-slate-600">
+                                Sin Asignar
+                              </span>
+                            )}
+                            <p className="text-[10px] text-rose-600 font-bold mt-0.5">
+                              Déficit: {item.total_deficit.toLocaleString('es-BO')} hrs
+                            </p>
+                          </div>
+                        </div>
+                      );
+                    })
+                  )}
+                </div>
+              </div>
+
+              {/* Formulario de vinculación */}
+              <div className="lg:col-span-5 bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                <span className="text-[11px] font-semibold text-slate-700 uppercase tracking-wider block">
+                  5. Vincular a Especialidad Oficial:
+                </span>
+
+                {selectedCargoItem ? (
+                  <div className="p-3 bg-white rounded-lg border border-slate-200 text-xs space-y-1">
+                    <span className="text-[10px] text-slate-500 uppercase font-semibold">Cargo Seleccionado:</span>
+                    <p className="font-bold text-slate-900">{selectedCargoItem.cargo}</p>
+                    <p className="text-[11px] text-slate-600">
+                      <strong>Nivel:</strong> {selectedCargoItem.nivel} · <strong>Dependencia:</strong> {selectedCargoItem.dependencia}
+                    </p>
+                    <p className="text-[11px] text-rose-600 font-semibold">
+                      Déficit Registrado: {selectedCargoItem.total_deficit.toLocaleString('es-BO')} hrs
+                    </p>
+                  </div>
+                ) : (
+                  <div className="p-3 bg-amber-50 rounded-lg border border-amber-200 text-xs text-amber-800">
+                    Selecciona un cargo de la lista izquierda para asignarle su Especialidad Oficial.
+                  </div>
+                )}
+
+                <div>
+                  <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                    Especialidad Curricular Oficial (20):
+                  </label>
+                  <select
+                    value={targetEspecialidadId}
+                    onChange={(e) => setTargetEspecialidadId(Number(e.target.value))}
+                    className="w-full text-xs font-semibold bg-white border border-slate-200 rounded-lg p-2 focus:outline-hidden focus:ring-1 focus:ring-[#c9a751] text-slate-900 cursor-pointer"
+                  >
+                    {especialidadesOficiales.map((e) => (
+                      <option key={e.id} value={e.id}>
+                        {e.id}. {e.nombre}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <button
+                  disabled={!selectedCargoItem}
+                  onClick={handleCrearRelacion}
+                  className="w-full py-2 px-3 rounded-lg text-xs font-semibold bg-[#c9a751] text-slate-900 hover:bg-[#b89542] transition-colors shadow-xs disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                >
+                  Guardar Relación en Supabase
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* DÉFICIT CALCULADO EN VIVO POR ESPECIALIDAD OFICIAL */}
+          <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs space-y-4">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-100 pb-3">
+              <div>
+                <h2 className="text-base font-semibold text-slate-900 tracking-tight flex items-center gap-2">
+                  <ScaleIcon size={18} className="text-rose-600" />
+                  <span>Déficit Consolidado por Especialidad Oficial ESFM</span>
+                </h2>
+                <p className="text-xs text-slate-500">
+                  Cálculo automático en vivo sumando todas las horas trabajadas vs planilla según las relaciones asignadas.
+                </p>
+              </div>
+
+              {/* Filtro de Gestión para el resumen */}
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-medium text-slate-600">Gestión:</span>
+                <select
+                  value={selectedGestionEsp}
+                  onChange={(e) => setSelectedGestionEsp(e.target.value)}
+                  className="text-xs font-semibold bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 focus:outline-hidden focus:ring-1 focus:ring-[#c9a751] text-slate-900 cursor-pointer"
+                >
+                  <option value="all">Todas las Gestiones (2021-2025)</option>
+                  <option value="2025">Gestión 2025</option>
+                  <option value="2024">Gestión 2024</option>
+                  <option value="2023">Gestión 2023</option>
+                  <option value="2022">Gestión 2022</option>
+                  <option value="2021">Gestión 2021</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Gráfico y Torta */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+              <PieChart
+                title="Participación en el Déficit por Especialidad Oficial"
+                subtitle="Concentración de horas no cubiertas en las 20 carreras de formación docente"
+                data={pieEspecialidadesDeficit}
+                donut={true}
+                unit="horas"
+              />
+
+              {/* Ranking de las 5 más críticas */}
+              <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                <div className="flex items-center justify-between text-xs border-b border-slate-200 pb-2">
+                  <span className="font-semibold text-slate-900">Especialidades con Mayor Demanda de Ítems</span>
+                  <span className="text-[10px] text-rose-700 font-bold bg-rose-50 px-2 py-0.5 rounded border border-rose-200">
+                    Prioridad de Admisión
+                  </span>
+                </div>
+                <div className="space-y-2.5">
+                  {tablaEspecialidadesDeficit.slice(0, 5).map((esp, idx) => (
+                    <div key={esp.id} className="p-2.5 bg-white rounded-lg border border-slate-200">
+                      <div className="flex items-center justify-between text-xs mb-1">
+                        <span className="font-semibold text-slate-900 truncate">
+                          {idx + 1}. {esp.nombre}
+                        </span>
+                        <span className="font-bold text-rose-600">
+                          {esp.deficit.toLocaleString('es-BO')} hrs
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between text-[11px] text-slate-500">
+                        <span>Ítems faltantes: <strong>{esp.items_equiv_88h.toLocaleString('es-BO')}</strong> maestros</span>
+                        <span>Brecha: {esp.deficit_pct}%</span>
+                      </div>
+                      <div className="w-full bg-slate-200 h-1.5 rounded-full mt-1.5 overflow-hidden">
+                        <div
+                          className="bg-rose-500 h-full rounded-full"
+                          style={{ width: `${Math.min(100, Math.max(5, (esp.deficit / (tablaEspecialidadesDeficit[0]?.deficit || 1)) * 100))}%` }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Tabla Completa de las 20 Especialidades */}
+            <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+              <table className="w-full text-left border-collapse text-xs">
+                <thead>
+                  <tr className="bg-slate-50 border-b border-slate-200 text-slate-600 font-medium uppercase text-[11px]">
+                    <th className="py-3 px-3">Especialidad Oficial Curricular</th>
+                    <th className="py-3 px-3 text-right">Horas Trabajadas</th>
+                    <th className="py-3 px-3 text-right">Horas en Planilla</th>
+                    <th className="py-3 px-3 text-right text-rose-700">Déficit Horas</th>
+                    <th className="py-3 px-3 text-center">% Brecha</th>
+                    <th className="py-3 px-3 text-right text-[#c9a751]">Ítems Necesarios (88h)</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {tablaEspecialidadesDeficit.map((esp) => (
+                    <tr key={esp.id} className="hover:bg-slate-50/80 transition-colors">
+                      <td className="py-3 px-3 font-semibold text-slate-900 flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-rose-500" />
+                        <span>{esp.nombre}</span>
+                      </td>
+                      <td className="py-3 px-3 text-right font-medium text-slate-800">
+                        {esp.trabajadas.toLocaleString('es-BO')}
+                      </td>
+                      <td className="py-3 px-3 text-right font-medium text-slate-800">
+                        {esp.planilla.toLocaleString('es-BO')}
+                      </td>
+                      <td className="py-3 px-3 text-right font-bold text-rose-600">
+                        {esp.deficit.toLocaleString('es-BO')}
+                      </td>
+                      <td className="py-3 px-3 text-center font-medium">
+                        <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-rose-50 text-rose-700 border border-rose-200">
+                          {esp.deficit_pct}%
+                        </span>
+                      </td>
+                      <td className="py-3 px-3 text-right font-bold text-slate-900">
+                        <span className="bg-[#faf5e8] text-[#c9a751] border border-[#e5d5a6] px-2 py-0.5 rounded">
+                          {esp.items_equiv_88h.toLocaleString('es-BO')} ítems
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* =========================================================================
+          PESTAÑA 2: TABLA Y GRÁFICO LINEAL DEPARTAMENTAL
+         ========================================================================= */}
+      {activeTab === 'departamentos' && (
+        <div className="space-y-6">
+          <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs space-y-4">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-100 pb-3">
+              <div>
+                <h2 className="text-base font-semibold text-slate-900 tracking-tight flex items-center gap-2">
+                  <MapPinIcon size={18} className="text-[#c9a751]" />
+                  <span>Balance Departamental: Horas Trabajadas vs Planilla vs Déficit</span>
+                </h2>
+                <p className="text-xs text-slate-500">
+                  Selecciona la gestión deseada para consultar la tabla comparativa de los 9 departamentos y su proyección en gráfico lineal continuo.
+                </p>
+              </div>
+
+              {/* Controles de Selección por Gestión y Métricas */}
+              <div className="flex items-center gap-2 flex-wrap">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-xs font-semibold text-slate-700">Gestión:</span>
+                  <select
+                    value={gestionDept}
+                    onChange={(e) => setGestionDept(e.target.value)}
+                    className="text-xs font-semibold bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 focus:outline-hidden focus:ring-1 focus:ring-[#c9a751] text-slate-900 cursor-pointer"
+                  >
+                    <option value="all">Total Acumulado (2021-2025)</option>
+                    <option value="2025">Gestión 2025</option>
+                    <option value="2024">Gestión 2024</option>
+                    <option value="2023">Gestión 2023</option>
+                    <option value="2022">Gestión 2022</option>
+                    <option value="2021">Gestión 2021</option>
+                  </select>
+                </div>
+
+                <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-lg text-xs font-medium">
+                  <button
+                    onClick={() => setDeptMetric('comparativa')}
+                    className={`px-2.5 py-1 rounded-md transition-colors ${
+                      deptMetric === 'comparativa' ? 'bg-white text-slate-900 shadow-2xs font-semibold' : 'text-slate-600'
+                    }`}
+                  >
+                    Comparativa Completa
+                  </button>
+                  <button
+                    onClick={() => setDeptMetric('deficit')}
+                    className={`px-2.5 py-1 rounded-md transition-colors ${
+                      deptMetric === 'deficit' ? 'bg-rose-600 text-white shadow-2xs font-semibold' : 'text-slate-600'
+                    }`}
+                  >
+                    Solo Déficit
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Gráfico Lineal Departamental Continuo */}
+            <TrendLineChart
+              title={`Evolución Departamental · Gestión ${gestionDept === 'all' ? '2021 - 2025' : gestionDept}`}
+              subtitle="Curvas comparativas entre Horas Trabajadas en Aula, Horas Cubiertas en Planilla y Déficit resultante en los 9 departamentos"
+              series={seriesLinealDepartamentos}
+              xLabelFormatter={(idx) => tablaDepartamentalGestion[idx - 1]?.departamento || ''}
+              unit="horas"
+              height={360}
+              showArea={false}
+            />
+
+            {/* TABLA PRINCIPAL DEPARTAMENTAL SOLICITADA */}
+            <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+              <table className="w-full text-left border-collapse text-xs">
+                <thead>
+                  <tr className="bg-slate-50 border-b border-slate-200 text-slate-600 font-medium uppercase text-[11px]">
+                    <th className="py-3 px-3">Departamento</th>
+                    <th className="py-3 px-3 text-right">Horas Trabajadas</th>
+                    <th className="py-3 px-3 text-right">Horas en Planilla</th>
+                    <th className="py-3 px-3 text-right text-rose-700">Déficit</th>
+                    <th className="py-3 px-3 text-center">% Brecha</th>
+                    <th className="py-3 px-3 text-right text-[#c9a751]">Ítems Equivalentes (88h)</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {tablaDepartamentalGestion.map((d) => (
+                    <tr key={d.id} className="hover:bg-slate-50/80 transition-colors">
+                      <td className="py-3 px-3 font-semibold text-slate-900">{d.departamento}</td>
+                      <td className="py-3 px-3 text-right font-medium text-slate-800">
+                        {d.horas_trabajadas.toLocaleString('es-BO')}
+                      </td>
+                      <td className="py-3 px-3 text-right font-medium text-slate-800">
+                        {d.horas_planilla.toLocaleString('es-BO')}
+                      </td>
+                      <td className="py-3 px-3 text-right font-bold text-rose-600">
+                        {d.deficit.toLocaleString('es-BO')}
+                      </td>
+                      <td className="py-3 px-3 text-center font-medium">
+                        <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-rose-50 text-rose-700 border border-rose-200">
+                          {d.deficit_pct}%
+                        </span>
+                      </td>
+                      <td className="py-3 px-3 text-right font-bold text-slate-900">
+                        <span className="bg-[#faf5e8] text-[#c9a751] border border-[#e5d5a6] px-2 py-0.5 rounded">
+                          {d.items_equiv_88h.toLocaleString('es-BO')} ítems
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                  {/* Fila Totalizadora */}
+                  <tr className="bg-slate-50/90 font-bold border-t-2 border-slate-300">
+                    <td className="py-3.5 px-3 text-slate-900 uppercase">Total Nacional</td>
+                    <td className="py-3.5 px-3 text-right text-slate-900">
+                      {totalDepartamentalGestion.totTrab.toLocaleString('es-BO')}
+                    </td>
+                    <td className="py-3.5 px-3 text-right text-slate-900">
+                      {totalDepartamentalGestion.totPlan.toLocaleString('es-BO')}
+                    </td>
+                    <td className="py-3.5 px-3 text-right text-rose-700">
+                      {totalDepartamentalGestion.totDef.toLocaleString('es-BO')}
+                    </td>
+                    <td className="py-3.5 px-3 text-center text-rose-700">
+                      {totalDepartamentalGestion.totPct}%
+                    </td>
+                    <td className="py-3.5 px-3 text-right text-[#c9a751]">
+                      {totalDepartamentalGestion.totItems.toLocaleString('es-BO')} ítems
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* =========================================================================
+          PESTAÑA 3: DÉFICIT POR CARGOS Y FAMILIAS
          ========================================================================= */}
       {activeTab === 'cargos' && (
         <div className="space-y-6">
-          {/* Panel de Control y Filtros */}
           <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs space-y-4">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
               <div>
                 <h2 className="text-base font-semibold text-slate-900 tracking-tight">
-                  Balance de Déficit por Cargos y Familias Pedagógicas
+                  Balance de Déficit por Familias Pedagógicas y Cargos
                 </h2>
                 <p className="text-xs text-slate-500">
-                  Agrupa los 807 cargos específicos en 12 familias de formación docente o examina cada cargo individualmente.
+                  Agrupa los 807 cargos singulares en 12 familias de formación docente o visualiza cada cargo específico.
                 </p>
               </div>
 
-              {/* Selector Modo: Grupos vs Individual */}
               <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl self-start md:self-auto">
                 <button
                   onClick={() => setCargoMode('grupos')}
@@ -456,7 +1112,7 @@ export function UieDeficitView({ data }: UieDeficitViewProps) {
                   }`}
                 >
                   <LayersIcon size={14} />
-                  <span>Agrupación por Familias</span>
+                  <span>Familias Pedagógicas</span>
                 </button>
                 <button
                   onClick={() => setCargoMode('individual')}
@@ -472,8 +1128,7 @@ export function UieDeficitView({ data }: UieDeficitViewProps) {
               </div>
             </div>
 
-            {/* Controles de Filtros */}
-            <div className="pt-3 border-t border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-3 flex-wrap">
+            <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-3 flex-wrap">
               <div className="flex items-center gap-2 flex-wrap">
                 <span className="text-xs font-medium text-slate-600">Gestión:</span>
                 <div className="flex items-center gap-1">
@@ -492,203 +1147,55 @@ export function UieDeficitView({ data }: UieDeficitViewProps) {
                   ))}
                 </div>
               </div>
-
-              {cargoMode === 'individual' && (
-                <div className="flex items-center gap-2 flex-wrap">
-                  <div className="relative w-full sm:w-64">
-                    <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-slate-400">
-                      <SearchIcon size={14} />
-                    </div>
-                    <input
-                      type="text"
-                      value={searchCargoTerm}
-                      onChange={(e) => setSearchCargoTerm(e.target.value)}
-                      placeholder="Buscar cargo (ej: Matemáticas, BTH)..."
-                      className="w-full text-xs pl-8 pr-7 py-1.5 rounded-lg border border-slate-200 focus:outline-hidden focus:ring-1 focus:ring-[#c9a751] focus:border-[#c9a751] bg-slate-50/50"
-                    />
-                    {searchCargoTerm && (
-                      <button
-                        onClick={() => setSearchCargoTerm('')}
-                        className="absolute inset-y-0 right-0 pr-2 flex items-center text-slate-400 hover:text-slate-600"
-                      >
-                        <XIcon size={13} />
-                      </button>
-                    )}
-                  </div>
-
-                  <select
-                    value={selectedGrupoFilter}
-                    onChange={(e) => setSelectedGrupoFilter(e.target.value)}
-                    className="text-xs font-medium bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-hidden focus:ring-1 focus:ring-[#c9a751] text-slate-900 cursor-pointer"
-                  >
-                    <option value="all">Todas las Familias</option>
-                    {summary.por_grupo_cargo.map((g) => (
-                      <option key={g.grupo} value={g.grupo}>
-                        {g.grupo}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              )}
             </div>
           </div>
 
-          {/* VISTA 1: AGRUPACIÓN POR FAMILIAS */}
-          {cargoMode === 'grupos' ? (
-            <div className="space-y-6">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-                <PieChart
-                  title="Distribución del Déficit por Familias de Formación"
-                  subtitle={`Participación porcentual de cada rama en las horas faltantes (${selectedGestionCargo === 'all' ? 'Total 2021-2025' : `Gestión ${selectedGestionCargo}`})`}
-                  data={pieGruposCargo}
-                  donut={true}
-                  unit="horas"
-                />
-
-                {/* Resumen de las 4 familias más críticas */}
-                <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-xs space-y-3.5">
-                  <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
-                    <h3 className="text-sm font-semibold text-slate-900">
-                      Familias con Mayor Déficit Horario
-                    </h3>
-                    <span className="text-[10px] font-semibold text-rose-700 bg-rose-50 px-2 py-0.5 rounded border border-rose-200">
-                      Prioridad Formación ESFM
-                    </span>
-                  </div>
-                  <div className="space-y-3">
-                    {dataGruposCargo.slice(0, 5).map((item, idx) => (
-                      <div key={item.grupo} className="p-3 rounded-lg border border-slate-200 bg-slate-50/70">
-                        <div className="flex items-center justify-between text-xs mb-1">
-                          <span className="font-semibold text-slate-900 truncate">
-                            {idx + 1}. {item.grupo}
-                          </span>
-                          <span className="font-bold text-rose-600">
-                            {item.deficit.toLocaleString('es-BO')} hrs
-                          </span>
-                        </div>
-                        <div className="flex items-center justify-between text-[11px] text-slate-500">
-                          <span>Ítems equivalentes: <strong>{item.items_equiv_88h.toLocaleString('es-BO')}</strong> maestros</span>
-                          <span>Brecha: {item.deficit_pct}%</span>
-                        </div>
-                        <div className="w-full bg-slate-200 h-1.5 rounded-full mt-2 overflow-hidden">
-                          <div
-                            className="bg-rose-500 h-full rounded-full"
-                            style={{ width: `${Math.min(100, Math.max(5, (item.deficit / dataGruposCargo[0].deficit) * 100))}%` }}
-                          />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Tabla Consolidada de Grupos de Cargo */}
-              <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-2xs">
-                <table className="w-full text-left border-collapse text-xs">
-                  <thead>
-                    <tr className="bg-slate-50 border-b border-slate-200 text-slate-600 font-medium uppercase text-[11px]">
-                      <th className="py-3 px-3">Familia Pedagógica / Especialidad</th>
-                      <th className="py-3 px-3 text-right">Horas Trabajadas</th>
-                      <th className="py-3 px-3 text-right">Horas Planilla</th>
-                      <th className="py-3 px-3 text-right text-rose-700">Déficit de Horas</th>
-                      <th className="py-3 px-3 text-center">% Déficit</th>
-                      <th className="py-3 px-3 text-right text-[#c9a751]">Ítems Equivalentes (88h)</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-100">
-                    {dataGruposCargo.map((item) => (
-                      <tr key={item.grupo} className="hover:bg-slate-50/80 transition-colors">
-                        <td className="py-3 px-3 font-semibold text-slate-900 flex items-center gap-2">
-                          <span className="w-2 h-2 rounded-full bg-rose-500" />
-                          <span>{item.grupo}</span>
-                        </td>
-                        <td className="py-3 px-3 text-right font-medium text-slate-800">
-                          {item.trabajadas.toLocaleString('es-BO')}
-                        </td>
-                        <td className="py-3 px-3 text-right font-medium text-slate-800">
-                          {item.planilla.toLocaleString('es-BO')}
-                        </td>
-                        <td className="py-3 px-3 text-right font-bold text-rose-600">
-                          {item.deficit.toLocaleString('es-BO')}
-                        </td>
-                        <td className="py-3 px-3 text-center">
-                          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-rose-50 text-rose-700 border border-rose-200">
-                            {item.deficit_pct}%
-                          </span>
-                        </td>
-                        <td className="py-3 px-3 text-right font-bold text-slate-900">
-                          <span className="bg-[#faf5e8] text-[#c9a751] border border-[#e5d5a6] px-2 py-0.5 rounded">
-                            {item.items_equiv_88h.toLocaleString('es-BO')} ítems
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          ) : (
-            /* VISTA 2: CARGOS ESPECÍFICOS INDIVIDUALES */
-            <div className="space-y-4">
-              <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-2xs">
-                <table className="w-full text-left border-collapse text-xs">
-                  <thead>
-                    <tr className="bg-slate-50 border-b border-slate-200 text-slate-600 font-medium uppercase text-[11px]">
-                      <th className="py-3 px-3">Cargo Docente / Administrativo</th>
-                      <th className="py-3 px-3 text-left">Familia Asignada</th>
-                      <th className="py-3 px-3 text-right">Horas Trabajadas</th>
-                      <th className="py-3 px-3 text-right">Horas Planilla</th>
-                      <th className="py-3 px-3 text-right text-rose-700">Déficit de Horas</th>
-                      <th className="py-3 px-3 text-center">% Brecha</th>
-                      <th className="py-3 px-3 text-right text-[#c9a751]">Ítems Estimados (88h)</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-100">
-                    {dataCargosIndividuales.slice(0, 100).map((c, idx) => (
-                      <tr key={`${c.cargo}-${idx}`} className="hover:bg-slate-50/80 transition-colors">
-                        <td className="py-2.5 px-3 font-semibold text-slate-900">
-                          {c.cargo}
-                        </td>
-                        <td className="py-2.5 px-3 text-slate-600">
-                          <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200 text-[10px]">
-                            {c.grupo}
-                          </span>
-                        </td>
-                        <td className="py-2.5 px-3 text-right font-medium text-slate-800">
-                          {c.trabajadas.toLocaleString('es-BO')}
-                        </td>
-                        <td className="py-2.5 px-3 text-right font-medium text-slate-800">
-                          {c.planilla.toLocaleString('es-BO')}
-                        </td>
-                        <td className="py-2.5 px-3 text-right font-bold text-rose-600">
-                          {c.deficit.toLocaleString('es-BO')}
-                        </td>
-                        <td className="py-2.5 px-3 text-center font-medium">
-                          <span className="text-[11px] text-slate-700">
-                            {c.deficit_pct}%
-                          </span>
-                        </td>
-                        <td className="py-2.5 px-3 text-right font-bold text-slate-900">
-                          <span className="bg-[#faf5e8] text-[#c9a751] border border-[#e5d5a6] px-1.5 py-0.5 rounded text-[11px]">
-                            {c.items_equiv_88h.toLocaleString('es-BO')}
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              <div className="flex items-center justify-between text-xs text-slate-500 px-1">
-                <span>Mostrando los 100 cargos con mayor déficit de {dataCargosIndividuales.length} filtrados</span>
-                <span>Fuente: Registros UIE Ministerio de Educación</span>
-              </div>
-            </div>
-          )}
+          {/* VISTA FAMILIAS */}
+          <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+            <table className="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr className="bg-slate-50 border-b border-slate-200 text-slate-600 font-medium uppercase text-[11px]">
+                  <th className="py-3 px-3">Familia Pedagógica</th>
+                  <th className="py-3 px-3 text-right">Horas Trabajadas</th>
+                  <th className="py-3 px-3 text-right">Horas en Planilla</th>
+                  <th className="py-3 px-3 text-right text-rose-700">Déficit</th>
+                  <th className="py-3 px-3 text-center">% Brecha</th>
+                  <th className="py-3 px-3 text-right text-[#c9a751]">Ítems Equivalentes (88h)</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {summary.por_grupo_cargo.map((g) => (
+                  <tr key={g.grupo} className="hover:bg-slate-50/80 transition-colors">
+                    <td className="py-3 px-3 font-semibold text-slate-900">{g.grupo}</td>
+                    <td className="py-3 px-3 text-right font-medium text-slate-800">
+                      {g.trabajadas_total.toLocaleString('es-BO')}
+                    </td>
+                    <td className="py-3 px-3 text-right font-medium text-slate-800">
+                      {g.planilla_total.toLocaleString('es-BO')}
+                    </td>
+                    <td className="py-3 px-3 text-right font-bold text-rose-600">
+                      {g.deficit_total.toLocaleString('es-BO')}
+                    </td>
+                    <td className="py-3 px-3 text-center">
+                      <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-rose-50 text-rose-700 border border-rose-200">
+                        {g.deficit_pct}%
+                      </span>
+                    </td>
+                    <td className="py-3 px-3 text-right font-bold text-slate-900">
+                      <span className="bg-[#faf5e8] text-[#c9a751] border border-[#e5d5a6] px-2 py-0.5 rounded">
+                        {g.items_equiv_88h.toLocaleString('es-BO')} ítems
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
 
       {/* =========================================================================
-          PESTAÑA 2: PRONÓSTICO POR GESTIÓN (2026 - 2035)
+          PESTAÑA 4: PRONÓSTICO POR GESTIÓN (2026 - 2035)
          ========================================================================= */}
       {activeTab === 'pronostico' && (
         <div className="space-y-6">
@@ -705,7 +1212,6 @@ export function UieDeficitView({ data }: UieDeficitViewProps) {
               </div>
             </div>
 
-            {/* Gráfico Continuo de Tendencia y Pronóstico */}
             <TrendLineChart
               title="Evolución y Pronóstico de Horas: Demanda Trabajada vs Planilla Fiscal (2021 - 2035)"
               subtitle="Línea roja representa el déficit de horas no cubiertas que requiere asignación presupuestaria o nuevos egresados ESFM"
@@ -716,7 +1222,6 @@ export function UieDeficitView({ data }: UieDeficitViewProps) {
             />
           </div>
 
-          {/* YearProgression Visual del Pronóstico de Déficit */}
           <YearProgression
             title="Trayectoria Proyectada del Déficit de Horas Docentes (2021 - 2035)"
             subtitle="Planificación de mediano y largo plazo para cupos de admisión en las Escuelas Superiores de Formación de Maestros"
@@ -724,157 +1229,11 @@ export function UieDeficitView({ data }: UieDeficitViewProps) {
             unit="horas deficit"
             color="#e11d48"
           />
-
-          {/* Matriz Detallada de Pronóstico */}
-          <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-2xs">
-            <table className="w-full text-left border-collapse text-xs">
-              <thead>
-                <tr className="bg-slate-50 border-b border-slate-200 text-slate-600 font-medium uppercase text-[11px]">
-                  <th className="py-3 px-3">Gestión</th>
-                  <th className="py-3 px-3 text-center">Tipo de Dato</th>
-                  <th className="py-3 px-3 text-right">Carga Horaria Trabajada</th>
-                  <th className="py-3 px-3 text-right">Horas Pagadas en Planilla</th>
-                  <th className="py-3 px-3 text-right text-rose-700">Déficit Horas</th>
-                  <th className="py-3 px-3 text-center">% Déficit</th>
-                  <th className="py-3 px-3 text-right text-[#c9a751]">Nuevos Ítems Necesarios (88h)</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100">
-                {timelineCompleta.map((row) => (
-                  <tr
-                    key={row.year}
-                    className={`transition-colors ${
-                      row.esPronostico ? 'bg-amber-50/20 hover:bg-amber-50/40' : 'hover:bg-slate-50'
-                    }`}
-                  >
-                    <td className="py-3 px-3 font-semibold text-slate-900">{row.year}</td>
-                    <td className="py-3 px-3 text-center">
-                      <span
-                        className={`px-2 py-0.5 rounded text-[10px] font-semibold ${
-                          row.esPronostico
-                            ? 'bg-[#faf5e8] text-[#c9a751] border border-[#e5d5a6]'
-                            : 'bg-slate-100 text-slate-700 border border-slate-200'
-                        }`}
-                      >
-                        {row.esPronostico ? 'Pronóstico' : 'Histórico Real'}
-                      </span>
-                    </td>
-                    <td className="py-3 px-3 text-right font-medium text-slate-800">
-                      {row.trabajadas.toLocaleString('es-BO')}
-                    </td>
-                    <td className="py-3 px-3 text-right font-medium text-slate-800">
-                      {row.planilla.toLocaleString('es-BO')}
-                    </td>
-                    <td className="py-3 px-3 text-right font-bold text-rose-600">
-                      {row.deficit.toLocaleString('es-BO')}
-                    </td>
-                    <td className="py-3 px-3 text-center font-medium">
-                      {row.pct}%
-                    </td>
-                    <td className="py-3 px-3 text-right font-bold text-slate-900">
-                      <span className="bg-[#faf5e8] text-[#c9a751] border border-[#e5d5a6] px-2 py-0.5 rounded">
-                        {row.items.toLocaleString('es-BO')} ítems
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
         </div>
       )}
 
       {/* =========================================================================
-          PESTAÑA 3: DISTRIBUCIÓN DEPARTAMENTAL
-         ========================================================================= */}
-      {activeTab === 'departamentos' && (
-        <div className="space-y-6">
-          <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs space-y-4">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
-              <div>
-                <h2 className="text-base font-semibold text-slate-900 tracking-tight">
-                  Déficit Docente por Departamento
-                </h2>
-                <p className="text-xs text-slate-500">
-                  Brecha territorial de horas no cubiertas en los 9 departamentos de Bolivia.
-                </p>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <span className="text-xs font-medium text-slate-600">Gestión:</span>
-                <select
-                  value={selectedGestionDept}
-                  onChange={(e) => setSelectedGestionDept(e.target.value)}
-                  className="text-xs font-semibold bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 focus:outline-hidden focus:ring-1 focus:ring-[#c9a751] text-slate-900 cursor-pointer"
-                >
-                  <option value="all">Total Acumulado (2021-2025)</option>
-                  <option value="2025">Gestión 2025</option>
-                  <option value="2024">Gestión 2024</option>
-                  <option value="2023">Gestión 2023</option>
-                  <option value="2022">Gestión 2022</option>
-                  <option value="2021">Gestión 2021</option>
-                </select>
-              </div>
-            </div>
-
-            {/* Gráfico Comparativo Departamental */}
-            <TrendLineChart
-              title={`Comparativa de Déficit de Horas por Departamento (${selectedGestionDept === 'all' ? '2021-2025' : selectedGestionDept})`}
-              subtitle="Volumen absoluto de horas faltantes en cada departamento"
-              series={seriesDeptDeficit}
-              xLabelFormatter={(idx) => dataDepartamentos[idx - 1]?.departamento || ''}
-              unit="horas"
-              height={360}
-              showArea={false}
-            />
-
-            {/* Tabla Departamental */}
-            <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
-              <table className="w-full text-left border-collapse text-xs">
-                <thead>
-                  <tr className="bg-slate-50 border-b border-slate-200 text-slate-600 font-medium uppercase text-[11px]">
-                    <th className="py-3 px-3">Departamento</th>
-                    <th className="py-3 px-3 text-right">Horas Trabajadas</th>
-                    <th className="py-3 px-3 text-right">Horas Pagadas</th>
-                    <th className="py-3 px-3 text-right text-rose-700">Déficit Horas</th>
-                    <th className="py-3 px-3 text-center">% Déficit</th>
-                    <th className="py-3 px-3 text-right text-[#c9a751]">Ítems Equivalentes (88h)</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100">
-                  {dataDepartamentos.map((d) => (
-                    <tr key={d.id} className="hover:bg-slate-50/80 transition-colors">
-                      <td className="py-3 px-3 font-semibold text-slate-900">{d.departamento}</td>
-                      <td className="py-3 px-3 text-right font-medium text-slate-800">
-                        {d.trabajadas.toLocaleString('es-BO')}
-                      </td>
-                      <td className="py-3 px-3 text-right font-medium text-slate-800">
-                        {d.planilla.toLocaleString('es-BO')}
-                      </td>
-                      <td className="py-3 px-3 text-right font-bold text-rose-600">
-                        {d.deficit.toLocaleString('es-BO')}
-                      </td>
-                      <td className="py-3 px-3 text-center font-medium">
-                        <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-rose-50 text-rose-700 border border-rose-200">
-                          {d.deficit_pct}%
-                        </span>
-                      </td>
-                      <td className="py-3 px-3 text-right font-bold text-slate-900">
-                        <span className="bg-[#faf5e8] text-[#c9a751] border border-[#e5d5a6] px-2 py-0.5 rounded">
-                          {d.items_equiv_88h.toLocaleString('es-BO')} ítems
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* =========================================================================
-          PESTAÑA 4: MATRIZ HISTÓRICA (2021 - 2025)
+          PESTAÑA 5: MATRIZ HISTÓRICA (2021 - 2025)
          ========================================================================= */}
       {activeTab === 'matriz_anual' && (
         <div className="space-y-6">
@@ -940,7 +1299,7 @@ export function UieDeficitView({ data }: UieDeficitViewProps) {
       )}
 
       {/* =========================================================================
-          PESTAÑA 5: EXPLORADOR EN VIVO (17.274 FILAS SUPABASE)
+          PESTAÑA 6: BASE SUPABASE (17.274 FILAS)
          ========================================================================= */}
       {activeTab === 'registros_api' && (
         <div className="space-y-6">
@@ -1101,9 +1460,9 @@ export function UieDeficitView({ data }: UieDeficitViewProps) {
 
       {/* SourceBadge */}
       <SourceBadge
-        sourceName="UIE · Unidad de Información Educativa"
+        sourceName="UIE & DGFM · Subsistema de Educación Regular, Alternativa y Especial"
         institutionTitle="Ministerio de Educación del Estado Plurinacional de Bolivia"
-        methodology="Auditoría censal cruzada de Carga Horaria Trabajada en Unidades Educativas frente a la Planilla Fiscal Efectiva. 17.274 registros administrados en PostgreSQL Supabase."
+        methodology="Auditoría censal cruzada de Carga Horaria Trabajada en Unidades Educativas frente a la Planilla Fiscal Efectiva vinculada con las 20 Especialidades Oficiales ESFM."
         links={[
           {
             title: 'Base de Datos de Carga Horaria y Déficit UIE',

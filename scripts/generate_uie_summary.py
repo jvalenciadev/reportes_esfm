@@ -231,3 +231,4 @@ with open(out_path, 'w', encoding='utf-8') as f:
     json.dump(output_data, f, ensure_ascii=False, indent=2)
 
 print(f'Resumen UIE generado exitosamente en {out_path} ({os.path.getsize(out_path):,} bytes).')
+
