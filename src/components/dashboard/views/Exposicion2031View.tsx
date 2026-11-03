@@ -985,8 +985,8 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                     <th className="px-3 py-2.5 text-slate-700">Población INE 2024 (4-17)</th>
                     <th className="px-3 py-2.5 text-slate-700">Población INE 2026 (4-17)</th>
                     <th className="px-3 py-2.5 text-rose-600">Población INE 2031 (4-17)</th>
-                    <th className="px-3 py-2.5 text-emerald-700">Cobertura Pública (SIE/INE)</th>
-                    <th className="px-3 py-2.5">Var. INE (24→31)</th>
+                    {/* <th className="px-3 py-2.5 text-emerald-700">Cobertura Pública (SIE/INE)</th> */}
+                    {/* <th className="px-3 py-2.5">Var. INE (24→31)</th> */}
                     <th className="px-3 py-2.5">Tendencia</th>
                   </tr>
                 </thead>
@@ -998,10 +998,10 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                       <td className="px-3 py-2.5">{dpto.ine_2024.toLocaleString()}</td>
                       <td className="px-3 py-2.5">{dpto.ine_2026.toLocaleString()}</td>
                       <td className="px-3 py-2.5 font-bold text-rose-600">{dpto.ine_2031.toLocaleString()}</td>
-                      <td className="px-3 py-2.5 font-black text-emerald-700">{dpto.tasa_cobertura_publica}%</td>
-                      <td className={`px-3 py-2.5 font-black ${dpto.variacion_pct < 0 ? "text-rose-600" : "text-emerald-600"}`}>
+                      {/* <td className="px-3 py-2.5 font-black text-emerald-700">{dpto.tasa_cobertura_publica}%</td> */}
+                      {/* <td className={`px-3 py-2.5 font-black ${dpto.variacion_pct < 0 ? "text-rose-600" : "text-emerald-600"}`}>
                         {dpto.variacion_pct > 0 ? "+" : ""}{dpto.variacion_pct}%
-                      </td>
+                      </td> */}
                       <td className="px-3 py-2.5">
                         <span
                           className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black border ${dpto.tendencia === "EXPANSION"
@@ -1026,8 +1026,8 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                     <td className="px-3 py-2.5">{POB_INE_2024_TOTAL.toLocaleString()}</td>
                     <td className="px-3 py-2.5">{POB_INE_2026_TOTAL.toLocaleString()}</td>
                     <td className="px-3 py-2.5 text-rose-700">{POB_INE_2031_TOTAL.toLocaleString()}</td>
-                    <td className="px-3 py-2.5 font-black text-emerald-800">{TASA_COBERTURA_PUBLICA_2026}%</td>
-                    <td className="px-3 py-2.5 text-rose-700">-13.0%</td>
+                    {/* <td className="px-3 py-2.5 font-black text-emerald-800">{TASA_COBERTURA_PUBLICA_2026}%</td> */}
+                    {/* <td className="px-3 py-2.5 text-rose-700">-13.0%</td> */}
                     <td className="px-3 py-2.5 text-rose-700">CONTRACCIÓN</td>
                   </tr>
                 </tbody>
