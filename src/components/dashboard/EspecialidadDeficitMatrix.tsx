@@ -271,8 +271,11 @@ export function EspecialidadDeficitMatrix({ onGoToConfig }: EspecialidadDeficitM
     }
   };
 
-  const baseHorasActual = reportData?.resumen_nacional?.base_horas_aplicada || 88;
-  const esPromedioAutomatico = reportData?.resumen_nacional?.es_promedio_dinamico ?? true;
+  const esEspecial = reportData?.especialidad?.nombre?.toUpperCase().includes('ESPECIAL') || false;
+  const baseHorasActual = esEspecial && !customBaseHoras
+    ? 108.0
+    : reportData?.resumen_nacional?.base_horas_aplicada || 88;
+  const esPromedioAutomatico = esEspecial ? false : (reportData?.resumen_nacional?.es_promedio_dinamico ?? true);
 
   return (
     <div className="space-y-6 animate-fadeIn">
@@ -481,7 +484,7 @@ export function EspecialidadDeficitMatrix({ onGoToConfig }: EspecialidadDeficitM
             <div className="flex items-center gap-2">
               <ChartBarIcon className="w-4 h-4 text-[#c9a751]" />
               <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
-                Metodología de Cálculo del Ítem: Promedio de Horas ({baseHorasActual} hrs/docente)
+                Metodología de Cálculo del Ítem: {esEspecial ? "Base Reglamentada (108 hrs/docente - Educación Especial)" : `Promedio de Horas (${baseHorasActual} hrs/docente)`}
               </h3>
             </div>
             <div className="flex items-center gap-2 text-xs">

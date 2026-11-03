@@ -102,7 +102,7 @@
         "total_carga_horaria": 79980,
         "total_horas_planilla": 77508,
         "total_deficit_horas": 2472,
-        "promedio_horas_docente": 93.0,
+        "promedio_horas_docente": 93,
         "items_deficit": 24.8,
         "items_deficit_88h": 28.1,
         "pct_cobertura": 96.9
@@ -131,7 +131,7 @@
         "total_horas_planilla": 20428,
         "total_deficit_horas": 1100,
         "promedio_horas_docente": 109.84,
-        "items_deficit": 11.0,
+        "items_deficit": 11,
         "items_deficit_88h": 12.5,
         "pct_cobertura": 94.9
       },
@@ -147,7 +147,7 @@
         "promedio_horas_docente": 95.8,
         "items_deficit": 6.2,
         "items_deficit_88h": 7.1,
-        "pct_cobertura": 98.0
+        "pct_cobertura": 98
       },
       {
         "departamento_id": 9,
@@ -161,7 +161,7 @@
         "promedio_horas_docente": 106.99,
         "items_deficit": 4.2,
         "items_deficit_88h": 4.8,
-        "pct_cobertura": 95.0
+        "pct_cobertura": 95
       },
       {
         "departamento_id": 6,
@@ -174,7 +174,7 @@
         "total_deficit_horas": 348,
         "promedio_horas_docente": 82.2,
         "items_deficit": 3.5,
-        "items_deficit_88h": 4.0,
+        "items_deficit_88h": 4,
         "pct_cobertura": 98.6
       }
     ],
@@ -212,7 +212,7 @@
         "cantidad_docentes": 189,
         "pct_del_total": 3.5,
         "horas_totales": 9644,
-        "promedio_rango": 51.0
+        "promedio_rango": 51
       },
       {
         "rango": "61 – 80 hrs",
@@ -9802,7 +9802,7 @@
         "promedio_horas_docente": 105.71,
         "items_deficit": 394.8,
         "items_deficit_88h": 474.9,
-        "pct_cobertura": 96.0
+        "pct_cobertura": 96
       },
       {
         "departamento_id": 5,
@@ -9844,7 +9844,7 @@
         "promedio_horas_docente": 105.61,
         "items_deficit": 165.7,
         "items_deficit_88h": 199.3,
-        "pct_cobertura": 95.0
+        "pct_cobertura": 95
       },
       {
         "departamento_id": 4,
@@ -9930,7 +9930,7 @@
         "cantidad_docentes": 83,
         "pct_del_total": 0.1,
         "horas_totales": 6144,
-        "promedio_rango": 74.0
+        "promedio_rango": 74
       },
       {
         "rango": "81 – 100 hrs",
@@ -9942,7 +9942,7 @@
       {
         "rango": "101 – 120+ hrs",
         "cantidad_docentes": 35636,
-        "pct_del_total": 60.0,
+        "pct_del_total": 60,
         "horas_totales": 4107400,
         "promedio_rango": 115.3
       }
@@ -19641,7 +19641,7 @@
         "total_horas_planilla": 129402,
         "total_deficit_horas": 6038,
         "promedio_horas_docente": 86.32,
-        "items_deficit": 73.0,
+        "items_deficit": 73,
         "items_deficit_88h": 68.6,
         "pct_cobertura": 95.5
       },
@@ -19755,7 +19755,7 @@
         "promedio_horas_docente": 85.28,
         "items_deficit": 1.5,
         "items_deficit_88h": 1.4,
-        "pct_cobertura": 97.0
+        "pct_cobertura": 97
       }
     ],
     "resumen_nacional": {
@@ -19799,7 +19799,7 @@
         "cantidad_docentes": 598,
         "pct_del_total": 12.4,
         "horas_totales": 43664,
-        "promedio_rango": 73.0
+        "promedio_rango": 73
       },
       {
         "rango": "81 – 100 hrs",
@@ -28923,7 +28923,7 @@
         "total_deficit_horas": 1052,
         "promedio_horas_docente": 100.88,
         "items_deficit": 12.4,
-        "items_deficit_88h": 12.0,
+        "items_deficit_88h": 12,
         "pct_cobertura": 93.3
       },
       {
@@ -38258,7 +38258,7 @@
         "total_horas_planilla": 184984,
         "total_deficit_horas": 4004,
         "promedio_horas_docente": 94.49,
-        "items_deficit": 43.0,
+        "items_deficit": 43,
         "items_deficit_88h": 45.5,
         "pct_cobertura": 97.9
       },
@@ -38344,7 +38344,7 @@
         "promedio_horas_docente": 92.61,
         "items_deficit": -0.2,
         "items_deficit_88h": -0.2,
-        "pct_cobertura": 100.0
+        "pct_cobertura": 100
       }
     ],
     "resumen_nacional": {
@@ -38365,23 +38365,23 @@
       {
         "rango": "0 – 20 hrs",
         "cantidad_docentes": 1,
-        "pct_del_total": 0.0,
+        "pct_del_total": 0,
         "horas_totales": 20,
-        "promedio_rango": 20.0
+        "promedio_rango": 20
       },
       {
         "rango": "61 – 80 hrs",
         "cantidad_docentes": 1,
-        "pct_del_total": 0.0,
+        "pct_del_total": 0,
         "horas_totales": 72,
-        "promedio_rango": 72.0
+        "promedio_rango": 72
       },
       {
         "rango": "81 – 100 hrs",
         "cantidad_docentes": 11273,
         "pct_del_total": 99.8,
         "horas_totales": 1048268,
-        "promedio_rango": 93.0
+        "promedio_rango": 93
       },
       {
         "rango": "101 – 120+ hrs",
@@ -48178,7 +48178,7 @@
         "total_horas_planilla": 26528,
         "total_deficit_horas": 476,
         "promedio_horas_docente": 77.6,
-        "items_deficit": 6.0,
+        "items_deficit": 6,
         "items_deficit_88h": 5.4,
         "pct_cobertura": 98.2
       },
@@ -48207,8 +48207,8 @@
       "promedio_horas_docente": 79.91,
       "base_horas_aplicada": 79.91,
       "es_promedio_dinamico": true,
-      "items_deficit": 239.0,
-      "items_deficit_88h": 217.0,
+      "items_deficit": 239,
+      "items_deficit_88h": 217,
       "pct_cobertura": 95.6
     },
     "distribucion_rangos": [
@@ -48231,7 +48231,7 @@
         "cantidad_docentes": 708,
         "pct_del_total": 13.1,
         "horas_totales": 36104,
-        "promedio_rango": 51.0
+        "promedio_rango": 51
       },
       {
         "rango": "61 – 80 hrs",
@@ -57932,7 +57932,7 @@
         "total_horas_planilla": 880,
         "total_deficit_horas": 608,
         "promedio_horas_docente": 57.23,
-        "items_deficit": 8.0,
+        "items_deficit": 8,
         "items_deficit_88h": 6.9,
         "pct_cobertura": 59.1
       },
@@ -57974,7 +57974,7 @@
         "total_horas_planilla": 1556,
         "total_deficit_horas": 228,
         "promedio_horas_docente": 84.95,
-        "items_deficit": 3.0,
+        "items_deficit": 3,
         "items_deficit_88h": 2.6,
         "pct_cobertura": 87.2
       },
@@ -57990,7 +57990,7 @@
         "promedio_horas_docente": 82.87,
         "items_deficit": 2.1,
         "items_deficit_88h": 1.8,
-        "pct_cobertura": 95.0
+        "pct_cobertura": 95
       },
       {
         "departamento_id": 1,
@@ -58001,8 +58001,8 @@
         "total_carga_horaria": 1456,
         "total_horas_planilla": 1380,
         "total_deficit_horas": 76,
-        "promedio_horas_docente": 91.0,
-        "items_deficit": 1.0,
+        "promedio_horas_docente": 91,
+        "items_deficit": 1,
         "items_deficit_88h": 0.9,
         "pct_cobertura": 94.8
       },
@@ -58032,7 +58032,7 @@
         "promedio_horas_docente": 61.2,
         "items_deficit": 0.2,
         "items_deficit_88h": 0.1,
-        "pct_cobertura": 98.0
+        "pct_cobertura": 98
       },
       {
         "departamento_id": 9,
@@ -58043,10 +58043,10 @@
         "total_carga_horaria": 172,
         "total_horas_planilla": 172,
         "total_deficit_horas": 0,
-        "promedio_horas_docente": 43.0,
-        "items_deficit": 0.0,
-        "items_deficit_88h": 0.0,
-        "pct_cobertura": 100.0
+        "promedio_horas_docente": 43,
+        "items_deficit": 0,
+        "items_deficit_88h": 0,
+        "pct_cobertura": 100
       }
     ],
     "resumen_nacional": {
@@ -58074,7 +58074,7 @@
       {
         "rango": "21 – 40 hrs",
         "cantidad_docentes": 41,
-        "pct_del_total": 15.0,
+        "pct_del_total": 15,
         "horas_totales": 1276,
         "promedio_rango": 31.1
       },
@@ -58083,7 +58083,7 @@
         "cantidad_docentes": 29,
         "pct_del_total": 10.6,
         "horas_totales": 1392,
-        "promedio_rango": 48.0
+        "promedio_rango": 48
       },
       {
         "rango": "61 – 80 hrs",
@@ -58097,7 +58097,7 @@
         "cantidad_docentes": 106,
         "pct_del_total": 38.7,
         "horas_totales": 10176,
-        "promedio_rango": 96.0
+        "promedio_rango": 96
       },
       {
         "rango": "101 – 120+ hrs",
@@ -61226,9 +61226,9 @@
         "total_horas_planilla": 253040,
         "total_deficit_horas": 10628,
         "promedio_horas_docente": 99.91,
-        "items_deficit": 107.0,
+        "items_deficit": 107,
         "items_deficit_88h": 120.8,
-        "pct_cobertura": 96.0
+        "pct_cobertura": 96
       },
       {
         "departamento_id": 5,
@@ -61240,7 +61240,7 @@
         "total_horas_planilla": 87852,
         "total_deficit_horas": 8748,
         "promedio_horas_docente": 100.52,
-        "items_deficit": 88.0,
+        "items_deficit": 88,
         "items_deficit_88h": 99.4,
         "pct_cobertura": 90.9
       },
@@ -61284,7 +61284,7 @@
         "promedio_horas_docente": 111.3,
         "items_deficit": 33.7,
         "items_deficit_88h": 38.1,
-        "pct_cobertura": 92.0
+        "pct_cobertura": 92
       },
       {
         "departamento_id": 4,
@@ -61297,7 +61297,7 @@
         "total_deficit_horas": 1932,
         "promedio_horas_docente": 90.17,
         "items_deficit": 19.4,
-        "items_deficit_88h": 22.0,
+        "items_deficit_88h": 22,
         "pct_cobertura": 96.4
       },
       {
@@ -61324,7 +61324,7 @@
         "total_horas_planilla": 12456,
         "total_deficit_horas": 496,
         "promedio_horas_docente": 110.7,
-        "items_deficit": 5.0,
+        "items_deficit": 5,
         "items_deficit_88h": 5.6,
         "pct_cobertura": 96.2
       },
@@ -71103,7 +71103,7 @@
         "total_horas_planilla": 98514,
         "total_deficit_horas": 10278,
         "promedio_horas_docente": 103.12,
-        "items_deficit": 101.0,
+        "items_deficit": 101,
         "items_deficit_88h": 116.8,
         "pct_cobertura": 90.6
       },
@@ -71117,7 +71117,7 @@
         "total_horas_planilla": 176452,
         "total_deficit_horas": 6108,
         "promedio_horas_docente": 98.52,
-        "items_deficit": 60.0,
+        "items_deficit": 60,
         "items_deficit_88h": 69.4,
         "pct_cobertura": 96.7
       },
@@ -71146,7 +71146,7 @@
         "total_deficit_horas": 2114,
         "promedio_horas_docente": 91.55,
         "items_deficit": 20.8,
-        "items_deficit_88h": 24.0,
+        "items_deficit_88h": 24,
         "pct_cobertura": 96.2
       },
       {
@@ -71188,7 +71188,7 @@
         "total_deficit_horas": 618,
         "promedio_horas_docente": 89.2,
         "items_deficit": 6.1,
-        "items_deficit_88h": 7.0,
+        "items_deficit_88h": 7,
         "pct_cobertura": 98.7
       }
     ],
@@ -71231,7 +71231,7 @@
       {
         "rango": "61 – 80 hrs",
         "cantidad_docentes": 1034,
-        "pct_del_total": 10.0,
+        "pct_del_total": 10,
         "horas_totales": 80968,
         "promedio_rango": 78.3
       },
@@ -80929,7 +80929,7 @@
         "promedio_horas_docente": 91.31,
         "items_deficit": 22.5,
         "items_deficit_88h": 18.9,
-        "pct_cobertura": 97.0
+        "pct_cobertura": 97
       },
       {
         "departamento_id": 2,
@@ -80982,10 +80982,10 @@
         "total_carga_horaria": 17756,
         "total_horas_planilla": 17042,
         "total_deficit_horas": 714,
-        "promedio_horas_docente": 67.0,
+        "promedio_horas_docente": 67,
         "items_deficit": 9.7,
         "items_deficit_88h": 8.1,
-        "pct_cobertura": 96.0
+        "pct_cobertura": 96
       },
       {
         "departamento_id": 4,
@@ -81013,7 +81013,7 @@
         "promedio_horas_docente": 81.85,
         "items_deficit": 1.3,
         "items_deficit_88h": 1.1,
-        "pct_cobertura": 97.0
+        "pct_cobertura": 97
       },
       {
         "departamento_id": 1,
@@ -81092,7 +81092,7 @@
         "cantidad_docentes": 682,
         "pct_del_total": 21.1,
         "horas_totales": 64124,
-        "promedio_rango": 94.0
+        "promedio_rango": 94
       },
       {
         "rango": "101 – 120+ hrs",
@@ -90056,7 +90056,7 @@
         "total_deficit_horas": 3520,
         "promedio_horas_docente": 88.59,
         "items_deficit": 39.9,
-        "items_deficit_88h": 40.0,
+        "items_deficit_88h": 40,
         "pct_cobertura": 96.3
       },
       {
@@ -90069,7 +90069,7 @@
         "total_horas_planilla": 76826,
         "total_deficit_horas": 2822,
         "promedio_horas_docente": 100.69,
-        "items_deficit": 32.0,
+        "items_deficit": 32,
         "items_deficit_88h": 32.1,
         "pct_cobertura": 96.5
       },
@@ -90199,7 +90199,7 @@
         "cantidad_docentes": 385,
         "pct_del_total": 9.7,
         "horas_totales": 11944,
-        "promedio_rango": 31.0
+        "promedio_rango": 31
       },
       {
         "rango": "41 – 60 hrs",
@@ -99468,7 +99468,7 @@
         "promedio_horas_docente": 88.45,
         "items_deficit": 10.6,
         "items_deficit_88h": 11.8,
-        "pct_cobertura": 97.0
+        "pct_cobertura": 97
       },
       {
         "departamento_id": 1,
@@ -99508,7 +99508,7 @@
         "total_horas_planilla": 9376,
         "total_deficit_horas": 396,
         "promedio_horas_docente": 106.22,
-        "items_deficit": 4.0,
+        "items_deficit": 4,
         "items_deficit_88h": 4.5,
         "pct_cobertura": 95.9
       }
@@ -109184,7 +109184,7 @@
         "total_horas_planilla": 704,
         "total_deficit_horas": 72,
         "promedio_horas_docente": 77.6,
-        "items_deficit": 1.0,
+        "items_deficit": 1,
         "items_deficit_88h": 0.8,
         "pct_cobertura": 90.7
       },
@@ -109211,7 +109211,7 @@
         "total_carga_horaria": 448,
         "total_horas_planilla": 420,
         "total_deficit_horas": 28,
-        "promedio_horas_docente": 64.0,
+        "promedio_horas_docente": 64,
         "items_deficit": 0.4,
         "items_deficit_88h": 0.3,
         "pct_cobertura": 93.8
@@ -109225,7 +109225,7 @@
         "total_carga_horaria": 104,
         "total_horas_planilla": 96,
         "total_deficit_horas": 8,
-        "promedio_horas_docente": 52.0,
+        "promedio_horas_docente": 52,
         "items_deficit": 0.1,
         "items_deficit_88h": 0.1,
         "pct_cobertura": 92.3
@@ -109239,9 +109239,9 @@
         "total_carga_horaria": 144,
         "total_horas_planilla": 140,
         "total_deficit_horas": 4,
-        "promedio_horas_docente": 48.0,
+        "promedio_horas_docente": 48,
         "items_deficit": 0.1,
-        "items_deficit_88h": 0.0,
+        "items_deficit_88h": 0,
         "pct_cobertura": 97.2
       },
       {
@@ -109254,9 +109254,9 @@
         "total_horas_planilla": 0,
         "total_deficit_horas": 0,
         "promedio_horas_docente": 71.38,
-        "items_deficit": 0.0,
-        "items_deficit_88h": 0.0,
-        "pct_cobertura": 100.0
+        "items_deficit": 0,
+        "items_deficit_88h": 0,
+        "pct_cobertura": 100
       }
     ],
     "resumen_nacional": {
@@ -109279,7 +109279,7 @@
         "cantidad_docentes": 15,
         "pct_del_total": 10.6,
         "horas_totales": 180,
-        "promedio_rango": 12.0
+        "promedio_rango": 12
       },
       {
         "rango": "21 – 40 hrs",
@@ -109300,7 +109300,7 @@
         "cantidad_docentes": 19,
         "pct_del_total": 13.5,
         "horas_totales": 1368,
-        "promedio_rango": 72.0
+        "promedio_rango": 72
       },
       {
         "rango": "81 – 100 hrs",
@@ -111061,8 +111061,8 @@
         "total_horas_planilla": 1772,
         "total_deficit_horas": 84,
         "promedio_horas_docente": 84.36,
-        "items_deficit": 1.0,
-        "items_deficit_88h": 1.0,
+        "items_deficit": 1,
+        "items_deficit_88h": 1,
         "pct_cobertura": 95.5
       },
       {
@@ -111102,10 +111102,10 @@
         "total_carga_horaria": 80,
         "total_horas_planilla": 80,
         "total_deficit_horas": 0,
-        "promedio_horas_docente": 80.0,
-        "items_deficit": 0.0,
-        "items_deficit_88h": 0.0,
-        "pct_cobertura": 100.0
+        "promedio_horas_docente": 80,
+        "items_deficit": 0,
+        "items_deficit_88h": 0,
+        "pct_cobertura": 100
       },
       {
         "departamento_id": 9,
@@ -111116,10 +111116,10 @@
         "total_carga_horaria": 96,
         "total_horas_planilla": 96,
         "total_deficit_horas": 0,
-        "promedio_horas_docente": 96.0,
-        "items_deficit": 0.0,
-        "items_deficit_88h": 0.0,
-        "pct_cobertura": 100.0
+        "promedio_horas_docente": 96,
+        "items_deficit": 0,
+        "items_deficit_88h": 0,
+        "pct_cobertura": 100
       }
     ],
     "resumen_nacional": {
@@ -111142,14 +111142,14 @@
         "cantidad_docentes": 18,
         "pct_del_total": 7.9,
         "horas_totales": 576,
-        "promedio_rango": 32.0
+        "promedio_rango": 32
       },
       {
         "rango": "41 – 60 hrs",
         "cantidad_docentes": 35,
         "pct_del_total": 15.4,
         "horas_totales": 1680,
-        "promedio_rango": 48.0
+        "promedio_rango": 48
       },
       {
         "rango": "61 – 80 hrs",
@@ -111163,7 +111163,7 @@
         "cantidad_docentes": 112,
         "pct_del_total": 49.1,
         "horas_totales": 10752,
-        "promedio_rango": 96.0
+        "promedio_rango": 96
       },
       {
         "rango": "101 – 120+ hrs",
@@ -113777,7 +113777,7 @@
         "total_deficit_horas": 704,
         "promedio_horas_docente": 102.44,
         "items_deficit": 7.9,
-        "items_deficit_88h": 8.0,
+        "items_deficit_88h": 8,
         "pct_cobertura": 90.5
       },
       {
@@ -113845,10 +113845,10 @@
         "total_carga_horaria": 192,
         "total_horas_planilla": 144,
         "total_deficit_horas": 48,
-        "promedio_horas_docente": 96.0,
+        "promedio_horas_docente": 96,
         "items_deficit": 0.5,
         "items_deficit_88h": 0.5,
-        "pct_cobertura": 75.0
+        "pct_cobertura": 75
       },
       {
         "departamento_id": 6,
@@ -113874,9 +113874,9 @@
         "total_horas_planilla": 0,
         "total_deficit_horas": 0,
         "promedio_horas_docente": 89.28,
-        "items_deficit": 0.0,
-        "items_deficit_88h": 0.0,
-        "pct_cobertura": 100.0
+        "items_deficit": 0,
+        "items_deficit_88h": 0,
+        "pct_cobertura": 100
       }
     ],
     "resumen_nacional": {
@@ -113899,14 +113899,14 @@
         "cantidad_docentes": 37,
         "pct_del_total": 8.5,
         "horas_totales": 1184,
-        "promedio_rango": 32.0
+        "promedio_rango": 32
       },
       {
         "rango": "41 – 60 hrs",
         "cantidad_docentes": 44,
         "pct_del_total": 10.1,
         "horas_totales": 2112,
-        "promedio_rango": 48.0
+        "promedio_rango": 48
       },
       {
         "rango": "61 – 80 hrs",
@@ -113920,7 +113920,7 @@
         "cantidad_docentes": 212,
         "pct_del_total": 48.6,
         "horas_totales": 20344,
-        "promedio_rango": 96.0
+        "promedio_rango": 96
       },
       {
         "rango": "101 – 120+ hrs",
@@ -117327,9 +117327,9 @@
         "total_horas_planilla": 320,
         "total_deficit_horas": 0,
         "promedio_horas_docente": 106.67,
-        "items_deficit": 0.0,
-        "items_deficit_88h": 0.0,
-        "pct_cobertura": 100.0
+        "items_deficit": 0,
+        "items_deficit_88h": 0,
+        "pct_cobertura": 100
       },
       {
         "departamento_id": 3,
@@ -117341,9 +117341,9 @@
         "total_horas_planilla": 576,
         "total_deficit_horas": 0,
         "promedio_horas_docente": 82.29,
-        "items_deficit": 0.0,
-        "items_deficit_88h": 0.0,
-        "pct_cobertura": 100.0
+        "items_deficit": 0,
+        "items_deficit_88h": 0,
+        "pct_cobertura": 100
       },
       {
         "departamento_id": 4,
@@ -117354,10 +117354,10 @@
         "total_carga_horaria": 384,
         "total_horas_planilla": 384,
         "total_deficit_horas": 0,
-        "promedio_horas_docente": 96.0,
-        "items_deficit": 0.0,
-        "items_deficit_88h": 0.0,
-        "pct_cobertura": 100.0
+        "promedio_horas_docente": 96,
+        "items_deficit": 0,
+        "items_deficit_88h": 0,
+        "pct_cobertura": 100
       },
       {
         "departamento_id": 5,
@@ -117368,10 +117368,10 @@
         "total_carga_horaria": 192,
         "total_horas_planilla": 192,
         "total_deficit_horas": 0,
-        "promedio_horas_docente": 96.0,
-        "items_deficit": 0.0,
-        "items_deficit_88h": 0.0,
-        "pct_cobertura": 100.0
+        "promedio_horas_docente": 96,
+        "items_deficit": 0,
+        "items_deficit_88h": 0,
+        "pct_cobertura": 100
       },
       {
         "departamento_id": 6,
@@ -117383,9 +117383,9 @@
         "total_horas_planilla": 0,
         "total_deficit_horas": 0,
         "promedio_horas_docente": 88.28,
-        "items_deficit": 0.0,
-        "items_deficit_88h": 0.0,
-        "pct_cobertura": 100.0
+        "items_deficit": 0,
+        "items_deficit_88h": 0,
+        "pct_cobertura": 100
       },
       {
         "departamento_id": 7,
@@ -117396,10 +117396,10 @@
         "total_carga_horaria": 192,
         "total_horas_planilla": 192,
         "total_deficit_horas": 0,
-        "promedio_horas_docente": 96.0,
-        "items_deficit": 0.0,
-        "items_deficit_88h": 0.0,
-        "pct_cobertura": 100.0
+        "promedio_horas_docente": 96,
+        "items_deficit": 0,
+        "items_deficit_88h": 0,
+        "pct_cobertura": 100
       },
       {
         "departamento_id": 8,
@@ -117411,9 +117411,9 @@
         "total_horas_planilla": 0,
         "total_deficit_horas": 0,
         "promedio_horas_docente": 88.28,
-        "items_deficit": 0.0,
-        "items_deficit_88h": 0.0,
-        "pct_cobertura": 100.0
+        "items_deficit": 0,
+        "items_deficit_88h": 0,
+        "pct_cobertura": 100
       },
       {
         "departamento_id": 9,
@@ -117425,9 +117425,9 @@
         "total_horas_planilla": 0,
         "total_deficit_horas": 0,
         "promedio_horas_docente": 88.28,
-        "items_deficit": 0.0,
-        "items_deficit_88h": 0.0,
-        "pct_cobertura": 100.0
+        "items_deficit": 0,
+        "items_deficit_88h": 0,
+        "pct_cobertura": 100
       }
     ],
     "resumen_nacional": {
@@ -117442,7 +117442,7 @@
       "es_promedio_dinamico": true,
       "items_deficit": 0.6,
       "items_deficit_88h": 0.6,
-      "pct_cobertura": 98.0
+      "pct_cobertura": 98
     },
     "distribucion_rangos": [
       {
@@ -117450,28 +117450,28 @@
         "cantidad_docentes": 5,
         "pct_del_total": 17.2,
         "horas_totales": 240,
-        "promedio_rango": 48.0
+        "promedio_rango": 48
       },
       {
         "rango": "61 – 80 hrs",
         "cantidad_docentes": 3,
         "pct_del_total": 10.3,
         "horas_totales": 240,
-        "promedio_rango": 80.0
+        "promedio_rango": 80
       },
       {
         "rango": "81 – 100 hrs",
         "cantidad_docentes": 19,
         "pct_del_total": 65.5,
         "horas_totales": 1824,
-        "promedio_rango": 96.0
+        "promedio_rango": 96
       },
       {
         "rango": "101 – 120+ hrs",
         "cantidad_docentes": 2,
         "pct_del_total": 6.9,
         "horas_totales": 256,
-        "promedio_rango": 128.0
+        "promedio_rango": 128
       }
     ],
     "filtro_cargos_aplicados": 2,
@@ -117880,7 +117880,7 @@
         "total_horas_planilla": 68074,
         "total_deficit_horas": 1646,
         "promedio_horas_docente": 80.69,
-        "items_deficit": 20.0,
+        "items_deficit": 20,
         "items_deficit_88h": 18.7,
         "pct_cobertura": 97.6
       },
@@ -117909,7 +117909,7 @@
         "total_deficit_horas": 620,
         "promedio_horas_docente": 102.62,
         "items_deficit": 7.5,
-        "items_deficit_88h": 7.0,
+        "items_deficit_88h": 7,
         "pct_cobertura": 93.7
       },
       {
@@ -118001,7 +118001,7 @@
       {
         "rango": "0 – 20 hrs",
         "cantidad_docentes": 153,
-        "pct_del_total": 5.0,
+        "pct_del_total": 5,
         "horas_totales": 2008,
         "promedio_rango": 13.1
       },
@@ -118017,7 +118017,7 @@
         "cantidad_docentes": 242,
         "pct_del_total": 7.9,
         "horas_totales": 12092,
-        "promedio_rango": 50.0
+        "promedio_rango": 50
       },
       {
         "rango": "61 – 80 hrs",
@@ -118036,7 +118036,7 @@
       {
         "rango": "101 – 120+ hrs",
         "cantidad_docentes": 1016,
-        "pct_del_total": 33.0,
+        "pct_del_total": 33,
         "horas_totales": 114048,
         "promedio_rango": 112.3
       }
@@ -126881,7 +126881,7 @@
         "total_horas_planilla": 3444,
         "total_deficit_horas": 448,
         "promedio_horas_docente": 102.42,
-        "items_deficit": 5.0,
+        "items_deficit": 5,
         "items_deficit_88h": 5.1,
         "pct_cobertura": 88.5
       },
@@ -126923,8 +126923,8 @@
         "total_horas_planilla": 1708,
         "total_deficit_horas": 180,
         "promedio_horas_docente": 89.9,
-        "items_deficit": 2.0,
-        "items_deficit_88h": 2.0,
+        "items_deficit": 2,
+        "items_deficit_88h": 2,
         "pct_cobertura": 90.5
       },
       {
@@ -126936,7 +126936,7 @@
         "total_carga_horaria": 448,
         "total_horas_planilla": 400,
         "total_deficit_horas": 48,
-        "promedio_horas_docente": 64.0,
+        "promedio_horas_docente": 64,
         "items_deficit": 0.5,
         "items_deficit_88h": 0.5,
         "pct_cobertura": 89.3
@@ -126965,9 +126965,9 @@
         "total_horas_planilla": 416,
         "total_deficit_horas": 0,
         "promedio_horas_docente": 83.2,
-        "items_deficit": 0.0,
-        "items_deficit_88h": 0.0,
-        "pct_cobertura": 100.0
+        "items_deficit": 0,
+        "items_deficit_88h": 0,
+        "pct_cobertura": 100
       },
       {
         "departamento_id": 9,
@@ -126978,10 +126978,10 @@
         "total_carga_horaria": 96,
         "total_horas_planilla": 96,
         "total_deficit_horas": 0,
-        "promedio_horas_docente": 96.0,
-        "items_deficit": 0.0,
-        "items_deficit_88h": 0.0,
-        "pct_cobertura": 100.0
+        "promedio_horas_docente": 96,
+        "items_deficit": 0,
+        "items_deficit_88h": 0,
+        "pct_cobertura": 100
       }
     ],
     "resumen_nacional": {
@@ -127004,7 +127004,7 @@
         "cantidad_docentes": 24,
         "pct_del_total": 9.3,
         "horas_totales": 768,
-        "promedio_rango": 32.0
+        "promedio_rango": 32
       },
       {
         "rango": "41 – 60 hrs",
@@ -127025,7 +127025,7 @@
         "cantidad_docentes": 129,
         "pct_del_total": 49.8,
         "horas_totales": 12388,
-        "promedio_rango": 96.0
+        "promedio_rango": 96
       },
       {
         "rango": "101 – 120+ hrs",
@@ -129815,9 +129815,10 @@
         "total_horas_planilla": 59276,
         "total_deficit_horas": 10436,
         "promedio_horas_docente": 101.92,
-        "items_deficit": 107.8,
+        "items_deficit": 96.6,
         "items_deficit_88h": 118.6,
-        "pct_cobertura": 85.0
+        "pct_cobertura": 85,
+        "base_horas": 108
       },
       {
         "departamento_id": 2,
@@ -129829,9 +129830,10 @@
         "total_horas_planilla": 31964,
         "total_deficit_horas": 3936,
         "promedio_horas_docente": 92.29,
-        "items_deficit": 40.6,
+        "items_deficit": 36.4,
         "items_deficit_88h": 44.7,
-        "pct_cobertura": 89.0
+        "pct_cobertura": 89,
+        "base_horas": 108
       },
       {
         "departamento_id": 3,
@@ -129843,9 +129845,10 @@
         "total_horas_planilla": 28512,
         "total_deficit_horas": 1768,
         "promedio_horas_docente": 99.93,
-        "items_deficit": 18.3,
+        "items_deficit": 16.4,
         "items_deficit_88h": 20.1,
-        "pct_cobertura": 94.2
+        "pct_cobertura": 94.2,
+        "base_horas": 108
       },
       {
         "departamento_id": 8,
@@ -129857,9 +129860,10 @@
         "total_horas_planilla": 10368,
         "total_deficit_horas": 1540,
         "promedio_horas_docente": 101.78,
-        "items_deficit": 15.9,
+        "items_deficit": 14.3,
         "items_deficit_88h": 17.5,
-        "pct_cobertura": 87.1
+        "pct_cobertura": 87.1,
+        "base_horas": 108
       },
       {
         "departamento_id": 5,
@@ -129871,9 +129875,10 @@
         "total_horas_planilla": 13240,
         "total_deficit_horas": 1460,
         "promedio_horas_docente": 85.47,
-        "items_deficit": 15.1,
+        "items_deficit": 13.5,
         "items_deficit_88h": 16.6,
-        "pct_cobertura": 90.1
+        "pct_cobertura": 90.1,
+        "base_horas": 108
       },
       {
         "departamento_id": 9,
@@ -129885,9 +129890,10 @@
         "total_horas_planilla": 5724,
         "total_deficit_horas": 1144,
         "promedio_horas_docente": 88.05,
-        "items_deficit": 11.8,
-        "items_deficit_88h": 13.0,
-        "pct_cobertura": 83.3
+        "items_deficit": 10.6,
+        "items_deficit_88h": 13,
+        "pct_cobertura": 83.3,
+        "base_horas": 108
       },
       {
         "departamento_id": 1,
@@ -129899,9 +129905,10 @@
         "total_horas_planilla": 14040,
         "total_deficit_horas": 972,
         "promedio_horas_docente": 98.12,
-        "items_deficit": 10.0,
-        "items_deficit_88h": 11.0,
-        "pct_cobertura": 93.5
+        "items_deficit": 9,
+        "items_deficit_88h": 11,
+        "pct_cobertura": 93.5,
+        "base_horas": 108
       },
       {
         "departamento_id": 4,
@@ -129913,9 +129920,10 @@
         "total_horas_planilla": 11556,
         "total_deficit_horas": 972,
         "promedio_horas_docente": 91.45,
-        "items_deficit": 10.0,
-        "items_deficit_88h": 11.0,
-        "pct_cobertura": 92.2
+        "items_deficit": 9,
+        "items_deficit_88h": 11,
+        "pct_cobertura": 92.2,
+        "base_horas": 108
       },
       {
         "departamento_id": 6,
@@ -129929,7 +129937,8 @@
         "promedio_horas_docente": 96.66,
         "items_deficit": 0.3,
         "items_deficit_88h": 0.4,
-        "pct_cobertura": 99.8
+        "pct_cobertura": 99.8,
+        "base_horas": 108
       }
     ],
     "resumen_nacional": {
@@ -129939,12 +129948,13 @@
       "total_carga_horaria": 215080,
       "total_horas_planilla": 192820,
       "total_deficit_horas": 22260,
-      "promedio_horas_docente": 96.84,
-      "base_horas_aplicada": 96.84,
-      "es_promedio_dinamico": true,
-      "items_deficit": 229.9,
-      "items_deficit_88h": 253.0,
-      "pct_cobertura": 89.7
+      "promedio_horas_docente": 108,
+      "base_horas_aplicada": 108,
+      "es_promedio_dinamico": false,
+      "items_deficit": 206.1,
+      "items_deficit_88h": 253,
+      "pct_cobertura": 89.7,
+      "metodologia_calculo": "Reglamentada (108 hrs/docente)"
     },
     "distribucion_rangos": [
       {
@@ -139465,7 +139475,7 @@
         "total_horas_planilla": 38554,
         "total_deficit_horas": 3134,
         "promedio_horas_docente": 112.37,
-        "items_deficit": 32.0,
+        "items_deficit": 32,
         "items_deficit_88h": 35.6,
         "pct_cobertura": 92.5
       },
@@ -139508,7 +139518,7 @@
         "total_deficit_horas": 524,
         "promedio_horas_docente": 110.91,
         "items_deficit": 5.4,
-        "items_deficit_88h": 6.0,
+        "items_deficit_88h": 6,
         "pct_cobertura": 96.1
       },
       {
@@ -139521,7 +139531,7 @@
         "total_horas_planilla": 41428,
         "total_deficit_horas": 492,
         "promedio_horas_docente": 84.01,
-        "items_deficit": 5.0,
+        "items_deficit": 5,
         "items_deficit_88h": 5.6,
         "pct_cobertura": 98.8
       }
@@ -139558,7 +139568,7 @@
       {
         "rango": "41 – 60 hrs",
         "cantidad_docentes": 270,
-        "pct_del_total": 3.0,
+        "pct_del_total": 3,
         "horas_totales": 13672,
         "promedio_rango": 50.6
       },

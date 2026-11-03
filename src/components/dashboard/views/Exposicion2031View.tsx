@@ -896,7 +896,7 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                   <TrendingUp className="w-4 h-4 text-indigo-300" />
                 </div>
                 <span className="text-xs font-black text-indigo-300 uppercase tracking-widest">
-                  Diapositiva 1 de 3 · Diagnóstico Demográfico y Matrícula Escolar
+                  Diapositiva 1 de 4 · Diagnóstico Demográfico y Matrícula Escolar · Datos Preliminares
                 </span>
                 <span className="ml-auto bg-indigo-500/20 text-indigo-200 border border-indigo-400/30 text-[10px] font-black px-2.5 py-1 rounded-full">
                   INE (2011–2025) · SIE 2026 Efectivo · Proyección 2031
@@ -1819,84 +1819,107 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                 </span>
               </div>
 
-              {/* 6 Stat Cards Oficiales UIE / SIE UE de la Especialidad */}
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-                <div className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs space-y-1">
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center justify-between">
-                    <span>Unidades Educativas</span>
-                    <School className="w-3.5 h-3.5 text-blue-600" />
-                  </div>
-                  <div className="text-xl font-black text-slate-900">
-                    {(selectedEsp.total_ues || 4885).toLocaleString()}
-                  </div>
-                  <div className="text-[10px] text-slate-500">Colegios con esta especialidad</div>
-                </div>
+              {/* 6 Stat Cards Oficiales UIE / SIE de la Especialidad */}
+              {(() => {
+                const nivelKey = selectedEsp.nivel_educativo === "INICIAL" ? "inicial"
+                  : selectedEsp.nivel_educativo === "PRIMARIA" ? "primaria"
+                  : "secundaria";
+                const s2026 = SERIE_NIVELES_2011_2031.find((s) => s.anio === 2026);
+                const s2031 = SERIE_NIVELES_2011_2031.find((s) => s.anio === 2031);
+                const est2026 = s2026 ? s2026[nivelKey] : 1235838;
+                const est2031 = s2031 ? s2031[nivelKey] : 1226934;
+                const varDemPct = est2026 > 0 ? Number((((est2031 - est2026) / est2026) * 100).toFixed(1)) : 0;
 
-                <div className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs space-y-1">
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center justify-between">
-                    <span>Docentes (Registros)</span>
-                    <Users className="w-3.5 h-3.5 text-indigo-600" />
-                  </div>
-                  <div className="text-xl font-black text-indigo-900">
-                    {(selectedEsp.total_docentes || 10379).toLocaleString()}
-                  </div>
-                  <div className="text-[10px] text-slate-500">Asignaciones en aula regular</div>
-                </div>
+                return (
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+                    {/* Card 1: Docentes */}
+                    <div className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs space-y-1">
+                      <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center justify-between">
+                        <span>Docentes (Registros)</span>
+                        <Users className="w-3.5 h-3.5 text-indigo-600" />
+                      </div>
+                      <div className="text-xl font-black text-indigo-900">
+                        {(selectedEsp.total_docentes || 10379).toLocaleString()}
+                      </div>
+                      <div className="text-[10px] text-slate-500">Asignaciones en aula regular</div>
+                    </div>
 
-                <div className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs space-y-1">
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center justify-between">
-                    <span>Carga Horaria Total</span>
-                    <TrendingUp className="w-3.5 h-3.5 text-amber-600" />
-                  </div>
-                  <div className="text-xl font-black text-amber-900">
-                    {(selectedEsp.carga_horaria_uie_nacional || 1056288).toLocaleString()}h
-                  </div>
-                  <div className="text-[10px] text-slate-500">Horas trabajadas aula</div>
-                </div>
+                    {/* Card 2: Carga Horaria Total */}
+                    <div className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs space-y-1">
+                      <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center justify-between">
+                        <span>Carga Horaria Total</span>
+                        <TrendingUp className="w-3.5 h-3.5 text-amber-600" />
+                      </div>
+                      <div className="text-xl font-black text-amber-900">
+                        {(selectedEsp.carga_horaria_uie_nacional || 1056288).toLocaleString()}h
+                      </div>
+                      <div className="text-[10px] text-slate-500">Horas trabajadas aula</div>
+                    </div>
 
-                <div className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs space-y-1">
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center justify-between">
-                    <span>Horas en Planilla</span>
-                    <Building2 className="w-3.5 h-3.5 text-purple-600" />
-                  </div>
-                  <div className="text-xl font-black text-purple-900">
-                    {(selectedEsp.horas_planilla_uie_nacional || 1006000).toLocaleString()}h
-                  </div>
-                  <div className="text-[10px] text-slate-500">Cubiertas por el SEP</div>
-                </div>
+                    {/* Card 3: Horas en Planilla */}
+                    <div className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs space-y-1">
+                      <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center justify-between">
+                        <span>Horas en Planilla</span>
+                        <Building2 className="w-3.5 h-3.5 text-purple-600" />
+                      </div>
+                      <div className="text-xl font-black text-purple-900">
+                        {(selectedEsp.horas_planilla_uie_nacional || 1006000).toLocaleString()}h
+                      </div>
+                      <div className="text-[10px] text-slate-500">Cubiertas por el SEP</div>
+                    </div>
 
-                <div className="bg-rose-50/80 p-3.5 rounded-2xl border border-rose-200 shadow-xs space-y-1">
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-rose-700 flex items-center justify-between">
-                    <span>Déficit de Horas</span>
-                    <AlertTriangle className="w-3.5 h-3.5 text-rose-600" />
-                  </div>
-                  <div className="text-xl font-black text-rose-900">
-                    {selectedEsp.deficit_horas_uie_nacional.toLocaleString()}h
-                  </div>
-                  <div className="text-[10px] text-rose-700 font-bold">
-                    Ítems: {selectedEsp.items_deficit_uie_nacional} · {selectedEsp.pct_cobertura_uie_nacional}% cob.
-                  </div>
-                </div>
+                    {/* Card 4: Estudiantes 2026 */}
+                    <div className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs space-y-1">
+                      <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center justify-between">
+                        <span>Estudiantes 2026</span>
+                        <School className="w-3.5 h-3.5 text-blue-600" />
+                      </div>
+                      <div className="text-xl font-black text-blue-950">
+                        {est2026.toLocaleString()}
+                      </div>
+                      <div className="text-[10px] text-blue-700 font-semibold">
+                        Matrícula SIE ({selectedEsp.nivel_educativo || "Secundaria"})
+                      </div>
+                    </div>
 
-                <div className={`p-3.5 rounded-2xl border shadow-xs space-y-1 ${selectedEsp.dictamen === "ABRIR"
-                  ? "bg-emerald-50/80 border-emerald-200"
-                  : selectedEsp.dictamen === "REGULAR"
-                    ? "bg-amber-50/80 border-amber-200"
-                    : "bg-rose-50/80 border-rose-200"
-                  }`}>
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-slate-500 flex items-center justify-between">
-                    <span>Egresados vs Demanda</span>
-                    <GraduationCap className="w-3.5 h-3.5 text-slate-700" />
+                    {/* Card 5: Estudiantes Proyectados 2031 */}
+                    <div className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs space-y-1">
+                      <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center justify-between">
+                        <span>Estudiantes Proyectados 2031</span>
+                        <TrendingUp className="w-3.5 h-3.5 text-amber-600" />
+                      </div>
+                      <div className="text-xl font-black text-amber-950">
+                        {est2031.toLocaleString()}
+                      </div>
+                      <div className="text-[10px] font-semibold text-slate-600">
+                        INE: <span className={varDemPct > 0 ? "text-emerald-700 font-bold" : "text-rose-700 font-bold"}>
+                          {varDemPct > 0 ? `+${varDemPct}%` : `${varDemPct}%`}
+                        </span> ({selectedEsp.edades_ine || "12 a 17 años"})
+                      </div>
+                    </div>
+
+                    {/* Card 6: Egresados vs Demanda */}
+                    <div className={`p-3.5 rounded-2xl border shadow-xs space-y-1 ${selectedEsp.dictamen === "ABRIR"
+                      ? "bg-emerald-50/80 border-emerald-200"
+                      : selectedEsp.dictamen === "REGULAR"
+                        ? "bg-amber-50/80 border-amber-200"
+                        : "bg-rose-50/80 border-rose-200"
+                      }`}>
+                      <div className="text-[10px] font-bold uppercase tracking-wider text-slate-500 flex items-center justify-between">
+                        <span>Egresados vs Demanda</span>
+                        <GraduationCap className="w-3.5 h-3.5 text-slate-700" />
+                      </div>
+                      <div className={`text-xl font-black ${selectedEsp.dictamen === "ABRIR" ? "text-emerald-800" : selectedEsp.dictamen === "REGULAR" ? "text-amber-800" : "text-rose-800"
+                        }`}>
+                        {selectedEsp.egresados_proyectados_2031} / {selectedEsp.demanda_proyectada_2031}
+                      </div>
+                      <div className="text-[10px] font-bold text-slate-600">
+                        Cobertura 2031: <strong>{selectedEsp.pct_cobertura}%</strong>
+                      </div>
+                    </div>
                   </div>
-                  <div className={`text-xl font-black ${selectedEsp.dictamen === "ABRIR" ? "text-emerald-800" : selectedEsp.dictamen === "REGULAR" ? "text-amber-800" : "text-rose-800"
-                    }`}>
-                    {selectedEsp.egresados_proyectados_2031} / {selectedEsp.demanda_proyectada_2031}
-                  </div>
-                  <div className="text-[10px] font-bold text-slate-600">
-                    Cobertura 2031: <strong>{selectedEsp.pct_cobertura}%</strong>
-                  </div>
-                </div>
-              </div>
+                );
+              })()}
 
               {/* Gráfico lineal demanda vs egresados con modulador demográfico */}
               <div className="bg-slate-50 rounded-2xl border border-slate-200/90 p-5 shadow-xs space-y-4">
@@ -2881,7 +2904,7 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                   <Layers className="w-4 h-4 text-emerald-300" />
                 </div>
                 <span className="text-xs font-black text-emerald-300 uppercase tracking-widest">
-                  Diapositiva 4 de 4 · Matriz General Territorial SEP
+                  Diapositiva 4 de 4 · Matriz General Territorial SEP · Datos Preliminares
                 </span>
                 <span className="ml-auto bg-emerald-500/20 text-emerald-200 border border-emerald-400/30 text-[10px] font-black px-2.5 py-1 rounded-full">
                   Corte Quinquenal 2031 · 20 Especialidades × 9 Departamentos
@@ -3309,11 +3332,24 @@ export default function Exposicion2031View({ data: dataset }: Props) {
   return (
     <div
       ref={containerRef}
-      className={`${isFullscreen ? "fixed inset-0 z-50 bg-slate-50 overflow-y-auto p-6 sm:p-10" : ""}`}
+      className={`relative ${isFullscreen ? "fixed inset-0 z-50 bg-slate-50 overflow-y-auto p-6 sm:p-10" : ""}`}
     >
+      {/* ── Marca de agua ultra translúcida en segundo plano (no interfiere la lectura) ── */}
+      <div className="fixed inset-0 z-10 pointer-events-none select-none overflow-hidden flex items-center justify-center">
+        {/* Marca diagonal tenue de fondo */}
+        <div className="relative rotate-[-24deg] text-center opacity-[0.03] select-none filter blur-[1.5px]">
+          <span className="block text-6xl sm:text-8xl lg:text-9xl font-black tracking-[0.2em] text-slate-900 uppercase">
+            DATOS PRELIMINARES
+          </span>
+          <span className="block text-sm sm:text-xl font-bold tracking-[0.4em] text-slate-700 uppercase mt-2">
+            DOCUMENTO DE TRABAJO · EN REVISIÓN
+          </span>
+        </div>
+      </div>
       {/* ── Barra de navegación superior ── */}
       <div className={`bg-white border border-slate-200 rounded-2xl shadow-sm mb-5 px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${isFullscreen ? "sticky top-4 z-10" : ""}`}>
-        <div className="flex items-center gap-1.5">
+        <div className="flex flex-wrap items-center gap-2">
+          <div className="flex items-center gap-1.5">
           {SLIDES.map((s, i) => {
             const Icon = s.icon;
             const isActive = slide === i;
@@ -3332,6 +3368,11 @@ export default function Exposicion2031View({ data: dataset }: Props) {
               </button>
             );
           })}
+          </div>
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 text-slate-500 border border-slate-200/80 text-[10px] font-medium">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+            Datos preliminares
+          </span>
         </div>
 
         <div className="flex items-center gap-2">
