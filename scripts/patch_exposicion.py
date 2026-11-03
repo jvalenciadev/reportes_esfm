@@ -231,27 +231,27 @@ jsx_replacement = '''                {/* Nota de Coherencia Demográfica */}
                       {/* Fila 2 de Métricas */}
                       <tr className="text-[10px] font-extrabold text-slate-700 border-b border-slate-300 text-right">
                         {/* 2027 */}
-                        <th className="py-1.5 px-2 bg-[#dbeafe]/40 border-r border-slate-200/70">DEMANDA ITEMS</th>
+                        <th className="py-1.5 px-2 bg-[#dbeafe]/40 border-r border-slate-200/70">DEMANDA MTROS</th>
                         <th className="py-1.5 px-2 bg-[#dbeafe]/40 border-r border-slate-200/70">EGRESADOS</th>
                         <th className="py-1.5 px-2 bg-[#dbeafe]/60 border-r border-slate-300 text-slate-900">DEMANDA REAL</th>
 
                         {/* 2028 */}
-                        <th className="py-1.5 px-2 bg-[#fef3c7]/40 border-r border-slate-200/70">DEMANDA ITEMS</th>
+                        <th className="py-1.5 px-2 bg-[#fef3c7]/40 border-r border-slate-200/70">DEMANDA MTROS</th>
                         <th className="py-1.5 px-2 bg-[#fef3c7]/40 border-r border-slate-200/70">EGRESADOS</th>
                         <th className="py-1.5 px-2 bg-[#fef3c7]/70 border-r border-slate-300 text-amber-950">DEMANDA REAL</th>
 
                         {/* 2029 */}
-                        <th className="py-1.5 px-2 bg-[#e0f2fe]/40 border-r border-slate-200/70">DEMANDA ITEMS</th>
+                        <th className="py-1.5 px-2 bg-[#e0f2fe]/40 border-r border-slate-200/70">DEMANDA MTROS</th>
                         <th className="py-1.5 px-2 bg-[#e0f2fe]/40 border-r border-slate-200/70">EGRESADOS</th>
                         <th className="py-1.5 px-2 bg-[#e0f2fe]/70 border-r border-slate-300 text-sky-950">DEMANDA REAL</th>
 
                         {/* 2030 */}
-                        <th className="py-1.5 px-2 bg-[#e2e8f0]/40 border-r border-slate-200/70">DEMANDA ITEMS</th>
+                        <th className="py-1.5 px-2 bg-[#e2e8f0]/40 border-r border-slate-200/70">DEMANDA MTROS</th>
                         <th className="py-1.5 px-2 bg-[#e2e8f0]/40 border-r border-slate-200/70">EGRESADOS</th>
                         <th className="py-1.5 px-2 bg-[#e2e8f0]/70 border-r border-slate-300 text-slate-900">DEMANDA REAL</th>
 
                         {/* 2031 */}
-                        <th className="py-1.5 px-2 bg-[#dcfce7]/40 border-r border-slate-200/70">DEMANDA ITEMS</th>
+                        <th className="py-1.5 px-2 bg-[#dcfce7]/40 border-r border-slate-200/70">DEMANDA MTROS</th>
                         <th className="py-1.5 px-2 bg-[#dcfce7]/40 border-r border-slate-200/70">EGRESADOS</th>
                         <th className="py-1.5 px-2 bg-[#dcfce7]/70 border-r border-slate-300 text-emerald-950">DEMANDA REAL</th>
                       </tr>

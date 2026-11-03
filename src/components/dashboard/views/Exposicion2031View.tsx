@@ -373,7 +373,7 @@ export default function Exposicion2031View({ data: dataset }: Props) {
   const [modoVistaCohorte, setModoVistaCohorte] = useState<"resumido" | "completo">("resumido");
 
   // Estados para Slide 4 (Matriz General Territorial por Especialidad)
-  const [modoVistaGeneral, setModoVistaGeneral] = useState<"combinado" | "cantidad" | "admision">("combinado");
+  const [modoVistaGeneral, setModoVistaGeneral] = useState<"combinado" | "cantidad" | "admision" | "comparar_2027_2031">("combinado");
   const [filtroGeneralDictamen, setFiltroGeneralDictamen] = useState<"TODAS" | "CON_APERTURA" | "SATURADAS">("TODAS");
   const [searchGeneral, setSearchGeneral] = useState("");
 
@@ -747,51 +747,92 @@ export default function Exposicion2031View({ data: dataset }: Props) {
   // Matriz General Territorial de 20 Especialidades x 9 Departamentos (Slide 4)
   const matrizGeneralData = useMemo(() => {
     if (!data?.dictamen_apertura_especialidades) {
-      return { filas: [], dptoTotales: {}, totalParalelosNac: 0, totalDeficitPositivoNac: 0 };
+      return {
+        filas: [],
+        dptoTotales: {},
+        totalParalelosNac: 0,
+        totalDeficitPositivoNac: 0,
+        totalReq2027Nac: 0,
+        totalReq2031Nac: 0,
+      };
     }
 
     const esps = data.dictamen_apertura_especialidades;
     const dptos = ["BENI", "CHUQUISACA", "COCHABAMBA", "LA PAZ", "ORURO", "PANDO", "POTOSI", "SANTA CRUZ", "TARIJA"];
 
-    const dptoTotales: Record<string, { realNeto: number; deficitPositivo: number; paralelos: number }> = {};
+    const dptoTotales: Record<string, {
+      realNeto: number;
+      deficitPositivo: number;
+      paralelos: number;
+      req2027: number;
+      req2031: number;
+    }> = {};
     dptos.forEach((dp) => {
-      dptoTotales[dp] = { realNeto: 0, deficitPositivo: 0, paralelos: 0 };
+      dptoTotales[dp] = { realNeto: 0, deficitPositivo: 0, paralelos: 0, req2027: 0, req2031: 0 };
     });
 
     let totalParalelosNac = 0;
     let totalDeficitPositivoNac = 0;
+    let totalReq2027Nac = 0;
+    let totalReq2031Nac = 0;
 
     const filas = esps.map((esp) => {
       let totRealEsp = 0;
       let totParalelosEsp = 0;
       let totDeficitPositivoEsp = 0;
-      const dptosVal: Record<string, { def: number; egr: number; real: number; par: number }> = {};
+
+      const sNac = esp.serie_proyeccion || [];
+      const p27Nac = sNac.find((p) => p.anio === 2027);
+      const p31Nac = sNac.find((p) => p.anio === 2031);
+      const totReq2027Esp = Math.round(p27Nac?.demanda ?? esp.items_deficit_uie_nacional ?? 0);
+      const totReq2031Esp = Math.round(p31Nac?.demanda ?? esp.demanda_proyectada_2031 ?? 0);
+
+      const dptosVal: Record<string, {
+        def: number;
+        egr: number;
+        real: number;
+        par: number;
+        req2027: number;
+        req2031: number;
+      }> = {};
 
       dptos.forEach((dp) => {
         const dData = esp.por_dpto?.[dp];
+        const sDp = dData?.serie_proyeccion || [];
+        const p27Dp = sDp.find((p) => p.anio === 2027);
+        const p31Dp = sDp.find((p) => p.anio === 2031);
+
         const def = Math.round(dData?.items_deficit_uie || 0);
+        const req2027 = Math.round(p27Dp?.demanda ?? def);
+        const req2031 = Math.round(p31Dp?.demanda ?? (dData?.demanda_2031 ?? def));
         const egr = Math.round(dData?.egresados_esfm_proyectados || 0);
         const real = def - egr;
         const par = calcularParalelosAdmision(real) || 0;
 
-        dptosVal[dp] = { def, egr, real, par };
+        dptosVal[dp] = { def, egr, real, par, req2027, req2031 };
         totRealEsp += real;
         totParalelosEsp += par;
         if (real > 0) totDeficitPositivoEsp += real;
 
         dptoTotales[dp].realNeto += real;
         dptoTotales[dp].paralelos += par;
+        dptoTotales[dp].req2027 += req2027;
+        dptoTotales[dp].req2031 += req2031;
         if (real > 0) dptoTotales[dp].deficitPositivo += real;
       });
 
       totalParalelosNac += totParalelosEsp;
       totalDeficitPositivoNac += totDeficitPositivoEsp;
+      totalReq2027Nac += totReq2027Esp;
+      totalReq2031Nac += totReq2031Esp;
 
       return {
         especialidad: esp.especialidad,
         macroArea: getMacroArea(esp.especialidad),
         dictamen: esp.dictamen,
         badge: esp.badge,
+        totReq2027Esp,
+        totReq2031Esp,
         dptos: dptosVal,
         totRealEsp,
         totParalelosEsp,
@@ -813,23 +854,32 @@ export default function Exposicion2031View({ data: dataset }: Props) {
       return b.totParalelosEsp - a.totParalelosEsp || a.especialidad.localeCompare(b.especialidad);
     });
 
-    return { filas, dptoTotales, totalParalelosNac, totalDeficitPositivoNac };
+    return {
+      filas,
+      dptoTotales,
+      totalParalelosNac,
+      totalDeficitPositivoNac,
+      totalReq2027Nac,
+      totalReq2031Nac,
+    };
   }, [data]);
 
   // Exportar CSV de la Matriz General
   const handleExportMatrizGeneral = () => {
     if (!data?.dictamen_apertura_especialidades) return;
     const dptos = ["BENI", "CHUQUISACA", "COCHABAMBA", "LA PAZ", "ORURO", "PANDO", "POTOSI", "SANTA CRUZ", "TARIJA"];
-    let csv = "Especialidad,Macro Area,Dictamen," + dptos.map((d) => `${d} (Cantidad),${d} (Paralelos)`).join(",") + ",Total Real Bolivia,Total Paralelos Bolivia\n";
+    let csv = "Especialidad,Macro Area,Dictamen,Requerido 2027 Bolivia,Requerido 2031 Bolivia," +
+      dptos.map((d) => `${d} Req 2027,${d} Req 2031,${d} Cantidad Real,${d} Paralelos`).join(",") +
+      ",Total Real Bolivia,Total Paralelos Bolivia\n";
     matrizGeneralData.filas.forEach((f) => {
-      const dCells = dptos.map((d) => `${f.dptos[d].real},${f.dptos[d].par}`).join(",");
-      csv += `"${f.especialidad}","${f.macroArea}","${f.dictamen}",${dCells},${f.totRealEsp},${f.totParalelosEsp}\n`;
+      const dCells = dptos.map((d) => `${f.dptos[d].req2027},${f.dptos[d].req2031},${f.dptos[d].real},${f.dptos[d].par}`).join(",");
+      csv += `"${f.especialidad}","${f.macroArea}","${f.dictamen}",${f.totReq2027Esp},${f.totReq2031Esp},${dCells},${f.totRealEsp},${f.totParalelosEsp}\n`;
     });
     const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "matriz_general_todas_especialidades_2031.csv";
+    a.download = "matriz_general_comparativa_2027_2031.csv";
     a.click();
   };
 
@@ -1685,7 +1735,7 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                 </span>
               </div>
               <h2 className="text-2xl sm:text-4xl font-black tracking-tight text-white">
-                Dictamen de Apertura de Especialidades ESFM 2031
+                Calculo de Apertura de Especialidades ESFM 2031
               </h2>
               <p className="text-amber-200 text-sm mt-1 max-w-2xl">
                 Modelo de correspondencia curricular: Déficit de horas UIE auditadas vs egresados proyectados de las ESFM.
@@ -1823,7 +1873,7 @@ export default function Exposicion2031View({ data: dataset }: Props) {
               {(() => {
                 const nivelKey = selectedEsp.nivel_educativo === "INICIAL" ? "inicial"
                   : selectedEsp.nivel_educativo === "PRIMARIA" ? "primaria"
-                  : "secundaria";
+                    : "secundaria";
                 const s2026 = SERIE_NIVELES_2011_2031.find((s) => s.anio === 2026);
                 const s2031 = SERIE_NIVELES_2011_2031.find((s) => s.anio === 2031);
                 const est2026 = s2026 ? s2026[nivelKey] : 1235838;
@@ -1878,7 +1928,7 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                         {est2026.toLocaleString()}
                       </div>
                       <div className="text-[10px] text-blue-700 font-semibold">
-                        Matrícula SIE ({selectedEsp.nivel_educativo || "Secundaria"})
+                        FUENTE SIE ({selectedEsp.nivel_educativo || "Secundaria"})
                       </div>
                     </div>
 
@@ -1892,7 +1942,7 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                         {est2031.toLocaleString()}
                       </div>
                       <div className="text-[10px] font-semibold text-slate-600">
-                        INE: <span className={varDemPct > 0 ? "text-emerald-700 font-bold" : "text-rose-700 font-bold"}>
+                        FUENTE INE: <span className={varDemPct > 0 ? "text-emerald-700 font-bold" : "text-rose-700 font-bold"}>
                           {varDemPct > 0 ? `+${varDemPct}%` : `${varDemPct}%`}
                         </span> ({selectedEsp.edades_ine || "12 a 17 años"})
                       </div>
@@ -2393,32 +2443,32 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                           {/* Sub Cabecera de Métricas */}
                           <tr className="text-[10px] font-extrabold text-slate-700 border-b border-slate-300 text-right">
                             {/* INICIAL */}
-                            <th className="py-1.5 px-2 bg-amber-50/50 border-r border-slate-200/70">DEMANDA ITEMS</th>
+                            <th className="py-1.5 px-2 bg-amber-50/50 border-r border-slate-200/70">DEMANDA MTROS</th>
                             <th className="py-1.5 px-2 bg-amber-50/50 border-r border-slate-200/70">EGRESADOS</th>
                             <th className="py-1.5 px-2 bg-amber-100/60 border-r border-slate-300 text-amber-950">DEMANDA REAL</th>
 
                             {/* PRIMARIA */}
-                            <th className="py-1.5 px-2 bg-blue-50/50 border-r border-slate-200/70">DEMANDA ITEMS</th>
+                            <th className="py-1.5 px-2 bg-blue-50/50 border-r border-slate-200/70">DEMANDA MTROS</th>
                             <th className="py-1.5 px-2 bg-blue-50/50 border-r border-slate-200/70">EGRESADOS</th>
                             <th className="py-1.5 px-2 bg-blue-100/60 border-r border-slate-300 text-blue-950">DEMANDA REAL</th>
 
                             {/* SECUNDARIA */}
-                            <th className="py-1.5 px-2 bg-emerald-50/50 border-r border-slate-200/70">DEMANDA ITEMS</th>
+                            <th className="py-1.5 px-2 bg-emerald-50/50 border-r border-slate-200/70">DEMANDA MTROS</th>
                             <th className="py-1.5 px-2 bg-emerald-50/50 border-r border-slate-200/70">EGRESADOS</th>
                             <th className="py-1.5 px-2 bg-emerald-100/60 border-r border-slate-300 text-emerald-950">DEMANDA REAL</th>
 
                             {/* SECUNDARIA BTH */}
-                            <th className="py-1.5 px-2 bg-indigo-50/50 border-r border-slate-200/70">DEMANDA ITEMS</th>
+                            <th className="py-1.5 px-2 bg-indigo-50/50 border-r border-slate-200/70">DEMANDA MTROS</th>
                             <th className="py-1.5 px-2 bg-indigo-50/50 border-r border-slate-200/70">EGRESADOS</th>
                             <th className="py-1.5 px-2 bg-indigo-100/60 border-r border-slate-300 text-indigo-950">DEMANDA REAL</th>
 
                             {/* ESPECIAL */}
-                            <th className="py-1.5 px-2 bg-rose-50/50 border-r border-slate-200/70">DEMANDA ITEMS</th>
+                            <th className="py-1.5 px-2 bg-rose-50/50 border-r border-slate-200/70">DEMANDA MTROS</th>
                             <th className="py-1.5 px-2 bg-rose-50/50 border-r border-slate-200/70">EGRESADOS</th>
                             <th className="py-1.5 px-2 bg-rose-100/60 border-r border-slate-300 text-rose-950">DEMANDA REAL</th>
 
                             {/* TOTAL GENERAL */}
-                            <th className="py-1.5 px-2 bg-slate-100 border-r border-slate-200/70 text-slate-800">DEMANDA ITEMS</th>
+                            <th className="py-1.5 px-2 bg-slate-100 border-r border-slate-200/70 text-slate-800">DEMANDA MTROS</th>
                             <th className="py-1.5 px-2 bg-slate-100 border-r border-slate-200/70 text-slate-800">EGRESADOS</th>
                             <th className="py-1.5 px-2 bg-slate-200/90 border-l border-slate-300 text-slate-900 font-black">DEMANDA REAL</th>
                           </tr>
@@ -2663,23 +2713,23 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                                 </th>
                               </tr>
                               <tr className="text-[10px] font-extrabold text-slate-700 border-b border-slate-300 text-right">
-                                <th className="py-1.5 px-2 bg-[#dbeafe]/40 border-r border-slate-200/70">DEMANDA ITEMS</th>
+                                <th className="py-1.5 px-2 bg-[#dbeafe]/40 border-r border-slate-200/70">DEMANDA MTROS</th>
                                 <th className="py-1.5 px-2 bg-[#dbeafe]/40 border-r border-slate-200/70">EGRESADOS</th>
                                 <th className="py-1.5 px-2 bg-[#dbeafe]/60 border-r border-slate-300 text-slate-900">DEMANDA REAL</th>
 
-                                <th className="py-1.5 px-2 bg-[#fef3c7]/40 border-r border-slate-200/70">DEMANDA ITEMS</th>
+                                <th className="py-1.5 px-2 bg-[#fef3c7]/40 border-r border-slate-200/70">DEMANDA MTROS</th>
                                 <th className="py-1.5 px-2 bg-[#fef3c7]/40 border-r border-slate-200/70">EGRESADOS</th>
                                 <th className="py-1.5 px-2 bg-[#fef3c7]/70 border-r border-slate-300 text-amber-950">DEMANDA REAL</th>
 
-                                <th className="py-1.5 px-2 bg-[#e0f2fe]/40 border-r border-slate-200/70">DEMANDA ITEMS</th>
+                                <th className="py-1.5 px-2 bg-[#e0f2fe]/40 border-r border-slate-200/70">DEMANDA MTROS</th>
                                 <th className="py-1.5 px-2 bg-[#e0f2fe]/40 border-r border-slate-200/70">EGRESADOS</th>
                                 <th className="py-1.5 px-2 bg-[#e0f2fe]/70 border-r border-slate-300 text-sky-950">DEMANDA REAL</th>
 
-                                <th className="py-1.5 px-2 bg-[#e2e8f0]/40 border-r border-slate-200/70">DEMANDA ITEMS</th>
+                                <th className="py-1.5 px-2 bg-[#e2e8f0]/40 border-r border-slate-200/70">DEMANDA MTROS</th>
                                 <th className="py-1.5 px-2 bg-[#e2e8f0]/40 border-r border-slate-200/70">EGRESADOS</th>
                                 <th className="py-1.5 px-2 bg-[#e2e8f0]/70 border-r border-slate-300 text-slate-900">DEMANDA REAL</th>
 
-                                <th className="py-1.5 px-2 bg-[#dcfce7]/40 border-r border-slate-200/70">DEMANDA ITEMS</th>
+                                <th className="py-1.5 px-2 bg-[#dcfce7]/40 border-r border-slate-200/70">DEMANDA MTROS</th>
                                 <th className="py-1.5 px-2 bg-[#dcfce7]/40 border-r border-slate-200/70">EGRESADOS</th>
                                 <th className="py-1.5 px-2 bg-[#dcfce7]/70 border-r border-slate-300 text-emerald-950">DEMANDA REAL</th>
                               </tr>
@@ -2911,7 +2961,7 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                 </span>
               </div>
               <h2 className="text-2xl sm:text-4xl font-black tracking-tight text-white">
-                Dictamen General: Requerimiento de Docentes y Admisión por Especialidad
+                Calculo Preliminar: Requerimiento de Docentes y Admisión por Especialidad
               </h2>
               <p className="text-slate-300 text-sm mt-2 max-w-3xl leading-relaxed">
                 Consolidado territorial integral al año 2031. Visualización cruzada por <strong>Cantidad</strong> (demanda real neta de docentes en déficit o superávit) y por <strong>Admisión 2027</strong> (número de paralelos recomendados de 30 estudiantes con umbral mínimo de 6 docentes).
@@ -2970,7 +3020,7 @@ export default function Exposicion2031View({ data: dataset }: Props) {
               {/* Selector de Modo de Vista */}
               <div className="flex flex-wrap items-center gap-2">
                 <span className="text-xs font-bold text-slate-700">Modo de Visualización:</span>
-                <div className="inline-flex rounded-xl border border-slate-200 p-1 bg-slate-100/80 text-xs font-bold gap-1">
+                <div className="inline-flex flex-wrap items-center rounded-xl border border-slate-200 p-1 bg-slate-100/80 text-xs font-bold gap-1">
                   <button
                     onClick={() => setModoVistaGeneral("combinado")}
                     className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${modoVistaGeneral === "combinado"
@@ -2997,6 +3047,15 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                       }`}
                   >
                     Solo Admisión (Paralelos)
+                  </button>
+                  <button
+                    onClick={() => setModoVistaGeneral("comparar_2027_2031")}
+                    className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${modoVistaGeneral === "comparar_2027_2031"
+                      ? "bg-indigo-900 text-white shadow-xs font-black"
+                      : "text-indigo-800 bg-indigo-50/80 hover:bg-indigo-100 hover:text-indigo-950 font-extrabold border border-indigo-200/80"
+                      }`}
+                  >
+                    COMPARAR 2027 - 2031
                   </button>
                 </div>
               </div>
@@ -3050,17 +3109,35 @@ export default function Exposicion2031View({ data: dataset }: Props) {
               <table className="w-full text-[11px] text-left border-collapse whitespace-nowrap">
                 <thead>
                   <tr className="bg-slate-100/90 text-slate-800 font-black border-b border-slate-300">
-                    <th className="py-2.5 px-3 text-left border-r border-slate-300 min-w-[240px]">
+                    <th className="py-2.5 px-3 text-left border-r border-slate-300 min-w-[230px]">
                       ESPECIALIDAD OFICIAL (SEP)
                     </th>
+                    <th className="py-2.5 px-2.5 text-right bg-amber-50 text-amber-950 border-r border-slate-300 min-w-[95px] font-black">
+                      REQUERIDO 2027
+                      <span className="block text-[9px] font-extrabold text-amber-800">(Convocatoria)</span>
+                    </th>
+                    <th className="py-2.5 px-2.5 text-right bg-blue-50 text-blue-950 border-r border-slate-300 min-w-[95px] font-black">
+                      REQUERIDO 2031
+                      <span className="block text-[9px] font-extrabold text-blue-800">(Quinquenio)</span>
+                    </th>
                     {dptos.map((dp) => (
-                      <th key={dp} className="py-2.5 px-2 text-center border-r border-slate-200 min-w-[85px]">
-                        {dp}
+                      <th
+                        key={dp}
+                        className={`py-2.5 px-2 text-center border-r border-slate-200 min-w-[95px] ${
+                          modoVistaGeneral === "comparar_2027_2031" ? "bg-indigo-50/70 text-indigo-950" : ""
+                        }`}
+                      >
+                        <span className="block font-black">{dp}</span>
+                        {modoVistaGeneral === "comparar_2027_2031" ? (
+                          <span className="block text-[8.5px] font-extrabold text-indigo-700 uppercase tracking-tight">
+                            2027 vs 2031
+                          </span>
+                        ) : null}
                       </th>
                     ))}
-                    <th className="py-2.5 px-3 text-right bg-slate-200/90 text-slate-950 border-r border-slate-300 min-w-[100px] font-black">
+                    <th className="py-2.5 px-3 text-right bg-slate-200/90 text-slate-950 border-r border-slate-300 min-w-[110px] font-black">
                       TOTAL BOLIVIA
-                      <span className="block text-[9px] font-normal text-slate-600">(Cantidad Real)</span>
+                      <span className="block text-[9px] font-normal text-slate-600">(Balance Real)</span>
                     </th>
                     <th className="py-2.5 px-3 text-center bg-[#ecfccb] text-lime-950 border-l border-slate-300 min-w-[110px] font-black">
                       ADMISIÓN 2027
@@ -3089,7 +3166,7 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                       <React.Fragment key={row.especialidad}>
                         {isNewGroup && (
                           <tr className={`${gInfo.bg} ${gInfo.text} font-black text-xs border-y ${gInfo.border}`}>
-                            <td colSpan={dptos.length + 3} className="py-2 px-3">
+                            <td colSpan={dptos.length + 5} className="py-2 px-3">
                               <div className="flex items-center justify-between">
                                 <span className="tracking-wide font-black">{gInfo.label}</span>
                                 <span className="text-[10px] font-bold opacity-80">{gInfo.sub}</span>
@@ -3100,102 +3177,169 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                         <tr
                           className={`transition-colors ${hasParalelos ? "hover:bg-lime-50/30" : "hover:bg-slate-50/80"}`}
                         >
-                        {/* Especialidad + Área */}
-                        <td className="py-2 px-3 border-r border-slate-200 bg-slate-50/40">
-                          <div className="flex items-center justify-between gap-2">
-                            <span className="font-bold text-slate-900">{row.especialidad}</span>
-                            <span className={`text-[9px] font-extrabold px-1.5 py-0.2 rounded ${row.macroArea === "INICIAL" ? "bg-amber-100 text-amber-800"
-                              : row.macroArea === "PRIMARIA" ? "bg-blue-100 text-blue-800"
-                                : row.macroArea === "SECUNDARIA_BTH" ? "bg-indigo-100 text-indigo-800"
-                                  : row.macroArea === "ESPECIAL" ? "bg-rose-100 text-rose-800"
-                                    : "bg-emerald-100 text-emerald-800"
-                              }`}>
-                              {row.macroArea === "SECUNDARIA_BTH" ? "BTH" : row.macroArea}
-                            </span>
-                          </div>
-                        </td>
+                          {/* Especialidad + Área */}
+                          <td className="py-2 px-3 border-r border-slate-200 bg-slate-50/40">
+                            <div className="flex items-center justify-between gap-2">
+                              <span className="font-bold text-slate-900">{row.especialidad}</span>
+                              <span className={`text-[9px] font-extrabold px-1.5 py-0.2 rounded ${row.macroArea === "INICIAL" ? "bg-amber-100 text-amber-800"
+                                : row.macroArea === "PRIMARIA" ? "bg-blue-100 text-blue-800"
+                                  : row.macroArea === "SECUNDARIA_BTH" ? "bg-indigo-100 text-indigo-800"
+                                    : row.macroArea === "ESPECIAL" ? "bg-rose-100 text-rose-800"
+                                      : "bg-emerald-100 text-emerald-800"
+                                }`}>
+                                {row.macroArea === "SECUNDARIA_BTH" ? "BTH" : row.macroArea}
+                              </span>
+                            </div>
+                          </td>
 
-                        {/* Celdas Departamentales */}
-                        {dptos.map((dp) => {
-                          const cell = row.dptos[dp];
-                          const real = cell.real;
-                          const par = cell.par;
+                          {/* Requerimiento 2027 Nacional */}
+                          <td className="py-2 px-2.5 text-right border-r border-slate-200 bg-amber-50/30 font-extrabold text-amber-950">
+                            <span>{row.totReq2027Esp.toLocaleString()}</span>
+                            <span className="text-[9px] text-amber-800/80 font-semibold block">docentes</span>
+                          </td>
 
-                          return (
-                            <td key={dp} className="py-2 px-2 text-right border-r border-slate-100">
-                              {modoVistaGeneral === "combinado" && (
-                                <div>
-                                  {par > 0 ? (
-                                    <div className="flex items-center justify-end gap-1 font-black text-slate-900">
-                                      <span>+{real}</span>
-                                      <span
-                                        className="inline-flex items-center justify-center px-1.5 py-0.2 rounded bg-[#84cc16] text-white text-[10px] font-black shadow-2xs"
-                                        title={`${par} paralelo(s) requeridos (${par * 30} plazas)`}
-                                      >
-                                        {par}p
+                          {/* Requerimiento 2031 Nacional */}
+                          <td className="py-2 px-2.5 text-right border-r border-slate-200 bg-blue-50/30 font-extrabold text-blue-950">
+                            <span>{row.totReq2031Esp.toLocaleString()}</span>
+                            <span className="text-[9px] text-blue-800/80 font-semibold block">docentes</span>
+                          </td>
+
+                          {/* Celdas Departamentales */}
+                          {dptos.map((dp) => {
+                            const cell = row.dptos[dp];
+                            const real = cell.real;
+                            const par = cell.par;
+
+                            return (
+                              <td key={dp} className="py-2 px-2 text-right border-r border-slate-100">
+                                {modoVistaGeneral === "combinado" && (
+                                  <div>
+                                    {par > 0 ? (
+                                      <div className="flex items-center justify-end gap-1 font-black text-slate-900">
+                                        <span>+{real}</span>
+                                        <span
+                                          className="inline-flex items-center justify-center px-1.5 py-0.2 rounded bg-[#84cc16] text-white text-[10px] font-black shadow-2xs"
+                                          title={`${par} paralelo(s) requeridos (${par * 30} plazas)`}
+                                        >
+                                          {par}p
+                                        </span>
+                                      </div>
+                                    ) : real > 0 ? (
+                                      <span className="text-slate-600 font-semibold" title="Déficit menor a 6 docentes">
+                                        +{real}
                                       </span>
+                                    ) : real < 0 ? (
+                                      <span className="text-rose-600 font-semibold">{real}</span>
+                                    ) : (
+                                      <span className="text-slate-300 font-semibold">0</span>
+                                    )}
+                                    <div className="flex items-center justify-end gap-1 text-[8.5px] font-semibold mt-0.5">
+                                      <span className="text-amber-800 bg-amber-50 px-1 rounded border border-amber-200/60">&apos;27: {cell.req2027}</span>
+                                      <span className="text-slate-400">→</span>
+                                      <span className="text-blue-800 bg-blue-50 px-1 rounded border border-blue-200/60">&apos;31: {cell.req2031}</span>
                                     </div>
-                                  ) : real > 0 ? (
-                                    <span className="text-slate-600 font-semibold" title="Déficit menor a 6 docentes">
-                                      +{real}
-                                    </span>
-                                  ) : real < 0 ? (
-                                    <span className="text-rose-600 font-semibold">{real}</span>
-                                  ) : (
-                                    <span className="text-slate-300 font-semibold">0</span>
-                                  )}
+                                  </div>
+                                )}
+
+                                {modoVistaGeneral === "cantidad" && (
+                                  <div>
+                                    {real > 0 ? (
+                                      <span className="font-extrabold text-slate-900">+{real}</span>
+                                    ) : real < 0 ? (
+                                      <span className="text-rose-600 font-semibold">{real}</span>
+                                    ) : (
+                                      <span className="text-slate-300 font-semibold">0</span>
+                                    )}
+                                  </div>
+                                )}
+
+                                {modoVistaGeneral === "admision" && (
+                                  <div className="text-center">
+                                    {par > 0 ? (
+                                      <span className="inline-flex items-center justify-center px-2 py-0.5 rounded bg-[#84cc16] text-white text-[10px] font-black shadow-2xs">
+                                        {par} paralelo{par === 1 ? "" : "s"}
+                                      </span>
+                                    ) : (
+                                      <span className="text-slate-300 font-semibold">—</span>
+                                    )}
+                                  </div>
+                                )}
+
+                                {modoVistaGeneral === "comparar_2027_2031" && (
+                                  <div className="flex flex-col items-stretch p-1 bg-slate-50/90 rounded-lg border border-slate-200/90 text-[10px] shadow-2xs">
+                                    <div className="flex items-center justify-between gap-1">
+                                      <span className="px-1 py-0.2 rounded bg-amber-100 text-amber-900 font-extrabold text-[8.5px]">
+                                        &apos;27
+                                      </span>
+                                      <span className="font-black text-amber-950 text-[11px]">{cell.req2027}</span>
+                                    </div>
+                                    <div className="flex items-center justify-between gap-1 mt-0.5 pt-0.5 border-t border-slate-200/80">
+                                      <span className="px-1 py-0.2 rounded bg-blue-100 text-blue-900 font-extrabold text-[8.5px]">
+                                        &apos;31
+                                      </span>
+                                      <span className="font-black text-blue-950 text-[11px]">{cell.req2031}</span>
+                                    </div>
+                                    {par > 0 ? (
+                                      <div className="mt-1 text-center">
+                                        <span className="inline-flex items-center justify-center w-full px-1 py-0.5 rounded bg-[#84cc16] text-white text-[9px] font-black shadow-2xs">
+                                          {par} paralelo{par > 1 ? "s" : ""} (+{real})
+                                        </span>
+                                      </div>
+                                    ) : (
+                                      <div className="mt-0.5 text-right text-[8.5px] font-bold text-slate-400">
+                                        Saldo: <span className={real < 0 ? "text-rose-600 font-bold" : "text-slate-600 font-bold"}>{real}</span>
+                                      </div>
+                                    )}
+                                  </div>
+                                )}
+                              </td>
+                            );
+                          })}
+
+                          {/* Total Cantidad Bolivia */}
+                          <td className="py-2 px-3 text-right border-r border-slate-300 bg-slate-100/60 font-black">
+                            {modoVistaGeneral === "comparar_2027_2031" ? (
+                              <div className="space-y-0.5">
+                                <div className="flex items-center justify-end gap-1.5">
+                                  <span className="text-[11px] font-extrabold text-amber-950 bg-amber-100 border border-amber-300 px-1.5 py-0.5 rounded shadow-2xs">
+                                    &apos;27: {row.totReq2027Esp.toLocaleString()}
+                                  </span>
+                                  <span className="text-slate-400 font-black">→</span>
+                                  <span className="text-[11px] font-extrabold text-blue-950 bg-blue-100 border border-blue-300 px-1.5 py-0.5 rounded shadow-2xs">
+                                    &apos;31: {row.totReq2031Esp.toLocaleString()}
+                                  </span>
                                 </div>
-                              )}
-
-                              {modoVistaGeneral === "cantidad" && (
-                                <div>
-                                  {real > 0 ? (
-                                    <span className="font-extrabold text-slate-900">+{real}</span>
-                                  ) : real < 0 ? (
-                                    <span className="text-rose-600 font-semibold">{real}</span>
-                                  ) : (
-                                    <span className="text-slate-300 font-semibold">0</span>
-                                  )}
+                                <div className="text-[9px] text-slate-500 font-bold">
+                                  Saldo Real: {row.totRealEsp > 0 ? `+${row.totRealEsp.toLocaleString()}` : row.totRealEsp.toLocaleString()}
                                 </div>
-                              )}
-
-                              {modoVistaGeneral === "admision" && (
-                                <div className="text-center">
-                                  {par > 0 ? (
-                                    <span className="inline-flex items-center justify-center px-2 py-0.5 rounded bg-[#84cc16] text-white text-[10px] font-black shadow-2xs">
-                                      {par} paralelo{par === 1 ? "" : "s"}
-                                    </span>
-                                  ) : (
-                                    <span className="text-slate-300 font-semibold">—</span>
-                                  )}
+                              </div>
+                            ) : (
+                              <div>
+                                {row.totRealEsp > 0 ? (
+                                  <span className="text-emerald-700">+{row.totRealEsp.toLocaleString()}</span>
+                                ) : row.totRealEsp < 0 ? (
+                                  <span className="text-rose-700">{row.totRealEsp.toLocaleString()}</span>
+                                ) : (
+                                  <span className="text-slate-400">0</span>
+                                )}
+                                <div className="text-[9px] text-slate-400 font-medium tracking-tight">
+                                  &apos;27: {row.totReq2027Esp.toLocaleString()} → &apos;31: {row.totReq2031Esp.toLocaleString()}
                                 </div>
-                              )}
-                            </td>
-                          );
-                        })}
+                              </div>
+                            )}
+                          </td>
 
-                        {/* Total Cantidad Bolivia */}
-                        <td className="py-2 px-3 text-right border-r border-slate-300 bg-slate-100/60 font-black">
-                          {row.totRealEsp > 0 ? (
-                            <span className="text-emerald-700">+{row.totRealEsp.toLocaleString()}</span>
-                          ) : row.totRealEsp < 0 ? (
-                            <span className="text-rose-700">{row.totRealEsp.toLocaleString()}</span>
-                          ) : (
-                            <span className="text-slate-400">0</span>
-                          )}
-                        </td>
-
-                        {/* Total Admisión 2027 (Paralelos) */}
-                        <td className="py-2 px-3 text-center border-l border-slate-200 bg-lime-50/40">
-                          {row.totParalelosEsp > 0 ? (
-                            <span className="inline-flex items-center justify-center px-2.5 py-0.5 rounded bg-lime-700 text-white font-black text-xs shadow-xs">
-                              {row.totParalelosEsp} {row.totParalelosEsp === 1 ? "paralelo" : "paralelos"}
-                            </span>
-                          ) : (
-                            <span className="text-slate-300 font-semibold">—</span>
-                          )}
-                        </td>
-                      </tr>
+                          {/* Total Admisión 2027 (Paralelos) */}
+                          <td className="py-2 px-3 text-center border-l border-slate-200 bg-lime-50/40">
+                            {row.totParalelosEsp > 0 ? (
+                              <span className="inline-flex items-center justify-center px-2.5 py-0.5 rounded bg-lime-700 text-white font-black text-xs shadow-xs">
+                                {row.totParalelosEsp} {row.totParalelosEsp === 1 ? "paralelo" : "paralelos"}
+                              </span>
+                            ) : (
+                              <span className="text-slate-300 font-semibold">—</span>
+                            )}
+                          </td>
+                        </tr>
                       </React.Fragment>
                     );
                   })}
@@ -3208,16 +3352,50 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                     <td className="py-2.5 px-3 text-left font-black border-r border-slate-300">
                       TOTAL BALANCE NETO SEP
                     </td>
+                    <td className="py-2.5 px-2.5 border-r border-slate-300 font-black text-amber-950 bg-amber-100/60">
+                      {matrizGeneralData.totalReq2027Nac.toLocaleString()} doc.
+                    </td>
+                    <td className="py-2.5 px-2.5 border-r border-slate-300 font-black text-blue-950 bg-blue-100/60">
+                      {matrizGeneralData.totalReq2031Nac.toLocaleString()} doc.
+                    </td>
                     {dptos.map((dp) => {
                       const r = dptoTotales[dp].realNeto;
+                      const r27 = dptoTotales[dp].req2027;
+                      const r31 = dptoTotales[dp].req2031;
                       return (
                         <td key={dp} className="py-2.5 px-2 border-r border-slate-200 font-black">
-                          {r < 0 ? <span className="text-rose-700">{r.toLocaleString()}</span> : r}
+                          {modoVistaGeneral === "comparar_2027_2031" ? (
+                            <div className="flex flex-col items-stretch p-1 bg-white rounded border border-slate-200 text-[10px] space-y-0.5">
+                              <div className="flex items-center justify-between text-amber-950 font-black">
+                                <span className="text-[8.5px] text-amber-800 font-bold">&apos;27</span>
+                                <span>{r27.toLocaleString()}</span>
+                              </div>
+                              <div className="flex items-center justify-between text-blue-950 font-black pt-0.5 border-t border-slate-100">
+                                <span className="text-[8.5px] text-blue-800 font-bold">&apos;31</span>
+                                <span>{r31.toLocaleString()}</span>
+                              </div>
+                              <div className="text-[8.5px] text-slate-500 font-medium text-right pt-0.5">
+                                Saldo: <span className={r < 0 ? "text-rose-700 font-bold" : "text-slate-700 font-bold"}>{r.toLocaleString()}</span>
+                              </div>
+                            </div>
+                          ) : (
+                            <div>
+                              <div>{r < 0 ? <span className="text-rose-700">{r.toLocaleString()}</span> : r}</div>
+                              <div className="flex items-center justify-end gap-1 text-[8.5px] text-slate-400 font-medium mt-0.5">
+                                <span>&apos;27: {r27}</span>
+                                <span>→</span>
+                                <span>&apos;31: {r31}</span>
+                              </div>
+                            </div>
+                          )}
                         </td>
                       );
                     })}
                     <td className="py-2.5 px-3 border-r border-slate-300 font-black text-rose-700 bg-slate-200/90">
-                      -8,253
+                      <div>-8,253</div>
+                      <div className="text-[9px] text-slate-500 font-normal">
+                        &apos;27: {matrizGeneralData.totalReq2027Nac.toLocaleString()} → &apos;31: {matrizGeneralData.totalReq2031Nac.toLocaleString()}
+                      </div>
                     </td>
                     <td className="py-2.5 px-3 text-center border-l border-slate-300 bg-lime-100/60 font-black">
                       <span className="inline-flex items-center justify-center px-3 py-1 rounded bg-lime-800 text-white font-black text-xs shadow-xs">
@@ -3230,6 +3408,12 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                   <tr className="bg-emerald-50/70 font-extrabold text-emerald-950 border-t border-slate-200 text-right">
                     <td className="py-2 px-3 text-left font-extrabold border-r border-slate-300">
                       DÉFICIT EN ÁREAS DE APERTURA
+                    </td>
+                    <td className="py-2 px-2.5 border-r border-slate-300 font-black text-slate-800 bg-amber-50/50">
+                      +{totalDeficitPositivoNac.toLocaleString()} doc.
+                    </td>
+                    <td className="py-2 px-2.5 border-r border-slate-300 font-black text-slate-800 bg-blue-50/50">
+                      +{totalDeficitPositivoNac.toLocaleString()} doc.
                     </td>
                     {dptos.map((dp) => (
                       <td key={dp} className="py-2 px-2 border-r border-slate-200 font-black text-slate-900">
@@ -3350,24 +3534,24 @@ export default function Exposicion2031View({ data: dataset }: Props) {
       <div className={`bg-white border border-slate-200 rounded-2xl shadow-sm mb-5 px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${isFullscreen ? "sticky top-4 z-10" : ""}`}>
         <div className="flex flex-wrap items-center gap-2">
           <div className="flex items-center gap-1.5">
-          {SLIDES.map((s, i) => {
-            const Icon = s.icon;
-            const isActive = slide === i;
-            return (
-              <button
-                key={s.id}
-                onClick={() => setSlide(i)}
-                className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${isActive
-                  ? "bg-slate-900 text-white shadow"
-                  : "hover:bg-slate-100 text-slate-600"
-                  }`}
-              >
-                <Icon className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">{s.label}</span>
-                <span className="sm:hidden">{i + 1}</span>
-              </button>
-            );
-          })}
+            {SLIDES.map((s, i) => {
+              const Icon = s.icon;
+              const isActive = slide === i;
+              return (
+                <button
+                  key={s.id}
+                  onClick={() => setSlide(i)}
+                  className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${isActive
+                    ? "bg-slate-900 text-white shadow"
+                    : "hover:bg-slate-100 text-slate-600"
+                    }`}
+                >
+                  <Icon className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">{s.label}</span>
+                  <span className="sm:hidden">{i + 1}</span>
+                </button>
+              );
+            })}
           </div>
           <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 text-slate-500 border border-slate-200/80 text-[10px] font-medium">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
