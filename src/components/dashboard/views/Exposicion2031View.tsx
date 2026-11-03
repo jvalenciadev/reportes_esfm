@@ -336,6 +336,7 @@ const SLIDES = [
   { id: "slide1", label: "Crecimiento Poblacional", icon: TrendingUp },
   { id: "slide2", label: "Tendencia de Maestros", icon: Users },
   { id: "slide3", label: "Proyección Egresados ESFM", icon: GraduationCap },
+  { id: "slide4", label: "General", icon: Layers },
 ];
 
 // ─── Componente Principal ────────────────────────────────────────────────────
@@ -370,6 +371,11 @@ export default function Exposicion2031View({ data: dataset }: Props) {
 
   // Modo de lectura para la tabla de cohorte anual (resumido vs detallado)
   const [modoVistaCohorte, setModoVistaCohorte] = useState<"resumido" | "completo">("resumido");
+
+  // Estados para Slide 4 (Matriz General Territorial por Especialidad)
+  const [modoVistaGeneral, setModoVistaGeneral] = useState<"combinado" | "cantidad" | "admision">("combinado");
+  const [filtroGeneralDictamen, setFiltroGeneralDictamen] = useState<"TODAS" | "CON_APERTURA" | "SATURADAS">("TODAS");
+  const [searchGeneral, setSearchGeneral] = useState("");
 
   useEffect(() => {
     fetch("/api/exposicion-2031")
@@ -737,6 +743,95 @@ export default function Exposicion2031View({ data: dataset }: Props) {
       }
     );
   }, [deptBalanceRows]);
+
+  // Matriz General Territorial de 20 Especialidades x 9 Departamentos (Slide 4)
+  const matrizGeneralData = useMemo(() => {
+    if (!data?.dictamen_apertura_especialidades) {
+      return { filas: [], dptoTotales: {}, totalParalelosNac: 0, totalDeficitPositivoNac: 0 };
+    }
+
+    const esps = data.dictamen_apertura_especialidades;
+    const dptos = ["BENI", "CHUQUISACA", "COCHABAMBA", "LA PAZ", "ORURO", "PANDO", "POTOSI", "SANTA CRUZ", "TARIJA"];
+
+    const dptoTotales: Record<string, { realNeto: number; deficitPositivo: number; paralelos: number }> = {};
+    dptos.forEach((dp) => {
+      dptoTotales[dp] = { realNeto: 0, deficitPositivo: 0, paralelos: 0 };
+    });
+
+    let totalParalelosNac = 0;
+    let totalDeficitPositivoNac = 0;
+
+    const filas = esps.map((esp) => {
+      let totRealEsp = 0;
+      let totParalelosEsp = 0;
+      let totDeficitPositivoEsp = 0;
+      const dptosVal: Record<string, { def: number; egr: number; real: number; par: number }> = {};
+
+      dptos.forEach((dp) => {
+        const dData = esp.por_dpto?.[dp];
+        const def = Math.round(dData?.items_deficit_uie || 0);
+        const egr = Math.round(dData?.egresados_esfm_proyectados || 0);
+        const real = def - egr;
+        const par = calcularParalelosAdmision(real) || 0;
+
+        dptosVal[dp] = { def, egr, real, par };
+        totRealEsp += real;
+        totParalelosEsp += par;
+        if (real > 0) totDeficitPositivoEsp += real;
+
+        dptoTotales[dp].realNeto += real;
+        dptoTotales[dp].paralelos += par;
+        if (real > 0) dptoTotales[dp].deficitPositivo += real;
+      });
+
+      totalParalelosNac += totParalelosEsp;
+      totalDeficitPositivoNac += totDeficitPositivoEsp;
+
+      return {
+        especialidad: esp.especialidad,
+        macroArea: getMacroArea(esp.especialidad),
+        dictamen: esp.dictamen,
+        badge: esp.badge,
+        dptos: dptosVal,
+        totRealEsp,
+        totParalelosEsp,
+        totDeficitPositivoEsp,
+      };
+    });
+
+    const AREA_ORDER: Record<MacroAreaTipo, number> = {
+      INICIAL: 1,
+      PRIMARIA: 2,
+      SECUNDARIA: 3,
+      ESPECIAL: 4,
+      SECUNDARIA_BTH: 5,
+    };
+
+    filas.sort((a, b) => {
+      const diff = (AREA_ORDER[a.macroArea] || 99) - (AREA_ORDER[b.macroArea] || 99);
+      if (diff !== 0) return diff;
+      return b.totParalelosEsp - a.totParalelosEsp || a.especialidad.localeCompare(b.especialidad);
+    });
+
+    return { filas, dptoTotales, totalParalelosNac, totalDeficitPositivoNac };
+  }, [data]);
+
+  // Exportar CSV de la Matriz General
+  const handleExportMatrizGeneral = () => {
+    if (!data?.dictamen_apertura_especialidades) return;
+    const dptos = ["BENI", "CHUQUISACA", "COCHABAMBA", "LA PAZ", "ORURO", "PANDO", "POTOSI", "SANTA CRUZ", "TARIJA"];
+    let csv = "Especialidad,Macro Area,Dictamen," + dptos.map((d) => `${d} (Cantidad),${d} (Paralelos)`).join(",") + ",Total Real Bolivia,Total Paralelos Bolivia\n";
+    matrizGeneralData.filas.forEach((f) => {
+      const dCells = dptos.map((d) => `${f.dptos[d].real},${f.dptos[d].par}`).join(",");
+      csv += `"${f.especialidad}","${f.macroArea}","${f.dictamen}",${dCells},${f.totRealEsp},${f.totParalelosEsp}\n`;
+    });
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "matriz_general_todas_especialidades_2031.csv";
+    a.click();
+  };
 
   // Exportar CSV
   const handleExport = () => {
@@ -2163,11 +2258,10 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                   <div className="inline-flex rounded-xl border border-slate-200 p-1 bg-slate-100/80 text-xs font-bold gap-1 self-start lg:self-auto">
                     <button
                       onClick={() => setTabTablaBalance("macro")}
-                      className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${
-                        tabTablaBalance === "macro"
-                          ? "bg-white text-slate-900 shadow-xs font-black"
-                          : "text-slate-600 hover:text-slate-900"
-                      }`}
+                      className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${tabTablaBalance === "macro"
+                        ? "bg-white text-slate-900 shadow-xs font-black"
+                        : "text-slate-600 hover:text-slate-900"
+                        }`}
                     >
                       <Layers className="w-3.5 h-3.5 text-indigo-600" />
                       <span>Matriz General por Subsistemas</span>
@@ -2176,11 +2270,10 @@ export default function Exposicion2031View({ data: dataset }: Props) {
 
                     <button
                       onClick={() => setTabTablaBalance("cohorte")}
-                      className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${
-                        tabTablaBalance === "cohorte"
-                          ? "bg-white text-slate-900 shadow-xs font-black"
-                          : "text-slate-600 hover:text-slate-900"
-                      }`}
+                      className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${tabTablaBalance === "cohorte"
+                        ? "bg-white text-slate-900 shadow-xs font-black"
+                        : "text-slate-600 hover:text-slate-900"
+                        }`}
                     >
                       <TrendingUp className="w-3.5 h-3.5 text-emerald-600" />
                       <span>Evolución Anual Cohortes ({selectedEsp.especialidad})</span>
@@ -2209,11 +2302,10 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                             <button
                               key={opt.id}
                               onClick={() => setMacroFiltroAnio(opt.id)}
-                              className={`px-2.5 py-1 rounded-md transition-all cursor-pointer ${
-                                macroFiltroAnio === opt.id
-                                  ? "bg-slate-900 text-white shadow-xs font-black"
-                                  : "text-slate-600 hover:bg-slate-100"
-                              }`}
+                              className={`px-2.5 py-1 rounded-md transition-all cursor-pointer ${macroFiltroAnio === opt.id
+                                ? "bg-slate-900 text-white shadow-xs font-black"
+                                : "text-slate-600 hover:bg-slate-100"
+                                }`}
                             >
                               {opt.label}
                             </button>
@@ -2471,21 +2563,19 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                       <div className="inline-flex rounded-lg border border-slate-200 bg-white p-0.5 text-[11px] font-bold">
                         <button
                           onClick={() => setModoVistaCohorte("resumido")}
-                          className={`px-3 py-1 rounded-md transition-all cursor-pointer ${
-                            modoVistaCohorte === "resumido"
-                              ? "bg-emerald-600 text-white shadow-xs font-black"
-                              : "text-slate-600 hover:bg-slate-100"
-                          }`}
+                          className={`px-3 py-1 rounded-md transition-all cursor-pointer ${modoVistaCohorte === "resumido"
+                            ? "bg-emerald-600 text-white shadow-xs font-black"
+                            : "text-slate-600 hover:bg-slate-100"
+                            }`}
                         >
                           Vista Resumida (Demanda Real Año a Año)
                         </button>
                         <button
                           onClick={() => setModoVistaCohorte("completo")}
-                          className={`px-3 py-1 rounded-md transition-all cursor-pointer ${
-                            modoVistaCohorte === "completo"
-                              ? "bg-slate-900 text-white shadow-xs font-black"
-                              : "text-slate-600 hover:bg-slate-100"
-                          }`}
+                          className={`px-3 py-1 rounded-md transition-all cursor-pointer ${modoVistaCohorte === "completo"
+                            ? "bg-slate-900 text-white shadow-xs font-black"
+                            : "text-slate-600 hover:bg-slate-100"
+                            }`}
                         >
                           Vista Detallada (16 Columnas)
                         </button>
@@ -2757,6 +2847,457 @@ export default function Exposicion2031View({ data: dataset }: Props) {
               </div>
             </div>
           )}
+        </div>
+      );
+    }
+
+    // ═════════════════════════════════════════════════════════════════════════
+    // SLIDE 4 — MATRIZ GENERAL (TODAS LAS ESPECIALIDADES X DEPARTAMENTO AL 2031)
+    // ═════════════════════════════════════════════════════════════════════════
+    if (slide === 3) {
+      const dptos = ["BENI", "CHUQUISACA", "COCHABAMBA", "LA PAZ", "ORURO", "PANDO", "POTOSI", "SANTA CRUZ", "TARIJA"];
+      const { filas, dptoTotales, totalParalelosNac, totalDeficitPositivoNac } = matrizGeneralData;
+
+      // Filtrado interactivo de filas
+      const filasFiltradas = filas.filter((f) => {
+        const matchSearch = !searchGeneral.trim() || f.especialidad.toLowerCase().includes(searchGeneral.toLowerCase());
+        if (!matchSearch) return false;
+        if (filtroGeneralDictamen === "CON_APERTURA") return f.totParalelosEsp > 0;
+        if (filtroGeneralDictamen === "SATURADAS") return f.totParalelosEsp === 0;
+        return true;
+      });
+
+      // Ordenar departamentos por paralelos de mayor a menor para el resumen
+      const dptosRank = [...dptos].sort((a, b) => dptoTotales[b].paralelos - dptoTotales[a].paralelos);
+
+      return (
+        <div className="space-y-6">
+          {/* Encabezado del Slide 4 */}
+          <div className="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 relative overflow-hidden shadow-2xl border border-indigo-900/40">
+            <div className="absolute -right-10 -bottom-10 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="relative z-10">
+              <div className="flex flex-wrap items-center gap-2 mb-3">
+                <div className="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center">
+                  <Layers className="w-4 h-4 text-emerald-300" />
+                </div>
+                <span className="text-xs font-black text-emerald-300 uppercase tracking-widest">
+                  Diapositiva 4 de 4 · Matriz General Territorial SEP
+                </span>
+                <span className="ml-auto bg-emerald-500/20 text-emerald-200 border border-emerald-400/30 text-[10px] font-black px-2.5 py-1 rounded-full">
+                  Corte Quinquenal 2031 · 20 Especialidades × 9 Departamentos
+                </span>
+              </div>
+              <h2 className="text-2xl sm:text-4xl font-black tracking-tight text-white">
+                Dictamen General: Requerimiento de Docentes y Admisión por Especialidad
+              </h2>
+              <p className="text-slate-300 text-sm mt-2 max-w-3xl leading-relaxed">
+                Consolidado territorial integral al año 2031. Visualización cruzada por <strong>Cantidad</strong> (demanda real neta de docentes en déficit o superávit) y por <strong>Admisión 2027</strong> (número de paralelos recomendados de 30 estudiantes con umbral mínimo de 6 docentes).
+              </p>
+            </div>
+          </div>
+
+          {/* 4 Stat Cards de Alto Impacto */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
+            <div className="bg-white rounded-2xl border border-lime-200 shadow-xs p-4 relative overflow-hidden">
+              <div className="flex items-center gap-2 mb-1.5">
+                <GraduationCap className="w-4 h-4 text-lime-700" />
+                <span className="text-[10px] font-black uppercase tracking-wider text-slate-500">Paralelos Recomendados</span>
+              </div>
+              <div className="text-3xl font-black text-slate-900 flex items-baseline gap-2">
+                <span>{totalParalelosNac}</span>
+                <span className="text-xs font-bold text-lime-700">cursos ({totalParalelosNac * 30} plazas)</span>
+              </div>
+              <div className="text-[11px] text-slate-500 font-medium mt-1">Convocatoria Admisión 2027</div>
+            </div>
+
+            <div className="bg-white rounded-2xl border border-indigo-200 shadow-xs p-4 relative overflow-hidden">
+              <div className="flex items-center gap-2 mb-1.5">
+                <Users className="w-4 h-4 text-indigo-600" />
+                <span className="text-[10px] font-black uppercase tracking-wider text-slate-500">Déficit Territorial Focalizado</span>
+              </div>
+              <div className="text-3xl font-black text-indigo-950 flex items-baseline gap-1.5">
+                <span>{totalDeficitPositivoNac.toLocaleString()}</span>
+                <span className="text-xs font-bold text-indigo-600">docentes</span>
+              </div>
+              <div className="text-[11px] text-slate-500 font-medium mt-1">En departamentos con necesidad real</div>
+            </div>
+
+            <div className="bg-white rounded-2xl border border-blue-200 shadow-xs p-4 relative overflow-hidden">
+              <div className="flex items-center gap-2 mb-1.5">
+                <CheckCircle2 className="w-4 h-4 text-blue-600" />
+                <span className="text-[10px] font-black uppercase tracking-wider text-slate-500">Especialidades con Apertura</span>
+              </div>
+              <div className="text-3xl font-black text-blue-950">11 <span className="text-sm font-semibold text-slate-400">/ 20</span></div>
+              <div className="text-[11px] text-blue-700 font-bold mt-1">55% con déficit justificado</div>
+            </div>
+
+            <div className="bg-white rounded-2xl border border-amber-200 shadow-xs p-4 relative overflow-hidden">
+              <div className="flex items-center gap-2 mb-1.5">
+                <School className="w-4 h-4 text-amber-600" />
+                <span className="text-[10px] font-black uppercase tracking-wider text-slate-500">Departamentos con Cupo</span>
+              </div>
+              <div className="text-3xl font-black text-amber-950">8 <span className="text-sm font-semibold text-slate-400">/ 9</span></div>
+              <div className="text-[11px] text-amber-800 font-bold mt-1">Potosí lidera con 7 paralelos</div>
+            </div>
+          </div>
+
+          {/* Barra de Controles y Filtros */}
+          <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-xs space-y-3">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+              {/* Selector de Modo de Vista */}
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-xs font-bold text-slate-700">Modo de Visualización:</span>
+                <div className="inline-flex rounded-xl border border-slate-200 p-1 bg-slate-100/80 text-xs font-bold gap-1">
+                  <button
+                    onClick={() => setModoVistaGeneral("combinado")}
+                    className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${modoVistaGeneral === "combinado"
+                      ? "bg-white text-slate-900 shadow-xs font-black"
+                      : "text-slate-600 hover:text-slate-900"
+                      }`}
+                  >
+                    Combinado (Cantidad + Admisión)
+                  </button>
+                  <button
+                    onClick={() => setModoVistaGeneral("cantidad")}
+                    className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${modoVistaGeneral === "cantidad"
+                      ? "bg-white text-slate-900 shadow-xs font-black"
+                      : "text-slate-600 hover:text-slate-900"
+                      }`}
+                  >
+                    Solo Cantidad (Docentes)
+                  </button>
+                  <button
+                    onClick={() => setModoVistaGeneral("admision")}
+                    className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${modoVistaGeneral === "admision"
+                      ? "bg-white text-slate-900 shadow-xs font-black"
+                      : "text-slate-600 hover:text-slate-900"
+                      }`}
+                  >
+                    Solo Admisión (Paralelos)
+                  </button>
+                </div>
+              </div>
+
+              {/* Botón Exportar CSV de la Matriz General */}
+              <button
+                onClick={handleExportMatrizGeneral}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold shadow-xs cursor-pointer self-start lg:self-auto"
+              >
+                <Download className="w-3.5 h-3.5 text-indigo-600" />
+                <span>Exportar Matriz General CSV</span>
+              </button>
+            </div>
+
+            {/* Segunda Fila de Filtros y Búsqueda */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 border-t border-slate-100">
+              <div className="flex flex-wrap items-center gap-1.5 text-xs">
+                <span className="font-bold text-slate-500 text-[11px]">Filtrar Especialidades:</span>
+                {(["TODAS", "CON_APERTURA", "SATURADAS"] as const).map((filtro) => (
+                  <button
+                    key={filtro}
+                    onClick={() => setFiltroGeneralDictamen(filtro)}
+                    className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all cursor-pointer ${filtroGeneralDictamen === filtro
+                      ? "bg-slate-900 text-white shadow-xs"
+                      : "bg-slate-100 hover:bg-slate-200 text-slate-600"
+                      }`}
+                  >
+                    {filtro === "TODAS" && "Todas las 20"}
+                    {filtro === "CON_APERTURA" && "Con Apertura (11)"}
+                    {filtro === "SATURADAS" && "Saturadas / Congelar (9)"}
+                  </button>
+                ))}
+              </div>
+
+              <div className="relative w-full sm:w-64">
+                <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <input
+                  type="text"
+                  placeholder="Buscar especialidad…"
+                  value={searchGeneral}
+                  onChange={(e) => setSearchGeneral(e.target.value)}
+                  className="w-full pl-8 pr-3 py-1.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Tabla Matriz General Oficial (20 Especialidades × 9 Departamentos) */}
+          <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs">
+            <div className="overflow-x-auto">
+              <table className="w-full text-[11px] text-left border-collapse whitespace-nowrap">
+                <thead>
+                  <tr className="bg-slate-100/90 text-slate-800 font-black border-b border-slate-300">
+                    <th className="py-2.5 px-3 text-left border-r border-slate-300 min-w-[240px]">
+                      ESPECIALIDAD OFICIAL (SEP)
+                    </th>
+                    {dptos.map((dp) => (
+                      <th key={dp} className="py-2.5 px-2 text-center border-r border-slate-200 min-w-[85px]">
+                        {dp}
+                      </th>
+                    ))}
+                    <th className="py-2.5 px-3 text-right bg-slate-200/90 text-slate-950 border-r border-slate-300 min-w-[100px] font-black">
+                      TOTAL BOLIVIA
+                      <span className="block text-[9px] font-normal text-slate-600">(Cantidad Real)</span>
+                    </th>
+                    <th className="py-2.5 px-3 text-center bg-[#ecfccb] text-lime-950 border-l border-slate-300 min-w-[110px] font-black">
+                      ADMISIÓN 2027
+                      <span className="block text-[9px] font-bold text-lime-800">(30 doc./paralelo)</span>
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody className="divide-y divide-slate-100 font-medium text-slate-700">
+                  {filasFiltradas.map((row, idx) => {
+                    const hasParalelos = row.totParalelosEsp > 0;
+                    const prevRow = idx > 0 ? filasFiltradas[idx - 1] : null;
+                    const isNewGroup = !prevRow || prevRow.macroArea !== row.macroArea;
+
+                    const groupMeta: Record<MacroAreaTipo, { label: string; sub: string; bg: string; text: string; border: string }> = {
+                      INICIAL: { label: "1. EDUCACIÓN INICIAL", sub: "En Familia Comunitaria · 1 Especialidad", bg: "bg-amber-100/80", text: "text-amber-950", border: "border-amber-300" },
+                      PRIMARIA: { label: "2. EDUCACIÓN PRIMARIA", sub: "Comunitaria Vocacional · 1 Especialidad", bg: "bg-blue-100/80", text: "text-blue-950", border: "border-blue-300" },
+                      SECUNDARIA: { label: "3. EDUCACIÓN SECUNDARIA", sub: "Formación Humanística Regular · 11 Especialidades", bg: "bg-emerald-100/80", text: "text-emerald-950", border: "border-emerald-300" },
+                      ESPECIAL: { label: "4. EDUCACIÓN ESPECIAL", sub: "Personas con Discapacidad · 1 Especialidad", bg: "bg-rose-100/80", text: "text-rose-950", border: "border-rose-300" },
+                      SECUNDARIA_BTH: { label: "5. SECUNDARIA BTH (TÉCNICA)", sub: "Bachillerato Técnico Humanístico · 6 Especialidades", bg: "bg-indigo-100/80", text: "text-indigo-950", border: "border-indigo-300" },
+                    };
+
+                    const gInfo = groupMeta[row.macroArea];
+
+                    return (
+                      <React.Fragment key={row.especialidad}>
+                        {isNewGroup && (
+                          <tr className={`${gInfo.bg} ${gInfo.text} font-black text-xs border-y ${gInfo.border}`}>
+                            <td colSpan={dptos.length + 3} className="py-2 px-3">
+                              <div className="flex items-center justify-between">
+                                <span className="tracking-wide font-black">{gInfo.label}</span>
+                                <span className="text-[10px] font-bold opacity-80">{gInfo.sub}</span>
+                              </div>
+                            </td>
+                          </tr>
+                        )}
+                        <tr
+                          className={`transition-colors ${hasParalelos ? "hover:bg-lime-50/30" : "hover:bg-slate-50/80"}`}
+                        >
+                        {/* Especialidad + Área */}
+                        <td className="py-2 px-3 border-r border-slate-200 bg-slate-50/40">
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="font-bold text-slate-900">{row.especialidad}</span>
+                            <span className={`text-[9px] font-extrabold px-1.5 py-0.2 rounded ${row.macroArea === "INICIAL" ? "bg-amber-100 text-amber-800"
+                              : row.macroArea === "PRIMARIA" ? "bg-blue-100 text-blue-800"
+                                : row.macroArea === "SECUNDARIA_BTH" ? "bg-indigo-100 text-indigo-800"
+                                  : row.macroArea === "ESPECIAL" ? "bg-rose-100 text-rose-800"
+                                    : "bg-emerald-100 text-emerald-800"
+                              }`}>
+                              {row.macroArea === "SECUNDARIA_BTH" ? "BTH" : row.macroArea}
+                            </span>
+                          </div>
+                        </td>
+
+                        {/* Celdas Departamentales */}
+                        {dptos.map((dp) => {
+                          const cell = row.dptos[dp];
+                          const real = cell.real;
+                          const par = cell.par;
+
+                          return (
+                            <td key={dp} className="py-2 px-2 text-right border-r border-slate-100">
+                              {modoVistaGeneral === "combinado" && (
+                                <div>
+                                  {par > 0 ? (
+                                    <div className="flex items-center justify-end gap-1 font-black text-slate-900">
+                                      <span>+{real}</span>
+                                      <span
+                                        className="inline-flex items-center justify-center px-1.5 py-0.2 rounded bg-[#84cc16] text-white text-[10px] font-black shadow-2xs"
+                                        title={`${par} paralelo(s) requeridos (${par * 30} plazas)`}
+                                      >
+                                        {par}p
+                                      </span>
+                                    </div>
+                                  ) : real > 0 ? (
+                                    <span className="text-slate-600 font-semibold" title="Déficit menor a 6 docentes">
+                                      +{real}
+                                    </span>
+                                  ) : real < 0 ? (
+                                    <span className="text-rose-600 font-semibold">{real}</span>
+                                  ) : (
+                                    <span className="text-slate-300 font-semibold">0</span>
+                                  )}
+                                </div>
+                              )}
+
+                              {modoVistaGeneral === "cantidad" && (
+                                <div>
+                                  {real > 0 ? (
+                                    <span className="font-extrabold text-slate-900">+{real}</span>
+                                  ) : real < 0 ? (
+                                    <span className="text-rose-600 font-semibold">{real}</span>
+                                  ) : (
+                                    <span className="text-slate-300 font-semibold">0</span>
+                                  )}
+                                </div>
+                              )}
+
+                              {modoVistaGeneral === "admision" && (
+                                <div className="text-center">
+                                  {par > 0 ? (
+                                    <span className="inline-flex items-center justify-center px-2 py-0.5 rounded bg-[#84cc16] text-white text-[10px] font-black shadow-2xs">
+                                      {par} paralelo{par === 1 ? "" : "s"}
+                                    </span>
+                                  ) : (
+                                    <span className="text-slate-300 font-semibold">—</span>
+                                  )}
+                                </div>
+                              )}
+                            </td>
+                          );
+                        })}
+
+                        {/* Total Cantidad Bolivia */}
+                        <td className="py-2 px-3 text-right border-r border-slate-300 bg-slate-100/60 font-black">
+                          {row.totRealEsp > 0 ? (
+                            <span className="text-emerald-700">+{row.totRealEsp.toLocaleString()}</span>
+                          ) : row.totRealEsp < 0 ? (
+                            <span className="text-rose-700">{row.totRealEsp.toLocaleString()}</span>
+                          ) : (
+                            <span className="text-slate-400">0</span>
+                          )}
+                        </td>
+
+                        {/* Total Admisión 2027 (Paralelos) */}
+                        <td className="py-2 px-3 text-center border-l border-slate-200 bg-lime-50/40">
+                          {row.totParalelosEsp > 0 ? (
+                            <span className="inline-flex items-center justify-center px-2.5 py-0.5 rounded bg-lime-700 text-white font-black text-xs shadow-xs">
+                              {row.totParalelosEsp} {row.totParalelosEsp === 1 ? "paralelo" : "paralelos"}
+                            </span>
+                          ) : (
+                            <span className="text-slate-300 font-semibold">—</span>
+                          )}
+                        </td>
+                      </tr>
+                      </React.Fragment>
+                    );
+                  })}
+                </tbody>
+
+                {/* Footer Totales */}
+                <tfoot>
+                  {/* Fila 1: Total Real Neto */}
+                  <tr className="bg-slate-100 font-black text-slate-900 border-t-2 border-slate-300 text-right">
+                    <td className="py-2.5 px-3 text-left font-black border-r border-slate-300">
+                      TOTAL BALANCE NETO SEP
+                    </td>
+                    {dptos.map((dp) => {
+                      const r = dptoTotales[dp].realNeto;
+                      return (
+                        <td key={dp} className="py-2.5 px-2 border-r border-slate-200 font-black">
+                          {r < 0 ? <span className="text-rose-700">{r.toLocaleString()}</span> : r}
+                        </td>
+                      );
+                    })}
+                    <td className="py-2.5 px-3 border-r border-slate-300 font-black text-rose-700 bg-slate-200/90">
+                      -8,253
+                    </td>
+                    <td className="py-2.5 px-3 text-center border-l border-slate-300 bg-lime-100/60 font-black">
+                      <span className="inline-flex items-center justify-center px-3 py-1 rounded bg-lime-800 text-white font-black text-xs shadow-xs">
+                        {totalParalelosNac} paralelos
+                      </span>
+                    </td>
+                  </tr>
+
+                  {/* Fila 2: Total Déficit Focalizado con Apertura */}
+                  <tr className="bg-emerald-50/70 font-extrabold text-emerald-950 border-t border-slate-200 text-right">
+                    <td className="py-2 px-3 text-left font-extrabold border-r border-slate-300">
+                      DÉFICIT EN ÁREAS DE APERTURA
+                    </td>
+                    {dptos.map((dp) => (
+                      <td key={dp} className="py-2 px-2 border-r border-slate-200 font-black text-slate-900">
+                        {dptoTotales[dp].deficitPositivo > 0 ? `+${dptoTotales[dp].deficitPositivo}` : "0"}
+                      </td>
+                    ))}
+                    <td className="py-2 px-3 border-r border-slate-300 font-black text-slate-900 bg-emerald-100/80">
+                      +{totalDeficitPositivoNac.toLocaleString()} doc.
+                    </td>
+                    <td className="py-2 px-3 text-center border-l border-slate-300 font-black text-lime-900">
+                      {totalParalelosNac * 30} plazas
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 p-3 bg-slate-50 border-t border-slate-200 text-[11px] text-slate-500">
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-slate-700">Regla Oficial de Admisión:</span>
+                <span>Umbral de justificación $ge 6$ docentes en déficit al 2031 (1 paralelo = 30 estudiantes). Potosí: 101/30 = 3 paralelos.</span>
+              </div>
+              <div className="text-slate-600 font-semibold">
+                * En rojo se indican especialidades con superávit acumulado de maestros formados en ESFM.
+              </div>
+            </div>
+          </div>
+
+          {/* Panel de Resumen por Departamento (Distribución Territorial de Cursos) */}
+          <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs space-y-4">
+            <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
+              <div className="w-2.5 h-2.5 rounded-full bg-lime-600" />
+              <h4 className="text-sm font-extrabold text-slate-900">
+                Distribución Territorial de la Convocatoria de Admisión 2027 ({totalParalelosNac} Paralelos / {totalParalelosNac * 30} Plazas)
+              </h4>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+              {dptosRank.map((dp) => {
+                const totPar = dptoTotales[dp].paralelos;
+                const defPos = dptoTotales[dp].deficitPositivo;
+                const espsConPar = filas.filter((f) => f.dptos[dp].par > 0);
+
+                return (
+                  <div
+                    key={dp}
+                    className={`p-4 rounded-xl border transition-all ${totPar > 0
+                      ? "bg-white border-lime-200 shadow-2xs hover:border-lime-300 ring-1 ring-lime-500/10"
+                      : "bg-slate-50/70 border-slate-200 opacity-75"
+                      }`}
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="font-black text-slate-900 text-xs">{dp}</span>
+                      <span
+                        className={`px-2 py-0.5 rounded-full text-[10px] font-black ${totPar > 0 ? "bg-lime-100 text-lime-900 border border-lime-300" : "bg-slate-200 text-slate-600"
+                          }`}
+                      >
+                        {totPar > 0 ? `${totPar} paralelo${totPar === 1 ? "" : "s"} (${totPar * 30} plazas)` : "Sin apertura"}
+                      </span>
+                    </div>
+
+                    <div className="text-[11px] text-slate-500 mb-2">
+                      Déficit en áreas autorizadas: <strong>+{defPos} docentes</strong>
+                    </div>
+
+                    {totPar > 0 ? (
+                      <div className="space-y-1.5 pt-2 border-t border-slate-100">
+                        {espsConPar.map((e) => (
+                          <div key={e.especialidad} className="flex items-center justify-between text-[11px]">
+                            <span className="text-slate-700 font-medium truncate max-w-[200px]" title={e.especialidad}>
+                              {e.especialidad}
+                            </span>
+                            <span className="font-bold text-slate-900 shrink-0 flex items-center gap-1">
+                              <span>+{e.dptos[dp].real} doc.</span>
+                              <span className="px-1.5 py-0.2 rounded bg-lime-600 text-white text-[9px] font-black">
+                                {e.dptos[dp].par}p
+                              </span>
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="text-[10px] text-slate-400 italic pt-2 border-t border-slate-100">
+                        Demanda cubierta o con déficit menor al umbral de apertura.
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       );
     }
