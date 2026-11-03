@@ -3112,20 +3112,12 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                     <th className="py-2.5 px-3 text-left border-r border-slate-300 min-w-[230px]">
                       ESPECIALIDAD OFICIAL (SEP)
                     </th>
-                    <th className="py-2.5 px-2.5 text-right bg-amber-50 text-amber-950 border-r border-slate-300 min-w-[95px] font-black">
-                      REQUERIDO 2027
-                      <span className="block text-[9px] font-extrabold text-amber-800">(Convocatoria)</span>
-                    </th>
-                    <th className="py-2.5 px-2.5 text-right bg-blue-50 text-blue-950 border-r border-slate-300 min-w-[95px] font-black">
-                      REQUERIDO 2031
-                      <span className="block text-[9px] font-extrabold text-blue-800">(Quinquenio)</span>
-                    </th>
+
                     {dptos.map((dp) => (
                       <th
                         key={dp}
-                        className={`py-2.5 px-2 text-center border-r border-slate-200 min-w-[95px] ${
-                          modoVistaGeneral === "comparar_2027_2031" ? "bg-indigo-50/70 text-indigo-950" : ""
-                        }`}
+                        className={`py-2.5 px-2 text-center border-r border-slate-200 min-w-[95px] ${modoVistaGeneral === "comparar_2027_2031" ? "bg-indigo-50/70 text-indigo-950" : ""
+                          }`}
                       >
                         <span className="block font-black">{dp}</span>
                         {modoVistaGeneral === "comparar_2027_2031" ? (
@@ -3166,7 +3158,7 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                       <React.Fragment key={row.especialidad}>
                         {isNewGroup && (
                           <tr className={`${gInfo.bg} ${gInfo.text} font-black text-xs border-y ${gInfo.border}`}>
-                            <td colSpan={dptos.length + 5} className="py-2 px-3">
+                            <td colSpan={dptos.length + 3} className="py-2 px-3">
                               <div className="flex items-center justify-between">
                                 <span className="tracking-wide font-black">{gInfo.label}</span>
                                 <span className="text-[10px] font-bold opacity-80">{gInfo.sub}</span>
@@ -3192,17 +3184,7 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                             </div>
                           </td>
 
-                          {/* Requerimiento 2027 Nacional */}
-                          <td className="py-2 px-2.5 text-right border-r border-slate-200 bg-amber-50/30 font-extrabold text-amber-950">
-                            <span>{row.totReq2027Esp.toLocaleString()}</span>
-                            <span className="text-[9px] text-amber-800/80 font-semibold block">docentes</span>
-                          </td>
 
-                          {/* Requerimiento 2031 Nacional */}
-                          <td className="py-2 px-2.5 text-right border-r border-slate-200 bg-blue-50/30 font-extrabold text-blue-950">
-                            <span>{row.totReq2031Esp.toLocaleString()}</span>
-                            <span className="text-[9px] text-blue-800/80 font-semibold block">docentes</span>
-                          </td>
 
                           {/* Celdas Departamentales */}
                           {dptos.map((dp) => {
@@ -3233,11 +3215,6 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                                     ) : (
                                       <span className="text-slate-300 font-semibold">0</span>
                                     )}
-                                    <div className="flex items-center justify-end gap-1 text-[8.5px] font-semibold mt-0.5">
-                                      <span className="text-amber-800 bg-amber-50 px-1 rounded border border-amber-200/60">&apos;27: {cell.req2027}</span>
-                                      <span className="text-slate-400">→</span>
-                                      <span className="text-blue-800 bg-blue-50 px-1 rounded border border-blue-200/60">&apos;31: {cell.req2031}</span>
-                                    </div>
                                   </div>
                                 )}
 
@@ -3266,30 +3243,39 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                                 )}
 
                                 {modoVistaGeneral === "comparar_2027_2031" && (
-                                  <div className="flex flex-col items-stretch p-1 bg-slate-50/90 rounded-lg border border-slate-200/90 text-[10px] shadow-2xs">
-                                    <div className="flex items-center justify-between gap-1">
-                                      <span className="px-1 py-0.2 rounded bg-amber-100 text-amber-900 font-extrabold text-[8.5px]">
-                                        &apos;27
-                                      </span>
-                                      <span className="font-black text-amber-950 text-[11px]">{cell.req2027}</span>
-                                    </div>
-                                    <div className="flex items-center justify-between gap-1 mt-0.5 pt-0.5 border-t border-slate-200/80">
-                                      <span className="px-1 py-0.2 rounded bg-blue-100 text-blue-900 font-extrabold text-[8.5px]">
-                                        &apos;31
-                                      </span>
-                                      <span className="font-black text-blue-950 text-[11px]">{cell.req2031}</span>
-                                    </div>
-                                    {par > 0 ? (
-                                      <div className="mt-1 text-center">
-                                        <span className="inline-flex items-center justify-center w-full px-1 py-0.5 rounded bg-[#84cc16] text-white text-[9px] font-black shadow-2xs">
-                                          {par} paralelo{par > 1 ? "s" : ""} (+{real})
-                                        </span>
+                                  <div className="flex flex-col items-stretch text-[10px]">
+                                    {/* Demanda '27 → '31 */}
+                                    <div className="flex items-center justify-between gap-1 px-1 py-0.5 bg-slate-50 border border-slate-200 rounded-t-md">
+                                      <span className="text-[8px] font-extrabold text-slate-500 uppercase tracking-tight">Demanda</span>
+                                      <div className="flex items-center gap-1">
+                                        <span className="px-1 py-0.2 rounded bg-amber-100 text-amber-900 font-black text-[9px]">&apos;27: {cell.req2027}</span>
+                                        <span className="text-slate-400 text-[8px]">&rarr;</span>
+                                        <span className="px-1 py-0.2 rounded bg-blue-100 text-blue-900 font-black text-[9px]">&apos;31: {cell.req2031}</span>
                                       </div>
-                                    ) : (
-                                      <div className="mt-0.5 text-right text-[8.5px] font-bold text-slate-400">
-                                        Saldo: <span className={real < 0 ? "text-rose-600 font-bold" : "text-slate-600 font-bold"}>{real}</span>
+                                    </div>
+                                    {/* Fórmula del saldo */}
+                                    <div className="px-1 py-0.5 bg-white border-x border-b border-slate-200 rounded-b-md space-y-0.5">
+                                      <div className="flex items-center justify-between">
+                                        <span className="text-[8px] text-slate-400 font-semibold">Déf. UIE</span>
+                                        <span className="font-extrabold text-slate-700">{cell.def}</span>
                                       </div>
-                                    )}
+                                      <div className="flex items-center justify-between">
+                                        <span className="text-[8px] text-indigo-500 font-semibold">Egresados</span>
+                                        <span className="font-extrabold text-indigo-700">{cell.egr}</span>
+                                      </div>
+                                      <div className="flex items-center justify-between pt-0.5 border-t border-slate-200/80">
+                                        <span className="text-[8px] font-black text-slate-500">{cell.def}&minus;{cell.egr}</span>
+                                        {par > 0 ? (
+                                          <span className="inline-flex items-center px-1.5 py-0.2 rounded bg-[#84cc16] text-white text-[9px] font-black">
+                                            +{real} &middot; {par}p
+                                          </span>
+                                        ) : (
+                                          <span className={`font-black text-[11px] ${real < 0 ? "text-rose-600" : "text-emerald-700"}`}>
+                                            {real}
+                                          </span>
+                                        )}
+                                      </div>
+                                    </div>
                                   </div>
                                 )}
                               </td>
@@ -3322,9 +3308,7 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                                 ) : (
                                   <span className="text-slate-400">0</span>
                                 )}
-                                <div className="text-[9px] text-slate-400 font-medium tracking-tight">
-                                  &apos;27: {row.totReq2027Esp.toLocaleString()} → &apos;31: {row.totReq2031Esp.toLocaleString()}
-                                </div>
+
                               </div>
                             )}
                           </td>
@@ -3352,12 +3336,7 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                     <td className="py-2.5 px-3 text-left font-black border-r border-slate-300">
                       TOTAL BALANCE NETO SEP
                     </td>
-                    <td className="py-2.5 px-2.5 border-r border-slate-300 font-black text-amber-950 bg-amber-100/60">
-                      {matrizGeneralData.totalReq2027Nac.toLocaleString()} doc.
-                    </td>
-                    <td className="py-2.5 px-2.5 border-r border-slate-300 font-black text-blue-950 bg-blue-100/60">
-                      {matrizGeneralData.totalReq2031Nac.toLocaleString()} doc.
-                    </td>
+
                     {dptos.map((dp) => {
                       const r = dptoTotales[dp].realNeto;
                       const r27 = dptoTotales[dp].req2027;
@@ -3380,22 +3359,14 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                             </div>
                           ) : (
                             <div>
-                              <div>{r < 0 ? <span className="text-rose-700">{r.toLocaleString()}</span> : r}</div>
-                              <div className="flex items-center justify-end gap-1 text-[8.5px] text-slate-400 font-medium mt-0.5">
-                                <span>&apos;27: {r27}</span>
-                                <span>→</span>
-                                <span>&apos;31: {r31}</span>
-                              </div>
+                              {r < 0 ? <span className="text-rose-700">{r.toLocaleString()}</span> : r}
                             </div>
                           )}
                         </td>
                       );
                     })}
                     <td className="py-2.5 px-3 border-r border-slate-300 font-black text-rose-700 bg-slate-200/90">
-                      <div>-8,253</div>
-                      <div className="text-[9px] text-slate-500 font-normal">
-                        &apos;27: {matrizGeneralData.totalReq2027Nac.toLocaleString()} → &apos;31: {matrizGeneralData.totalReq2031Nac.toLocaleString()}
-                      </div>
+                      -8,253
                     </td>
                     <td className="py-2.5 px-3 text-center border-l border-slate-300 bg-lime-100/60 font-black">
                       <span className="inline-flex items-center justify-center px-3 py-1 rounded bg-lime-800 text-white font-black text-xs shadow-xs">
@@ -3409,12 +3380,7 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                     <td className="py-2 px-3 text-left font-extrabold border-r border-slate-300">
                       DÉFICIT EN ÁREAS DE APERTURA
                     </td>
-                    <td className="py-2 px-2.5 border-r border-slate-300 font-black text-slate-800 bg-amber-50/50">
-                      +{totalDeficitPositivoNac.toLocaleString()} doc.
-                    </td>
-                    <td className="py-2 px-2.5 border-r border-slate-300 font-black text-slate-800 bg-blue-50/50">
-                      +{totalDeficitPositivoNac.toLocaleString()} doc.
-                    </td>
+
                     {dptos.map((dp) => (
                       <td key={dp} className="py-2 px-2 border-r border-slate-200 font-black text-slate-900">
                         {dptoTotales[dp].deficitPositivo > 0 ? `+${dptoTotales[dp].deficitPositivo}` : "0"}
