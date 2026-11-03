@@ -366,7 +366,7 @@ export default function Exposicion2031View({ data: dataset }: Props) {
   const [tabTablaBalance, setTabTablaBalance] = useState<"macro" | "cohorte">("macro");
 
   // Horizonte temporal para la Matriz Macro General
-  const [macroFiltroAnio, setMacroFiltroAnio] = useState<"2031" | "2027" | "2028" | "2029" | "2030">("2031");
+  const [macroFiltroAnio, setMacroFiltroAnio] = useState<"2031_acum" | "2027" | "2028" | "2029" | "2030" | "2031">("2031_acum");
 
   // Modo de lectura para la tabla de cohorte anual (resumido vs detallado)
   const [modoVistaCohorte, setModoVistaCohorte] = useState<"resumido" | "completo">("resumido");
@@ -531,27 +531,59 @@ export default function Exposicion2031View({ data: dataset }: Props) {
     return dptos.map((dpto) => {
       const calcArea = (macroTipo: MacroAreaTipo): MacroAreaStats => {
         const areaEsps = esps.filter((e) => getMacroArea(e.especialidad) === macroTipo);
-        let totDem = 0;
-        let totEgr = 0;
+        let baseDemanda = 0;
+        const egrAnuales: Record<number, number> = { 2027: 0, 2028: 0, 2029: 0, 2030: 0, 2031: 0 };
+        let totalEgrQuinquenio = 0;
 
         areaEsps.forEach((e) => {
           const dData = e.por_dpto?.[dpto];
           if (!dData) return;
-          if (macroFiltroAnio === "2031") {
-            totDem += Math.round(dData.items_deficit_uie || 0);
-            totEgr += dData.egresados_esfm_proyectados || 0;
-          } else {
-            const anioNum = Number(macroFiltroAnio);
-            const serie = dData.serie_proyeccion || [];
-            const pt = serie.find((p: { anio: number }) => p.anio === anioNum);
-            totDem += pt ? Math.round(pt.demanda) : Math.round(dData.items_deficit_uie || 0);
-            totEgr += pt ? (pt.egresados_anual || 0) : 0;
-          }
+          baseDemanda += (dData.items_deficit_uie || 0);
+          totalEgrQuinquenio += (dData.egresados_esfm_proyectados || 0);
+
+          const serie = dData.serie_proyeccion || [];
+          [2027, 2028, 2029, 2030, 2031].forEach((y) => {
+            const pt = serie.find((p: { anio: number }) => p.anio === y);
+            if (pt) {
+              egrAnuales[y] += (pt.egresados_anual || 0);
+            }
+          });
         });
 
-        const real = totDem - totEgr;
-        const paralelos = calcularParalelosAdmision(real);
-        return { demanda: totDem, egresados: totEgr, real, paralelos };
+        // Simulación recursiva año por año de cohorte:
+        // Demanda(t) = Demanda Real(t-1)
+        // Demanda Real(t) = Demanda(t) - Egresados(t)
+        let remanente = baseDemanda;
+        const progression: Record<number, { demanda: number; egresados: number; real: number }> = {};
+
+        for (const y of [2027, 2028, 2029, 2030, 2031]) {
+          const demAnio = remanente;
+          const egrAnio = egrAnuales[y] || 0;
+          const realAnio = demAnio - egrAnio;
+          progression[y] = {
+            demanda: Math.round(demAnio),
+            egresados: Math.round(egrAnio),
+            real: Math.round(realAnio),
+          };
+          remanente = realAnio;
+        }
+
+        if (macroFiltroAnio === "2031_acum") {
+          const dTotal = Math.round(baseDemanda);
+          const eTotal = Math.round(
+            totalEgrQuinquenio > 0
+              ? totalEgrQuinquenio
+              : egrAnuales[2027] + egrAnuales[2028] + egrAnuales[2029] + egrAnuales[2030] + egrAnuales[2031]
+          );
+          const rTotal = dTotal - eTotal;
+          const paralelos = calcularParalelosAdmision(rTotal);
+          return { demanda: dTotal, egresados: eTotal, real: rTotal, paralelos };
+        }
+
+        const yNum = Number(macroFiltroAnio);
+        const st = progression[yNum] || { demanda: 0, egresados: 0, real: 0 };
+        const paralelos = calcularParalelosAdmision(st.real);
+        return { demanda: st.demanda, egresados: st.egresados, real: st.real, paralelos };
       };
 
       const inicial = calcArea("INICIAL");
@@ -2165,18 +2197,25 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-50/70 p-3 rounded-xl border border-slate-100">
                       <div className="flex items-center gap-2 text-xs">
                         <span className="font-bold text-slate-700">Horizonte de Análisis:</span>
-                        <div className="inline-flex rounded-lg border border-slate-200 bg-white p-0.5 text-[11px] font-bold">
-                          {(["2031", "2027", "2028", "2029", "2030"] as const).map((y) => (
+                        <div className="inline-flex flex-wrap rounded-lg border border-slate-200 bg-white p-0.5 text-[11px] font-bold">
+                          {([
+                            { id: "2031_acum", label: "Corte Quinquenal al 2031 (Consolidado)" },
+                            { id: "2027", label: "Gestión 2027" },
+                            { id: "2028", label: "Gestión 2028" },
+                            { id: "2029", label: "Gestión 2029" },
+                            { id: "2030", label: "Gestión 2030" },
+                            { id: "2031", label: "Gestión 2031" },
+                          ] as const).map((opt) => (
                             <button
-                              key={y}
-                              onClick={() => setMacroFiltroAnio(y)}
+                              key={opt.id}
+                              onClick={() => setMacroFiltroAnio(opt.id)}
                               className={`px-2.5 py-1 rounded-md transition-all cursor-pointer ${
-                                macroFiltroAnio === y
+                                macroFiltroAnio === opt.id
                                   ? "bg-slate-900 text-white shadow-xs font-black"
                                   : "text-slate-600 hover:bg-slate-100"
                               }`}
                             >
-                              {y === "2031" ? "Corte Quinquenal al 2031 (Recomendado)" : `Gestión ${y}`}
+                              {opt.label}
                             </button>
                           ))}
                         </div>
