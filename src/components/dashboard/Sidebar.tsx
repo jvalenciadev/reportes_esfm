@@ -4,7 +4,6 @@ import React from 'react';
 import Image from 'next/image';
 import { SourceTab } from '@/types/stats';
 import {
-  BuildingIcon,
   GraduationCapIcon,
   ChartBarIcon,
   SchoolIcon,
@@ -13,6 +12,7 @@ import {
   TrendingUpIcon,
   ScaleIcon,
 } from '../ui/Icons';
+import { Sparkles } from 'lucide-react';
 
 interface SidebarProps {
   currentTab: SourceTab;
@@ -89,13 +89,33 @@ export function Sidebar({
     },
     {
       id: 'uie' as SourceTab,
-      label: 'UIE',
+      label: 'UIE / SIE UE',
       sublabel: 'Déficit Docente y Horas',
-      badge: 'DÉFICIT',
+      badge: '16.2K UEs',
       badgeColor: 'bg-rose-50 text-rose-700 border-rose-200',
-      count: counts.uie ?? 17274,
-      tables: 'Carga Horaria vs Planilla',
+      count: counts.uie ?? 16273,
+      tables: '16.273 UEs & 169K Registros',
       icon: <ScaleIcon size={18} className="text-rose-700" />,
+    },
+    {
+      id: 'historial' as SourceTab,
+      label: 'Historial Docente',
+      sublabel: 'Análisis 2024-2026',
+      badge: '3 REPORTES',
+      badgeColor: 'bg-indigo-50 text-indigo-700 border-indigo-200',
+      count: 533993,
+      tables: 'Salientes, Impert., Sin Cargo',
+      icon: <LayersIcon size={18} className="text-indigo-700" />,
+    },
+    {
+      id: 'exposicion' as SourceTab,
+      label: 'Exposición 2031',
+      sublabel: 'Decisión Apertura ESFM',
+      badge: 'ESTRATÉGICO',
+      badgeColor: 'bg-amber-100 text-amber-900 border-amber-300 font-extrabold',
+      count: 164448,
+      tables: '19 Especialidades & Proyección',
+      icon: <Sparkles className="w-[18px] h-[18px] text-[#c9a751]" />,
     },
   ];
 

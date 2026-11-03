@@ -1,0 +1,1995 @@
+{
+  "nacional": {
+    "total_ues": 16273,
+    "total_estudiantes": 15202835,
+    "total_paralelos": 662110,
+    "total_carga_horaria": 16009284,
+    "total_horas_planilla": 15069687,
+    "total_deficit_horas": 944368,
+    "items_deficit_88h": 10731,
+    "total_filas": 169198
+  },
+  "departamentos": {
+    "Beni": {
+      "departamento_id": 8,
+      "departamento": "Beni",
+      "total_ues": 905,
+      "total_estudiantes": 691328,
+      "total_paralelos": 30257,
+      "total_carga_horaria": 853104,
+      "total_horas_planilla": 789251,
+      "total_deficit_horas": 64219,
+      "items_deficit_88h": 730,
+      "subsistemas": {}
+    },
+    "Chuquisaca": {
+      "departamento_id": 1,
+      "departamento": "Chuquisaca",
+      "total_ues": 1257,
+      "total_estudiantes": 740268,
+      "total_paralelos": 39247,
+      "total_carga_horaria": 982768,
+      "total_horas_planilla": 947469,
+      "total_deficit_horas": 36576,
+      "items_deficit_88h": 416,
+      "subsistemas": {}
+    },
+    "Cochabamba": {
+      "departamento_id": 3,
+      "departamento": "Cochabamba",
+      "total_ues": 2408,
+      "total_estudiantes": 2917800,
+      "total_paralelos": 117675,
+      "total_carga_horaria": 2706000,
+      "total_horas_planilla": 2581588,
+      "total_deficit_horas": 124576,
+      "items_deficit_88h": 1416,
+      "subsistemas": {}
+    },
+    "La Paz": {
+      "departamento_id": 2,
+      "departamento": "La Paz",
+      "total_ues": 4379,
+      "total_estudiantes": 3946324,
+      "total_paralelos": 190372,
+      "total_carga_horaria": 4320356,
+      "total_horas_planilla": 4082519,
+      "total_deficit_horas": 238529,
+      "items_deficit_88h": 2711,
+      "subsistemas": {}
+    },
+    "Oruro": {
+      "departamento_id": 4,
+      "departamento": "Oruro",
+      "total_ues": 764,
+      "total_estudiantes": 869187,
+      "total_paralelos": 37739,
+      "total_carga_horaria": 840688,
+      "total_horas_planilla": 808060,
+      "total_deficit_horas": 32876,
+      "items_deficit_88h": 374,
+      "subsistemas": {}
+    },
+    "Pando": {
+      "departamento_id": 9,
+      "departamento": "Pando",
+      "total_ues": 384,
+      "total_estudiantes": 146048,
+      "total_paralelos": 8739,
+      "total_carga_horaria": 271172,
+      "total_horas_planilla": 255846,
+      "total_deficit_horas": 15334,
+      "items_deficit_88h": 174,
+      "subsistemas": {}
+    },
+    "Potosí": {
+      "departamento_id": 5,
+      "departamento": "Potosí",
+      "total_ues": 2237,
+      "total_estudiantes": 1181129,
+      "total_paralelos": 60351,
+      "total_carga_horaria": 1547116,
+      "total_horas_planilla": 1446768,
+      "total_deficit_horas": 100460,
+      "items_deficit_88h": 1142,
+      "subsistemas": {}
+    },
+    "Santa Cruz": {
+      "departamento_id": 7,
+      "departamento": "Santa Cruz",
+      "total_ues": 3092,
+      "total_estudiantes": 3963002,
+      "total_paralelos": 144851,
+      "total_carga_horaria": 3703456,
+      "total_horas_planilla": 3384915,
+      "total_deficit_horas": 320433,
+      "items_deficit_88h": 3641,
+      "subsistemas": {}
+    },
+    "Tarija": {
+      "departamento_id": 6,
+      "departamento": "Tarija",
+      "total_ues": 847,
+      "total_estudiantes": 747749,
+      "total_paralelos": 32879,
+      "total_carga_horaria": 784624,
+      "total_horas_planilla": 773271,
+      "total_deficit_horas": 11365,
+      "items_deficit_88h": 129,
+      "subsistemas": {}
+    }
+  },
+  "dependencias": {
+    "FISCAL": {
+      "dependencia": "FISCAL",
+      "total_ues": 14922,
+      "total_estudiantes": 12775804,
+      "total_paralelos": 574816,
+      "total_carga_horaria": 14030568,
+      "total_horas_planilla": 13198764,
+      "total_deficit_horas": 835925
+    },
+    "CONVENIO": {
+      "dependencia": "CONVENIO",
+      "total_ues": 1344,
+      "total_estudiantes": 2426916,
+      "total_paralelos": 87264,
+      "total_carga_horaria": 1977516,
+      "total_horas_planilla": 1869823,
+      "total_deficit_horas": 108343
+    },
+    "COMUNITARIA": {
+      "dependencia": "COMUNITARIA",
+      "total_ues": 7,
+      "total_estudiantes": 115,
+      "total_paralelos": 30,
+      "total_carga_horaria": 1200,
+      "total_horas_planilla": 1100,
+      "total_deficit_horas": 100
+    }
+  },
+  "subsistemas": {
+    "EDUCACIÓN REGULAR": {
+      "subsistema": "EDUCACIÓN REGULAR",
+      "total_ues": 0,
+      "total_estudiantes": 14997193,
+      "total_paralelos": 647992,
+      "total_carga_horaria": 15132864,
+      "total_horas_planilla": 14349712,
+      "total_deficit_horas": 784668
+    },
+    "EDUCACIÓN ALTERNATIVA": {
+      "subsistema": "EDUCACIÓN ALTERNATIVA",
+      "total_ues": 0,
+      "total_estudiantes": 177092,
+      "total_paralelos": 10256,
+      "total_carga_horaria": 660044,
+      "total_horas_planilla": 525967,
+      "total_deficit_horas": 137332
+    },
+    "EDUCACIÓN ESPECIAL": {
+      "subsistema": "EDUCACIÓN ESPECIAL",
+      "total_ues": 0,
+      "total_estudiantes": 28550,
+      "total_paralelos": 3862,
+      "total_carga_horaria": 216376,
+      "total_horas_planilla": 194008,
+      "total_deficit_horas": 22368
+    }
+  },
+  "niveles": {
+    "INICIAL": {
+      "nivel": "INICIAL",
+      "subsistema": "EDUCACIÓN REGULAR",
+      "total_ues": 0,
+      "total_estudiantes": 245476,
+      "total_paralelos": 12955,
+      "total_carga_horaria": 1056300,
+      "total_horas_planilla": 1020148,
+      "total_deficit_horas": 36308
+    },
+    "PRIMARIA": {
+      "nivel": "PRIMARIA",
+      "subsistema": "EDUCACIÓN REGULAR",
+      "total_ues": 0,
+      "total_estudiantes": 3689688,
+      "total_paralelos": 183895,
+      "total_carga_horaria": 7126900,
+      "total_horas_planilla": 6788645,
+      "total_deficit_horas": 338675
+    },
+    "SECUNDARIA": {
+      "nivel": "SECUNDARIA",
+      "subsistema": "EDUCACIÓN REGULAR",
+      "total_ues": 0,
+      "total_estudiantes": 10883509,
+      "total_paralelos": 442398,
+      "total_carga_horaria": 6571260,
+      "total_horas_planilla": 6207870,
+      "total_deficit_horas": 363674
+    },
+    "SECUNDARIA (BTH)": {
+      "nivel": "SECUNDARIA (BTH)",
+      "subsistema": "EDUCACIÓN REGULAR",
+      "total_ues": 0,
+      "total_estudiantes": 178520,
+      "total_paralelos": 8744,
+      "total_carga_horaria": 378404,
+      "total_horas_planilla": 333049,
+      "total_deficit_horas": 46011
+    },
+    "EPA": {
+      "nivel": "EPA",
+      "subsistema": "EDUCACIÓN ALTERNATIVA",
+      "total_ues": 0,
+      "total_estudiantes": 2948,
+      "total_paralelos": 325,
+      "total_carga_horaria": 20848,
+      "total_horas_planilla": 17677,
+      "total_deficit_horas": 3493
+    },
+    "ESA": {
+      "nivel": "ESA",
+      "subsistema": "EDUCACIÓN ALTERNATIVA",
+      "total_ues": 0,
+      "total_estudiantes": 80425,
+      "total_paralelos": 4390,
+      "total_carga_horaria": 202656,
+      "total_horas_planilla": 190092,
+      "total_deficit_horas": 15267
+    },
+    "ETA": {
+      "nivel": "ETA",
+      "subsistema": "EDUCACIÓN ALTERNATIVA",
+      "total_ues": 0,
+      "total_estudiantes": 93719,
+      "total_paralelos": 5541,
+      "total_carga_horaria": 436540,
+      "total_horas_planilla": 318198,
+      "total_deficit_horas": 118572
+    },
+    "INTELECTUAL": {
+      "nivel": "INTELECTUAL",
+      "subsistema": "EDUCACIÓN ESPECIAL",
+      "total_ues": 0,
+      "total_estudiantes": 16222,
+      "total_paralelos": 2509,
+      "total_carga_horaria": 144816,
+      "total_horas_planilla": 128028,
+      "total_deficit_horas": 16788
+    },
+    "AUDITIVA": {
+      "nivel": "AUDITIVA",
+      "subsistema": "EDUCACIÓN ESPECIAL",
+      "total_ues": 0,
+      "total_estudiantes": 3616,
+      "total_paralelos": 475,
+      "total_carga_horaria": 27280,
+      "total_horas_planilla": 26063,
+      "total_deficit_horas": 1217
+    },
+    "PROGRAMA DE EDUCACION SOCIO COMUNITARIA EN CASA PARA PERSONAS CON DISCAPACIDAD GRAVE Y MUY GRAVE (MAESTRO RESPONSABLE)": {
+      "nivel": "PROGRAMA DE EDUCACION SOCIO COMUNITARIA EN CASA PARA PERSONAS CON DISCAPACIDAD GRAVE Y MUY GRAVE (MAESTRO RESPONSABLE)",
+      "subsistema": "EDUCACIÓN ESPECIAL",
+      "total_ues": 0,
+      "total_estudiantes": 218,
+      "total_paralelos": 22,
+      "total_carga_horaria": 2080,
+      "total_horas_planilla": 2076,
+      "total_deficit_horas": 4
+    },
+    "VISUAL": {
+      "nivel": "VISUAL",
+      "subsistema": "EDUCACIÓN ESPECIAL",
+      "total_ues": 0,
+      "total_estudiantes": 794,
+      "total_paralelos": 216,
+      "total_carga_horaria": 13068,
+      "total_horas_planilla": 12491,
+      "total_deficit_horas": 577
+    },
+    "DIFICULTADES EN EL APRENDIZAJE": {
+      "nivel": "DIFICULTADES EN EL APRENDIZAJE",
+      "subsistema": "EDUCACIÓN ESPECIAL",
+      "total_ues": 0,
+      "total_estudiantes": 6699,
+      "total_paralelos": 476,
+      "total_carga_horaria": 20824,
+      "total_horas_planilla": 18440,
+      "total_deficit_horas": 2384
+    },
+    "FISICA MOTORA": {
+      "nivel": "FISICA MOTORA",
+      "subsistema": "EDUCACIÓN ESPECIAL",
+      "total_ues": 0,
+      "total_estudiantes": 178,
+      "total_paralelos": 39,
+      "total_carga_horaria": 1828,
+      "total_horas_planilla": 1466,
+      "total_deficit_horas": 362
+    },
+    "TRASTORNO DEL ESPECTRO AUTISTA": {
+      "nivel": "TRASTORNO DEL ESPECTRO AUTISTA",
+      "subsistema": "EDUCACIÓN ESPECIAL",
+      "total_ues": 0,
+      "total_estudiantes": 366,
+      "total_paralelos": 89,
+      "total_carga_horaria": 4356,
+      "total_horas_planilla": 3608,
+      "total_deficit_horas": 748
+    },
+    "TALENTO EXTRAORDINARIO": {
+      "nivel": "TALENTO EXTRAORDINARIO",
+      "subsistema": "EDUCACIÓN ESPECIAL",
+      "total_ues": 0,
+      "total_estudiantes": 309,
+      "total_paralelos": 13,
+      "total_carga_horaria": 924,
+      "total_horas_planilla": 924,
+      "total_deficit_horas": 0
+    },
+    "MENTAL-PSIQUICA": {
+      "nivel": "MENTAL-PSIQUICA",
+      "subsistema": "EDUCACIÓN ESPECIAL",
+      "total_ues": 0,
+      "total_estudiantes": 133,
+      "total_paralelos": 20,
+      "total_carga_horaria": 912,
+      "total_horas_planilla": 912,
+      "total_deficit_horas": 0
+    },
+    "PROGRAMA DE EDUCACION SOCIO COMUNITARIA EN CASA PARA PERSONAS CON DISCAPACIDAD GRAVE Y MUY GRAVE (MAESTRO VOLUNTARIO)": {
+      "nivel": "PROGRAMA DE EDUCACION SOCIO COMUNITARIA EN CASA PARA PERSONAS CON DISCAPACIDAD GRAVE Y MUY GRAVE (MAESTRO VOLUNTARIO)",
+      "subsistema": "EDUCACIÓN ESPECIAL",
+      "total_ues": 0,
+      "total_estudiantes": 15,
+      "total_paralelos": 3,
+      "total_carga_horaria": 288,
+      "total_horas_planilla": 0,
+      "total_deficit_horas": 288
+    }
+  },
+  "top_deficit_ues": [
+    {
+      "cod_ue": 82220218,
+      "unidad_educativa": "PROF. JULIO SATONAKA RUIZ",
+      "departamento": "Beni",
+      "dependencia": "FISCAL",
+      "estudiantes": 1324,
+      "paralelos": 61,
+      "carga": 5256,
+      "planilla": 1142,
+      "deficit": 4114,
+      "niveles": [
+        "ESA",
+        "ETA",
+        "EPA"
+      ],
+      "items_88h": 46.8
+    },
+    {
+      "cod_ue": 80730743,
+      "unidad_educativa": "DON BOSCO D",
+      "departamento": "La Paz",
+      "dependencia": "CONVENIO",
+      "estudiantes": 1734,
+      "paralelos": 63,
+      "carga": 4700,
+      "planilla": 1452,
+      "deficit": 3248,
+      "niveles": [
+        "ETA"
+      ],
+      "items_88h": 36.9
+    },
+    {
+      "cod_ue": 80600053,
+      "unidad_educativa": "RENACER",
+      "departamento": "La Paz",
+      "dependencia": "FISCAL",
+      "estudiantes": 442,
+      "paralelos": 39,
+      "carga": 3640,
+      "planilla": 1390,
+      "deficit": 2250,
+      "niveles": [
+        "ESA",
+        "ETA"
+      ],
+      "items_88h": 25.6
+    },
+    {
+      "cod_ue": 80660192,
+      "unidad_educativa": "HUAYHUASI",
+      "departamento": "La Paz",
+      "dependencia": "FISCAL",
+      "estudiantes": 464,
+      "paralelos": 30,
+      "carga": 2900,
+      "planilla": 792,
+      "deficit": 2108,
+      "niveles": [
+        "ETA"
+      ],
+      "items_88h": 24.0
+    },
+    {
+      "cod_ue": 82470056,
+      "unidad_educativa": "SAN IGNACIO",
+      "departamento": "Pando",
+      "dependencia": "CONVENIO",
+      "estudiantes": 515,
+      "paralelos": 44,
+      "carga": 3400,
+      "planilla": 1300,
+      "deficit": 2100,
+      "niveles": [
+        "ESA",
+        "ETA",
+        "EPA"
+      ],
+      "items_88h": 23.9
+    },
+    {
+      "cod_ue": 40730596,
+      "unidad_educativa": "RADIO SAN GABRIEL B",
+      "departamento": "La Paz",
+      "dependencia": "CONVENIO",
+      "estudiantes": 1148,
+      "paralelos": 50,
+      "carga": 4680,
+      "planilla": 2676,
+      "deficit": 2004,
+      "niveles": [
+        "ESA",
+        "ETA",
+        "EPA"
+      ],
+      "items_88h": 22.8
+    },
+    {
+      "cod_ue": 80730660,
+      "unidad_educativa": "CHUQUIAGUILLO",
+      "departamento": "La Paz",
+      "dependencia": "FISCAL",
+      "estudiantes": 521,
+      "paralelos": 42,
+      "carga": 3328,
+      "planilla": 1416,
+      "deficit": 1912,
+      "niveles": [
+        "ESA",
+        "ETA",
+        "EPA"
+      ],
+      "items_88h": 21.7
+    },
+    {
+      "cod_ue": 81980779,
+      "unidad_educativa": "LUZ Y ESPERANZA",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 1159,
+      "paralelos": 44,
+      "carga": 3488,
+      "planilla": 1628,
+      "deficit": 1860,
+      "niveles": [
+        "ESA",
+        "ETA",
+        "EPA"
+      ],
+      "items_88h": 21.1
+    },
+    {
+      "cod_ue": 40610063,
+      "unidad_educativa": "MCAL. DE MONTENEGRO",
+      "departamento": "La Paz",
+      "dependencia": "FISCAL",
+      "estudiantes": 494,
+      "paralelos": 33,
+      "carga": 3120,
+      "planilla": 1268,
+      "deficit": 1852,
+      "niveles": [
+        "ESA",
+        "ETA"
+      ],
+      "items_88h": 21.0
+    },
+    {
+      "cod_ue": 80730640,
+      "unidad_educativa": "SANTA RITA DE FE Y ALEGRIA",
+      "departamento": "La Paz",
+      "dependencia": "CONVENIO",
+      "estudiantes": 406,
+      "paralelos": 29,
+      "carga": 2900,
+      "planilla": 1124,
+      "deficit": 1776,
+      "niveles": [
+        "ETA"
+      ],
+      "items_88h": 20.2
+    },
+    {
+      "cod_ue": 80660218,
+      "unidad_educativa": "ANA MARIA DE LAS NIEVES ROMERO DE CAMPERO",
+      "departamento": "La Paz",
+      "dependencia": "FISCAL",
+      "estudiantes": 464,
+      "paralelos": 34,
+      "carga": 2908,
+      "planilla": 1170,
+      "deficit": 1758,
+      "niveles": [
+        "ESA",
+        "ETA",
+        "EPA"
+      ],
+      "items_88h": 20.0
+    },
+    {
+      "cod_ue": 40730321,
+      "unidad_educativa": "COREA",
+      "departamento": "La Paz",
+      "dependencia": "FISCAL",
+      "estudiantes": 2175,
+      "paralelos": 63,
+      "carga": 5720,
+      "planilla": 4066,
+      "deficit": 1654,
+      "niveles": [
+        "ESA",
+        "ETA",
+        "EPA"
+      ],
+      "items_88h": 18.8
+    },
+    {
+      "cod_ue": 71940030,
+      "unidad_educativa": "VILLA NUEVA",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 3051,
+      "paralelos": 79,
+      "carga": 1628,
+      "planilla": 0,
+      "deficit": 1628,
+      "niveles": [
+        "PRIMARIA",
+        "SECUNDARIA",
+        "INICIAL"
+      ],
+      "items_88h": 18.5
+    },
+    {
+      "cod_ue": 80630044,
+      "unidad_educativa": "MADRE MARIE POUSSEPIN",
+      "departamento": "La Paz",
+      "dependencia": "CONVENIO",
+      "estudiantes": 285,
+      "paralelos": 25,
+      "carga": 2440,
+      "planilla": 900,
+      "deficit": 1550,
+      "niveles": [
+        "ESA",
+        "ETA",
+        "EPA"
+      ],
+      "items_88h": 17.6
+    },
+    {
+      "cod_ue": 82230005,
+      "unidad_educativa": "GONZALO SUAREZ DORADO",
+      "departamento": "Beni",
+      "dependencia": "FISCAL",
+      "estudiantes": 2280,
+      "paralelos": 78,
+      "carga": 1648,
+      "planilla": 120,
+      "deficit": 1528,
+      "niveles": [
+        "PRIMARIA",
+        "SECUNDARIA",
+        "INICIAL"
+      ],
+      "items_88h": 17.4
+    },
+    {
+      "cod_ue": 40730328,
+      "unidad_educativa": "12 DE OCTUBRE NOCHE",
+      "departamento": "La Paz",
+      "dependencia": "FISCAL",
+      "estudiantes": 918,
+      "paralelos": 46,
+      "carga": 3780,
+      "planilla": 2316,
+      "deficit": 1464,
+      "niveles": [
+        "ESA",
+        "ETA",
+        "EPA"
+      ],
+      "items_88h": 16.6
+    },
+    {
+      "cod_ue": 80660194,
+      "unidad_educativa": "TUPAC KATARI DE CORPA",
+      "departamento": "La Paz",
+      "dependencia": "CONVENIO",
+      "estudiantes": 360,
+      "paralelos": 50,
+      "carga": 2920,
+      "planilla": 1460,
+      "deficit": 1460,
+      "niveles": [
+        "ESA",
+        "ETA"
+      ],
+      "items_88h": 16.6
+    },
+    {
+      "cod_ue": 80880174,
+      "unidad_educativa": "MUSUJ MUJU KAWSANAPAJ",
+      "departamento": "Cochabamba",
+      "dependencia": "CONVENIO",
+      "estudiantes": 108,
+      "paralelos": 22,
+      "carga": 1820,
+      "planilla": 430,
+      "deficit": 1390,
+      "niveles": [
+        "ESA",
+        "ETA"
+      ],
+      "items_88h": 15.8
+    },
+    {
+      "cod_ue": 40730425,
+      "unidad_educativa": "JUAN LECHIN OQUENDO",
+      "departamento": "La Paz",
+      "dependencia": "FISCAL",
+      "estudiantes": 1129,
+      "paralelos": 36,
+      "carga": 3000,
+      "planilla": 1628,
+      "deficit": 1372,
+      "niveles": [
+        "ESA",
+        "ETA"
+      ],
+      "items_88h": 15.6
+    },
+    {
+      "cod_ue": 81981302,
+      "unidad_educativa": "MAMA MARGARITA",
+      "departamento": "Santa Cruz",
+      "dependencia": "CONVENIO",
+      "estudiantes": 431,
+      "paralelos": 23,
+      "carga": 2100,
+      "planilla": 786,
+      "deficit": 1314,
+      "niveles": [
+        "ETA"
+      ],
+      "items_88h": 14.9
+    },
+    {
+      "cod_ue": 80730601,
+      "unidad_educativa": "MCAL. SANTA CRUZ",
+      "departamento": "La Paz",
+      "dependencia": "FISCAL",
+      "estudiantes": 273,
+      "paralelos": 26,
+      "carga": 2280,
+      "planilla": 996,
+      "deficit": 1284,
+      "niveles": [
+        "ESA",
+        "ETA",
+        "EPA"
+      ],
+      "items_88h": 14.6
+    },
+    {
+      "cod_ue": 71460020,
+      "unidad_educativa": "SAGRADO CORAZON DE JESUS DE RODERO",
+      "departamento": "Potosí",
+      "dependencia": "CONVENIO",
+      "estudiantes": 631,
+      "paralelos": 48,
+      "carga": 1440,
+      "planilla": 156,
+      "deficit": 1284,
+      "niveles": [
+        "SECUNDARIA",
+        "PRIMARIA"
+      ],
+      "items_88h": 14.6
+    },
+    {
+      "cod_ue": 51980110,
+      "unidad_educativa": "METROPOLITANA II",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 3905,
+      "paralelos": 124,
+      "carga": 3944,
+      "planilla": 2664,
+      "deficit": 1280,
+      "niveles": [
+        "PRIMARIA",
+        "SECUNDARIA",
+        "INICIAL"
+      ],
+      "items_88h": 14.5
+    },
+    {
+      "cod_ue": 70620083,
+      "unidad_educativa": "VENEZUELA",
+      "departamento": "La Paz",
+      "dependencia": "FISCAL",
+      "estudiantes": 212,
+      "paralelos": 16,
+      "carga": 1468,
+      "planilla": 196,
+      "deficit": 1272,
+      "niveles": [
+        "ESA",
+        "ETA"
+      ],
+      "items_88h": 14.5
+    },
+    {
+      "cod_ue": 81890022,
+      "unidad_educativa": "SAN MAXIMILIANO KOLBE 3",
+      "departamento": "Santa Cruz",
+      "dependencia": "CONVENIO",
+      "estudiantes": 487,
+      "paralelos": 19,
+      "carga": 1900,
+      "planilla": 636,
+      "deficit": 1264,
+      "niveles": [
+        "ETA"
+      ],
+      "items_88h": 14.4
+    },
+    {
+      "cod_ue": 71940020,
+      "unidad_educativa": "PROF. HERMAN ORTIZ CAMARGO",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 828,
+      "paralelos": 33,
+      "carga": 2520,
+      "planilla": 1264,
+      "deficit": 1256,
+      "niveles": [
+        "ESA",
+        "ETA",
+        "EPA"
+      ],
+      "items_88h": 14.3
+    },
+    {
+      "cod_ue": 81970114,
+      "unidad_educativa": "MARCELO QUIROGA SANTA CRUZ",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 6064,
+      "paralelos": 176,
+      "carga": 4612,
+      "planilla": 3356,
+      "deficit": 1256,
+      "niveles": [
+        "PRIMARIA",
+        "SECUNDARIA",
+        "SECUNDARIA (BTH)",
+        "INICIAL"
+      ],
+      "items_88h": 14.3
+    },
+    {
+      "cod_ue": 81980751,
+      "unidad_educativa": "MIGUEL MAGONE",
+      "departamento": "Santa Cruz",
+      "dependencia": "CONVENIO",
+      "estudiantes": 745,
+      "paralelos": 35,
+      "carga": 3480,
+      "planilla": 2230,
+      "deficit": 1250,
+      "niveles": [
+        "ESA",
+        "ETA"
+      ],
+      "items_88h": 14.2
+    },
+    {
+      "cod_ue": 81981180,
+      "unidad_educativa": "MAGISTERIO E",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 285,
+      "paralelos": 17,
+      "carga": 1400,
+      "planilla": 190,
+      "deficit": 1210,
+      "niveles": [
+        "ESA",
+        "ETA",
+        "EPA"
+      ],
+      "items_88h": 13.8
+    },
+    {
+      "cod_ue": 40730324,
+      "unidad_educativa": "DELIA GAMBARTE DE QUEZADA",
+      "departamento": "La Paz",
+      "dependencia": "FISCAL",
+      "estudiantes": 611,
+      "paralelos": 31,
+      "carga": 3080,
+      "planilla": 1920,
+      "deficit": 1160,
+      "niveles": [
+        "ESA",
+        "ETA"
+      ],
+      "items_88h": 13.2
+    },
+    {
+      "cod_ue": 80730821,
+      "unidad_educativa": "SARANTAÑANI",
+      "departamento": "La Paz",
+      "dependencia": "CONVENIO",
+      "estudiantes": 181,
+      "paralelos": 18,
+      "carga": 1800,
+      "planilla": 640,
+      "deficit": 1160,
+      "niveles": [
+        "ETA"
+      ],
+      "items_88h": 13.2
+    },
+    {
+      "cod_ue": 81840036,
+      "unidad_educativa": "SAN LUIS",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 2384,
+      "paralelos": 97,
+      "carga": 3368,
+      "planilla": 2208,
+      "deficit": 1160,
+      "niveles": [
+        "PRIMARIA",
+        "SECUNDARIA",
+        "SECUNDARIA (BTH)",
+        "INICIAL"
+      ],
+      "items_88h": 13.2
+    },
+    {
+      "cod_ue": 60620095,
+      "unidad_educativa": "ESPIRITU SANTO",
+      "departamento": "La Paz",
+      "dependencia": "CONVENIO",
+      "estudiantes": 353,
+      "paralelos": 24,
+      "carga": 2320,
+      "planilla": 1196,
+      "deficit": 1124,
+      "niveles": [
+        "ESA",
+        "ETA"
+      ],
+      "items_88h": 12.8
+    },
+    {
+      "cod_ue": 81890014,
+      "unidad_educativa": "AMERICANO MONTERO 4",
+      "departamento": "Santa Cruz",
+      "dependencia": "CONVENIO",
+      "estudiantes": 436,
+      "paralelos": 22,
+      "carga": 2200,
+      "planilla": 1080,
+      "deficit": 1120,
+      "niveles": [
+        "ETA"
+      ],
+      "items_88h": 12.7
+    },
+    {
+      "cod_ue": 81970154,
+      "unidad_educativa": "JUAN PABLO II",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 263,
+      "paralelos": 18,
+      "carga": 1300,
+      "planilla": 180,
+      "deficit": 1120,
+      "niveles": [
+        "ESA",
+        "ETA",
+        "EPA"
+      ],
+      "items_88h": 12.7
+    },
+    {
+      "cod_ue": 80720200,
+      "unidad_educativa": "EXPERIMENTAL AVICHACA",
+      "departamento": "La Paz",
+      "dependencia": "FISCAL",
+      "estudiantes": 247,
+      "paralelos": 22,
+      "carga": 2180,
+      "planilla": 1092,
+      "deficit": 1088,
+      "niveles": [
+        "ESA",
+        "ETA"
+      ],
+      "items_88h": 12.4
+    },
+    {
+      "cod_ue": 80730609,
+      "unidad_educativa": "VILLA DE LA CRUZ",
+      "departamento": "La Paz",
+      "dependencia": "FISCAL",
+      "estudiantes": 207,
+      "paralelos": 19,
+      "carga": 1900,
+      "planilla": 824,
+      "deficit": 1076,
+      "niveles": [
+        "ETA"
+      ],
+      "items_88h": 12.2
+    },
+    {
+      "cod_ue": 80660237,
+      "unidad_educativa": "ABYA YALA",
+      "departamento": "La Paz",
+      "dependencia": "FISCAL",
+      "estudiantes": 227,
+      "paralelos": 17,
+      "carga": 1460,
+      "planilla": 400,
+      "deficit": 1060,
+      "niveles": [
+        "ESA",
+        "ETA"
+      ],
+      "items_88h": 12.0
+    },
+    {
+      "cod_ue": 80540218,
+      "unidad_educativa": "HNO. NILO CULLEN",
+      "departamento": "La Paz",
+      "dependencia": "CONVENIO",
+      "estudiantes": 373,
+      "paralelos": 26,
+      "carga": 2340,
+      "planilla": 1288,
+      "deficit": 1052,
+      "niveles": [
+        "ESA",
+        "ETA"
+      ],
+      "items_88h": 12.0
+    },
+    {
+      "cod_ue": 40730493,
+      "unidad_educativa": "VIRGEN NIÑA",
+      "departamento": "La Paz",
+      "dependencia": "CONVENIO",
+      "estudiantes": 393,
+      "paralelos": 42,
+      "carga": 2880,
+      "planilla": 1836,
+      "deficit": 1044,
+      "niveles": [
+        "INTELECTUAL",
+        "PROGRAMA DE EDUCACION SOCIO COMUNITARIA EN CASA PARA PERSONAS CON DISCAPACIDAD GRAVE Y MUY GRAVE (MAESTRO VOLUNTARIO)",
+        "FISICA MOTORA",
+        "DIFICULTADES EN EL APRENDIZAJE",
+        "TRASTORNO DEL ESPECTRO AUTISTA"
+      ],
+      "items_88h": 11.9
+    },
+    {
+      "cod_ue": 40730318,
+      "unidad_educativa": "SANTA RITA",
+      "departamento": "La Paz",
+      "dependencia": "CONVENIO",
+      "estudiantes": 301,
+      "paralelos": 20,
+      "carga": 2000,
+      "planilla": 958,
+      "deficit": 1042,
+      "niveles": [
+        "ETA"
+      ],
+      "items_88h": 11.8
+    },
+    {
+      "cod_ue": 71980067,
+      "unidad_educativa": "CIUDADELA NUEVA JERUSALEN",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 4133,
+      "paralelos": 103,
+      "carga": 2932,
+      "planilla": 1892,
+      "deficit": 1040,
+      "niveles": [
+        "PRIMARIA",
+        "SECUNDARIA",
+        "INICIAL"
+      ],
+      "items_88h": 11.8
+    },
+    {
+      "cod_ue": 81981678,
+      "unidad_educativa": "LEOCADIO POROMA SALINAS",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 4661,
+      "paralelos": 130,
+      "carga": 1808,
+      "planilla": 776,
+      "deficit": 1032,
+      "niveles": [
+        "SECUNDARIA"
+      ],
+      "items_88h": 11.7
+    },
+    {
+      "cod_ue": 40730602,
+      "unidad_educativa": "MADRE ASCENSIÓN NICOL",
+      "departamento": "La Paz",
+      "dependencia": "CONVENIO",
+      "estudiantes": 148,
+      "paralelos": 16,
+      "carga": 2096,
+      "planilla": 1080,
+      "deficit": 1016,
+      "niveles": [
+        "INTELECTUAL",
+        "PROGRAMA DE EDUCACION SOCIO COMUNITARIA EN CASA PARA PERSONAS CON DISCAPACIDAD GRAVE Y MUY GRAVE (MAESTRO VOLUNTARIO)"
+      ],
+      "items_88h": 11.5
+    },
+    {
+      "cod_ue": 51980069,
+      "unidad_educativa": "TOMAS MORALES PADILLA",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 3904,
+      "paralelos": 124,
+      "carga": 4612,
+      "planilla": 3596,
+      "deficit": 1016,
+      "niveles": [
+        "PRIMARIA",
+        "SECUNDARIA",
+        "INICIAL"
+      ],
+      "items_88h": 11.5
+    },
+    {
+      "cod_ue": 81980635,
+      "unidad_educativa": "EVANGELICO BUENAS NUEVAS D",
+      "departamento": "Santa Cruz",
+      "dependencia": "CONVENIO",
+      "estudiantes": 1705,
+      "paralelos": 51,
+      "carga": 2528,
+      "planilla": 1512,
+      "deficit": 1016,
+      "niveles": [
+        "SECUNDARIA",
+        "SECUNDARIA (BTH)"
+      ],
+      "items_88h": 11.5
+    },
+    {
+      "cod_ue": 81981654,
+      "unidad_educativa": "PAURO DEL SABER",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 842,
+      "paralelos": 27,
+      "carga": 1528,
+      "planilla": 520,
+      "deficit": 1008,
+      "niveles": [
+        "SECUNDARIA"
+      ],
+      "items_88h": 11.5
+    },
+    {
+      "cod_ue": 81970124,
+      "unidad_educativa": "GRAN PAITITI",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 3127,
+      "paralelos": 104,
+      "carga": 3820,
+      "planilla": 2836,
+      "deficit": 984,
+      "niveles": [
+        "PRIMARIA",
+        "SECUNDARIA",
+        "SECUNDARIA (BTH)",
+        "INICIAL"
+      ],
+      "items_88h": 11.2
+    },
+    {
+      "cod_ue": 81970100,
+      "unidad_educativa": "TERRACOR",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 5105,
+      "paralelos": 168,
+      "carga": 5008,
+      "planilla": 4032,
+      "deficit": 976,
+      "niveles": [
+        "PRIMARIA",
+        "SECUNDARIA",
+        "SECUNDARIA (BTH)",
+        "INICIAL"
+      ],
+      "items_88h": 11.1
+    },
+    {
+      "cod_ue": 81981353,
+      "unidad_educativa": "FRANCISCO HURTADO PEDRAZA",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 5293,
+      "paralelos": 155,
+      "carga": 4792,
+      "planilla": 3824,
+      "deficit": 968,
+      "niveles": [
+        "PRIMARIA",
+        "SECUNDARIA",
+        "INICIAL"
+      ],
+      "items_88h": 11.0
+    },
+    {
+      "cod_ue": 80980443,
+      "unidad_educativa": "EDMUNDO BOJANOWSKI",
+      "departamento": "Cochabamba",
+      "dependencia": "CONVENIO",
+      "estudiantes": 878,
+      "paralelos": 41,
+      "carga": 2300,
+      "planilla": 1336,
+      "deficit": 964,
+      "niveles": [
+        "ESA",
+        "ETA",
+        "EPA"
+      ],
+      "items_88h": 11.0
+    },
+    {
+      "cod_ue": 81980768,
+      "unidad_educativa": "SAN MIGUEL APONTE",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 2492,
+      "paralelos": 88,
+      "carga": 2776,
+      "planilla": 1824,
+      "deficit": 952,
+      "niveles": [
+        "PRIMARIA",
+        "SECUNDARIA",
+        "INICIAL"
+      ],
+      "items_88h": 10.8
+    },
+    {
+      "cod_ue": 81970147,
+      "unidad_educativa": "LUIS GADEA CAMPOS II",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 470,
+      "paralelos": 19,
+      "carga": 1528,
+      "planilla": 576,
+      "deficit": 952,
+      "niveles": [
+        "SECUNDARIA"
+      ],
+      "items_88h": 10.8
+    },
+    {
+      "cod_ue": 40730506,
+      "unidad_educativa": "VILLA ESPERANZA",
+      "departamento": "La Paz",
+      "dependencia": "FISCAL",
+      "estudiantes": 1200,
+      "paralelos": 34,
+      "carga": 2660,
+      "planilla": 1736,
+      "deficit": 924,
+      "niveles": [
+        "ESA",
+        "ETA"
+      ],
+      "items_88h": 10.5
+    },
+    {
+      "cod_ue": 50730040,
+      "unidad_educativa": "KURMI WASI",
+      "departamento": "La Paz",
+      "dependencia": "CONVENIO",
+      "estudiantes": 817,
+      "paralelos": 61,
+      "carga": 1164,
+      "planilla": 264,
+      "deficit": 900,
+      "niveles": [
+        "PRIMARIA",
+        "SECUNDARIA",
+        "INICIAL"
+      ],
+      "items_88h": 10.2
+    },
+    {
+      "cod_ue": 81890125,
+      "unidad_educativa": "SAN JOSE SEBASTIAN PELCZAR",
+      "departamento": "Santa Cruz",
+      "dependencia": "CONVENIO",
+      "estudiantes": 594,
+      "paralelos": 18,
+      "carga": 1800,
+      "planilla": 900,
+      "deficit": 900,
+      "niveles": [
+        "ETA"
+      ],
+      "items_88h": 10.2
+    },
+    {
+      "cod_ue": 80730649,
+      "unidad_educativa": "ILLIMANI",
+      "departamento": "La Paz",
+      "dependencia": "FISCAL",
+      "estudiantes": 128,
+      "paralelos": 13,
+      "carga": 1300,
+      "planilla": 404,
+      "deficit": 896,
+      "niveles": [
+        "ETA"
+      ],
+      "items_88h": 10.2
+    },
+    {
+      "cod_ue": 81970118,
+      "unidad_educativa": "INTEGRACION DEL NORTE",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 5651,
+      "paralelos": 195,
+      "carga": 5560,
+      "planilla": 4668,
+      "deficit": 892,
+      "niveles": [
+        "PRIMARIA",
+        "SECUNDARIA",
+        "SECUNDARIA (BTH)",
+        "INICIAL"
+      ],
+      "items_88h": 10.1
+    },
+    {
+      "cod_ue": 81980715,
+      "unidad_educativa": "ANGELINA RIBERA II",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 1170,
+      "paralelos": 39,
+      "carga": 3204,
+      "planilla": 2332,
+      "deficit": 872,
+      "niveles": [
+        "PRIMARIA",
+        "SECUNDARIA",
+        "INICIAL"
+      ],
+      "items_88h": 9.9
+    },
+    {
+      "cod_ue": 81410128,
+      "unidad_educativa": "SUIPACHA DE TUPIZA",
+      "departamento": "Potosí",
+      "dependencia": "FISCAL",
+      "estudiantes": 10528,
+      "paralelos": 368,
+      "carga": 5064,
+      "planilla": 4210,
+      "deficit": 854,
+      "niveles": [
+        "SECUNDARIA",
+        "SECUNDARIA (BTH)"
+      ],
+      "items_88h": 9.7
+    },
+    {
+      "cod_ue": 61950048,
+      "unidad_educativa": "VILLA BOQUERON",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 74,
+      "paralelos": 14,
+      "carga": 1300,
+      "planilla": 456,
+      "deficit": 844,
+      "niveles": [
+        "PRIMARIA",
+        "SECUNDARIA",
+        "INICIAL"
+      ],
+      "items_88h": 9.6
+    },
+    {
+      "cod_ue": 81981742,
+      "unidad_educativa": "25 DE FEBRERO",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 271,
+      "paralelos": 9,
+      "carga": 1060,
+      "planilla": 216,
+      "deficit": 844,
+      "niveles": [
+        "PRIMARIA",
+        "INICIAL"
+      ],
+      "items_88h": 9.6
+    },
+    {
+      "cod_ue": 82230103,
+      "unidad_educativa": "NAZARIA IGNACIA MARCH",
+      "departamento": "Beni",
+      "dependencia": "CONVENIO",
+      "estudiantes": 520,
+      "paralelos": 39,
+      "carga": 2620,
+      "planilla": 1790,
+      "deficit": 830,
+      "niveles": [
+        "ESA",
+        "ETA",
+        "EPA"
+      ],
+      "items_88h": 9.4
+    },
+    {
+      "cod_ue": 81970107,
+      "unidad_educativa": "JUANA AZURDUY DE PADILLA",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 7129,
+      "paralelos": 210,
+      "carga": 4788,
+      "planilla": 3960,
+      "deficit": 828,
+      "niveles": [
+        "PRIMARIA",
+        "SECUNDARIA",
+        "SECUNDARIA (BTH)",
+        "INICIAL"
+      ],
+      "items_88h": 9.4
+    },
+    {
+      "cod_ue": 81981590,
+      "unidad_educativa": "ARAKUARENDA",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 173,
+      "paralelos": 13,
+      "carga": 1660,
+      "planilla": 836,
+      "deficit": 824,
+      "niveles": [
+        "PRIMARIA",
+        "SECUNDARIA",
+        "INICIAL"
+      ],
+      "items_88h": 9.4
+    },
+    {
+      "cod_ue": 81981746,
+      "unidad_educativa": "EL RECREO",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 160,
+      "paralelos": 10,
+      "carga": 920,
+      "planilla": 100,
+      "deficit": 820,
+      "niveles": [
+        "ESA",
+        "ETA",
+        "EPA"
+      ],
+      "items_88h": 9.3
+    },
+    {
+      "cod_ue": 81390017,
+      "unidad_educativa": "FRANCIA DE GUADALUPE",
+      "departamento": "Potosí",
+      "dependencia": "FISCAL",
+      "estudiantes": 376,
+      "paralelos": 42,
+      "carga": 1352,
+      "planilla": 536,
+      "deficit": 816,
+      "niveles": [
+        "SECUNDARIA",
+        "PRIMARIA"
+      ],
+      "items_88h": 9.3
+    },
+    {
+      "cod_ue": 81980259,
+      "unidad_educativa": "FELIX BASCOPE GONZALES E",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 1301,
+      "paralelos": 39,
+      "carga": 3380,
+      "planilla": 2570,
+      "deficit": 810,
+      "niveles": [
+        "ESA",
+        "ETA",
+        "EPA"
+      ],
+      "items_88h": 9.2
+    },
+    {
+      "cod_ue": 80980567,
+      "unidad_educativa": "SANTA MARIA",
+      "departamento": "Cochabamba",
+      "dependencia": "CONVENIO",
+      "estudiantes": 428,
+      "paralelos": 21,
+      "carga": 2100,
+      "planilla": 1300,
+      "deficit": 800,
+      "niveles": [
+        "ETA"
+      ],
+      "items_88h": 9.1
+    },
+    {
+      "cod_ue": 81980718,
+      "unidad_educativa": "HERNANDO SILES REYES MAÑANA",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 7140,
+      "paralelos": 206,
+      "carga": 4936,
+      "planilla": 4136,
+      "deficit": 800,
+      "niveles": [
+        "PRIMARIA",
+        "SECUNDARIA",
+        "INICIAL"
+      ],
+      "items_88h": 9.1
+    },
+    {
+      "cod_ue": 71980053,
+      "unidad_educativa": "LIBERTAD ESPINAL",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 299,
+      "paralelos": 14,
+      "carga": 1760,
+      "planilla": 964,
+      "deficit": 796,
+      "niveles": [
+        "PRIMARIA",
+        "SECUNDARIA",
+        "INICIAL"
+      ],
+      "items_88h": 9.0
+    },
+    {
+      "cod_ue": 51980120,
+      "unidad_educativa": "NUEVA AMERICA",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 5250,
+      "paralelos": 145,
+      "carga": 2064,
+      "planilla": 1268,
+      "deficit": 796,
+      "niveles": [
+        "SECUNDARIA",
+        "SECUNDARIA (BTH)"
+      ],
+      "items_88h": 9.0
+    },
+    {
+      "cod_ue": 80980481,
+      "unidad_educativa": "MARIA DEL CAMINO",
+      "departamento": "Cochabamba",
+      "dependencia": "CONVENIO",
+      "estudiantes": 257,
+      "paralelos": 15,
+      "carga": 1500,
+      "planilla": 710,
+      "deficit": 790,
+      "niveles": [
+        "ETA"
+      ],
+      "items_88h": 9.0
+    },
+    {
+      "cod_ue": 71480033,
+      "unidad_educativa": "JAHUACAYA",
+      "departamento": "Potosí",
+      "dependencia": "FISCAL",
+      "estudiantes": 1099,
+      "paralelos": 67,
+      "carga": 1820,
+      "planilla": 1036,
+      "deficit": 784,
+      "niveles": [
+        "PRIMARIA",
+        "SECUNDARIA",
+        "SECUNDARIA (BTH)",
+        "INICIAL"
+      ],
+      "items_88h": 8.9
+    },
+    {
+      "cod_ue": 81970152,
+      "unidad_educativa": "NACIONAL SAN FRANCISCO DE BORJA",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 974,
+      "paralelos": 30,
+      "carga": 1256,
+      "planilla": 472,
+      "deficit": 784,
+      "niveles": [
+        "SECUNDARIA"
+      ],
+      "items_88h": 8.9
+    },
+    {
+      "cod_ue": 81981687,
+      "unidad_educativa": "MANANTIAL DE VIDA A",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 486,
+      "paralelos": 14,
+      "carga": 1640,
+      "planilla": 856,
+      "deficit": 784,
+      "niveles": [
+        "PRIMARIA",
+        "INICIAL"
+      ],
+      "items_88h": 8.9
+    },
+    {
+      "cod_ue": 80980218,
+      "unidad_educativa": "EDUARDO LAREDO",
+      "departamento": "Cochabamba",
+      "dependencia": "FISCAL",
+      "estudiantes": 6673,
+      "paralelos": 284,
+      "carga": 7164,
+      "planilla": 6381,
+      "deficit": 783,
+      "niveles": [
+        "SECUNDARIA",
+        "SECUNDARIA (BTH)",
+        "PRIMARIA"
+      ],
+      "items_88h": 8.9
+    },
+    {
+      "cod_ue": 81970113,
+      "unidad_educativa": "SAN JUAN",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 7376,
+      "paralelos": 212,
+      "carga": 5460,
+      "planilla": 4680,
+      "deficit": 780,
+      "niveles": [
+        "PRIMARIA",
+        "SECUNDARIA",
+        "SECUNDARIA (BTH)",
+        "INICIAL"
+      ],
+      "items_88h": 8.9
+    },
+    {
+      "cod_ue": 81981723,
+      "unidad_educativa": "11 DE SEPTIEMBRE",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 420,
+      "paralelos": 13,
+      "carga": 1528,
+      "planilla": 760,
+      "deficit": 768,
+      "niveles": [
+        "PRIMARIA",
+        "INICIAL"
+      ],
+      "items_88h": 8.7
+    },
+    {
+      "cod_ue": 81981655,
+      "unidad_educativa": "SAN JUAN DEL ESTE B",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 795,
+      "paralelos": 23,
+      "carga": 1464,
+      "planilla": 696,
+      "deficit": 768,
+      "niveles": [
+        "PRIMARIA",
+        "INICIAL"
+      ],
+      "items_88h": 8.7
+    },
+    {
+      "cod_ue": 50640079,
+      "unidad_educativa": "LA MERCED",
+      "departamento": "La Paz",
+      "dependencia": "CONVENIO",
+      "estudiantes": 166,
+      "paralelos": 13,
+      "carga": 1300,
+      "planilla": 540,
+      "deficit": 760,
+      "niveles": [
+        "ETA"
+      ],
+      "items_88h": 8.6
+    },
+    {
+      "cod_ue": 82480035,
+      "unidad_educativa": "COBIJA B",
+      "departamento": "Pando",
+      "dependencia": "FISCAL",
+      "estudiantes": 376,
+      "paralelos": 37,
+      "carga": 2916,
+      "planilla": 2160,
+      "deficit": 756,
+      "niveles": [
+        "INTELECTUAL",
+        "PROGRAMA DE EDUCACION SOCIO COMUNITARIA EN CASA PARA PERSONAS CON DISCAPACIDAD GRAVE Y MUY GRAVE (MAESTRO RESPONSABLE)",
+        "AUDITIVA",
+        "TALENTO EXTRAORDINARIO",
+        "DIFICULTADES EN EL APRENDIZAJE",
+        "TRASTORNO DEL ESPECTRO AUTISTA"
+      ],
+      "items_88h": 8.6
+    },
+    {
+      "cod_ue": 61880174,
+      "unidad_educativa": "GUILLERMO JORDAN",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 5647,
+      "paralelos": 217,
+      "carga": 5140,
+      "planilla": 4384,
+      "deficit": 756,
+      "niveles": [
+        "PRIMARIA",
+        "SECUNDARIA",
+        "INICIAL"
+      ],
+      "items_88h": 8.6
+    },
+    {
+      "cod_ue": 81980746,
+      "unidad_educativa": "EL MESON",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 403,
+      "paralelos": 14,
+      "carga": 1620,
+      "planilla": 864,
+      "deficit": 756,
+      "niveles": [
+        "PRIMARIA",
+        "INICIAL"
+      ],
+      "items_88h": 8.6
+    },
+    {
+      "cod_ue": 81981425,
+      "unidad_educativa": "JUANCITO PINTO",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 2856,
+      "paralelos": 97,
+      "carga": 2996,
+      "planilla": 2240,
+      "deficit": 756,
+      "niveles": [
+        "PRIMARIA",
+        "SECUNDARIA",
+        "INICIAL"
+      ],
+      "items_88h": 8.6
+    },
+    {
+      "cod_ue": 50630048,
+      "unidad_educativa": "PALOS BLANCOS C",
+      "departamento": "La Paz",
+      "dependencia": "FISCAL",
+      "estudiantes": 285,
+      "paralelos": 18,
+      "carga": 1300,
+      "planilla": 548,
+      "deficit": 752,
+      "niveles": [
+        "ESA",
+        "ETA"
+      ],
+      "items_88h": 8.5
+    },
+    {
+      "cod_ue": 61880156,
+      "unidad_educativa": "EL PROGRESO",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 1980,
+      "paralelos": 83,
+      "carga": 2960,
+      "planilla": 2208,
+      "deficit": 752,
+      "niveles": [
+        "PRIMARIA",
+        "SECUNDARIA",
+        "INICIAL"
+      ],
+      "items_88h": 8.5
+    },
+    {
+      "cod_ue": 81970116,
+      "unidad_educativa": "BUENA FE",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 6155,
+      "paralelos": 200,
+      "carga": 5700,
+      "planilla": 4952,
+      "deficit": 748,
+      "niveles": [
+        "PRIMARIA",
+        "SECUNDARIA",
+        "SECUNDARIA (BTH)",
+        "INICIAL"
+      ],
+      "items_88h": 8.5
+    },
+    {
+      "cod_ue": 81981656,
+      "unidad_educativa": "NELIDA CASTRO MEJIA B",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 3294,
+      "paralelos": 103,
+      "carga": 1392,
+      "planilla": 644,
+      "deficit": 748,
+      "niveles": [
+        "SECUNDARIA"
+      ],
+      "items_88h": 8.5
+    },
+    {
+      "cod_ue": 81981390,
+      "unidad_educativa": "FUENTES DEL SABER",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 6447,
+      "paralelos": 186,
+      "carga": 4656,
+      "planilla": 3912,
+      "deficit": 744,
+      "niveles": [
+        "PRIMARIA",
+        "SECUNDARIA",
+        "INICIAL"
+      ],
+      "items_88h": 8.5
+    },
+    {
+      "cod_ue": 81970122,
+      "unidad_educativa": "26 DE MARZO",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 2564,
+      "paralelos": 82,
+      "carga": 2752,
+      "planilla": 2012,
+      "deficit": 740,
+      "niveles": [
+        "PRIMARIA",
+        "SECUNDARIA",
+        "INICIAL"
+      ],
+      "items_88h": 8.4
+    },
+    {
+      "cod_ue": 81981737,
+      "unidad_educativa": "PROF. NOEL MAMANI VILLCA",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 260,
+      "paralelos": 10,
+      "carga": 940,
+      "planilla": 200,
+      "deficit": 740,
+      "niveles": [
+        "ESA",
+        "ETA"
+      ],
+      "items_88h": 8.4
+    },
+    {
+      "cod_ue": 71980024,
+      "unidad_educativa": "DON LORENZO",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 3663,
+      "paralelos": 139,
+      "carga": 3700,
+      "planilla": 2968,
+      "deficit": 732,
+      "niveles": [
+        "PRIMARIA",
+        "SECUNDARIA",
+        "INICIAL"
+      ],
+      "items_88h": 8.3
+    },
+    {
+      "cod_ue": 71980078,
+      "unidad_educativa": "SAN JORGE",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 930,
+      "paralelos": 33,
+      "carga": 1016,
+      "planilla": 288,
+      "deficit": 728,
+      "niveles": [
+        "SECUNDARIA",
+        "PRIMARIA"
+      ],
+      "items_88h": 8.3
+    },
+    {
+      "cod_ue": 81840021,
+      "unidad_educativa": "ASCENCION",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 761,
+      "paralelos": 42,
+      "carga": 1640,
+      "planilla": 912,
+      "deficit": 728,
+      "niveles": [
+        "ESA",
+        "ETA"
+      ],
+      "items_88h": 8.3
+    },
+    {
+      "cod_ue": 81981772,
+      "unidad_educativa": "VIANA CENTRAL E",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 1517,
+      "paralelos": 44,
+      "carga": 832,
+      "planilla": 104,
+      "deficit": 728,
+      "niveles": [
+        "SECUNDARIA"
+      ],
+      "items_88h": 8.3
+    },
+    {
+      "cod_ue": 80980641,
+      "unidad_educativa": "COBOL",
+      "departamento": "Cochabamba",
+      "dependencia": "FISCAL",
+      "estudiantes": 2548,
+      "paralelos": 87,
+      "carga": 2336,
+      "planilla": 1612,
+      "deficit": 724,
+      "niveles": [
+        "PRIMARIA",
+        "SECUNDARIA",
+        "INICIAL"
+      ],
+      "items_88h": 8.2
+    },
+    {
+      "cod_ue": 81980437,
+      "unidad_educativa": "SAN MARTIN MAÑANA",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 5036,
+      "paralelos": 144,
+      "carga": 2224,
+      "planilla": 1504,
+      "deficit": 720,
+      "niveles": [
+        "SECUNDARIA"
+      ],
+      "items_88h": 8.2
+    },
+    {
+      "cod_ue": 40730317,
+      "unidad_educativa": "MARIA AUXILIADORA",
+      "departamento": "La Paz",
+      "dependencia": "CONVENIO",
+      "estudiantes": 873,
+      "paralelos": 38,
+      "carga": 2600,
+      "planilla": 1884,
+      "deficit": 716,
+      "niveles": [
+        "ETA"
+      ],
+      "items_88h": 8.1
+    },
+    {
+      "cod_ue": 81981775,
+      "unidad_educativa": "SAN JUAN DEL SUR",
+      "departamento": "Santa Cruz",
+      "dependencia": "FISCAL",
+      "estudiantes": 244,
+      "paralelos": 7,
+      "carga": 820,
+      "planilla": 104,
+      "deficit": 716,
+      "niveles": [
+        "PRIMARIA",
+        "INICIAL"
+      ],
+      "items_88h": 8.1
+    }
+  ]
+}

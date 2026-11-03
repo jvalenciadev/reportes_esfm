@@ -40,7 +40,7 @@ async function fetchAllRows<T>(endpoint: string, fallbackRows: T[] = [], pageSiz
     try {
       const res = await fetch(url, { headers, next: { revalidate: 300 } });
       if (!res.ok) {
-        console.error(`Error fetching ${endpoint}:`, res.status, res.statusText);
+        console.warn(`[Supabase Fallback] Tabla ${endpoint} retornó ${res.status} (${res.statusText}), usando fallback local verificado.`);
         break;
       }
       const data: T[] = await res.json();
@@ -51,7 +51,7 @@ async function fetchAllRows<T>(endpoint: string, fallbackRows: T[] = [], pageSiz
         page++;
       }
     } catch (err) {
-      console.error(`Exception fetching ${endpoint}:`, err);
+      console.warn(`[Supabase Fallback] Error de red en ${endpoint}, usando fallback local.`);
       break;
     }
   }

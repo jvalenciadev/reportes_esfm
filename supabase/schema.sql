@@ -107,19 +107,32 @@ CREATE TABLE IF NOT EXISTS public.sie_discapacidad_2026 (
     anio INT NOT NULL DEFAULT 2026
 );
 
--- 13. TABLA: UIE DÉFICIT DE HORAS Y CARGA HORARIA VS PLANILLA (2021-2025)
-CREATE TABLE IF NOT EXISTS public.uie_deficit_horas (
-    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    gestion INT NOT NULL,
+-- 13. TABLA EXTRA: UNIDAD_EDUCATIVA (CATÁLOGO MAESTRO)
+CREATE TABLE IF NOT EXISTS public.unidad_educativa (
+    cod_ue BIGINT PRIMARY KEY,
+    unidad_educativa VARCHAR(255) NOT NULL,
     departamento_id INT NOT NULL REFERENCES public.departamentos(id) ON DELETE CASCADE,
     departamento VARCHAR(50) NOT NULL,
     dependencia VARCHAR(50) NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 14. TABLA PRINCIPAL: SIE_UNIDAD_EDUCATIVA (DETALLE DE CARGA HORARIA Y DÉFICIT)
+CREATE TABLE IF NOT EXISTS public.sie_unidad_educativa (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    cod_ue BIGINT NOT NULL REFERENCES public.unidad_educativa(cod_ue) ON DELETE CASCADE,
+    departamento_id INT NOT NULL REFERENCES public.departamentos(id) ON DELETE CASCADE,
+    departamento VARCHAR(50) NOT NULL,
+    unidad_educativa VARCHAR(255) NOT NULL,
+    dependencia VARCHAR(50) NOT NULL,
     subsistema VARCHAR(100) NOT NULL,
     nivel VARCHAR(150) NOT NULL,
-    cargo VARCHAR(150) NOT NULL,
-    horas_trabajadas INT NOT NULL,
-    horas_planilla INT NOT NULL,
-    deficit_horas INT NOT NULL
+    nro_estudiantes INT NOT NULL DEFAULT 0,
+    total_paralelos INT NOT NULL DEFAULT 0,
+    carga_horaria INT NOT NULL DEFAULT 0,
+    horas_planilla INT NOT NULL DEFAULT 0,
+    deficit_horas INT GENERATED ALWAYS AS (carga_horaria - horas_planilla) STORED,
+    created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
 -- ÍNDICES DE RENDIMIENTO PARA REPORTES Y FILTRADOS
@@ -130,9 +143,34 @@ CREATE INDEX IF NOT EXISTS idx_sie_total_dep ON public.sie_total_estudiantes(dep
 CREATE INDEX IF NOT EXISTS idx_seie_disc_dep_anio ON public.seie_discapacidad_dependencia(anio, departamento_id);
 CREATE INDEX IF NOT EXISTS idx_seie_disc_area_anio ON public.seie_discapacidad_area(anio, departamento_id);
 CREATE INDEX IF NOT EXISTS idx_sie_disc_2026_dep ON public.sie_discapacidad_2026(departamento_id, tipo_discapacidad);
-CREATE INDEX IF NOT EXISTS idx_uie_deficit_gestion_dept ON public.uie_deficit_horas(gestion, departamento_id);
-CREATE INDEX IF NOT EXISTS idx_uie_deficit_subsistema ON public.uie_deficit_horas(subsistema, nivel);
-CREATE INDEX IF NOT EXISTS idx_uie_deficit_dependencia ON public.uie_deficit_horas(dependencia);
+CREATE INDEX IF NOT EXISTS idx_ue_dept ON public.unidad_educativa(departamento_id);
+CREATE INDEX IF NOT EXISTS idx_ue_dep ON public.unidad_educativa(dependencia);
+CREATE INDEX IF NOT EXISTS idx_ue_nombre ON public.unidad_educativa(unidad_educativa);
+CREATE INDEX IF NOT EXISTS idx_sie_ue_cod ON public.sie_unidad_educativa(cod_ue);
+CREATE INDEX IF NOT EXISTS idx_sie_ue_dept ON public.sie_unidad_educativa(departamento_id);
+CREATE INDEX IF NOT EXISTS idx_sie_ue_dep ON public.sie_unidad_educativa(dependencia);
+CREATE INDEX IF NOT EXISTS idx_sie_ue_sub_nivel ON public.sie_unidad_educativa(subsistema, nivel);
+CREATE INDEX IF NOT EXISTS idx_sie_ue_deficit ON public.sie_unidad_educativa(deficit_horas DESC);
+
+-- 15. TABLA: FILTRO_ESPECIALIDAD (REGLAS Y FILTROS POR ESPECIALIDAD OFICIAL)
+CREATE TABLE IF NOT EXISTS public.filtro_especialidad (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    especialidad_oficial_id INT NOT NULL REFERENCES public.especialidades_oficiales(id) ON DELETE CASCADE,
+    subsistemas TEXT[] NOT NULL DEFAULT '{}',
+    niveles TEXT[] NOT NULL DEFAULT '{}',
+    cargos TEXT[] NOT NULL DEFAULT '{}',
+    operador_carga VARCHAR(5) DEFAULT NULL,          -- NULL = sin restricción de carga global
+    carga_especialidad NUMERIC DEFAULT NULL,          -- NULL = sin restricción de carga global
+    cargos_condiciones JSONB NOT NULL DEFAULT '[]',  -- Condiciones individuales por cargo
+    activo BOOLEAN NOT NULL DEFAULT true,
+    descripcion TEXT DEFAULT '',
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    CONSTRAINT uq_filtro_especialidad UNIQUE (especialidad_oficial_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_filtro_esp_id ON public.filtro_especialidad(especialidad_oficial_id);
+CREATE INDEX IF NOT EXISTS idx_filtro_cargos_cond ON public.filtro_especialidad USING GIN(cargos_condiciones);
 
 -- HABILITAR RLS Y POLÍTICAS DE LECTURA PÚBLICA PARA DASHBOARDS
 DO $$
@@ -148,7 +186,7 @@ BEGIN
             'ine_matricula', 'ine_poblacion', 'ine_proyeccion_edad',
             'inscritos_esfm', 'matricula_rural_urbana', 'sie_total_estudiantes',
             'seie_discapacidad_dependencia', 'seie_discapacidad_area', 'sie_discapacidad_2026',
-            'uie_deficit_horas'
+            'unidad_educativa', 'sie_unidad_educativa', 'filtro_especialidad'
           )
     LOOP
         EXECUTE format('ALTER TABLE public.%I ENABLE ROW LEVEL SECURITY;', tbl);
@@ -156,3 +194,5 @@ BEGIN
         EXECUTE format('CREATE POLICY "allow_anon_all" ON public.%I FOR ALL TO anon, authenticated USING (true) WITH CHECK (true);', tbl);
     END LOOP;
 END $$;
+
+

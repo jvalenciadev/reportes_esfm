@@ -9,7 +9,10 @@ import { IneView } from './views/IneView';
 import { SieView } from './views/SieView';
 import { SeieView } from './views/SeieView';
 import { UieDeficitView } from './views/UieDeficitView';
+import HistorialDocenteView from './views/HistorialDocenteView';
+import Exposicion2031View from './views/Exposicion2031View';
 import Image from 'next/image';
+import { Sparkles } from 'lucide-react';
 
 interface DashboardShellProps {
   initialData: DashboardDataset;
@@ -68,6 +71,16 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
       title: 'UIE · Déficit Docente y Carga Horaria',
       subtitle: 'Balance de horas trabajadas vs planilla fiscal y pronóstico de demanda ESFM',
       tag: 'DÉFICIT HORARIO',
+    },
+    historial: {
+      title: 'Historial Docente 2024 – 2026',
+      subtitle: 'Salientes, nuevos ingresantes, impertinencias y maestros sin cargo por departamento',
+      tag: 'ANÁLISIS HISTÓRICO',
+    },
+    exposicion: {
+      title: 'Sala de Exposición Estratégica · Proyección ESFM 2031',
+      subtitle: 'Dictamen de apertura de especialidades oficiales: Demografía INE, Padrón Docente y Egresados ESFM',
+      tag: 'DICTAMEN 2031',
     },
   };
 
@@ -170,7 +183,26 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
                 : 'text-slate-600 hover:text-slate-900'
                 }`}
             >
-              UIE
+              UIE / SIE UE
+            </button>
+            <button
+              onClick={() => setCurrentTab('historial')}
+              className={`px-3 py-1.5 rounded-lg transition-all ${currentTab === 'historial'
+                ? 'bg-[#c9a751] text-slate-900 shadow-xs ring-1 ring-[#c9a751]/50 font-semibold'
+                : 'text-slate-600 hover:text-slate-900'
+                }`}
+            >
+              Historial
+            </button>
+            <button
+              onClick={() => setCurrentTab('exposicion')}
+              className={`px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 ${currentTab === 'exposicion'
+                ? 'bg-[#c9a751] text-slate-900 shadow-xs ring-1 ring-[#c9a751]/50 font-bold'
+                : 'text-amber-800 hover:text-slate-900 bg-amber-500/10'
+                }`}
+            >
+              <Sparkles className="w-3.5 h-3.5 text-amber-700" />
+              Exposición 2031
             </button>
           </div>
         </header>
@@ -183,6 +215,8 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
           {currentTab === 'sie' && <SieView data={initialData} />}
           {currentTab === 'seie' && <SeieView data={initialData} />}
           {currentTab === 'uie' && <UieDeficitView data={initialData} />}
+          {currentTab === 'historial' && <HistorialDocenteView />}
+          {currentTab === 'exposicion' && <Exposicion2031View data={initialData} />}
         </main>
       </div>
     </div>
