@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { execFile } from 'child_process';
 import path from 'path';
 import fs from 'fs';
 
@@ -40,12 +39,13 @@ const DEPARTAMENTOS_LIST = [
   { id: 9, nombre: 'Pando' },
 ];
 
+const CACHE_PATH = path.join(process.cwd(), 'src/data/sich_especialidades_cache.json');
+
 let cachedDb: any = null;
 
 function getDatabase(dbPath: string) {
   if (!cachedDb) {
     try {
-      // Dynamic require of native node:sqlite (available in Node 22+ / Vercel without external packages or C++ build tools)
       // eslint-disable-next-line @typescript-eslint/no-require-imports
       const { DatabaseSync } = require('node:sqlite');
       cachedDb = new DatabaseSync(dbPath, { open: true, readOnly: true });
@@ -54,37 +54,6 @@ function getDatabase(dbPath: string) {
     }
   }
   return cachedDb;
-}
-
-async function runSqlite(sql: string, dbPath: string): Promise<any[]> {
-  try {
-    const db = getDatabase(dbPath);
-    if (db) {
-      const stmt = db.prepare(sql);
-      return stmt.all();
-    }
-  } catch (dbErr) {
-    console.warn('DatabaseSync query failed, attempting CLI fallback:', dbErr);
-  }
-
-  // CLI fallback para entornos locales que dispongan del comando sqlite3 en PATH
-  const bin = process.platform === 'win32' ? 'sqlite3' : 'sqlite3';
-  return new Promise((resolve, reject) => {
-    execFile(bin, ['-json', dbPath, sql], { maxBuffer: 15 * 1024 * 1024 }, (err, stdout, stderr) => {
-      if (err) {
-        console.error('SQLite exec fallback error:', err, stderr);
-        return reject(err);
-      }
-      try {
-        const text = stdout.trim();
-        if (!text) return resolve([]);
-        const data = JSON.parse(text);
-        resolve(data);
-      } catch (parseErr) {
-        reject(parseErr);
-      }
-    });
-  });
 }
 
 function escapeSql(str: string): string {
@@ -99,15 +68,7 @@ export async function GET(req: NextRequest) {
   const customBaseHoras = baseHorasParam && !isNaN(Number(baseHorasParam)) ? Number(baseHorasParam) : null;
   const viewUes = searchParams.get('view') === 'ues';
 
-  const dbPath = path.join(process.cwd(), 'src/data/sich_2025.db');
-
-  if (!fs.existsSync(dbPath)) {
-    return NextResponse.json(
-      { error: 'Base de datos SICH local no inicializada. Por favor espere.' },
-      { status: 500 }
-    );
-  }
-
+  // Si no pide especialidad_id, retorna la lista de especialidades
   if (!especialidadIdParam) {
     try {
       const res = await fetch(
@@ -126,8 +87,79 @@ export async function GET(req: NextRequest) {
 
   const especialidadId = Number(especialidadIdParam);
 
+  // 1. CAPA DE SEGURIDAD 1: Caché Analítico Precomputado (Instantáneo y 100% Portable)
+  if (fs.existsSync(CACHE_PATH)) {
+    try {
+      const cacheRaw = fs.readFileSync(CACHE_PATH, 'utf-8');
+      const cacheAll = JSON.parse(cacheRaw);
+      const cached = cacheAll[String(especialidadId)];
+
+      if (cached) {
+        // Desglose de Unidades Educativas
+        if (viewUes && departamentoIdParam) {
+          const deptObj = DEPARTAMENTOS_LIST.find((d) => d.id === Number(departamentoIdParam));
+          const ues = cached.unidades_educativas_por_dpto?.[String(departamentoIdParam)] || [];
+          return NextResponse.json({
+            especialidad: cached.especialidad,
+            filtro: cached.filtro,
+            departamento_id: Number(departamentoIdParam),
+            departamento: deptObj?.nombre || '',
+            unidades_educativas: ues,
+          });
+        }
+
+        // Si el usuario especificó una base de horas personalizada diferente al promedio dinámico
+        if (customBaseHoras && cached.departamentos) {
+          const recDepts = cached.departamentos.map((d: any) => ({
+            ...d,
+            items_deficit: Number((d.total_deficit_horas / customBaseHoras).toFixed(1)),
+          }));
+          const recResumen = cached.resumen_nacional
+            ? {
+                ...cached.resumen_nacional,
+                base_horas_aplicada: customBaseHoras,
+                es_promedio_dinamico: false,
+                items_deficit: Number((cached.resumen_nacional.total_deficit_horas / customBaseHoras).toFixed(1)),
+              }
+            : null;
+
+          return NextResponse.json({
+            especialidad: cached.especialidad,
+            filtro: cached.filtro,
+            filtro_configurado: cached.filtro_configurado,
+            departamentos: recDepts,
+            resumen_nacional: recResumen,
+            distribucion_rangos: cached.distribucion_rangos,
+            filtro_cargos_aplicados: cached.filtro_cargos_aplicados,
+          });
+        }
+
+        // Respuesta estándar directa
+        return NextResponse.json({
+          especialidad: cached.especialidad,
+          filtro: cached.filtro,
+          filtro_configurado: cached.filtro_configurado,
+          departamentos: cached.departamentos,
+          resumen_nacional: cached.resumen_nacional,
+          distribucion_rangos: cached.distribucion_rangos,
+          filtro_cargos_aplicados: cached.filtro_cargos_aplicados,
+        });
+      }
+    } catch (cacheErr) {
+      console.warn('Error leyendo cache sich_especialidades_cache.json:', cacheErr);
+    }
+  }
+
+  // 2. CAPA DE SEGURIDAD 2: Ejecución Dinámica con node:sqlite (DatabaseSync)
+  const dbPath = path.join(process.cwd(), 'src/data/sich_2025.db');
+  if (!fs.existsSync(dbPath)) {
+    return NextResponse.json(
+      { error: 'Base de datos SICH local no inicializada.' },
+      { status: 500 }
+    );
+  }
+
   try {
-    // 1. Obtener la regla del filtro guardado en Supabase
     const resFiltro = await fetch(
       `${SUPABASE_URL}/rest/v1/filtro_especialidad?especialidad_oficial_id=eq.${especialidadId}&select=*,especialidades_oficiales(id,nombre)&limit=1`,
       { headers, next: { revalidate: 10 } }
@@ -169,7 +201,6 @@ export async function GET(req: NextRequest) {
       });
     }
 
-    // 2. Construir la cláusula dinámica SQL
     const subSql = subsistemas.map((s: string) => `'${escapeSql(s.toUpperCase().trim())}'`).join(',');
     const nivSql = niveles.map((n: string) => `'${escapeSql(n.toUpperCase().trim())}'`).join(',');
 
@@ -213,7 +244,15 @@ export async function GET(req: NextRequest) {
 
     const whereCargos = cargoClauses.length > 0 ? `(${cargoClauses.join(' OR ')})` : '1=1';
 
-    // 3. Si se solicita desglose de Unidades Educativas de un departamento específico
+    const db = getDatabase(dbPath);
+    if (!db) {
+      return NextResponse.json(
+        { error: 'El motor SQLite integrado no está disponible en este entorno.' },
+        { status: 500 }
+      );
+    }
+
+    // Unidades Educativas
     if (viewUes && departamentoIdParam) {
       const deptObj = DEPARTAMENTOS_LIST.find((d) => d.id === Number(departamentoIdParam));
       const deptNameUpper = deptObj ? deptObj.nombre.toUpperCase() : '';
@@ -239,7 +278,7 @@ export async function GET(req: NextRequest) {
         LIMIT 100;
       `;
 
-      const uesRows = await runSqlite(uesSql, dbPath);
+      const uesRows = db.prepare(uesSql).all();
 
       return NextResponse.json({
         especialidad: filtro.especialidades_oficiales,
@@ -250,7 +289,7 @@ export async function GET(req: NextRequest) {
       });
     }
 
-    // 4. Agregación de la Matriz Departamental
+    // Matriz Departamental
     const matrixSql = `
       SELECT 
         UPPER(TRIM(departamento)) as dept_raw,
@@ -268,9 +307,9 @@ export async function GET(req: NextRequest) {
       ORDER BY total_def DESC;
     `;
 
-    const matrixRows = await runSqlite(matrixSql, dbPath);
+    const matrixRows = db.prepare(matrixSql).all();
 
-    // 5. Distribución por Rangos de Horas (como el análisis del usuario)
+    // Distribución por Rangos
     const distribucionSql = `
       SELECT 
         CASE 
@@ -291,11 +330,9 @@ export async function GET(req: NextRequest) {
       ORDER BY MIN(carga_horaria);
     `;
 
-    const distribucionRows = await runSqlite(distribucionSql, dbPath);
+    const distribucionRows = db.prepare(distribucionSql).all();
 
-    // Mapear a los 9 departamentos oficiales
     const deptResultMap = new Map<number, any>();
-
     DEPARTAMENTOS_LIST.forEach((d) => {
       deptResultMap.set(d.id, {
         departamento_id: d.id,
@@ -337,14 +374,11 @@ export async function GET(req: NextRequest) {
       }
     });
 
-    // CÁLCULO DEL PROMEDIO DINÁMICO POR DOCENTE / ÍTEM
-    // Promedio Máximo Posible = Total Horas Carga / Total Docentes
     const promedioHorasDocenteNacional =
       totalNacionalDocentes > 0
         ? Number((totalNacionalCarga / totalNacionalDocentes).toFixed(2))
         : 88.0;
 
-    // Si el usuario especificó un base_horas personalizado, usarlo; de lo contrario usar el promedio del filtro
     const baseHorasAplicada =
       customBaseHoras && customBaseHoras > 0
         ? customBaseHoras
@@ -355,7 +389,6 @@ export async function GET(req: NextRequest) {
         d.total_docentes > 0
           ? Number((d.total_carga_horaria / d.total_docentes).toFixed(2))
           : promedioHorasDocenteNacional;
-      // Ítems calculados sobre la base de horas del promedio del filtro
       d.items_deficit = Number((d.total_deficit_horas / baseHorasAplicada).toFixed(1));
       d.items_deficit_88h = Number((d.total_deficit_horas / 88.0).toFixed(1));
       d.pct_cobertura =
@@ -367,7 +400,6 @@ export async function GET(req: NextRequest) {
 
     departamentList.sort((a, b) => b.total_deficit_horas - a.total_deficit_horas);
 
-    // Total nacional único de UEs
     const totalUesSql = `
       SELECT COUNT(DISTINCT cod_ue) as nacional_ues
       FROM sich_2025
@@ -375,8 +407,8 @@ export async function GET(req: NextRequest) {
         AND nivel IN (${nivSql})
         AND (${whereCargos});
     `;
-    const totalUesRows = await runSqlite(totalUesSql, dbPath);
-    const nacionalUes = totalUesRows[0]?.nacional_ues || 0;
+    const totalUesRows = db.prepare(totalUesSql).all();
+    const nacionalUes = (totalUesRows[0] as any)?.nacional_ues || 0;
 
     const resumenNacional = {
       total_ues: nacionalUes,
@@ -396,7 +428,6 @@ export async function GET(req: NextRequest) {
           : 100,
     };
 
-    // Formatear distribución de rangos con % de docentes
     const distribucionFormateada = distribucionRows.map((r: any) => {
       const cant = Number(r.cantidad_docentes || 0);
       const hrs = Number(r.horas_totales || 0);
