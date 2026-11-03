@@ -39,3 +39,4 @@ with open('src/components/dashboard/views/Exposicion2031View.tsx', 'w', encoding
     f.write(c)
 
 print('Commented out successfully')
+
