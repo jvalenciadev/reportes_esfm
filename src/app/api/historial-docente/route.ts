@@ -21,32 +21,77 @@ export async function GET(req: NextRequest) {
     const data = JSON.parse(raw);
 
     if (report === "salientes_entrantes") {
-      let items = data.salientes_entrantes || [];
-      if (dpto) {
-        items = items.filter(
-          (r: { departamento: string }) =>
-            r.departamento.toLowerCase() === dpto.toLowerCase()
-        );
-      }
-      return NextResponse.json(items);
+      const se = data.salientes_entrantes || {};
+      const porDpto = (se.por_departamento || []).map((r: any) => ({
+        departamento: r.departamento,
+        salientes: r.salientes ?? r.salientes_2024_2025 ?? 0,
+        entrantes: r.entrantes ?? r.entrantes_2024_2025 ?? 0,
+        neto: r.neto ?? ((r.entrantes ?? r.entrantes_2024_2025 ?? 0) - (r.salientes ?? r.salientes_2024_2025 ?? 0)),
+      }));
+
+      const filtered = dpto
+        ? porDpto.filter((r: any) => r.departamento.toLowerCase() === dpto.toLowerCase())
+        : porDpto;
+
+      const total2024 = se.total_regular_2024 ?? 0;
+      const total2025 = se.total_regular_2025 ?? 0;
+
+      return NextResponse.json({
+        total_regular_2024: total2024,
+        total_regular_2025: total2025,
+        total_salientes: se.total_salientes ?? filtered.reduce((acc: number, cur: any) => acc + cur.salientes, 0),
+        total_entrantes: se.total_entrantes ?? filtered.reduce((acc: number, cur: any) => acc + cur.entrantes, 0),
+        variacion_neta: se.variacion_neta ?? (total2025 - total2024),
+        por_departamento: filtered,
+      });
     } else if (report === "impertinencias") {
-      let items = data.impertinencias || [];
+      const imp = data.impertinencias || {};
+      const totalDoc = imp.total_docentes ?? imp.total_docentes_2026 ?? 0;
+      const totalImp = imp.total_impertinentes ?? 0;
+      const pctNac = imp.porcentaje_nacional ?? (totalDoc > 0 ? Number(((totalImp / totalDoc) * 100).toFixed(2)) : 0);
+
+      let porDpto = imp.por_departamento || [];
       if (dpto) {
-        items = items.filter(
-          (r: { departamento: string }) =>
-            r.departamento.toLowerCase() === dpto.toLowerCase()
-        );
+        porDpto = porDpto.filter((r: any) => r.departamento.toLowerCase() === dpto.toLowerCase());
       }
-      return NextResponse.json(items);
+
+      return NextResponse.json({
+        total_docentes: totalDoc,
+        total_impertinentes: totalImp,
+        porcentaje_nacional: pctNac,
+        por_departamento: porDpto,
+      });
     } else if (report === "sin_cargo") {
-      let items = data.sin_cargo || [];
+      const sc = data.sin_cargo || {};
+      const sc2026 = sc.sin_cargo_2026 || { total: 0, por_departamento: [] };
+      const sp2026 = sc.sin_presencia_2026 || { total: 0, por_departamento: [] };
+
+      let porDptoSc = (sc2026.por_departamento || []).map((r: any) => ({
+        departamento: r.departamento,
+        sin_cargo: r.sin_cargo ?? 0,
+      }));
+      let porDptoSp = (sp2026.por_departamento || []).map((r: any) => ({
+        departamento: r.departamento,
+        sin_presencia: r.sin_presencia ?? r.sin_presencia_2026 ?? 0,
+      }));
+
       if (dpto) {
-        items = items.filter(
-          (r: { departamento: string }) =>
-            r.departamento.toLowerCase() === dpto.toLowerCase()
-        );
+        porDptoSc = porDptoSc.filter((r: any) => r.departamento.toLowerCase() === dpto.toLowerCase());
+        porDptoSp = porDptoSp.filter((r: any) => r.departamento.toLowerCase() === dpto.toLowerCase());
       }
-      return NextResponse.json(items);
+
+      return NextResponse.json({
+        sin_cargo_2026: {
+          total: sc2026.total ?? 0,
+          descripcion: sc2026.descripcion ?? sc.descripcion ?? "",
+          por_departamento: porDptoSc,
+        },
+        sin_presencia_2026: {
+          total: sp2026.total ?? 0,
+          descripcion: sp2026.descripcion ?? sc.descripcion ?? "",
+          por_departamento: porDptoSp,
+        },
+      });
     } else {
       return NextResponse.json(data);
     }

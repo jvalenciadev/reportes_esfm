@@ -9,57 +9,76 @@
         "departamento": "BENI",
         "salientes_2024_2025": 196,
         "entrantes_2024_2025": 332,
-        "neto": 136
+        "neto": 136,
+        "salientes": 196,
+        "entrantes": 332
       },
       {
         "departamento": "CHUQUISACA",
         "salientes_2024_2025": 229,
         "entrantes_2024_2025": 298,
-        "neto": 69
+        "neto": 69,
+        "salientes": 229,
+        "entrantes": 298
       },
       {
         "departamento": "COCHABAMBA",
         "salientes_2024_2025": 625,
         "entrantes_2024_2025": 833,
-        "neto": 208
+        "neto": 208,
+        "salientes": 625,
+        "entrantes": 833
       },
       {
         "departamento": "LA PAZ",
         "salientes_2024_2025": 941,
         "entrantes_2024_2025": 1185,
-        "neto": 244
+        "neto": 244,
+        "salientes": 941,
+        "entrantes": 1185
       },
       {
         "departamento": "ORURO",
         "salientes_2024_2025": 187,
         "entrantes_2024_2025": 201,
-        "neto": 14
+        "neto": 14,
+        "salientes": 187,
+        "entrantes": 201
       },
       {
         "departamento": "PANDO",
         "salientes_2024_2025": 70,
         "entrantes_2024_2025": 147,
-        "neto": 77
+        "neto": 77,
+        "salientes": 70,
+        "entrantes": 147
       },
       {
         "departamento": "POTOSI",
         "salientes_2024_2025": 353,
         "entrantes_2024_2025": 446,
-        "neto": 93
+        "neto": 93,
+        "salientes": 353,
+        "entrantes": 446
       },
       {
         "departamento": "SANTA CRUZ",
         "salientes_2024_2025": 730,
         "entrantes_2024_2025": 1110,
-        "neto": 380
+        "neto": 380,
+        "salientes": 730,
+        "entrantes": 1110
       },
       {
         "departamento": "TARIJA",
         "salientes_2024_2025": 145,
         "entrantes_2024_2025": 143,
-        "neto": -2
+        "neto": -2,
+        "salientes": 145,
+        "entrantes": 143
       }
-    ]
+    ],
+    "variacion_neta": 1219
   },
   "impertinencias": {
     "total_docentes_2026": 164448,
@@ -119,7 +138,9 @@
         "impertinentes": 1423,
         "porcentaje": 15.31
       }
-    ]
+    ],
+    "total_docentes": 164448,
+    "porcentaje_nacional": 17.22
   },
   "sin_cargo": {
     "descripcion": "Maestros sin cargo en 2026 (hoja 2026)",
@@ -170,39 +191,48 @@
       "por_departamento": [
         {
           "departamento": "BENI",
-          "sin_presencia_2026": 1260
+          "sin_presencia_2026": 1260,
+          "sin_presencia": 1260
         },
         {
           "departamento": "CHUQUISACA",
-          "sin_presencia_2026": 1250
+          "sin_presencia_2026": 1250,
+          "sin_presencia": 1250
         },
         {
           "departamento": "COCHABAMBA",
-          "sin_presencia_2026": 3521
+          "sin_presencia_2026": 3521,
+          "sin_presencia": 3521
         },
         {
           "departamento": "LA PAZ",
-          "sin_presencia_2026": 7287
+          "sin_presencia_2026": 7287,
+          "sin_presencia": 7287
         },
         {
           "departamento": "ORURO",
-          "sin_presencia_2026": 1201
+          "sin_presencia_2026": 1201,
+          "sin_presencia": 1201
         },
         {
           "departamento": "PANDO",
-          "sin_presencia_2026": 243
+          "sin_presencia_2026": 243,
+          "sin_presencia": 243
         },
         {
           "departamento": "POTOSI",
-          "sin_presencia_2026": 2176
+          "sin_presencia_2026": 2176,
+          "sin_presencia": 2176
         },
         {
           "departamento": "SANTA CRUZ",
-          "sin_presencia_2026": 4313
+          "sin_presencia_2026": 4313,
+          "sin_presencia": 4313
         },
         {
           "departamento": "TARIJA",
-          "sin_presencia_2026": 1187
+          "sin_presencia_2026": 1187,
+          "sin_presencia": 1187
         }
       ]
     }
