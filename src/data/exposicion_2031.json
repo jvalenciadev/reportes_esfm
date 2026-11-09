@@ -14709,6 +14709,1334 @@
           "estado_dpto": "SATURADO"
         }
       }
+    },
+    {
+      "especialidad": "CARPINTERÍA INDUSTRIAL EN MADERA Y METAL",
+      "nivel_educativo": "SECUNDARIA",
+      "edades_ine": "12 a 17 años",
+      "total_docentes": 0,
+      "impertinentes": 0,
+      "pertinentes": 0,
+      "pct_impertinencia": 0.0,
+      "pct_rural_nacional": 55.0,
+      "pct_urbano_nacional": 45.0,
+      "ues_afectadas_nacional": 0,
+      "carga_horaria_uie_nacional": 0,
+      "horas_planilla_uie_nacional": 0,
+      "deficit_horas_uie_nacional": 0,
+      "items_deficit_uie_nacional": 0.0,
+      "pct_cobertura_uie_nacional": 0.0,
+      "egresados_proyectados_2031": 0,
+      "demanda_proyectada_2031": 0,
+      "pct_cobertura": 0.0,
+      "dictamen": "ABRIR",
+      "color": "emerald",
+      "badge": "Prioridad Alta de Apertura",
+      "justificacion": "Especialidad BTH sin cobertura ESFM registrada. Sin docentes pertinentes en SIE. Requiere apertura urgente de cupos en CARPINTERÍA INDUSTRIAL EN MADERA Y METAL.",
+      "serie_proyeccion": [
+        {
+          "anio": 2026,
+          "demanda": 0.0,
+          "var_poblacional_pct": 1.39,
+          "egresados_anual": 0,
+          "egresados_acumulados": 0
+        },
+        {
+          "anio": 2027,
+          "demanda": 0.0,
+          "var_poblacional_pct": 1.34,
+          "egresados_anual": 0,
+          "egresados_acumulados": 0
+        },
+        {
+          "anio": 2028,
+          "demanda": 0.0,
+          "var_poblacional_pct": 0.83,
+          "egresados_anual": 0,
+          "egresados_acumulados": 0
+        },
+        {
+          "anio": 2029,
+          "demanda": 0.0,
+          "var_poblacional_pct": -0.36,
+          "egresados_anual": 0,
+          "egresados_acumulados": 0
+        },
+        {
+          "anio": 2030,
+          "demanda": 0.0,
+          "var_poblacional_pct": -1.03,
+          "egresados_anual": 0,
+          "egresados_acumulados": 0
+        },
+        {
+          "anio": 2031,
+          "demanda": 0.0,
+          "var_poblacional_pct": -1.47,
+          "egresados_anual": 0,
+          "egresados_acumulados": 0
+        }
+      ],
+      "por_dpto": {
+        "BENI": {
+          "total_docentes": 0,
+          "impertinentes": 0,
+          "pertinentes": 0,
+          "pct_impert": 0,
+          "rural_docentes": 0,
+          "urbana_docentes": 0,
+          "pct_rural": 0,
+          "pct_urbana": 0,
+          "ues_afectadas": 0,
+          "carga_horaria_uie": 0,
+          "horas_planilla_uie": 0,
+          "deficit_horas_uie": 0,
+          "items_deficit_uie": 0,
+          "pct_cobertura_uie": 0,
+          "egresados_esfm_proyectados": 0,
+          "demanda_2031": 0,
+          "pct_cobertura_2031": 0,
+          "brecha_neta": 0,
+          "lograra_cubrir": "DÉFICIT CRÍTICO",
+          "estado_dpto": "DEFICIT",
+          "serie_proyeccion": [
+            {
+              "anio": 2026,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.39,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2027,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.34,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2028,
+              "demanda": 0.0,
+              "var_poblacional_pct": 0.83,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2029,
+              "demanda": 0.0,
+              "var_poblacional_pct": -0.36,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2030,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.03,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2031,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.47,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            }
+          ]
+        },
+        "CHUQUISACA": {
+          "total_docentes": 0,
+          "impertinentes": 0,
+          "pertinentes": 0,
+          "pct_impert": 0,
+          "rural_docentes": 0,
+          "urbana_docentes": 0,
+          "pct_rural": 0,
+          "pct_urbana": 0,
+          "ues_afectadas": 0,
+          "carga_horaria_uie": 0,
+          "horas_planilla_uie": 0,
+          "deficit_horas_uie": 0,
+          "items_deficit_uie": 0,
+          "pct_cobertura_uie": 0,
+          "egresados_esfm_proyectados": 0,
+          "demanda_2031": 0,
+          "pct_cobertura_2031": 0,
+          "brecha_neta": 0,
+          "lograra_cubrir": "DÉFICIT CRÍTICO",
+          "estado_dpto": "DEFICIT",
+          "serie_proyeccion": [
+            {
+              "anio": 2026,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.39,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2027,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.34,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2028,
+              "demanda": 0.0,
+              "var_poblacional_pct": 0.83,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2029,
+              "demanda": 0.0,
+              "var_poblacional_pct": -0.36,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2030,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.03,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2031,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.47,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            }
+          ]
+        },
+        "COCHABAMBA": {
+          "total_docentes": 0,
+          "impertinentes": 0,
+          "pertinentes": 0,
+          "pct_impert": 0,
+          "rural_docentes": 0,
+          "urbana_docentes": 0,
+          "pct_rural": 0,
+          "pct_urbana": 0,
+          "ues_afectadas": 0,
+          "carga_horaria_uie": 0,
+          "horas_planilla_uie": 0,
+          "deficit_horas_uie": 0,
+          "items_deficit_uie": 0,
+          "pct_cobertura_uie": 0,
+          "egresados_esfm_proyectados": 0,
+          "demanda_2031": 0,
+          "pct_cobertura_2031": 0,
+          "brecha_neta": 0,
+          "lograra_cubrir": "DÉFICIT CRÍTICO",
+          "estado_dpto": "DEFICIT",
+          "serie_proyeccion": [
+            {
+              "anio": 2026,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.39,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2027,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.34,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2028,
+              "demanda": 0.0,
+              "var_poblacional_pct": 0.83,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2029,
+              "demanda": 0.0,
+              "var_poblacional_pct": -0.36,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2030,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.03,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2031,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.47,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            }
+          ]
+        },
+        "LA PAZ": {
+          "total_docentes": 0,
+          "impertinentes": 0,
+          "pertinentes": 0,
+          "pct_impert": 0,
+          "rural_docentes": 0,
+          "urbana_docentes": 0,
+          "pct_rural": 0,
+          "pct_urbana": 0,
+          "ues_afectadas": 0,
+          "carga_horaria_uie": 0,
+          "horas_planilla_uie": 0,
+          "deficit_horas_uie": 0,
+          "items_deficit_uie": 0,
+          "pct_cobertura_uie": 0,
+          "egresados_esfm_proyectados": 0,
+          "demanda_2031": 0,
+          "pct_cobertura_2031": 0,
+          "brecha_neta": 0,
+          "lograra_cubrir": "DÉFICIT CRÍTICO",
+          "estado_dpto": "DEFICIT",
+          "serie_proyeccion": [
+            {
+              "anio": 2026,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.39,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2027,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.34,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2028,
+              "demanda": 0.0,
+              "var_poblacional_pct": 0.83,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2029,
+              "demanda": 0.0,
+              "var_poblacional_pct": -0.36,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2030,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.03,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2031,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.47,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            }
+          ]
+        },
+        "ORURO": {
+          "total_docentes": 0,
+          "impertinentes": 0,
+          "pertinentes": 0,
+          "pct_impert": 0,
+          "rural_docentes": 0,
+          "urbana_docentes": 0,
+          "pct_rural": 0,
+          "pct_urbana": 0,
+          "ues_afectadas": 0,
+          "carga_horaria_uie": 0,
+          "horas_planilla_uie": 0,
+          "deficit_horas_uie": 0,
+          "items_deficit_uie": 0,
+          "pct_cobertura_uie": 0,
+          "egresados_esfm_proyectados": 0,
+          "demanda_2031": 0,
+          "pct_cobertura_2031": 0,
+          "brecha_neta": 0,
+          "lograra_cubrir": "DÉFICIT CRÍTICO",
+          "estado_dpto": "DEFICIT",
+          "serie_proyeccion": [
+            {
+              "anio": 2026,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.39,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2027,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.34,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2028,
+              "demanda": 0.0,
+              "var_poblacional_pct": 0.83,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2029,
+              "demanda": 0.0,
+              "var_poblacional_pct": -0.36,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2030,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.03,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2031,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.47,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            }
+          ]
+        },
+        "PANDO": {
+          "total_docentes": 0,
+          "impertinentes": 0,
+          "pertinentes": 0,
+          "pct_impert": 0,
+          "rural_docentes": 0,
+          "urbana_docentes": 0,
+          "pct_rural": 0,
+          "pct_urbana": 0,
+          "ues_afectadas": 0,
+          "carga_horaria_uie": 0,
+          "horas_planilla_uie": 0,
+          "deficit_horas_uie": 0,
+          "items_deficit_uie": 0,
+          "pct_cobertura_uie": 0,
+          "egresados_esfm_proyectados": 0,
+          "demanda_2031": 0,
+          "pct_cobertura_2031": 0,
+          "brecha_neta": 0,
+          "lograra_cubrir": "DÉFICIT CRÍTICO",
+          "estado_dpto": "DEFICIT",
+          "serie_proyeccion": [
+            {
+              "anio": 2026,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.39,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2027,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.34,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2028,
+              "demanda": 0.0,
+              "var_poblacional_pct": 0.83,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2029,
+              "demanda": 0.0,
+              "var_poblacional_pct": -0.36,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2030,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.03,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2031,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.47,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            }
+          ]
+        },
+        "POTOSI": {
+          "total_docentes": 0,
+          "impertinentes": 0,
+          "pertinentes": 0,
+          "pct_impert": 0,
+          "rural_docentes": 0,
+          "urbana_docentes": 0,
+          "pct_rural": 0,
+          "pct_urbana": 0,
+          "ues_afectadas": 0,
+          "carga_horaria_uie": 0,
+          "horas_planilla_uie": 0,
+          "deficit_horas_uie": 0,
+          "items_deficit_uie": 0,
+          "pct_cobertura_uie": 0,
+          "egresados_esfm_proyectados": 0,
+          "demanda_2031": 0,
+          "pct_cobertura_2031": 0,
+          "brecha_neta": 0,
+          "lograra_cubrir": "DÉFICIT CRÍTICO",
+          "estado_dpto": "DEFICIT",
+          "serie_proyeccion": [
+            {
+              "anio": 2026,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.39,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2027,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.34,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2028,
+              "demanda": 0.0,
+              "var_poblacional_pct": 0.83,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2029,
+              "demanda": 0.0,
+              "var_poblacional_pct": -0.36,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2030,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.03,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2031,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.47,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            }
+          ]
+        },
+        "SANTA CRUZ": {
+          "total_docentes": 0,
+          "impertinentes": 0,
+          "pertinentes": 0,
+          "pct_impert": 0,
+          "rural_docentes": 0,
+          "urbana_docentes": 0,
+          "pct_rural": 0,
+          "pct_urbana": 0,
+          "ues_afectadas": 0,
+          "carga_horaria_uie": 0,
+          "horas_planilla_uie": 0,
+          "deficit_horas_uie": 0,
+          "items_deficit_uie": 0,
+          "pct_cobertura_uie": 0,
+          "egresados_esfm_proyectados": 0,
+          "demanda_2031": 0,
+          "pct_cobertura_2031": 0,
+          "brecha_neta": 0,
+          "lograra_cubrir": "DÉFICIT CRÍTICO",
+          "estado_dpto": "DEFICIT",
+          "serie_proyeccion": [
+            {
+              "anio": 2026,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.39,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2027,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.34,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2028,
+              "demanda": 0.0,
+              "var_poblacional_pct": 0.83,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2029,
+              "demanda": 0.0,
+              "var_poblacional_pct": -0.36,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2030,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.03,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2031,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.47,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            }
+          ]
+        },
+        "TARIJA": {
+          "total_docentes": 0,
+          "impertinentes": 0,
+          "pertinentes": 0,
+          "pct_impert": 0,
+          "rural_docentes": 0,
+          "urbana_docentes": 0,
+          "pct_rural": 0,
+          "pct_urbana": 0,
+          "ues_afectadas": 0,
+          "carga_horaria_uie": 0,
+          "horas_planilla_uie": 0,
+          "deficit_horas_uie": 0,
+          "items_deficit_uie": 0,
+          "pct_cobertura_uie": 0,
+          "egresados_esfm_proyectados": 0,
+          "demanda_2031": 0,
+          "pct_cobertura_2031": 0,
+          "brecha_neta": 0,
+          "lograra_cubrir": "DÉFICIT CRÍTICO",
+          "estado_dpto": "DEFICIT",
+          "serie_proyeccion": [
+            {
+              "anio": 2026,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.39,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2027,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.34,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2028,
+              "demanda": 0.0,
+              "var_poblacional_pct": 0.83,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2029,
+              "demanda": 0.0,
+              "var_poblacional_pct": -0.36,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2030,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.03,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2031,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.47,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "especialidad": "MECÁNICA INDUSTRIAL",
+      "nivel_educativo": "SECUNDARIA",
+      "edades_ine": "12 a 17 años",
+      "total_docentes": 0,
+      "impertinentes": 0,
+      "pertinentes": 0,
+      "pct_impertinencia": 0.0,
+      "pct_rural_nacional": 55.0,
+      "pct_urbano_nacional": 45.0,
+      "ues_afectadas_nacional": 0,
+      "carga_horaria_uie_nacional": 0,
+      "horas_planilla_uie_nacional": 0,
+      "deficit_horas_uie_nacional": 0,
+      "items_deficit_uie_nacional": 0.0,
+      "pct_cobertura_uie_nacional": 0.0,
+      "egresados_proyectados_2031": 0,
+      "demanda_proyectada_2031": 0,
+      "pct_cobertura": 0.0,
+      "dictamen": "ABRIR",
+      "color": "emerald",
+      "badge": "Prioridad Alta de Apertura",
+      "justificacion": "Especialidad BTH sin cobertura ESFM registrada. Sin docentes pertinentes en SIE. Requiere apertura urgente de cupos en MECÁNICA INDUSTRIAL.",
+      "serie_proyeccion": [
+        {
+          "anio": 2026,
+          "demanda": 0.0,
+          "var_poblacional_pct": 1.39,
+          "egresados_anual": 0,
+          "egresados_acumulados": 0
+        },
+        {
+          "anio": 2027,
+          "demanda": 0.0,
+          "var_poblacional_pct": 1.34,
+          "egresados_anual": 0,
+          "egresados_acumulados": 0
+        },
+        {
+          "anio": 2028,
+          "demanda": 0.0,
+          "var_poblacional_pct": 0.83,
+          "egresados_anual": 0,
+          "egresados_acumulados": 0
+        },
+        {
+          "anio": 2029,
+          "demanda": 0.0,
+          "var_poblacional_pct": -0.36,
+          "egresados_anual": 0,
+          "egresados_acumulados": 0
+        },
+        {
+          "anio": 2030,
+          "demanda": 0.0,
+          "var_poblacional_pct": -1.03,
+          "egresados_anual": 0,
+          "egresados_acumulados": 0
+        },
+        {
+          "anio": 2031,
+          "demanda": 0.0,
+          "var_poblacional_pct": -1.47,
+          "egresados_anual": 0,
+          "egresados_acumulados": 0
+        }
+      ],
+      "por_dpto": {
+        "BENI": {
+          "total_docentes": 0,
+          "impertinentes": 0,
+          "pertinentes": 0,
+          "pct_impert": 0,
+          "rural_docentes": 0,
+          "urbana_docentes": 0,
+          "pct_rural": 0,
+          "pct_urbana": 0,
+          "ues_afectadas": 0,
+          "carga_horaria_uie": 0,
+          "horas_planilla_uie": 0,
+          "deficit_horas_uie": 0,
+          "items_deficit_uie": 0,
+          "pct_cobertura_uie": 0,
+          "egresados_esfm_proyectados": 0,
+          "demanda_2031": 0,
+          "pct_cobertura_2031": 0,
+          "brecha_neta": 0,
+          "lograra_cubrir": "DÉFICIT CRÍTICO",
+          "estado_dpto": "DEFICIT",
+          "serie_proyeccion": [
+            {
+              "anio": 2026,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.39,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2027,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.34,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2028,
+              "demanda": 0.0,
+              "var_poblacional_pct": 0.83,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2029,
+              "demanda": 0.0,
+              "var_poblacional_pct": -0.36,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2030,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.03,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2031,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.47,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            }
+          ]
+        },
+        "CHUQUISACA": {
+          "total_docentes": 0,
+          "impertinentes": 0,
+          "pertinentes": 0,
+          "pct_impert": 0,
+          "rural_docentes": 0,
+          "urbana_docentes": 0,
+          "pct_rural": 0,
+          "pct_urbana": 0,
+          "ues_afectadas": 0,
+          "carga_horaria_uie": 0,
+          "horas_planilla_uie": 0,
+          "deficit_horas_uie": 0,
+          "items_deficit_uie": 0,
+          "pct_cobertura_uie": 0,
+          "egresados_esfm_proyectados": 0,
+          "demanda_2031": 0,
+          "pct_cobertura_2031": 0,
+          "brecha_neta": 0,
+          "lograra_cubrir": "DÉFICIT CRÍTICO",
+          "estado_dpto": "DEFICIT",
+          "serie_proyeccion": [
+            {
+              "anio": 2026,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.39,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2027,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.34,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2028,
+              "demanda": 0.0,
+              "var_poblacional_pct": 0.83,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2029,
+              "demanda": 0.0,
+              "var_poblacional_pct": -0.36,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2030,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.03,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2031,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.47,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            }
+          ]
+        },
+        "COCHABAMBA": {
+          "total_docentes": 0,
+          "impertinentes": 0,
+          "pertinentes": 0,
+          "pct_impert": 0,
+          "rural_docentes": 0,
+          "urbana_docentes": 0,
+          "pct_rural": 0,
+          "pct_urbana": 0,
+          "ues_afectadas": 0,
+          "carga_horaria_uie": 0,
+          "horas_planilla_uie": 0,
+          "deficit_horas_uie": 0,
+          "items_deficit_uie": 0,
+          "pct_cobertura_uie": 0,
+          "egresados_esfm_proyectados": 0,
+          "demanda_2031": 0,
+          "pct_cobertura_2031": 0,
+          "brecha_neta": 0,
+          "lograra_cubrir": "DÉFICIT CRÍTICO",
+          "estado_dpto": "DEFICIT",
+          "serie_proyeccion": [
+            {
+              "anio": 2026,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.39,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2027,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.34,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2028,
+              "demanda": 0.0,
+              "var_poblacional_pct": 0.83,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2029,
+              "demanda": 0.0,
+              "var_poblacional_pct": -0.36,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2030,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.03,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2031,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.47,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            }
+          ]
+        },
+        "LA PAZ": {
+          "total_docentes": 0,
+          "impertinentes": 0,
+          "pertinentes": 0,
+          "pct_impert": 0,
+          "rural_docentes": 0,
+          "urbana_docentes": 0,
+          "pct_rural": 0,
+          "pct_urbana": 0,
+          "ues_afectadas": 0,
+          "carga_horaria_uie": 0,
+          "horas_planilla_uie": 0,
+          "deficit_horas_uie": 0,
+          "items_deficit_uie": 0,
+          "pct_cobertura_uie": 0,
+          "egresados_esfm_proyectados": 0,
+          "demanda_2031": 0,
+          "pct_cobertura_2031": 0,
+          "brecha_neta": 0,
+          "lograra_cubrir": "DÉFICIT CRÍTICO",
+          "estado_dpto": "DEFICIT",
+          "serie_proyeccion": [
+            {
+              "anio": 2026,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.39,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2027,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.34,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2028,
+              "demanda": 0.0,
+              "var_poblacional_pct": 0.83,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2029,
+              "demanda": 0.0,
+              "var_poblacional_pct": -0.36,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2030,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.03,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2031,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.47,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            }
+          ]
+        },
+        "ORURO": {
+          "total_docentes": 0,
+          "impertinentes": 0,
+          "pertinentes": 0,
+          "pct_impert": 0,
+          "rural_docentes": 0,
+          "urbana_docentes": 0,
+          "pct_rural": 0,
+          "pct_urbana": 0,
+          "ues_afectadas": 0,
+          "carga_horaria_uie": 0,
+          "horas_planilla_uie": 0,
+          "deficit_horas_uie": 0,
+          "items_deficit_uie": 0,
+          "pct_cobertura_uie": 0,
+          "egresados_esfm_proyectados": 0,
+          "demanda_2031": 0,
+          "pct_cobertura_2031": 0,
+          "brecha_neta": 0,
+          "lograra_cubrir": "DÉFICIT CRÍTICO",
+          "estado_dpto": "DEFICIT",
+          "serie_proyeccion": [
+            {
+              "anio": 2026,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.39,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2027,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.34,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2028,
+              "demanda": 0.0,
+              "var_poblacional_pct": 0.83,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2029,
+              "demanda": 0.0,
+              "var_poblacional_pct": -0.36,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2030,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.03,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2031,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.47,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            }
+          ]
+        },
+        "PANDO": {
+          "total_docentes": 0,
+          "impertinentes": 0,
+          "pertinentes": 0,
+          "pct_impert": 0,
+          "rural_docentes": 0,
+          "urbana_docentes": 0,
+          "pct_rural": 0,
+          "pct_urbana": 0,
+          "ues_afectadas": 0,
+          "carga_horaria_uie": 0,
+          "horas_planilla_uie": 0,
+          "deficit_horas_uie": 0,
+          "items_deficit_uie": 0,
+          "pct_cobertura_uie": 0,
+          "egresados_esfm_proyectados": 0,
+          "demanda_2031": 0,
+          "pct_cobertura_2031": 0,
+          "brecha_neta": 0,
+          "lograra_cubrir": "DÉFICIT CRÍTICO",
+          "estado_dpto": "DEFICIT",
+          "serie_proyeccion": [
+            {
+              "anio": 2026,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.39,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2027,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.34,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2028,
+              "demanda": 0.0,
+              "var_poblacional_pct": 0.83,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2029,
+              "demanda": 0.0,
+              "var_poblacional_pct": -0.36,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2030,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.03,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2031,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.47,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            }
+          ]
+        },
+        "POTOSI": {
+          "total_docentes": 0,
+          "impertinentes": 0,
+          "pertinentes": 0,
+          "pct_impert": 0,
+          "rural_docentes": 0,
+          "urbana_docentes": 0,
+          "pct_rural": 0,
+          "pct_urbana": 0,
+          "ues_afectadas": 0,
+          "carga_horaria_uie": 0,
+          "horas_planilla_uie": 0,
+          "deficit_horas_uie": 0,
+          "items_deficit_uie": 0,
+          "pct_cobertura_uie": 0,
+          "egresados_esfm_proyectados": 0,
+          "demanda_2031": 0,
+          "pct_cobertura_2031": 0,
+          "brecha_neta": 0,
+          "lograra_cubrir": "DÉFICIT CRÍTICO",
+          "estado_dpto": "DEFICIT",
+          "serie_proyeccion": [
+            {
+              "anio": 2026,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.39,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2027,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.34,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2028,
+              "demanda": 0.0,
+              "var_poblacional_pct": 0.83,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2029,
+              "demanda": 0.0,
+              "var_poblacional_pct": -0.36,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2030,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.03,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2031,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.47,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            }
+          ]
+        },
+        "SANTA CRUZ": {
+          "total_docentes": 0,
+          "impertinentes": 0,
+          "pertinentes": 0,
+          "pct_impert": 0,
+          "rural_docentes": 0,
+          "urbana_docentes": 0,
+          "pct_rural": 0,
+          "pct_urbana": 0,
+          "ues_afectadas": 0,
+          "carga_horaria_uie": 0,
+          "horas_planilla_uie": 0,
+          "deficit_horas_uie": 0,
+          "items_deficit_uie": 0,
+          "pct_cobertura_uie": 0,
+          "egresados_esfm_proyectados": 0,
+          "demanda_2031": 0,
+          "pct_cobertura_2031": 0,
+          "brecha_neta": 0,
+          "lograra_cubrir": "DÉFICIT CRÍTICO",
+          "estado_dpto": "DEFICIT",
+          "serie_proyeccion": [
+            {
+              "anio": 2026,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.39,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2027,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.34,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2028,
+              "demanda": 0.0,
+              "var_poblacional_pct": 0.83,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2029,
+              "demanda": 0.0,
+              "var_poblacional_pct": -0.36,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2030,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.03,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2031,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.47,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            }
+          ]
+        },
+        "TARIJA": {
+          "total_docentes": 0,
+          "impertinentes": 0,
+          "pertinentes": 0,
+          "pct_impert": 0,
+          "rural_docentes": 0,
+          "urbana_docentes": 0,
+          "pct_rural": 0,
+          "pct_urbana": 0,
+          "ues_afectadas": 0,
+          "carga_horaria_uie": 0,
+          "horas_planilla_uie": 0,
+          "deficit_horas_uie": 0,
+          "items_deficit_uie": 0,
+          "pct_cobertura_uie": 0,
+          "egresados_esfm_proyectados": 0,
+          "demanda_2031": 0,
+          "pct_cobertura_2031": 0,
+          "brecha_neta": 0,
+          "lograra_cubrir": "DÉFICIT CRÍTICO",
+          "estado_dpto": "DEFICIT",
+          "serie_proyeccion": [
+            {
+              "anio": 2026,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.39,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2027,
+              "demanda": 0.0,
+              "var_poblacional_pct": 1.34,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2028,
+              "demanda": 0.0,
+              "var_poblacional_pct": 0.83,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2029,
+              "demanda": 0.0,
+              "var_poblacional_pct": -0.36,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2030,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.03,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            },
+            {
+              "anio": 2031,
+              "demanda": 0.0,
+              "var_poblacional_pct": -1.47,
+              "egresados_anual": 0,
+              "egresados_acumulados": 0
+            }
+          ]
+        }
+      }
     }
   ]
 }

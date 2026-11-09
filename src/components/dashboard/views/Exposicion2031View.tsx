@@ -273,6 +273,7 @@ export function getMacroArea(especialidad: string): MacroAreaTipo {
     u.includes("ALIMENTOS") ||
     u.includes("GASTRONOMIA") ||
     u.includes("AGROPECUARIA") ||
+    u.includes("CARPINTERIA") ||
     u.includes("BTH")
   ) {
     return "SECUNDARIA_BTH";
@@ -2428,7 +2429,7 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                             </th>
                             <th colSpan={3} className="py-2 px-2 bg-indigo-100/70 text-indigo-950 border-r border-slate-300">
                               SECUNDARIA BTH
-                              <span className="block text-[9px] font-normal text-indigo-800">6 Especialidades Técnicas</span>
+                              <span className="block text-[9px] font-normal text-indigo-800">8 Especialidades Técnicas</span>
                             </th>
                             <th colSpan={3} className="py-2 px-2 bg-rose-100/70 text-rose-950 border-r border-slate-300">
                               ESPECIAL
@@ -3149,7 +3150,7 @@ export default function Exposicion2031View({ data: dataset }: Props) {
                       PRIMARIA: { label: "2. EDUCACIÓN PRIMARIA", sub: "Comunitaria Vocacional · 1 Especialidad", bg: "bg-blue-100/80", text: "text-blue-950", border: "border-blue-300" },
                       SECUNDARIA: { label: "3. EDUCACIÓN SECUNDARIA", sub: "Formación Humanística Regular · 11 Especialidades", bg: "bg-emerald-100/80", text: "text-emerald-950", border: "border-emerald-300" },
                       ESPECIAL: { label: "4. EDUCACIÓN ESPECIAL", sub: "Personas con Discapacidad · 1 Especialidad", bg: "bg-rose-100/80", text: "text-rose-950", border: "border-rose-300" },
-                      SECUNDARIA_BTH: { label: "5. SECUNDARIA BTH (TÉCNICA)", sub: "Bachillerato Técnico Humanístico · 6 Especialidades", bg: "bg-indigo-100/80", text: "text-indigo-950", border: "border-indigo-300" },
+                      SECUNDARIA_BTH: { label: "5. SECUNDARIA BTH (TÉCNICA)", sub: "Bachillerato Técnico Humanístico · 8 Especialidades", bg: "bg-indigo-100/80", text: "text-indigo-950", border: "border-indigo-300" },
                     };
 
                     const gInfo = groupMeta[row.macroArea];
