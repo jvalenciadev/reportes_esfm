@@ -862,7 +862,7 @@ export function UieDeficitView({ data }: UieDeficitViewProps) {
 
       {/* TAB: MATRIZ DE DÉFICIT POR MATERIA (SIE GRANULAR) */}
       {activeTab === 'matriz_materia' && (
-        <MateriaDeficitMatrix />
+        <MateriaDeficitMatrix onGoToConfig={() => setActiveTab('filtros_materia')} />
       )}
 
       {/* TAB: CONFIGURADOR DE FILTROS CRUD (MATERIA) */}

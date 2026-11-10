@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1794324601188,
+    "especialidad_oficial_id": 1,
+    "subsistemas": [
+      "EDUCACIÓN REGULAR"
+    ],
+    "niveles": [
+      "SECUNDARIA"
+    ],
+    "materias": [
+      "FÍSICA",
+      "QUÍMICA",
+      "QUÍMICA INDUSTRIAL"
+    ],
+    "operador_carga": null,
+    "carga_especialidad": null,
+    "materias_condiciones": [],
+    "activo": true,
+    "descripcion": "FILTRO FÍSICA Y QUÍMICA",
+    "updated_at": "2026-11-10T15:50:38.574Z"
+  },
+  {
+    "id": 1794325442177,
+    "especialidad_oficial_id": 5,
+    "subsistemas": [
+      "EDUCACIÓN REGULAR"
+    ],
+    "niveles": [
+      "INICIAL"
+    ],
+    "materias": [
+      "MAESTRO DE AÑO DE ESCOLARIDAD INICIAL",
+      "COMUNICACIÓN Y LENGUAS, LENGUA ORIGINARIA Y EXTRANJERA",
+      "MATEMÁTICAS"
+    ],
+    "operador_carga": null,
+    "carga_especialidad": null,
+    "materias_condiciones": [],
+    "activo": true,
+    "descripcion": "Filtro de Educación Inicial",
+    "updated_at": "2026-11-10T16:11:22.634Z"
+  }
+]

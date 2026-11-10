@@ -1,548 +1,1079 @@
 'use client';
 
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import materiasCatalogoMapRaw from '@/data/materiasPorSubsistemaNivel.json';
 import {
   GraduationCapIcon,
   CheckIcon,
   XIcon,
+  EditIcon,
   TrashIcon,
   SearchIcon,
   AlertTriangleIcon,
+  SaveIcon,
   PlusIcon,
-  LayersIcon,
 } from '../ui/Icons';
 
-interface EspecialidadOficial {
-  id: number;
-  nombre: string;
-}
+const SUBSISTEMAS_DISPONIBLES = [
+  'EDUCACIÓN REGULAR',
+  'EDUCACIÓN ALTERNATIVA',
+  'EDUCACIÓN ESPECIAL',
+];
 
-interface ReglaMateria {
-  id: number;
-  especialidad_id: number;
-  subsistema: string | null;
-  nivel: string | null;
-  grado: number | null;
+const OPERADORES = [
+  { value: '<=', label: '<= Menor o igual' },
+  { value: '>=', label: '>= Mayor o igual' },
+  { value: '<', label: '< Menor que' },
+  { value: '>', label: '> Mayor que' },
+  { value: '=', label: '= Exactamente' },
+];
+
+type Operador = '<=' | '>=' | '<' | '>' | '=';
+
+export interface MateriaCondicion {
   materia: string;
-  tipo_coincidencia: 'EXACTA' | 'CONTIENE';
-  activo: boolean;
-  created_at?: string;
-  especialidades_oficiales?: {
-    id: number;
-    nombre: string;
-  };
+  operador: Operador;
+  horas: number;
 }
 
-const SUBSISTEMAS = ['EDUCACIÓN REGULAR', 'EDUCACIÓN ALTERNATIVA', 'EDUCACIÓN ESPECIAL'];
-const NIVELES = ['INICIAL', 'PRIMARIA', 'SECUNDARIA', 'SECUNDARIA (BTH)'];
+export interface FiltroMateria {
+  id?: number;
+  especialidad_oficial_id: number;
+  subsistemas: string[];
+  niveles: string[];
+  materias: string[];
+  operador_carga: Operador | null;
+  carga_especialidad: number | null;
+  materias_condiciones: MateriaCondicion[];
+  activo: boolean;
+  descripcion: string;
+  updated_at?: string;
+}
+
+type EditState = {
+  id?: number;
+  especialidad_oficial_id: number;
+  subsistemas: string[];
+  niveles: string[];
+  materias: string[];
+  operador_carga: Operador | null;
+  carga_especialidad: number | null;
+  materias_condiciones: MateriaCondicion[];
+  activo: boolean;
+  descripcion: string;
+};
+
+// CASCADA: Niveles dependientes de subsistemas seleccionados
+function getNivelesParaSubsistemas(subsistemas: string[]): string[] {
+  const catalog = materiasCatalogoMapRaw as Record<string, string[]>;
+  const nivelesSet = new Set<string>();
+  for (const key of Object.keys(catalog)) {
+    const pipeIdx = key.indexOf('|');
+    const sub = key.substring(0, pipeIdx);
+    const nivel = key.substring(pipeIdx + 1);
+    if (subsistemas.includes(sub)) nivelesSet.add(nivel);
+  }
+  return Array.from(nivelesSet).sort((a, b) => a.localeCompare(b));
+}
+
+// CASCADA: Materias dependientes de subsistemas y niveles seleccionados
+function getMateriasParaCombo(subsistemas: string[], niveles: string[]): string[] {
+  const catalog = materiasCatalogoMapRaw as Record<string, string[]>;
+  const setMaterias = new Set<string>();
+  for (const s of subsistemas) {
+    for (const n of niveles) {
+      const lista = catalog[`${s.toUpperCase()}|${n.toUpperCase()}`] || [];
+      lista.forEach((m) => setMaterias.add(m));
+    }
+  }
+  return Array.from(setMaterias).sort((a, b) => a.localeCompare(b));
+}
 
 export function FiltrosMateriaManager() {
-  const [especialidades, setEspecialidades] = useState<EspecialidadOficial[]>([]);
-  const [selectedEspId, setSelectedEspId] = useState<number>(1);
-  const [reglas, setReglas] = useState<ReglaMateria[]>([]);
-  const [materiasSugeridas, setMateriasSugeridas] = useState<string[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [saving, setSaving] = useState<boolean>(false);
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const [successMsg, setSuccessMsg] = useState<string | null>(null);
-  const [searchEsp, setSearchEsp] = useState<string>('');
+  const [filtros, setFiltros] = useState<FiltroMateria[]>([]);
+  const [especialidades, setEspecialidades] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [espStatusFilter, setEspStatusFilter] = useState<'all' | 'configured' | 'pending'>('all');
+  const [actionMessage, setActionMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
-  // Formulario nueva regla
-  const [materiaInput, setMateriaInput] = useState<string>('');
-  const [subsistemaInput, setSubsistemaInput] = useState<string>('EDUCACIÓN REGULAR');
-  const [nivelInput, setNivelInput] = useState<string>('SECUNDARIA');
-  const [gradoInput, setGradoInput] = useState<string>('');
-  const [coincidenciaInput, setCoincidenciaInput] = useState<'EXACTA' | 'CONTIENE'>('CONTIENE');
+  const [editingItem, setEditingItem] = useState<EditState | null>(null);
+  const [materiaFilterSearch, setMateriaFilterSearch] = useState('');
+  const [materiasTabFilter, setMateriasTabFilter] = useState<'all' | 'selected' | 'with_condition'>('all');
+  const [inputCustomMateria, setInputCustomMateria] = useState('');
 
-  // 1. Cargar especialidades oficiales
-  const loadEspecialidades = useCallback(async () => {
-    try {
-      const res = await fetch('/api/filtros-materia?action=especialidades');
-      if (res.ok) {
-        const data = await res.json();
-        setEspecialidades(data);
-        if (data.length > 0 && !selectedEspId) {
-          setSelectedEspId(data[0].id);
-        }
-      }
-    } catch (e: any) {
-      console.error('Error cargando especialidades:', e);
-    }
-  }, [selectedEspId]);
+  // Estado del mini-editor de condición individual por materia
+  const [editingMateriaCondicion, setEditingMateriaCondicion] = useState<string | null>(null);
+  const [tempOp, setTempOp] = useState<Operador>('>=');
+  const [tempHoras, setTempHoras] = useState<number>(48);
 
-  // 2. Cargar materias sugeridas de la base de datos
-  const loadMateriasSugeridas = useCallback(async () => {
-    try {
-      const res = await fetch('/api/filtros-materia?action=materias_disponibles');
-      if (res.ok) {
-        const data = await res.json();
-        setMateriasSugeridas(data);
-      }
-    } catch (e: any) {
-      console.error('Error cargando materias sugeridas:', e);
-    }
-  }, []);
-
-  // 3. Cargar reglas de mapeo de la especialidad activa
-  const loadReglas = useCallback(async (espId: number) => {
+  const loadData = useCallback(async () => {
     setLoading(true);
-    setErrorMsg(null);
     try {
-      const res = await fetch(`/api/filtros-materia?especialidad_id=${espId}`);
-      if (res.ok) {
-        const data = await res.json();
-        setReglas(Array.isArray(data) ? data : []);
-      } else {
-        setReglas([]);
-      }
-    } catch (e: any) {
-      setErrorMsg('Error consultando reglas de materias');
+      const [resEsp, resFiltros] = await Promise.all([
+        fetch('/api/filtros-materia?action=especialidades'),
+        fetch('/api/filtros-materia'),
+      ]);
+      if (resEsp.ok) setEspecialidades(await resEsp.json() || []);
+      if (resFiltros.ok) setFiltros(await resFiltros.json() || []);
+    } catch (e) {
+      console.error(e);
     } finally {
       setLoading(false);
     }
   }, []);
 
   useEffect(() => {
-    loadEspecialidades();
-    loadMateriasSugeridas();
-  }, [loadEspecialidades, loadMateriasSugeridas]);
+    loadData();
+  }, [loadData]);
 
   useEffect(() => {
-    if (selectedEspId) {
-      loadReglas(selectedEspId);
+    if (actionMessage) {
+      const t = setTimeout(() => setActionMessage(null), 4000);
+      return () => clearTimeout(t);
     }
-  }, [selectedEspId, loadReglas]);
+  }, [actionMessage]);
 
-  const especialidadActual = useMemo(() => {
-    return especialidades.find((e) => e.id === selectedEspId);
-  }, [especialidades, selectedEspId]);
+  const combinedList = useMemo(() =>
+    especialidades.map((esp) => ({
+      especialidad: esp,
+      filtro: filtros.find((f) => f.especialidad_oficial_id === esp.id) || null,
+    }))
+  , [especialidades, filtros]);
 
-  const filteredEspecialidades = useMemo(() => {
-    if (!searchEsp.trim()) return especialidades;
-    const q = searchEsp.toLowerCase();
-    return especialidades.filter((e) => e.nombre.toLowerCase().includes(q));
-  }, [especialidades, searchEsp]);
+  const configuredCount = useMemo(() =>
+    combinedList.filter((i) => i.filtro && i.filtro.materias && i.filtro.materias.length > 0).length
+  , [combinedList]);
 
-  // Agregar nueva regla
-  const handleAddRule = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!materiaInput.trim()) return;
+  const pendingCount = useMemo(() =>
+    combinedList.length - configuredCount
+  , [combinedList, configuredCount]);
 
+  const filteredList = useMemo(() => {
+    let list = combinedList;
+    if (espStatusFilter === 'configured') {
+      list = list.filter((i) => i.filtro && i.filtro.materias && i.filtro.materias.length > 0);
+    } else if (espStatusFilter === 'pending') {
+      list = list.filter((i) => !i.filtro || !i.filtro.materias || i.filtro.materias.length === 0);
+    }
+    if (!searchTerm.trim()) return list;
+    const q = searchTerm.toLowerCase();
+    return list.filter((i) => i.especialidad.nombre.toLowerCase().includes(q));
+  }, [combinedList, searchTerm, espStatusFilter]);
+
+  // CASCADA 1 & 2
+  const nivelesDisponibles = useMemo(() => {
+    if (!editingItem || editingItem.subsistemas.length === 0) return [];
+    return getNivelesParaSubsistemas(editingItem.subsistemas);
+  }, [editingItem?.subsistemas]);
+
+  const materiasDisponibles = useMemo(() => {
+    if (!editingItem || !editingItem.subsistemas.length || !editingItem.niveles.length) return [];
+    return getMateriasParaCombo(editingItem.subsistemas, editingItem.niveles);
+  }, [editingItem?.subsistemas, editingItem?.niveles]);
+
+  const materiasFiltradas = useMemo(() => {
+    let list = materiasDisponibles;
+    if (materiasTabFilter === 'selected' && editingItem) {
+      const set = new Set(editingItem.materias);
+      list = list.filter((m) => set.has(m));
+    } else if (materiasTabFilter === 'with_condition' && editingItem) {
+      const set = new Set(editingItem.materias_condiciones.map((mc) => mc.materia));
+      list = list.filter((m) => set.has(m));
+    }
+    if (!materiaFilterSearch.trim()) return list;
+    const q = materiaFilterSearch.toLowerCase();
+    return list.filter((m) => m.toLowerCase().includes(q));
+  }, [materiasDisponibles, materiaFilterSearch, materiasTabFilter, editingItem]);
+
+  const pasoActual = useMemo(() => {
+    if (!editingItem) return 0;
+    if (!editingItem.subsistemas.length) return 1;
+    if (!editingItem.niveles.length) return 2;
+    return 3;
+  }, [editingItem?.subsistemas, editingItem?.niveles]);
+
+  const condicionGlobalActiva = editingItem?.operador_carga !== null && editingItem?.carga_especialidad !== null;
+
+  const handleOpenEdit = (esp: any, filtroExistente: FiltroMateria | null) => {
+    setEditingItem({
+      id: filtroExistente?.id,
+      especialidad_oficial_id: esp.id,
+      subsistemas: filtroExistente?.subsistemas || ['EDUCACIÓN REGULAR'],
+      niveles: filtroExistente?.niveles || ['SECUNDARIA'],
+      materias: filtroExistente?.materias || [],
+      operador_carga: (filtroExistente?.operador_carga as Operador) ?? null,
+      carga_especialidad: filtroExistente?.carga_especialidad ?? null,
+      materias_condiciones: filtroExistente?.materias_condiciones || [],
+      activo: filtroExistente?.activo ?? true,
+      descripcion: filtroExistente?.descripcion || '',
+    });
+    setMateriaFilterSearch('');
+    setMateriasTabFilter('all');
+    setInputCustomMateria('');
+    setEditingMateriaCondicion(null);
+  };
+
+  const handleSave = async () => {
+    if (!editingItem) return;
     setSaving(true);
-    setErrorMsg(null);
-    setSuccessMsg(null);
-
     try {
       const res = await fetch('/api/filtros-materia', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          especialidad_id: selectedEspId,
-          materia: materiaInput.trim(),
-          subsistema: subsistemaInput || null,
-          nivel: nivelInput || null,
-          grado: gradoInput ? Number(gradoInput) : null,
-          tipo_coincidencia: coincidenciaInput,
-          activo: true,
-        }),
+        body: JSON.stringify(editingItem),
       });
-
       if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.detail || err.error || 'Error al guardar regla');
+        const errJson = await res.json();
+        throw new Error(errJson.error || 'Error al guardar');
       }
-
-      setMateriaInput('');
-      setSuccessMsg('Regla de materia guardada exitosamente');
-      loadReglas(selectedEspId);
-      setTimeout(() => setSuccessMsg(null), 3000);
+      const nombre = especialidades.find((e) => e.id === editingItem.especialidad_oficial_id)?.nombre;
+      setActionMessage({ type: 'success', text: `Filtro de materias guardado para "${nombre}".` });
+      setEditingItem(null);
+      await loadData();
     } catch (err: any) {
-      setErrorMsg(err.message || 'Error al guardar regla');
+      setActionMessage({ type: 'error', text: err.message });
     } finally {
       setSaving(false);
     }
   };
 
-  // Alternar activo/inactivo
-  const handleToggleActivo = async (regla: ReglaMateria) => {
-    try {
-      const res = await fetch('/api/filtros-materia', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          id: regla.id,
-          activo: !regla.activo,
-        }),
-      });
-      if (res.ok) {
-        loadReglas(selectedEspId);
-      }
-    } catch (e: any) {
-      console.error('Error al actualizar regla:', e);
+  const handleDelete = async (id: number) => {
+    if (!confirm('¿Eliminar la configuración de materias para esta especialidad?')) return;
+    const res = await fetch(`/api/filtros-materia?id=${id}`, { method: 'DELETE' });
+    if (res.ok) {
+      setActionMessage({ type: 'success', text: 'Filtro eliminado correctamente.' });
+      await loadData();
     }
   };
 
-  // Eliminar regla
-  const handleDeleteRule = async (id: number) => {
-    if (!confirm('¿Confirma eliminar esta regla de mapeo?')) return;
-    try {
-      const res = await fetch(`/api/filtros-materia?id=${id}`, {
-        method: 'DELETE',
-      });
-      if (res.ok) {
-        loadReglas(selectedEspId);
-      }
-    } catch (e: any) {
-      console.error('Error al eliminar regla:', e);
-    }
+  const toggleMateria = (materia: string) => {
+    if (!editingItem) return;
+    const exists = editingItem.materias.includes(materia);
+    const newMaterias = exists ? editingItem.materias.filter((m) => m !== materia) : [...editingItem.materias, materia];
+    const newCondiciones = exists
+      ? editingItem.materias_condiciones.filter((mc) => mc.materia !== materia)
+      : editingItem.materias_condiciones;
+    setEditingItem({ ...editingItem, materias: newMaterias, materias_condiciones: newCondiciones });
+    if (editingMateriaCondicion === materia) setEditingMateriaCondicion(null);
   };
 
-  // Preset inteligente según nombre de especialidad
-  const handleApplyPreset = () => {
-    if (!especialidadActual) return;
-    const name = especialidadActual.nombre.toUpperCase();
-    if (name.includes('MATEMÁTICA')) {
-      setMateriaInput('MATEMÁTICA');
-      setNivelInput('SECUNDARIA');
-    } else if (name.includes('LENGUA CASTELLANA')) {
-      setMateriaInput('COMUNICACIÓN Y LENGUAJES');
-      setNivelInput('SECUNDARIA');
-    } else if (name.includes('INICIAL')) {
-      setMateriaInput('EDUCACIÓN INICIAL');
-      setNivelInput('INICIAL');
-    } else if (name.includes('PRIMARIA')) {
-      setMateriaInput('EDUCACIÓN PRIMARIA');
-      setNivelInput('PRIMARIA');
-    } else if (name.includes('FÍSICA')) {
-      setMateriaInput('FÍSICA');
-      setNivelInput('SECUNDARIA');
-    } else if (name.includes('QUÍMICA')) {
-      setMateriaInput('QUÍMICA');
-      setNivelInput('SECUNDARIA');
-    } else if (name.includes('BIOLOGÍA')) {
-      setMateriaInput('BIOLOGÍA');
-      setNivelInput('SECUNDARIA');
-    } else if (name.includes('CARPINTERÍA')) {
-      setMateriaInput('CARPINTERÍA');
-      setNivelInput('SECUNDARIA (BTH)');
-    } else if (name.includes('MECÁNICA INDUSTRIAL')) {
-      setMateriaInput('MECÁNICA INDUSTRIAL');
-      setNivelInput('SECUNDARIA (BTH)');
-    } else {
-      setMateriaInput(name);
+  const handleSelectAllVisible = () => {
+    if (!editingItem) return;
+    const set = new Set(editingItem.materias);
+    materiasFiltradas.forEach((m) => set.add(m));
+    setEditingItem({ ...editingItem, materias: Array.from(set) });
+  };
+
+  const handleDeselectAllVisible = () => {
+    if (!editingItem) return;
+    const toRemove = new Set(materiasFiltradas);
+    const newMaterias = editingItem.materias.filter((m) => !toRemove.has(m));
+    const newCondiciones = editingItem.materias_condiciones.filter((mc) => !toRemove.has(mc.materia));
+    setEditingItem({ ...editingItem, materias: newMaterias, materias_condiciones: newCondiciones });
+  };
+
+  const handleClearAllMaterias = () => {
+    if (!editingItem || editingItem.materias.length === 0) return;
+    if (!confirm(`¿Desmarcar todas las ${editingItem.materias.length} materias?`)) return;
+    setEditingItem({ ...editingItem, materias: [], materias_condiciones: [] });
+    setEditingMateriaCondicion(null);
+  };
+
+  const handleAddCustomMateria = () => {
+    const val = inputCustomMateria.trim().toUpperCase();
+    if (!val || !editingItem || editingItem.materias.includes(val)) {
+      setInputCustomMateria('');
+      return;
     }
+    setEditingItem({ ...editingItem, materias: [...editingItem.materias, val] });
+    setInputCustomMateria('');
+  };
+
+  const toggleSubsistema = (sub: string) => {
+    if (!editingItem) return;
+    const exists = editingItem.subsistemas.includes(sub);
+    const newSubs = exists ? editingItem.subsistemas.filter((s) => s !== sub) : [...editingItem.subsistemas, sub];
+    const nivelesValidos = new Set(getNivelesParaSubsistemas(newSubs));
+    const newNiveles = editingItem.niveles.filter((n) => nivelesValidos.has(n));
+    setEditingItem({ ...editingItem, subsistemas: newSubs, niveles: newNiveles });
+  };
+
+  const toggleNivel = (niv: string) => {
+    if (!editingItem) return;
+    const exists = editingItem.niveles.includes(niv);
+    setEditingItem({
+      ...editingItem,
+      niveles: exists ? editingItem.niveles.filter((n) => n !== niv) : [...editingItem.niveles, niv],
+    });
+  };
+
+  // Condición por materia
+  const getCondicionMateria = (materia: string): MateriaCondicion | null =>
+    editingItem?.materias_condiciones.find((mc) => mc.materia === materia) || null;
+
+  const openMateriaCondicionEditor = (materia: string) => {
+    const existing = getCondicionMateria(materia);
+    setTempOp(existing?.operador || '>=');
+    setTempHoras(existing?.horas || 48);
+    setEditingMateriaCondicion(materia);
+  };
+
+  const saveMateriaCondicion = () => {
+    if (!editingItem || !editingMateriaCondicion) return;
+    const nuevasCondiciones = editingItem.materias_condiciones.filter((mc) => mc.materia !== editingMateriaCondicion);
+    nuevasCondiciones.push({ materia: editingMateriaCondicion, operador: tempOp, horas: tempHoras });
+    setEditingItem({ ...editingItem, materias_condiciones: nuevasCondiciones });
+    setEditingMateriaCondicion(null);
+  };
+
+  const removeMateriaCondicion = (materia: string) => {
+    if (!editingItem) return;
+    setEditingItem({
+      ...editingItem,
+      materias_condiciones: editingItem.materias_condiciones.filter((mc) => mc.materia !== materia),
+    });
+    if (editingMateriaCondicion === materia) setEditingMateriaCondicion(null);
   };
 
   return (
     <div className="space-y-6">
-      {/* Banner Explicativo */}
-      <div className="bg-gradient-to-r from-blue-900 to-indigo-900 rounded-2xl p-6 text-white shadow-lg border border-blue-800">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-blue-500/20 text-blue-200 border border-blue-400/30">
-                CRUD Granular SIE
-              </span>
-              <span className="text-xs text-blue-200 font-medium">Reemplazo de Cargo por Materia</span>
-            </div>
-            <h2 className="text-xl md:text-2xl font-black mt-1">Configurador de Materias Curriculares</h2>
-            <p className="text-xs md:text-sm text-blue-100/90 mt-1 max-w-3xl">
-              Asigna qué asignaturas y materias del SIE alimentan el cálculo de horas y déficit de cada Especialidad Oficial. 
-              El motor agrupa por coincidencia exacta o contiene para consolidar las horas de la Unidad Educativa.
-            </p>
+      {/* Toast de acción */}
+      {actionMessage && (
+        <div
+          className={`p-4 rounded-xl border text-xs flex items-center justify-between ${
+            actionMessage.type === 'success'
+              ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
+              : 'bg-red-50 border-red-200 text-red-800'
+          }`}
+        >
+          <div className="flex items-center gap-2 font-medium">
+            {actionMessage.type === 'success' ? (
+              <CheckIcon className="w-4 h-4 text-emerald-600" />
+            ) : (
+              <AlertTriangleIcon className="w-4 h-4 text-red-600" />
+            )}
+            {actionMessage.text}
           </div>
-          <div className="flex items-center gap-2">
-            <div className="bg-white/10 backdrop-blur-sm px-4 py-2.5 rounded-xl border border-white/15 text-center">
-              <div className="text-2xl font-black text-amber-300">{especialidades.length}</div>
-              <div className="text-[10px] uppercase tracking-wider text-blue-200 font-bold">Especialidades</div>
-            </div>
-            <div className="bg-white/10 backdrop-blur-sm px-4 py-2.5 rounded-xl border border-white/15 text-center">
-              <div className="text-2xl font-black text-emerald-300">{reglas.length}</div>
-              <div className="text-[10px] uppercase tracking-wider text-blue-200 font-bold">Reglas Activas</div>
-            </div>
-          </div>
+          <button onClick={() => setActionMessage(null)}>
+            <XIcon className="w-4 h-4 text-slate-400 hover:text-slate-600" />
+          </button>
         </div>
-      </div>
+      )}
 
-      {/* Grid Principal: Lista de Especialidades (Izquierda) + Reglas de Materias (Derecha) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Columna Izquierda: Especialidades Oficiales */}
-        <div className="lg:col-span-4 bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex flex-col h-[700px]">
-          <div className="flex items-center justify-between gap-2 mb-3">
-            <h3 className="text-sm font-black text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
-              <GraduationCapIcon className="w-4 h-4 text-indigo-600" />
-              Especialidades Oficiales
-            </h3>
-            <span className="text-xs font-bold text-slate-400">({filteredEspecialidades.length})</span>
-          </div>
-
-          <div className="relative mb-3">
-            <SearchIcon className="w-4 h-4 absolute left-3 top-2.5 text-slate-400" />
-            <input
-              type="text"
-              placeholder="Buscar especialidad..."
-              value={searchEsp}
-              onChange={(e) => setSearchEsp(e.target.value)}
-              className="w-full pl-9 pr-3 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium"
-            />
-          </div>
-
-          <div className="flex-1 overflow-y-auto space-y-1 pr-1 divide-y divide-slate-100">
-            {filteredEspecialidades.map((esp) => {
-              const isSelected = esp.id === selectedEspId;
-              return (
-                <button
-                  key={esp.id}
-                  onClick={() => setSelectedEspId(esp.id)}
-                  className={`w-full text-left p-2.5 rounded-xl transition-all flex items-start justify-between gap-2 text-xs font-bold ${
-                    isSelected
-                      ? 'bg-indigo-600 text-white shadow-sm'
-                      : 'hover:bg-slate-50 text-slate-700'
-                  }`}
-                >
-                  <div className="flex items-center gap-2">
-                    <span
-                      className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-black shrink-0 ${
-                        isSelected ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-600'
-                      }`}
-                    >
-                      {esp.id}
-                    </span>
-                    <span className="line-clamp-2 leading-tight">{esp.nombre}</span>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
+      {/* Header Principal */}
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-white p-5 rounded-xl border border-slate-200 shadow-xs">
+        <div>
+          <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
+            <GraduationCapIcon className="w-5 h-5 text-indigo-600" />
+            CRUD de Filtros por Materia Curricular (22 Especialidades)
+          </h2>
+          <p className="text-xs text-slate-500 mt-1 max-w-2xl">
+            Flujo en cascada: <strong>① Subsistema</strong> → <strong>② Nivel</strong> → <strong>③ Materias Curriculares</strong> → Condición de horas.
+          </p>
         </div>
 
-        {/* Columna Derecha: Reglas y Formulario CRUD */}
-        <div className="lg:col-span-8 space-y-6">
-          {/* Cabecera de Especialidad Seleccionada */}
-          <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div>
-              <div className="text-[10px] font-bold text-indigo-600 uppercase tracking-wider">
-                Configurando Especialidad #{selectedEspId}
-              </div>
-              <h3 className="text-lg font-black text-slate-900 mt-0.5">
-                {especialidadActual?.nombre || 'Seleccione una especialidad'}
-              </h3>
-            </div>
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          {/* Status filter pills */}
+          <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-lg">
             <button
-              onClick={handleApplyPreset}
-              className="px-3 py-1.5 text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-200 rounded-lg hover:bg-indigo-100 transition-colors shrink-0"
+              onClick={() => setEspStatusFilter('all')}
+              className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-colors ${
+                espStatusFilter === 'all'
+                  ? 'bg-white text-slate-900 shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
             >
-              Sugerir Materia Base
+              Todas ({combinedList.length})
+            </button>
+            <button
+              onClick={() => setEspStatusFilter('configured')}
+              className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-colors ${
+                espStatusFilter === 'configured'
+                  ? 'bg-indigo-600 text-white shadow-xs'
+                  : 'text-slate-600 hover:text-indigo-700'
+              }`}
+            >
+              Configuradas ({configuredCount})
+            </button>
+            <button
+              onClick={() => setEspStatusFilter('pending')}
+              className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-colors ${
+                espStatusFilter === 'pending'
+                  ? 'bg-amber-600 text-white shadow-xs'
+                  : 'text-slate-600 hover:text-amber-700'
+              }`}
+            >
+              Pendientes ({pendingCount})
             </button>
           </div>
 
-          {/* Formulario Nueva Regla */}
-          <form
-            onSubmit={handleAddRule}
-            className="bg-slate-50 rounded-2xl p-5 border border-slate-200/90 shadow-sm space-y-4"
-          >
-            <div className="flex items-center justify-between">
-              <h4 className="text-xs font-black text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
-                <PlusIcon className="w-4 h-4 text-emerald-600" />
-                Vincular Nueva Materia Curricular
-              </h4>
-              <span className="text-[11px] text-slate-500">Materia evaluada en el registro de la UE</span>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-12 gap-3">
-              {/* Input Materia */}
-              <div className="sm:col-span-6 space-y-1">
-                <label className="text-[11px] font-bold text-slate-600">Nombre de Materia *</label>
-                <input
-                  type="text"
-                  required
-                  placeholder="Ej: MATEMÁTICA, QUÍMICA, etc."
-                  value={materiaInput}
-                  onChange={(e) => setMateriaInput(e.target.value)}
-                  list="sugerencias-materias"
-                  className="w-full px-3 py-2 text-xs bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 font-semibold uppercase"
-                />
-                <datalist id="sugerencias-materias">
-                  {materiasSugeridas.map((m, idx) => (
-                    <option key={idx} value={m} />
-                  ))}
-                </datalist>
-              </div>
-
-              {/* Select Nivel */}
-              <div className="sm:col-span-3 space-y-1">
-                <label className="text-[11px] font-bold text-slate-600">Nivel</label>
-                <select
-                  value={nivelInput}
-                  onChange={(e) => setNivelInput(e.target.value)}
-                  className="w-full px-2.5 py-2 text-xs bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 font-semibold"
-                >
-                  <option value="">TODOS</option>
-                  {NIVELES.map((n) => (
-                    <option key={n} value={n}>
-                      {n}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Select Coincidencia */}
-              <div className="sm:col-span-3 space-y-1">
-                <label className="text-[11px] font-bold text-slate-600">Coincidencia</label>
-                <select
-                  value={coincidenciaInput}
-                  onChange={(e) => setCoincidenciaInput(e.target.value as any)}
-                  className="w-full px-2.5 py-2 text-xs bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 font-semibold"
-                >
-                  <option value="CONTIENE">CONTIENE (Flexible)</option>
-                  <option value="EXACTA">EXACTA (=)</option>
-                </select>
-              </div>
-
-              {/* Select Subsistema */}
-              <div className="sm:col-span-6 space-y-1">
-                <label className="text-[11px] font-bold text-slate-600">Subsistema</label>
-                <select
-                  value={subsistemaInput}
-                  onChange={(e) => setSubsistemaInput(e.target.value)}
-                  className="w-full px-2.5 py-2 text-xs bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 font-semibold"
-                >
-                  <option value="">TODOS</option>
-                  {SUBSISTEMAS.map((s) => (
-                    <option key={s} value={s}>
-                      {s}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Input Grado */}
-              <div className="sm:col-span-3 space-y-1">
-                <label className="text-[11px] font-bold text-slate-600">Grado (Opcional)</label>
-                <input
-                  type="number"
-                  min="1"
-                  max="6"
-                  placeholder="1 a 6 (Vacío = Todos)"
-                  value={gradoInput}
-                  onChange={(e) => setGradoInput(e.target.value)}
-                  className="w-full px-3 py-2 text-xs bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 font-semibold"
-                />
-              </div>
-
-              {/* Botón Guardar */}
-              <div className="sm:col-span-3 flex items-end">
-                <button
-                  type="submit"
-                  disabled={saving || !materiaInput.trim()}
-                  className="w-full py-2 px-4 text-xs font-black text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 rounded-lg transition-colors shadow-xs flex items-center justify-center gap-1.5"
-                >
-                  <PlusIcon className="w-3.5 h-3.5" />
-                  {saving ? 'Guardando...' : 'Agregar Regla'}
-                </button>
-              </div>
-            </div>
-
-            {/* Mensajes de Estado */}
-            {successMsg && (
-              <div className="p-2.5 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-semibold flex items-center gap-2">
-                <CheckIcon className="w-4 h-4 text-emerald-600" />
-                {successMsg}
-              </div>
-            )}
-            {errorMsg && (
-              <div className="p-2.5 rounded-lg bg-rose-50 text-rose-800 border border-rose-200 text-xs font-semibold flex items-center gap-2">
-                <AlertTriangleIcon className="w-4 h-4 text-rose-600" />
-                {errorMsg}
-              </div>
-            )}
-          </form>
-
-          {/* Lista de Reglas Registradas */}
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-            <div className="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <LayersIcon className="w-4 h-4 text-slate-500" />
-                <span className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                  Materias Asignadas ({reglas.length})
-                </span>
-              </div>
-              <span className="text-[11px] text-slate-400">
-                Afecta el cálculo en tiempo real de la matriz
-              </span>
-            </div>
-
-            {loading ? (
-              <div className="p-8 text-center text-xs text-slate-400">Cargando reglas...</div>
-            ) : reglas.length === 0 ? (
-              <div className="p-8 text-center space-y-2">
-                <div className="text-sm font-bold text-slate-500">
-                  Sin materias asignadas para esta especialidad
-                </div>
-                <div className="text-xs text-slate-400 max-w-md mx-auto">
-                  Agregue una materia arriba o presione &quot;Sugerir Materia Base&quot; para vincular las horas curriculares correspondientes.
-                </div>
-              </div>
-            ) : (
-              <div className="divide-y divide-slate-100 text-xs">
-                {reglas.map((r) => (
-                  <div
-                    key={r.id}
-                    className={`p-3.5 flex items-center justify-between gap-3 hover:bg-slate-50/80 transition-colors ${
-                      !r.activo ? 'opacity-50 bg-slate-50/50' : ''
-                    }`}
-                  >
-                    <div className="space-y-1">
-                      <div className="flex items-center gap-2">
-                        <span className="font-black text-slate-900">{r.materia}</span>
-                        <span
-                          className={`text-[10px] font-extrabold px-2 py-0.5 rounded-full border ${
-                            r.tipo_coincidencia === 'EXACTA'
-                              ? 'bg-blue-50 text-blue-700 border-blue-200'
-                              : 'bg-purple-50 text-purple-700 border-purple-200'
-                          }`}
-                        >
-                          {r.tipo_coincidencia}
-                        </span>
-                        {!r.activo && (
-                          <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-200 text-slate-600">
-                            INACTIVA
-                          </span>
-                        )}
-                      </div>
-                      <div className="text-[11px] text-slate-500 flex flex-wrap gap-x-3 gap-y-1">
-                        <span>Subsistema: <b>{r.subsistema || 'TODOS'}</b></span>
-                        <span>Nivel: <b>{r.nivel || 'TODOS'}</b></span>
-                        {r.grado && <span>Grado: <b>{r.grado}°</b></span>}
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-2 shrink-0">
-                      <button
-                        onClick={() => handleToggleActivo(r)}
-                        className={`px-2.5 py-1 text-xs font-bold rounded-lg border transition-colors ${
-                          r.activo
-                            ? 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100'
-                            : 'bg-slate-100 text-slate-600 border-slate-300 hover:bg-slate-200'
-                        }`}
-                      >
-                        {r.activo ? 'Activa' : 'Pausada'}
-                      </button>
-                      <button
-                        onClick={() => handleDeleteRule(r.id)}
-                        className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors"
-                        title="Eliminar regla"
-                      >
-                        <TrashIcon className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
+          <div className="relative w-full sm:w-60">
+            <input
+              type="text"
+              placeholder="Buscar especialidad..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full text-xs pl-8 pr-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            />
+            <SearchIcon className="w-4 h-4 text-slate-400 absolute left-2.5 top-2.5" />
           </div>
         </div>
       </div>
+
+      {/* Grid de Especialidades */}
+      {loading ? (
+        <div className="p-12 text-center text-slate-400 bg-white rounded-xl border border-slate-200">
+          Cargando catálogo de especialidades...
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          {filteredList.map(({ especialidad, filtro }) => {
+            const hasFiltro = Boolean(filtro && filtro.materias && filtro.materias.length > 0);
+            const subsistemas = filtro?.subsistemas || [];
+            const niveles = filtro?.niveles || [];
+            const materias = filtro?.materias || [];
+            const materiasCondiciones = filtro?.materias_condiciones || [];
+            const operador = filtro?.operador_carga;
+            const carga = filtro?.carga_especialidad;
+            const activo = filtro?.activo ?? true;
+
+            const tieneCondGlobal = operador !== null && operador !== undefined && carga !== null && carga !== undefined;
+            const tieneCondPorMateria = materiasCondiciones.length > 0;
+
+            return (
+              <div
+                key={especialidad.id}
+                className={`bg-white rounded-xl border p-5 shadow-xs transition-all hover:shadow-sm ${
+                  hasFiltro ? 'border-slate-200' : 'border-dashed border-slate-300 bg-slate-50/50'
+                }`}
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex items-start gap-2.5">
+                    <span className="flex items-center justify-center w-6 h-6 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200 text-xs font-bold shrink-0">
+                      {especialidad.id}
+                    </span>
+                    <div>
+                      <h3 className="text-sm font-bold text-slate-900 leading-snug">{especialidad.nombre}</h3>
+                      <div className="flex flex-wrap items-center gap-1.5 mt-1">
+                        <span
+                          className={`px-2 py-0.5 rounded-full text-[10px] font-semibold ${
+                            activo
+                              ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                              : 'bg-slate-100 text-slate-600 border border-slate-200'
+                          }`}
+                        >
+                          {activo ? 'Activo' : 'Inactivo'}
+                        </span>
+                        {tieneCondGlobal ? (
+                          <span className="text-[11px] font-semibold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">
+                            Global: {operador} {carga} hrs
+                          </span>
+                        ) : (
+                          <span className="text-[11px] text-slate-400 italic bg-slate-50 px-2 py-0.5 rounded border border-slate-200">
+                            Sin restricción global
+                          </span>
+                        )}
+                        {tieneCondPorMateria && (
+                          <span className="text-[10px] font-semibold text-purple-700 bg-purple-50 px-2 py-0.5 rounded border border-purple-200">
+                            {materiasCondiciones.length} excepción(es) por materia
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    <button
+                      onClick={() => handleOpenEdit(especialidad, filtro)}
+                      className="px-2.5 py-1 text-xs font-semibold rounded-lg bg-slate-100 hover:bg-indigo-50 text-slate-700 hover:text-indigo-700 border border-slate-200 transition-colors flex items-center gap-1"
+                    >
+                      <EditIcon className="w-3.5 h-3.5" />
+                      {hasFiltro ? 'Editar' : 'Configurar'}
+                    </button>
+                    {hasFiltro && filtro?.id && (
+                      <button
+                        onClick={() => handleDelete(filtro.id!)}
+                        className="p-1 text-slate-400 hover:text-red-600 rounded hover:bg-red-50 transition-colors"
+                        title="Eliminar filtro"
+                      >
+                        <TrashIcon className="w-3.5 h-3.5" />
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                <div className="mt-4 pt-3 border-t border-slate-100 space-y-2.5 text-xs">
+                  <div>
+                    <span className="text-slate-400 font-medium block text-[11px] mb-1">Subsistemas:</span>
+                    <div className="flex flex-wrap gap-1">
+                      {subsistemas.length > 0 ? (
+                        subsistemas.map((s) => (
+                          <span key={s} className="px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200 font-medium text-[10px]">
+                            {s}
+                          </span>
+                        ))
+                      ) : (
+                        <span className="text-slate-400 italic text-[11px]">Sin configurar</span>
+                      )}
+                    </div>
+                  </div>
+
+                  <div>
+                    <span className="text-slate-400 font-medium block text-[11px] mb-1">Niveles ({niveles.length}):</span>
+                    <div className="flex flex-wrap gap-1 max-h-16 overflow-y-auto">
+                      {niveles.length > 0 ? (
+                        niveles.map((n) => (
+                          <span key={n} className="px-2 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200 font-medium text-[10px]">
+                            {n}
+                          </span>
+                        ))
+                      ) : (
+                        <span className="text-slate-400 italic text-[11px]">Sin configurar</span>
+                      )}
+                    </div>
+                  </div>
+
+                  <div>
+                    <span className="text-slate-400 font-medium block text-[11px] mb-1">
+                      Materias Curriculares ({materias.length}):
+                    </span>
+                    <div className="flex flex-wrap gap-1 max-h-20 overflow-y-auto">
+                      {materias.length > 0 ? (
+                        materias.map((m) => {
+                          const condMat = materiasCondiciones.find((mc) => mc.materia === m);
+                          return (
+                            <span
+                              key={m}
+                              className={`px-2 py-0.5 rounded border font-mono text-[10px] ${
+                                condMat
+                                  ? 'bg-indigo-50 text-indigo-700 border-indigo-200'
+                                  : 'bg-emerald-50 text-emerald-800 border-emerald-200'
+                              }`}
+                            >
+                              {m}
+                              {condMat ? ` (${condMat.operador}${condMat.horas})` : ''}
+                            </span>
+                          );
+                        })
+                      ) : (
+                        <span className="text-slate-400 italic text-[11px]">Ninguna materia seleccionada</span>
+                      )}
+                    </div>
+                  </div>
+
+                  {filtro?.descripcion && (
+                    <div className="text-[11px] text-slate-500 italic">&quot;{filtro.descripcion}&quot;</div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* ============================================================ */}
+      {/* MODAL / DRAWER DE CONFIGURACIÓN EN CASCADA                    */}
+      {/* ============================================================ */}
+      {editingItem && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-2xl w-full max-w-3xl max-h-[94vh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            {/* Modal Header */}
+            <div className="px-6 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+              <div>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-indigo-600">
+                  Configuración Curricular en Cascada
+                </span>
+                <h3 className="text-base font-bold text-slate-900 leading-tight">
+                  {especialidades.find((e) => e.id === editingItem.especialidad_oficial_id)?.nombre}
+                </h3>
+              </div>
+              <button
+                onClick={() => setEditingItem(null)}
+                className="p-1 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-200 transition-colors"
+              >
+                <XIcon className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Barra de Progreso de Pasos */}
+            <div className="px-6 py-3 bg-slate-50 border-b border-slate-100 flex items-center gap-3 flex-wrap">
+              {[
+                { paso: 1, label: 'Subsistema', done: editingItem.subsistemas.length > 0 },
+                { paso: 2, label: 'Nivel', done: editingItem.niveles.length > 0 },
+                { paso: 3, label: 'Materias', done: editingItem.materias.length > 0 },
+                { paso: 4, label: 'Condición', done: true },
+              ].map(({ paso, label, done }, i) => (
+                <React.Fragment key={paso}>
+                  <div className="flex items-center gap-1.5">
+                    <span
+                      className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold ${
+                        done
+                          ? 'bg-emerald-500 text-white'
+                          : pasoActual === paso
+                          ? 'bg-indigo-600 text-white'
+                          : 'bg-slate-200 text-slate-500'
+                      }`}
+                    >
+                      {done ? '✓' : paso}
+                    </span>
+                    <span
+                      className={`text-[11px] font-semibold ${
+                        done
+                          ? 'text-emerald-700'
+                          : pasoActual === paso
+                          ? 'text-indigo-700'
+                          : 'text-slate-400'
+                      }`}
+                    >
+                      {label}
+                    </span>
+                  </div>
+                  {i < 3 && <span className="text-slate-300 text-xs">→</span>}
+                </React.Fragment>
+              ))}
+            </div>
+
+            {/* Cuerpo del Editor */}
+            <div className="p-6 space-y-5 overflow-y-auto flex-1 text-xs">
+              {/* PASO 1: SUBSISTEMA */}
+              <div
+                className={`p-4 rounded-xl border space-y-3 transition-all ${
+                  pasoActual === 1
+                    ? 'border-blue-400 bg-blue-50/60 ring-1 ring-blue-200'
+                    : 'border-slate-200 bg-slate-50/70'
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <label className="text-xs font-bold text-slate-900 flex items-center gap-2">
+                    <span
+                      className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold ${
+                        editingItem.subsistemas.length > 0 ? 'bg-emerald-500 text-white' : 'bg-blue-600 text-white'
+                      }`}
+                    >
+                      {editingItem.subsistemas.length > 0 ? '✓' : '1'}
+                    </span>
+                    Selecciona Subsistema(s):
+                  </label>
+                  <span className="text-[11px] text-slate-500">{editingItem.subsistemas.length} sel.</span>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {SUBSISTEMAS_DISPONIBLES.map((sub) => {
+                    const sel = editingItem.subsistemas.includes(sub);
+                    return (
+                      <button
+                        key={sub}
+                        type="button"
+                        onClick={() => toggleSubsistema(sub)}
+                        className={`px-3 py-1.5 rounded-lg font-semibold text-xs border flex items-center gap-1.5 transition-colors ${
+                          sel
+                            ? 'bg-blue-600 text-white border-blue-600'
+                            : 'bg-white text-slate-600 border-slate-300 hover:bg-slate-100'
+                        }`}
+                      >
+                        {sel && <CheckIcon className="w-3.5 h-3.5" />}
+                        {sub}
+                      </button>
+                    );
+                  })}
+                </div>
+                {editingItem.subsistemas.length === 0 && (
+                  <p className="text-[11px] text-blue-700 font-medium">⚠ Selecciona al menos un subsistema.</p>
+                )}
+              </div>
+
+              {/* PASO 2: NIVEL */}
+              <div
+                className={`p-4 rounded-xl border space-y-3 transition-all ${
+                  editingItem.subsistemas.length === 0
+                    ? 'opacity-40 pointer-events-none border-slate-200 bg-slate-50/30'
+                    : pasoActual === 2
+                    ? 'border-amber-400 bg-amber-50/60 ring-1 ring-amber-200'
+                    : 'border-slate-200 bg-slate-50/70'
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <label className="text-xs font-bold text-slate-900 flex items-center gap-2">
+                    <span
+                      className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold ${
+                        editingItem.niveles.length > 0
+                          ? 'bg-emerald-500 text-white'
+                          : editingItem.subsistemas.length > 0
+                          ? 'bg-amber-600 text-white'
+                          : 'bg-slate-300 text-slate-500'
+                      }`}
+                    >
+                      {editingItem.niveles.length > 0 ? '✓' : '2'}
+                    </span>
+                    Selecciona Nivel(es):
+                  </label>
+                  <span className="text-[11px] text-slate-500">
+                    {editingItem.niveles.length} / {nivelesDisponibles.length} disp.
+                  </span>
+                </div>
+                {nivelesDisponibles.length === 0 ? (
+                  <p className="text-[11px] text-amber-700 italic">Selecciona un subsistema primero.</p>
+                ) : (
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 max-h-44 overflow-y-auto p-2 border border-slate-200 rounded-lg bg-white">
+                    {nivelesDisponibles.map((niv) => {
+                      const sel = editingItem.niveles.includes(niv);
+                      return (
+                        <button
+                          key={niv}
+                          type="button"
+                          onClick={() => toggleNivel(niv)}
+                          className={`p-2 rounded text-left border flex items-center justify-between text-xs transition-colors ${
+                            sel
+                              ? 'bg-amber-50 text-amber-900 border-amber-300 font-bold'
+                              : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200'
+                          }`}
+                        >
+                          <span className="truncate">{niv}</span>
+                          {sel && <CheckIcon className="w-3.5 h-3.5 text-amber-600 shrink-0" />}
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+
+              {/* PASO 3: MATERIAS CURRICULARES */}
+              <div
+                className={`p-4 rounded-xl border space-y-3 transition-all ${
+                  editingItem.niveles.length === 0
+                    ? 'opacity-40 pointer-events-none border-slate-200 bg-slate-50/30'
+                    : pasoActual === 3
+                    ? 'border-indigo-400 bg-indigo-50/60 ring-1 ring-indigo-200'
+                    : 'border-slate-200 bg-slate-50/70'
+                }`}
+              >
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <label className="text-xs font-bold text-slate-900 flex items-center gap-2">
+                    <span
+                      className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold ${
+                        editingItem.materias.length > 0
+                          ? 'bg-emerald-500 text-white'
+                          : 'bg-indigo-600 text-white'
+                      }`}
+                    >
+                      {editingItem.materias.length > 0 ? '✓' : '3'}
+                    </span>
+                    Selecciona Materias Curriculares:
+                  </label>
+                  <span className="text-[11px] font-bold text-indigo-700">
+                    {editingItem.materias.length} seleccionada(s)
+                  </span>
+                </div>
+
+                {/* Filtros internos de materias */}
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2">
+                  <div className="relative flex-1">
+                    <input
+                      type="text"
+                      placeholder="Buscar materia en catálogo..."
+                      value={materiaFilterSearch}
+                      onChange={(e) => setMateriaFilterSearch(e.target.value)}
+                      className="w-full text-xs pl-8 pr-3 py-1.5 border border-slate-300 rounded-lg bg-white focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                    />
+                    <SearchIcon className="w-4 h-4 text-slate-400 absolute left-2.5 top-2" />
+                  </div>
+
+                  <div className="flex items-center gap-1 shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => setMateriasTabFilter('all')}
+                      className={`px-2 py-1 text-[11px] font-semibold rounded ${
+                        materiasTabFilter === 'all' ? 'bg-indigo-600 text-white' : 'bg-white text-slate-600 border border-slate-200'
+                      }`}
+                    >
+                      Todas ({materiasDisponibles.length})
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setMateriasTabFilter('selected')}
+                      className={`px-2 py-1 text-[11px] font-semibold rounded ${
+                        materiasTabFilter === 'selected' ? 'bg-indigo-600 text-white' : 'bg-white text-slate-600 border border-slate-200'
+                      }`}
+                    >
+                      Sel. ({editingItem.materias.length})
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleSelectAllVisible}
+                      className="px-2 py-1 text-[11px] font-semibold bg-white border border-slate-200 rounded hover:bg-slate-100 text-slate-700"
+                    >
+                      Marcar Visibles
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleDeselectAllVisible}
+                      className="px-2 py-1 text-[11px] font-semibold bg-white border border-slate-200 rounded hover:bg-slate-100 text-slate-700"
+                    >
+                      Desmarcar
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleClearAllMaterias}
+                      className="px-2 py-1 text-[11px] font-semibold bg-white border border-rose-200 rounded hover:bg-rose-50 text-rose-600"
+                    >
+                      Limpiar
+                    </button>
+                  </div>
+                </div>
+
+                {/* Materia personalizada */}
+                <div className="flex items-center gap-2">
+                  <input
+                    type="text"
+                    placeholder="O agrega una materia personalizada (ej: ROBÓTICA INDUSTRIAL)..."
+                    value={inputCustomMateria}
+                    onChange={(e) => setInputCustomMateria(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault();
+                        handleAddCustomMateria();
+                      }
+                    }}
+                    className="flex-1 text-xs px-3 py-1.5 border border-slate-300 rounded-lg bg-white focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono uppercase"
+                  />
+                  <button
+                    type="button"
+                    onClick={handleAddCustomMateria}
+                    disabled={!inputCustomMateria.trim()}
+                    className="px-3 py-1.5 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 disabled:opacity-50 text-xs flex items-center gap-1"
+                  >
+                    <PlusIcon className="w-3.5 h-3.5" />
+                    Agregar
+                  </button>
+                </div>
+
+                {/* Catálogo de Materias */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 max-h-56 overflow-y-auto p-2 border border-slate-200 rounded-lg bg-white">
+                  {materiasFiltradas.length === 0 ? (
+                    <div className="col-span-2 text-center text-slate-400 py-6 italic text-xs">
+                      No se encontraron materias con los filtros actuales.
+                    </div>
+                  ) : (
+                    materiasFiltradas.map((mat) => {
+                      const sel = editingItem.materias.includes(mat);
+                      const condMat = getCondicionMateria(mat);
+                      return (
+                        <div
+                          key={mat}
+                          className={`p-2 rounded border flex items-center justify-between text-xs transition-colors ${
+                            sel
+                              ? 'bg-indigo-50 border-indigo-300 text-indigo-950 font-semibold'
+                              : 'bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-700'
+                          }`}
+                        >
+                          <button
+                            type="button"
+                            onClick={() => toggleMateria(mat)}
+                            className="flex items-center gap-2 flex-1 text-left truncate mr-2"
+                          >
+                            <span
+                              className={`w-4 h-4 rounded border flex items-center justify-center shrink-0 ${
+                                sel ? 'bg-indigo-600 border-indigo-600 text-white' : 'border-slate-300 bg-white'
+                              }`}
+                            >
+                              {sel && <CheckIcon className="w-3 h-3" />}
+                            </span>
+                            <span className="truncate font-mono text-[11px]">{mat}</span>
+                          </button>
+
+                          {sel && (
+                            <div className="flex items-center gap-1 shrink-0">
+                              {condMat ? (
+                                <button
+                                  type="button"
+                                  onClick={() => openMateriaCondicionEditor(mat)}
+                                  className="px-1.5 py-0.5 rounded bg-indigo-200 text-indigo-900 font-mono text-[10px]"
+                                >
+                                  {condMat.operador} {condMat.horas}h
+                                </button>
+                              ) : (
+                                <button
+                                  type="button"
+                                  onClick={() => openMateriaCondicionEditor(mat)}
+                                  className="text-[10px] text-slate-400 hover:text-indigo-600 underline"
+                                >
+                                  + Condición
+                                </button>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })
+                  )}
+                </div>
+              </div>
+
+              {/* PASO 4: RESTRICCIÓN DE CARGA HORARIA */}
+              <div className="p-4 rounded-xl border border-slate-200 bg-slate-50/70 space-y-3">
+                <div className="flex items-center justify-between">
+                  <label className="text-xs font-bold text-slate-900 flex items-center gap-2">
+                    <span className="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold bg-slate-700 text-white">
+                      4
+                    </span>
+                    Restricción de Horas (Opcional):
+                  </label>
+                  <label className="flex items-center gap-2 text-[11px] font-semibold text-slate-700 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={condicionGlobalActiva}
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          setEditingItem({ ...editingItem, operador_carga: '>=', carga_especialidad: 48 });
+                        } else {
+                          setEditingItem({ ...editingItem, operador_carga: null, carga_especialidad: null });
+                        }
+                      }}
+                      className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+                    />
+                    Activar restricción global
+                  </label>
+                </div>
+
+                {condicionGlobalActiva && (
+                  <div className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-lg">
+                    <span className="text-[11px] text-slate-600 font-medium">Contabilizar solo si Carga:</span>
+                    <select
+                      value={editingItem.operador_carga || '>='}
+                      onChange={(e) =>
+                        setEditingItem({ ...editingItem, operador_carga: e.target.value as Operador })
+                      }
+                      className="text-xs border border-slate-300 rounded px-2 py-1 bg-white"
+                    >
+                      {OPERADORES.map((op) => (
+                        <option key={op.value} value={op.value}>
+                          {op.label}
+                        </option>
+                      ))}
+                    </select>
+                    <input
+                      type="number"
+                      value={editingItem.carga_especialidad ?? 48}
+                      onChange={(e) =>
+                        setEditingItem({ ...editingItem, carga_especialidad: Number(e.target.value) })
+                      }
+                      className="w-20 text-xs border border-slate-300 rounded px-2 py-1"
+                    />
+                    <span className="text-slate-500 text-[11px]">horas</span>
+                  </div>
+                )}
+
+                {/* Descripción y Activo */}
+                <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 pt-2 border-t border-slate-200">
+                  <div className="sm:col-span-9 space-y-1">
+                    <label className="text-[11px] font-bold text-slate-600">Descripción / Justificación:</label>
+                    <input
+                      type="text"
+                      placeholder="Ej: Materias de formación técnica BTH..."
+                      value={editingItem.descripcion}
+                      onChange={(e) => setEditingItem({ ...editingItem, descripcion: e.target.value })}
+                      className="w-full text-xs px-3 py-1.5 border border-slate-300 rounded-lg bg-white"
+                    />
+                  </div>
+                  <div className="sm:col-span-3 flex items-end">
+                    <label className="flex items-center gap-2 text-xs font-bold text-slate-700 cursor-pointer pb-1.5">
+                      <input
+                        type="checkbox"
+                        checked={editingItem.activo}
+                        onChange={(e) => setEditingItem({ ...editingItem, activo: e.target.checked })}
+                        className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+                      />
+                      Filtro Activo
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="px-6 py-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
+              <button
+                type="button"
+                onClick={() => setEditingItem(null)}
+                className="px-4 py-2 text-xs font-semibold rounded-lg bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 transition-colors"
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                disabled={saving || editingItem.materias.length === 0}
+                onClick={handleSave}
+                className="px-5 py-2 text-xs font-bold rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 disabled:opacity-50 transition-colors flex items-center gap-2 shadow-xs"
+              >
+                <SaveIcon className="w-4 h-4" />
+                {saving ? 'Guardando...' : 'Guardar Filtro de Materias'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Mini-Modal de Condición Individual por Materia */}
+      {editingMateriaCondicion && (
+        <div className="fixed inset-0 z-60 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
+          <div className="bg-white rounded-xl border border-slate-200 shadow-xl p-5 w-full max-w-sm space-y-4">
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-600">Condición Específica</span>
+              <h4 className="text-sm font-bold text-slate-900 font-mono mt-0.5 truncate">{editingMateriaCondicion}</h4>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-xs text-slate-600 font-medium">Contabilizar solo si horas trabajadas son:</label>
+              <div className="flex items-center gap-2">
+                <select
+                  value={tempOp}
+                  onChange={(e) => setTempOp(e.target.value as Operador)}
+                  className="text-xs border border-slate-300 rounded px-2 py-1.5 flex-1 bg-white"
+                >
+                  {OPERADORES.map((op) => (
+                    <option key={op.value} value={op.value}>
+                      {op.label}
+                    </option>
+                  ))}
+                </select>
+                <input
+                  type="number"
+                  value={tempHoras}
+                  onChange={(e) => setTempHoras(Number(e.target.value))}
+                  className="w-20 text-xs border border-slate-300 rounded px-2 py-1.5"
+                />
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between pt-2 border-t border-slate-100">
+              <button
+                type="button"
+                onClick={() => removeMateriaCondicion(editingMateriaCondicion)}
+                className="text-xs text-rose-600 hover:underline font-semibold"
+              >
+                Eliminar condición
+              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setEditingMateriaCondicion(null)}
+                  className="px-3 py-1.5 text-xs font-semibold rounded bg-slate-100 text-slate-700 hover:bg-slate-200"
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="button"
+                  onClick={saveMateriaCondicion}
+                  className="px-3 py-1.5 text-xs font-semibold rounded bg-indigo-600 text-white hover:bg-indigo-700"
+                >
+                  Aplicar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
