@@ -3,14 +3,14 @@
     "id": 1794324601188,
     "especialidad_oficial_id": 1,
     "subsistemas": [
-      "EDUCACIÓN REGULAR"
+      "REGULAR"
     ],
     "niveles": [
       "SECUNDARIA"
     ],
     "materias": [
-      "FÍSICA",
       "QUÍMICA",
+      "FÍSICA",
       "QUÍMICA INDUSTRIAL"
     ],
     "operador_carga": null,
@@ -21,18 +21,77 @@
     "updated_at": "2026-11-10T15:50:38.574Z"
   },
   {
+    "id": 1794327653943,
+    "especialidad_oficial_id": 2,
+    "subsistemas": [
+      "REGULAR"
+    ],
+    "niveles": [
+      "PRIMARIA"
+    ],
+    "materias": [
+      "COMUNICACIÓN Y LENGUAS, LENGUA ORIGINARIA Y EXTRANJERA",
+      "MATEMÁTICAS",
+      "CIENCIAS SOCIALES",
+      "CIENCIAS NATURALES"
+    ],
+    "operador_carga": null,
+    "carga_especialidad": null,
+    "materias_condiciones": [],
+    "activo": true,
+    "descripcion": "Filtro de Educación Primaria",
+    "updated_at": "2026-11-10T18:27:00.881Z"
+  },
+  {
+    "id": 1794327761212,
+    "especialidad_oficial_id": 3,
+    "subsistemas": [
+      "REGULAR"
+    ],
+    "niveles": [
+      "SECUNDARIA",
+      "PRIMARIA"
+    ],
+    "materias": [
+      "INSTRUMENTO MUSICAL: CUERDA",
+      "EDUCACIÓN MUSICAL",
+      "INSTRUMENTO MUSICAL: VIENTO"
+    ],
+    "operador_carga": null,
+    "carga_especialidad": null,
+    "materias_condiciones": [],
+    "activo": true,
+    "descripcion": "Filtro de Música",
+    "updated_at": "2026-11-10T16:46:16.584Z"
+  },
+  {
+    "id": 4,
+    "especialidad_oficial_id": 4,
+    "subsistemas": [],
+    "niveles": [],
+    "materias": [
+      "ARTES PLÁSTICAS"
+    ],
+    "operador_carga": null,
+    "carga_especialidad": null,
+    "materias_condiciones": [],
+    "activo": true,
+    "descripcion": "Filtro inicial para ARTES PLÁSTICAS Y VISUALES",
+    "updated_at": "2026-11-10T14:00:00.000Z"
+  },
+  {
     "id": 1794325442177,
     "especialidad_oficial_id": 5,
     "subsistemas": [
-      "EDUCACIÓN REGULAR"
+      "REGULAR"
     ],
     "niveles": [
       "INICIAL"
     ],
     "materias": [
+      "MATEMÁTICAS",
       "MAESTRO DE AÑO DE ESCOLARIDAD INICIAL",
-      "COMUNICACIÓN Y LENGUAS, LENGUA ORIGINARIA Y EXTRANJERA",
-      "MATEMÁTICAS"
+      "COMUNICACIÓN Y LENGUAS, LENGUA ORIGINARIA Y EXTRANJERA"
     ],
     "operador_carga": null,
     "carga_especialidad": null,
@@ -40,5 +99,267 @@
     "activo": true,
     "descripcion": "Filtro de Educación Inicial",
     "updated_at": "2026-11-10T16:11:22.634Z"
+  },
+  {
+    "id": 6,
+    "especialidad_oficial_id": 6,
+    "subsistemas": [],
+    "niveles": [],
+    "materias": [
+      "EDUCACIÓN FÍSICA",
+      "DEPORTES"
+    ],
+    "operador_carga": null,
+    "carga_especialidad": null,
+    "materias_condiciones": [],
+    "activo": true,
+    "descripcion": "Filtro inicial para EDUCACIÓN FÍSICA Y DEPORTES",
+    "updated_at": "2026-11-10T14:00:00.000Z"
+  },
+  {
+    "id": 7,
+    "especialidad_oficial_id": 7,
+    "subsistemas": [],
+    "niveles": [],
+    "materias": [
+      "GASTRONOMÍA"
+    ],
+    "operador_carga": null,
+    "carga_especialidad": null,
+    "materias_condiciones": [],
+    "activo": true,
+    "descripcion": "Filtro inicial para TRANSFORMACIÓN DE ALIMENTOS Y GASTRONOMÍA",
+    "updated_at": "2026-11-10T14:00:00.000Z"
+  },
+  {
+    "id": 8,
+    "especialidad_oficial_id": 8,
+    "subsistemas": [],
+    "niveles": [],
+    "materias": [
+      "COMUNICACIÓN Y LENGUAJES",
+      "LENGUA CASTELLANA"
+    ],
+    "operador_carga": null,
+    "carga_especialidad": null,
+    "materias_condiciones": [],
+    "activo": true,
+    "descripcion": "Filtro inicial para COMUNICACIÓN Y LENGUAJES: LENGUA CASTELLANA",
+    "updated_at": "2026-11-10T14:00:00.000Z"
+  },
+  {
+    "id": 9,
+    "especialidad_oficial_id": 9,
+    "subsistemas": [],
+    "niveles": [],
+    "materias": [
+      "MATEMÁTICA"
+    ],
+    "operador_carga": null,
+    "carga_especialidad": null,
+    "materias_condiciones": [],
+    "activo": true,
+    "descripcion": "Filtro inicial para MATEMÁTICA",
+    "updated_at": "2026-11-10T14:00:00.000Z"
+  },
+  {
+    "id": 10,
+    "especialidad_oficial_id": 10,
+    "subsistemas": [],
+    "niveles": [],
+    "materias": [
+      "RELIGIONES",
+      "VALORES"
+    ],
+    "operador_carga": null,
+    "carga_especialidad": null,
+    "materias_condiciones": [],
+    "activo": true,
+    "descripcion": "Filtro inicial para VALORES, ESPIRITUALIDAD Y RELIGIONES",
+    "updated_at": "2026-11-10T14:00:00.000Z"
+  },
+  {
+    "id": 11,
+    "especialidad_oficial_id": 11,
+    "subsistemas": [],
+    "niveles": [],
+    "materias": [
+      "SICOLOGÍA",
+      "FILOSOFÍA"
+    ],
+    "operador_carga": null,
+    "carga_especialidad": null,
+    "materias_condiciones": [],
+    "activo": true,
+    "descripcion": "Filtro inicial para COSMOVISIONES, FILOSOFÍAS Y SICOLOGÍA",
+    "updated_at": "2026-11-10T14:00:00.000Z"
+  },
+  {
+    "id": 12,
+    "especialidad_oficial_id": 12,
+    "subsistemas": [],
+    "niveles": [],
+    "materias": [
+      "BIOLOGÍA",
+      "GEOGRAFÍA"
+    ],
+    "operador_carga": null,
+    "carga_especialidad": null,
+    "materias_condiciones": [],
+    "activo": true,
+    "descripcion": "Filtro inicial para CIENCIAS NATURALES: BIOLOGÍA - GEOGRAFÍA",
+    "updated_at": "2026-11-10T14:00:00.000Z"
+  },
+  {
+    "id": 13,
+    "especialidad_oficial_id": 13,
+    "subsistemas": [],
+    "niveles": [],
+    "materias": [
+      "AGROPECUARIA"
+    ],
+    "operador_carga": null,
+    "carga_especialidad": null,
+    "materias_condiciones": [],
+    "activo": true,
+    "descripcion": "Filtro inicial para AGROPECUARIA",
+    "updated_at": "2026-11-10T14:00:00.000Z"
+  },
+  {
+    "id": 14,
+    "especialidad_oficial_id": 14,
+    "subsistemas": [],
+    "niveles": [],
+    "materias": [
+      "ELECTRICIDAD"
+    ],
+    "operador_carga": null,
+    "carga_especialidad": null,
+    "materias_condiciones": [],
+    "activo": true,
+    "descripcion": "Filtro inicial para ELECTRICIDAD Y ELECTRÓNICA",
+    "updated_at": "2026-11-10T14:00:00.000Z"
+  },
+  {
+    "id": 15,
+    "especialidad_oficial_id": 15,
+    "subsistemas": [],
+    "niveles": [],
+    "materias": [
+      "MECÁNICA AUTOMOTRIZ"
+    ],
+    "operador_carga": null,
+    "carga_especialidad": null,
+    "materias_condiciones": [],
+    "activo": true,
+    "descripcion": "Filtro inicial para MECÁNICA AUTOMOTRIZ",
+    "updated_at": "2026-11-10T14:00:00.000Z"
+  },
+  {
+    "id": 16,
+    "especialidad_oficial_id": 16,
+    "subsistemas": [],
+    "niveles": [],
+    "materias": [
+      "ELECTROMECÁNICA"
+    ],
+    "operador_carga": null,
+    "carga_especialidad": null,
+    "materias_condiciones": [],
+    "activo": true,
+    "descripcion": "Filtro inicial para ELECTROMECÁNICA",
+    "updated_at": "2026-11-10T14:00:00.000Z"
+  },
+  {
+    "id": 17,
+    "especialidad_oficial_id": 17,
+    "subsistemas": [],
+    "niveles": [],
+    "materias": [
+      "INGLÉS"
+    ],
+    "operador_carga": null,
+    "carga_especialidad": null,
+    "materias_condiciones": [],
+    "activo": true,
+    "descripcion": "Filtro inicial para COMUNICACIÓN Y LENGUAJES: LENGUA EXTRANJERA (INGLÉS)",
+    "updated_at": "2026-11-10T14:00:00.000Z"
+  },
+  {
+    "id": 18,
+    "especialidad_oficial_id": 18,
+    "subsistemas": [],
+    "niveles": [],
+    "materias": [
+      "INDUSTRIA TEXTIL"
+    ],
+    "operador_carga": null,
+    "carga_especialidad": null,
+    "materias_condiciones": [],
+    "activo": true,
+    "descripcion": "Filtro inicial para INDUSTRIA TEXTIL Y CONFECCIÓN",
+    "updated_at": "2026-11-10T14:00:00.000Z"
+  },
+  {
+    "id": 19,
+    "especialidad_oficial_id": 19,
+    "subsistemas": [],
+    "niveles": [],
+    "materias": [
+      "EDUCACIÓN ESPECIAL"
+    ],
+    "operador_carga": null,
+    "carga_especialidad": null,
+    "materias_condiciones": [],
+    "activo": true,
+    "descripcion": "Filtro inicial para EDUCACIÓN ESPECIAL PARA PERSONAS CON DISCAPACIDAD",
+    "updated_at": "2026-11-10T14:00:00.000Z"
+  },
+  {
+    "id": 20,
+    "especialidad_oficial_id": 20,
+    "subsistemas": [],
+    "niveles": [],
+    "materias": [
+      "CIENCIAS SOCIALES",
+      "HISTORIA"
+    ],
+    "operador_carga": null,
+    "carga_especialidad": null,
+    "materias_condiciones": [],
+    "activo": true,
+    "descripcion": "Filtro inicial para CIENCIAS SOCIALES",
+    "updated_at": "2026-11-10T14:00:00.000Z"
+  },
+  {
+    "id": 21,
+    "especialidad_oficial_id": 21,
+    "subsistemas": [],
+    "niveles": [],
+    "materias": [
+      "CARPINTERÍA",
+      "MADERA Y METAL"
+    ],
+    "operador_carga": null,
+    "carga_especialidad": null,
+    "materias_condiciones": [],
+    "activo": true,
+    "descripcion": "Filtro inicial para CARPINTERÍA INDUSTRIAL EN MADERA Y METAL",
+    "updated_at": "2026-11-10T14:00:00.000Z"
+  },
+  {
+    "id": 22,
+    "especialidad_oficial_id": 22,
+    "subsistemas": [],
+    "niveles": [],
+    "materias": [
+      "MECÁNICA INDUSTRIAL"
+    ],
+    "operador_carga": null,
+    "carga_especialidad": null,
+    "materias_condiciones": [],
+    "activo": true,
+    "descripcion": "Filtro inicial para MECÁNICA INDUSTRIAL",
+    "updated_at": "2026-11-10T14:00:00.000Z"
   }
 ]

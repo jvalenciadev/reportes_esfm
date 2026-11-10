@@ -16,7 +16,6 @@ const headers = {
 
 const CONFIG_PATH = path.join(process.cwd(), 'src/data/filtros_materia_config.json');
 
-// Helper para leer configuración local
 function getLocalConfig(): any[] {
   try {
     if (fs.existsSync(CONFIG_PATH)) {
@@ -29,17 +28,16 @@ function getLocalConfig(): any[] {
   return [];
 }
 
-// Helper para guardar configuración local
 function saveLocalConfig(data: any[]) {
   try {
     fs.writeFileSync(CONFIG_PATH, JSON.stringify(data, null, 2), 'utf-8');
   } catch (e) {
-    console.error('Error escribiendo filtros_materia_config.json:', e);
+    console.warn('Aviso escribiendo filtros_materia_config.json local (ignorable en Vercel):', e);
   }
 }
 
-function normalizeSubsistema(sub?: string | null): string | null {
-  if (!sub) return null;
+function normalizeSubsistema(sub?: string | null): string {
+  if (!sub) return 'REGULAR';
   const s = sub.trim().toUpperCase();
   if (s.includes('REGULAR')) return 'REGULAR';
   if (s.includes('ALTERNATIVA')) return 'ALTERNATIVA';
@@ -47,34 +45,100 @@ function normalizeSubsistema(sub?: string | null): string | null {
   return s;
 }
 
-// 1. GET: Listar especialidades oficiales o filtros guardados por materia
+// 1. GET: Listar especialidades oficiales o filtros configurados
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const action = searchParams.get('action');
 
   try {
-    // A. Si se solicitan las especialidades oficiales
     if (action === 'especialidades') {
       const res = await fetch(
         `${SUPABASE_URL}/rest/v1/especialidades_oficiales?select=id,nombre&order=id.asc`,
         { headers, next: { revalidate: 120 } }
       );
       if (res.ok) {
-        const data = await res.json();
-        return NextResponse.json(data);
+        return NextResponse.json(await res.json());
       }
       return NextResponse.json([]);
     }
 
-    // B. Listar filtros por materia configurados
-    const local = getLocalConfig();
-    return NextResponse.json(local);
+    // Consultar relacion_especialidad_materia en Supabase (Fuente de Verdad Persistente en la Nube)
+    const [relRes, espRes] = await Promise.all([
+      fetch(`${SUPABASE_URL}/rest/v1/relacion_especialidad_materia?select=*&order=especialidad_id.asc`, {
+        headers,
+        cache: 'no-store',
+      }),
+      fetch(`${SUPABASE_URL}/rest/v1/especialidades_oficiales?select=id,nombre&order=id.asc`, {
+        headers,
+        next: { revalidate: 120 },
+      }),
+    ]);
+
+    const relaciones: any[] = relRes.ok ? await relRes.json() : [];
+    const especialidades: any[] = espRes.ok ? await espRes.json() : [];
+    const localConfigs = getLocalConfig();
+
+    const localMap = new Map<number, any>();
+    localConfigs.forEach((c) => localMap.set(c.especialidad_oficial_id, c));
+
+    // Agrupar relaciones por especialidad_id
+    const relMap = new Map<number, { subs: Set<string>; nivs: Set<string>; mats: Set<string>; activo: boolean }>();
+    relaciones.forEach((r) => {
+      const espId = Number(r.especialidad_id);
+      if (!relMap.has(espId)) {
+        relMap.set(espId, {
+          subs: new Set<string>(),
+          nivs: new Set<string>(),
+          mats: new Set<string>(),
+          activo: false,
+        });
+      }
+      const item = relMap.get(espId)!;
+      if (r.activo) item.activo = true;
+      if (r.subsistema) item.subs.add(normalizeSubsistema(r.subsistema));
+      if (r.nivel) item.nivs.add(r.nivel.toUpperCase().trim());
+      if (r.materia) item.mats.add(r.materia.toUpperCase().trim());
+    });
+
+    // Construir la lista consolidada para todas las especialidades oficiales
+    const result: any[] = [];
+
+    especialidades.forEach((esp) => {
+      const espId = esp.id;
+      const relData = relMap.get(espId);
+      const localData = localMap.get(espId);
+
+      if (relData && relData.mats.size > 0) {
+        result.push({
+          id: localData?.id || espId,
+          especialidad_oficial_id: espId,
+          subsistemas: Array.from(relData.subs),
+          niveles: Array.from(relData.nivs),
+          materias: Array.from(relData.mats),
+          operador_carga: localData?.operador_carga || null,
+          carga_especialidad: localData?.carga_especialidad || null,
+          materias_condiciones: localData?.materias_condiciones || [],
+          activo: relData.activo,
+          descripcion: localData?.descripcion || '',
+          updated_at: localData?.updated_at || new Date().toISOString(),
+        });
+      } else if (localData) {
+        result.push(localData);
+      }
+    });
+
+    // Guardar copia local de respaldo si hay resultados
+    if (result.length > 0) {
+      saveLocalConfig(result);
+    }
+
+    return NextResponse.json(result);
   } catch (err: any) {
     return NextResponse.json({ error: err.message || 'Error en GET filtros-materia' }, { status: 500 });
   }
 }
 
-// 2. POST / PUT: Crear o actualizar filtro de especialidad (Subsistema -> Nivel -> Materias)
+// 2. POST / PUT: Crear o actualizar filtro de especialidad
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -121,35 +185,45 @@ export async function POST(req: NextRequest) {
     }
     saveLocalConfig(list);
 
-    // Sincronizar en segundo plano con Supabase (relacion_especialidad_materia)
+    // Sincronizar reglas en relacion_especialidad_materia en Supabase (Persistente en Vercel)
     try {
-      // 1. Limpiar materias previas para esta especialidad
       await fetch(
         `${SUPABASE_URL}/rest/v1/relacion_especialidad_materia?especialidad_id=eq.${espId}`,
         { method: 'DELETE', headers }
       );
 
-      // 2. Insertar las materias seleccionadas
       if (record.activo && record.materias.length > 0) {
-        const sub = normalizeSubsistema(record.subsistemas[0]);
-        const niv = record.niveles[0] || null;
-        const insertPayload = record.materias.map((m: string) => ({
-          especialidad_id: espId,
-          subsistema: sub,
-          nivel: niv,
-          materia: m.toUpperCase(),
-          tipo_coincidencia: 'CONTIENE',
-          activo: true,
-        }));
+        const subsNorm = record.subsistemas.length > 0
+          ? record.subsistemas.map((s: string) => normalizeSubsistema(s))
+          : ['REGULAR'];
+        const nivs = record.niveles.length > 0 ? record.niveles : [null];
 
-        await fetch(`${SUPABASE_URL}/rest/v1/relacion_especialidad_materia`, {
-          method: 'POST',
-          headers: {
-            ...headers,
-            Prefer: 'resolution=merge-duplicates',
-          },
-          body: JSON.stringify(insertPayload),
-        });
+        const insertPayload: any[] = [];
+        for (const sub of subsNorm) {
+          for (const niv of nivs) {
+            for (const mat of record.materias) {
+              insertPayload.push({
+                especialidad_id: espId,
+                subsistema: sub,
+                nivel: niv,
+                materia: mat.toUpperCase().trim(),
+                tipo_coincidencia: 'CONTIENE',
+                activo: true,
+              });
+            }
+          }
+        }
+
+        if (insertPayload.length > 0) {
+          await fetch(`${SUPABASE_URL}/rest/v1/relacion_especialidad_materia`, {
+            method: 'POST',
+            headers: {
+              ...headers,
+              Prefer: 'resolution=merge-duplicates',
+            },
+            body: JSON.stringify(insertPayload),
+          });
+        }
       }
     } catch (syncErr) {
       console.warn('Aviso sincronizando relacion_especialidad_materia:', syncErr);
@@ -161,12 +235,10 @@ export async function POST(req: NextRequest) {
   }
 }
 
-// 3. PUT: Actualizar filtro
 export async function PUT(req: NextRequest) {
   return POST(req);
 }
 
-// 4. DELETE: Eliminar filtro por ID
 export async function DELETE(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
@@ -190,7 +262,7 @@ export async function DELETE(req: NextRequest) {
           { method: 'DELETE', headers }
         );
       } catch (syncErr) {
-        console.warn('Aviso eliminando de relacion_especialidad_materia:', syncErr);
+        console.warn('Aviso eliminando de BD:', syncErr);
       }
     }
 

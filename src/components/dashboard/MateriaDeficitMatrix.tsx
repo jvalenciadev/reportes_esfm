@@ -67,6 +67,8 @@ interface EspecialidadItem {
 interface ReportData {
   especialidad_id: number;
   especialidad: string;
+  filtro?: any;
+  filtro_configurado?: boolean;
   resumen_nacional: ResumenNacional | null;
   departamentos: DepartamentoDato[];
   materias_breakdown: MateriaBreakdown[];
@@ -305,8 +307,34 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
             </select>
           </div>
 
-          {/* BADGES DE CONFIGURACIÓN */}
-          {especialidadActual && (
+          {/* BADGES DEL FILTRO APLICADO */}
+          {reportData?.filtro ? (
+            <div className="text-xs bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-1">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
+                Criterios del Filtro Aplicados (CRUD):
+              </span>
+              <div className="flex flex-wrap items-center gap-1.5">
+                <span className="px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200 text-[10px] font-semibold">
+                  {reportData.filtro.subsistemas?.join(', ') || 'Sin subsistema'}
+                </span>
+                <span className="px-2 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200 text-[10px] font-semibold">
+                  {reportData.filtro.niveles?.join(', ') || 'Sin nivel'}
+                </span>
+                <span className="px-2 py-0.5 rounded bg-purple-50 text-purple-700 border border-purple-200 text-[10px] font-bold">
+                  {reportData.filtro.materias?.length || 0} materias filtradas
+                </span>
+                {reportData.filtro.operador_carga && reportData.filtro.carga_especialidad !== null ? (
+                  <span className="px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-200 text-[10px] font-bold">
+                    Carga {reportData.filtro.operador_carga} {reportData.filtro.carga_especialidad} hrs
+                  </span>
+                ) : (
+                  <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-500 border border-slate-200 text-[10px] italic">
+                    Sin restricción de horas
+                  </span>
+                )}
+              </div>
+            </div>
+          ) : especialidadActual && (
             <div className="text-xs bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-1">
               <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
                 Reglas de Materia Configuradas:
