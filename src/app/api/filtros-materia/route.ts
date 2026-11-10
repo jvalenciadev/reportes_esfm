@@ -38,6 +38,15 @@ function saveLocalConfig(data: any[]) {
   }
 }
 
+function normalizeSubsistema(sub?: string | null): string | null {
+  if (!sub) return null;
+  const s = sub.trim().toUpperCase();
+  if (s.includes('REGULAR')) return 'REGULAR';
+  if (s.includes('ALTERNATIVA')) return 'ALTERNATIVA';
+  if (s.includes('ESPECIAL')) return 'ESPECIAL';
+  return s;
+}
+
 // 1. GET: Listar especialidades oficiales o filtros guardados por materia
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -122,7 +131,7 @@ export async function POST(req: NextRequest) {
 
       // 2. Insertar las materias seleccionadas
       if (record.activo && record.materias.length > 0) {
-        const sub = record.subsistemas[0] || null;
+        const sub = normalizeSubsistema(record.subsistemas[0]);
         const niv = record.niveles[0] || null;
         const insertPayload = record.materias.map((m: string) => ({
           especialidad_id: espId,
