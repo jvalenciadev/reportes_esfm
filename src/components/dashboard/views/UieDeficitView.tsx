@@ -20,6 +20,8 @@ import {
 } from '../../ui/Icons';
 import { FiltrosEspecialidadManager } from '../FiltrosEspecialidadManager';
 import { EspecialidadDeficitMatrix } from '../EspecialidadDeficitMatrix';
+import { FiltrosMateriaManager } from '../FiltrosMateriaManager';
+import { MateriaDeficitMatrix } from '../MateriaDeficitMatrix';
 
 interface UieDeficitViewProps {
   data: DashboardDataset;
@@ -27,7 +29,7 @@ interface UieDeficitViewProps {
 
 export function UieDeficitView({ data }: UieDeficitViewProps) {
   const summary = summaryRaw;
-  const [activeTab, setActiveTab] = useState<'departamentos' | 'subsistemas' | 'top_deficit' | 'matriz_especialidad' | 'filtros_especialidad' | 'explorador' | 'sql'>('matriz_especialidad');
+  const [activeTab, setActiveTab] = useState<'departamentos' | 'subsistemas' | 'top_deficit' | 'matriz_especialidad' | 'filtros_especialidad' | 'matriz_materia' | 'filtros_materia' | 'explorador' | 'sql'>('matriz_materia');
 
   // Estados Tab 1: Departamentos
   const [selectedDeptSort, setSelectedDeptSort] = useState<'deficit' | 'ues' | 'paralelos' | 'nombre'>('deficit');
@@ -271,7 +273,32 @@ export function UieDeficitView({ data }: UieDeficitViewProps) {
           }`}
         >
           <GridIcon className="w-4 h-4" />
-          Configurador de Filtros (CRUD)
+          Filtros por Cargo (CRUD)
+        </button>
+
+        <button
+          onClick={() => setActiveTab('matriz_materia')}
+          className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap transition-colors ${
+            activeTab === 'matriz_materia'
+              ? 'border-indigo-600 text-indigo-700 font-bold bg-indigo-50/50'
+              : 'border-transparent text-slate-600 hover:text-indigo-600 hover:border-indigo-300'
+          }`}
+        >
+          <GraduationCapIcon className="w-4 h-4 text-indigo-600" />
+          Déficit por Materia (SIE)
+          <span className="text-[10px] font-black px-1.5 py-0.2 rounded bg-indigo-100 text-indigo-800">NUEVO</span>
+        </button>
+
+        <button
+          onClick={() => setActiveTab('filtros_materia')}
+          className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap transition-colors ${
+            activeTab === 'filtros_materia'
+              ? 'border-indigo-600 text-indigo-700 font-bold bg-indigo-50/50'
+              : 'border-transparent text-slate-600 hover:text-indigo-600 hover:border-indigo-300'
+          }`}
+        >
+          <GridIcon className="w-4 h-4 text-indigo-600" />
+          Filtros de Materia (CRUD)
         </button>
 
         <button
@@ -828,9 +855,19 @@ export function UieDeficitView({ data }: UieDeficitViewProps) {
         <EspecialidadDeficitMatrix onGoToConfig={() => setActiveTab('filtros_especialidad')} />
       )}
 
-      {/* TAB: CONFIGURADOR DE FILTROS CRUD */}
+      {/* TAB: CONFIGURADOR DE FILTROS CRUD (CARGO) */}
       {activeTab === 'filtros_especialidad' && (
         <FiltrosEspecialidadManager />
+      )}
+
+      {/* TAB: MATRIZ DE DÉFICIT POR MATERIA (SIE GRANULAR) */}
+      {activeTab === 'matriz_materia' && (
+        <MateriaDeficitMatrix />
+      )}
+
+      {/* TAB: CONFIGURADOR DE FILTROS CRUD (MATERIA) */}
+      {activeTab === 'filtros_materia' && (
+        <FiltrosMateriaManager />
       )}
 
       {/* TAB 5: ESTRUCTURA SQL Y MIGRACIÓN */}

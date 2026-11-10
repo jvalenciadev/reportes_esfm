@@ -34,12 +34,16 @@ interface DptoSalienteEntrante {
   salientes: number;
   entrantes: number;
   neto: number;
+  salientes_2024_2025?: number;
+  entrantes_2024_2025?: number;
 }
 
 interface SalientesData {
   total_regular_2024: number;
   total_regular_2025: number;
-  variacion_neta: number;
+  variacion_neta?: number;
+  total_salientes?: number;
+  total_entrantes?: number;
   por_departamento: DptoSalienteEntrante[];
 }
 
@@ -51,9 +55,10 @@ interface DptoImpertinencia {
 }
 
 interface ImpertinenciasData {
-  total_docentes: number;
+  total_docentes?: number;
+  total_docentes_2026?: number;
   total_impertinentes: number;
-  porcentaje_nacional: number;
+  porcentaje_nacional?: number;
   por_departamento: DptoImpertinencia[];
 }
 
@@ -61,6 +66,7 @@ interface DptoSinCargo {
   departamento: string;
   sin_cargo?: number;
   sin_presencia?: number;
+  sin_presencia_2026?: number;
 }
 
 interface SinCargoData {
@@ -280,10 +286,10 @@ export default function HistorialDocenteView() {
         map[r.departamento] = {
           departamento: r.departamento,
           sinCargo: 0,
-          sinPresencia: r.sin_presencia ?? 0,
+          sinPresencia: r.sin_presencia ?? r.sin_presencia_2026 ?? 0,
         };
       } else {
-        map[r.departamento].sinPresencia = r.sin_presencia ?? 0;
+        map[r.departamento].sinPresencia = r.sin_presencia ?? r.sin_presencia_2026 ?? 0;
       }
     });
 
@@ -615,7 +621,7 @@ export default function HistorialDocenteView() {
                         <TrendingUp className="w-4 h-4 text-emerald-400" />
                       </div>
                       <div className="text-2xl font-black text-emerald-400 mt-1">
-                        +{salientes.variacion_neta.toLocaleString("es-BO")}
+                        +{((salientes.variacion_neta ?? (salientes.total_regular_2025 - salientes.total_regular_2024)) ?? 0).toLocaleString("es-BO")}
                       </div>
                     </div>
                     <div className="text-xs text-slate-300 mt-3 pt-2 border-t border-white/10">
@@ -629,9 +635,11 @@ export default function HistorialDocenteView() {
               {viewMode === "cards" ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                   {filteredSalientes.map((d) => {
-                    const salPct = ((d.salientes / maxSaliente) * 100).toFixed(0);
-                    const entPct = ((d.entrantes / maxSaliente) * 100).toFixed(0);
-                    const reposicion = (d.entrantes / (d.salientes || 1)).toFixed(2);
+                    const dSal = d.salientes ?? d.salientes_2024_2025 ?? 0;
+                    const dEnt = d.entrantes ?? d.entrantes_2024_2025 ?? 0;
+                    const salPct = ((dSal / maxSaliente) * 100).toFixed(0);
+                    const entPct = ((dEnt / maxSaliente) * 100).toFixed(0);
+                    const reposicion = (dEnt / (dSal || 1)).toFixed(2);
 
                     return (
                       <div
@@ -664,7 +672,7 @@ export default function HistorialDocenteView() {
                                 <span className="font-semibold text-rose-600 flex items-center gap-1">
                                   <UserMinus className="w-3.5 h-3.5" /> Salientes
                                 </span>
-                                <span className="font-bold text-slate-700">{d.salientes.toLocaleString()}</span>
+                                <span className="font-bold text-slate-700">{(d.salientes ?? d.salientes_2024_2025 ?? 0).toLocaleString()}</span>
                               </div>
                               <div className="h-2 w-full bg-slate-200 rounded-full overflow-hidden">
                                 <div
@@ -679,7 +687,7 @@ export default function HistorialDocenteView() {
                                 <span className="font-semibold text-emerald-600 flex items-center gap-1">
                                   <UserPlus className="w-3.5 h-3.5" /> Nuevos Entrantes
                                 </span>
-                                <span className="font-bold text-slate-700">{d.entrantes.toLocaleString()}</span>
+                                <span className="font-bold text-slate-700">{(d.entrantes ?? d.entrantes_2024_2025 ?? 0).toLocaleString()}</span>
                               </div>
                               <div className="h-2 w-full bg-slate-200 rounded-full overflow-hidden">
                                 <div
@@ -734,8 +742,8 @@ export default function HistorialDocenteView() {
                         {filteredSalientes.map((r) => (
                           <tr key={r.departamento} className="hover:bg-slate-50/80 transition-colors">
                             <td className="py-3.5 px-4 font-bold text-slate-800">{r.departamento}</td>
-                            <td className="py-3.5 px-4 font-semibold text-rose-600">{r.salientes.toLocaleString()}</td>
-                            <td className="py-3.5 px-4 font-semibold text-emerald-600">{r.entrantes.toLocaleString()}</td>
+                            <td className="py-3.5 px-4 font-semibold text-rose-600">{(r.salientes ?? r.salientes_2024_2025 ?? 0).toLocaleString()}</td>
+                            <td className="py-3.5 px-4 font-semibold text-emerald-600">{(r.entrantes ?? r.entrantes_2024_2025 ?? 0).toLocaleString()}</td>
                             <td className="py-3.5 px-4 font-extrabold">
                               <span
                                 className={`inline-flex px-2 py-0.5 rounded-full ${
@@ -770,7 +778,7 @@ export default function HistorialDocenteView() {
                           <td className="py-3.5 px-4 text-rose-600 font-black">{totalSalientes.toLocaleString()}</td>
                           <td className="py-3.5 px-4 text-emerald-600 font-black">{totalEntrantes.toLocaleString()}</td>
                           <td className="py-3.5 px-4 font-black text-indigo-700">
-                            +{salientes.variacion_neta.toLocaleString()}
+                            +{((salientes.variacion_neta ?? (salientes.total_regular_2025 - salientes.total_regular_2024)) ?? 0).toLocaleString()}
                           </td>
                           <td className="py-3.5 px-4 text-center text-slate-500 font-medium">Planilla auditada</td>
                         </tr>
@@ -801,43 +809,52 @@ export default function HistorialDocenteView() {
                   </div>
                   <span className="text-xs font-bold px-3 py-1 bg-amber-50 text-amber-700 rounded-full border border-amber-200 flex items-center gap-1">
                     <ShieldAlert className="w-3.5 h-3.5 text-amber-600" />
-                    Índice Nacional: {impertinencias.porcentaje_nacional}%
+                    Índice Nacional: {impertinencias.porcentaje_nacional ?? ((impertinencias.total_impertinentes / ((impertinencias.total_docentes || impertinencias.total_docentes_2026) || 1)) * 100).toFixed(2)}%
                   </span>
                 </div>
 
                 {/* Barra Visual de Pertinencia Nacional */}
                 <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200/80 space-y-3">
-                  <div className="flex justify-between items-center text-xs">
-                    <div className="flex items-center gap-2">
-                      <span className="w-3 h-3 rounded-full bg-emerald-500" />
-                      <span className="font-bold text-slate-700">
-                        Pertinentes: {(impertinencias.total_docentes - impertinencias.total_impertinentes).toLocaleString("es-BO")}{" "}
-                        <span className="text-slate-400 font-normal">
-                          ({(100 - impertinencias.porcentaje_nacional).toFixed(2)}%)
-                        </span>
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-3 h-3 rounded-full bg-amber-500" />
-                      <span className="font-bold text-amber-700">
-                        Impertinentes: {impertinencias.total_impertinentes.toLocaleString("es-BO")}{" "}
-                        <span className="text-amber-500 font-normal">({impertinencias.porcentaje_nacional}%)</span>
-                      </span>
-                    </div>
-                  </div>
+                  {(() => {
+                    const totalDoc = impertinencias.total_docentes ?? impertinencias.total_docentes_2026 ?? 0;
+                    const totalImp = impertinencias.total_impertinentes ?? 0;
+                    const pctNac = impertinencias.porcentaje_nacional ?? (totalDoc > 0 ? Number(((totalImp / totalDoc) * 100).toFixed(2)) : 0);
+                    return (
+                      <>
+                        <div className="flex justify-between items-center text-xs">
+                          <div className="flex items-center gap-2">
+                            <span className="w-3 h-3 rounded-full bg-emerald-500" />
+                            <span className="font-bold text-slate-700">
+                              Pertinentes: {(totalDoc - totalImp).toLocaleString("es-BO")}{" "}
+                              <span className="text-slate-400 font-normal">
+                                ({(100 - pctNac).toFixed(2)}%)
+                              </span>
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="w-3 h-3 rounded-full bg-amber-500" />
+                            <span className="font-bold text-amber-700">
+                              Impertinentes: {totalImp.toLocaleString("es-BO")}{" "}
+                              <span className="text-amber-500 font-normal">({pctNac}%)</span>
+                            </span>
+                          </div>
+                        </div>
 
-                  <div className="h-4 w-full bg-slate-200 rounded-full overflow-hidden flex shadow-inner">
-                    <div
-                      className="h-full bg-gradient-to-r from-emerald-500 to-teal-500 transition-all duration-700"
-                      style={{ width: `${100 - impertinencias.porcentaje_nacional}%` }}
-                      title="Pertinentes"
-                    />
-                    <div
-                      className="h-full bg-gradient-to-r from-amber-500 to-rose-500 transition-all duration-700"
-                      style={{ width: `${impertinencias.porcentaje_nacional}%` }}
-                      title="Impertinentes"
-                    />
-                  </div>
+                        <div className="h-4 w-full bg-slate-200 rounded-full overflow-hidden flex shadow-inner">
+                          <div
+                            className="h-full bg-gradient-to-r from-emerald-500 to-teal-500 transition-all duration-700"
+                            style={{ width: `${100 - pctNac}%` }}
+                            title="Pertinentes"
+                          />
+                          <div
+                            className="h-full bg-gradient-to-r from-amber-500 to-rose-500 transition-all duration-700"
+                            style={{ width: `${pctNac}%` }}
+                            title="Impertinentes"
+                          />
+                        </div>
+                      </>
+                    );
+                  })()}
                 </div>
 
                 {/* 3 Callouts Semáforo */}
@@ -1009,9 +1026,9 @@ export default function HistorialDocenteView() {
                       <tfoot>
                         <tr className="bg-slate-100 font-bold text-slate-800 text-xs border-t border-slate-200">
                           <td className="py-3.5 px-4">TOTAL NACIONAL</td>
-                          <td className="py-3.5 px-4">{impertinencias.total_docentes.toLocaleString()}</td>
-                          <td className="py-3.5 px-4 text-amber-600 font-black">{impertinencias.total_impertinentes.toLocaleString()}</td>
-                          <td className="py-3.5 px-4 font-black text-rose-700">{impertinencias.porcentaje_nacional}%</td>
+                          <td className="py-3.5 px-4">{(impertinencias.total_docentes ?? impertinencias.total_docentes_2026 ?? 0).toLocaleString()}</td>
+                          <td className="py-3.5 px-4 text-amber-600 font-black">{(impertinencias.total_impertinentes ?? 0).toLocaleString()}</td>
+                          <td className="py-3.5 px-4 font-black text-rose-700">{impertinencias.porcentaje_nacional ?? (((impertinencias.total_impertinentes ?? 0) / ((impertinencias.total_docentes || impertinencias.total_docentes_2026) || 1)) * 100).toFixed(2)}%</td>
                           <td className="py-3.5 px-4 text-center text-slate-500 font-medium">Promedio ponderado</td>
                         </tr>
                       </tfoot>
