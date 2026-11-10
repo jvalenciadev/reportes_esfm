@@ -72,6 +72,8 @@ export async function GET(req: NextRequest) {
   const especialidadIdParam = searchParams.get('especialidad_id');
   const departamentoIdParam = searchParams.get('departamento_id');
   const viewUes = searchParams.get('view') === 'ues';
+  const baseHorasParam = searchParams.get('base_horas');
+  const customBaseHoras = baseHorasParam && !isNaN(Number(baseHorasParam)) && Number(baseHorasParam) > 0 ? Number(baseHorasParam) : null;
 
   try {
     // 1. Si no especifica especialidad_id, listar especialidades y número de reglas de materia
@@ -100,6 +102,7 @@ export async function GET(req: NextRequest) {
       const list = especialidades.map((e: any) => ({
         id: e.id,
         nombre: e.nombre,
+        hora_item: e.hora_item ?? (e.nombre?.toUpperCase().includes('ESPECIAL') ? 108 : 88),
         reglas_total: countsMap[e.id]?.total ?? 0,
         reglas_activas: countsMap[e.id]?.activas ?? 0,
       }));
@@ -111,14 +114,20 @@ export async function GET(req: NextRequest) {
 
     // Obtener nombre de la especialidad oficial
     let espNombre = 'Especialidad Oficial';
+    let horaItemBd = 88.0;
     try {
       const resEsp = await fetch(
-        `${SUPABASE_URL}/rest/v1/especialidades_oficiales?id=eq.${especialidadId}&select=id,nombre`,
+        `${SUPABASE_URL}/rest/v1/especialidades_oficiales?id=eq.${especialidadId}&select=id,nombre,hora_item`,
         { headers, next: { revalidate: 300 } }
       );
       if (resEsp.ok) {
         const espData = await resEsp.json();
-        if (espData.length > 0) espNombre = espData[0].nombre;
+        if (espData.length > 0) {
+          espNombre = espData[0].nombre;
+          horaItemBd = Number(espData[0].hora_item) || (espNombre.toUpperCase().includes('ESPECIAL') ? 108.0 : 88.0);
+        }
+      } else {
+        horaItemBd = espNombre.toUpperCase().includes('ESPECIAL') ? 108.0 : 88.0;
       }
     } catch (e) {
       console.warn(e);
@@ -199,7 +208,7 @@ export async function GET(req: NextRequest) {
         const resUes = await fetch(queryUrl, { headers, cache: 'no-store' });
         if (resUes.ok) {
           const rawUes = await resUes.json();
-          const baseHoras = espNombre.toUpperCase().includes('ESPECIAL') ? 108.0 : 88.0;
+          const baseHoras = customBaseHoras && customBaseHoras > 0 ? customBaseHoras : horaItemBd;
 
           const ues = rawUes.map((r: any) => ({
             cod_ue: Number(r.cod_ue),
@@ -258,7 +267,7 @@ export async function GET(req: NextRequest) {
 
     // 4. Agregación analítica instantánea en memoria (0.7 MB agrupado, < 5 ms, 0 fallos en Vercel)
     const agrupado = getAgrupadoData();
-    const baseHoras = espNombre.toUpperCase().includes('ESPECIAL') ? 108.0 : 88.0;
+    const baseHoras = customBaseHoras && customBaseHoras > 0 ? customBaseHoras : horaItemBd;
 
     const uesSetNac = new Set<number>();
     let cargaNac = 0;
@@ -361,8 +370,16 @@ export async function GET(req: NextRequest) {
         carga_horaria: cargaNac,
         horas_planilla: planillaNac,
         deficit_horas: deficitNac,
+        hora_item_bd: horaItemBd,
+        base_horas_aplicada: baseHoras,
+        es_promedio_dinamico: !customBaseHoras,
         items_deficit_equiv: itemsNac,
         pct_cobertura: pctCobNac,
+      },
+      especialidad_obj: {
+        id: especialidadId,
+        nombre: espNombre,
+        hora_item: horaItemBd,
       },
       departamentos,
       materias_breakdown,

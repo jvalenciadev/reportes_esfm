@@ -32,6 +32,9 @@ interface ResumenNacional {
   carga_horaria: number;
   horas_planilla: number;
   deficit_horas: number;
+  hora_item_bd?: number;
+  base_horas_aplicada?: number;
+  es_promedio_dinamico?: boolean;
   items_deficit_equiv: number;
   pct_cobertura: number;
 }
@@ -60,6 +63,7 @@ interface UeDetalle {
 interface EspecialidadItem {
   id: number;
   nombre: string;
+  hora_item?: number;
   reglas_total: number;
   reglas_activas: number;
 }
@@ -88,6 +92,9 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
 
   const [reportData, setReportData] = useState<ReportData | null>(null);
   const [showMateriasPanel, setShowMateriasPanel] = useState<boolean>(true);
+  const [showMetodologia, setShowMetodologia] = useState<boolean>(true);
+  const [customBaseHoras, setCustomBaseHoras] = useState<string>('');
+  const [modoBase, setModoBase] = useState<'bd' | 'promedio' | 'manual'>('bd');
 
   // Modal UEs por departamento
   const [selectedDeptForUes, setSelectedDeptForUes] = useState<{ id: number; nombre: string } | null>(null);
@@ -124,10 +131,14 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
   }, []);
 
   // 2. Cargar reporte de déficit por materia para la especialidad seleccionada
-  const fetchReport = useCallback(async (espId: number) => {
+  const fetchReport = useCallback(async (espId: number, baseHorasOverride?: string) => {
     setLoadingData(true);
     try {
-      const res = await fetch(`/api/materia-deficit?especialidad_id=${espId}`);
+      let url = `/api/materia-deficit?especialidad_id=${espId}`;
+      if (baseHorasOverride && !isNaN(Number(baseHorasOverride)) && Number(baseHorasOverride) > 0) {
+        url += `&base_horas=${encodeURIComponent(baseHorasOverride)}`;
+      }
+      const res = await fetch(url);
       if (res.ok) {
         const data = await res.json();
         setReportData(data);
@@ -144,11 +155,11 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
 
   useEffect(() => {
     if (selectedEspId) {
-      fetchReport(selectedEspId);
+      fetchReport(selectedEspId, customBaseHoras);
       setSelectedDeptForUes(null);
       setUesList([]);
     }
-  }, [selectedEspId, fetchReport]);
+  }, [selectedEspId, customBaseHoras, fetchReport]);
 
   // 3. Cargar UEs de un departamento
   const openUesModal = async (deptId: number, deptNombre: string) => {
@@ -241,6 +252,15 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
   };
 
   const especialidadActual = especialidades.find((e) => e.id === selectedEspId);
+  const esEspecial = (especialidadActual?.nombre || reportData?.especialidad || '').toUpperCase().includes('ESPECIAL');
+  const horaItemBd = reportData?.resumen_nacional?.hora_item_bd ?? especialidadActual?.hora_item ?? (esEspecial ? 108.0 : 88.0);
+  const totalCarga = reportData?.resumen_nacional?.carga_horaria || 0;
+  const totalUes = reportData?.resumen_nacional?.total_ues || 1;
+  const promedioHorasDocente = totalUes > 0 ? Number((totalCarga / totalUes).toFixed(2)) : 88.0;
+
+  const baseHorasActual = customBaseHoras && !isNaN(Number(customBaseHoras)) && Number(customBaseHoras) > 0
+    ? Number(customBaseHoras)
+    : (modoBase === 'bd' ? horaItemBd : (reportData?.resumen_nacional?.base_horas_aplicada || horaItemBd));
   const sinDatos = reportData?.sin_datos ?? false;
   const filtroConfigurado = (especialidadActual?.reglas_total ?? 0) > 0;
 
@@ -455,9 +475,126 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
               {reportData.resumen_nacional.items_deficit_equiv.toLocaleString('es-BO')}
             </div>
             <div className="text-[10px] text-slate-600 font-medium">
-              Base: <strong className="text-slate-900">88h / 108h ítem</strong>
+              Base: <strong className="text-slate-900">{baseHorasActual} hrs/ítem</strong>
+              <span className="text-indigo-700 ml-1">
+                ({modoBase === 'bd' ? `BD: ${horaItemBd}h` : modoBase === 'promedio' ? 'promedio' : 'manual'})
+              </span>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* PANEL METODOLOGÍA DE CÁLCULO DEL ÍTEM (BASE BD vs PROMEDIO) */}
+      {reportData?.resumen_nacional && (
+        <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+          <div
+            className="p-4 bg-slate-50/80 border-b border-slate-200 flex items-center justify-between cursor-pointer hover:bg-slate-100 transition-colors"
+            onClick={() => setShowMetodologia(!showMetodologia)}
+          >
+            <div className="flex items-center gap-2">
+              <ChartBarIcon className="w-4 h-4 text-indigo-600" />
+              <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
+                Metodología de Cálculo del Ítem: Base {baseHorasActual} hrs/docente ({modoBase === 'bd' ? 'Base de Datos Oficial' : modoBase === 'promedio' ? 'Promedio' : 'Manual'})
+              </h3>
+            </div>
+            <span className="text-slate-500 text-[11px]">
+              {showMetodologia ? 'Ocultar metodología ▲' : 'Ver opciones de cálculo ▼'}
+            </span>
+          </div>
+
+          {showMetodologia && (
+            <div className="p-5 space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-indigo-50/50 p-4 rounded-xl border border-indigo-200">
+                <div>
+                  <span className="text-[11px] font-bold uppercase text-indigo-900 block">
+                    Fórmula de Horas por Ítem
+                  </span>
+                  <div className="font-mono text-xs font-bold text-slate-900 mt-1">
+                    Carga Horaria ({reportData.resumen_nacional.carga_horaria.toLocaleString('es-BO')}h) ÷ UEs ({reportData.resumen_nacional.total_ues.toLocaleString('es-BO')})
+                  </div>
+                  <div className="text-xs font-bold text-indigo-700 mt-0.5">
+                    = {promedioHorasDocente} hrs/UE promedio
+                  </div>
+                </div>
+
+                <div>
+                  <span className="text-[11px] font-bold uppercase text-slate-600 block">
+                    Cálculo del Déficit en Ítems
+                  </span>
+                  <div className="font-mono text-xs font-bold text-slate-900 mt-1">
+                    Déficit ({reportData.resumen_nacional.deficit_horas.toLocaleString('es-BO')}h) ÷ Base ({baseHorasActual}h)
+                  </div>
+                  <div className="text-xs font-bold text-red-700 mt-0.5">
+                    = {reportData.resumen_nacional.items_deficit_equiv.toLocaleString('es-BO')} Ítems Necesarios
+                  </div>
+                </div>
+
+                <div>
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="text-[11px] font-bold uppercase text-slate-700 block">
+                      Ajustar Base Horas por Ítem:
+                    </label>
+                  </div>
+                  <div className="flex items-center gap-1.5 mb-2">
+                    <input
+                      type="number"
+                      step="0.1"
+                      min="1"
+                      max="200"
+                      placeholder={String(horaItemBd)}
+                      value={customBaseHoras}
+                      onChange={(e) => {
+                        setModoBase('manual');
+                        setCustomBaseHoras(e.target.value);
+                      }}
+                      className="w-24 text-xs font-bold px-2.5 py-1.5 border border-slate-300 rounded-lg bg-white focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                    />
+                    <span className="text-xs text-slate-500 font-semibold">hrs</span>
+                  </div>
+
+                  {/* 2 OPCIONES: BASE BD vs PROMEDIO */}
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setModoBase('bd');
+                        setCustomBaseHoras(String(horaItemBd));
+                      }}
+                      className={`px-2.5 py-1 text-[11px] rounded-lg border font-bold transition-all flex items-center gap-1 ${
+                        modoBase === 'bd'
+                          ? 'bg-indigo-600 text-white border-indigo-700 shadow-xs'
+                          : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
+                      }`}
+                      title="Usar valor oficial hora_item configurado en especialidades_oficiales"
+                    >
+                      <span>🏛️ Base BD ({horaItemBd}h)</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setModoBase('promedio');
+                        setCustomBaseHoras(String(promedioHorasDocente));
+                      }}
+                      className={`px-2.5 py-1 text-[11px] rounded-lg border font-bold transition-all flex items-center gap-1 ${
+                        modoBase === 'promedio'
+                          ? 'bg-indigo-600 text-white border-indigo-700 shadow-xs'
+                          : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
+                      }`}
+                      title="Calcular con promedio Carga ÷ UEs"
+                    >
+                      <span>📊 Promedio ({promedioHorasDocente}h)</span>
+                    </button>
+                  </div>
+
+                  <p className="text-[10px] text-slate-500 mt-1.5 font-medium">
+                    {modoBase === 'bd' && `Usando base oficial de la base de datos (${horaItemBd}h)`}
+                    {modoBase === 'promedio' && `Usando promedio calculado: ${promedioHorasDocente}h`}
+                    {modoBase === 'manual' && `Usando base manual: ${customBaseHoras}h`}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       )}
 
@@ -590,7 +727,7 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
                     % Cobertura {sortBy === 'cobertura' && (sortAsc ? '▲' : '▼')}
                   </th>
                   <th className="py-3 px-3 text-right">
-                    <span className="text-indigo-700">Ítems (88/108h)</span>
+                    <span className="text-indigo-700">Ítems (~{baseHorasActual}h)</span>
                   </th>
                   <th className="py-3 px-3 text-center">Acción</th>
                 </tr>

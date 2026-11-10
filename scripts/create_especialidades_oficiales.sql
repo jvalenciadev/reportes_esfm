@@ -5,7 +5,8 @@
 
 CREATE TABLE IF NOT EXISTS public.especialidades_oficiales (
     id SERIAL PRIMARY KEY,
-    nombre VARCHAR(255) NOT NULL UNIQUE
+    nombre VARCHAR(255) NOT NULL UNIQUE,
+    hora_item INTEGER DEFAULT 88
 );
 
 -- Habilitar RLS y lectura pública

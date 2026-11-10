@@ -184,6 +184,7 @@ export interface FiltroEspecialidad {
   especialidades_oficiales?: {
     id: number;
     nombre: string;
+    hora_item?: number;
   };
 }
 

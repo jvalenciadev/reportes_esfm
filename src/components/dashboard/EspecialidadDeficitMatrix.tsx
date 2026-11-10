@@ -39,6 +39,7 @@ interface ResumenNacional {
   total_horas_planilla: number;
   total_deficit_horas: number;
   promedio_horas_docente: number;
+  hora_item_bd?: number;
   base_horas_aplicada: number;
   es_promedio_dinamico: boolean;
   items_deficit: number;
@@ -82,6 +83,7 @@ export function EspecialidadDeficitMatrix({ onGoToConfig }: EspecialidadDeficitM
 
   // Base de cálculo personalizada (null = usa el promedio del filtro dinámicamente)
   const [customBaseHoras, setCustomBaseHoras] = useState<string>('');
+  const [modoBase, setModoBase] = useState<'bd' | 'promedio' | 'manual'>('promedio');
   const [showRangoAnalysis, setShowRangoAnalysis] = useState<boolean>(true);
 
   const [reportData, setReportData] = useState<{
@@ -272,10 +274,12 @@ export function EspecialidadDeficitMatrix({ onGoToConfig }: EspecialidadDeficitM
   };
 
   const esEspecial = reportData?.especialidad?.nombre?.toUpperCase().includes('ESPECIAL') || false;
-  const baseHorasActual = esEspecial && !customBaseHoras
-    ? 108.0
-    : reportData?.resumen_nacional?.base_horas_aplicada || 88;
-  const esPromedioAutomatico = esEspecial ? false : (reportData?.resumen_nacional?.es_promedio_dinamico ?? true);
+  const horaItemBd = reportData?.resumen_nacional?.hora_item_bd ?? (reportData?.especialidad?.hora_item || (esEspecial ? 108.0 : 88.0));
+  const promedioHorasDocente = reportData?.resumen_nacional?.promedio_horas_docente || 88.0;
+  const baseHorasActual = customBaseHoras && !isNaN(Number(customBaseHoras)) && Number(customBaseHoras) > 0
+    ? Number(customBaseHoras)
+    : (modoBase === 'bd' ? horaItemBd : (reportData?.resumen_nacional?.base_horas_aplicada || promedioHorasDocente));
+  const esPromedioAutomatico = modoBase === 'promedio';
 
   return (
     <div className="space-y-6 animate-fadeIn">
@@ -468,7 +472,7 @@ export function EspecialidadDeficitMatrix({ onGoToConfig }: EspecialidadDeficitM
             </div>
             <div className="text-[10px] text-slate-600 font-medium">
               Base: <strong className="text-slate-900">{baseHorasActual} hrs/ítem</strong>
-              {esPromedioAutomatico && <span className="text-[#937527] ml-1">(promedio)</span>}
+              <span className="text-[#937527] ml-1">({modoBase === "bd" ? "base BD" : modoBase === "promedio" ? "promedio" : "manual"})</span>
             </div>
           </div>
         </div>
@@ -484,7 +488,7 @@ export function EspecialidadDeficitMatrix({ onGoToConfig }: EspecialidadDeficitM
             <div className="flex items-center gap-2">
               <ChartBarIcon className="w-4 h-4 text-[#c9a751]" />
               <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
-                Metodología de Cálculo del Ítem: {esEspecial ? "Base Reglamentada (108 hrs/docente - Educación Especial)" : `Promedio de Horas (${baseHorasActual} hrs/docente)`}
+                Metodología de Cálculo del Ítem: Base {baseHorasActual} hrs/docente ({modoBase === "bd" ? "Base de Datos" : modoBase === "promedio" ? "Promedio Filtro" : "Manual"})
               </h3>
             </div>
             <div className="flex items-center gap-2 text-xs">
@@ -522,34 +526,66 @@ export function EspecialidadDeficitMatrix({ onGoToConfig }: EspecialidadDeficitM
                 </div>
 
                 <div>
-                  <label className="text-[11px] font-bold uppercase text-slate-600 block mb-1">
-                    Ajustar Base Horas por Ítem:
-                  </label>
-                  <div className="flex items-center gap-1.5">
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="text-[11px] font-bold uppercase text-slate-700 block">
+                      Ajustar Base Horas por Ítem:
+                    </label>
+                  </div>
+                  <div className="flex items-center gap-1.5 mb-2">
                     <input
                       type="number"
                       step="0.1"
                       min="1"
                       max="200"
-                      placeholder={String(reportData.resumen_nacional.promedio_horas_docente)}
+                      placeholder={String(promedioHorasDocente)}
                       value={customBaseHoras}
-                      onChange={(e) => handleApplyCustomHoras(e.target.value)}
+                      onChange={(e) => {
+                        setModoBase('manual');
+                        handleApplyCustomHoras(e.target.value);
+                      }}
                       className="w-24 text-xs font-bold px-2.5 py-1.5 border border-slate-300 rounded-lg bg-white focus:outline-none focus:ring-1 focus:ring-[#c9a751]"
                     />
-                    <span className="text-xs text-slate-500">hrs</span>
-                    {customBaseHoras && (
-                      <button
-                        type="button"
-                        onClick={handleResetToPromedio}
-                        className="px-2 py-1 text-[11px] text-slate-600 bg-white border border-slate-300 rounded hover:bg-slate-50 font-semibold"
-                        title="Restablecer al promedio exacto del filtro"
-                      >
-                        Promedio
-                      </button>
-                    )}
+                    <span className="text-xs text-slate-500 font-semibold">hrs</span>
                   </div>
-                  <p className="text-[10px] text-slate-400 mt-1">
-                    {customBaseHoras ? `Usando base manual: ${customBaseHoras}h` : 'Usando promedio exacto del filtro'}
+
+                  {/* 2 OPCIONES: BASE BD vs SACAR PROMEDIO */}
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setModoBase('bd');
+                        handleApplyCustomHoras(String(horaItemBd));
+                      }}
+                      className={`px-2.5 py-1 text-[11px] rounded-lg border font-bold transition-all flex items-center gap-1 ${
+                        modoBase === 'bd'
+                          ? 'bg-[#c9a751] text-white border-[#b38f38] shadow-xs'
+                          : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
+                      }`}
+                      title="Usar valor hora_item configurado en la base de datos"
+                    >
+                      <span>🏛️ Base BD ({horaItemBd}h)</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setModoBase('promedio');
+                        handleResetToPromedio();
+                      }}
+                      className={`px-2.5 py-1 text-[11px] rounded-lg border font-bold transition-all flex items-center gap-1 ${
+                        modoBase === 'promedio'
+                          ? 'bg-[#c9a751] text-white border-[#b38f38] shadow-xs'
+                          : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
+                      }`}
+                      title="Calcular con el promedio exacto del filtro (Carga ÷ Docentes)"
+                    >
+                      <span>📊 Promedio ({promedioHorasDocente}h)</span>
+                    </button>
+                  </div>
+
+                  <p className="text-[10px] text-slate-500 mt-1.5 font-medium">
+                    {modoBase === 'bd' && `Usando base oficial de la base de datos (${horaItemBd}h)`}
+                    {modoBase === 'promedio' && 'Usando promedio exacto del filtro'}
+                    {modoBase === 'manual' && `Usando base manual: ${customBaseHoras}h`}
                   </p>
                 </div>
               </div>

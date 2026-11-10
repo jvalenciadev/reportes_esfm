@@ -53,7 +53,7 @@ export async function GET(req: NextRequest) {
   try {
     if (action === 'especialidades') {
       const res = await fetch(
-        `${SUPABASE_URL}/rest/v1/especialidades_oficiales?select=id,nombre&order=id.asc`,
+        `${SUPABASE_URL}/rest/v1/especialidades_oficiales?select=id,nombre,hora_item&order=id.asc`,
         { headers, next: { revalidate: 120 } }
       );
       if (res.ok) {
@@ -68,7 +68,7 @@ export async function GET(req: NextRequest) {
         headers,
         cache: 'no-store',
       }),
-      fetch(`${SUPABASE_URL}/rest/v1/especialidades_oficiales?select=id,nombre&order=id.asc`, {
+      fetch(`${SUPABASE_URL}/rest/v1/especialidades_oficiales?select=id,nombre,hora_item&order=id.asc`, {
         headers,
         next: { revalidate: 120 },
       }),

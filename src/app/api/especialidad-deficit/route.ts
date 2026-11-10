@@ -72,7 +72,7 @@ export async function GET(req: NextRequest) {
   if (!especialidadIdParam) {
     try {
       const res = await fetch(
-        `${SUPABASE_URL}/rest/v1/filtro_especialidad?select=id,especialidad_oficial_id,subsistemas,niveles,cargos,operador_carga,carga_especialidad,activo,especialidades_oficiales(id,nombre)&order=especialidad_oficial_id.asc`,
+        `${SUPABASE_URL}/rest/v1/filtro_especialidad?select=id,especialidad_oficial_id,subsistemas,niveles,cargos,operador_carga,carga_especialidad,activo,especialidades_oficiales(id,nombre,hora_item)&order=especialidad_oficial_id.asc`,
         { headers, next: { revalidate: 60 } }
       );
       if (!res.ok) {
@@ -161,7 +161,7 @@ export async function GET(req: NextRequest) {
 
   try {
     const resFiltro = await fetch(
-      `${SUPABASE_URL}/rest/v1/filtro_especialidad?especialidad_oficial_id=eq.${especialidadId}&select=*,especialidades_oficiales(id,nombre)&limit=1`,
+      `${SUPABASE_URL}/rest/v1/filtro_especialidad?especialidad_oficial_id=eq.${especialidadId}&select=*,especialidades_oficiales(id,nombre,hora_item)&limit=1`,
       { headers, next: { revalidate: 10 } }
     );
 
@@ -410,6 +410,9 @@ export async function GET(req: NextRequest) {
     const totalUesRows = db.prepare(totalUesSql).all();
     const nacionalUes = (totalUesRows[0] as any)?.nacional_ues || 0;
 
+    const nombreEsp = filtro?.especialidades_oficiales?.nombre || '';
+    const horaItemBd = Number(filtro?.especialidades_oficiales?.hora_item) || (nombreEsp.toUpperCase().includes('ESPECIAL') ? 108.0 : 88.0);
+
     const resumenNacional = {
       total_ues: nacionalUes,
       total_docentes: totalNacionalDocentes,
@@ -418,6 +421,7 @@ export async function GET(req: NextRequest) {
       total_horas_planilla: totalNacionalPlan,
       total_deficit_horas: totalNacionalDef,
       promedio_horas_docente: promedioHorasDocenteNacional,
+      hora_item_bd: horaItemBd,
       base_horas_aplicada: baseHorasAplicada,
       es_promedio_dinamico: !customBaseHoras,
       items_deficit: Number((totalNacionalDef / baseHorasAplicada).toFixed(1)),
