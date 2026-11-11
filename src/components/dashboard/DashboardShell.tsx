@@ -11,6 +11,7 @@ import { SeieView } from './views/SeieView';
 import { UieDeficitView } from './views/UieDeficitView';
 import HistorialDocenteView from './views/HistorialDocenteView';
 import Exposicion2031View from './views/Exposicion2031View';
+import PertinenciaView from './views/PertinenciaView';
 import Image from 'next/image';
 import { Sparkles } from 'lucide-react';
 
@@ -81,6 +82,11 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
       title: 'Sala de Exposición Estratégica · Proyección ESFM 2031',
       subtitle: 'Dictamen de apertura de especialidades oficiales: Demografía INE, Padrón Docente y Egresados ESFM',
       tag: 'DICTAMEN 2031',
+    },
+    pertinencia: {
+      title: 'Pertinencia Docente',
+      subtitle: 'Docentes que enseñan fuera de su especialidad o nivel de formación — desagregado por rango V / A / N',
+      tag: 'PERTINENCIA SIE',
     },
   };
 
@@ -204,6 +210,15 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
               <Sparkles className="w-3.5 h-3.5 text-amber-700" />
               Exposición 2031
             </button>
+            <button
+              onClick={() => setCurrentTab('pertinencia')}
+              className={`px-3 py-1.5 rounded-lg transition-all ${currentTab === 'pertinencia'
+                ? 'bg-[#c9a751] text-slate-900 shadow-xs ring-1 ring-[#c9a751]/50 font-semibold'
+                : 'text-slate-600 hover:text-slate-900'
+                }`}
+            >
+              Pertinencia
+            </button>
           </div>
         </header>
 
@@ -217,6 +232,7 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
           {currentTab === 'uie' && <UieDeficitView data={initialData} />}
           {currentTab === 'historial' && <HistorialDocenteView />}
           {currentTab === 'exposicion' && <Exposicion2031View data={initialData} />}
+          {currentTab === 'pertinencia' && <PertinenciaView />}
         </main>
       </div>
     </div>

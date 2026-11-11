@@ -1,0 +1,461 @@
+{
+  "resumen": {
+    "V": {
+      "rango": "V",
+      "docentes": 43411,
+      "asignaciones": 48580,
+      "ues": 1762,
+      "horas_total": 4417887,
+      "duracion_semanas": 4,
+      "costo_estimado_bs": 60775400,
+      "estudiantes_atendidos": 1953495
+    },
+    "A": {
+      "rango": "A",
+      "docentes": 76754,
+      "asignaciones": 82779,
+      "ues": 1433,
+      "horas_total": 7858329,
+      "duracion_semanas": 12,
+      "costo_estimado_bs": 322366800,
+      "estudiantes_atendidos": 3684192
+    },
+    "N": {
+      "rango": "N",
+      "docentes": 4314,
+      "asignaciones": 4760,
+      "ues": 657,
+      "horas_total": 425780,
+      "duracion_semanas": 24,
+      "costo_estimado_bs": 36237600,
+      "estudiantes_atendidos": 215700
+    },
+    "SIN": {
+      "rango": "SIN",
+      "docentes": 26093,
+      "asignaciones": 28329,
+      "ues": 1907,
+      "horas_total": 2465276,
+      "duracion_semanas": 0,
+      "costo_estimado_bs": 0,
+      "estudiantes_atendidos": 1174185
+    },
+    "TOTAL": {
+      "docentes": 147096,
+      "asignaciones": 164448,
+      "ues": 2264,
+      "horas_total": 15167272,
+      "estudiantes_atendidos": 7027572
+    }
+  },
+  "desalineacion": {
+    "total_asignaciones_desalineadas": 33089,
+    "docentes_unicos_afectados": 30273,
+    "fuera_especialidad": 30930,
+    "fuera_nivel": 80,
+    "fuera_ambos": 2079,
+    "pct_fuera_especialidad": 18.81,
+    "pct_fuera_ambos": 1.26,
+    "pct_fuera_nivel": 0.05
+  },
+  "por_departamento": [
+    {
+      "departamento": "BENI",
+      "rangos": {
+        "V": {
+          "docentes": 2771,
+          "ues": 106,
+          "horas": 289712
+        },
+        "A": {
+          "docentes": 3069,
+          "ues": 90,
+          "horas": 317546
+        },
+        "N": {
+          "docentes": 168,
+          "ues": 39,
+          "horas": 17030
+        },
+        "SIN": {
+          "docentes": 1759,
+          "ues": 115,
+          "horas": 163826
+        }
+      }
+    },
+    {
+      "departamento": "CHUQUISACA",
+      "rangos": {
+        "V": {
+          "docentes": 2448,
+          "ues": 158,
+          "horas": 247690
+        },
+        "A": {
+          "docentes": 5127,
+          "ues": 119,
+          "horas": 517334
+        },
+        "N": {
+          "docentes": 315,
+          "ues": 51,
+          "horas": 30322
+        },
+        "SIN": {
+          "docentes": 1664,
+          "ues": 174,
+          "horas": 160821
+        }
+      }
+    },
+    {
+      "departamento": "COCHABAMBA",
+      "rangos": {
+        "V": {
+          "docentes": 6317,
+          "ues": 249,
+          "horas": 635022
+        },
+        "A": {
+          "docentes": 14646,
+          "ues": 211,
+          "horas": 1489448
+        },
+        "N": {
+          "docentes": 670,
+          "ues": 105,
+          "horas": 67248
+        },
+        "SIN": {
+          "docentes": 4401,
+          "ues": 273,
+          "horas": 401342
+        }
+      }
+    },
+    {
+      "departamento": "LA PAZ",
+      "rangos": {
+        "V": {
+          "docentes": 12663,
+          "ues": 478,
+          "horas": 1270377
+        },
+        "A": {
+          "docentes": 20862,
+          "ues": 394,
+          "horas": 2103242
+        },
+        "N": {
+          "docentes": 1407,
+          "ues": 200,
+          "horas": 134408
+        },
+        "SIN": {
+          "docentes": 6176,
+          "ues": 457,
+          "horas": 579706
+        }
+      }
+    },
+    {
+      "departamento": "ORURO",
+      "rangos": {
+        "V": {
+          "docentes": 2111,
+          "ues": 125,
+          "horas": 204776
+        },
+        "A": {
+          "docentes": 4225,
+          "ues": 97,
+          "horas": 410003
+        },
+        "N": {
+          "docentes": 428,
+          "ues": 51,
+          "horas": 42032
+        },
+        "SIN": {
+          "docentes": 1781,
+          "ues": 120,
+          "horas": 164976
+        }
+      }
+    },
+    {
+      "departamento": "PANDO",
+      "rangos": {
+        "V": {
+          "docentes": 963,
+          "ues": 44,
+          "horas": 105984
+        },
+        "A": {
+          "docentes": 820,
+          "ues": 32,
+          "horas": 91524
+        },
+        "N": {
+          "docentes": 28,
+          "ues": 11,
+          "horas": 2964
+        },
+        "SIN": {
+          "docentes": 631,
+          "ues": 62,
+          "horas": 64148
+        }
+      }
+    },
+    {
+      "departamento": "POTOSI",
+      "rangos": {
+        "V": {
+          "docentes": 3910,
+          "ues": 196,
+          "horas": 398166
+        },
+        "A": {
+          "docentes": 7831,
+          "ues": 154,
+          "horas": 808212
+        },
+        "N": {
+          "docentes": 402,
+          "ues": 66,
+          "horas": 40748
+        },
+        "SIN": {
+          "docentes": 2196,
+          "ues": 217,
+          "horas": 214438
+        }
+      }
+    },
+    {
+      "departamento": "SANTA CRUZ",
+      "rangos": {
+        "V": {
+          "docentes": 10129,
+          "ues": 339,
+          "horas": 1051566
+        },
+        "A": {
+          "docentes": 16035,
+          "ues": 278,
+          "horas": 1689922
+        },
+        "N": {
+          "docentes": 713,
+          "ues": 112,
+          "horas": 73040
+        },
+        "SIN": {
+          "docentes": 6223,
+          "ues": 408,
+          "horas": 599952
+        }
+      }
+    },
+    {
+      "departamento": "TARIJA",
+      "rangos": {
+        "V": {
+          "docentes": 2100,
+          "ues": 67,
+          "horas": 214594
+        },
+        "A": {
+          "docentes": 4139,
+          "ues": 58,
+          "horas": 431098
+        },
+        "N": {
+          "docentes": 183,
+          "ues": 22,
+          "horas": 17988
+        },
+        "SIN": {
+          "docentes": 1263,
+          "ues": 81,
+          "horas": 116067
+        }
+      }
+    }
+  ],
+  "por_nivel": [
+    {
+      "nivel": "Adultos",
+      "rangos": {
+        "V": {
+          "docentes": 487,
+          "ues": 164,
+          "horas": 41353
+        },
+        "A": {
+          "docentes": 7,
+          "ues": 6,
+          "horas": 580
+        },
+        "N": {
+          "docentes": 0,
+          "ues": 0,
+          "horas": 0
+        },
+        "SIN": {
+          "docentes": 5722,
+          "ues": 335,
+          "horas": 504036
+        }
+      }
+    },
+    {
+      "nivel": "Especial",
+      "rangos": {
+        "V": {
+          "docentes": 5,
+          "ues": 5,
+          "horas": 540
+        },
+        "A": {
+          "docentes": 0,
+          "ues": 0,
+          "horas": 0
+        },
+        "N": {
+          "docentes": 0,
+          "ues": 0,
+          "horas": 0
+        },
+        "SIN": {
+          "docentes": 1852,
+          "ues": 203,
+          "horas": 199812
+        }
+      }
+    },
+    {
+      "nivel": "Inicial",
+      "rangos": {
+        "V": {
+          "docentes": 5086,
+          "ues": 489,
+          "horas": 513492
+        },
+        "A": {
+          "docentes": 3403,
+          "ues": 326,
+          "horas": 345880
+        },
+        "N": {
+          "docentes": 0,
+          "ues": 0,
+          "horas": 0
+        },
+        "SIN": {
+          "docentes": 2211,
+          "ues": 292,
+          "horas": 221500
+        }
+      }
+    },
+    {
+      "nivel": "Permanente",
+      "rangos": {
+        "V": {
+          "docentes": 46,
+          "ues": 7,
+          "horas": 4310
+        },
+        "A": {
+          "docentes": 4,
+          "ues": 3,
+          "horas": 390
+        },
+        "N": {
+          "docentes": 0,
+          "ues": 0,
+          "horas": 0
+        },
+        "SIN": {
+          "docentes": 219,
+          "ues": 74,
+          "horas": 20254
+        }
+      }
+    },
+    {
+      "nivel": "Primaria",
+      "rangos": {
+        "V": {
+          "docentes": 9451,
+          "ues": 544,
+          "horas": 891688
+        },
+        "A": {
+          "docentes": 51125,
+          "ues": 557,
+          "horas": 5165963
+        },
+        "N": {
+          "docentes": 1952,
+          "ues": 393,
+          "horas": 200062
+        },
+        "SIN": {
+          "docentes": 5713,
+          "ues": 472,
+          "horas": 525386
+        }
+      }
+    },
+    {
+      "nivel": "Secundaria",
+      "rangos": {
+        "V": {
+          "docentes": 29633,
+          "ues": 553,
+          "horas": 2966504
+        },
+        "A": {
+          "docentes": 23057,
+          "ues": 541,
+          "horas": 2345516
+        },
+        "N": {
+          "docentes": 2362,
+          "ues": 264,
+          "horas": 225718
+        },
+        "SIN": {
+          "docentes": 10913,
+          "ues": 531,
+          "horas": 994288
+        }
+      }
+    }
+  ],
+  "config": {
+    "duracion": {
+      "V": 4,
+      "A": 12,
+      "N": 24,
+      "SIN": 0
+    },
+    "costo_semana_bs": 350,
+    "labels": {
+      "V": "Alta Pertinencia",
+      "A": "Media Pertinencia",
+      "N": "Baja Pertinencia",
+      "SIN": "Sin Pertinencia / Impertinente"
+    },
+    "colores": {
+      "V": "#16a34a",
+      "A": "#2563eb",
+      "N": "#ea580c",
+      "SIN": "#64748b"
+    }
+  }
+}
