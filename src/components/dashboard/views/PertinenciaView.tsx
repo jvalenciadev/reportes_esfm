@@ -15,7 +15,9 @@ import {
   Layers,
   MapPin,
   Target,
-  ArrowRight
+  ArrowRight,
+  ShieldCheck,
+  TrendingUp
 } from 'lucide-react';
 
 // ─── Tipos ────────────────────────────────────────────────────────────────────
@@ -59,67 +61,72 @@ interface PertinenciaData {
   por_nivel: NivelRangos[];
 }
 
-// ─── Metadatos visuales por Rango (SIN semanas ni meses inventados) ─────────────
+// ─── Paleta y Metadatos Institucionales ────────────────────────────────────────
 
 const RANGO_INFO: Record<Rango, {
-  colorCode: string;
+  code: string;
+  badgeText: string;
   hex: string;
+  accentBg: string;
+  accentBorder: string;
+  pillBg: string;
+  pillText: string;
   label: string;
-  intensidadFormacion: string;
-  enfoqueBID: string;
+  subtitle: string;
   queSignifica: string;
-  bgLight: string;
-  borderLight: string;
-  badge: string;
-  textClass: string;
+  intensidadFormacion: string;
 }> = {
   V: {
-    colorCode: 'V (Verde)',
-    hex: '#16a34a',
+    code: 'V',
+    badgeText: 'Rango V · Alta',
+    hex: '#059669', // Emerald 600
+    accentBg: 'from-emerald-500/10 via-emerald-500/5 to-transparent',
+    accentBorder: 'border-emerald-200/80',
+    pillBg: 'bg-emerald-50 text-emerald-800 border-emerald-200',
+    pillText: 'text-emerald-700',
     label: 'Alta Pertinencia',
+    subtitle: 'Docente Idóneo en Aula',
+    queSignifica: 'Especialidad y nivel del título normalista coinciden con la materia impartida.',
     intensidadFormacion: 'Formación Corta / Continua',
-    enfoqueBID: 'Actualización en aula e innovación didáctica',
-    queSignifica: 'Docente con título normalista en la misma especialidad y nivel donde enseña.',
-    bgLight: 'bg-emerald-50/70',
-    borderLight: 'border-emerald-200',
-    badge: 'bg-emerald-100 text-emerald-800 border-emerald-300',
-    textClass: 'text-emerald-700',
   },
   A: {
-    colorCode: 'A (Azul)',
-    hex: '#2563eb',
+    code: 'A',
+    badgeText: 'Rango A · Media',
+    hex: '#2563eb', // Blue 600
+    accentBg: 'from-blue-500/10 via-blue-500/5 to-transparent',
+    accentBorder: 'border-blue-200/80',
+    pillBg: 'bg-blue-50 text-blue-800 border-blue-200',
+    pillText: 'text-blue-700',
     label: 'Media Pertinencia',
+    subtitle: 'Alineación Parcial / Afín',
+    queSignifica: 'Formación en área afín o planes anteriores. Requiere actualización curricular.',
     intensidadFormacion: 'Formación Media / Nivelación Modular',
-    enfoqueBID: 'Nivelación curricular y actualización pedagógica',
-    queSignifica: 'Docente con formación afín o planes anteriores que requiere actualización curricular.',
-    bgLight: 'bg-blue-50/70',
-    borderLight: 'border-blue-200',
-    badge: 'bg-blue-100 text-blue-800 border-blue-300',
-    textClass: 'text-blue-700',
   },
   N: {
-    colorCode: 'N (Naranja)',
-    hex: '#ea580c',
+    code: 'N',
+    badgeText: 'Rango N · Baja',
+    hex: '#ea580c', // Orange 600
+    accentBg: 'from-amber-500/10 via-amber-500/5 to-transparent',
+    accentBorder: 'border-amber-200/80',
+    pillBg: 'bg-amber-50 text-amber-800 border-amber-200',
+    pillText: 'text-amber-700',
     label: 'Baja Pertinencia',
+    subtitle: 'Desalineación Marcada',
+    queSignifica: 'Enseña una materia sustancialmente distante a su formación de egreso.',
     intensidadFormacion: 'Formación Larga / Reconversión Profunda',
-    enfoqueBID: 'Reconversión disciplinar y habilitación docente',
-    queSignifica: 'Docente que enseña una materia significativamente distante a su formación de egreso.',
-    bgLight: 'bg-amber-50/70',
-    borderLight: 'border-amber-200',
-    badge: 'bg-amber-100 text-amber-800 border-amber-300',
-    textClass: 'text-amber-700',
   },
   SIN: {
-    colorCode: 'Sin Pertinencia / NO',
-    hex: '#64748b',
+    code: 'SIN',
+    badgeText: 'Sin Código / NO',
+    hex: '#64748b', // Slate 500
+    accentBg: 'from-slate-500/10 via-slate-500/5 to-transparent',
+    accentBorder: 'border-slate-200',
+    pillBg: 'bg-slate-100 text-slate-700 border-slate-200',
+    pillText: 'text-slate-700',
     label: 'Sin Pertinencia Registrada',
+    subtitle: 'Fuera de Perfil Oficial',
+    queSignifica: 'Asignaciones sin correspondencia curricular identificada en el padrón.',
     intensidadFormacion: 'Evaluación y Reasignación',
-    enfoqueBID: 'Regularización de perfil y especialización formal',
-    queSignifica: 'Asignaciones sin concordancia curricular identificada en el padrón.',
-    bgLight: 'bg-slate-50',
-    borderLight: 'border-slate-200',
-    badge: 'bg-slate-100 text-slate-700 border-slate-300',
-    textClass: 'text-slate-700',
   },
 };
 
@@ -133,36 +140,62 @@ function pct(part: number, total: number): string {
   return ((part / total) * 100).toFixed(1) + '%';
 }
 
-// ─── Componente Gráfico Torta / Dona SVG ──────────────────────────────────────
+// ─── Componente Gráfico Torta / Dona SVG Premium ──────────────────────────────
 
-function DonutChart({ 
+function DonutChartPremium({ 
   valores, 
   total,
+  hoveredRango,
   selectedRango,
+  onHoverRango,
   onSelectRango
 }: { 
   valores: { rango: Rango; cantidad: number; color: string; label: string }[];
   total: number;
+  hoveredRango: Rango | null;
   selectedRango: Rango | null;
+  onHoverRango: (r: Rango | null) => void;
   onSelectRango: (r: Rango | null) => void;
 }) {
-  const size = 230;
-  const strokeWidth = 38;
+  const size = 260;
+  const strokeWidth = 36;
   const radius = (size - strokeWidth) / 2;
   const center = size / 2;
   const circumference = 2 * Math.PI * radius;
 
   let accumulatedPercent = 0;
 
+  // Rango activo (hover tiene prioridad, luego selected, si no hay ninguno es null)
+  const activeR = hoveredRango || selectedRango;
+  const activeItem = activeR ? valores.find(v => v.rango === activeR) : null;
+
   return (
-    <div className="relative flex items-center justify-center">
-      <svg width={size} height={size} className="transform -rotate-90 drop-shadow-xs">
+    <div className="relative flex items-center justify-center select-none py-2">
+      <svg width={size} height={size} className="transform -rotate-90">
+        <defs>
+          <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" floodOpacity="0.08" />
+          </filter>
+        </defs>
+
+        {/* Pista de fondo sutil */}
+        <circle
+          cx={center}
+          cy={center}
+          r={radius}
+          fill="transparent"
+          stroke="#f1f5f9"
+          strokeWidth={strokeWidth}
+        />
+
         {valores.map((item) => {
           const percent = total > 0 ? item.cantidad / total : 0;
           const strokeDasharray = `${percent * circumference} ${circumference}`;
           const strokeDashoffset = -(accumulatedPercent * circumference);
           accumulatedPercent += percent;
-          const isSelected = selectedRango === item.rango;
+
+          const isHighlighted = activeR === item.rango;
+          const isDimmed = activeR !== null && !isHighlighted;
 
           return (
             <circle
@@ -172,21 +205,53 @@ function DonutChart({
               r={radius}
               fill="transparent"
               stroke={item.color}
-              strokeWidth={isSelected ? strokeWidth + 6 : strokeWidth}
+              strokeWidth={isHighlighted ? strokeWidth + 6 : strokeWidth}
               strokeDasharray={strokeDasharray}
               strokeDashoffset={strokeDashoffset}
+              strokeLinecap="butt"
+              onMouseEnter={() => onHoverRango(item.rango)}
+              onMouseLeave={() => onHoverRango(null)}
               onClick={() => onSelectRango(selectedRango === item.rango ? null : item.rango)}
-              className="transition-all duration-300 hover:opacity-90 cursor-pointer"
+              style={{
+                opacity: isDimmed ? 0.35 : 1,
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                cursor: 'pointer',
+              }}
             />
           );
         })}
       </svg>
-      {/* Texto Central */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none px-4">
-        <span className="text-2xl font-black text-slate-800">{fmt(total)}</span>
-        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">
-          Docentes Evaluados
-        </span>
+
+      {/* Centro Informativo Dinámico */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none px-6">
+        {activeItem ? (
+          <div className="animate-in fade-in zoom-in-95 duration-200">
+            <span 
+              className="text-xs font-black uppercase tracking-wider block"
+              style={{ color: activeItem.color }}
+            >
+              {activeItem.label}
+            </span>
+            <span className="text-3xl font-black text-slate-900 tracking-tight block mt-0.5">
+              {pct(activeItem.cantidad, total)}
+            </span>
+            <span className="text-xs font-bold text-slate-500 block">
+              {fmt(activeItem.cantidad)} docentes
+            </span>
+          </div>
+        ) : (
+          <div className="animate-in fade-in duration-200">
+            <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 block">
+              Padrón Evaluado
+            </span>
+            <span className="text-3xl font-black text-slate-900 tracking-tight block mt-0.5">
+              {fmt(total)}
+            </span>
+            <span className="text-xs font-bold text-slate-500 block">
+              100% Magisterio
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -198,6 +263,7 @@ export default function PertinenciaView() {
   const [data, setData] = useState<PertinenciaData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [hoveredRango, setHoveredRango] = useState<Rango | null>(null);
   const [selectedRango, setSelectedRango] = useState<Rango | null>(null);
   const [activeTab, setActiveTab] = useState<'preguntas' | 'territorial' | 'niveles'>('preguntas');
 
@@ -217,22 +283,26 @@ export default function PertinenciaView() {
   const totalDoc = data?.resumen?.TOTAL?.docentes ?? 147096;
   const totalUes = data?.resumen?.TOTAL?.ues ?? 2264;
 
-  // Metas BID
   const metaDocentesPrioritarios = useMemo(() => {
     if (!data) return 81068;
     return (data.resumen.A?.docentes ?? 0) + (data.resumen.N?.docentes ?? 0);
   }, [data]);
 
-  const estudiantesAlcanzados = useMemo(() => {
-    if (!data) return 3900000;
-    return (data.resumen.A?.estudiantes_atendidos ?? 0) + (data.resumen.N?.estudiantes_atendidos ?? 0);
+  const donutData = useMemo(() => {
+    if (!data) return [];
+    return [
+      { rango: 'V' as Rango, cantidad: data.resumen.V?.docentes ?? 0, color: '#059669', label: 'Alta Pertinencia' },
+      { rango: 'A' as Rango, cantidad: data.resumen.A?.docentes ?? 0, color: '#2563eb', label: 'Media Pertinencia' },
+      { rango: 'N' as Rango, cantidad: data.resumen.N?.docentes ?? 0, color: '#ea580c', label: 'Baja Pertinencia' },
+      { rango: 'SIN' as Rango, cantidad: data.resumen.SIN?.docentes ?? 0, color: '#64748b', label: 'Sin Pertinencia' },
+    ];
   }, [data]);
 
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center h-80 gap-3 text-slate-500">
         <div className="w-8 h-8 border-3 border-blue-600 border-t-transparent rounded-full animate-spin" />
-        <span className="text-sm font-semibold">Cargando diagnóstico institucional de pertinencia...</span>
+        <span className="text-sm font-semibold tracking-wide">Cargando diagnóstico institucional de pertinencia...</span>
       </div>
     );
   }
@@ -244,13 +314,6 @@ export default function PertinenciaView() {
       </div>
     );
   }
-
-  const donutData = [
-    { rango: 'V' as Rango, cantidad: data.resumen.V?.docentes ?? 0, color: '#16a34a', label: 'Alta Pertinencia' },
-    { rango: 'A' as Rango, cantidad: data.resumen.A?.docentes ?? 0, color: '#2563eb', label: 'Media Pertinencia' },
-    { rango: 'N' as Rango, cantidad: data.resumen.N?.docentes ?? 0, color: '#ea580c', label: 'Baja Pertinencia' },
-    { rango: 'SIN' as Rango, cantidad: data.resumen.SIN?.docentes ?? 0, color: '#94a3b8', label: 'Sin Pertinencia' },
-  ];
 
   return (
     <div className="space-y-8 animate-in fade-in duration-300 pb-16">
@@ -320,152 +383,261 @@ export default function PertinenciaView() {
         <div className="space-y-8">
 
           {/* ═══════════════════════════════════════════════════════════════════
-              1. PREGUNTA 1: PERTINENCIA POR RANGOS Y CAUSAS DE DESALINEACIÓN
+              SECCIÓN REDISEÑADA ELEGANTE: DISTRIBUCIÓN POR RANGO (PADRÓN NACIONAL)
              ═══════════════════════════════════════════════════════════════════ */}
-          <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="w-7 h-7 rounded-full bg-blue-100 text-blue-800 font-black text-xs flex items-center justify-center">1</span>
-              <h2 className="text-lg sm:text-xl font-bold text-slate-900">
-                Pertinencia Docente: Rangos Oficiales y Situación en Aula
-              </h2>
-            </div>
-            <p className="text-xs sm:text-sm text-slate-500 mb-6 ml-9">
-              ¿Cuántos docentes enseñan fuera de su especialidad, de su nivel o de ambos? Desagregación por rango.
-            </p>
+          <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm overflow-hidden">
+            
+            {/* Header de la sección */}
+            <div className="p-6 sm:p-8 pb-4 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-b from-slate-50/50 to-white">
+              <div>
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-xl bg-blue-600 text-white font-black text-sm flex items-center justify-center shadow-xs">
+                    1
+                  </div>
+                  <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+                    Distribución por Rango (Padrón Nacional)
+                  </h2>
+                </div>
+                <p className="text-xs sm:text-sm text-slate-500 mt-1.5 ml-10 max-w-2xl">
+                  Caracterización oficial del universo de <strong>147,096 docentes</strong> en los tres rangos normativos de pertinencia académica del SEP.
+                </p>
+              </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+              {/* Indicador de ayuda */}
+              <div className="flex items-center gap-2 text-xs text-slate-500 bg-slate-100/80 px-3 py-1.5 rounded-xl ml-10 md:ml-0 shrink-0">
+                <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
+                <span>Haz clic en un rango o segmento para focalizar</span>
+              </div>
+            </div>
+
+            {/* Contenido principal: Gráfico Dona + Tarjetas Elegantes */}
+            <div className="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               
-              {/* Torta / Dona */}
-              <div className="lg:col-span-5 bg-slate-50/70 rounded-2xl p-5 border border-slate-200/80 flex flex-col items-center">
-                <span className="text-xs font-bold text-slate-600 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                  <PieIcon className="w-4 h-4 text-blue-600" />
-                  Distribución por Rango (Padrón Nacional)
+              {/* Columna Izquierda: Gráfico de Dona y Leyenda Premium */}
+              <div className="lg:col-span-5 bg-gradient-to-b from-slate-50 to-white rounded-2xl p-6 border border-slate-200/80 flex flex-col items-center shadow-xs">
+                <span className="text-[11px] font-black text-slate-500 uppercase tracking-widest mb-3 flex items-center gap-1.5">
+                  <PieIcon className="w-3.5 h-3.5 text-blue-600" />
+                  Estructura Proporcional del Magisterio
                 </span>
-                
-                <DonutChart 
-                  valores={donutData} 
-                  total={totalDoc} 
-                  selectedRango={selectedRango} 
-                  onSelectRango={setSelectedRango} 
+
+                <DonutChartPremium
+                  valores={donutData}
+                  total={totalDoc}
+                  hoveredRango={hoveredRango}
+                  selectedRango={selectedRango}
+                  onHoverRango={setHoveredRango}
+                  onSelectRango={setSelectedRango}
                 />
 
-                <div className="w-full mt-4 space-y-1.5 text-xs">
-                  {donutData.map((d) => (
-                    <div 
-                      key={d.rango} 
-                      onClick={() => setSelectedRango(selectedRango === d.rango ? null : d.rango)}
-                      className={`flex items-center justify-between p-1.5 rounded-lg cursor-pointer transition-colors ${
-                        selectedRango === d.rango ? 'bg-slate-200/80 font-bold' : 'hover:bg-slate-100'
-                      }`}
-                    >
-                      <div className="flex items-center gap-2">
-                        <span className="w-3 h-3 rounded-full shrink-0" style={{ backgroundColor: d.color }} />
-                        <span className="text-slate-700">{d.label} ({d.rango})</span>
+                {/* Leyenda interactiva con micro-barras */}
+                <div className="w-full mt-6 space-y-2">
+                  {donutData.map((item) => {
+                    const isSelected = selectedRango === item.rango;
+                    const isHovered = hoveredRango === item.rango;
+                    const percentage = totalDoc > 0 ? (item.cantidad / totalDoc) * 100 : 0;
+
+                    return (
+                      <div
+                        key={item.rango}
+                        onMouseEnter={() => setHoveredRango(item.rango)}
+                        onMouseLeave={() => setHoveredRango(null)}
+                        onClick={() => setSelectedRango(selectedRango === item.rango ? null : item.rango)}
+                        className={`p-2.5 rounded-xl border transition-all duration-200 cursor-pointer ${
+                          isSelected || isHovered
+                            ? 'bg-white border-slate-300 shadow-xs ring-1 ring-slate-300'
+                            : 'bg-white/60 border-slate-200/70 hover:bg-white hover:border-slate-300'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between text-xs mb-1.5">
+                          <div className="flex items-center gap-2">
+                            <span 
+                              className="w-2.5 h-2.5 rounded-full shrink-0 shadow-xs"
+                              style={{ backgroundColor: item.color }} 
+                            />
+                            <span className="font-bold text-slate-800">{item.label}</span>
+                            <span className="text-[10px] font-extrabold px-1.5 py-0.5 rounded-md bg-slate-100 text-slate-600">
+                              {item.rango}
+                            </span>
+                          </div>
+                          <div className="flex items-baseline gap-2">
+                            <span className="font-black text-slate-900">{fmt(item.cantidad)}</span>
+                            <span className="font-extrabold text-slate-400 text-[11px]">
+                              {percentage.toFixed(1)}%
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Micro-barra de progreso */}
+                        <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+                          <div 
+                            className="h-full rounded-full transition-all duration-500"
+                            style={{ 
+                              width: `${percentage}%`,
+                              backgroundColor: item.color 
+                            }} 
+                          />
+                        </div>
                       </div>
-                      <div className="text-right">
-                        <span className="font-bold text-slate-900 mr-2">{fmt(d.cantidad)}</span>
-                        <span className="text-slate-500 font-semibold">{pct(d.cantidad, totalDoc)}</span>
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
 
-              {/* Tarjetas de Rangos */}
-              <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              {/* Columna Derecha: Tarjetas de los 4 Rangos con Diseño Profesional */}
+              <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {(['V', 'A', 'N', 'SIN'] as Rango[]).map((rk) => {
                   const info = RANGO_INFO[rk];
                   const d = data.resumen[rk];
                   const isSelected = selectedRango === rk;
+                  const isHovered = hoveredRango === rk;
+                  const porcentaje = pct(d?.docentes ?? 0, totalDoc);
+
                   return (
-                    <div 
+                    <div
                       key={rk}
+                      onMouseEnter={() => setHoveredRango(rk)}
+                      onMouseLeave={() => setHoveredRango(null)}
                       onClick={() => setSelectedRango(selectedRango === rk ? null : rk)}
-                      className={`rounded-2xl border p-4 flex flex-col justify-between cursor-pointer transition-all ${
-                        isSelected 
-                          ? 'ring-2 ring-blue-600 shadow-md bg-white' 
-                          : `${info.borderLight} ${info.bgLight} hover:bg-white hover:shadow-xs`
+                      className={`group relative rounded-2xl p-5 border transition-all duration-300 cursor-pointer flex flex-col justify-between overflow-hidden ${
+                        isSelected || isHovered
+                          ? 'bg-white border-slate-400 shadow-md ring-2 ring-slate-400/20 -translate-y-0.5'
+                          : 'bg-white border-slate-200 hover:border-slate-300 hover:shadow-xs'
                       }`}
                     >
+                      {/* Borde superior de acento temático */}
+                      <div 
+                        className="absolute top-0 left-0 right-0 h-1.5 transition-all"
+                        style={{ backgroundColor: info.hex }} 
+                      />
+
                       <div>
-                        <div className="flex items-center justify-between">
-                          <span className={`text-[11px] font-black px-2.5 py-0.5 rounded-full border ${info.badge}`}>
-                            {info.colorCode}
+                        {/* Cabecera de la tarjeta */}
+                        <div className="flex items-center justify-between pt-1">
+                          <span className={`text-[11px] font-black px-2.5 py-0.5 rounded-full border ${info.pillBg}`}>
+                            {info.badgeText}
                           </span>
-                          <span className="text-xs font-bold text-slate-600">
-                            {pct(d?.docentes ?? 0, totalDoc)}
+                          <span className="text-xs font-black text-slate-400 group-hover:text-slate-700 transition-colors">
+                            {porcentaje}
                           </span>
                         </div>
-                        <h4 className="font-black text-slate-900 text-sm mt-2">{info.label}</h4>
-                        <p className="text-[11px] text-slate-600 mt-1 leading-snug">{info.queSignifica}</p>
+
+                        {/* Título y estado */}
+                        <div className="mt-3">
+                          <h4 className="text-base font-black text-slate-900 tracking-tight">
+                            {info.label}
+                          </h4>
+                          <span className={`text-xs font-bold block mt-0.5 ${info.pillText}`}>
+                            {info.subtitle}
+                          </span>
+                        </div>
+
+                        {/* Explicación pedagógica */}
+                        <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+                          {info.queSignifica}
+                        </p>
                       </div>
 
-                      <div className="mt-4 pt-3 border-t border-slate-200/70 flex items-baseline justify-between">
-                        <div>
-                          <span className="text-2xl font-black" style={{ color: info.hex }}>
-                            {fmt(d?.docentes)}
+                      {/* Footer con métricas y nivel de formación */}
+                      <div className="mt-5 pt-3.5 border-t border-slate-100">
+                        <div className="flex items-baseline justify-between">
+                          <div>
+                            <span className="text-2xl font-black text-slate-900 tracking-tight">
+                              {fmt(d?.docentes)}
+                            </span>
+                            <span className="text-xs text-slate-400 font-semibold ml-1.5">docentes</span>
+                          </div>
+                          <span className="text-xs font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded-md">
+                            {fmt(d?.ues)} UEs
                           </span>
-                          <span className="text-xs text-slate-500 font-medium ml-1">docentes</span>
                         </div>
-                        <span className="text-xs text-slate-500 font-bold">{fmt(d?.ues)} UEs</span>
+
+                        {/* Indicador cualitativo de formación */}
+                        <div className="mt-2 text-[11px] font-semibold text-slate-500 flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: info.hex }} />
+                          <span>{info.intensidadFormacion}</span>
+                        </div>
                       </div>
                     </div>
                   );
                 })}
               </div>
+
             </div>
 
-            {/* CAUSAS DE LA DESALINEACIÓN (Barras horizontales proporcionales) */}
-            <div className="mt-8 pt-6 border-t border-slate-100">
-              <h3 className="text-xs sm:text-sm font-bold text-slate-800 uppercase tracking-wider mb-4 flex items-center gap-2">
+            {/* SECCIÓN CAUSAS DE DESALINEACIÓN */}
+            <div className="p-6 sm:p-8 pt-6 border-t border-slate-100 bg-slate-50/50">
+              <div className="flex items-center gap-2 mb-3">
                 <AlertCircle className="w-4 h-4 text-amber-600" />
-                ¿En qué dimensión enseñan fuera de perfil? (28,329 casos analizados):
-              </h3>
+                <h3 className="text-xs sm:text-sm font-black text-slate-800 uppercase tracking-wider">
+                  ¿En qué dimensión están desalineados los docentes? (28,329 casos analizados en aula)
+                </h3>
+              </div>
 
-              <div className="space-y-3.5 bg-slate-50/80 p-5 rounded-2xl border border-slate-200">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                
                 {/* 1. Especialidad */}
-                <div>
-                  <div className="flex justify-between text-xs font-bold text-slate-800 mb-1">
-                    <span className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-blue-600" />
-                      1. Fuera solo de Especialidad (Docente con título en un área dictando otra materia)
-                    </span>
-                    <span className="text-blue-700">26,170 casos · 92.4%</span>
+                <div className="bg-white p-4.5 rounded-2xl border border-slate-200/90 shadow-xs flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Causa Principal</span>
+                      <span className="text-xs font-black text-blue-700 bg-blue-50 px-2 py-0.5 rounded-md border border-blue-200">
+                        92.4%
+                      </span>
+                    </div>
+                    <h4 className="font-black text-slate-900 text-sm mt-2">Fuera solo de Especialidad</h4>
+                    <span className="text-2xl font-black text-slate-900 block mt-1">26,170 casos</span>
+                    <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+                      Docente formado en una disciplina (ej: Lenguaje o Primaria) asignado a materias distintas (ej: Física, Química o Robótica).
+                    </p>
                   </div>
-                  <div className="w-full bg-slate-200 rounded-full h-3 overflow-hidden">
+                  <div className="w-full bg-slate-100 rounded-full h-2 mt-4 overflow-hidden">
                     <div className="bg-blue-600 h-full rounded-full" style={{ width: '92.4%' }} />
                   </div>
                 </div>
 
                 {/* 2. Ambos */}
-                <div>
-                  <div className="flex justify-between text-xs font-bold text-slate-800 mb-1">
-                    <span className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-amber-600" />
-                      2. Fuera de Ambos: Nivel y Especialidad (Brecha total: nivel distinto y materia ajena)
-                    </span>
-                    <span className="text-amber-700">2,079 casos · 7.3%</span>
+                <div className="bg-white p-4.5 rounded-2xl border border-amber-200 shadow-xs flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-amber-800 uppercase tracking-wider">Brecha Doble</span>
+                      <span className="text-xs font-black text-amber-800 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200">
+                        7.3%
+                      </span>
+                    </div>
+                    <h4 className="font-black text-slate-900 text-sm mt-2">Fuera de Nivel y Especialidad</h4>
+                    <span className="text-2xl font-black text-amber-800 block mt-1">2,079 casos</span>
+                    <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+                      Desalineación máxima: titulado para un ciclo y área técnica ajena al grado y materia donde ejerce docencia.
+                    </p>
                   </div>
-                  <div className="w-full bg-slate-200 rounded-full h-3 overflow-hidden">
+                  <div className="w-full bg-slate-100 rounded-full h-2 mt-4 overflow-hidden">
                     <div className="bg-amber-600 h-full rounded-full" style={{ width: '7.3%' }} />
                   </div>
                 </div>
 
                 {/* 3. Nivel */}
-                <div>
-                  <div className="flex justify-between text-xs font-bold text-slate-800 mb-1">
-                    <span className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-slate-600" />
-                      3. Fuera solo de Nivel Formativo (Misma materia pero en subsistema o ciclo diferente)
-                    </span>
-                    <span className="text-slate-700">80 casos · 0.3%</span>
+                <div className="bg-white p-4.5 rounded-2xl border border-slate-200/90 shadow-xs flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Brecha Leve</span>
+                      <span className="text-xs font-black text-slate-600 bg-slate-100 px-2 py-0.5 rounded-md border border-slate-200">
+                        0.3%
+                      </span>
+                    </div>
+                    <h4 className="font-black text-slate-900 text-sm mt-2">Fuera solo de Nivel</h4>
+                    <span className="text-2xl font-black text-slate-900 block mt-1">80 casos</span>
+                    <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+                      Enseña la materia exacta de su formación profesional pero en un subsistema o nivel escolar diferente.
+                    </p>
                   </div>
-                  <div className="w-full bg-slate-200 rounded-full h-3 overflow-hidden">
-                    <div className="bg-slate-600 h-full rounded-full" style={{ width: '0.3%' }} />
+                  <div className="w-full bg-slate-100 rounded-full h-2 mt-4 overflow-hidden">
+                    <div className="bg-slate-500 h-full rounded-full" style={{ width: '0.3%' }} />
                   </div>
                 </div>
+
               </div>
             </div>
+
           </div>
 
 
@@ -474,12 +646,14 @@ export default function PertinenciaView() {
              ═══════════════════════════════════════════════════════════════════ */}
           <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs">
             <div className="flex items-center gap-2 mb-2">
-              <span className="w-7 h-7 rounded-full bg-amber-100 text-amber-800 font-black text-xs flex items-center justify-center">2</span>
-              <h2 className="text-lg sm:text-xl font-bold text-slate-900">
+              <span className="w-8 h-8 rounded-xl bg-amber-600 text-white font-black text-sm flex items-center justify-center shadow-xs">
+                2
+              </span>
+              <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
                 Necesidades de Formación: Metas Cuantitativas y Nivel de Intensidad
               </h2>
             </div>
-            <p className="text-xs sm:text-sm text-slate-500 mb-6 ml-9">
+            <p className="text-xs sm:text-sm text-slate-500 mb-6 ml-10">
               ¿Cuántos docentes requerirían formación y cuánto duraría según el rango de pertinencia?
             </p>
 
@@ -516,7 +690,7 @@ export default function PertinenciaView() {
                     </span>
                     <span className="text-xs font-extrabold text-amber-800">Baja Pertinencia</span>
                   </div>
-                  <h4 className="font-black text-slate-900 text-base mt-2">Formación Larga / Mayor Duración</h4>
+                  <h4 className="font-black text-slate-900 text-base mt-2">Formación Larga / Mayor Carga</h4>
                   <p className="text-xs text-slate-600 mt-1">
                     Requieren un programa de <strong>mayor carga y duración extendida (reconversión profunda)</strong> debido a la brecha sustancial entre su título y la materia que enseñan.
                   </p>
@@ -597,12 +771,14 @@ export default function PertinenciaView() {
              ═══════════════════════════════════════════════════════════════════ */}
           <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs">
             <div className="flex items-center gap-2 mb-2">
-              <span className="w-7 h-7 rounded-full bg-purple-100 text-purple-800 font-black text-xs flex items-center justify-center">3</span>
-              <h2 className="text-lg sm:text-xl font-bold text-slate-900">
+              <span className="w-8 h-8 rounded-xl bg-purple-600 text-white font-black text-sm flex items-center justify-center shadow-xs">
+                3
+              </span>
+              <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
                 Beneficiarios y Alcance de la Intervención
               </h2>
             </div>
-            <p className="text-xs sm:text-sm text-slate-500 mb-6 ml-9">
+            <p className="text-xs sm:text-sm text-slate-500 mb-6 ml-10">
               ¿En cuántas unidades educativas enseñan los docentes que requerirían formación y a cuántos estudiantes atienden?
             </p>
 
