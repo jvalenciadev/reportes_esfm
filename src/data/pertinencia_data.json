@@ -6,8 +6,6 @@
       "asignaciones": 48580,
       "ues": 1762,
       "horas_total": 4417887,
-      "duracion_semanas": 4,
-      "costo_estimado_bs": 60775400,
       "estudiantes_atendidos": 1953495
     },
     "A": {
@@ -16,8 +14,6 @@
       "asignaciones": 82779,
       "ues": 1433,
       "horas_total": 7858329,
-      "duracion_semanas": 12,
-      "costo_estimado_bs": 322366800,
       "estudiantes_atendidos": 3684192
     },
     "N": {
@@ -26,8 +22,6 @@
       "asignaciones": 4760,
       "ues": 657,
       "horas_total": 425780,
-      "duracion_semanas": 24,
-      "costo_estimado_bs": 36237600,
       "estudiantes_atendidos": 215700
     },
     "SIN": {
@@ -36,8 +30,6 @@
       "asignaciones": 28329,
       "ues": 1907,
       "horas_total": 2465276,
-      "duracion_semanas": 0,
-      "costo_estimado_bs": 0,
       "estudiantes_atendidos": 1174185
     },
     "TOTAL": {
@@ -437,25 +429,1882 @@
       }
     }
   ],
-  "config": {
-    "duracion": {
-      "V": 4,
-      "A": 12,
-      "N": 24,
-      "SIN": 0
+  "por_especialidad": [
+    {
+      "especialidad": "EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL",
+      "docentes": 65558,
+      "ues": 1644,
+      "horas": 6708948,
+      "rangos": {
+        "V": {
+          "docentes": 13153,
+          "ues": 1074,
+          "horas": 1337462
+        },
+        "A": {
+          "docentes": 46492,
+          "ues": 594,
+          "horas": 4763052
+        },
+        "N": {
+          "docentes": 33,
+          "ues": 15,
+          "horas": 3160
+        },
+        "SIN": {
+          "docentes": 6359,
+          "ues": 1149,
+          "horas": 605274
+        }
+      },
+      "por_departamento": {
+        "BENI": {
+          "V": 900,
+          "A": 2380,
+          "N": 0,
+          "SIN": 569,
+          "total": 3796
+        },
+        "CHUQUISACA": {
+          "V": 898,
+          "A": 2854,
+          "N": 9,
+          "SIN": 325,
+          "total": 4083
+        },
+        "COCHABAMBA": {
+          "V": 1804,
+          "A": 8240,
+          "N": 3,
+          "SIN": 851,
+          "total": 10819
+        },
+        "LA PAZ": {
+          "V": 4054,
+          "A": 12090,
+          "N": 13,
+          "SIN": 1408,
+          "total": 17464
+        },
+        "ORURO": {
+          "V": 518,
+          "A": 2412,
+          "N": 6,
+          "SIN": 414,
+          "total": 3328
+        },
+        "PANDO": {
+          "V": 339,
+          "A": 632,
+          "N": 0,
+          "SIN": 131,
+          "total": 1093
+        },
+        "POTOSI": {
+          "V": 1003,
+          "A": 5121,
+          "N": 1,
+          "SIN": 547,
+          "total": 6631
+        },
+        "SANTA CRUZ": {
+          "V": 2953,
+          "A": 10242,
+          "N": 1,
+          "SIN": 1682,
+          "total": 14769
+        },
+        "TARIJA": {
+          "V": 685,
+          "A": 2521,
+          "N": 0,
+          "SIN": 432,
+          "total": 3576
+        }
+      }
     },
-    "costo_semana_bs": 350,
-    "labels": {
-      "V": "Alta Pertinencia",
-      "A": "Media Pertinencia",
-      "N": "Baja Pertinencia",
-      "SIN": "Sin Pertinencia / Impertinente"
+    {
+      "especialidad": "CIENCIAS NATURALES: FÍSICA - QUÍMICA",
+      "docentes": 13672,
+      "ues": 1304,
+      "horas": 1435946,
+      "rangos": {
+        "V": {
+          "docentes": 6780,
+          "ues": 999,
+          "horas": 671098
+        },
+        "A": {
+          "docentes": 4362,
+          "ues": 669,
+          "horas": 425899
+        },
+        "N": {
+          "docentes": 870,
+          "ues": 191,
+          "horas": 84644
+        },
+        "SIN": {
+          "docentes": 2628,
+          "ues": 758,
+          "horas": 254305
+        }
+      },
+      "por_departamento": {
+        "BENI": {
+          "V": 353,
+          "A": 51,
+          "N": 20,
+          "SIN": 103,
+          "total": 510
+        },
+        "CHUQUISACA": {
+          "V": 383,
+          "A": 354,
+          "N": 56,
+          "SIN": 228,
+          "total": 954
+        },
+        "COCHABAMBA": {
+          "V": 1083,
+          "A": 795,
+          "N": 220,
+          "SIN": 487,
+          "total": 2255
+        },
+        "LA PAZ": {
+          "V": 1936,
+          "A": 1497,
+          "N": 222,
+          "SIN": 630,
+          "total": 4048
+        },
+        "ORURO": {
+          "V": 318,
+          "A": 296,
+          "N": 82,
+          "SIN": 166,
+          "total": 805
+        },
+        "PANDO": {
+          "V": 157,
+          "A": 18,
+          "N": 3,
+          "SIN": 125,
+          "total": 281
+        },
+        "POTOSI": {
+          "V": 598,
+          "A": 425,
+          "N": 53,
+          "SIN": 213,
+          "total": 1234
+        },
+        "SANTA CRUZ": {
+          "V": 1635,
+          "A": 651,
+          "N": 180,
+          "SIN": 570,
+          "total": 2953
+        },
+        "TARIJA": {
+          "V": 317,
+          "A": 275,
+          "N": 34,
+          "SIN": 106,
+          "total": 633
+        }
+      }
     },
-    "colores": {
-      "V": "#16a34a",
-      "A": "#2563eb",
-      "N": "#ea580c",
-      "SIN": "#64748b"
+    {
+      "especialidad": "MATEMÁTICA",
+      "docentes": 12656,
+      "ues": 1197,
+      "horas": 1325903,
+      "rangos": {
+        "V": {
+          "docentes": 4440,
+          "ues": 520,
+          "horas": 465952
+        },
+        "A": {
+          "docentes": 4484,
+          "ues": 469,
+          "horas": 471952
+        },
+        "N": {
+          "docentes": 1176,
+          "ues": 340,
+          "horas": 120650
+        },
+        "SIN": {
+          "docentes": 2898,
+          "ues": 776,
+          "horas": 267349
+        }
+      },
+      "por_departamento": {
+        "BENI": {
+          "V": 338,
+          "A": 121,
+          "N": 76,
+          "SIN": 208,
+          "total": 693
+        },
+        "CHUQUISACA": {
+          "V": 253,
+          "A": 265,
+          "N": 100,
+          "SIN": 137,
+          "total": 747
+        },
+        "COCHABAMBA": {
+          "V": 667,
+          "A": 819,
+          "N": 154,
+          "SIN": 606,
+          "total": 2139
+        },
+        "LA PAZ": {
+          "V": 1199,
+          "A": 1435,
+          "N": 316,
+          "SIN": 619,
+          "total": 3523
+        },
+        "ORURO": {
+          "V": 251,
+          "A": 221,
+          "N": 86,
+          "SIN": 236,
+          "total": 782
+        },
+        "PANDO": {
+          "V": 104,
+          "A": 30,
+          "N": 10,
+          "SIN": 44,
+          "total": 174
+        },
+        "POTOSI": {
+          "V": 463,
+          "A": 449,
+          "N": 134,
+          "SIN": 257,
+          "total": 1293
+        },
+        "SANTA CRUZ": {
+          "V": 953,
+          "A": 926,
+          "N": 258,
+          "SIN": 612,
+          "total": 2697
+        },
+        "TARIJA": {
+          "V": 212,
+          "A": 218,
+          "N": 42,
+          "SIN": 179,
+          "total": 608
+        }
+      }
+    },
+    {
+      "especialidad": "COMUNICACIÓN Y LENGUAJES: LENGUA CASTELLANA",
+      "docentes": 10381,
+      "ues": 1191,
+      "horas": 1067845,
+      "rangos": {
+        "V": {
+          "docentes": 3563,
+          "ues": 527,
+          "horas": 367594
+        },
+        "A": {
+          "docentes": 3476,
+          "ues": 462,
+          "horas": 357816
+        },
+        "N": {
+          "docentes": 1288,
+          "ues": 409,
+          "horas": 132844
+        },
+        "SIN": {
+          "docentes": 2262,
+          "ues": 772,
+          "horas": 209591
+        }
+      },
+      "por_departamento": {
+        "BENI": {
+          "V": 216,
+          "A": 42,
+          "N": 64,
+          "SIN": 142,
+          "total": 445
+        },
+        "CHUQUISACA": {
+          "V": 186,
+          "A": 214,
+          "N": 77,
+          "SIN": 121,
+          "total": 592
+        },
+        "COCHABAMBA": {
+          "V": 553,
+          "A": 702,
+          "N": 187,
+          "SIN": 457,
+          "total": 1827
+        },
+        "LA PAZ": {
+          "V": 943,
+          "A": 1168,
+          "N": 397,
+          "SIN": 475,
+          "total": 2952
+        },
+        "ORURO": {
+          "V": 223,
+          "A": 146,
+          "N": 162,
+          "SIN": 242,
+          "total": 767
+        },
+        "PANDO": {
+          "V": 35,
+          "A": 42,
+          "N": 9,
+          "SIN": 41,
+          "total": 117
+        },
+        "POTOSI": {
+          "V": 412,
+          "A": 335,
+          "N": 145,
+          "SIN": 272,
+          "total": 1146
+        },
+        "SANTA CRUZ": {
+          "V": 795,
+          "A": 666,
+          "N": 189,
+          "SIN": 404,
+          "total": 2029
+        },
+        "TARIJA": {
+          "V": 200,
+          "A": 161,
+          "N": 58,
+          "SIN": 108,
+          "total": 506
+        }
+      }
+    },
+    {
+      "especialidad": "EDUCACIÓN INICIAL EN FAMILIA COMUNITARIA",
+      "docentes": 8705,
+      "ues": 637,
+      "horas": 881582,
+      "rangos": {
+        "V": {
+          "docentes": 5086,
+          "ues": 489,
+          "horas": 513492
+        },
+        "A": {
+          "docentes": 3403,
+          "ues": 326,
+          "horas": 345880
+        },
+        "N": {
+          "docentes": 0,
+          "ues": 0,
+          "horas": 0
+        },
+        "SIN": {
+          "docentes": 218,
+          "ues": 151,
+          "horas": 22210
+        }
+      },
+      "por_departamento": {
+        "BENI": {
+          "V": 290,
+          "A": 193,
+          "N": 0,
+          "SIN": 43,
+          "total": 525
+        },
+        "CHUQUISACA": {
+          "V": 274,
+          "A": 243,
+          "N": 0,
+          "SIN": 19,
+          "total": 536
+        },
+        "COCHABAMBA": {
+          "V": 877,
+          "A": 776,
+          "N": 0,
+          "SIN": 31,
+          "total": 1683
+        },
+        "LA PAZ": {
+          "V": 1325,
+          "A": 767,
+          "N": 0,
+          "SIN": 36,
+          "total": 2128
+        },
+        "ORURO": {
+          "V": 354,
+          "A": 228,
+          "N": 0,
+          "SIN": 14,
+          "total": 596
+        },
+        "PANDO": {
+          "V": 107,
+          "A": 20,
+          "N": 0,
+          "SIN": 4,
+          "total": 131
+        },
+        "POTOSI": {
+          "V": 415,
+          "A": 259,
+          "N": 0,
+          "SIN": 11,
+          "total": 685
+        },
+        "SANTA CRUZ": {
+          "V": 1198,
+          "A": 667,
+          "N": 0,
+          "SIN": 49,
+          "total": 1914
+        },
+        "TARIJA": {
+          "V": 246,
+          "A": 250,
+          "N": 0,
+          "SIN": 11,
+          "total": 507
+        }
+      }
+    },
+    {
+      "especialidad": "CIENCIAS SOCIALES",
+      "docentes": 8545,
+      "ues": 874,
+      "horas": 891050,
+      "rangos": {
+        "V": {
+          "docentes": 3698,
+          "ues": 495,
+          "horas": 384546
+        },
+        "A": {
+          "docentes": 3834,
+          "ues": 426,
+          "horas": 401402
+        },
+        "N": {
+          "docentes": 23,
+          "ues": 14,
+          "horas": 2372
+        },
+        "SIN": {
+          "docentes": 1139,
+          "ues": 502,
+          "horas": 102730
+        }
+      },
+      "por_departamento": {
+        "BENI": {
+          "V": 284,
+          "A": 38,
+          "N": 0,
+          "SIN": 106,
+          "total": 411
+        },
+        "CHUQUISACA": {
+          "V": 159,
+          "A": 304,
+          "N": 9,
+          "SIN": 113,
+          "total": 578
+        },
+        "COCHABAMBA": {
+          "V": 459,
+          "A": 989,
+          "N": 1,
+          "SIN": 272,
+          "total": 1665
+        },
+        "LA PAZ": {
+          "V": 1087,
+          "A": 870,
+          "N": 6,
+          "SIN": 111,
+          "total": 2061
+        },
+        "ORURO": {
+          "V": 197,
+          "A": 211,
+          "N": 0,
+          "SIN": 55,
+          "total": 455
+        },
+        "PANDO": {
+          "V": 72,
+          "A": 31,
+          "N": 0,
+          "SIN": 48,
+          "total": 140
+        },
+        "POTOSI": {
+          "V": 398,
+          "A": 352,
+          "N": 2,
+          "SIN": 104,
+          "total": 851
+        },
+        "SANTA CRUZ": {
+          "V": 866,
+          "A": 855,
+          "N": 2,
+          "SIN": 292,
+          "total": 1996
+        },
+        "TARIJA": {
+          "V": 176,
+          "A": 184,
+          "N": 3,
+          "SIN": 38,
+          "total": 388
+        }
+      }
+    },
+    {
+      "especialidad": "CIENCIAS NATURALES: BIOLOGÍA - GEOGRAFÍA",
+      "docentes": 8373,
+      "ues": 1037,
+      "horas": 862661,
+      "rangos": {
+        "V": {
+          "docentes": 2945,
+          "ues": 472,
+          "horas": 303362
+        },
+        "A": {
+          "docentes": 3601,
+          "ues": 576,
+          "horas": 372420
+        },
+        "N": {
+          "docentes": 15,
+          "ues": 10,
+          "horas": 1668
+        },
+        "SIN": {
+          "docentes": 1974,
+          "ues": 687,
+          "horas": 185211
+        }
+      },
+      "por_departamento": {
+        "BENI": {
+          "V": 150,
+          "A": 39,
+          "N": 0,
+          "SIN": 89,
+          "total": 262
+        },
+        "CHUQUISACA": {
+          "V": 138,
+          "A": 352,
+          "N": 1,
+          "SIN": 192,
+          "total": 677
+        },
+        "COCHABAMBA": {
+          "V": 373,
+          "A": 965,
+          "N": 6,
+          "SIN": 413,
+          "total": 1695
+        },
+        "LA PAZ": {
+          "V": 879,
+          "A": 893,
+          "N": 7,
+          "SIN": 351,
+          "total": 2120
+        },
+        "ORURO": {
+          "V": 133,
+          "A": 243,
+          "N": 0,
+          "SIN": 205,
+          "total": 565
+        },
+        "PANDO": {
+          "V": 60,
+          "A": 19,
+          "N": 0,
+          "SIN": 37,
+          "total": 110
+        },
+        "POTOSI": {
+          "V": 272,
+          "A": 393,
+          "N": 1,
+          "SIN": 214,
+          "total": 874
+        },
+        "SANTA CRUZ": {
+          "V": 823,
+          "A": 533,
+          "N": 0,
+          "SIN": 405,
+          "total": 1738
+        },
+        "TARIJA": {
+          "V": 117,
+          "A": 164,
+          "N": 0,
+          "SIN": 68,
+          "total": 332
+        }
+      }
+    },
+    {
+      "especialidad": "VALORES, ESPIRITUALIDAD Y RELIGIONES",
+      "docentes": 4409,
+      "ues": 733,
+      "horas": 452660,
+      "rangos": {
+        "V": {
+          "docentes": 0,
+          "ues": 0,
+          "horas": 0
+        },
+        "A": {
+          "docentes": 3269,
+          "ues": 589,
+          "horas": 336892
+        },
+        "N": {
+          "docentes": 657,
+          "ues": 91,
+          "horas": 54718
+        },
+        "SIN": {
+          "docentes": 672,
+          "ues": 307,
+          "horas": 61050
+        }
+      },
+      "por_departamento": {
+        "BENI": {
+          "V": 0,
+          "A": 137,
+          "N": 6,
+          "SIN": 70,
+          "total": 209
+        },
+        "CHUQUISACA": {
+          "V": 0,
+          "A": 259,
+          "N": 43,
+          "SIN": 42,
+          "total": 336
+        },
+        "COCHABAMBA": {
+          "V": 0,
+          "A": 672,
+          "N": 74,
+          "SIN": 89,
+          "total": 800
+        },
+        "LA PAZ": {
+          "V": 0,
+          "A": 895,
+          "N": 327,
+          "SIN": 102,
+          "total": 1251
+        },
+        "ORURO": {
+          "V": 0,
+          "A": 177,
+          "N": 49,
+          "SIN": 87,
+          "total": 291
+        },
+        "PANDO": {
+          "V": 0,
+          "A": 22,
+          "N": 6,
+          "SIN": 13,
+          "total": 40
+        },
+        "POTOSI": {
+          "V": 0,
+          "A": 234,
+          "N": 47,
+          "SIN": 87,
+          "total": 350
+        },
+        "SANTA CRUZ": {
+          "V": 0,
+          "A": 748,
+          "N": 66,
+          "SIN": 160,
+          "total": 959
+        },
+        "TARIJA": {
+          "V": 0,
+          "A": 125,
+          "N": 39,
+          "SIN": 22,
+          "total": 173
+        }
+      }
+    },
+    {
+      "especialidad": "COMUNICACIÓN Y LENGUAJES: LENGUA EXTRANJERA (INGLÉS)",
+      "docentes": 2993,
+      "ues": 651,
+      "horas": 308172,
+      "rangos": {
+        "V": {
+          "docentes": 1323,
+          "ues": 355,
+          "horas": 133854
+        },
+        "A": {
+          "docentes": 556,
+          "ues": 121,
+          "horas": 57278
+        },
+        "N": {
+          "docentes": 105,
+          "ues": 22,
+          "horas": 10432
+        },
+        "SIN": {
+          "docentes": 1090,
+          "ues": 448,
+          "horas": 106608
+        }
+      },
+      "por_departamento": {
+        "BENI": {
+          "V": 112,
+          "A": 3,
+          "N": 0,
+          "SIN": 65,
+          "total": 173
+        },
+        "CHUQUISACA": {
+          "V": 77,
+          "A": 29,
+          "N": 0,
+          "SIN": 61,
+          "total": 162
+        },
+        "COCHABAMBA": {
+          "V": 197,
+          "A": 178,
+          "N": 2,
+          "SIN": 193,
+          "total": 542
+        },
+        "LA PAZ": {
+          "V": 353,
+          "A": 79,
+          "N": 101,
+          "SIN": 340,
+          "total": 857
+        },
+        "ORURO": {
+          "V": 41,
+          "A": 13,
+          "N": 0,
+          "SIN": 73,
+          "total": 125
+        },
+        "PANDO": {
+          "V": 43,
+          "A": 1,
+          "N": 0,
+          "SIN": 32,
+          "total": 68
+        },
+        "POTOSI": {
+          "V": 83,
+          "A": 68,
+          "N": 0,
+          "SIN": 112,
+          "total": 261
+        },
+        "SANTA CRUZ": {
+          "V": 371,
+          "A": 111,
+          "N": 2,
+          "SIN": 181,
+          "total": 658
+        },
+        "TARIJA": {
+          "V": 46,
+          "A": 74,
+          "N": 0,
+          "SIN": 34,
+          "total": 148
+        }
+      }
+    },
+    {
+      "especialidad": "COSMOVISIONES, FILOSOFÍAS Y SICOLOGÍA",
+      "docentes": 2737,
+      "ues": 644,
+      "horas": 282944,
+      "rangos": {
+        "V": {
+          "docentes": 1566,
+          "ues": 401,
+          "horas": 159650
+        },
+        "A": {
+          "docentes": 547,
+          "ues": 103,
+          "horas": 56968
+        },
+        "N": {
+          "docentes": 0,
+          "ues": 0,
+          "horas": 0
+        },
+        "SIN": {
+          "docentes": 685,
+          "ues": 345,
+          "horas": 66326
+        }
+      },
+      "por_departamento": {
+        "BENI": {
+          "V": 114,
+          "A": 16,
+          "N": 0,
+          "SIN": 74,
+          "total": 197
+        },
+        "CHUQUISACA": {
+          "V": 65,
+          "A": 46,
+          "N": 0,
+          "SIN": 16,
+          "total": 125
+        },
+        "COCHABAMBA": {
+          "V": 235,
+          "A": 64,
+          "N": 0,
+          "SIN": 92,
+          "total": 376
+        },
+        "LA PAZ": {
+          "V": 460,
+          "A": 191,
+          "N": 0,
+          "SIN": 216,
+          "total": 854
+        },
+        "ORURO": {
+          "V": 50,
+          "A": 64,
+          "N": 0,
+          "SIN": 68,
+          "total": 179
+        },
+        "PANDO": {
+          "V": 38,
+          "A": 1,
+          "N": 0,
+          "SIN": 34,
+          "total": 69
+        },
+        "POTOSI": {
+          "V": 196,
+          "A": 39,
+          "N": 0,
+          "SIN": 28,
+          "total": 261
+        },
+        "SANTA CRUZ": {
+          "V": 323,
+          "A": 105,
+          "N": 0,
+          "SIN": 130,
+          "total": 547
+        },
+        "TARIJA": {
+          "V": 85,
+          "A": 21,
+          "N": 0,
+          "SIN": 27,
+          "total": 129
+        }
+      }
+    },
+    {
+      "especialidad": "OTRAS ESPECIALIDADES",
+      "docentes": 2444,
+      "ues": 685,
+      "horas": 225160,
+      "rangos": {
+        "V": {
+          "docentes": 0,
+          "ues": 0,
+          "horas": 0
+        },
+        "A": {
+          "docentes": 0,
+          "ues": 0,
+          "horas": 0
+        },
+        "N": {
+          "docentes": 0,
+          "ues": 0,
+          "horas": 0
+        },
+        "SIN": {
+          "docentes": 2444,
+          "ues": 685,
+          "horas": 225160
+        }
+      },
+      "por_departamento": {
+        "BENI": {
+          "V": 0,
+          "A": 0,
+          "N": 0,
+          "SIN": 200,
+          "total": 200
+        },
+        "CHUQUISACA": {
+          "V": 0,
+          "A": 0,
+          "N": 0,
+          "SIN": 188,
+          "total": 188
+        },
+        "COCHABAMBA": {
+          "V": 0,
+          "A": 0,
+          "N": 0,
+          "SIN": 510,
+          "total": 510
+        },
+        "LA PAZ": {
+          "V": 0,
+          "A": 0,
+          "N": 0,
+          "SIN": 195,
+          "total": 195
+        },
+        "ORURO": {
+          "V": 0,
+          "A": 0,
+          "N": 0,
+          "SIN": 37,
+          "total": 37
+        },
+        "PANDO": {
+          "V": 0,
+          "A": 0,
+          "N": 0,
+          "SIN": 37,
+          "total": 37
+        },
+        "POTOSI": {
+          "V": 0,
+          "A": 0,
+          "N": 0,
+          "SIN": 213,
+          "total": 213
+        },
+        "SANTA CRUZ": {
+          "V": 0,
+          "A": 0,
+          "N": 0,
+          "SIN": 934,
+          "total": 934
+        },
+        "TARIJA": {
+          "V": 0,
+          "A": 0,
+          "N": 0,
+          "SIN": 130,
+          "total": 130
+        }
+      }
+    },
+    {
+      "especialidad": "OTRAS ESPECIALIDADES / TÉCNICO",
+      "docentes": 2349,
+      "ues": 590,
+      "horas": 224842,
+      "rangos": {
+        "V": {
+          "docentes": 200,
+          "ues": 106,
+          "horas": 17992
+        },
+        "A": {
+          "docentes": 689,
+          "ues": 201,
+          "horas": 69620
+        },
+        "N": {
+          "docentes": 3,
+          "ues": 3,
+          "horas": 272
+        },
+        "SIN": {
+          "docentes": 1467,
+          "ues": 402,
+          "horas": 136958
+        }
+      },
+      "por_departamento": {
+        "BENI": {
+          "V": 11,
+          "A": 26,
+          "N": 0,
+          "SIN": 41,
+          "total": 77
+        },
+        "CHUQUISACA": {
+          "V": 6,
+          "A": 5,
+          "N": 0,
+          "SIN": 136,
+          "total": 147
+        },
+        "COCHABAMBA": {
+          "V": 21,
+          "A": 97,
+          "N": 0,
+          "SIN": 160,
+          "total": 278
+        },
+        "LA PAZ": {
+          "V": 68,
+          "A": 175,
+          "N": 3,
+          "SIN": 720,
+          "total": 961
+        },
+        "ORURO": {
+          "V": 20,
+          "A": 46,
+          "N": 0,
+          "SIN": 99,
+          "total": 165
+        },
+        "PANDO": {
+          "V": 4,
+          "A": 1,
+          "N": 0,
+          "SIN": 16,
+          "total": 21
+        },
+        "POTOSI": {
+          "V": 19,
+          "A": 26,
+          "N": 0,
+          "SIN": 58,
+          "total": 103
+        },
+        "SANTA CRUZ": {
+          "V": 43,
+          "A": 302,
+          "N": 0,
+          "SIN": 201,
+          "total": 542
+        },
+        "TARIJA": {
+          "V": 8,
+          "A": 11,
+          "N": 0,
+          "SIN": 36,
+          "total": 55
+        }
+      }
+    },
+    {
+      "especialidad": "EDUCACIÓN MUSICAL",
+      "docentes": 1236,
+      "ues": 301,
+      "horas": 119876,
+      "rangos": {
+        "V": {
+          "docentes": 0,
+          "ues": 0,
+          "horas": 0
+        },
+        "A": {
+          "docentes": 1069,
+          "ues": 225,
+          "horas": 98538
+        },
+        "N": {
+          "docentes": 2,
+          "ues": 1,
+          "horas": 40
+        },
+        "SIN": {
+          "docentes": 247,
+          "ues": 121,
+          "horas": 21298
+        }
+      },
+      "por_departamento": {
+        "BENI": {
+          "V": 0,
+          "A": 15,
+          "N": 0,
+          "SIN": 6,
+          "total": 20
+        },
+        "CHUQUISACA": {
+          "V": 0,
+          "A": 113,
+          "N": 2,
+          "SIN": 26,
+          "total": 127
+        },
+        "COCHABAMBA": {
+          "V": 0,
+          "A": 193,
+          "N": 0,
+          "SIN": 40,
+          "total": 216
+        },
+        "LA PAZ": {
+          "V": 0,
+          "A": 357,
+          "N": 0,
+          "SIN": 65,
+          "total": 401
+        },
+        "ORURO": {
+          "V": 0,
+          "A": 115,
+          "N": 0,
+          "SIN": 31,
+          "total": 142
+        },
+        "PANDO": {
+          "V": 0,
+          "A": 1,
+          "N": 0,
+          "SIN": 0,
+          "total": 1
+        },
+        "POTOSI": {
+          "V": 0,
+          "A": 82,
+          "N": 0,
+          "SIN": 14,
+          "total": 89
+        },
+        "SANTA CRUZ": {
+          "V": 0,
+          "A": 117,
+          "N": 0,
+          "SIN": 45,
+          "total": 155
+        },
+        "TARIJA": {
+          "V": 0,
+          "A": 76,
+          "N": 0,
+          "SIN": 20,
+          "total": 85
+        }
+      }
+    },
+    {
+      "especialidad": "ARTES PLÁSTICAS Y VISUALES",
+      "docentes": 1186,
+      "ues": 248,
+      "horas": 124808,
+      "rangos": {
+        "V": {
+          "docentes": 0,
+          "ues": 0,
+          "horas": 0
+        },
+        "A": {
+          "docentes": 940,
+          "ues": 182,
+          "horas": 97060
+        },
+        "N": {
+          "docentes": 142,
+          "ues": 42,
+          "horas": 14980
+        },
+        "SIN": {
+          "docentes": 149,
+          "ues": 90,
+          "horas": 12768
+        }
+      },
+      "por_departamento": {
+        "BENI": {
+          "V": 0,
+          "A": 8,
+          "N": 2,
+          "SIN": 7,
+          "total": 15
+        },
+        "CHUQUISACA": {
+          "V": 0,
+          "A": 88,
+          "N": 18,
+          "SIN": 39,
+          "total": 137
+        },
+        "COCHABAMBA": {
+          "V": 0,
+          "A": 155,
+          "N": 23,
+          "SIN": 29,
+          "total": 194
+        },
+        "LA PAZ": {
+          "V": 0,
+          "A": 418,
+          "N": 15,
+          "SIN": 25,
+          "total": 453
+        },
+        "ORURO": {
+          "V": 0,
+          "A": 50,
+          "N": 43,
+          "SIN": 21,
+          "total": 103
+        },
+        "PANDO": {
+          "V": 0,
+          "A": 2,
+          "N": 0,
+          "SIN": 1,
+          "total": 2
+        },
+        "POTOSI": {
+          "V": 0,
+          "A": 47,
+          "N": 19,
+          "SIN": 9,
+          "total": 73
+        },
+        "SANTA CRUZ": {
+          "V": 0,
+          "A": 114,
+          "N": 15,
+          "SIN": 12,
+          "total": 141
+        },
+        "TARIJA": {
+          "V": 0,
+          "A": 58,
+          "N": 7,
+          "SIN": 6,
+          "total": 68
+        }
+      }
+    },
+    {
+      "especialidad": "EDUCACIÓN ESPECIAL PARA PERSONAS CON DISCAPACIDAD",
+      "docentes": 1159,
+      "ues": 307,
+      "horas": 119230,
+      "rangos": {
+        "V": {
+          "docentes": 197,
+          "ues": 96,
+          "horas": 18260
+        },
+        "A": {
+          "docentes": 25,
+          "ues": 15,
+          "horas": 2480
+        },
+        "N": {
+          "docentes": 0,
+          "ues": 0,
+          "horas": 0
+        },
+        "SIN": {
+          "docentes": 945,
+          "ues": 249,
+          "horas": 98490
+        }
+      },
+      "por_departamento": {
+        "BENI": {
+          "V": 1,
+          "A": 0,
+          "N": 0,
+          "SIN": 22,
+          "total": 23
+        },
+        "CHUQUISACA": {
+          "V": 1,
+          "A": 1,
+          "N": 0,
+          "SIN": 18,
+          "total": 20
+        },
+        "COCHABAMBA": {
+          "V": 9,
+          "A": 0,
+          "N": 0,
+          "SIN": 138,
+          "total": 147
+        },
+        "LA PAZ": {
+          "V": 81,
+          "A": 20,
+          "N": 0,
+          "SIN": 321,
+          "total": 417
+        },
+        "ORURO": {
+          "V": 1,
+          "A": 3,
+          "N": 0,
+          "SIN": 29,
+          "total": 32
+        },
+        "PANDO": {
+          "V": 1,
+          "A": 0,
+          "N": 0,
+          "SIN": 21,
+          "total": 22
+        },
+        "POTOSI": {
+          "V": 13,
+          "A": 1,
+          "N": 0,
+          "SIN": 20,
+          "total": 34
+        },
+        "SANTA CRUZ": {
+          "V": 89,
+          "A": 0,
+          "N": 0,
+          "SIN": 344,
+          "total": 431
+        },
+        "TARIJA": {
+          "V": 1,
+          "A": 0,
+          "N": 0,
+          "SIN": 32,
+          "total": 33
+        }
+      }
+    },
+    {
+      "especialidad": "AGROPECUARIA",
+      "docentes": 476,
+      "ues": 212,
+      "horas": 48034,
+      "rangos": {
+        "V": {
+          "docentes": 105,
+          "ues": 50,
+          "horas": 10412
+        },
+        "A": {
+          "docentes": 4,
+          "ues": 3,
+          "horas": 388
+        },
+        "N": {
+          "docentes": 0,
+          "ues": 0,
+          "horas": 0
+        },
+        "SIN": {
+          "docentes": 373,
+          "ues": 190,
+          "horas": 37234
+        }
+      },
+      "por_departamento": {
+        "BENI": {
+          "V": 1,
+          "A": 0,
+          "N": 0,
+          "SIN": 1,
+          "total": 2
+        },
+        "CHUQUISACA": {
+          "V": 1,
+          "A": 0,
+          "N": 0,
+          "SIN": 0,
+          "total": 1
+        },
+        "COCHABAMBA": {
+          "V": 1,
+          "A": 0,
+          "N": 0,
+          "SIN": 11,
+          "total": 12
+        },
+        "LA PAZ": {
+          "V": 39,
+          "A": 4,
+          "N": 0,
+          "SIN": 139,
+          "total": 182
+        },
+        "ORURO": {
+          "V": 0,
+          "A": 0,
+          "N": 0,
+          "SIN": 2,
+          "total": 2
+        },
+        "PANDO": {
+          "V": 3,
+          "A": 0,
+          "N": 0,
+          "SIN": 44,
+          "total": 46
+        },
+        "POTOSI": {
+          "V": 4,
+          "A": 0,
+          "N": 0,
+          "SIN": 2,
+          "total": 6
+        },
+        "SANTA CRUZ": {
+          "V": 50,
+          "A": 0,
+          "N": 0,
+          "SIN": 162,
+          "total": 207
+        },
+        "TARIJA": {
+          "V": 6,
+          "A": 0,
+          "N": 0,
+          "SIN": 12,
+          "total": 18
+        }
+      }
+    },
+    {
+      "especialidad": "ELECTRICIDAD Y ELECTRÓNICA",
+      "docentes": 282,
+      "ues": 136,
+      "horas": 27138,
+      "rangos": {
+        "V": {
+          "docentes": 42,
+          "ues": 34,
+          "horas": 3804
+        },
+        "A": {
+          "docentes": 4,
+          "ues": 3,
+          "horas": 384
+        },
+        "N": {
+          "docentes": 0,
+          "ues": 0,
+          "horas": 0
+        },
+        "SIN": {
+          "docentes": 246,
+          "ues": 123,
+          "horas": 22950
+        }
+      },
+      "por_departamento": {
+        "BENI": {
+          "V": 1,
+          "A": 0,
+          "N": 0,
+          "SIN": 8,
+          "total": 8
+        },
+        "COCHABAMBA": {
+          "V": 11,
+          "A": 1,
+          "N": 0,
+          "SIN": 14,
+          "total": 23
+        },
+        "LA PAZ": {
+          "V": 26,
+          "A": 3,
+          "N": 0,
+          "SIN": 211,
+          "total": 234
+        },
+        "PANDO": {
+          "V": 0,
+          "A": 0,
+          "N": 0,
+          "SIN": 2,
+          "total": 2
+        },
+        "POTOSI": {
+          "V": 2,
+          "A": 0,
+          "N": 0,
+          "SIN": 3,
+          "total": 5
+        },
+        "SANTA CRUZ": {
+          "V": 2,
+          "A": 0,
+          "N": 0,
+          "SIN": 7,
+          "total": 9
+        },
+        "TARIJA": {
+          "V": 0,
+          "A": 0,
+          "N": 0,
+          "SIN": 1,
+          "total": 1
+        }
+      }
+    },
+    {
+      "especialidad": "TRANSFORMACIÓN DE ALIMENTOS Y GASTRONOMÍA",
+      "docentes": 229,
+      "ues": 136,
+      "horas": 22075,
+      "rangos": {
+        "V": {
+          "docentes": 127,
+          "ues": 81,
+          "horas": 12321
+        },
+        "A": {
+          "docentes": 1,
+          "ues": 1,
+          "horas": 100
+        },
+        "N": {
+          "docentes": 0,
+          "ues": 0,
+          "horas": 0
+        },
+        "SIN": {
+          "docentes": 105,
+          "ues": 72,
+          "horas": 9654
+        }
+      },
+      "por_departamento": {
+        "BENI": {
+          "V": 0,
+          "A": 0,
+          "N": 0,
+          "SIN": 1,
+          "total": 1
+        },
+        "CHUQUISACA": {
+          "V": 1,
+          "A": 0,
+          "N": 0,
+          "SIN": 0,
+          "total": 1
+        },
+        "COCHABAMBA": {
+          "V": 12,
+          "A": 0,
+          "N": 0,
+          "SIN": 6,
+          "total": 17
+        },
+        "LA PAZ": {
+          "V": 85,
+          "A": 0,
+          "N": 0,
+          "SIN": 60,
+          "total": 144
+        },
+        "POTOSI": {
+          "V": 9,
+          "A": 0,
+          "N": 0,
+          "SIN": 4,
+          "total": 13
+        },
+        "SANTA CRUZ": {
+          "V": 19,
+          "A": 0,
+          "N": 0,
+          "SIN": 33,
+          "total": 50
+        },
+        "TARIJA": {
+          "V": 1,
+          "A": 1,
+          "N": 0,
+          "SIN": 1,
+          "total": 3
+        }
+      }
+    },
+    {
+      "especialidad": "MECÁNICA AUTOMOTRIZ",
+      "docentes": 203,
+      "ues": 118,
+      "horas": 19834,
+      "rangos": {
+        "V": {
+          "docentes": 125,
+          "ues": 75,
+          "horas": 11984
+        },
+        "A": {
+          "docentes": 1,
+          "ues": 1,
+          "horas": 104
+        },
+        "N": {
+          "docentes": 0,
+          "ues": 0,
+          "horas": 0
+        },
+        "SIN": {
+          "docentes": 87,
+          "ues": 61,
+          "horas": 7746
+        }
+      },
+      "por_departamento": {
+        "COCHABAMBA": {
+          "V": 9,
+          "A": 0,
+          "N": 0,
+          "SIN": 6,
+          "total": 13
+        },
+        "LA PAZ": {
+          "V": 108,
+          "A": 1,
+          "N": 0,
+          "SIN": 75,
+          "total": 176
+        },
+        "ORURO": {
+          "V": 3,
+          "A": 0,
+          "N": 0,
+          "SIN": 3,
+          "total": 6
+        },
+        "PANDO": {
+          "V": 0,
+          "A": 0,
+          "N": 0,
+          "SIN": 1,
+          "total": 1
+        },
+        "POTOSI": {
+          "V": 1,
+          "A": 0,
+          "N": 0,
+          "SIN": 1,
+          "total": 2
+        },
+        "SANTA CRUZ": {
+          "V": 4,
+          "A": 0,
+          "N": 0,
+          "SIN": 1,
+          "total": 5
+        }
+      }
+    },
+    {
+      "especialidad": "INDUSTRIA TEXTIL Y CONFECCIÓN",
+      "docentes": 109,
+      "ues": 76,
+      "horas": 10720,
+      "rangos": {
+        "V": {
+          "docentes": 50,
+          "ues": 35,
+          "horas": 5032
+        },
+        "A": {
+          "docentes": 1,
+          "ues": 1,
+          "horas": 96
+        },
+        "N": {
+          "docentes": 0,
+          "ues": 0,
+          "horas": 0
+        },
+        "SIN": {
+          "docentes": 59,
+          "ues": 50,
+          "horas": 5592
+        }
+      },
+      "por_departamento": {
+        "BENI": {
+          "V": 0,
+          "A": 0,
+          "N": 0,
+          "SIN": 1,
+          "total": 1
+        },
+        "CHUQUISACA": {
+          "V": 5,
+          "A": 0,
+          "N": 0,
+          "SIN": 3,
+          "total": 8
+        },
+        "COCHABAMBA": {
+          "V": 3,
+          "A": 0,
+          "N": 0,
+          "SIN": 1,
+          "total": 3
+        },
+        "LA PAZ": {
+          "V": 15,
+          "A": 1,
+          "N": 0,
+          "SIN": 24,
+          "total": 40
+        },
+        "ORURO": {
+          "V": 2,
+          "A": 0,
+          "N": 0,
+          "SIN": 2,
+          "total": 4
+        },
+        "POTOSI": {
+          "V": 22,
+          "A": 0,
+          "N": 0,
+          "SIN": 25,
+          "total": 47
+        },
+        "SANTA CRUZ": {
+          "V": 3,
+          "A": 0,
+          "N": 0,
+          "SIN": 3,
+          "total": 6
+        }
+      }
+    },
+    {
+      "especialidad": "ELECTROMECÁNICA",
+      "docentes": 82,
+      "ues": 66,
+      "horas": 7844,
+      "rangos": {
+        "V": {
+          "docentes": 11,
+          "ues": 10,
+          "horas": 1072
+        },
+        "A": {
+          "docentes": 0,
+          "ues": 0,
+          "horas": 0
+        },
+        "N": {
+          "docentes": 0,
+          "ues": 0,
+          "horas": 0
+        },
+        "SIN": {
+          "docentes": 71,
+          "ues": 59,
+          "horas": 6772
+        }
+      },
+      "por_departamento": {
+        "BENI": {
+          "V": 0,
+          "A": 0,
+          "N": 0,
+          "SIN": 4,
+          "total": 4
+        },
+        "CHUQUISACA": {
+          "V": 1,
+          "A": 0,
+          "N": 0,
+          "SIN": 1,
+          "total": 2
+        },
+        "COCHABAMBA": {
+          "V": 3,
+          "A": 0,
+          "N": 0,
+          "SIN": 2,
+          "total": 5
+        },
+        "LA PAZ": {
+          "V": 5,
+          "A": 0,
+          "N": 0,
+          "SIN": 58,
+          "total": 63
+        },
+        "POTOSI": {
+          "V": 0,
+          "A": 0,
+          "N": 0,
+          "SIN": 4,
+          "total": 4
+        },
+        "SANTA CRUZ": {
+          "V": 2,
+          "A": 0,
+          "N": 0,
+          "SIN": 1,
+          "total": 3
+        },
+        "TARIJA": {
+          "V": 0,
+          "A": 0,
+          "N": 0,
+          "SIN": 1,
+          "total": 1
+        }
+      }
     }
-  }
+  ]
 }
