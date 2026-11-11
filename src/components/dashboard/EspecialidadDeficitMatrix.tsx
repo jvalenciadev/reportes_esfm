@@ -556,14 +556,13 @@ export function EspecialidadDeficitMatrix({ onGoToConfig }: EspecialidadDeficitM
                         setModoBase('bd');
                         handleApplyCustomHoras(String(horaItemBd));
                       }}
-                      className={`px-2.5 py-1 text-[11px] rounded-lg border font-bold transition-all flex items-center gap-1 ${
-                        modoBase === 'bd'
-                          ? 'bg-[#c9a751] text-white border-[#b38f38] shadow-xs'
-                          : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
-                      }`}
+                      className={`px-2.5 py-1 text-[11px] rounded-lg border font-bold transition-all flex items-center gap-1 ${modoBase === 'bd'
+                        ? 'bg-[#c9a751] text-white border-[#b38f38] shadow-xs'
+                        : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
+                        }`}
                       title="Usar valor hora_item configurado en la base de datos"
                     >
-                      <span>🏛️ Base BD ({horaItemBd}h)</span>
+                      <span>Base BD ({horaItemBd}h)</span>
                     </button>
                     <button
                       type="button"
@@ -571,14 +570,13 @@ export function EspecialidadDeficitMatrix({ onGoToConfig }: EspecialidadDeficitM
                         setModoBase('promedio');
                         handleResetToPromedio();
                       }}
-                      className={`px-2.5 py-1 text-[11px] rounded-lg border font-bold transition-all flex items-center gap-1 ${
-                        modoBase === 'promedio'
-                          ? 'bg-[#c9a751] text-white border-[#b38f38] shadow-xs'
-                          : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
-                      }`}
+                      className={`px-2.5 py-1 text-[11px] rounded-lg border font-bold transition-all flex items-center gap-1 ${modoBase === 'promedio'
+                        ? 'bg-[#c9a751] text-white border-[#b38f38] shadow-xs'
+                        : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
+                        }`}
                       title="Calcular con el promedio exacto del filtro (Carga ÷ Docentes)"
                     >
-                      <span>📊 Promedio ({promedioHorasDocente}h)</span>
+                      <span>Promedio ({promedioHorasDocente}h)</span>
                     </button>
                   </div>
 
@@ -740,11 +738,10 @@ export function EspecialidadDeficitMatrix({ onGoToConfig }: EspecialidadDeficitM
                       </td>
                       <td className="py-3.5 px-3 text-right font-mono">
                         <span
-                          className={`inline-flex items-center px-2 py-0.5 rounded-full font-bold text-xs ${
-                            hasDeficit
-                              ? 'bg-red-50 text-red-700 border border-red-200'
-                              : 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                          }`}
+                          className={`inline-flex items-center px-2 py-0.5 rounded-full font-bold text-xs ${hasDeficit
+                            ? 'bg-red-50 text-red-700 border border-red-200'
+                            : 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                            }`}
                         >
                           {dept.total_deficit_horas.toLocaleString('es-BO')}h
                         </span>
@@ -753,13 +750,12 @@ export function EspecialidadDeficitMatrix({ onGoToConfig }: EspecialidadDeficitM
                         <div className="flex items-center justify-center gap-2">
                           <div className="w-14 bg-slate-200 rounded-full h-1.5 overflow-hidden">
                             <div
-                              className={`h-full rounded-full ${
-                                dept.pct_cobertura >= 95
-                                  ? 'bg-emerald-500'
-                                  : dept.pct_cobertura >= 85
+                              className={`h-full rounded-full ${dept.pct_cobertura >= 95
+                                ? 'bg-emerald-500'
+                                : dept.pct_cobertura >= 85
                                   ? 'bg-amber-500'
                                   : 'bg-red-500'
-                              }`}
+                                }`}
                               style={{ width: `${Math.min(100, Math.max(0, dept.pct_cobertura))}%` }}
                             />
                           </div>

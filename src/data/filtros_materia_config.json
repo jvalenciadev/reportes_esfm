@@ -9,8 +9,8 @@
       "SECUNDARIA"
     ],
     "materias": [
-      "QUÍMICA",
       "FÍSICA",
+      "QUÍMICA",
       "QUÍMICA INDUSTRIAL"
     ],
     "operador_carga": null,
@@ -30,10 +30,10 @@
       "PRIMARIA"
     ],
     "materias": [
-      "COMUNICACIÓN Y LENGUAS, LENGUA ORIGINARIA Y EXTRANJERA",
-      "MATEMÁTICAS",
+      "CIENCIAS NATURALES",
       "CIENCIAS SOCIALES",
-      "CIENCIAS NATURALES"
+      "COMUNICACIÓN Y LENGUAS, LENGUA ORIGINARIA Y EXTRANJERA",
+      "MATEMÁTICAS"
     ],
     "operador_carga": null,
     "carga_especialidad": null,
@@ -49,12 +49,12 @@
       "REGULAR"
     ],
     "niveles": [
-      "SECUNDARIA",
-      "PRIMARIA"
+      "PRIMARIA",
+      "SECUNDARIA"
     ],
     "materias": [
-      "INSTRUMENTO MUSICAL: CUERDA",
       "EDUCACIÓN MUSICAL",
+      "INSTRUMENTO MUSICAL: CUERDA",
       "INSTRUMENTO MUSICAL: VIENTO"
     ],
     "operador_carga": null,
@@ -67,17 +67,23 @@
   {
     "id": 4,
     "especialidad_oficial_id": 4,
-    "subsistemas": [],
-    "niveles": [],
+    "subsistemas": [
+      "REGULAR"
+    ],
+    "niveles": [
+      "PRIMARIA",
+      "SECUNDARIA"
+    ],
     "materias": [
-      "ARTES PLÁSTICAS"
+      "ARTES PLÁSTICAS",
+      "ARTES PLÁSTICAS Y VISUALES"
     ],
     "operador_carga": null,
     "carga_especialidad": null,
     "materias_condiciones": [],
     "activo": true,
     "descripcion": "Filtro inicial para ARTES PLÁSTICAS Y VISUALES",
-    "updated_at": "2026-11-10T14:00:00.000Z"
+    "updated_at": "2026-11-10T19:38:51.245Z"
   },
   {
     "id": 1794325442177,
@@ -89,9 +95,9 @@
       "INICIAL"
     ],
     "materias": [
-      "MATEMÁTICAS",
+      "COMUNICACIÓN Y LENGUAS, LENGUA ORIGINARIA Y EXTRANJERA",
       "MAESTRO DE AÑO DE ESCOLARIDAD INICIAL",
-      "COMUNICACIÓN Y LENGUAS, LENGUA ORIGINARIA Y EXTRANJERA"
+      "MATEMÁTICAS"
     ],
     "operador_carga": null,
     "carga_especialidad": null,
@@ -103,55 +109,78 @@
   {
     "id": 6,
     "especialidad_oficial_id": 6,
-    "subsistemas": [],
-    "niveles": [],
+    "subsistemas": [
+      "REGULAR"
+    ],
+    "niveles": [
+      "PRIMARIA",
+      "SECUNDARIA"
+    ],
     "materias": [
+      "DEPORTES",
       "EDUCACIÓN FÍSICA",
-      "DEPORTES"
+      "EDUCACIÓN FÍSICA Y DEPORTES"
     ],
     "operador_carga": null,
     "carga_especialidad": null,
     "materias_condiciones": [],
     "activo": true,
     "descripcion": "Filtro inicial para EDUCACIÓN FÍSICA Y DEPORTES",
-    "updated_at": "2026-11-10T14:00:00.000Z"
+    "updated_at": "2026-11-10T19:39:25.545Z"
   },
   {
     "id": 7,
     "especialidad_oficial_id": 7,
-    "subsistemas": [],
-    "niveles": [],
+    "subsistemas": [
+      "ALTERNATIVA",
+      "REGULAR"
+    ],
+    "niveles": [
+      "ETA",
+      "SECUNDARIA"
+    ],
     "materias": [
-      "GASTRONOMÍA"
+      "GASTRONOMÍA",
+      "TRANSFORMACIÓN DE ALIMENTOS"
     ],
     "operador_carga": null,
     "carga_especialidad": null,
     "materias_condiciones": [],
     "activo": true,
     "descripcion": "Filtro inicial para TRANSFORMACIÓN DE ALIMENTOS Y GASTRONOMÍA",
-    "updated_at": "2026-11-10T14:00:00.000Z"
+    "updated_at": "2026-11-10T20:07:15.139Z"
   },
   {
     "id": 8,
     "especialidad_oficial_id": 8,
-    "subsistemas": [],
-    "niveles": [],
+    "subsistemas": [
+      "REGULAR"
+    ],
+    "niveles": [
+      "SECUNDARIA"
+    ],
     "materias": [
+      "COMUNICACIÓN",
       "COMUNICACIÓN Y LENGUAJES",
-      "LENGUA CASTELLANA"
+      "LENGUA CASTELLANA",
+      "LENGUA CASTELLANA Y ORIGINARIA"
     ],
     "operador_carga": null,
     "carga_especialidad": null,
     "materias_condiciones": [],
     "activo": true,
     "descripcion": "Filtro inicial para COMUNICACIÓN Y LENGUAJES: LENGUA CASTELLANA",
-    "updated_at": "2026-11-10T14:00:00.000Z"
+    "updated_at": "2026-11-10T20:11:50.627Z"
   },
   {
     "id": 9,
     "especialidad_oficial_id": 9,
-    "subsistemas": [],
-    "niveles": [],
+    "subsistemas": [
+      "REGULAR"
+    ],
+    "niveles": [
+      "SECUNDARIA"
+    ],
     "materias": [
       "MATEMÁTICA"
     ],
@@ -160,47 +189,63 @@
     "materias_condiciones": [],
     "activo": true,
     "descripcion": "Filtro inicial para MATEMÁTICA",
-    "updated_at": "2026-11-10T14:00:00.000Z"
+    "updated_at": "2026-11-10T19:41:27.710Z"
   },
   {
     "id": 10,
     "especialidad_oficial_id": 10,
-    "subsistemas": [],
-    "niveles": [],
+    "subsistemas": [
+      "REGULAR"
+    ],
+    "niveles": [
+      "PRIMARIA",
+      "SECUNDARIA"
+    ],
     "materias": [
       "RELIGIONES",
-      "VALORES"
+      "VALORES",
+      "VALORES, ESPIRITUALIDAD Y RELIGIONES"
     ],
     "operador_carga": null,
     "carga_especialidad": null,
     "materias_condiciones": [],
     "activo": true,
     "descripcion": "Filtro inicial para VALORES, ESPIRITUALIDAD Y RELIGIONES",
-    "updated_at": "2026-11-10T14:00:00.000Z"
+    "updated_at": "2026-11-10T19:41:43.575Z"
   },
   {
     "id": 11,
     "especialidad_oficial_id": 11,
-    "subsistemas": [],
-    "niveles": [],
+    "subsistemas": [
+      "REGULAR"
+    ],
+    "niveles": [
+      "SECUNDARIA"
+    ],
     "materias": [
-      "SICOLOGÍA",
-      "FILOSOFÍA"
+      "COSMOVISIONES FILOSOFIA Y PSICOLOGIA",
+      "FILOSOFÍA",
+      "SICOLOGÍA"
     ],
     "operador_carga": null,
     "carga_especialidad": null,
     "materias_condiciones": [],
     "activo": true,
     "descripcion": "Filtro inicial para COSMOVISIONES, FILOSOFÍAS Y SICOLOGÍA",
-    "updated_at": "2026-11-10T14:00:00.000Z"
+    "updated_at": "2026-11-10T19:42:02.793Z"
   },
   {
     "id": 12,
     "especialidad_oficial_id": 12,
-    "subsistemas": [],
-    "niveles": [],
+    "subsistemas": [
+      "REGULAR"
+    ],
+    "niveles": [
+      "SECUNDARIA"
+    ],
     "materias": [
       "BIOLOGÍA",
+      "CIENCIAS NATURALES : BIOLOGÍA Y GEOGRAFÍA",
       "GEOGRAFÍA"
     ],
     "operador_carga": null,
@@ -208,13 +253,19 @@
     "materias_condiciones": [],
     "activo": true,
     "descripcion": "Filtro inicial para CIENCIAS NATURALES: BIOLOGÍA - GEOGRAFÍA",
-    "updated_at": "2026-11-10T14:00:00.000Z"
+    "updated_at": "2026-11-10T19:42:17.273Z"
   },
   {
     "id": 13,
     "especialidad_oficial_id": 13,
-    "subsistemas": [],
-    "niveles": [],
+    "subsistemas": [
+      "ALTERNATIVA",
+      "REGULAR"
+    ],
+    "niveles": [
+      "ETA",
+      "SECUNDARIA"
+    ],
     "materias": [
       "AGROPECUARIA"
     ],
@@ -223,28 +274,42 @@
     "materias_condiciones": [],
     "activo": true,
     "descripcion": "Filtro inicial para AGROPECUARIA",
-    "updated_at": "2026-11-10T14:00:00.000Z"
+    "updated_at": "2026-11-10T20:08:53.331Z"
   },
   {
     "id": 14,
     "especialidad_oficial_id": 14,
-    "subsistemas": [],
-    "niveles": [],
+    "subsistemas": [
+      "ALTERNATIVA",
+      "REGULAR"
+    ],
+    "niveles": [
+      "ETA",
+      "SECUNDARIA"
+    ],
     "materias": [
-      "ELECTRICIDAD"
+      "ELECTRICIDAD",
+      "ELECTRICIDAD INDUSTRIAL",
+      "ELECTRÓNICA"
     ],
     "operador_carga": null,
     "carga_especialidad": null,
     "materias_condiciones": [],
     "activo": true,
     "descripcion": "Filtro inicial para ELECTRICIDAD Y ELECTRÓNICA",
-    "updated_at": "2026-11-10T14:00:00.000Z"
+    "updated_at": "2026-11-10T20:09:41.186Z"
   },
   {
     "id": 15,
     "especialidad_oficial_id": 15,
-    "subsistemas": [],
-    "niveles": [],
+    "subsistemas": [
+      "ALTERNATIVA",
+      "REGULAR"
+    ],
+    "niveles": [
+      "ETA",
+      "SECUNDARIA"
+    ],
     "materias": [
       "MECÁNICA AUTOMOTRIZ"
     ],
@@ -253,13 +318,19 @@
     "materias_condiciones": [],
     "activo": true,
     "descripcion": "Filtro inicial para MECÁNICA AUTOMOTRIZ",
-    "updated_at": "2026-11-10T14:00:00.000Z"
+    "updated_at": "2026-11-10T20:10:21.397Z"
   },
   {
     "id": 16,
     "especialidad_oficial_id": 16,
-    "subsistemas": [],
-    "niveles": [],
+    "subsistemas": [
+      "ALTERNATIVA",
+      "REGULAR"
+    ],
+    "niveles": [
+      "ETA",
+      "SECUNDARIA"
+    ],
     "materias": [
       "ELECTROMECÁNICA"
     ],
@@ -268,58 +339,468 @@
     "materias_condiciones": [],
     "activo": true,
     "descripcion": "Filtro inicial para ELECTROMECÁNICA",
-    "updated_at": "2026-11-10T14:00:00.000Z"
+    "updated_at": "2026-11-10T20:10:50.761Z"
   },
   {
     "id": 17,
     "especialidad_oficial_id": 17,
-    "subsistemas": [],
-    "niveles": [],
+    "subsistemas": [
+      "REGULAR"
+    ],
+    "niveles": [
+      "SECUNDARIA"
+    ],
     "materias": [
-      "INGLÉS"
+      "INGLÉS",
+      "LENGUA EXTRANJERA",
+      "LENGUA EXTRANJERA: INGLES"
     ],
     "operador_carga": null,
     "carga_especialidad": null,
     "materias_condiciones": [],
     "activo": true,
     "descripcion": "Filtro inicial para COMUNICACIÓN Y LENGUAJES: LENGUA EXTRANJERA (INGLÉS)",
-    "updated_at": "2026-11-10T14:00:00.000Z"
+    "updated_at": "2026-11-10T20:11:22.330Z"
   },
   {
     "id": 18,
     "especialidad_oficial_id": 18,
-    "subsistemas": [],
-    "niveles": [],
+    "subsistemas": [
+      "ALTERNATIVA",
+      "REGULAR"
+    ],
+    "niveles": [
+      "ETA",
+      "SECUNDARIA"
+    ],
     "materias": [
-      "INDUSTRIA TEXTIL"
+      "INDUSTRIA TEXTIL",
+      "TEXTIL Y CONFECCIÓN",
+      "TEXTILES Y CONFECCIONES",
+      "TEXTILES, TEJIDOS Y CONFECCIONES"
     ],
     "operador_carga": null,
     "carga_especialidad": null,
     "materias_condiciones": [],
     "activo": true,
     "descripcion": "Filtro inicial para INDUSTRIA TEXTIL Y CONFECCIÓN",
-    "updated_at": "2026-11-10T14:00:00.000Z"
+    "updated_at": "2026-11-10T20:12:16.805Z"
   },
   {
     "id": 19,
     "especialidad_oficial_id": 19,
-    "subsistemas": [],
-    "niveles": [],
-    "materias": [
+    "subsistemas": [
       "EDUCACIÓN ESPECIAL"
+    ],
+    "niveles": [
+      "AUDITIVA",
+      "ESPECIAL",
+      "FISICA MOTORA",
+      "INTELECTUAL",
+      "VISUAL",
+      "PERSONAS CON DISCAPACDIAD MULTIPLE CON COMPROMISO INTELECTUAL Y/O SENSORIAL",
+      "DIFICULTADES GENERALES EN EL APRENDIZAJE",
+      "FORMACION TECNICA TECNOLOGICA PRODUCTIVA",
+      "EDUCACION PRIMARIA",
+      "INDEPENDENCIA PERSONAL",
+      "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+      "DIFICULTADES EN EL APRENDIZAJE",
+      "ATENCION TEMPRANA",
+      "APOYO TECNICO PEDAGOGICO",
+      "APOYO EDUCATIVO A ESTUDIANTES CON DISCAPACIDAD VISUAL",
+      "PROGRAMA DE EDUCACION SOCIO COMUNITARIA EN CASA PARA PERSONAS CON DISCAPACIDAD GRAVE Y MUY GRAVE (MAESTRO RESPONSABLE)",
+      "TRASTORNO DEL ESPECTRO AUTISTA",
+      "PROGRAMA DE ATENCION TEMPRANA",
+      "SERVICIO  APOYO TECNICO PEDAGOGICO",
+      "PROGRAMA",
+      "PROGRAMAS",
+      "INDEPENDENCIA SOCIAL"
+    ],
+    "materias": [
+      "EDUCACIÓN ESPECIAL",
+      "[1] FISIOTERAPIA",
+      "[1] PSICOPEDAGOGIA",
+      "[10] FISIOTERAPIA",
+      "[10] FONOAUDIOLOGIA",
+      "[2] PSICOLOGIA",
+      "[2] PSICOPEDAGOGIA",
+      "[3] FONOAUDIOLOGIA",
+      "[3] PSICOPEDAGOGIA",
+      "[4] A-SALSB  MÓDULO 1",
+      "[4] A-SALSB  MÓDULO 2",
+      "[4] PSICOLOGIA",
+      "[4] PSICOPEDAGOGIA",
+      "[7] DESARROLLO BIOPSICOMOTRIZ",
+      "[7] DESARROLLO DE LA COMUNICACIÓN Y LENGUAJES",
+      "[7] DESARROLLO DEL CONOCIMIENTO Y DE LA PRODUCCIÓN",
+      "[7] DESARROLLO SOCIOCULTURAL, AFECTIVO Y ESPIRITUAL",
+      "[8] FONOAUDIOLOGIA",
+      "[8] PSICOLOGIA",
+      "[9] FISIOTERAPIA",
+      "[9] PSICOPEDAGOGIA",
+      "[A] ACTIVIDADES DE LA VIDA DIARIA",
+      "[A] ADAPTACIONES CURRICULARES DE ENREQUECIMIENTO",
+      "[A] CIENCIAS NATURALES",
+      "[A] CIENCIAS SOCIALES",
+      "[A] COMUNICACIÓN Y LENGUAJE",
+      "[A] DA -E",
+      "[A] DESARROLLO CURRICULAR  (ESTUDIANTE 2)",
+      "[A] DESARROLLO CURRICULAR (ESTUDIANTE 1)",
+      "[A] EDUCACIÓN FÍSICA Y DEPORTIVA",
+      "[A] EDUCACIÓN MUSICAL",
+      "[A] EDUCACIÓN PLÁSTICA",
+      "[A] FISIOTERAPIA",
+      "[A] FONOAUDIOLOGIA",
+      "[A] I - ATP",
+      "[A] I - ATP - TALLER",
+      "[A] MATEMATICA",
+      "[A] NEUROLOGIA",
+      "[A] ORIENTACION VOCACIONAL",
+      "[A] OTRAS ACTIVIDADES",
+      "[A] PSICOLOGIA",
+      "[A] PSICOMOTRIICIDAD",
+      "[A] PSICOPEDAGOGIA",
+      "[A] TRABAJO SOCIAL",
+      "[B] DA -E",
+      "[B] DESARROLLO CURRICULAR  (ESTUDIANTE 2)",
+      "[B] DESARROLLO CURRICULAR (ESTUDIANTE 1)",
+      "[B] FISIOTERAPIA",
+      "[B] FONOAUDIOLOGIA",
+      "[B] I - ATP",
+      "[B] OTRAS ACTIVIDADES",
+      "[B] PESPDG",
+      "[B] PSICOLOGIA",
+      "[B] PSICOPEDAGOGIA",
+      "[C] FONOAUDIOLOGIA",
+      "[C] ORIENTACION Y MOVILIDAD (OM)",
+      "[C] PSICOPEDAGOGIA",
+      "[D] ORIENTACION Y MOVILIDAD (OM)",
+      "[E] FISIOTERAPIA",
+      "[E] FONOAUDIOLOGIA",
+      "[E] ORIENTACION Y MOVILIDAD (OM)",
+      "[E] PSICOPEDAGOGIA",
+      "[F] FISIOTERAPIA",
+      "[F] ORIENTACION Y MOVILIDAD (OM)",
+      "[F] PSICOMOTRICIDAD",
+      "[F] PSICOPEDAGOGIA",
+      "[G] NEUROLOGIA",
+      "[G] PSICOLOGIA",
+      "[G] TRABAJO SOCIAL",
+      "[H] FISIOTERAPIA",
+      "[H] FONOAUDIOLOGIA",
+      "[I] TRABAJO SOCIAL",
+      "[J] PSICOLOGIA",
+      "[L] BAJA VISISON - REHABILITACION VISUAL",
+      "[O] FISIOTERAPIA",
+      "[P] FISIOTERAPIA",
+      "[P] FONOAUDIOLOGIA",
+      "[Q] FISIOTERAPIA",
+      "[Q] TRABAJO SOCIAL",
+      "[R] PSICOLOGIA",
+      "[S] PSICOLOGIA",
+      "[T] PSICOLOGIA",
+      "[U] PSICOPEDAGOGIA",
+      "DESARROLLO BIOPSICOMOTRIZ",
+      "DESARROLLO DE LA COMUNICACIÓN Y LENGUAJES",
+      "DESARROLLO DEL CONOCIMIENTO Y DE LA PRODUCCIÓN",
+      "DESARROLLO SOCIOCULTURAL, AFECTIVO Y ESPIRITUAL",
+      "LIBRE",
+      "[1] A - ATP",
+      "[1] ACTIVIDADES DE LA VIDA DIARIA",
+      "[1] CIENCIAS NATURALES",
+      "[1] CIENCIAS SOCIALES",
+      "[1] COMUNICACIÓN Y LENGUAJE",
+      "[1] DAE-LE",
+      "[1] DAE-RVL",
+      "[1] DAG-ATP",
+      "[1] DESARROLLO BIOPSICOMOTRIZ",
+      "[1] DESARROLLO DE LA COMUNICACIÓN Y LENGUAJES",
+      "[1] DESARROLLO DEL CONOCIMIENTO Y DE LA PRODUCCIÓN",
+      "[1] DESARROLLO INTEGRAL DE LA NÑA O NIÑO EN EL MARCO DE LAS ACTIVIDADES LUDICAS Y PRODCUTIVAS DE LA FAMILIA",
+      "[1] DESARROLLO SOCIOCULTURAL, AFECTIVO Y ESPIRITUAL",
+      "[1] EDUCACIÓN FÍSICA Y DEPORTIVA",
+      "[1] EDUCACIÓN MUSICAL",
+      "[1] EDUCACIÓN PLÁSTICA",
+      "[1] I - ATP",
+      "[1] MATEMATICA",
+      "[1] NUTRICIÓN Y SALUD INTEGRAL DE LA FAMILIA Y LA NIÑA O NIÑO CON DISCAPACIDAD INTELECTUAL",
+      "[2] ACTIVIDADES DE LA VIDA DIARIA (AVD)",
+      "[2] DAE-LE",
+      "[2] DAE-RVL",
+      "[2] DAG-ATP",
+      "[2] DESARROLLO BIOPSICOMOTRIZ",
+      "[2] DESARROLLO DE LA COMUNICACIÓN Y LENGUAJES",
+      "[2] DESARROLLO DEL CONOCIMIENTO Y DE LA PRODUCCIÓN",
+      "[2] DESARROLLO SOCIOCULTURAL, AFECTIVO Y ESPIRITUAL",
+      "[2] I - ATP",
+      "[2] I - ATP - TALLER",
+      "[2] I-IEP",
+      "[2] LECTURA  Y ESCRITURA EN SISTEMA BRAILLE, MACROTIPO, SIGNOGRAFIA, MATEMÁTICA Y ÁBACO",
+      "[2] ORIENTACION Y MOVILIDAD (OM)",
+      "[3] DAE-CM",
+      "[3] DAE-LE",
+      "[3] DAE-RVL",
+      "[3] DAG-ATP",
+      "[3] DESARROLLO BIOPSICOMOTRIZ",
+      "[3] DESARROLLO DE LA COMUNICACIÓN Y LENGUAJES",
+      "[3] DESARROLLO DEL CONOCIMIENTO Y DE LA PRODUCCIÓN",
+      "[3] DESARROLLO INTEGRAL DE LA NÑA O NIÑO EN EL MARCO DE LAS ACTIVIDADES LUDICAS Y PRODCUTIVAS DE LA FAMILIA",
+      "[3] DESARROLLO SOCIOCULTURAL, AFECTIVO Y ESPIRITUAL",
+      "[3] I - ATP",
+      "[3] NUTRICIÓN Y SALUD INTEGRAL DE LA FAMILIA Y LA NIÑA O NIÑO CON DISCAPACIDAD INTELECTUAL",
+      "[4] DAE-CM",
+      "[4] DAE-LE",
+      "[4] DAG-ATP",
+      "[4] I - ATP",
+      "[4] I- FTO",
+      "[5] DAE-CM",
+      "[5] DAE-LE",
+      "[5] DAG-ATP",
+      "[5] DESARROLLO BIOPSICOMOTRIZ",
+      "[5] DESARROLLO DE LA COMUNICACIÓN Y LENGUAJES",
+      "[5] DESARROLLO DEL CONOCIMIENTO Y DE LA PRODUCCIÓN",
+      "[5] DESARROLLO SOCIOCULTURAL, AFECTIVO Y ESPIRITUAL",
+      "[5] I - ATP",
+      "[6] DAE-CM",
+      "[6] DAE-LE",
+      "[6] DAG-ATP",
+      "[6] I - ATP - TALLER",
+      "[7] ACTIVIDADES DE LA VIDA DIARIA",
+      "[7] ATP",
+      "[7] DAG-ATP",
+      "[8] DAE-RVL",
+      "[A]  CIENCIAS NATURALES",
+      "[A] A - ATP",
+      "[A] A - ATP - TALLER",
+      "[A] APRESTAMIENTO A LA FORMACIÓN TÉCNICA TECNOLÓGICA PRODUCTIVA",
+      "[A] ARTES PLASTICAS Y VISUALES",
+      "[A] ATP - TALLER",
+      "[A] COMUNICACIÓN Y LENGUAJE: LSB Y CASTELLANO EN MODALIDAD ESCRITA",
+      "[A] D-ATP",
+      "[A] DAE-CM",
+      "[A] DAE-LE",
+      "[A] DAG-ATP",
+      "[A] DESARROLLO BIOPSICOMOTRIZ",
+      "[A] DESARROLLO DE LA COMUNICACIÓN Y LENGUAJES",
+      "[A] DESARROLLO DEL CONOCIMIENTO Y DE LA PRODUCCIÓN",
+      "[A] DESARROLLO INTEGRAL DE LA NIÑA/O, LA FAMILIA A PARTIR DE LA POSESIÓN E INTEREACCIÓN CON LA FAMILIA",
+      "[A] DESARROLLO INTEGRAL DE LA NÑA O NIÑO EN EL MARCO DE LAS ACTIVIDADES LUDICAS Y PRODCUTIVAS DE LA FAMILIA",
+      "[A] DESARROLLO SOCIOCULTURAL, AFECTIVO Y ESPIRITUAL",
+      "[A] EDUCACION FISICA Y DEPORTES",
+      "[A] EDUCACION MUSICAL",
+      "[A] F - ATP",
+      "[A] F - ATP - TALLER",
+      "[A] I - FT A",
+      "[A] I- FT B",
+      "[A] I- FTO",
+      "[A] MATEMÁTICA",
+      "[A] NUTRICIÓN Y SALUD INTEGRAL DE LA FAMILIA Y LA NIÑA O NIÑO CON DISCAPACIDAD INTELECTUAL",
+      "[A] TÉCNICA TECNOLÓGICA",
+      "[A] VALORES, ESPIRITUALIDAD Y RELIGIONES",
+      "[B] A - ATP",
+      "[B] APRESTAMIENTO A LA FORMACIÓN TÉCNICA TECNOLÓGICA PRODUCTIVA",
+      "[B] D-ATP",
+      "[B] DAE-CM",
+      "[B] DAE-LE",
+      "[B] DAG-ATP",
+      "[B] DESARROLLO BIOPSICOMOTRIZ",
+      "[B] DESARROLLO DE LA COMUNICACIÓN Y LENGUAJES",
+      "[B] DESARROLLO DEL CONOCIMIENTO Y DE LA PRODUCCIÓN",
+      "[B] DESARROLLO SOCIOCULTURAL, AFECTIVO Y ESPIRITUAL",
+      "[B] I - ATP - TALLER",
+      "[B] NUTRICIÓN Y SALUD INTEGRAL DE LA FAMILIA Y LA NIÑA O NIÑO CON DISCAPACIDAD INTELECTUAL",
+      "[C] A - ATP",
+      "[C] ATP - TALLER",
+      "[C] DAE-CM",
+      "[C] DAE-LE",
+      "[C] DAG-ATP",
+      "[C] DESARROLLO DE LA COMUNICACIÓN Y LENGUAJES",
+      "[C] I - ATP",
+      "[D] A - ATP",
+      "[D] DAE-CM",
+      "[D] DAE-LE",
+      "[D] DAG-ATP",
+      "[D] I - ATP",
+      "[E] ATP",
+      "[E] ATP - TALLER",
+      "[E] DAE-CM",
+      "[E] DAE-LE",
+      "[E] DAE-RVL",
+      "[F] I - ATP",
+      "[F] I - ATP - TALLER",
+      "[G] A - ATP",
+      "[G] DAE-CM",
+      "[G] I - ATP",
+      "[G] I - ATP - TALLER",
+      "[G] I- FTO",
+      "[H] DAE-LE",
+      "[H] I - ATP",
+      "[I] DAG-ATP",
+      "[I] I - ATP",
+      "[J] DAG-ATP",
+      "[J] I - ATP",
+      "[K] DAG-ATP",
+      "[K] I - ATP",
+      "[L] DAE-LE",
+      "[M] DAE-LE",
+      "[N] DAE-LE",
+      "[O] DAE-CM",
+      "[O] I - ATP",
+      "[P] DAE-CM",
+      "[P] I - ATP",
+      "[Q] DAG-ATP",
+      "[Q] I - ATP",
+      "[R] DAE-LE",
+      "[R] DAG-ATP",
+      "[S] I - ATP",
+      "[S] I - ATP - TALLER",
+      "[U] I - ATP",
+      "[U] I - ATP - TALLER",
+      "[Y] I - ATP",
+      "[Z] I - ATP",
+      "[1] A-PALSB 3",
+      "[1] APOYO TECNICO PEDAGOGICO",
+      "[1] DESARROLLO INTEGRAL DE LA NIÑA/O, LA FAMILIA A PARTIR DE LA POSESIÓN E INTEREACCIÓN CON LA FAMILIA",
+      "[1] HABILIDADES SOCIALES",
+      "[1] I-IEP",
+      "[1] PRIMER MOMENTO: ESTIMULACION TEMPRANA",
+      "[2] ACTIVIDADES DE LA VIDA DIARIA",
+      "[2] CIENCIAS NATURALES",
+      "[2] CIENCIAS SOCIALES",
+      "[2] COMUNICACIÓN Y LENGUAJE",
+      "[2] EDUCACIÓN FÍSICA Y DEPORTIVA",
+      "[2] EDUCACIÓN MUSICAL",
+      "[2] EDUCACIÓN PLÁSTICA",
+      "[2] MATEMATICA",
+      "[3] ACTIVIDADES DE LA VIDA DIARIA",
+      "[3] CIENCIAS NATURALES",
+      "[3] CIENCIAS SOCIALES",
+      "[3] COMUNICACIÓN Y LENGUAJE",
+      "[3] EDUCACIÓN FÍSICA Y DEPORTIVA",
+      "[3] EDUCACIÓN MUSICAL",
+      "[3] EDUCACIÓN PLÁSTICA",
+      "[3] I - TVA",
+      "[3] I-IEP",
+      "[3] MATEMATICA",
+      "[4] A- PA-LSB 1",
+      "[4] A- PET",
+      "[4] A-PALSB 2",
+      "[4] A-PALSB 3",
+      "[4] ACTIVIDADES DE LA VIDA DIARIA",
+      "[4] CIENCIAS NATURALES",
+      "[4] CIENCIAS SOCIALES",
+      "[4] COMUNICACIÓN Y LENGUAJE",
+      "[4] EDUCACIÓN FÍSICA Y DEPORTIVA",
+      "[4] EDUCACIÓN MUSICAL",
+      "[4] EDUCACIÓN PLÁSTICA",
+      "[4] MATEMATICA",
+      "[5] ACTIVIDADES DE LA VIDA DIARIA",
+      "[5] CIENCIAS NATURALES",
+      "[5] CIENCIAS SOCIALES",
+      "[5] COMUNICACIÓN Y LENGUAJE",
+      "[5] EDUCACIÓN FÍSICA Y DEPORTIVA",
+      "[5] EDUCACIÓN MUSICAL",
+      "[5] EDUCACIÓN PLÁSTICA",
+      "[5] I - TVA",
+      "[5] I-IEP",
+      "[5] MATEMATICA",
+      "[7] ACTIVIDADES DE LA VIDA DIARIA (AVD)",
+      "[7] CIENCIAS NATURALES",
+      "[7] CIENCIAS SOCIALES",
+      "[7] COMUNICACIÓN Y LENGUAJE",
+      "[7] EDUCACIÓN FÍSICA Y DEPORTIVA",
+      "[7] EDUCACIÓN MUSICAL",
+      "[7] EDUCACIÓN PLÁSTICA",
+      "[7] I - ATP",
+      "[7] LECTURA  Y ESCRITURA EN SISTEMA BRAILLE, MACROTIPO, SIGNOGRAFIA, MATEMÁTICA Y ÁBACO",
+      "[7] MATEMATICA",
+      "[7] ORIENTACION Y MOVILIDAD (OM)",
+      "[8] ACTIVIDADES DE LA VIDA DIARIA",
+      "[8] CIENCIAS NATURALES",
+      "[8] CIENCIAS SOCIALES",
+      "[8] COMUNICACIÓN Y LENGUAJE",
+      "[8] EDUCACIÓN FÍSICA Y DEPORTIVA",
+      "[8] EDUCACIÓN MUSICAL",
+      "[8] EDUCACIÓN PLÁSTICA",
+      "[8] MATEMATICA",
+      "[9] I - TVA",
+      "[9] I-IEP",
+      "[A] A- PA-LSB 1",
+      "[A] A- PSL",
+      "[A] A-PALSB 2",
+      "[A] A-PAM",
+      "[A] I - TVA",
+      "[A] I-IEP",
+      "[A] ORIENTACION Y MOVILIDAD (OM)",
+      "[A] PSICOEDUCACIÓN",
+      "[A] SEGUNDO MOMENTO: INDEPENDENCIA PERSONAL BASICA",
+      "[A] TALLER EDUCACION FISICA DEPORTES Y RECREACIÓN",
+      "[A] TERCER MOMENTO: INDEPENDENCIA Y TRANSICION A LA VIDA ADULTA",
+      "[B] ACTIVIDADES DE LA VIDA DIARIA",
+      "[B] ADAPTACIONES CURRICULARES DE ENREQUECIMIENTO",
+      "[B] CIENCIAS NATURALES",
+      "[B] CIENCIAS SOCIALES",
+      "[B] COMUNICACIÓN Y LENGUAJE",
+      "[B] EDUCACIÓN FÍSICA Y DEPORTIVA",
+      "[B] EDUCACIÓN MUSICAL",
+      "[B] EDUCACIÓN PLÁSTICA",
+      "[B] I - TVA",
+      "[B] I-IEP",
+      "[B] MATEMATICA",
+      "[B] REHABILITACIÓN COGNITIVA",
+      "[C] ACTIVIDADES DE LA VIDA DIARIA",
+      "[C] CIENCIAS NATURALES",
+      "[C] CIENCIAS SOCIALES",
+      "[C] COMUNICACIÓN Y LENGUAJE",
+      "[C] EDUCACIÓN FÍSICA Y DEPORTIVA",
+      "[C] EDUCACIÓN MUSICAL",
+      "[C] EDUCACIÓN PLÁSTICA",
+      "[C] I-IEP",
+      "[C] MATEMATICA",
+      "[C] TALLER EDUCACIÓN MUSICAL",
+      "[D] I - TVA",
+      "[D] I-IEP",
+      "[D] MATEMATICA",
+      "[E] ACTIVIDADES DE LA VIDA DIARIA",
+      "[E] CIENCIAS NATURALES",
+      "[E] CIENCIAS SOCIALES",
+      "[E] COMUNICACIÓN Y LENGUAJE",
+      "[E] EDUCACIÓN FÍSICA Y DEPORTIVA",
+      "[E] EDUCACIÓN MUSICAL",
+      "[E] EDUCACIÓN PLÁSTICA",
+      "[E] I-IEP",
+      "[E] MATEMATICA",
+      "[F] ACTIVIDADES DE LA VIDA DIARIA",
+      "[F] CIENCIAS NATURALES",
+      "[F] CIENCIAS SOCIALES",
+      "[F] COMUNICACIÓN Y LENGUAJE",
+      "[F] EDUCACIÓN FÍSICA Y DEPORTIVA",
+      "[F] EDUCACIÓN MUSICAL",
+      "[F] EDUCACIÓN PLÁSTICA",
+      "[F] I-IEP",
+      "[F] MATEMATICA",
+      "[G] I - TVA",
+      "[G] SEGUIMIENTO Y ACOMPAÑAMIENTO",
+      "[H] APOYO TECNICO PEDAGOGICO",
+      "[K] I-IEP",
+      "[N] I-IEP"
     ],
     "operador_carga": null,
     "carga_especialidad": null,
     "materias_condiciones": [],
     "activo": true,
     "descripcion": "Filtro inicial para EDUCACIÓN ESPECIAL PARA PERSONAS CON DISCAPACIDAD",
-    "updated_at": "2026-11-10T14:00:00.000Z"
+    "updated_at": "2026-11-10T20:13:28.924Z"
   },
   {
     "id": 20,
     "especialidad_oficial_id": 20,
-    "subsistemas": [],
-    "niveles": [],
+    "subsistemas": [
+      "REGULAR"
+    ],
+    "niveles": [
+      "SECUNDARIA"
+    ],
     "materias": [
       "CIENCIAS SOCIALES",
       "HISTORIA"
@@ -329,15 +810,22 @@
     "materias_condiciones": [],
     "activo": true,
     "descripcion": "Filtro inicial para CIENCIAS SOCIALES",
-    "updated_at": "2026-11-10T14:00:00.000Z"
+    "updated_at": "2026-11-10T20:19:22.737Z"
   },
   {
     "id": 21,
     "especialidad_oficial_id": 21,
-    "subsistemas": [],
-    "niveles": [],
+    "subsistemas": [
+      "ALTERNATIVA",
+      "REGULAR"
+    ],
+    "niveles": [
+      "ETA",
+      "SECUNDARIA"
+    ],
     "materias": [
       "CARPINTERÍA",
+      "CARPINTERÍA EN MADERA Y METAL",
       "MADERA Y METAL"
     ],
     "operador_carga": null,
@@ -345,13 +833,19 @@
     "materias_condiciones": [],
     "activo": true,
     "descripcion": "Filtro inicial para CARPINTERÍA INDUSTRIAL EN MADERA Y METAL",
-    "updated_at": "2026-11-10T14:00:00.000Z"
+    "updated_at": "2026-11-10T20:14:19.855Z"
   },
   {
     "id": 22,
     "especialidad_oficial_id": 22,
-    "subsistemas": [],
-    "niveles": [],
+    "subsistemas": [
+      "ALTERNATIVA",
+      "REGULAR"
+    ],
+    "niveles": [
+      "ETA",
+      "SECUNDARIA"
+    ],
     "materias": [
       "MECÁNICA INDUSTRIAL"
     ],
@@ -360,6 +854,6 @@
     "materias_condiciones": [],
     "activo": true,
     "descripcion": "Filtro inicial para MECÁNICA INDUSTRIAL",
-    "updated_at": "2026-11-10T14:00:00.000Z"
+    "updated_at": "2026-11-10T20:14:35.330Z"
   }
 ]

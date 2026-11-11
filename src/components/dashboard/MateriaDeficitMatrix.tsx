@@ -361,11 +361,10 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
               </span>
               <div className="flex flex-wrap items-center gap-1.5">
                 <span
-                  className={`px-2 py-0.5 rounded text-[10px] font-semibold border ${
-                    especialidadActual.reglas_activas > 0
-                      ? 'bg-indigo-50 text-indigo-700 border-indigo-200'
-                      : 'bg-slate-100 text-slate-500 border-slate-200'
-                  }`}
+                  className={`px-2 py-0.5 rounded text-[10px] font-semibold border ${especialidadActual.reglas_activas > 0
+                    ? 'bg-indigo-50 text-indigo-700 border-indigo-200'
+                    : 'bg-slate-100 text-slate-500 border-slate-200'
+                    }`}
                 >
                   {especialidadActual.reglas_activas} activas
                 </span>
@@ -560,14 +559,13 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
                         setModoBase('bd');
                         setCustomBaseHoras(String(horaItemBd));
                       }}
-                      className={`px-2.5 py-1 text-[11px] rounded-lg border font-bold transition-all flex items-center gap-1 ${
-                        modoBase === 'bd'
-                          ? 'bg-indigo-600 text-white border-indigo-700 shadow-xs'
-                          : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
-                      }`}
+                      className={`px-2.5 py-1 text-[11px] rounded-lg border font-bold transition-all flex items-center gap-1 ${modoBase === 'bd'
+                        ? 'bg-indigo-600 text-white border-indigo-700 shadow-xs'
+                        : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
+                        }`}
                       title="Usar valor oficial hora_item configurado en especialidades_oficiales"
                     >
-                      <span>🏛️ Base BD ({horaItemBd}h)</span>
+                      <span>Base BD ({horaItemBd}h)</span>
                     </button>
                     <button
                       type="button"
@@ -575,14 +573,13 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
                         setModoBase('promedio');
                         setCustomBaseHoras(String(promedioHorasDocente));
                       }}
-                      className={`px-2.5 py-1 text-[11px] rounded-lg border font-bold transition-all flex items-center gap-1 ${
-                        modoBase === 'promedio'
-                          ? 'bg-indigo-600 text-white border-indigo-700 shadow-xs'
-                          : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
-                      }`}
+                      className={`px-2.5 py-1 text-[11px] rounded-lg border font-bold transition-all flex items-center gap-1 ${modoBase === 'promedio'
+                        ? 'bg-indigo-600 text-white border-indigo-700 shadow-xs'
+                        : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
+                        }`}
                       title="Calcular con promedio Carga ÷ UEs"
                     >
-                      <span>📊 Promedio ({promedioHorasDocente}h)</span>
+                      <span>Promedio ({promedioHorasDocente}h)</span>
                     </button>
                   </div>
 
@@ -758,11 +755,10 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
                       </td>
                       <td className="py-3.5 px-3 text-right font-mono">
                         <span
-                          className={`inline-flex items-center px-2 py-0.5 rounded-full font-bold text-xs ${
-                            hasDeficit
-                              ? 'bg-red-50 text-red-700 border border-red-200'
-                              : 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                          }`}
+                          className={`inline-flex items-center px-2 py-0.5 rounded-full font-bold text-xs ${hasDeficit
+                            ? 'bg-red-50 text-red-700 border border-red-200'
+                            : 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                            }`}
                         >
                           {dept.deficit_horas.toLocaleString('es-BO')}h
                         </span>
@@ -771,13 +767,12 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
                         <div className="flex items-center justify-center gap-2">
                           <div className="w-14 bg-slate-200 rounded-full h-1.5 overflow-hidden">
                             <div
-                              className={`h-full rounded-full ${
-                                dept.pct_cobertura >= 95
-                                  ? 'bg-emerald-500'
-                                  : dept.pct_cobertura >= 85
+                              className={`h-full rounded-full ${dept.pct_cobertura >= 95
+                                ? 'bg-emerald-500'
+                                : dept.pct_cobertura >= 85
                                   ? 'bg-amber-500'
                                   : 'bg-red-500'
-                              }`}
+                                }`}
                               style={{ width: `${Math.min(100, Math.max(0, dept.pct_cobertura))}%` }}
                             />
                           </div>

@@ -63,15 +63,26 @@ type EditState = {
   descripcion: string;
 };
 
+// Normaliza cualquier formato de subsistema al estándar del catálogo ('EDUCACIÓN REGULAR', 'EDUCACIÓN ALTERNATIVA', etc.)
+function toCatalogSubsistema(sub?: string | null): string {
+  if (!sub) return 'EDUCACIÓN REGULAR';
+  const s = sub.trim().toUpperCase();
+  if (s.includes('REGULAR')) return 'EDUCACIÓN REGULAR';
+  if (s.includes('ALTERNATIVA')) return 'EDUCACIÓN ALTERNATIVA';
+  if (s.includes('ESPECIAL')) return 'EDUCACIÓN ESPECIAL';
+  return s;
+}
+
 // CASCADA: Niveles dependientes de subsistemas seleccionados
 function getNivelesParaSubsistemas(subsistemas: string[]): string[] {
   const catalog = materiasCatalogoMapRaw as Record<string, string[]>;
   const nivelesSet = new Set<string>();
+  const normalizedSubs = (subsistemas || []).map(toCatalogSubsistema);
   for (const key of Object.keys(catalog)) {
     const pipeIdx = key.indexOf('|');
     const sub = key.substring(0, pipeIdx);
     const nivel = key.substring(pipeIdx + 1);
-    if (subsistemas.includes(sub)) nivelesSet.add(nivel);
+    if (normalizedSubs.includes(sub)) nivelesSet.add(nivel);
   }
   return Array.from(nivelesSet).sort((a, b) => a.localeCompare(b));
 }
@@ -80,8 +91,9 @@ function getNivelesParaSubsistemas(subsistemas: string[]): string[] {
 function getMateriasParaCombo(subsistemas: string[], niveles: string[]): string[] {
   const catalog = materiasCatalogoMapRaw as Record<string, string[]>;
   const setMaterias = new Set<string>();
-  for (const s of subsistemas) {
-    for (const n of niveles) {
+  const normalizedSubs = (subsistemas || []).map(toCatalogSubsistema);
+  for (const s of normalizedSubs) {
+    for (const n of (niveles || [])) {
       const lista = catalog[`${s.toUpperCase()}|${n.toUpperCase()}`] || [];
       lista.forEach((m) => setMaterias.add(m));
     }
@@ -169,15 +181,25 @@ export function FiltrosMateriaManager() {
   }, [editingItem?.subsistemas]);
 
   const materiasDisponibles = useMemo(() => {
-    if (!editingItem || !editingItem.subsistemas.length || !editingItem.niveles.length) return [];
-    return getMateriasParaCombo(editingItem.subsistemas, editingItem.niveles);
-  }, [editingItem?.subsistemas, editingItem?.niveles]);
+    if (!editingItem) return [];
+    const comboList = getMateriasParaCombo(editingItem.subsistemas, editingItem.niveles);
+    const set = new Set(comboList);
+    // Garantizar que las materias ya configuradas en el filtro siempre estén presentes en la lista
+    if (editingItem.materias && editingItem.materias.length > 0) {
+      editingItem.materias.forEach((m) => set.add(m));
+    }
+    return Array.from(set).sort((a, b) => a.localeCompare(b));
+  }, [editingItem?.subsistemas, editingItem?.niveles, editingItem?.materias]);
 
   const materiasFiltradas = useMemo(() => {
     let list = materiasDisponibles;
     if (materiasTabFilter === 'selected' && editingItem) {
       const set = new Set(editingItem.materias);
-      list = list.filter((m) => set.has(m));
+      list = materiasDisponibles.filter((m) => set.has(m));
+      editingItem.materias.forEach((m) => {
+        if (!list.includes(m)) list.push(m);
+      });
+      list.sort((a, b) => a.localeCompare(b));
     } else if (materiasTabFilter === 'with_condition' && editingItem) {
       const set = new Set(editingItem.materias_condiciones.map((mc) => mc.materia));
       list = list.filter((m) => set.has(m));
@@ -197,15 +219,19 @@ export function FiltrosMateriaManager() {
   const condicionGlobalActiva = editingItem?.operador_carga !== null && editingItem?.carga_especialidad !== null;
 
   const handleOpenEdit = (esp: any, filtroExistente: FiltroMateria | null) => {
+    const rawSubs = filtroExistente?.subsistemas && filtroExistente.subsistemas.length > 0
+      ? filtroExistente.subsistemas.map(toCatalogSubsistema)
+      : ['EDUCACIÓN REGULAR'];
+
     setEditingItem({
       id: filtroExistente?.id,
       especialidad_oficial_id: esp.id,
-      subsistemas: filtroExistente?.subsistemas || ['EDUCACIÓN REGULAR'],
-      niveles: filtroExistente?.niveles || ['SECUNDARIA'],
-      materias: filtroExistente?.materias || [],
+      subsistemas: rawSubs,
+      niveles: filtroExistente?.niveles ? [...filtroExistente.niveles] : [],
+      materias: filtroExistente?.materias ? [...filtroExistente.materias] : [],
       operador_carga: (filtroExistente?.operador_carga as Operador) ?? null,
       carga_especialidad: filtroExistente?.carga_especialidad ?? null,
-      materias_condiciones: filtroExistente?.materias_condiciones || [],
+      materias_condiciones: filtroExistente?.materias_condiciones ? [...filtroExistente.materias_condiciones] : [],
       activo: filtroExistente?.activo ?? true,
       descripcion: filtroExistente?.descripcion || '',
     });
@@ -293,8 +319,11 @@ export function FiltrosMateriaManager() {
 
   const toggleSubsistema = (sub: string) => {
     if (!editingItem) return;
-    const exists = editingItem.subsistemas.includes(sub);
-    const newSubs = exists ? editingItem.subsistemas.filter((s) => s !== sub) : [...editingItem.subsistemas, sub];
+    const catSub = toCatalogSubsistema(sub);
+    const exists = editingItem.subsistemas.some((s) => toCatalogSubsistema(s) === catSub);
+    const newSubs = exists
+      ? editingItem.subsistemas.filter((s) => toCatalogSubsistema(s) !== catSub)
+      : [...editingItem.subsistemas.map(toCatalogSubsistema), catSub];
     const nivelesValidos = new Set(getNivelesParaSubsistemas(newSubs));
     const newNiveles = editingItem.niveles.filter((n) => nivelesValidos.has(n));
     setEditingItem({ ...editingItem, subsistemas: newSubs, niveles: newNiveles });
@@ -660,7 +689,7 @@ export function FiltrosMateriaManager() {
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {SUBSISTEMAS_DISPONIBLES.map((sub) => {
-                    const sel = editingItem.subsistemas.includes(sub);
+                    const sel = editingItem.subsistemas.some((s) => toCatalogSubsistema(s) === sub);
                     return (
                       <button
                         key={sub}
