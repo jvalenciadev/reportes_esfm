@@ -14,11 +14,8 @@ import {
   PieChart as PieIcon,
   Layers,
   MapPin,
-  BookOpen,
-  Filter,
-  ArrowRight,
-  TrendingUp,
-  Target
+  Target,
+  ArrowRight
 } from 'lucide-react';
 
 // ─── Tipos ────────────────────────────────────────────────────────────────────
@@ -31,7 +28,6 @@ interface RangoSummary {
   asignaciones?: number;
   ues: number;
   horas_total?: number;
-  duracion_semanas: number;
   estudiantes_atendidos?: number;
 }
 
@@ -63,16 +59,15 @@ interface PertinenciaData {
   por_nivel: NivelRangos[];
 }
 
-// ─── Metadatos visuales por Rango ─────────────────────────────────────────────
+// ─── Metadatos visuales por Rango (SIN semanas ni meses inventados) ─────────────
 
 const RANGO_INFO: Record<Rango, {
   colorCode: string;
   hex: string;
   label: string;
-  tituloBID: string;
+  intensidadFormacion: string;
+  enfoqueBID: string;
   queSignifica: string;
-  duracion: string;
-  duracionSemanas: number;
   bgLight: string;
   borderLight: string;
   badge: string;
@@ -82,10 +77,9 @@ const RANGO_INFO: Record<Rango, {
     colorCode: 'V (Verde)',
     hex: '#16a34a',
     label: 'Alta Pertinencia',
-    tituloBID: 'Docente Idóneo en Especialidad y Nivel',
-    queSignifica: 'Título normalista exactamente alineado a la materia y nivel impartido.',
-    duracion: '4 semanas (1 mes)',
-    duracionSemanas: 4,
+    intensidadFormacion: 'Formación Corta / Continua',
+    enfoqueBID: 'Actualización en aula e innovación didáctica',
+    queSignifica: 'Docente con título normalista en la misma especialidad y nivel donde enseña.',
     bgLight: 'bg-emerald-50/70',
     borderLight: 'border-emerald-200',
     badge: 'bg-emerald-100 text-emerald-800 border-emerald-300',
@@ -95,10 +89,9 @@ const RANGO_INFO: Record<Rango, {
     colorCode: 'A (Azul)',
     hex: '#2563eb',
     label: 'Media Pertinencia',
-    tituloBID: 'Alineación Parcial / Especialidad Afín',
-    queSignifica: 'Docente con formación afín o planes anteriores. Requiere nivelación curricular.',
-    duracion: '12 semanas (3 meses)',
-    duracionSemanas: 12,
+    intensidadFormacion: 'Formación Media / Nivelación Modular',
+    enfoqueBID: 'Nivelación curricular y actualización pedagógica',
+    queSignifica: 'Docente con formación afín o planes anteriores que requiere actualización curricular.',
     bgLight: 'bg-blue-50/70',
     borderLight: 'border-blue-200',
     badge: 'bg-blue-100 text-blue-800 border-blue-300',
@@ -108,23 +101,21 @@ const RANGO_INFO: Record<Rango, {
     colorCode: 'N (Naranja)',
     hex: '#ea580c',
     label: 'Baja Pertinencia',
-    tituloBID: 'Desalineación Curricular Marcada',
-    queSignifica: 'Enseña una materia sustancialmente distante a su formación inicial de egreso.',
-    duracion: '24 semanas (6 meses)',
-    duracionSemanas: 24,
+    intensidadFormacion: 'Formación Larga / Reconversión Profunda',
+    enfoqueBID: 'Reconversión disciplinar y habilitación docente',
+    queSignifica: 'Docente que enseña una materia significativamente distante a su formación de egreso.',
     bgLight: 'bg-amber-50/70',
     borderLight: 'border-amber-200',
     badge: 'bg-amber-100 text-amber-800 border-amber-300',
     textClass: 'text-amber-700',
   },
   SIN: {
-    colorCode: 'Sin Código / NO',
+    colorCode: 'Sin Pertinencia / NO',
     hex: '#64748b',
-    label: 'Sin Pertinencia / Impertinente',
-    tituloBID: 'Docencia Fuera del Perfil Oficial',
-    queSignifica: 'Asignaciones sin correspondencia curricular identificada en el sistema.',
-    duracion: 'Especialización / Reasignación',
-    duracionSemanas: 0,
+    label: 'Sin Pertinencia Registrada',
+    intensidadFormacion: 'Evaluación y Reasignación',
+    enfoqueBID: 'Regularización de perfil y especialización formal',
+    queSignifica: 'Asignaciones sin concordancia curricular identificada en el padrón.',
     bgLight: 'bg-slate-50',
     borderLight: 'border-slate-200',
     badge: 'bg-slate-100 text-slate-700 border-slate-300',
@@ -142,7 +133,7 @@ function pct(part: number, total: number): string {
   return ((part / total) * 100).toFixed(1) + '%';
 }
 
-// ─── Componente Gráfico 1: Torta / Dona SVG Interactiva ───────────────────────
+// ─── Componente Gráfico Torta / Dona SVG ──────────────────────────────────────
 
 function DonutChart({ 
   valores, 
@@ -155,8 +146,8 @@ function DonutChart({
   selectedRango: Rango | null;
   onSelectRango: (r: Rango | null) => void;
 }) {
-  const size = 240;
-  const strokeWidth = 40;
+  const size = 230;
+  const strokeWidth = 38;
   const radius = (size - strokeWidth) / 2;
   const center = size / 2;
   const circumference = 2 * Math.PI * radius;
@@ -165,7 +156,7 @@ function DonutChart({
 
   return (
     <div className="relative flex items-center justify-center">
-      <svg width={size} height={size} className="transform -rotate-90 drop-shadow-sm">
+      <svg width={size} height={size} className="transform -rotate-90 drop-shadow-xs">
         {valores.map((item) => {
           const percent = total > 0 ? item.cantidad / total : 0;
           const strokeDasharray = `${percent * circumference} ${circumference}`;
@@ -190,9 +181,9 @@ function DonutChart({
           );
         })}
       </svg>
-      {/* Centro informativo */}
+      {/* Texto Central */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none px-4">
-        <span className="text-2xl font-black text-slate-800 tracking-tight">{fmt(total)}</span>
+        <span className="text-2xl font-black text-slate-800">{fmt(total)}</span>
         <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">
           Docentes Evaluados
         </span>
@@ -208,7 +199,7 @@ export default function PertinenciaView() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedRango, setSelectedRango] = useState<Rango | null>(null);
-  const [activeTab, setActiveTab] = useState<'diagnostico' | 'territorial' | 'niveles'>('diagnostico');
+  const [activeTab, setActiveTab] = useState<'preguntas' | 'territorial' | 'niveles'>('preguntas');
 
   useEffect(() => {
     fetch('/api/pertinencia')
@@ -239,9 +230,9 @@ export default function PertinenciaView() {
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center h-96 gap-3 text-slate-500">
-        <div className="w-9 h-9 border-3 border-blue-600 border-t-transparent rounded-full animate-spin" />
-        <span className="text-sm font-semibold tracking-wide">Cargando tablero institucional de pertinencia...</span>
+      <div className="flex flex-col items-center justify-center h-80 gap-3 text-slate-500">
+        <div className="w-8 h-8 border-3 border-blue-600 border-t-transparent rounded-full animate-spin" />
+        <span className="text-sm font-semibold">Cargando diagnóstico institucional de pertinencia...</span>
       </div>
     );
   }
@@ -264,40 +255,35 @@ export default function PertinenciaView() {
   return (
     <div className="space-y-8 animate-in fade-in duration-300 pb-16">
       
-      {/* ── HEADER INSTITUCIONAL ──────────────────────────────────────────── */}
+      {/* ── ENCABEZADO INSTITUCIONAL BID ──────────────────────────────────── */}
       <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-indigo-950 text-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-700 relative overflow-hidden">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-xs font-bold mb-3 tracking-wider uppercase">
               <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-              SISTEMA INTEGRAL DE PERTINENCIA CURRICULAR · SIE / BID
+              SISTEMA INTEGRAL DE PERTINENCIA CURRICULAR · BID COMPONENTE 2
             </div>
             <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white">
-              Diagnóstico de Pertinencia & Formación Docente
+              Metas de Pertinencia & Formación Docente
             </h1>
             <p className="text-slate-300 text-xs sm:text-sm mt-2 max-w-2xl leading-relaxed">
-              Base técnica oficial para la definición de metas e indicadores del <strong>Componente 2 (BID)</strong>: caracterización de pertinencia, necesidades formativas y alcance poblacional en el Estado Plurinacional de Bolivia.
+              Información oficial para la definición de metas del <strong>Componente 2 (BID)</strong>: caracterización de pertinencia por rangos, niveles de intensidad formativa y alcance en unidades educativas y estudiantes.
             </p>
           </div>
 
-          {/* Tarjeta de impacto superior */}
-          <div className="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-4 sm:p-5 flex flex-col justify-center min-w-[240px]">
+          <div className="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-4 sm:p-5 flex flex-col justify-center min-w-[230px]">
             <span className="text-[11px] font-bold text-slate-300 uppercase tracking-widest">Padrón Docente Evaluado</span>
-            <span className="text-3xl sm:text-4xl font-black text-white mt-1">{fmt(totalDoc)}</span>
-            <div className="flex items-center gap-2 mt-2 text-xs text-amber-300 font-semibold">
-              <span>{fmt(totalUes)} Unidades Educativas</span>
-              <span>•</span>
-              <span>164,448 asignaciones</span>
-            </div>
+            <span className="text-3xl font-black text-white mt-1">{fmt(totalDoc)}</span>
+            <span className="text-xs text-amber-300 font-semibold mt-1">164,448 asignaciones en {fmt(totalUes)} UEs</span>
           </div>
         </div>
 
-        {/* Barra de navegación de pestañas */}
+        {/* Pestañas de navegación */}
         <div className="flex gap-2 mt-6 pt-5 border-t border-slate-700/80 text-xs font-bold">
           <button
-            onClick={() => setActiveTab('diagnostico')}
+            onClick={() => setActiveTab('preguntas')}
             className={`px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 ${
-              activeTab === 'diagnostico' 
+              activeTab === 'preguntas' 
                 ? 'bg-[#c9a751] text-slate-900 shadow-md font-extrabold' 
                 : 'bg-slate-800/80 text-slate-300 hover:bg-slate-800'
             }`}
@@ -314,7 +300,7 @@ export default function PertinenciaView() {
             }`}
           >
             <MapPin className="w-4 h-4" />
-            Distribución Territorial por Departamentos
+            Distribución por Departamento
           </button>
           <button
             onClick={() => setActiveTab('niveles')}
@@ -325,85 +311,22 @@ export default function PertinenciaView() {
             }`}
           >
             <Layers className="w-4 h-4" />
-            Comportamiento por Nivel Educativo
+            Por Nivel Educativo
           </button>
         </div>
       </div>
 
-      {activeTab === 'diagnostico' && (
+      {activeTab === 'preguntas' && (
         <div className="space-y-8">
 
           {/* ═══════════════════════════════════════════════════════════════════
-              1. GRÁFICO DE EMBUDO DE IMPACTO BID (FUNNEL)
-             ═══════════════════════════════════════════════════════════════════ */}
-          <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-xs">
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full border border-blue-200">
-                  Visión Estratégica BID
-                </span>
-                <h3 className="text-base sm:text-lg font-black text-slate-900 mt-2">
-                  Pirámide de Alcance e Impacto del Programa (Componente 2)
-                </h3>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
-              <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col justify-between">
-                <div>
-                  <span className="text-[11px] font-bold text-slate-500 uppercase">1. Padrón Total</span>
-                  <p className="text-2xl font-black text-slate-900 mt-1">{fmt(totalDoc)}</p>
-                  <p className="text-xs text-slate-500 mt-1">Docentes evaluados a nivel nacional</p>
-                </div>
-                <div className="mt-3 text-xs font-bold text-slate-600 bg-slate-200/60 px-2 py-1 rounded-lg text-center">
-                  100% Cobertura Padrón
-                </div>
-              </div>
-
-              <div className="bg-amber-50/70 border border-amber-200 rounded-2xl p-4 flex flex-col justify-between">
-                <div>
-                  <span className="text-[11px] font-bold text-amber-800 uppercase">2. Meta Prioritaria</span>
-                  <p className="text-2xl font-black text-amber-800 mt-1">{fmt(metaDocentesPrioritarios)}</p>
-                  <p className="text-xs text-amber-800/80 mt-1">Docentes con pertinencia Media y Baja (A + N)</p>
-                </div>
-                <div className="mt-3 text-xs font-bold text-amber-800 bg-amber-100 px-2 py-1 rounded-lg text-center">
-                  55.1% del Magisterio
-                </div>
-              </div>
-
-              <div className="bg-purple-50/70 border border-purple-200 rounded-2xl p-4 flex flex-col justify-between">
-                <div>
-                  <span className="text-[11px] font-bold text-purple-800 uppercase">3. UEs Focalizadas</span>
-                  <p className="text-2xl font-black text-purple-800 mt-1">1,452 UEs</p>
-                  <p className="text-xs text-purple-800/80 mt-1">Recintos escolares con docentes a capacitar</p>
-                </div>
-                <div className="mt-3 text-xs font-bold text-purple-800 bg-purple-100 px-2 py-1 rounded-lg text-center">
-                  64.1% de UEs Evaluadas
-                </div>
-              </div>
-
-              <div className="bg-emerald-50/70 border border-emerald-200 rounded-2xl p-4 flex flex-col justify-between">
-                <div>
-                  <span className="text-[11px] font-bold text-emerald-800 uppercase">4. Estudiantes Beneficiados</span>
-                  <p className="text-2xl font-black text-emerald-800 mt-1">~3.9 Millones</p>
-                  <p className="text-xs text-emerald-800/80 mt-1">Atenciones escolares alcanzadas en aula</p>
-                </div>
-                <div className="mt-3 text-xs font-bold text-emerald-800 bg-emerald-100 px-2 py-1 rounded-lg text-center">
-                  Impacto Directo en Calidad
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          {/* ═══════════════════════════════════════════════════════════════════
-              2. PREGUNTA 1: RANGOS DE PERTINENCIA & GRÁFICO DE DONA
+              1. PREGUNTA 1: PERTINENCIA POR RANGOS Y CAUSAS DE DESALINEACIÓN
              ═══════════════════════════════════════════════════════════════════ */}
           <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs">
             <div className="flex items-center gap-2 mb-2">
               <span className="w-7 h-7 rounded-full bg-blue-100 text-blue-800 font-black text-xs flex items-center justify-center">1</span>
               <h2 className="text-lg sm:text-xl font-bold text-slate-900">
-                Pertinencia Docente: Rangos Oficiales y Distribución
+                Pertinencia Docente: Rangos Oficiales y Situación en Aula
               </h2>
             </div>
             <p className="text-xs sm:text-sm text-slate-500 mb-6 ml-9">
@@ -412,11 +335,11 @@ export default function PertinenciaView() {
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
               
-              {/* Gráfico Dona */}
+              {/* Torta / Dona */}
               <div className="lg:col-span-5 bg-slate-50/70 rounded-2xl p-5 border border-slate-200/80 flex flex-col items-center">
                 <span className="text-xs font-bold text-slate-600 uppercase tracking-wider mb-2 flex items-center gap-1.5">
                   <PieIcon className="w-4 h-4 text-blue-600" />
-                  Gráfico de Distribución por Rango (Torta)
+                  Distribución por Rango (Padrón Nacional)
                 </span>
                 
                 <DonutChart 
@@ -426,8 +349,7 @@ export default function PertinenciaView() {
                   onSelectRango={setSelectedRango} 
                 />
 
-                {/* Leyenda interactiva */}
-                <div className="w-full mt-4 space-y-2 text-xs">
+                <div className="w-full mt-4 space-y-1.5 text-xs">
                   {donutData.map((d) => (
                     <div 
                       key={d.rango} 
@@ -493,16 +415,15 @@ export default function PertinenciaView() {
               </div>
             </div>
 
-            {/* GRÁFICO 2: CAUSAS DE LA DESALINEACIÓN CURRICULAR */}
+            {/* CAUSAS DE LA DESALINEACIÓN (Barras horizontales proporcionales) */}
             <div className="mt-8 pt-6 border-t border-slate-100">
               <h3 className="text-xs sm:text-sm font-bold text-slate-800 uppercase tracking-wider mb-4 flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 text-amber-600" />
-                ¿En qué dimensión están desalineados? (28,329 casos analizados):
+                ¿En qué dimensión enseñan fuera de perfil? (28,329 casos analizados):
               </h3>
 
               <div className="space-y-3.5 bg-slate-50/80 p-5 rounded-2xl border border-slate-200">
-                
-                {/* Barra 1: Especialidad */}
+                {/* 1. Especialidad */}
                 <div>
                   <div className="flex justify-between text-xs font-bold text-slate-800 mb-1">
                     <span className="flex items-center gap-2">
@@ -511,12 +432,12 @@ export default function PertinenciaView() {
                     </span>
                     <span className="text-blue-700">26,170 casos · 92.4%</span>
                   </div>
-                  <div className="w-full bg-slate-200 rounded-full h-3.5 overflow-hidden">
-                    <div className="bg-blue-600 h-full rounded-full transition-all duration-700" style={{ width: '92.4%' }} />
+                  <div className="w-full bg-slate-200 rounded-full h-3 overflow-hidden">
+                    <div className="bg-blue-600 h-full rounded-full" style={{ width: '92.4%' }} />
                   </div>
                 </div>
 
-                {/* Barra 2: Ambos */}
+                {/* 2. Ambos */}
                 <div>
                   <div className="flex justify-between text-xs font-bold text-slate-800 mb-1">
                     <span className="flex items-center gap-2">
@@ -525,12 +446,12 @@ export default function PertinenciaView() {
                     </span>
                     <span className="text-amber-700">2,079 casos · 7.3%</span>
                   </div>
-                  <div className="w-full bg-slate-200 rounded-full h-3.5 overflow-hidden">
-                    <div className="bg-amber-600 h-full rounded-full transition-all duration-700" style={{ width: '7.3%' }} />
+                  <div className="w-full bg-slate-200 rounded-full h-3 overflow-hidden">
+                    <div className="bg-amber-600 h-full rounded-full" style={{ width: '7.3%' }} />
                   </div>
                 </div>
 
-                {/* Barra 3: Solo Nivel */}
+                {/* 3. Nivel */}
                 <div>
                   <div className="flex justify-between text-xs font-bold text-slate-800 mb-1">
                     <span className="flex items-center gap-2">
@@ -539,107 +460,140 @@ export default function PertinenciaView() {
                     </span>
                     <span className="text-slate-700">80 casos · 0.3%</span>
                   </div>
-                  <div className="w-full bg-slate-200 rounded-full h-3.5 overflow-hidden">
-                    <div className="bg-slate-600 h-full rounded-full transition-all duration-700" style={{ width: '0.3%' }} />
+                  <div className="w-full bg-slate-200 rounded-full h-3 overflow-hidden">
+                    <div className="bg-slate-600 h-full rounded-full" style={{ width: '0.3%' }} />
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
 
 
           {/* ═══════════════════════════════════════════════════════════════════
-              3. PREGUNTA 2: NECESIDADES DE FORMACIÓN & CRONOGRAMA MODULAR
+              2. PREGUNTA 2: NECESIDADES DE FORMACIÓN & INTENSIDAD POR RANGO
              ═══════════════════════════════════════════════════════════════════ */}
           <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs">
             <div className="flex items-center gap-2 mb-2">
               <span className="w-7 h-7 rounded-full bg-amber-100 text-amber-800 font-black text-xs flex items-center justify-center">2</span>
               <h2 className="text-lg sm:text-xl font-bold text-slate-900">
-                Necesidades de Formación: Metas y Duración Diferenciada
+                Necesidades de Formación: Metas Cuantitativas y Nivel de Intensidad
               </h2>
             </div>
             <p className="text-xs sm:text-sm text-slate-500 mb-6 ml-9">
               ¿Cuántos docentes requerirían formación y cuánto duraría según el rango de pertinencia?
             </p>
 
-            {/* GRÁFICO 3: CRONOGRAMA Y DURACIÓN COMPARATIVA (GANTT STYLE) */}
-            <div className="bg-slate-50 rounded-2xl p-5 border border-slate-200 mb-6">
-              <h3 className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-4 flex items-center gap-2">
-                <Clock className="w-4 h-4 text-blue-600" />
-                Comparativa de Duración Formativa por Rango:
-              </h3>
-
-              <div className="space-y-4">
-                {/* Rango N */}
-                <div className="bg-white p-4 rounded-xl border border-amber-200">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-                    <div>
-                      <span className="text-xs font-extrabold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-md">
-                        Rango N · Baja Pertinencia
-                      </span>
-                      <strong className="text-sm text-slate-900 ml-2">4,314 Docentes Meta</strong>
-                    </div>
-                    <span className="text-xs font-black text-amber-800">
-                      24 SEMANAS (6 MESES / 1 SEMESTRE)
-                    </span>
-                  </div>
-                  <div className="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
-                    <div className="bg-amber-600 h-full rounded-full transition-all duration-700" style={{ width: '100%' }} />
-                  </div>
-                  <p className="text-[11px] text-slate-500 mt-2">
-                    <strong>¿Por qué 24 semanas?</strong> El docente enseña materias con brecha sustancial frente a su formación; requiere habilitación y reconversión pedagógica profunda.
-                  </p>
+            {/* Grupo Meta Principal BID */}
+            <div className="bg-gradient-to-r from-blue-900 to-indigo-900 text-white rounded-2xl p-5 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-3.5">
+                <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-amber-400 shrink-0">
+                  <GraduationCap className="w-6 h-6" />
                 </div>
-
-                {/* Rango A */}
-                <div className="bg-white p-4 rounded-xl border border-blue-200">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-                    <div>
-                      <span className="text-xs font-extrabold text-blue-800 bg-blue-100 px-2 py-0.5 rounded-md">
-                        Rango A · Media Pertinencia
-                      </span>
-                      <strong className="text-sm text-slate-900 ml-2">76,754 Docentes Meta</strong>
-                    </div>
-                    <span className="text-xs font-black text-blue-800">
-                      12 SEMANAS (3 MESES / 1 TRIMESTRE)
-                    </span>
-                  </div>
-                  <div className="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
-                    <div className="bg-blue-600 h-full rounded-full transition-all duration-700" style={{ width: '50%' }} />
-                  </div>
-                  <p className="text-[11px] text-slate-500 mt-2">
-                    <strong>¿Por qué 12 semanas?</strong> Posee formación afín; requiere nivelación modular y actualización curricular en contenidos vigentes.
-                  </p>
-                </div>
-
-                {/* Rango V */}
-                <div className="bg-white p-4 rounded-xl border border-emerald-200">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-                    <div>
-                      <span className="text-xs font-extrabold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-md">
-                        Rango V · Alta Pertinencia
-                      </span>
-                      <strong className="text-sm text-slate-900 ml-2">43,411 Docentes Idóneos</strong>
-                    </div>
-                    <span className="text-xs font-black text-emerald-800">
-                      4 SEMANAS (1 MES / TALLERES)
-                    </span>
-                  </div>
-                  <div className="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
-                    <div className="bg-emerald-600 h-full rounded-full transition-all duration-700" style={{ width: '16.6%' }} />
-                  </div>
-                  <p className="text-[11px] text-slate-500 mt-2">
-                    <strong>¿Por qué 4 semanas?</strong> Pertinencia idónea; formación enfocada en didáctica activa y tecnologías de aula.
+                <div>
+                  <h3 className="font-extrabold text-base text-white">
+                    Meta de Formación Prioritaria Componente 2: Rangos A + N
+                  </h3>
+                  <p className="text-xs text-blue-200 mt-0.5">
+                    Docentes en ejercicio que requieren capacitación correctiva y nivelación curricular.
                   </p>
                 </div>
               </div>
+              <div className="text-left sm:text-right shrink-0">
+                <span className="text-3xl font-black text-amber-300">{fmt(metaDocentesPrioritarios)}</span>
+                <span className="text-xs text-blue-200 block font-semibold">55.1% del magisterio</span>
+              </div>
+            </div>
+
+            {/* Comparativa cualitativa de intensidad y duración relativa */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              
+              {/* Rango N */}
+              <div className="rounded-2xl border-2 border-amber-300 bg-amber-50/50 p-5 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-black uppercase text-amber-800 bg-amber-200/70 px-2.5 py-0.5 rounded-full">
+                      Rango N (Naranja)
+                    </span>
+                    <span className="text-xs font-extrabold text-amber-800">Baja Pertinencia</span>
+                  </div>
+                  <h4 className="font-black text-slate-900 text-base mt-2">Formación Larga / Mayor Duración</h4>
+                  <p className="text-xs text-slate-600 mt-1">
+                    Requieren un programa de <strong>mayor carga y duración extendida (reconversión profunda)</strong> debido a la brecha sustancial entre su título y la materia que enseñan.
+                  </p>
+                </div>
+
+                <div className="mt-5 pt-4 border-t border-amber-200">
+                  <div className="flex items-baseline justify-between">
+                    <span className="text-2xl font-black text-amber-800">{fmt(data.resumen.N?.docentes)}</span>
+                    <span className="text-xs font-semibold text-slate-500">docentes meta</span>
+                  </div>
+                  <div className="mt-3 bg-white rounded-xl p-2.5 border border-amber-200 text-xs font-bold text-amber-900 flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-amber-600 shrink-0" />
+                    <span>Intensidad: Alta (Reconversión Disciplinar)</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Rango A */}
+              <div className="rounded-2xl border-2 border-blue-300 bg-blue-50/50 p-5 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-black uppercase text-blue-800 bg-blue-200/70 px-2.5 py-0.5 rounded-full">
+                      Rango A (Azul)
+                    </span>
+                    <span className="text-xs font-extrabold text-blue-800">Media Pertinencia</span>
+                  </div>
+                  <h4 className="font-black text-slate-900 text-base mt-2">Formación Media / Duración Intermedia</h4>
+                  <p className="text-xs text-slate-600 mt-1">
+                    Requieren un programa de <strong>duración intermedia (nivelación modular)</strong> para actualizarse en contenidos y enfoque pedagógico del currículo oficial.
+                  </p>
+                </div>
+
+                <div className="mt-5 pt-4 border-t border-blue-200">
+                  <div className="flex items-baseline justify-between">
+                    <span className="text-2xl font-black text-blue-800">{fmt(data.resumen.A?.docentes)}</span>
+                    <span className="text-xs font-semibold text-slate-500">docentes meta</span>
+                  </div>
+                  <div className="mt-3 bg-white rounded-xl p-2.5 border border-blue-200 text-xs font-bold text-blue-900 flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-blue-600 shrink-0" />
+                    <span>Intensidad: Media (Nivelación Curricular)</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Rango V */}
+              <div className="rounded-2xl border-2 border-emerald-300 bg-emerald-50/50 p-5 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-black uppercase text-emerald-800 bg-emerald-200/70 px-2.5 py-0.5 rounded-full">
+                      Rango V (Verde)
+                    </span>
+                    <span className="text-xs font-extrabold text-emerald-800">Alta Pertinencia</span>
+                  </div>
+                  <h4 className="font-black text-slate-900 text-base mt-2">Formación Corta / Talleres Breves</h4>
+                  <p className="text-xs text-slate-600 mt-1">
+                    Docentes ya alineados con su título; requieren únicamente <strong>capacitación breve de actualización continua</strong> en didáctica activa y tecnologías de aula.
+                  </p>
+                </div>
+
+                <div className="mt-5 pt-4 border-t border-emerald-200">
+                  <div className="flex items-baseline justify-between">
+                    <span className="text-2xl font-black text-emerald-800">{fmt(data.resumen.V?.docentes)}</span>
+                    <span className="text-xs font-semibold text-slate-500">docentes idóneos</span>
+                  </div>
+                  <div className="mt-3 bg-white rounded-xl p-2.5 border border-emerald-200 text-xs font-bold text-emerald-900 flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-emerald-600 shrink-0" />
+                    <span>Intensidad: Breve (Actualización en Aula)</span>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
 
 
           {/* ═══════════════════════════════════════════════════════════════════
-              4. PREGUNTA 3: BENEFICIARIOS (UES Y ESTUDIANTES)
+              3. PREGUNTA 3: BENEFICIARIOS (UES Y ESTUDIANTES)
              ═══════════════════════════════════════════════════════════════════ */}
           <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs">
             <div className="flex items-center gap-2 mb-2">
@@ -689,7 +643,7 @@ export default function PertinenciaView() {
                     <Users className="w-6 h-6" />
                   </div>
                   <div>
-                    <span className="text-xs font-bold text-blue-800 uppercase tracking-wide">Población Estudiantil Beneficiada</span>
+                    <span className="text-xs font-bold text-blue-800 uppercase tracking-wide">Población Escolar Alcanzada</span>
                     <h4 className="text-3xl font-black text-slate-900 mt-0.5">~3.9 Millones</h4>
                   </div>
                 </div>
@@ -705,7 +659,7 @@ export default function PertinenciaView() {
                   </div>
                   <div className="bg-white p-3 rounded-xl border border-blue-100 flex justify-between items-center font-bold text-slate-800">
                     <span>Beneficio sistémico acumulado:</span>
-                    <span className="text-emerald-700">Mejora directa de aprendizajes</span>
+                    <span className="text-emerald-700">Mejora directa de calidad educativa</span>
                   </div>
                 </div>
               </div>
@@ -730,7 +684,6 @@ export default function PertinenciaView() {
             </p>
           </div>
 
-          {/* Gráfico de Barras Apiladas por Departamento */}
           <div className="space-y-4">
             {data.por_departamento.map((d) => {
               const totalDept = (['V', 'A', 'N', 'SIN'] as Rango[]).reduce((s, rk) => s + (d.rangos[rk]?.docentes ?? 0), 0);
@@ -746,7 +699,6 @@ export default function PertinenciaView() {
                     <span className="text-slate-500 font-semibold">{fmt(totalDept)} docentes</span>
                   </div>
 
-                  {/* Barra apilada */}
                   <div className="w-full bg-slate-200 rounded-full h-4 overflow-hidden flex">
                     <div style={{ width: `${pV}%` }} className="bg-emerald-600 h-full" title={`Alta (V): ${fmt(d.rangos.V?.docentes)} (${pV.toFixed(1)}%)`} />
                     <div style={{ width: `${pA}%` }} className="bg-blue-600 h-full" title={`Media (A): ${fmt(d.rangos.A?.docentes)} (${pA.toFixed(1)}%)`} />
@@ -754,7 +706,6 @@ export default function PertinenciaView() {
                     <div style={{ width: `${pSIN}%` }} className="bg-slate-400 h-full" title={`Sin Pert: ${fmt(d.rangos.SIN?.docentes)} (${pSIN.toFixed(1)}%)`} />
                   </div>
 
-                  {/* Cifras rápidas bajo la barra */}
                   <div className="flex items-center justify-between text-[11px] text-slate-500 mt-2 font-medium">
                     <span className="text-emerald-700 font-bold">🟢 Alta: {fmt(d.rangos.V?.docentes)} ({pV.toFixed(0)}%)</span>
                     <span className="text-blue-700 font-bold">🔵 Media: {fmt(d.rangos.A?.docentes)} ({pA.toFixed(0)}%)</span>
