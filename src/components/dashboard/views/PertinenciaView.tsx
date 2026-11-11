@@ -437,24 +437,15 @@ export default function PertinenciaView() {
 
       {/* ── ENCABEZADO INSTITUCIONAL BID ──────────────────────────────────── */}
       <div className="bg-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-sm border border-[#c9a751]/20 relative overflow-hidden">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#c9a751]/10 border border-[#c9a751]/30 text-[#c9a751] text-xs font-bold mb-3 tracking-wider uppercase">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
+          <div className="flex items-center gap-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#c9a751]/10 border border-[#c9a751]/30 text-[#c9a751] text-xs font-bold tracking-wider uppercase">
               <Sparkles className="w-3.5 h-3.5 text-[#c9a751]" />
-              SISTEMA INTEGRAL DE PERTINENCIA CURRICULAR · BID COMPONENTE 2
+              BID · Componente 2
             </div>
-            <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white">
-              Metas de Pertinencia & Formación Docente
+            <h1 className="text-xl sm:text-2xl font-black tracking-tight text-white">
+              Pertinencia Curricular Docente
             </h1>
-            <p className="text-slate-300 text-xs sm:text-sm mt-2 max-w-2xl leading-relaxed">
-              Información oficial para la definición de metas del <strong>Componente 2 (BID)</strong>: caracterización por rangos, distribución territorial interactiva, matriz por especialidad y alcance en unidades educativas y estudiantes.
-            </p>
-          </div>
-
-          <div className="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-4 sm:p-5 flex flex-col justify-center min-w-[230px]">
-            <span className="text-[11px] font-bold text-slate-300 uppercase tracking-widest">Padrón Docente Evaluado</span>
-            <span className="text-3xl font-black text-white mt-1">{fmt(totalDoc)}</span>
-            <span className="text-xs text-[#c9a751] font-semibold mt-1">164,448 asignaciones en {fmt(totalUes)} UEs</span>
           </div>
         </div>
 
