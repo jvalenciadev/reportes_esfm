@@ -856,73 +856,155 @@ export default function PertinenciaView() {
             </div>
 
             {/* BENEFICIARIOS (UES Y ESTUDIANTES) */}
-            <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="w-8 h-8 rounded-xl bg-[#c9a751] text-slate-900 font-black text-sm flex items-center justify-center shadow-xs">
-                  3
-                </span>
-                <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-                  Beneficiarios y Alcance de la Intervención
-                </h2>
+            <div className="bg-white rounded-3xl border border-slate-200 shadow-xs overflow-hidden">
+              {/* Header de sección */}
+              <div className="p-6 sm:p-8 pb-5 border-b border-slate-100 bg-white">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="w-8 h-8 rounded-xl bg-[#c9a751] text-slate-900 font-black text-sm flex items-center justify-center shadow-xs">
+                    3
+                  </span>
+                  <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+                    Beneficiarios y Alcance de la Intervención
+                  </h2>
+                </div>
+                <p className="text-xs sm:text-sm text-slate-500 mt-1 ml-10">
+                  ¿En cuántas unidades educativas enseñan los docentes que requerirían formación y a cuántos estudiantes atienden?
+                </p>
               </div>
-              <p className="text-xs sm:text-sm text-slate-500 mb-6 ml-10">
-                ¿En cuántas unidades educativas enseñan los docentes que requerirían formación y a cuántos estudiantes atienden?
-              </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div className="rounded-2xl border border-purple-200 p-6 bg-purple-50/40">
-                  <div className="flex items-center gap-3.5">
-                    <div className="w-12 h-12 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center shrink-0">
-                      <School className="w-6 h-6" />
+              <div className="p-6 sm:p-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                {/* BLOQUE UEs */}
+                <div className="flex flex-col gap-4">
+                  {/* KPI principal UEs */}
+                  <div className="bg-slate-900 border border-[#c9a751]/25 rounded-2xl p-5 text-white flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-11 h-11 rounded-xl bg-[#c9a751]/15 border border-[#c9a751]/30 flex items-center justify-center shrink-0">
+                        <School className="w-5 h-5 text-[#c9a751]" />
+                      </div>
+                      <div>
+                        <span className="text-[11px] font-black uppercase tracking-widest text-slate-400 block">
+                          Alcance en Unidades Educativas
+                        </span>
+                        <span className="text-xs text-slate-400 mt-0.5 block">UEs con al menos un docente A o N</span>
+                      </div>
                     </div>
-                    <div>
-                      <span className="text-xs font-bold text-purple-800 uppercase tracking-wide">Alcance en Unidades Educativas</span>
-                      <h4 className="text-3xl font-black text-slate-900 mt-0.5">1,452 UEs Focalizadas</h4>
+                    <div className="text-right shrink-0">
+                      <span className="text-3xl font-black text-[#c9a751]">1,452</span>
+                      <span className="text-xs text-slate-400 block font-semibold">UEs Focalizadas</span>
                     </div>
                   </div>
 
-                  <div className="mt-5 space-y-2.5 text-xs">
-                    <div className="bg-white p-3 rounded-xl border border-purple-100 flex justify-between items-center">
-                      <span className="text-slate-600">UEs con docentes Rango N (Baja pertinencia):</span>
-                      <strong className="text-amber-700 font-black">{fmt(data.resumen.N?.ues)} UEs</strong>
+                  {/* Desglose UEs por rango */}
+                  <div className="space-y-2.5 text-xs">
+                    <div className="bg-amber-50 p-3.5 rounded-xl border border-amber-200 flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="w-2.5 h-2.5 rounded-full bg-amber-600 shrink-0" />
+                        <span className="text-slate-700 font-semibold">UEs con docentes Rango N (Baja pertinencia)</span>
+                      </div>
+                      <strong className="text-amber-800 font-black text-sm">{fmt(data.resumen.N?.ues)} UEs</strong>
                     </div>
-                    <div className="bg-white p-3 rounded-xl border border-purple-100 flex justify-between items-center">
-                      <span className="text-slate-600">UEs con docentes Rango A (Media pertinencia):</span>
-                      <strong className="text-blue-700 font-black">{fmt(data.resumen.A?.ues)} UEs</strong>
+                    <div className="bg-blue-50 p-3.5 rounded-xl border border-blue-200 flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="w-2.5 h-2.5 rounded-full bg-blue-600 shrink-0" />
+                        <span className="text-slate-700 font-semibold">UEs con docentes Rango A (Media pertinencia)</span>
+                      </div>
+                      <strong className="text-blue-800 font-black text-sm">{fmt(data.resumen.A?.ues)} UEs</strong>
                     </div>
-                    <div className="bg-white p-3 rounded-xl border border-purple-100 flex justify-between items-center font-bold text-slate-800">
-                      <span>Total UEs en todo el padrón nacional evaluado:</span>
-                      <span>{fmt(totalUes)} UEs</span>
+                    <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200 flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="w-2.5 h-2.5 rounded-full bg-slate-500 shrink-0" />
+                        <span className="text-slate-700 font-semibold">Total UEs padrón nacional evaluado</span>
+                      </div>
+                      <strong className="text-slate-800 font-black text-sm">{fmt(data.resumen.TOTAL?.ues)} UEs</strong>
+                    </div>
+                  </div>
+
+                  {/* Barra proporcional UEs */}
+                  <div className="bg-slate-50 rounded-xl p-3.5 border border-slate-200">
+                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-wider block mb-2">Cobertura sobre padrón total</span>
+                    <div className="w-full bg-slate-200 rounded-full h-3 overflow-hidden flex">
+                      <div
+                        style={{ width: `${(1452 / (data.resumen.TOTAL?.ues ?? 2264)) * 100}%` }}
+                        className="bg-[#c9a751] h-full rounded-full"
+                        title="UEs focalizadas"
+                      />
+                    </div>
+                    <div className="flex justify-between text-[10px] text-slate-500 font-semibold mt-1.5">
+                      <span className="text-[#c9a751] font-black">1,452 UEs focalizadas ({((1452 / (data.resumen.TOTAL?.ues ?? 2264)) * 100).toFixed(1)}%)</span>
+                      <span>{fmt(data.resumen.TOTAL?.ues)} total</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="rounded-2xl border border-blue-200 p-6 bg-blue-50/40">
-                  <div className="flex items-center gap-3.5">
-                    <div className="w-12 h-12 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center shrink-0">
-                      <Users className="w-6 h-6" />
+                {/* BLOQUE Estudiantes */}
+                <div className="flex flex-col gap-4">
+                  {/* KPI principal Alumnos */}
+                  <div className="bg-slate-900 border border-[#c9a751]/25 rounded-2xl p-5 text-white flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-11 h-11 rounded-xl bg-[#c9a751]/15 border border-[#c9a751]/30 flex items-center justify-center shrink-0">
+                        <Users className="w-5 h-5 text-[#c9a751]" />
+                      </div>
+                      <div>
+                        <span className="text-[11px] font-black uppercase tracking-widest text-slate-400 block">
+                          Población Escolar Alcanzada
+                        </span>
+                        <span className="text-xs text-slate-400 mt-0.5 block">Alumnos con docentes Rango A o N</span>
+                      </div>
                     </div>
-                    <div>
-                      <span className="text-xs font-bold text-blue-800 uppercase tracking-wide">Población Escolar Alcanzada</span>
-                      <h4 className="text-3xl font-black text-slate-900 mt-0.5">~3.9 Millones</h4>
+                    <div className="text-right shrink-0">
+                      <span className="text-3xl font-black text-[#c9a751]">~3.9M</span>
+                      <span className="text-xs text-slate-400 block font-semibold">Alumnos impactados</span>
                     </div>
                   </div>
 
-                  <div className="mt-5 space-y-2.5 text-xs">
-                    <div className="bg-white p-3 rounded-xl border border-blue-100 flex justify-between items-center">
-                      <span className="text-slate-600">Alumnos impactados por docentes Rango N:</span>
-                      <strong className="text-amber-700 font-black">~{fmt(data.resumen.N?.estudiantes_atendidos)} alumnos</strong>
+                  {/* Desglose alumnos por rango */}
+                  <div className="space-y-2.5 text-xs">
+                    <div className="bg-amber-50 p-3.5 rounded-xl border border-amber-200 flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="w-2.5 h-2.5 rounded-full bg-amber-600 shrink-0" />
+                        <span className="text-slate-700 font-semibold">Alumnos impactados — Rango N</span>
+                      </div>
+                      <strong className="text-amber-800 font-black text-sm">~{fmt(data.resumen.N?.estudiantes_atendidos)}</strong>
                     </div>
-                    <div className="bg-white p-3 rounded-xl border border-blue-100 flex justify-between items-center">
-                      <span className="text-slate-600">Alumnos impactados por docentes Rango A:</span>
-                      <strong className="text-blue-700 font-black">~{fmt(data.resumen.A?.estudiantes_atendidos)} alumnos</strong>
+                    <div className="bg-blue-50 p-3.5 rounded-xl border border-blue-200 flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="w-2.5 h-2.5 rounded-full bg-blue-600 shrink-0" />
+                        <span className="text-slate-700 font-semibold">Alumnos impactados — Rango A</span>
+                      </div>
+                      <strong className="text-blue-800 font-black text-sm">~{fmt(data.resumen.A?.estudiantes_atendidos)}</strong>
                     </div>
-                    <div className="bg-white p-3 rounded-xl border border-blue-100 flex justify-between items-center font-bold text-slate-800">
-                      <span>Beneficio sistémico acumulado:</span>
-                      <span className="text-emerald-700">Mejora directa de calidad educativa</span>
+                    <div className="bg-emerald-50 p-3.5 rounded-xl border border-emerald-200 flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-600 shrink-0" />
+                        <span className="text-slate-700 font-semibold">Beneficio sistémico acumulado</span>
+                      </div>
+                      <strong className="text-emerald-700 font-black text-sm">Mejora de calidad educativa</strong>
+                    </div>
+                  </div>
+
+                  {/* Barra proporcional alumnos */}
+                  <div className="bg-slate-50 rounded-xl p-3.5 border border-slate-200">
+                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-wider block mb-2">Alumnos A+N sobre total padrón</span>
+                    <div className="w-full bg-slate-200 rounded-full h-3 overflow-hidden flex">
+                      <div
+                        style={{ width: `${((data.resumen.N?.estudiantes_atendidos ?? 0) / (data.resumen.TOTAL?.estudiantes_atendidos ?? 1)) * 100}%` }}
+                        className="bg-amber-600 h-full"
+                        title="Rango N"
+                      />
+                      <div
+                        style={{ width: `${((data.resumen.A?.estudiantes_atendidos ?? 0) / (data.resumen.TOTAL?.estudiantes_atendidos ?? 1)) * 100}%` }}
+                        className="bg-blue-600 h-full"
+                        title="Rango A"
+                      />
+                    </div>
+                    <div className="flex justify-between text-[10px] text-slate-500 font-semibold mt-1.5">
+                      <span className="text-[#c9a751] font-black">~3,899,892 alumnos (55.5%)</span>
+                      <span>{fmt(data.resumen.TOTAL?.estudiantes_atendidos)} total</span>
                     </div>
                   </div>
                 </div>
+
               </div>
             </div>
 
