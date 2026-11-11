@@ -203,9 +203,15 @@ export async function GET(req: NextRequest) {
           .map((m) => `materia.ilike.*${encodeURIComponent(m)}*`)
           .join(',');
 
-        const queryUrl = `${SUPABASE_URL}/rest/v1/sie_deficit_materia?cod_dep=eq.${depId}&deficit=gt.0&or=(${matOrConditions})&order=deficit.desc&limit=150&select=cod_ue,ue,cod_dep,departamento,cod_dis,distrito,area,subsistema,nivel,materia,hora_tra,hora_pla,deficit`;
+        const fieldsWithSub = 'cod_ue,ue,cod_dep,departamento,cod_dis,distrito,area,subsistema,nivel,materia,sub_materia,hora_tra,hora_pla,deficit';
+        const fieldsFallback = 'cod_ue,ue,cod_dep,departamento,cod_dis,distrito,area,subsistema,nivel,materia,hora_tra,hora_pla,deficit';
+        const queryUrl = `${SUPABASE_URL}/rest/v1/sie_deficit_materia?cod_dep=eq.${depId}&deficit=gt.0&or=(${matOrConditions})&order=deficit.desc&limit=150&select=${fieldsWithSub}`;
 
-        const resUes = await fetch(queryUrl, { headers, cache: 'no-store' });
+        let resUes = await fetch(queryUrl, { headers, cache: 'no-store' });
+        if (!resUes.ok) {
+          const fallbackUrl = `${SUPABASE_URL}/rest/v1/sie_deficit_materia?cod_dep=eq.${depId}&deficit=gt.0&or=(${matOrConditions})&order=deficit.desc&limit=150&select=${fieldsFallback}`;
+          resUes = await fetch(fallbackUrl, { headers, cache: 'no-store' });
+        }
         if (resUes.ok) {
           const rawUes = await resUes.json();
           const baseHoras = customBaseHoras && customBaseHoras > 0 ? customBaseHoras : horaItemBd;
@@ -217,6 +223,7 @@ export async function GET(req: NextRequest) {
             area: r.area || 'U',
             nivel: r.nivel || '',
             materia: r.materia || '',
+            sub_materia: r.sub_materia || '',
             hora_tra: Number(r.hora_tra) || 0,
             hora_pla: Number(r.hora_pla) || 0,
             deficit: Number(r.deficit) || 0,
@@ -279,10 +286,11 @@ export async function GET(req: NextRequest) {
       deptMap[d.id] = { uesSet: new Set<number>(), carga: 0, planilla: 0, deficit: 0 };
     });
 
-    const matBreakdownMap: Record<string, { uesSet: Set<number>; carga: number; deficit: number; nivel: string }> = {};
+    const matBreakdownMap: Record<string, { uesSet: Set<number>; carga: number; deficit: number; nivel: string; sub_materia: string }> = {};
 
     agrupado.forEach((row: any) => {
       const rowMateria = String(row.m || '').toUpperCase();
+      const rowSubMateria = String(row.sm || '');
       const rowSubsistema = normalizeSubsistema(row.s);
       const rowNivel = String(row.n || '').toUpperCase();
       const depId = Number(row.d);
@@ -314,13 +322,14 @@ export async function GET(req: NextRequest) {
         uesArr.forEach((u) => deptMap[depId].uesSet.add(u));
       }
 
-      const matKey = `${rowMateria}__${rowNivel}`;
+      const matKey = `${rowMateria}__${rowNivel}__${rowSubMateria}`;
       if (!matBreakdownMap[matKey]) {
         matBreakdownMap[matKey] = {
           uesSet: new Set<number>(),
           carga: 0,
           deficit: 0,
           nivel: rowNivel,
+          sub_materia: rowSubMateria,
         };
       }
       matBreakdownMap[matKey].carga += carga;
@@ -352,6 +361,7 @@ export async function GET(req: NextRequest) {
         const matName = key.split('__')[0];
         return {
           materia: matName,
+          sub_materia: val.sub_materia || '',
           nivel: val.nivel,
           ues_afectadas: val.uesSet.size,
           carga_horaria: val.carga,

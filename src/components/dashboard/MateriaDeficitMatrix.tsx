@@ -41,6 +41,7 @@ interface ResumenNacional {
 
 interface MateriaBreakdown {
   materia: string;
+  sub_materia?: string;
   nivel: string;
   ues_afectadas: number;
   carga_horaria: number;
@@ -54,6 +55,7 @@ interface UeDetalle {
   area: string;
   nivel: string;
   materia: string;
+  sub_materia?: string;
   hora_tra: number;
   hora_pla: number;
   deficit: number;
@@ -207,6 +209,7 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
         u.ue.toLowerCase().includes(q) ||
         String(u.cod_ue).includes(q) ||
         u.materia.toLowerCase().includes(q) ||
+        (u.sub_materia && u.sub_materia.toLowerCase().includes(q)) ||
         u.distrito.toLowerCase().includes(q)
     );
   }, [uesList, searchUe]);
@@ -629,7 +632,16 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
                   <tbody className="divide-y divide-slate-100">
                     {reportData.materias_breakdown.map((m, idx) => (
                       <tr key={idx} className="hover:bg-slate-50">
-                        <td className="py-2 px-3 font-semibold text-slate-800">{m.materia}</td>
+                        <td className="py-2 px-3 font-semibold text-slate-800">
+                          <div>{m.materia}</div>
+                          {m.sub_materia && m.sub_materia.trim() !== '' && (
+                            <div className="mt-0.5">
+                              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-amber-50 text-amber-900 border border-amber-200 text-[10px] font-medium leading-tight">
+                                <span className="text-amber-600 font-bold">Sub:</span> {m.sub_materia}
+                              </span>
+                            </div>
+                          )}
+                        </td>
                         <td className="py-2 px-3">
                           <span className="px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-200 text-[10px] font-semibold">
                             {m.nivel || 'N/A'}
@@ -904,7 +916,16 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
                               {ue.area}
                             </span>
                           </td>
-                          <td className="py-2.5 px-3 font-semibold text-slate-800">{ue.materia}</td>
+                          <td className="py-2.5 px-3 font-semibold text-slate-800">
+                            <div>{ue.materia}</div>
+                            {ue.sub_materia && ue.sub_materia.trim() !== '' && (
+                              <div className="mt-0.5">
+                                <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-amber-50 text-amber-900 border border-amber-200 text-[10px] font-medium leading-tight">
+                                  <span className="text-amber-600 font-bold">Sub:</span> {ue.sub_materia}
+                                </span>
+                              </div>
+                            )}
+                          </td>
                           <td className="py-2.5 px-3 text-right text-slate-600">{ue.hora_tra}</td>
                           <td className="py-2.5 px-3 text-right text-slate-600">{ue.hora_pla}</td>
                           <td className="py-2.5 px-3 text-right font-bold text-red-600">
