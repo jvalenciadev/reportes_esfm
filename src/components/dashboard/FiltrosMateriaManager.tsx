@@ -372,8 +372,8 @@ export function FiltrosMateriaManager() {
       {actionMessage && (
         <div
           className={`p-4 rounded-xl border text-xs flex items-center justify-between ${actionMessage.type === 'success'
-              ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
-              : 'bg-red-50 border-red-200 text-red-800'
+            ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
+            : 'bg-red-50 border-red-200 text-red-800'
             }`}
         >
           <div className="flex items-center gap-2 font-medium">
@@ -408,8 +408,8 @@ export function FiltrosMateriaManager() {
             <button
               onClick={() => setEspStatusFilter('all')}
               className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-colors ${espStatusFilter === 'all'
-                  ? 'bg-white text-slate-900 shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-white text-slate-900 shadow-xs'
+                : 'text-slate-600 hover:text-slate-900'
                 }`}
             >
               Todas ({combinedList.length})
@@ -417,8 +417,8 @@ export function FiltrosMateriaManager() {
             <button
               onClick={() => setEspStatusFilter('configured')}
               className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-colors ${espStatusFilter === 'configured'
-                  ? 'bg-indigo-600 text-white shadow-xs'
-                  : 'text-slate-600 hover:text-indigo-700'
+                ? 'bg-indigo-600 text-white shadow-xs'
+                : 'text-slate-600 hover:text-indigo-700'
                 }`}
             >
               Configuradas ({configuredCount})
@@ -426,8 +426,8 @@ export function FiltrosMateriaManager() {
             <button
               onClick={() => setEspStatusFilter('pending')}
               className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-colors ${espStatusFilter === 'pending'
-                  ? 'bg-amber-600 text-white shadow-xs'
-                  : 'text-slate-600 hover:text-amber-700'
+                ? 'bg-amber-600 text-white shadow-xs'
+                : 'text-slate-600 hover:text-amber-700'
                 }`}
             >
               Pendientes ({pendingCount})
@@ -483,8 +483,8 @@ export function FiltrosMateriaManager() {
                       <div className="flex flex-wrap items-center gap-1.5 mt-1">
                         <span
                           className={`px-2 py-0.5 rounded-full text-[10px] font-semibold ${activo
-                              ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                              : 'bg-slate-100 text-slate-600 border border-slate-200'
+                            ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                            : 'bg-slate-100 text-slate-600 border border-slate-200'
                             }`}
                         >
                           {activo ? 'Activo' : 'Inactivo'}
@@ -570,8 +570,8 @@ export function FiltrosMateriaManager() {
                             <span
                               key={m}
                               className={`px-2 py-0.5 rounded border font-mono text-[10px] ${condMat
-                                  ? 'bg-indigo-50 text-indigo-700 border-indigo-200'
-                                  : 'bg-emerald-50 text-emerald-800 border-emerald-200'
+                                ? 'bg-indigo-50 text-indigo-700 border-indigo-200'
+                                : 'bg-emerald-50 text-emerald-800 border-emerald-200'
                                 }`}
                             >
                               {m}
@@ -631,20 +631,20 @@ export function FiltrosMateriaManager() {
                   <div className="flex items-center gap-1.5">
                     <span
                       className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold ${done
-                          ? 'bg-emerald-500 text-white'
-                          : pasoActual === paso
-                            ? 'bg-indigo-600 text-white'
-                            : 'bg-slate-200 text-slate-500'
+                        ? 'bg-emerald-500 text-white'
+                        : pasoActual === paso
+                          ? 'bg-indigo-600 text-white'
+                          : 'bg-slate-200 text-slate-500'
                         }`}
                     >
                       {done ? '✓' : paso}
                     </span>
                     <span
                       className={`text-[11px] font-semibold ${done
-                          ? 'text-emerald-700'
-                          : pasoActual === paso
-                            ? 'text-indigo-700'
-                            : 'text-slate-400'
+                        ? 'text-emerald-700'
+                        : pasoActual === paso
+                          ? 'text-indigo-700'
+                          : 'text-slate-400'
                         }`}
                     >
                       {label}
@@ -660,8 +660,8 @@ export function FiltrosMateriaManager() {
               {/* PASO 1: SUBSISTEMA */}
               <div
                 className={`p-4 rounded-xl border space-y-3 transition-all ${pasoActual === 1
-                    ? 'border-blue-400 bg-blue-50/60 ring-1 ring-blue-200'
-                    : 'border-slate-200 bg-slate-50/70'
+                  ? 'border-blue-400 bg-blue-50/60 ring-1 ring-blue-200'
+                  : 'border-slate-200 bg-slate-50/70'
                   }`}
               >
                 <div className="flex items-center justify-between">
@@ -685,8 +685,8 @@ export function FiltrosMateriaManager() {
                         type="button"
                         onClick={() => toggleSubsistema(sub)}
                         className={`px-3 py-1.5 rounded-lg font-semibold text-xs border flex items-center gap-1.5 transition-colors ${sel
-                            ? 'bg-blue-600 text-white border-blue-600'
-                            : 'bg-white text-slate-600 border-slate-300 hover:bg-slate-100'
+                          ? 'bg-blue-600 text-white border-blue-600'
+                          : 'bg-white text-slate-600 border-slate-300 hover:bg-slate-100'
                           }`}
                       >
                         {sel && <CheckIcon className="w-3.5 h-3.5" />}
@@ -703,20 +703,20 @@ export function FiltrosMateriaManager() {
               {/* PASO 2: NIVEL */}
               <div
                 className={`p-4 rounded-xl border space-y-3 transition-all ${editingItem.subsistemas.length === 0
-                    ? 'opacity-40 pointer-events-none border-slate-200 bg-slate-50/30'
-                    : pasoActual === 2
-                      ? 'border-amber-400 bg-amber-50/60 ring-1 ring-amber-200'
-                      : 'border-slate-200 bg-slate-50/70'
+                  ? 'opacity-40 pointer-events-none border-slate-200 bg-slate-50/30'
+                  : pasoActual === 2
+                    ? 'border-amber-400 bg-amber-50/60 ring-1 ring-amber-200'
+                    : 'border-slate-200 bg-slate-50/70'
                   }`}
               >
                 <div className="flex items-center justify-between">
                   <label className="text-xs font-bold text-slate-900 flex items-center gap-2">
                     <span
                       className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold ${editingItem.niveles.length > 0
-                          ? 'bg-emerald-500 text-white'
-                          : editingItem.subsistemas.length > 0
-                            ? 'bg-amber-600 text-white'
-                            : 'bg-slate-300 text-slate-500'
+                        ? 'bg-emerald-500 text-white'
+                        : editingItem.subsistemas.length > 0
+                          ? 'bg-amber-600 text-white'
+                          : 'bg-slate-300 text-slate-500'
                         }`}
                     >
                       {editingItem.niveles.length > 0 ? '✓' : '2'}
@@ -739,8 +739,8 @@ export function FiltrosMateriaManager() {
                           type="button"
                           onClick={() => toggleNivel(niv)}
                           className={`p-2 rounded text-left border flex items-center justify-between text-xs transition-colors ${sel
-                              ? 'bg-amber-50 text-amber-900 border-amber-300 font-bold'
-                              : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200'
+                            ? 'bg-amber-50 text-amber-900 border-amber-300 font-bold'
+                            : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200'
                             }`}
                         >
                           <span className="break-words whitespace-normal leading-snug">{niv}</span>
@@ -755,18 +755,18 @@ export function FiltrosMateriaManager() {
               {/* PASO 3: MATERIAS CURRICULARES */}
               <div
                 className={`p-4 rounded-xl border space-y-3 transition-all ${editingItem.niveles.length === 0
-                    ? 'opacity-40 pointer-events-none border-slate-200 bg-slate-50/30'
-                    : pasoActual === 3
-                      ? 'border-indigo-400 bg-indigo-50/60 ring-1 ring-indigo-200'
-                      : 'border-slate-200 bg-slate-50/70'
+                  ? 'opacity-40 pointer-events-none border-slate-200 bg-slate-50/30'
+                  : pasoActual === 3
+                    ? 'border-indigo-400 bg-indigo-50/60 ring-1 ring-indigo-200'
+                    : 'border-slate-200 bg-slate-50/70'
                   }`}
               >
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <label className="text-xs font-bold text-slate-900 flex items-center gap-2">
                     <span
                       className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold ${editingItem.materias.length > 0
-                          ? 'bg-emerald-500 text-white'
-                          : 'bg-indigo-600 text-white'
+                        ? 'bg-emerald-500 text-white'
+                        : 'bg-indigo-600 text-white'
                         }`}
                     >
                       {editingItem.materias.length > 0 ? '✓' : '3'}
@@ -872,8 +872,8 @@ export function FiltrosMateriaManager() {
                         <div
                           key={mat}
                           className={`p-2 rounded-lg border flex items-start justify-between gap-2 text-xs transition-colors ${sel
-                              ? 'bg-indigo-50 border-indigo-300 text-indigo-950 font-semibold'
-                              : 'bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-700'
+                            ? 'bg-indigo-50 border-indigo-300 text-indigo-950 font-semibold'
+                            : 'bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-700'
                             }`}
                         >
                           <button
