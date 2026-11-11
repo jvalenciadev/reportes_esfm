@@ -53,7 +53,10 @@ interface UeDetalle {
   ue: string;
   distrito: string;
   area: string;
+  subsistema?: string;
   nivel: string;
+  grado?: number | string;
+  paralelo?: string;
   materia: string;
   sub_materia?: string;
   hora_tra: number;
@@ -210,6 +213,8 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
         String(u.cod_ue).includes(q) ||
         u.materia.toLowerCase().includes(q) ||
         (u.sub_materia && u.sub_materia.toLowerCase().includes(q)) ||
+        (u.subsistema && u.subsistema.toLowerCase().includes(q)) ||
+        (u.nivel && u.nivel.toLowerCase().includes(q)) ||
         u.distrito.toLowerCase().includes(q)
     );
   }, [uesList, searchUe]);
@@ -623,6 +628,7 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
                   <thead className="bg-slate-50 text-slate-600 border-b border-slate-200 uppercase tracking-wider text-[10px] font-bold">
                     <tr>
                       <th className="py-2.5 px-3">Materia / Asignatura</th>
+                      <th className="py-2.5 px-3">Sub-materia</th>
                       <th className="py-2.5 px-3">Nivel</th>
                       <th className="py-2.5 px-3 text-right">UEs</th>
                       <th className="py-2.5 px-3 text-right">Carga Horaria</th>
@@ -632,14 +638,14 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
                   <tbody className="divide-y divide-slate-100">
                     {reportData.materias_breakdown.map((m, idx) => (
                       <tr key={idx} className="hover:bg-slate-50">
-                        <td className="py-2 px-3 font-semibold text-slate-800">
-                          <div>{m.materia}</div>
-                          {m.sub_materia && m.sub_materia.trim() !== '' && (
-                            <div className="mt-0.5">
-                              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-amber-50 text-amber-900 border border-amber-200 text-[10px] font-medium leading-tight">
-                                <span className="text-amber-600 font-bold">Sub:</span> {m.sub_materia}
-                              </span>
-                            </div>
+                        <td className="py-2 px-3 font-semibold text-slate-800 whitespace-nowrap">{m.materia}</td>
+                        <td className="py-2 px-3 text-slate-700 min-w-[200px]">
+                          {m.sub_materia && m.sub_materia.trim() !== '' ? (
+                            <span className="inline-block px-2 py-0.5 rounded bg-amber-50 text-amber-900 border border-amber-200 text-[11px] font-medium leading-relaxed">
+                              {m.sub_materia}
+                            </span>
+                          ) : (
+                            <span className="text-slate-400 italic text-[11px]">—</span>
                           )}
                         </td>
                         <td className="py-2 px-3">
@@ -655,7 +661,7 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
                   </tbody>
                   <tfoot className="bg-slate-100 border-t-2 border-slate-300 font-bold text-slate-900">
                     <tr>
-                      <td className="py-2.5 px-3 uppercase text-[11px]" colSpan={2}>Total</td>
+                      <td className="py-2.5 px-3 uppercase text-[11px]" colSpan={3}>Total</td>
                       <td className="py-2.5 px-3 text-right font-mono">{reportData.resumen_nacional?.total_ues.toLocaleString('es-BO')}</td>
                       <td className="py-2.5 px-3 text-right font-mono">{reportData.resumen_nacional?.carga_horaria.toLocaleString('es-BO')} hrs</td>
                       <td className="py-2.5 px-3 text-right font-mono text-red-700">{reportData.resumen_nacional?.deficit_horas.toLocaleString('es-BO')} hrs</td>
@@ -843,7 +849,7 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
       {/* MODAL DETALLE DE UNIDADES EDUCATIVAS */}
       {selectedDeptForUes && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden">
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-2xl w-full max-w-7xl max-h-[90vh] flex flex-col overflow-hidden">
             {/* Modal Header */}
             <div className="px-6 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
               <div>
@@ -896,9 +902,12 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
                       <tr>
                         <th className="py-2.5 px-3">Cód. SIE</th>
                         <th className="py-2.5 px-3">Unidad Educativa</th>
-                        <th className="py-2.5 px-3">Distrito</th>
-                        <th className="py-2.5 px-3">Área</th>
+                        <th className="py-2.5 px-3">Subsistema</th>
+                        <th className="py-2.5 px-3">Nivel</th>
+                        <th className="py-2.5 px-3 text-center">Grado</th>
+                        <th className="py-2.5 px-3 text-center">Par.</th>
                         <th className="py-2.5 px-3">Materia</th>
+                        <th className="py-2.5 px-3">Sub-materia</th>
                         <th className="py-2.5 px-3 text-right">Hora Tra.</th>
                         <th className="py-2.5 px-3 text-right">Hora Pla.</th>
                         <th className="py-2.5 px-3 text-right text-red-600">Déficit</th>
@@ -908,32 +917,30 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
                     <tbody className="divide-y divide-slate-100 font-medium">
                       {filteredUes.map((ue, idx) => (
                         <tr key={idx} className="hover:bg-slate-50/80">
-                          <td className="py-2.5 px-3 font-mono text-slate-500">{ue.cod_ue}</td>
-                          <td className="py-2.5 px-3 font-bold text-slate-900">{ue.ue}</td>
-                          <td className="py-2.5 px-3 text-slate-600">{ue.distrito}</td>
-                          <td className="py-2.5 px-3">
-                            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-700">
-                              {ue.area}
-                            </span>
-                          </td>
-                          <td className="py-2.5 px-3 font-semibold text-slate-800">
-                            <div>{ue.materia}</div>
-                            {ue.sub_materia && ue.sub_materia.trim() !== '' && (
-                              <div className="mt-0.5">
-                                <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-amber-50 text-amber-900 border border-amber-200 text-[10px] font-medium leading-tight">
-                                  <span className="text-amber-600 font-bold">Sub:</span> {ue.sub_materia}
-                                </span>
-                              </div>
+                          <td className="py-2.5 px-3 font-mono text-slate-500 whitespace-nowrap">{ue.cod_ue}</td>
+                          <td className="py-2.5 px-3 font-bold text-slate-900 whitespace-nowrap">{ue.ue}</td>
+                          <td className="py-2.5 px-3 text-[11px] text-slate-600 font-semibold">{ue.subsistema || '—'}</td>
+                          <td className="py-2.5 px-3 text-[11px] text-slate-600">{ue.nivel || '—'}</td>
+                          <td className="py-2.5 px-3 text-center font-mono">{ue.grado || '—'}</td>
+                          <td className="py-2.5 px-3 text-center font-mono">{ue.paralelo || '—'}</td>
+                          <td className="py-2.5 px-3 font-bold text-slate-800 whitespace-nowrap">{ue.materia}</td>
+                          <td className="py-2.5 px-3 text-slate-700 min-w-[220px]">
+                            {ue.sub_materia && ue.sub_materia.trim() !== '' ? (
+                              <span className="inline-block px-2 py-0.5 rounded bg-amber-50 text-amber-900 border border-amber-200 text-[11px] font-medium leading-relaxed">
+                                {ue.sub_materia}
+                              </span>
+                            ) : (
+                              <span className="text-slate-400 italic text-[11px]">—</span>
                             )}
                           </td>
-                          <td className="py-2.5 px-3 text-right text-slate-600">{ue.hora_tra}</td>
-                          <td className="py-2.5 px-3 text-right text-slate-600">{ue.hora_pla}</td>
+                          <td className="py-2.5 px-3 text-right text-slate-600 font-mono">{ue.hora_tra}</td>
+                          <td className="py-2.5 px-3 text-right text-slate-600 font-mono">{ue.hora_pla}</td>
                           <td className="py-2.5 px-3 text-right font-bold text-red-600">
-                            <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-red-50 border border-red-200">
+                            <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-red-50 border border-red-200 font-mono">
                               -{ue.deficit}h
                             </span>
                           </td>
-                          <td className="py-2.5 px-3 text-right font-black text-indigo-700">
+                          <td className="py-2.5 px-3 text-right font-black text-indigo-700 font-mono">
                             {ue.items_deficit_equiv.toFixed(2)}
                           </td>
                         </tr>

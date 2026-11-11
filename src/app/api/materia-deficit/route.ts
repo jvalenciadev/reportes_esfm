@@ -206,13 +206,13 @@ export async function GET(req: NextRequest) {
           ])
           .join(',');
 
-        const fieldsWithSub = 'cod_ue,ue,cod_dep,departamento,cod_dis,distrito,area,subsistema,nivel,materia,sub_materia,hora_tra,hora_pla,deficit';
-        const fieldsFallback = 'cod_ue,ue,cod_dep,departamento,cod_dis,distrito,area,subsistema,nivel,materia,hora_tra,hora_pla,deficit';
-        const queryUrl = `${SUPABASE_URL}/rest/v1/sie_deficit_materia?cod_dep=eq.${depId}&deficit=gt.0&or=(${matOrConditions})&order=deficit.desc&limit=150&select=${fieldsWithSub}`;
+        const fieldsWithSub = 'cod_ue,ue,cod_dep,departamento,cod_dis,distrito,area,subsistema,nivel,grado,paralelo,materia,sub_materia,hora_tra,hora_pla,deficit';
+        const fieldsFallback = 'cod_ue,ue,cod_dep,departamento,cod_dis,distrito,area,subsistema,nivel,grado,paralelo,materia,hora_tra,hora_pla,deficit';
+        const queryUrl = `${SUPABASE_URL}/rest/v1/sie_deficit_materia?cod_dep=eq.${depId}&deficit=gt.0&or=(${matOrConditions})&order=deficit.desc&limit=300&select=${fieldsWithSub}`;
 
         let resUes = await fetch(queryUrl, { headers, cache: 'no-store' });
         if (!resUes.ok) {
-          const fallbackUrl = `${SUPABASE_URL}/rest/v1/sie_deficit_materia?cod_dep=eq.${depId}&deficit=gt.0&or=(${matOrConditions})&order=deficit.desc&limit=150&select=${fieldsFallback}`;
+          const fallbackUrl = `${SUPABASE_URL}/rest/v1/sie_deficit_materia?cod_dep=eq.${depId}&deficit=gt.0&or=(${matOrConditions})&order=deficit.desc&limit=300&select=${fieldsFallback}`;
           resUes = await fetch(fallbackUrl, { headers, cache: 'no-store' });
         }
         if (resUes.ok) {
@@ -224,7 +224,10 @@ export async function GET(req: NextRequest) {
             ue: r.ue || 'SIN NOMBRE',
             distrito: r.distrito || '',
             area: r.area || 'U',
+            subsistema: r.subsistema || '',
             nivel: r.nivel || '',
+            grado: r.grado !== null && r.grado !== undefined ? r.grado : '',
+            paralelo: r.paralelo || '',
             materia: r.materia || '',
             sub_materia: r.sub_materia || '',
             hora_tra: Number(r.hora_tra) || 0,
