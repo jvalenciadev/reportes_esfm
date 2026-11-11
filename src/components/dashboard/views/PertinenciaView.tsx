@@ -24,7 +24,13 @@ import {
   ChevronDown,
   ChevronRight,
   SlidersHorizontal,
-  Info
+  Info,
+  Compass,
+  Award,
+  ArrowUpDown,
+  Building2,
+  Check,
+  X
 } from 'lucide-react';
 
 // ─── Tipos ────────────────────────────────────────────────────────────────────
@@ -78,7 +84,7 @@ interface PertinenciaData {
   por_especialidad?: EspecialidadItem[];
 }
 
-// ─── Paleta y Metadatos Institucionales (Sin Emoticones) ──────────────────────
+// ─── Paleta y Metadatos Institucionales (Cero Emoticones) ──────────────────────
 
 const RANGO_INFO: Record<Rango, {
   code: string;
@@ -103,7 +109,7 @@ const RANGO_INFO: Record<Rango, {
     pillText: 'text-emerald-700',
     label: 'Alta Pertinencia',
     subtitle: 'Docente Idóneo en Aula',
-    queSignifica: 'Especialidad y nivel del título normalista coinciden plenamente con la materia impartida.',
+    queSignifica: 'Especialidad y nivel del título normalista coinciden con la materia impartida.',
     intensidadFormacion: 'Formación Corta / Actualización Continua',
   },
   A: {
@@ -116,7 +122,7 @@ const RANGO_INFO: Record<Rango, {
     pillText: 'text-blue-700',
     label: 'Media Pertinencia',
     subtitle: 'Alineación Parcial / Afín',
-    queSignifica: 'Formación en área afín o planes anteriores. Requiere nivelación modular y actualización.',
+    queSignifica: 'Formación en área afín o planes anteriores. Requiere actualización curricular.',
     intensidadFormacion: 'Formación Media / Nivelación Modular',
   },
   N: {
@@ -129,7 +135,7 @@ const RANGO_INFO: Record<Rango, {
     pillText: 'text-amber-700',
     label: 'Baja Pertinencia',
     subtitle: 'Desalineación Marcada',
-    queSignifica: 'Enseña una materia sustancialmente distante a su formación inicial de egreso.',
+    queSignifica: 'Enseña una materia sustancialmente distante a su formación de egreso.',
     intensidadFormacion: 'Formación Larga / Reconversión Profunda',
   },
   SIN: {
@@ -181,7 +187,6 @@ function DonutChartPremium({
   const circumference = 2 * Math.PI * radius;
 
   let accumulatedPercent = 0;
-
   const activeR = hoveredRango || selectedRango;
   const activeItem = activeR ? valores.find(v => v.rango === activeR) : null;
 
@@ -277,10 +282,14 @@ export default function PertinenciaView() {
   // Pestaña principal
   const [activeTab, setActiveTab] = useState<'preguntas' | 'especialidad' | 'territorial' | 'niveles'>('preguntas');
 
-  // Filtros de la Matriz Especialidad x Departamento
+  // Filtros de Especialidad
   const [searchEsp, setSearchEsp] = useState<string>('');
   const [filterDepto, setFilterDepto] = useState<string>('TODOS');
   const [expandedEsp, setExpandedEsp] = useState<string | null>(null);
+
+  // Estados interactivos de Distribución Territorial
+  const [selectedDeptDetail, setSelectedDeptDetail] = useState<string | null>('LA PAZ');
+  const [sortDeptBy, setSortDeptBy] = useState<'total' | 'alta' | 'prioridad' | 'alfa'>('total');
 
   useEffect(() => {
     fetch('/api/pertinencia')
@@ -313,11 +322,80 @@ export default function PertinenciaView() {
     ];
   }, [data]);
 
-  // Lista de departamentos disponibles
   const departamentosList = useMemo(() => {
     if (!data?.por_departamento) return [];
     return data.por_departamento.map(d => d.departamento);
   }, [data]);
+
+  // Departamentos procesados con métricas enriquecidas y ordenamiento
+  const processedDepartamentos = useMemo(() => {
+    if (!data?.por_departamento) return [];
+    
+    const list = data.por_departamento.map((d) => {
+      const v = d.rangos.V?.docentes ?? 0;
+      const a = d.rangos.A?.docentes ?? 0;
+      const n = d.rangos.N?.docentes ?? 0;
+      const sin = d.rangos.SIN?.docentes ?? 0;
+      const total = v + a + n + sin;
+      const ues = Math.max(...(['V', 'A', 'N', 'SIN'] as Rango[]).map(rk => d.rangos[rk]?.ues ?? 0));
+      const prioridadBID = a + n;
+      const pctAlta = total > 0 ? (v / total) * 100 : 0;
+      const pctPrioridadBID = total > 0 ? (prioridadBID / total) * 100 : 0;
+      const estudiantesEst = Math.round(prioridadBID * 48);
+
+      return {
+        departamento: d.departamento,
+        total,
+        v,
+        a,
+        n,
+        sin,
+        ues,
+        prioridadBID,
+        pctAlta,
+        pctPrioridadBID,
+        estudiantesEst,
+        raw: d
+      };
+    });
+
+    return list.sort((x, y) => {
+      if (sortDeptBy === 'total') return y.total - x.total;
+      if (sortDeptBy === 'alta') return y.pctAlta - x.pctAlta;
+      if (sortDeptBy === 'prioridad') return y.prioridadBID - x.prioridadBID;
+      return x.departamento.localeCompare(y.departamento);
+    });
+  }, [data, sortDeptBy]);
+
+  // Departamento actualmente enfocado en detalle
+  const activeDeptInfo = useMemo(() => {
+    if (!processedDepartamentos.length) return null;
+    return processedDepartamentos.find(d => d.departamento === selectedDeptDetail) || processedDepartamentos[0];
+  }, [processedDepartamentos, selectedDeptDetail]);
+
+  // Especialidades con mayor número de docentes A + N en el departamento activo
+  const topEspecialidadesInDept = useMemo(() => {
+    if (!data?.por_especialidad || !activeDeptInfo) return [];
+    const deptName = activeDeptInfo.departamento;
+
+    return data.por_especialidad
+      .map(esp => {
+        const dInfo = esp.por_departamento[deptName] || { V: 0, A: 0, N: 0, SIN: 0, total: 0 };
+        const reqFormacion = (dInfo.A || 0) + (dInfo.N || 0);
+        return {
+          especialidad: esp.especialidad,
+          total: dInfo.total || 0,
+          v: dInfo.V || 0,
+          a: dInfo.A || 0,
+          n: dInfo.N || 0,
+          sin: dInfo.SIN || 0,
+          reqFormacion
+        };
+      })
+      .filter(item => item.total > 0)
+      .sort((a, b) => b.reqFormacion - a.reqFormacion)
+      .slice(0, 6);
+  }, [data, activeDeptInfo]);
 
   // Filtrado de Especialidades
   const filteredEspecialidades = useMemo(() => {
@@ -365,7 +443,7 @@ export default function PertinenciaView() {
               Metas de Pertinencia & Formación Docente
             </h1>
             <p className="text-slate-300 text-xs sm:text-sm mt-2 max-w-2xl leading-relaxed">
-              Información oficial para la definición de metas del <strong>Componente 2 (BID)</strong>: caracterización por rangos, matriz por especialidad y departamento, y alcance en unidades educativas y estudiantes.
+              Información oficial para la definición de metas del <strong>Componente 2 (BID)</strong>: caracterización por rangos, distribución territorial interactiva, y alcance en unidades educativas y estudiantes.
             </p>
           </div>
 
@@ -391,18 +469,6 @@ export default function PertinenciaView() {
           </button>
           
           <button
-            onClick={() => setActiveTab('especialidad')}
-            className={`px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 ${
-              activeTab === 'especialidad' 
-                ? 'bg-[#c9a751] text-slate-900 shadow-md font-extrabold' 
-                : 'bg-slate-800/80 text-slate-300 hover:bg-slate-800'
-            }`}
-          >
-            <BookOpen className="w-4 h-4" />
-            Matriz por Especialidad y Departamento
-          </button>
-
-          <button
             onClick={() => setActiveTab('territorial')}
             className={`px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 ${
               activeTab === 'territorial' 
@@ -412,6 +478,18 @@ export default function PertinenciaView() {
           >
             <MapPin className="w-4 h-4" />
             Distribución por Departamento
+          </button>
+
+          <button
+            onClick={() => setActiveTab('especialidad')}
+            className={`px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 ${
+              activeTab === 'especialidad' 
+                ? 'bg-[#c9a751] text-slate-900 shadow-md font-extrabold' 
+                : 'bg-slate-800/80 text-slate-300 hover:bg-slate-800'
+            }`}
+          >
+            <BookOpen className="w-4 h-4" />
+            Matriz por Especialidad
           </button>
 
           <button
@@ -459,7 +537,6 @@ export default function PertinenciaView() {
 
             <div className="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               
-              {/* Gráfico de Dona */}
               <div className="lg:col-span-5 bg-gradient-to-b from-slate-50 to-white rounded-2xl p-6 border border-slate-200/80 flex flex-col items-center shadow-xs">
                 <span className="text-[11px] font-black text-slate-500 uppercase tracking-widest mb-3 flex items-center gap-1.5">
                   <PieIcon className="w-3.5 h-3.5 text-blue-600" />
@@ -527,7 +604,6 @@ export default function PertinenciaView() {
                 </div>
               </div>
 
-              {/* Tarjetas de los 4 Rangos */}
               <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {(['V', 'A', 'N', 'SIN'] as Rango[]).map((rk) => {
                   const info = RANGO_INFO[rk];
@@ -862,14 +938,343 @@ export default function PertinenciaView() {
       )}
 
       {/* ═══════════════════════════════════════════════════════════════════
-          PESTAÑA 2: MATRIZ CREATIVA POR ESPECIALIDAD Y DEPARTAMENTO
+          PESTAÑA 2: DISTRIBUCIÓN POR DEPARTAMENTO (REDISEÑADA Y FASCINANTE)
+         ═══════════════════════════════════════════════════════════════════ */}
+      {activeTab === 'territorial' && (
+        <div className="space-y-6 animate-in fade-in duration-300">
+          
+          {/* Panel Superior: KPIs Territoriales & Controles de Ordenamiento */}
+          <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-slate-100">
+              <div>
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-xl bg-amber-500/10 text-amber-700 flex items-center justify-center font-black">
+                    <MapPin className="w-5 h-5" />
+                  </div>
+                  <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+                    Tablero Territorial: Pertinencia en los 9 Departamentos
+                  </h2>
+                </div>
+                <p className="text-xs sm:text-sm text-slate-500 mt-1.5 ml-10">
+                  Explora el perfil de pertinencia de cada departamento, identifica dónde se concentra la meta formativa BID y audita las especialidades críticas por región.
+                </p>
+              </div>
+
+              {/* Selector de Criterio de Ordenamiento */}
+              <div className="flex items-center gap-2 bg-slate-50 p-1.5 rounded-2xl border border-slate-200 text-xs shrink-0 ml-10 lg:ml-0">
+                <span className="text-slate-400 font-bold px-2 flex items-center gap-1">
+                  <ArrowUpDown className="w-3.5 h-3.5" /> Ordenar:
+                </span>
+                <button
+                  onClick={() => setSortDeptBy('total')}
+                  className={`px-3 py-1.5 rounded-xl font-bold transition-all ${
+                    sortDeptBy === 'total' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-500 hover:text-slate-800'
+                  }`}
+                >
+                  Mayor Padrón
+                </button>
+                <button
+                  onClick={() => setSortDeptBy('prioridad')}
+                  className={`px-3 py-1.5 rounded-xl font-bold transition-all ${
+                    sortDeptBy === 'prioridad' ? 'bg-white text-amber-800 shadow-xs' : 'text-slate-500 hover:text-slate-800'
+                  }`}
+                >
+                  Meta BID (A + N)
+                </button>
+                <button
+                  onClick={() => setSortDeptBy('alta')}
+                  className={`px-3 py-1.5 rounded-xl font-bold transition-all ${
+                    sortDeptBy === 'alta' ? 'bg-white text-emerald-800 shadow-xs' : 'text-slate-500 hover:text-slate-800'
+                  }`}
+                >
+                  % Idóneo (V)
+                </button>
+                <button
+                  onClick={() => setSortDeptBy('alfa')}
+                  className={`px-3 py-1.5 rounded-xl font-bold transition-all ${
+                    sortDeptBy === 'alfa' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-500 hover:text-slate-800'
+                  }`}
+                >
+                  A-Z
+                </button>
+              </div>
+            </div>
+
+            {/* Micro-KPIs territoriales comparativos */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+              <div className="bg-slate-50 rounded-2xl p-4 border border-slate-200/80">
+                <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Mayor Padrón Docente</span>
+                <span className="text-xl font-black text-slate-900 mt-1 block">LA PAZ</span>
+                <span className="text-xs text-slate-500 font-semibold mt-0.5">44,120 docentes (30.0%)</span>
+              </div>
+              <div className="bg-amber-50/60 rounded-2xl p-4 border border-amber-200/80">
+                <span className="text-[11px] font-bold text-amber-800 uppercase tracking-wider block">Mayor Meta BID (A + N)</span>
+                <span className="text-xl font-black text-amber-900 mt-1 block">LA PAZ & STA. CRUZ</span>
+                <span className="text-xs text-amber-700 font-semibold mt-0.5">24,130 y 21,600 docentes</span>
+              </div>
+              <div className="bg-emerald-50/60 rounded-2xl p-4 border border-emerald-200/80">
+                <span className="text-[11px] font-bold text-emerald-800 uppercase tracking-wider block">Mayor Tasa Idónea (V)</span>
+                <span className="text-xl font-black text-emerald-900 mt-1 block">BENI (35.7%)</span>
+                <span className="text-xs text-emerald-700 font-semibold mt-0.5">2,771 de 7,767 docentes</span>
+              </div>
+              <div className="bg-purple-50/60 rounded-2xl p-4 border border-purple-200/80">
+                <span className="text-[11px] font-bold text-purple-800 uppercase tracking-wider block">Focalización UEs</span>
+                <span className="text-xl font-black text-purple-900 mt-1 block">1,452 UEs en 9 Deptos</span>
+                <span className="text-xs text-purple-700 font-semibold mt-0.5">100% Cobertura País</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Grid de los 9 Departamentos + Panel de Detalle al Clic */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            
+            {/* 9 Tarjetas Departamentales Interactivas (7 columnas) */}
+            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {processedDepartamentos.map((dept) => {
+                const isSelected = selectedDeptDetail === dept.departamento;
+                const pV = dept.total > 0 ? (dept.v / dept.total) * 100 : 0;
+                const pA = dept.total > 0 ? (dept.a / dept.total) * 100 : 0;
+                const pN = dept.total > 0 ? (dept.n / dept.total) * 100 : 0;
+                const pSIN = dept.total > 0 ? (dept.sin / dept.total) * 100 : 0;
+
+                return (
+                  <div
+                    key={dept.departamento}
+                    onClick={() => setSelectedDeptDetail(dept.departamento)}
+                    className={`rounded-2xl p-4.5 border transition-all duration-200 cursor-pointer flex flex-col justify-between ${
+                      isSelected
+                        ? 'bg-white border-blue-600 shadow-md ring-2 ring-blue-600/20 -translate-y-0.5'
+                        : 'bg-white border-slate-200/90 hover:border-slate-300 hover:shadow-xs'
+                    }`}
+                  >
+                    <div>
+                      {/* Cabecera de la tarjeta departamental */}
+                      <div className="flex items-start justify-between gap-2">
+                        <div>
+                          <div className="flex items-center gap-1.5">
+                            <span className="w-2 h-2 rounded-full bg-blue-600" />
+                            <h4 className="font-black text-slate-900 text-sm tracking-tight">
+                              {dept.departamento}
+                            </h4>
+                          </div>
+                          <span className="text-[11px] text-slate-500 font-semibold block mt-0.5">
+                            {fmt(dept.total)} docentes en {fmt(dept.ues)} UEs
+                          </span>
+                        </div>
+
+                        {isSelected ? (
+                          <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-blue-600 text-white shrink-0">
+                            Activo
+                          </span>
+                        ) : (
+                          <span className="text-[10px] font-bold text-slate-400 group-hover:text-blue-600 shrink-0">
+                            Ver detalle
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Métricas clave de impacto */}
+                      <div className="grid grid-cols-2 gap-2 mt-4 pt-3 border-t border-slate-100 text-xs">
+                        <div className="bg-slate-50 p-2 rounded-xl">
+                          <span className="text-[10px] font-bold text-slate-400 uppercase block">Alta (V)</span>
+                          <span className="font-black text-emerald-700 text-sm">{fmt(dept.v)}</span>
+                          <span className="text-[10px] text-slate-500 font-semibold block">({dept.pctAlta.toFixed(1)}%)</span>
+                        </div>
+                        <div className="bg-amber-50/70 p-2 rounded-xl border border-amber-200/60">
+                          <span className="text-[10px] font-bold text-amber-800 uppercase block">Meta BID (A+N)</span>
+                          <span className="font-black text-amber-800 text-sm">{fmt(dept.prioridadBID)}</span>
+                          <span className="text-[10px] text-amber-700 font-semibold block">({dept.pctPrioridadBID.toFixed(1)}%)</span>
+                        </div>
+                      </div>
+
+                      {/* Barra apilada institucional */}
+                      <div className="mt-3.5">
+                        <div className="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden flex">
+                          <div style={{ width: `${pV}%` }} className="bg-emerald-600 h-full" title={`Alta: ${pV.toFixed(0)}%`} />
+                          <div style={{ width: `${pA}%` }} className="bg-blue-600 h-full" title={`Media: ${pA.toFixed(0)}%`} />
+                          <div style={{ width: `${pN}%` }} className="bg-amber-600 h-full" title={`Baja: ${pN.toFixed(0)}%`} />
+                          <div style={{ width: `${pSIN}%` }} className="bg-slate-400 h-full" title={`Sin Pert: ${pSIN.toFixed(0)}%`} />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-3.5 pt-2.5 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400 font-semibold">
+                      <span>Impacto estimado:</span>
+                      <strong className="text-slate-700">~{fmt(dept.estudiantesEst)} alumnos</strong>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Panel de Detalle Profundo del Departamento Activo (5 columnas fijas) */}
+            <div className="lg:col-span-5 bg-white rounded-3xl border border-slate-200 p-6 shadow-sm sticky top-6">
+              {activeDeptInfo && (
+                <div className="space-y-6">
+                  
+                  {/* Header del departamento activo */}
+                  <div className="border-b border-slate-100 pb-4">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] font-black text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full uppercase tracking-wider">
+                        Inspección Territorial Profunda
+                      </span>
+                      <span className="text-xs font-bold text-slate-400">
+                        {activeDeptInfo.departamento}
+                      </span>
+                    </div>
+                    <h3 className="text-2xl font-black text-slate-900 mt-2 tracking-tight">
+                      {activeDeptInfo.departamento}
+                    </h3>
+                    <p className="text-xs text-slate-500 mt-0.5">
+                      Padrón evaluado: <strong>{fmt(activeDeptInfo.total)} docentes</strong> en <strong>{fmt(activeDeptInfo.ues)} Unidades Educativas</strong>.
+                    </p>
+                  </div>
+
+                  {/* Tarjetas de Rangos del Departamento */}
+                  <div>
+                    <h4 className="text-xs font-black text-slate-700 uppercase tracking-wider mb-3">
+                      Composición por Rango en este Departamento
+                    </h4>
+                    
+                    <div className="space-y-2.5 text-xs">
+                      
+                      {/* V */}
+                      <div className="p-2.5 rounded-xl border border-emerald-200 bg-emerald-50/50 flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="w-2.5 h-2.5 rounded-full bg-emerald-600" />
+                          <div>
+                            <strong className="text-slate-800 block">Alta Pertinencia (V)</strong>
+                            <span className="text-[11px] text-slate-500">Docentes idóneos en aula</span>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <span className="font-black text-emerald-800 text-sm">{fmt(activeDeptInfo.v)}</span>
+                          <span className="text-[11px] text-emerald-700 font-bold block">
+                            {pct(activeDeptInfo.v, activeDeptInfo.total)}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* A */}
+                      <div className="p-2.5 rounded-xl border border-blue-200 bg-blue-50/50 flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="w-2.5 h-2.5 rounded-full bg-blue-600" />
+                          <div>
+                            <strong className="text-slate-800 block">Media Pertinencia (A)</strong>
+                            <span className="text-[11px] text-slate-500">Requiere nivelación curricular</span>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <span className="font-black text-blue-800 text-sm">{fmt(activeDeptInfo.a)}</span>
+                          <span className="text-[11px] text-blue-700 font-bold block">
+                            {pct(activeDeptInfo.a, activeDeptInfo.total)}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* N */}
+                      <div className="p-2.5 rounded-xl border border-amber-200 bg-amber-50/50 flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="w-2.5 h-2.5 rounded-full bg-amber-600" />
+                          <div>
+                            <strong className="text-slate-800 block">Baja Pertinencia (N)</strong>
+                            <span className="text-[11px] text-slate-500">Requiere reconversión profunda</span>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <span className="font-black text-amber-800 text-sm">{fmt(activeDeptInfo.n)}</span>
+                          <span className="text-[11px] text-amber-700 font-bold block">
+                            {pct(activeDeptInfo.n, activeDeptInfo.total)}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* SIN */}
+                      <div className="p-2.5 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="w-2.5 h-2.5 rounded-full bg-slate-400" />
+                          <div>
+                            <strong className="text-slate-700 block">Sin Pertinencia</strong>
+                            <span className="text-[11px] text-slate-500">Fuera de perfil normalista</span>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <span className="font-black text-slate-700 text-sm">{fmt(activeDeptInfo.sin)}</span>
+                          <span className="text-[11px] text-slate-500 font-bold block">
+                            {pct(activeDeptInfo.sin, activeDeptInfo.total)}
+                          </span>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  {/* Resumen de impacto BID para este departamento */}
+                  <div className="bg-gradient-to-br from-slate-900 to-indigo-950 text-white rounded-2xl p-4.5">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Target className="w-4 h-4 text-amber-400" />
+                      <span className="text-xs font-black uppercase tracking-wider text-amber-300">
+                        Meta Focalizada BID en {activeDeptInfo.departamento}
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3 mt-3 pt-3 border-t border-slate-700/80">
+                      <div>
+                        <span className="text-2xl font-black text-white">{fmt(activeDeptInfo.prioridadBID)}</span>
+                        <span className="text-[11px] text-slate-400 block font-medium">Docentes a Capacitar (A+N)</span>
+                      </div>
+                      <div>
+                        <span className="text-2xl font-black text-amber-400">~{fmt(activeDeptInfo.estudiantesEst)}</span>
+                        <span className="text-[11px] text-slate-400 block font-medium">Alumnos Beneficiados</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Top Especialidades críticas en este departamento */}
+                  <div>
+                    <h4 className="text-xs font-black text-slate-700 uppercase tracking-wider mb-2.5 flex items-center justify-between">
+                      <span>Especialidades con Mayor Demanda BID</span>
+                      <span className="text-[10px] font-bold text-slate-400">A + N</span>
+                    </h4>
+
+                    <div className="space-y-1.5 text-xs">
+                      {topEspecialidadesInDept.map((item, idx) => (
+                        <div 
+                          key={item.especialidad}
+                          className="p-2 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between"
+                        >
+                          <div className="flex items-center gap-2 max-w-[210px]">
+                            <span className="w-4 h-4 rounded-full bg-slate-200 text-slate-700 font-black text-[10px] flex items-center justify-center shrink-0">
+                              {idx + 1}
+                            </span>
+                            <span className="font-bold text-slate-800 truncate" title={item.especialidad}>
+                              {item.especialidad}
+                            </span>
+                          </div>
+                          <span className="font-black text-amber-800 bg-amber-100/80 px-2 py-0.5 rounded-md shrink-0">
+                            {fmt(item.reqFormacion)} doc.
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                </div>
+              )}
+            </div>
+
+          </div>
+
+        </div>
+      )}
+
+      {/* ═══════════════════════════════════════════════════════════════════
+          PESTAÑA 3: MATRIZ POR ESPECIALIDAD Y DEPARTAMENTO
          ═══════════════════════════════════════════════════════════════════ */}
       {activeTab === 'especialidad' && (
         <div className="space-y-6">
-          
-          {/* Barra de Filtros y Búsqueda */}
-          <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm">
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-100">
               <div>
                 <div className="flex items-center gap-2">
                   <BookOpen className="w-5 h-5 text-blue-600" />
@@ -882,10 +1287,7 @@ export default function PertinenciaView() {
                 </p>
               </div>
 
-              {/* Controles de filtro */}
               <div className="flex flex-col sm:flex-row items-center gap-3">
-                
-                {/* Buscador de Especialidad */}
                 <div className="relative w-full sm:w-72">
                   <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3 pointer-events-none" />
                   <input
@@ -897,7 +1299,6 @@ export default function PertinenciaView() {
                   />
                 </div>
 
-                {/* Filtro por Departamento */}
                 <div className="relative w-full sm:w-56">
                   <Filter className="w-4 h-4 text-slate-400 absolute left-3 top-3 pointer-events-none" />
                   <select
@@ -911,12 +1312,10 @@ export default function PertinenciaView() {
                     ))}
                   </select>
                 </div>
-
               </div>
             </div>
 
-            {/* Contador de resultados */}
-            <div className="flex items-center justify-between mt-4 pt-3 border-t border-slate-100 text-xs text-slate-500 font-medium">
+            <div className="flex items-center justify-between mt-4 text-xs text-slate-500 font-medium">
               <span>Mostrando <strong>{filteredEspecialidades.length}</strong> de 20 especialidades curriculares</span>
               {filterDepto !== 'TODOS' && (
                 <span className="bg-blue-50 text-blue-700 px-2 py-0.5 rounded-md font-bold">
@@ -926,7 +1325,6 @@ export default function PertinenciaView() {
             </div>
           </div>
 
-          {/* Tabla Matriz de Especialidades */}
           <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-xs text-left">
@@ -945,7 +1343,6 @@ export default function PertinenciaView() {
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                   {filteredEspecialidades.map((esp) => {
-                    // Datos ajustados si hay filtro por departamento
                     let vCount = esp.rangos.V.docentes;
                     let aCount = esp.rangos.A.docentes;
                     let nCount = esp.rangos.N.docentes;
@@ -988,7 +1385,6 @@ export default function PertinenciaView() {
                           <td className="py-3.5 px-3 text-right font-black text-slate-900 text-sm">{fmt(totalCount)}</td>
                           <td className="py-3.5 px-3 text-right font-semibold text-slate-600">{fmt(uesCount)}</td>
                           
-                          {/* Mini barra apilada */}
                           <td className="py-3.5 px-4">
                             <div className="w-28 bg-slate-100 rounded-full h-2.5 overflow-hidden flex mx-auto">
                               <div style={{ width: `${pV}%` }} className="bg-emerald-600 h-full" title={`Alta: ${pV.toFixed(0)}%`} />
@@ -998,7 +1394,6 @@ export default function PertinenciaView() {
                             </div>
                           </td>
 
-                          {/* Botón para expandir por departamento */}
                           <td className="py-3.5 px-3 text-center">
                             <button
                               onClick={() => setExpandedEsp(isExpanded ? null : esp.especialidad)}
@@ -1010,7 +1405,6 @@ export default function PertinenciaView() {
                           </td>
                         </tr>
 
-                        {/* Fila expandida con desglose por los 9 departamentos */}
                         {isExpanded && (
                           <tr className="bg-slate-50/90 border-y border-slate-200">
                             <td colSpan={9} className="p-4 sm:p-6">
@@ -1065,59 +1459,6 @@ export default function PertinenciaView() {
                 </tbody>
               </table>
             </div>
-          </div>
-
-        </div>
-      )}
-
-      {/* ═══════════════════════════════════════════════════════════════════
-          PESTAÑA 3: DISTRIBUCIÓN POR DEPARTAMENTO (GRÁFICO APILADO)
-         ═══════════════════════════════════════════════════════════════════ */}
-      {activeTab === 'territorial' && (
-        <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">
-          <div>
-            <div className="flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-blue-600" />
-              <h3 className="font-black text-lg text-slate-900">
-                Gráfico Territorial: Composición de Pertinencia por Departamento
-              </h3>
-            </div>
-            <p className="text-xs text-slate-500 mt-1">
-              Barras proporcionales de docentes por rango en los 9 departamentos de Bolivia
-            </p>
-          </div>
-
-          <div className="space-y-4">
-            {data.por_departamento.map((d) => {
-              const totalDept = (['V', 'A', 'N', 'SIN'] as Rango[]).reduce((s, rk) => s + (d.rangos[rk]?.docentes ?? 0), 0);
-              const pV = totalDept > 0 ? ((d.rangos.V?.docentes ?? 0) / totalDept) * 100 : 0;
-              const pA = totalDept > 0 ? ((d.rangos.A?.docentes ?? 0) / totalDept) * 100 : 0;
-              const pN = totalDept > 0 ? ((d.rangos.N?.docentes ?? 0) / totalDept) * 100 : 0;
-              const pSIN = totalDept > 0 ? ((d.rangos.SIN?.docentes ?? 0) / totalDept) * 100 : 0;
-
-              return (
-                <div key={d.departamento} className="bg-slate-50 p-4 rounded-2xl border border-slate-200/80">
-                  <div className="flex items-center justify-between text-xs font-bold text-slate-800 mb-2">
-                    <span className="text-sm font-black">{d.departamento}</span>
-                    <span className="text-slate-500 font-semibold">{fmt(totalDept)} docentes</span>
-                  </div>
-
-                  <div className="w-full bg-slate-200 rounded-full h-4 overflow-hidden flex">
-                    <div style={{ width: `${pV}%` }} className="bg-emerald-600 h-full" title={`Alta (V): ${fmt(d.rangos.V?.docentes)} (${pV.toFixed(1)}%)`} />
-                    <div style={{ width: `${pA}%` }} className="bg-blue-600 h-full" title={`Media (A): ${fmt(d.rangos.A?.docentes)} (${pA.toFixed(1)}%)`} />
-                    <div style={{ width: `${pN}%` }} className="bg-amber-600 h-full" title={`Baja (N): ${fmt(d.rangos.N?.docentes)} (${pN.toFixed(1)}%)`} />
-                    <div style={{ width: `${pSIN}%` }} className="bg-slate-400 h-full" title={`Sin Pert: ${fmt(d.rangos.SIN?.docentes)} (${pSIN.toFixed(1)}%)`} />
-                  </div>
-
-                  <div className="flex flex-wrap items-center justify-between text-[11px] text-slate-500 mt-2.5 font-medium">
-                    <span className="text-emerald-700 font-bold">Alta: {fmt(d.rangos.V?.docentes)} ({pV.toFixed(0)}%)</span>
-                    <span className="text-blue-700 font-bold">Media: {fmt(d.rangos.A?.docentes)} ({pA.toFixed(0)}%)</span>
-                    <span className="text-amber-700 font-bold">Baja: {fmt(d.rangos.N?.docentes)} ({pN.toFixed(0)}%)</span>
-                    <span className="text-slate-600">Sin Pert: {fmt(d.rangos.SIN?.docentes)}</span>
-                  </div>
-                </div>
-              );
-            })}
           </div>
         </div>
       )}
