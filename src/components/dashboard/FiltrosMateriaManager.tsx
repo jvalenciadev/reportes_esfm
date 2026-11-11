@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import materiasCatalogoMapRaw from '@/data/materiasPorSubsistemaNivel.json';
+import submateriasCatalogoRaw from '@/data/submateriasCatalogo.json';
 import {
   GraduationCapIcon,
   CheckIcon,
@@ -19,6 +20,10 @@ const SUBSISTEMAS_DISPONIBLES = [
   'EDUCACIÓN ALTERNATIVA',
   'EDUCACIÓN ESPECIAL',
 ];
+
+const SUBMATERIAS_SET = new Set<string>(
+  (submateriasCatalogoRaw as string[]).map((s) => s.trim().toUpperCase())
+);
 
 const OPERADORES = [
   { value: '<=', label: '<= Menor o igual' },
@@ -112,7 +117,7 @@ export function FiltrosMateriaManager() {
 
   const [editingItem, setEditingItem] = useState<EditState | null>(null);
   const [materiaFilterSearch, setMateriaFilterSearch] = useState('');
-  const [materiasTabFilter, setMateriasTabFilter] = useState<'all' | 'selected' | 'with_condition'>('all');
+  const [materiasTabFilter, setMateriasTabFilter] = useState<'all' | 'selected' | 'submateria' | 'with_condition'>('all');
   const [inputCustomMateria, setInputCustomMateria] = useState('');
 
   // Estado del mini-editor de condición individual por materia
@@ -191,6 +196,10 @@ export function FiltrosMateriaManager() {
     return Array.from(set).sort((a, b) => a.localeCompare(b));
   }, [editingItem?.subsistemas, editingItem?.niveles, editingItem?.materias]);
 
+  const submateriasCount = useMemo(() => {
+    return materiasDisponibles.filter((m) => SUBMATERIAS_SET.has(m.trim().toUpperCase())).length;
+  }, [materiasDisponibles]);
+
   const materiasFiltradas = useMemo(() => {
     let list = materiasDisponibles;
     if (materiasTabFilter === 'selected' && editingItem) {
@@ -200,6 +209,8 @@ export function FiltrosMateriaManager() {
         if (!list.includes(m)) list.push(m);
       });
       list.sort((a, b) => a.localeCompare(b));
+    } else if (materiasTabFilter === 'submateria') {
+      list = materiasDisponibles.filter((m) => SUBMATERIAS_SET.has(m.trim().toUpperCase()));
     } else if (materiasTabFilter === 'with_condition' && editingItem) {
       const set = new Set(editingItem.materias_condiciones.map((mc) => mc.materia));
       list = list.filter((m) => set.has(m));
@@ -820,6 +831,15 @@ export function FiltrosMateriaManager() {
                     </button>
                     <button
                       type="button"
+                      onClick={() => setMateriasTabFilter('submateria')}
+                      className={`px-2 py-1 text-[11px] font-semibold rounded ${
+                        materiasTabFilter === 'submateria' ? 'bg-amber-600 text-white' : 'bg-white text-amber-800 border border-amber-200 hover:bg-amber-50'
+                      }`}
+                    >
+                      Submaterias ({submateriasCount})
+                    </button>
+                    <button
+                      type="button"
                       onClick={() => setMateriasTabFilter('selected')}
                       className={`px-2 py-1 text-[11px] font-semibold rounded ${
                         materiasTabFilter === 'selected' ? 'bg-indigo-600 text-white' : 'bg-white text-slate-600 border border-slate-200'
@@ -909,6 +929,11 @@ export function FiltrosMateriaManager() {
                               {sel && <CheckIcon className="w-3 h-3" />}
                             </span>
                             <span className="truncate font-mono text-[11px]">{mat}</span>
+                            {SUBMATERIAS_SET.has(mat.trim().toUpperCase()) && (
+                              <span className="px-1.5 py-0.2 rounded bg-amber-50 text-amber-700 border border-amber-200 text-[9px] font-semibold tracking-wide shrink-0">
+                                Submateria
+                              </span>
+                            )}
                           </button>
 
                           {sel && (

@@ -200,7 +200,10 @@ export async function GET(req: NextRequest) {
       // Consultar en sie_deficit_materia de Supabase para este departamento
       try {
         const matOrConditions = materiasList
-          .map((m) => `materia.ilike.*${encodeURIComponent(m)}*`)
+          .flatMap((m) => [
+            `materia.ilike.*${encodeURIComponent(m)}*`,
+            `sub_materia.ilike.*${encodeURIComponent(m)}*`,
+          ])
           .join(',');
 
         const fieldsWithSub = 'cod_ue,ue,cod_dep,departamento,cod_dis,distrito,area,subsistema,nivel,materia,sub_materia,hora_tra,hora_pla,deficit';
@@ -295,8 +298,10 @@ export async function GET(req: NextRequest) {
       const rowNivel = String(row.n || '').toUpperCase();
       const depId = Number(row.d);
 
-      // 1. Coincidencia de Materia (exacta o contenida sin colisiones)
-      const matMatched = materiasList.some((m) => matchesMateria(rowMateria, m));
+      // 1. Coincidencia de Materia o Sub-materia (exacta o contenida)
+      const matMatched = materiasList.some((m) =>
+        matchesMateria(rowMateria, m) || (rowSubMateria && matchesMateria(rowSubMateria, m))
+      );
       if (!matMatched) return;
 
       // 2. Coincidencia de Subsistema (si está especificado)
