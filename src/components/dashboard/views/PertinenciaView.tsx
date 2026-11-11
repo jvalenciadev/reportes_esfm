@@ -104,7 +104,7 @@ const RANGO_INFO: Record<Rango, {
     code: 'V',
     badgeText: 'Rango V · Alta',
     hex: '#059669', // Emerald 600
-    accentBg: 'from-emerald-500/10 via-emerald-500/5 to-transparent',
+    accentBg: 'bg-emerald-50',
     accentBorder: 'border-emerald-200/80',
     pillBg: 'bg-emerald-50 text-emerald-800 border-emerald-200',
     pillText: 'text-emerald-700',
@@ -117,7 +117,7 @@ const RANGO_INFO: Record<Rango, {
     code: 'A',
     badgeText: 'Rango A · Media',
     hex: '#2563eb', // Blue 600
-    accentBg: 'from-blue-500/10 via-blue-500/5 to-transparent',
+    accentBg: 'bg-blue-50',
     accentBorder: 'border-blue-200/80',
     pillBg: 'bg-blue-50 text-blue-800 border-blue-200',
     pillText: 'text-blue-700',
@@ -130,7 +130,7 @@ const RANGO_INFO: Record<Rango, {
     code: 'N',
     badgeText: 'Rango N · Baja',
     hex: '#ea580c', // Orange 600
-    accentBg: 'from-amber-500/10 via-amber-500/5 to-transparent',
+    accentBg: 'bg-amber-50',
     accentBorder: 'border-amber-200/80',
     pillBg: 'bg-amber-50 text-amber-800 border-amber-200',
     pillText: 'text-amber-700',
@@ -143,7 +143,7 @@ const RANGO_INFO: Record<Rango, {
     code: 'SIN',
     badgeText: 'Sin Pertinencia / NO',
     hex: '#64748b', // Slate 500
-    accentBg: 'from-slate-500/10 via-slate-500/5 to-transparent',
+    accentBg: 'bg-slate-100',
     accentBorder: 'border-slate-200',
     pillBg: 'bg-slate-100 text-slate-700 border-slate-200',
     pillText: 'text-slate-700',
@@ -436,7 +436,7 @@ export default function PertinenciaView() {
     <div className="space-y-8 animate-in fade-in duration-300 pb-16">
 
       {/* ── ENCABEZADO INSTITUCIONAL BID ──────────────────────────────────── */}
-      <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-indigo-950 text-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-700 relative overflow-hidden">
+      <div className="bg-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-sm border border-[#c9a751]/20 relative overflow-hidden">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#c9a751]/10 border border-[#c9a751]/30 text-[#c9a751] text-xs font-bold mb-3 tracking-wider uppercase">
@@ -515,10 +515,10 @@ export default function PertinenciaView() {
 
             {/* DISTRIBUCIÓN POR RANGO */}
             <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm overflow-hidden">
-              <div className="p-6 sm:p-8 pb-4 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-b from-slate-50/50 to-white">
+              <div className="p-6 sm:p-8 pb-4 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white">
                 <div>
                   <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-xl bg-blue-600 text-white font-black text-sm flex items-center justify-center shadow-xs">
+                    <div className="w-8 h-8 rounded-xl bg-[#c9a751] text-slate-900 font-black text-sm flex items-center justify-center shadow-xs">
                       1
                     </div>
                     <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
@@ -539,7 +539,7 @@ export default function PertinenciaView() {
               <div className="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
 
                 {/* Gráfico de Dona */}
-                <div className="lg:col-span-5 bg-gradient-to-b from-slate-50 to-white rounded-2xl p-6 border border-slate-200/80 flex flex-col items-center shadow-xs">
+                <div className="lg:col-span-5 bg-slate-50 rounded-2xl p-6 border border-slate-200/80 flex flex-col items-center shadow-xs">
                   <span className="text-[11px] font-black text-slate-500 uppercase tracking-widest mb-3 flex items-center gap-1.5">
                     <PieIcon className="w-3.5 h-3.5 text-blue-600" />
                     Estructura Proporcional del Magisterio
@@ -752,7 +752,7 @@ export default function PertinenciaView() {
             {/* NECESIDADES DE FORMACIÓN & INTENSIDAD POR RANGO */}
             <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs">
               <div className="flex items-center gap-2 mb-2">
-                <span className="w-8 h-8 rounded-xl bg-amber-600 text-white font-black text-sm flex items-center justify-center shadow-xs">
+                <span className="w-8 h-8 rounded-xl bg-[#c9a751] text-slate-900 font-black text-sm flex items-center justify-center shadow-xs">
                   2
                 </span>
                 <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
@@ -763,23 +763,23 @@ export default function PertinenciaView() {
                 ¿Cuántos docentes requerirían formación y cuánto duraría según el rango de pertinencia?
               </p>
 
-              <div className="bg-gradient-to-r from-blue-900 to-indigo-900 text-white rounded-2xl p-5 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="bg-slate-900 border border-[#c9a751]/30 text-white rounded-2xl p-5 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="flex items-center gap-3.5">
-                  <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-[#c9a751] shrink-0">
+                  <div className="w-12 h-12 rounded-xl bg-[#c9a751]/15 border border-[#c9a751]/30 flex items-center justify-center text-[#c9a751] shrink-0">
                     <GraduationCap className="w-6 h-6" />
                   </div>
                   <div>
                     <h3 className="font-extrabold text-base text-white">
                       Meta de Formación Prioritaria Componente 2: Rangos A + N
                     </h3>
-                    <p className="text-xs text-blue-200 mt-0.5">
+                    <p className="text-xs text-slate-400 mt-0.5">
                       Docentes en ejercicio que requieren capacitación correctiva y nivelación curricular.
                     </p>
                   </div>
                 </div>
                 <div className="text-left sm:text-right shrink-0">
                   <span className="text-3xl font-black text-[#c9a751]">{fmt(metaDocentesPrioritarios)}</span>
-                  <span className="text-xs text-blue-200 block font-semibold">55.1% del magisterio</span>
+                  <span className="text-xs text-slate-400 block font-semibold">55.1% del magisterio</span>
                 </div>
               </div>
 
@@ -867,7 +867,7 @@ export default function PertinenciaView() {
             {/* BENEFICIARIOS (UES Y ESTUDIANTES) */}
             <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs">
               <div className="flex items-center gap-2 mb-2">
-                <span className="w-8 h-8 rounded-xl bg-purple-600 text-white font-black text-sm flex items-center justify-center shadow-xs">
+                <span className="w-8 h-8 rounded-xl bg-[#c9a751] text-slate-900 font-black text-sm flex items-center justify-center shadow-xs">
                   3
                 </span>
                 <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
@@ -1209,7 +1209,7 @@ export default function PertinenciaView() {
                     </div>
 
                     {/* Resumen de impacto BID para este departamento */}
-                    <div className="bg-gradient-to-br from-slate-900 to-indigo-950 text-white rounded-2xl p-4.5">
+                    <div className="bg-slate-900 border border-[#c9a751]/25 text-white rounded-2xl p-4.5">
                       <div className="flex items-center gap-2 mb-2">
                         <Target className="w-4 h-4 text-[#c9a751]" />
                         <span className="text-xs font-black uppercase tracking-wider text-[#c9a751]">
@@ -1278,7 +1278,7 @@ export default function PertinenciaView() {
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-100">
               <div>
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-black">
+                  <div className="w-8 h-8 rounded-xl bg-[#c9a751]/15 text-[#c9a751] flex items-center justify-center font-black">
                     <BookOpen className="w-5 h-5" />
                   </div>
                   <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
@@ -1481,7 +1481,7 @@ export default function PertinenciaView() {
         <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6 animate-in fade-in duration-300">
           <div>
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-black">
+              <div className="w-8 h-8 rounded-xl bg-[#c9a751]/15 text-[#c9a751] flex items-center justify-center font-black">
                 <Layers className="w-5 h-5" />
               </div>
               <h3 className="font-black text-xl sm:text-2xl text-slate-900 tracking-tight">
