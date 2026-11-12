@@ -8,7 +8,6 @@ import {
   Clock,
   Sparkles,
   CheckCircle2,
-  AlertCircle,
   HelpCircle,
   BarChart3,
   PieChart as PieIcon,
@@ -668,75 +667,6 @@ export default function PertinenciaView() {
                   })}
                 </div>
 
-              </div>
-
-              {/* Causas de Desalineación */}
-              <div className="p-6 sm:p-8 pt-6 border-t border-slate-100 bg-slate-50/50">
-                <div className="flex items-center gap-2 mb-3">
-                  <AlertCircle className="w-4 h-4 text-amber-600" />
-                  <h3 className="text-xs sm:text-sm font-black text-slate-800 uppercase tracking-wider">
-                    ¿En qué dimensión están desalineados los docentes? (28,329 casos analizados en aula)
-                  </h3>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-                  <div className="bg-white p-4.5 rounded-2xl border border-slate-200/90 shadow-xs flex flex-col justify-between">
-                    <div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Causa Principal</span>
-                        <span className="text-xs font-black text-blue-700 bg-blue-50 px-2 py-0.5 rounded-md border border-blue-200">
-                          92.4%
-                        </span>
-                      </div>
-                      <h4 className="font-black text-slate-900 text-sm mt-2">Fuera solo de Especialidad</h4>
-                      <span className="text-2xl font-black text-slate-900 block mt-1">26,170 casos</span>
-                      <p className="text-xs text-slate-500 mt-2 leading-relaxed">
-                        Docente formado en una disciplina asignado a materias distintas (ej: Matemática, Física, Técnica Tecnológica).
-                      </p>
-                    </div>
-                    <div className="w-full bg-slate-100 rounded-full h-2 mt-4 overflow-hidden">
-                      <div className="bg-blue-600 h-full rounded-full" style={{ width: '92.4%' }} />
-                    </div>
-                  </div>
-
-                  <div className="bg-white p-4.5 rounded-2xl border border-amber-200 shadow-xs flex flex-col justify-between">
-                    <div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-amber-800 uppercase tracking-wider">Brecha Doble</span>
-                        <span className="text-xs font-black text-amber-800 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200">
-                          7.3%
-                        </span>
-                      </div>
-                      <h4 className="font-black text-slate-900 text-sm mt-2">Fuera de Nivel y Especialidad</h4>
-                      <span className="text-2xl font-black text-amber-800 block mt-1">2,079 casos</span>
-                      <p className="text-xs text-slate-500 mt-2 leading-relaxed">
-                        Desalineación máxima: titulado para un ciclo y área técnica ajena al grado y materia donde ejerce docencia.
-                      </p>
-                    </div>
-                    <div className="w-full bg-slate-100 rounded-full h-2 mt-4 overflow-hidden">
-                      <div className="bg-amber-600 h-full rounded-full" style={{ width: '7.3%' }} />
-                    </div>
-                  </div>
-
-                  <div className="bg-white p-4.5 rounded-2xl border border-slate-200/90 shadow-xs flex flex-col justify-between">
-                    <div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Brecha Leve</span>
-                        <span className="text-xs font-black text-slate-600 bg-slate-100 px-2 py-0.5 rounded-md border border-slate-200">
-                          0.3%
-                        </span>
-                      </div>
-                      <h4 className="font-black text-slate-900 text-sm mt-2">Fuera solo de Nivel</h4>
-                      <span className="text-2xl font-black text-slate-900 block mt-1">80 casos</span>
-                      <p className="text-xs text-slate-500 mt-2 leading-relaxed">
-                        Enseña la materia exacta de su formación profesional pero en un subsistema o nivel escolar diferente.
-                      </p>
-                    </div>
-                    <div className="w-full bg-slate-100 rounded-full h-2 mt-4 overflow-hidden">
-                      <div className="bg-slate-500 h-full rounded-full" style={{ width: '0.3%' }} />
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
 
