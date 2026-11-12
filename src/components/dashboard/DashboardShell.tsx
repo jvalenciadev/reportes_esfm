@@ -14,7 +14,7 @@ import Exposicion2031View from './views/Exposicion2031View';
 import PertinenciaView from './views/PertinenciaView';
 import Image from 'next/image';
 import { Sparkles } from 'lucide-react';
-
+import { ResumenView } from './views/Resumen';
 interface DashboardShellProps {
   initialData: DashboardDataset;
 }
@@ -82,6 +82,11 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
       title: 'Sala de Exposición Estratégica · Proyección ESFM 2031',
       subtitle: 'Dictamen de apertura de especialidades oficiales: Demografía INE, Padrón Docente y Egresados ESFM',
       tag: 'DICTAMEN 2031',
+    },
+    Resumen: {
+      title: 'Resumen general',
+      subtitle: 'Descripción breve del módulo o reporte',
+      tag: 'NUEVO MÓDULO',
     },
     pertinencia: {
       title: 'Pertinencia Docente',
@@ -232,7 +237,11 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
           {currentTab === 'uie' && <UieDeficitView data={initialData} />}
           {currentTab === 'historial' && <HistorialDocenteView />}
           {currentTab === 'exposicion' && <Exposicion2031View data={initialData} />}
+
+          {currentTab === ('Resumen' as SourceTab) && <ResumenView />}
+
           {currentTab === 'pertinencia' && <PertinenciaView />}
+
         </main>
       </div>
     </div>

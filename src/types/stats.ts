@@ -1,4 +1,5 @@
-export type SourceTab = 'proyecciones' | 'dgfm' | 'ine' | 'sie' | 'seie' | 'uie' | 'historial' | 'exposicion' | 'pertinencia';
+
+export type SourceTab = 'proyecciones' | 'dgfm' | 'ine' | 'sie' | 'seie' | 'uie' | 'historial' | 'exposicion' | 'pertinencia' | 'Resumen';
 
 export interface Departamento {
   id: number;
@@ -27,6 +28,7 @@ export interface InscritoEsfm {
   departamentos?: { nombre: string };
   esfm?: { nombre: string };
   especialidades?: { nombre: string };
+
 }
 
 export interface IneMatricula {

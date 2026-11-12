@@ -12,7 +12,7 @@ import {
   TrendingUpIcon,
   ScaleIcon,
 } from '../ui/Icons';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Sun } from 'lucide-react';
 
 interface SidebarProps {
   currentTab: SourceTab;
@@ -117,6 +117,17 @@ export function Sidebar({
       tables: '19 Especialidades & Proyección',
       icon: <Sparkles className="w-[18px] h-[18px] text-[#c9a751]" />,
     },
+    {
+      id: 'Resumen' as SourceTab,
+      label: 'Resumen final',
+      sublabel: 'Decisión Apertura ESFM',
+      badge: 'ESTRATÉGICO',
+      badgeColor: 'bg-emerald-100 text-emerald-900 border-emerald-300 font-extrabold',
+      count: 164448,
+      tables: '19 Especialidades & Proyección',
+      icon: <Sun className="w-[18px] h-[18px] text-emerald-600" />,
+    },
+
   ];
 
   const handleSelect = (tab: SourceTab) => {
@@ -138,9 +149,8 @@ export function Sidebar({
 
       {/* Sidebar contenedor colapsable */}
       <aside
-        className={`fixed top-0 bottom-0 left-0 z-50 w-72 bg-white border-r border-slate-200/90 shadow-xs flex flex-col transition-transform duration-300 ease-in-out ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        className={`fixed top-0 bottom-0 left-0 z-50 w-72 bg-white border-r border-slate-200/90 shadow-xs flex flex-col transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
       >
         {/* Cabecera Institucional del Estado Plurinacional */}
         <div className="p-4 border-b border-slate-200 bg-white">
@@ -184,16 +194,14 @@ export function Sidebar({
               <button
                 key={item.id}
                 onClick={() => handleSelect(item.id)}
-                className={`w-full text-left p-3 rounded-xl border transition-all flex items-start gap-3 ${
-                  isActive
-                    ? 'bg-blue-50/90 border-blue-300 text-blue-950 shadow-xs ring-1 ring-blue-500/10'
-                    : 'bg-white border-transparent text-slate-700 hover:bg-slate-50 hover:border-slate-200'
-                }`}
+                className={`w-full text-left p-3 rounded-xl border transition-all flex items-start gap-3 ${isActive
+                  ? 'bg-blue-50/90 border-blue-300 text-blue-950 shadow-xs ring-1 ring-blue-500/10'
+                  : 'bg-white border-transparent text-slate-700 hover:bg-slate-50 hover:border-slate-200'
+                  }`}
               >
                 <div
-                  className={`p-2 rounded-lg shrink-0 mt-0.5 border ${
-                    isActive ? 'bg-white border-blue-200 shadow-2xs' : 'bg-slate-50 border-slate-200/60'
-                  }`}
+                  className={`p-2 rounded-lg shrink-0 mt-0.5 border ${isActive ? 'bg-white border-blue-200 shadow-2xs' : 'bg-slate-50 border-slate-200/60'
+                    }`}
                 >
                   {item.icon}
                 </div>
