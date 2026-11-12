@@ -761,7 +761,7 @@ export default function PertinenciaView() {
                   </div>
                   <div>
                     <h3 className="font-extrabold text-base text-white">
-                      Meta de Formación Prioritaria Componente 2: Rangos A + N
+                      Meta de Formación Prioritaria Componente 2
                     </h3>
                     <p className="text-xs text-slate-400 mt-0.5">
                       Docentes en ejercicio que requieren capacitación correctiva y nivelación curricular.
@@ -985,7 +985,7 @@ export default function PertinenciaView() {
 
                   {/* Barra proporcional alumnos */}
                   <div className="bg-slate-50 rounded-xl p-3.5 border border-slate-200">
-                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-wider block mb-2">Alumnos A+N sobre total padrón</span>
+                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-wider block mb-2">Población estudiantil focalizada</span>
                     <div className="w-full bg-slate-200 rounded-full h-3 overflow-hidden flex">
                       <div
                         style={{ width: `${((data.resumen.N?.estudiantes_atendidos ?? 0) / (data.resumen.TOTAL?.estudiantes_atendidos ?? 1)) * 100}%` }}
@@ -1033,7 +1033,7 @@ export default function PertinenciaView() {
                     </h2>
                   </div>
                   <p className="text-xs sm:text-sm text-slate-500 mt-1.5 ml-10">
-                    Explora el perfil de pertinencia de cada departamento, identifica dónde se concentra la meta formativa BID y audita las especialidades críticas por región.
+                    Explora el perfil de pertinencia de cada departamento, identifica dónde se concentra la meta formativa y audita las especialidades críticas por región.
                   </p>
                 </div>
 
@@ -1054,7 +1054,7 @@ export default function PertinenciaView() {
                     className={`px-3 py-1.5 rounded-xl font-bold transition-all ${sortDeptBy === 'prioridad' ? 'bg-white text-amber-800 shadow-xs' : 'text-slate-500 hover:text-slate-800'
                       }`}
                   >
-                    Meta BID (A + N)
+                    Meta
                   </button>
                   <button
                     onClick={() => setSortDeptBy('alta')}
@@ -1081,7 +1081,7 @@ export default function PertinenciaView() {
                   <span className="text-xs text-slate-500 font-semibold mt-0.5">44,120 docentes (30.0%)</span>
                 </div>
                 <div className="bg-amber-50/60 rounded-2xl p-4 border border-amber-200/80">
-                  <span className="text-[11px] font-bold text-amber-800 uppercase tracking-wider block">Mayor Meta BID (A + N)</span>
+                  <span className="text-[11px] font-bold text-amber-800 uppercase tracking-wider block">Mayor Meta</span>
                   <span className="text-xl font-black text-amber-900 mt-1 block">LA PAZ & STA. CRUZ</span>
                   <span className="text-xs text-amber-700 font-semibold mt-0.5">24,130 y 21,600 docentes</span>
                 </div>
@@ -1153,7 +1153,7 @@ export default function PertinenciaView() {
                             <span className="text-[10px] text-slate-500 font-semibold block">({dept.pctAlta.toFixed(1)}%)</span>
                           </div>
                           <div className="bg-amber-50/70 p-2 rounded-xl border border-amber-200/60">
-                            <span className="text-[10px] font-bold text-amber-800 uppercase block">Meta BID (A+N)</span>
+                            <span className="text-[10px] font-bold text-amber-800 uppercase block">Meta de Formación</span>
                             <span className="font-black text-amber-800 text-sm">{fmt(dept.prioridadBID)}</span>
                             <span className="text-[10px] text-amber-700 font-semibold block">({dept.pctPrioridadBID.toFixed(1)}%)</span>
                           </div>
@@ -1293,7 +1293,7 @@ export default function PertinenciaView() {
                       <div className="grid grid-cols-2 gap-3 mt-3 pt-3 border-t border-slate-700/80">
                         <div>
                           <span className="text-2xl font-black text-white">{fmt(activeDeptInfo.prioridadBID)}</span>
-                          <span className="text-[11px] text-slate-400 block font-medium">Docentes a Capacitar (A+N)</span>
+                          <span className="text-[11px] text-slate-400 block font-medium">Docentes a Capacitar</span>
                         </div>
                         <div>
                           <span className="text-2xl font-black text-[#c9a751]">~{fmt(activeDeptInfo.estudiantesEst)}</span>
@@ -1305,8 +1305,8 @@ export default function PertinenciaView() {
                     {/* Top Especialidades críticas en este departamento */}
                     <div>
                       <h4 className="text-xs font-black text-slate-700 uppercase tracking-wider mb-2.5 flex items-center justify-between">
-                        <span>Especialidades con Mayor Demanda BID</span>
-                        <span className="text-[10px] font-bold text-slate-400">A + N</span>
+                        <span>Especialidades con Mayor Demanda Formativa</span>
+                        <span className="text-[10px] font-bold text-slate-400">Prioridad</span>
                       </h4>
 
                       <div className="space-y-1.5 text-xs">
