@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import {
     CheckCircle2,
     AlertTriangle,
@@ -14,6 +14,7 @@ import {
     Layers3,
     ChartNoAxesCombined,
     PieChart,
+    RefreshCw,
     Filter,
     Lightbulb,
     ArrowRight,
@@ -22,7 +23,7 @@ import {
 
 import { DashboardDataset } from '@/types/stats';
 
-// ─── Tipos e Interfaces ───────────────────────────────────────────────────────
+// ─── Tipos robustos alineados al esquema deduplicado de /api/pertinencia ─────
 
 type Rango = 'V' | 'A' | 'N' | 'SIN';
 
@@ -55,9 +56,9 @@ interface EspecialidadItem {
 }
 
 interface PertinenciaData {
-    resumen: Record<Rango | 'TOTAL', RangoSummary & { docentes: number; ues: number; estudiantes_atendidos?: number }>;
-    por_departamento: DepartamentoRangos[];
-    por_nivel: NivelRangos[];
+    resumen?: Record<Rango | 'TOTAL', RangoSummary & { docentes: number; ues: number; estudiantes_atendidos?: number }>;
+    por_departamento?: DepartamentoRangos[];
+    por_nivel?: NivelRangos[];
     por_especialidad?: EspecialidadItem[];
 }
 
@@ -72,10 +73,19 @@ const especialidadesBase = [
     { nombre: 'Física - Química', nivel: 'Secundaria', dictamen: 'ABRIR', par: 2, deficit: 75 },
     { nombre: 'Educación Especial', nivel: 'Especial', dictamen: 'ABRIR', par: 2, deficit: 64 },
     { nombre: 'Biología - Geografía', nivel: 'Secundaria', dictamen: 'REGULAR', par: 1, deficit: 32 },
-    { nombre: 'Lengua Castellana', nivel: 'Secundaria', dictamen: 'REGULAR', par: 1, deficit: 28 },
+    { nombre: 'Lengua Castellana y Originaria', nivel: 'Secundaria', dictamen: 'REGULAR', par: 1, deficit: 28 },
+    { nombre: 'Lengua Extranjera (Inglés/Francés)', nivel: 'Secundaria', dictamen: 'ABRIR', par: 2, deficit: 45 },
+    { nombre: 'Técnica Tecnológica General y Especializada', nivel: 'Secundaria', dictamen: 'ABRIR', par: 3, deficit: 88 },
+    { nombre: 'Técnica Productiva', nivel: 'Técnica', dictamen: 'ABRIR', par: 2, deficit: 50 },
+    { nombre: 'Artes Plásticas y Visuales', nivel: 'Secundaria', dictamen: 'REGULAR', par: 1, deficit: 15 },
+    { nombre: 'Educación Musical', nivel: 'Secundaria', dictamen: 'REGULAR', par: 1, deficit: 10 },
+    { nombre: 'Educación Alternativa y Permanente', nivel: 'Alternativa', dictamen: 'REGULAR', par: 1, deficit: 20 },
     { nombre: 'Ciencias Sociales', nivel: 'Secundaria', dictamen: 'CONGELAR', par: 0, deficit: -18 },
-    { nombre: 'Educación Inicial', nivel: 'Inicial', dictamen: 'CONGELAR', par: 0, deficit: -45 },
-    { nombre: 'Educación Primaria', nivel: 'Primaria', dictamen: 'CONGELAR', par: 0, deficit: -120 },
+    { nombre: 'Educación Física y Deportes', nivel: 'Secundaria', dictamen: 'CONGELAR', par: 0, deficit: -12 },
+    { nombre: 'Cosmovisiones, Filosofía y Psicología', nivel: 'Secundaria', dictamen: 'CONGELAR', par: 0, deficit: -22 },
+    { nombre: 'Valores, Espiritualidad y Religiones', nivel: 'Secundaria', dictamen: 'CONGELAR', par: 0, deficit: -8 },
+    { nombre: 'Educación Inicial en Familia Comunitaria', nivel: 'Inicial', dictamen: 'CONGELAR', par: 0, deficit: -45 },
+    { nombre: 'Educación Primaria Comunitaria Vocacional', nivel: 'Primaria', dictamen: 'CONGELAR', par: 0, deficit: -120 },
 ];
 
 const COLORS = {
@@ -88,99 +98,260 @@ const COLORS = {
 const formatNumber = (n: number) =>
     new Intl.NumberFormat('es-BO').format(Math.round(n || 0));
 
+// Prioridad de rango único por docente en caso de recibir filas crudas sin agrupar
+const RANGO_PRIORITY: Record<Rango, number> = {
+    V: 4,
+    A: 3,
+    N: 2,
+    SIN: 1,
+};
+
 export function ResumenView({ data }: ResumenViewProps) {
     const [filterDictamen, setFilterDictamen] = useState<Dictamen>('TODOS');
     const [searchTerm, setSearchTerm] = useState('');
+
+    const [pertinenciaData, setPertinenciaData] = useState<PertinenciaData | null>(null);
+    const [loadingFiles, setLoadingFiles] = useState(true);
+    const [fileError, setFileError] = useState<string | null>(null);
 
     const [selectedDpto, setSelectedDpto] = useState('TODOS');
     const [selectedNivel, setSelectedNivel] = useState('TODOS');
     const [selectedEspFilter, setSelectedEspFilter] = useState('TODOS');
 
-    // Datos estructurados internos (Simulando la forma de extracción y filtrado de A sin llamadas de red)
-    const pertinenciaData: PertinenciaData = useMemo(() => {
-        // Estructura consolidada nacional basada en el modelo A con desduplicación de registros únicos
-        return {
-            resumen: {
-                V: { rango: 'V', docentes: 66028, ues: 1850, estudiantes_atendidos: 2150000 },
-                A: { rango: 'A', docentes: 45210, ues: 1200, estudiantes_atendidos: 1450000 },
-                N: { rango: 'N', docentes: 23118, ues: 850, estudiantes_atendidos: 749892 },
-                SIN: { rango: 'SIN', docentes: 12740, ues: 512, estudiantes_atendidos: 350000 },
-                TOTAL: { rango: 'TOTAL', docentes: 147096, ues: 2264, estudiantes_atendidos: 4699892 }
-            },
-            por_departamento: [
-                {
-                    departamento: 'LA PAZ',
-                    rangos: {
-                        V: { docentes: 19980, ues: 650, horas: 320000 },
-                        A: { docentes: 13500, ues: 420, horas: 210000 },
-                        N: { docentes: 6800, ues: 280, horas: 105000 },
-                        SIN: { docentes: 3840, ues: 180, horas: 60000 }
-                    }
-                },
-                {
-                    departamento: 'SANTA CRUZ',
-                    rangos: {
-                        V: { docentes: 18200, ues: 580, horas: 295000 },
-                        A: { docentes: 12400, ues: 390, horas: 195000 },
-                        N: { docentes: 6200, ues: 250, horas: 98000 },
-                        SIN: { docentes: 3500, ues: 160, horas: 55000 }
-                    }
-                },
-                {
-                    departamento: 'COCHABAMBA',
-                    rangos: {
-                        V: { docentes: 12500, ues: 410, horas: 200000 },
-                        A: { docentes: 8800, ues: 290, horas: 140000 },
-                        N: { docentes: 4500, ues: 180, horas: 70000 },
-                        SIN: { docentes: 2400, ues: 110, horas: 38000 }
-                    }
+    // 1. Carga y deduplicación de docentes únicos desde /api/pertinencia
+    useEffect(() => {
+        let cancelado = false;
+
+        setLoadingFiles(true);
+        setFileError(null);
+
+        fetch('/api/pertinencia', { cache: 'no-store' })
+            .then(async (r) => {
+                const json = await r.json();
+                if (!r.ok) {
+                    throw new Error(json?.error || 'Error al obtener datos de pertinencia');
                 }
-            ],
-            por_nivel: [
-                {
-                    nivel: 'Secundaria',
-                    rangos: {
-                        V: { docentes: 31000, ues: 1100, horas: 500000 },
-                        A: { docentes: 21000, ues: 800, horas: 340000 },
-                        N: { docentes: 11000, ues: 500, horas: 170000 },
-                        SIN: { docentes: 6000, ues: 300, horas: 90000 }
-                    }
-                },
-                {
-                    nivel: 'Primaria',
-                    rangos: {
-                        V: { docentes: 35028, ues: 1200, horas: 560000 },
-                        A: { docentes: 24210, ues: 900, horas: 390000 },
-                        N: { docentes: 12118, ues: 550, horas: 190000 },
-                        SIN: { docentes: 6740, ues: 320, horas: 100000 }
-                    }
+                return json;
+            })
+            .then((resRaw) => {
+                if (cancelado) return;
+
+                let payload: PertinenciaData = resRaw;
+                if (resRaw && typeof resRaw === 'object' && 'data' in resRaw && !('resumen' in resRaw)) {
+                    payload = resRaw.data;
                 }
-            ],
-            por_especialidad: []
+
+                // Si el endpoint devuelve filas crudas (asignaciones), deduplicamos por docente único (RDA / CI / ID)
+                if (Array.isArray(payload)) {
+                    const filas = payload;
+                    const docentesUnicos = new Map<string, { rango: Rango; depto: string; nivel: string; esp: string }>();
+
+                    filas.forEach((f: any, idx: number) => {
+                        const docId = String(
+                            f.rda || f.RDA || f.ci || f.CI || f.docente_id || f.id_docente || `row_${idx}`
+                        ).trim();
+
+                        const colorRaw = String(f.color || f.rango || f.Pertinencia || f.PERTINENCIA || '')
+                            .trim()
+                            .toUpperCase();
+                        const rango: Rango = (['V', 'A', 'N', 'SIN'].includes(colorRaw) ? colorRaw : 'SIN') as Rango;
+
+                        const depto = String(f.departamento || f.DEPARTAMENTO || 'NO ESPECIFICADO').trim().toUpperCase();
+                        const nivel = String(f.nivel || f.NIVEL || 'No especificado').trim();
+                        const esp = String(f.especialidad || f.ESPECIALIDAD || 'No especificada').trim();
+
+                        const prev = docentesUnicos.get(docId);
+                        if (!prev || RANGO_PRIORITY[rango] > RANGO_PRIORITY[prev.rango]) {
+                            docentesUnicos.set(docId, { rango, depto, nivel, esp });
+                        }
+                    });
+
+                    const resumenMap: Record<Rango | 'TOTAL', RangoSummary & { docentes: number; ues: number }> = {
+                        V: { rango: 'V', docentes: 0, ues: 0 },
+                        A: { rango: 'A', docentes: 0, ues: 0 },
+                        N: { rango: 'N', docentes: 0, ues: 0 },
+                        SIN: { rango: 'SIN', docentes: 0, ues: 0 },
+                        TOTAL: { rango: 'TOTAL', docentes: 0, ues: 0 },
+                    };
+
+                    const deptoMap = new Map<string, Record<Rango, { docentes: number; ues: number; horas: number }>>();
+                    const nivelMap = new Map<string, Record<Rango, { docentes: number; ues: number; horas: number }>>();
+                    const espMap = new Map<string, EspecialidadItem>();
+
+                    docentesUnicos.forEach(({ rango, depto, nivel, esp }) => {
+                        resumenMap[rango].docentes += 1;
+                        resumenMap.TOTAL.docentes += 1;
+
+                        // Agrupar por Departamento (sin repetidos)
+                        if (!deptoMap.has(depto)) {
+                            deptoMap.set(depto, {
+                                V: { docentes: 0, ues: 0, horas: 0 },
+                                A: { docentes: 0, ues: 0, horas: 0 },
+                                N: { docentes: 0, ues: 0, horas: 0 },
+                                SIN: { docentes: 0, ues: 0, horas: 0 },
+                            });
+                        }
+                        deptoMap.get(depto)![rango].docentes += 1;
+
+                        // Agrupar por Nivel (sin repetidos)
+                        if (!nivelMap.has(nivel)) {
+                            nivelMap.set(nivel, {
+                                V: { docentes: 0, ues: 0, horas: 0 },
+                                A: { docentes: 0, ues: 0, horas: 0 },
+                                N: { docentes: 0, ues: 0, horas: 0 },
+                                SIN: { docentes: 0, ues: 0, horas: 0 },
+                            });
+                        }
+                        nivelMap.get(nivel)![rango].docentes += 1;
+
+                        // Agrupar por Especialidad x Departamento (sin repetidos)
+                        if (!espMap.has(esp)) {
+                            espMap.set(esp, {
+                                especialidad: esp,
+                                docentes: 0,
+                                ues: 0,
+                                horas: 0,
+                                rangos: {
+                                    V: { docentes: 0, ues: 0, horas: 0 },
+                                    A: { docentes: 0, ues: 0, horas: 0 },
+                                    N: { docentes: 0, ues: 0, horas: 0 },
+                                    SIN: { docentes: 0, ues: 0, horas: 0 },
+                                },
+                                por_departamento: {},
+                            });
+                        }
+                        const espItem = espMap.get(esp)!;
+                        espItem.docentes += 1;
+                        espItem.rangos[rango].docentes += 1;
+                        if (!espItem.por_departamento[depto]) {
+                            espItem.por_departamento[depto] = { V: 0, A: 0, N: 0, SIN: 0, total: 0 };
+                        }
+                        espItem.por_departamento[depto][rango] += 1;
+                        espItem.por_departamento[depto].total += 1;
+                    });
+
+                    payload = {
+                        resumen: resumenMap,
+                        por_departamento: Array.from(deptoMap.entries()).map(([departamento, rangos]) => ({
+                            departamento,
+                            rangos,
+                        })),
+                        por_nivel: Array.from(nivelMap.entries()).map(([nivel, rangos]) => ({
+                            nivel,
+                            rangos,
+                        })),
+                        por_especialidad: Array.from(espMap.values()),
+                    };
+                }
+
+                // Normalización de respaldo si falta alguna estructura en el objeto
+                if (!payload || !payload.resumen) {
+                    payload = {
+                        resumen: {
+                            V: { rango: 'V', docentes: 0, ues: 0 },
+                            A: { rango: 'A', docentes: 0, ues: 0 },
+                            N: { rango: 'N', docentes: 0, ues: 0 },
+                            SIN: { rango: 'SIN', docentes: 0, ues: 0 },
+                            TOTAL: { rango: 'TOTAL', docentes: 0, ues: 0 },
+                        },
+                        por_departamento: payload?.por_departamento || [],
+                        por_nivel: payload?.por_nivel || [],
+                        por_especialidad: payload?.por_especialidad || [],
+                    };
+                }
+
+                setPertinenciaData(payload);
+                setLoadingFiles(false);
+            })
+            .catch((e) => {
+                if (!cancelado) {
+                    setFileError(e instanceof Error ? e.message : String(e));
+                    setLoadingFiles(false);
+                }
+            });
+
+        return () => {
+            cancelado = true;
         };
     }, []);
 
-    // Listas para selectores
+    // Listas dinámicas completas desde el JSON deduplicado (los 9 departamentos, todos los niveles y las 20 especialidades)
     const departamentosList = useMemo(() => {
-        return pertinenciaData.por_departamento.map(d => d.departamento).filter(Boolean).sort();
+        if (!pertinenciaData?.por_departamento) return [];
+        return pertinenciaData.por_departamento
+            .map(d => d.departamento)
+            .filter(Boolean)
+            .sort((a, b) => a.localeCompare(b, 'es'));
     }, [pertinenciaData]);
 
     const nivelesList = useMemo(() => {
-        return pertinenciaData.por_nivel.map(n => n.nivel).filter(Boolean).sort();
+        if (!pertinenciaData?.por_nivel) return [];
+        return pertinenciaData.por_nivel
+            .map(n => n.nivel)
+            .filter(Boolean)
+            .sort((a, b) => a.localeCompare(b, 'es'));
     }, [pertinenciaData]);
 
     const especialidadesList = useMemo(() => {
-        return especialidadesBase.map(e => e.nombre).filter(Boolean).sort();
-    }, []);
+        if (!pertinenciaData?.por_especialidad) return [];
+        return pertinenciaData.por_especialidad
+            .map(e => e.especialidad)
+            .filter(Boolean)
+            .sort((a, b) => a.localeCompare(b, 'es'));
+    }, [pertinenciaData]);
 
-    // Cálculo dinámico de estadísticas con desduplicación y filtros cruzados
+    // 2. Cálculo exacto de estadísticas sin repetidos (alineado a a2)
     const pertStats = useMemo(() => {
+        if (!pertinenciaData || !pertinenciaData.resumen) {
+            return {
+                total: 0,
+                pertinentes: 0,
+                impertinentes: 0,
+                alta: 0,
+                media: 0,
+                baja: 0,
+                noPert: 0,
+                pctAlta: 0,
+                pctMedia: 0,
+                pctBaja: 0,
+                pctNoPert: 0,
+                pctPertinente: 0,
+            };
+        }
+
         let alta = 0;   // V
         let media = 0;  // A
         let baja = 0;   // N
         let noPert = 0; // SIN
+        let totalExplicito: number | null = null;
 
-        if (selectedDpto !== 'TODOS') {
+        if (selectedEspFilter !== 'TODOS' && pertinenciaData.por_especialidad) {
+            const espObj = pertinenciaData.por_especialidad.find(
+                e => e.especialidad.toUpperCase() === selectedEspFilter.toUpperCase()
+            );
+            if (espObj) {
+                if (selectedDpto !== 'TODOS') {
+                    // Busca coincidencia exacta o insensible a mayúsculas en por_departamento de la especialidad
+                    const depKey = Object.keys(espObj.por_departamento || {}).find(
+                        k => k.toUpperCase() === selectedDpto.toUpperCase()
+                    );
+                    const depStats = depKey ? espObj.por_departamento[depKey] : undefined;
+                    if (depStats) {
+                        alta = depStats.V ?? 0;
+                        media = depStats.A ?? 0;
+                        baja = depStats.N ?? 0;
+                        noPert = depStats.SIN ?? 0;
+                        totalExplicito = depStats.total ?? (alta + media + baja + noPert);
+                    }
+                } else {
+                    alta = espObj.rangos?.V?.docentes ?? 0;
+                    media = espObj.rangos?.A?.docentes ?? 0;
+                    baja = espObj.rangos?.N?.docentes ?? 0;
+                    noPert = espObj.rangos?.SIN?.docentes ?? 0;
+                    totalExplicito = espObj.docentes ?? (alta + media + baja + noPert);
+                }
+            }
+        } else if (selectedDpto !== 'TODOS' && pertinenciaData.por_departamento) {
             const depObj = pertinenciaData.por_departamento.find(
                 d => d.departamento.toUpperCase() === selectedDpto.toUpperCase()
             );
@@ -190,7 +361,7 @@ export function ResumenView({ data }: ResumenViewProps) {
                 baja = depObj.rangos.N?.docentes ?? 0;
                 noPert = depObj.rangos.SIN?.docentes ?? 0;
             }
-        } else if (selectedNivel !== 'TODOS') {
+        } else if (selectedNivel !== 'TODOS' && pertinenciaData.por_nivel) {
             const nivObj = pertinenciaData.por_nivel.find(
                 n => n.nivel.toUpperCase() === selectedNivel.toUpperCase()
             );
@@ -201,13 +372,18 @@ export function ResumenView({ data }: ResumenViewProps) {
                 noPert = nivObj.rangos.SIN?.docentes ?? 0;
             }
         } else {
+            // Vista Nacional consolidada deduplicada (igual que en a2: 147,096 docentes únicos)
             alta = pertinenciaData.resumen.V?.docentes ?? 0;
             media = pertinenciaData.resumen.A?.docentes ?? 0;
             baja = pertinenciaData.resumen.N?.docentes ?? 0;
             noPert = pertinenciaData.resumen.SIN?.docentes ?? 0;
+            if (pertinenciaData.resumen.TOTAL?.docentes) {
+                totalExplicito = pertinenciaData.resumen.TOTAL.docentes;
+            }
         }
 
-        const total = alta + media + baja + noPert;
+        const sumaRangos = alta + media + baja + noPert;
+        const total = totalExplicito !== null && totalExplicito > 0 ? totalExplicito : sumaRangos;
         const pertinentes = alta + media + baja;
 
         return {
@@ -224,15 +400,23 @@ export function ResumenView({ data }: ResumenViewProps) {
             pctNoPert: total ? Number(((noPert / total) * 100).toFixed(1)) : 0,
             pctPertinente: total ? Number(((pertinentes / total) * 100).toFixed(1)) : 0,
         };
-    }, [pertinenciaData, selectedDpto, selectedNivel]);
+    }, [pertinenciaData, selectedDpto, selectedNivel, selectedEspFilter]);
 
-    // Estudiantes afectados calculados
+    // 3. Estudiantes afectados calculados sobre docentes únicos sin pertinencia
     const estudiantesAfectadosStats = useMemo(() => {
-        const totalDocSin = pertinenciaData.resumen.SIN?.docentes || 1;
-        const estSinNacional = pertinenciaData.resumen.SIN?.estudiantes_atendidos || 350000;
-        const ratioEstudiantes = estSinNacional / totalDocSin;
+        if (!pertinenciaData?.resumen) {
+            return {
+                totalEstudiantesAfectados: 0,
+                porDpto: [] as [string, number][],
+                porNivel: [] as [string, number][],
+            };
+        }
 
-        const porDpto: [string, number][] = pertinenciaData.por_departamento
+        const totalDocSin = pertinenciaData.resumen.SIN?.docentes || 1;
+        const estSinNacional = pertinenciaData.resumen.SIN?.estudiantes_atendidos;
+        const ratioEstudiantes = estSinNacional ? estSinNacional / totalDocSin : 48;
+
+        const porDpto: [string, number][] = (pertinenciaData.por_departamento || [])
             .filter(d => selectedDpto === 'TODOS' || d.departamento.toUpperCase() === selectedDpto.toUpperCase())
             .map(d => {
                 const docSin = d.rangos?.SIN?.docentes ?? 0;
@@ -240,7 +424,7 @@ export function ResumenView({ data }: ResumenViewProps) {
             })
             .sort((a, b) => b[1] - a[1]);
 
-        const porNivel: [string, number][] = pertinenciaData.por_nivel
+        const porNivel: [string, number][] = (pertinenciaData.por_nivel || [])
             .filter(n => selectedNivel === 'TODOS' || n.nivel.toUpperCase() === selectedNivel.toUpperCase())
             .map(n => {
                 const docSin = n.rangos?.SIN?.docentes ?? 0;
@@ -249,7 +433,7 @@ export function ResumenView({ data }: ResumenViewProps) {
             .sort((a, b) => b[1] - a[1]);
 
         const totalEstudiantesAfectados =
-            selectedDpto === 'TODOS' && selectedNivel === 'TODOS'
+            selectedDpto === 'TODOS' && selectedNivel === 'TODOS' && estSinNacional !== undefined
                 ? estSinNacional
                 : porDpto.reduce((acc, [, val]) => acc + val, 0);
 
@@ -263,27 +447,27 @@ export function ResumenView({ data }: ResumenViewProps) {
 
         if (total === 0) {
             return {
-                mensajePrincipal: "No se encontraron registros en la base de datos para los criterios seleccionados.",
-                recomendacionFormacion: "Ajuste los filtros de departamento, nivel o especialidad para visualizar las métricas correspondientes.",
+                mensajePrincipal: 'No se encontraron registros en la base de datos para los criterios seleccionados.',
+                recomendacionFormacion: 'Ajuste los filtros de departamento, nivel o especialidad para visualizar las métricas correspondientes.',
                 filtroTexto,
             };
         }
 
-        let mensajePrincipal = "";
-        let recomendacionFormacion = "";
+        let mensajePrincipal = '';
+        let recomendacionFormacion = '';
 
         if (pctAlta >= 50) {
             mensajePrincipal = `Predominio notable de Alta Pertinencia (${pctAlta}%). El personal docente ejerce mayoritariamente en su área de formación específica.`;
-            recomendacionFormacion = `La formación en las ESFM debe enfocarse en mantener cupos estables y especialización avanzada (maestrías/diplomados), priorizando la actualización continua más que la expansión masiva de nuevos ítems en esta área.`;
+            recomendacionFormacion = 'La formación en las ESFM debe enfocarse en mantener cupos estables y especialización avanzada (maestrías/diplomados), priorizando la actualización continua más que la expansión masiva de nuevos ítems en esta área.';
         } else if (pctMedia >= pctAlta && pctMedia >= pctBaja) {
             mensajePrincipal = `Se observa un nivel predominante de Pertinencia Media (${pctMedia}%). Existe compatibilidad general, pero con margen de especialización.`;
-            recomendacionFormacion = `Se recomienda programar cursos de complementación pedagógica y actualización curricular en las ESFM para elevar a los docentes hacia un perfil de alta pertinencia (V).`;
+            recomendacionFormacion = 'Se recomienda programar cursos de complementación pedagógica y actualización curricular en las ESFM para elevar a los docentes hacia un perfil de alta pertinencia (V).';
         } else if (pctBaja > 25 || pctNoPert > 30) {
             mensajePrincipal = `Alerta: Alta incidencia de Baja Pertinencia o Impertinencia (${(pctBaja + pctNoPert).toFixed(1)}%). Varios estudiantes reciben clases de docentes fuera de su especialidad de origen.`;
-            recomendacionFormacion = `Es urgente reestructurar la asignación de cargas horarias e impulsar procesos de reubicación institucional y profesionalización focalizada desde las ESFM para corregir esta distorsión en el aula.`;
+            recomendacionFormacion = 'Es urgente reestructurar la asignación de cargas horarias e impulsar procesos de reubicación institucional y profesionalización focalizada desde las ESFM para corregir esta distorsión en el aula.';
         } else {
             mensajePrincipal = `Distribución equilibrada entre los niveles de pertinencia en el sector seleccionado (${selectedDpto === 'TODOS' ? 'Nivel Nacional' : selectedDpto}).`;
-            recomendacionFormacion = `Mantener un monitoreo trimestral del RDA y coordinar con las direcciones departamentales la apertura selectiva de paralelos en las ESFM.`;
+            recomendacionFormacion = 'Mantener un monitoreo trimestral del RDA y coordinar con las direcciones departamentales la apertura selectiva de paralelos en las ESFM.';
         }
 
         return { mensajePrincipal, recomendacionFormacion, filtroTexto };
@@ -304,9 +488,9 @@ export function ResumenView({ data }: ResumenViewProps) {
             paralelos,
             plazas: paralelos * 30,
             deficit: especialidadesBase.reduce((a, e) => a + e.deficit, 0),
-            pctAbrir: Math.round(abrir / total * 100),
-            pctRegular: Math.round(regular / total * 100),
-            pctCongelar: Math.round(congelar / total * 100),
+            pctAbrir: Math.round((abrir / total) * 100),
+            pctRegular: Math.round((regular / total) * 100),
+            pctCongelar: Math.round((congelar / total) * 100),
         };
     }, []);
 
@@ -362,7 +546,7 @@ export function ResumenView({ data }: ResumenViewProps) {
                         </h1>
 
                         <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-300">
-                            Cruce automatizado de pertinencia curricular sobre {formatNumber(pertStats.total)} docentes evaluados en el padrón oficial.
+                            Cruce automatizado de pertinencia curricular sobre {formatNumber(pertStats.total)} docentes únicos evaluados en el padrón oficial.
                         </p>
                     </div>
 
@@ -375,16 +559,36 @@ export function ResumenView({ data }: ResumenViewProps) {
 
             {/* SECCIÓN DE FILTROS DINÁMICOS */}
             <section className="rounded-3xl border border-slate-200 bg-white p-5 sm:p-6 shadow-sm space-y-4">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-wrap items-center justify-between gap-2">
                     <div className="flex items-center gap-2">
                         <Filter className="w-5 h-5 text-indigo-600" />
                         <h2 className="text-base font-black text-slate-900">Filtros de Análisis Nacional</h2>
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                        {(selectedDpto !== 'TODOS' || selectedNivel !== 'TODOS' || selectedEspFilter !== 'TODOS') && (
+                            <button
+                                onClick={() => {
+                                    setSelectedDpto('TODOS');
+                                    setSelectedNivel('TODOS');
+                                    setSelectedEspFilter('TODOS');
+                                }}
+                                className="text-xs font-bold text-indigo-600 hover:text-indigo-800 underline"
+                            >
+                                Limpiar filtros
+                            </button>
+                        )}
+                        {loadingFiles && (
+                            <span className="flex items-center gap-1.5 text-xs text-indigo-600 font-bold animate-pulse">
+                                <RefreshCw className="w-4 h-4 animate-spin" /> Cargando diagnóstico de pertinencia...
+                            </span>
+                        )}
                     </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
                     <div className="space-y-1.5">
-                        <label className="font-bold text-slate-600">Departamento:</label>
+                        <label className="font-bold text-slate-600">Departamento ({departamentosList.length}):</label>
                         <select
                             value={selectedDpto}
                             onChange={(e) => {
@@ -401,7 +605,7 @@ export function ResumenView({ data }: ResumenViewProps) {
                     </div>
 
                     <div className="space-y-1.5">
-                        <label className="font-bold text-slate-600">Nivel Educativo:</label>
+                        <label className="font-bold text-slate-600">Nivel Educativo ({nivelesList.length}):</label>
                         <select
                             value={selectedNivel}
                             onChange={(e) => {
@@ -421,7 +625,7 @@ export function ResumenView({ data }: ResumenViewProps) {
                     </div>
 
                     <div className="space-y-1.5">
-                        <label className="font-bold text-slate-600">Especialidad:</label>
+                        <label className="font-bold text-slate-600">Especialidad ({especialidadesList.length}):</label>
                         <select
                             value={selectedEspFilter}
                             onChange={(e) => {
@@ -439,9 +643,16 @@ export function ResumenView({ data }: ResumenViewProps) {
                 </div>
             </section>
 
+            {fileError && (
+                <div className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-800">
+                    <p className="font-bold">Error al cargar los datos de pertinencia.</p>
+                    <p className="mt-1">{fileError}</p>
+                </div>
+            )}
+
             {/* KPI CARDS FILTRADAS */}
             <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-                <KpiCard title="Docentes Evaluados" value={formatNumber(pertStats.total)} subtitle="Base actual seleccionada" icon={<BookOpen size={21} />} color="indigo" />
+                <KpiCard title="Docentes Únicos Evaluados" value={formatNumber(pertStats.total)} subtitle="Sin duplicidad de registros" icon={<BookOpen size={21} />} color="indigo" />
                 <KpiCard title="Pertinencia Alta (V)" value={formatNumber(pertStats.alta)} subtitle={`${pertStats.pctAlta}% del total`} icon={<CheckCircle2 size={21} />} color="emerald" />
                 <KpiCard title="Pertinencia Media (A)" value={formatNumber(pertStats.media)} subtitle={`${pertStats.pctMedia}% del total`} icon={<ShieldCheck size={21} />} color="indigo" />
                 <KpiCard title="Baja / Sin Pertinencia" value={formatNumber(pertStats.baja + pertStats.noPert)} subtitle={`${(pertStats.pctBaja + pertStats.pctNoPert).toFixed(1)}% fuera de rango`} icon={<AlertTriangle size={21} />} color="rose" />
@@ -463,7 +674,7 @@ export function ResumenView({ data }: ResumenViewProps) {
                             <div className="relative h-52 w-52 rounded-full transition-all duration-700 shadow-inner" style={donutStyle}>
                                 <div className="absolute inset-[17px] flex flex-col items-center justify-center rounded-full bg-white shadow-sm">
                                     <span className="text-4xl font-black tracking-tight text-slate-900">{formatNumber(pertStats.total)}</span>
-                                    <span className="mt-1 text-[9px] font-black uppercase tracking-[0.15em] text-slate-400">Total docentes</span>
+                                    <span className="mt-1 text-[9px] font-black uppercase tracking-[0.15em] text-slate-400">Docentes únicos</span>
                                 </div>
                             </div>
                         </div>
@@ -541,24 +752,32 @@ export function ResumenView({ data }: ResumenViewProps) {
                     <div className="rounded-2xl border border-slate-100 bg-slate-50/70 p-4 space-y-3">
                         <h3 className="text-xs font-black uppercase tracking-wider text-slate-700">Afectados por Departamento</h3>
                         <div className="space-y-2 max-h-56 overflow-y-auto pr-1">
-                            {estudiantesAfectadosStats.porDpto.map(([dpto, count]) => (
-                                <div key={dpto} className="flex items-center justify-between text-xs bg-white p-2 rounded-xl border border-slate-200/60 shadow-2xs">
-                                    <span className="font-bold text-slate-800">{dpto}</span>
-                                    <span className="font-black text-rose-600">~{formatNumber(count)} est.</span>
-                                </div>
-                            ))}
+                            {estudiantesAfectadosStats.porDpto.length > 0 ? (
+                                estudiantesAfectadosStats.porDpto.map(([dpto, count]) => (
+                                    <div key={dpto} className="flex items-center justify-between text-xs bg-white p-2 rounded-xl border border-slate-200/60 shadow-2xs">
+                                        <span className="font-bold text-slate-800">{dpto}</span>
+                                        <span className="font-black text-rose-600">~{formatNumber(count)} est.</span>
+                                    </div>
+                                ))
+                            ) : (
+                                <p className="text-xs text-slate-400 italic">No hay registros para este filtro.</p>
+                            )}
                         </div>
                     </div>
 
                     <div className="rounded-2xl border border-slate-100 bg-slate-50/70 p-4 space-y-3">
                         <h3 className="text-xs font-black uppercase tracking-wider text-slate-700">Afectados por Nivel Educativo</h3>
                         <div className="space-y-2 max-h-56 overflow-y-auto pr-1">
-                            {estudiantesAfectadosStats.porNivel.map(([niv, count]) => (
-                                <div key={niv} className="flex items-center justify-between text-xs bg-white p-2 rounded-xl border border-slate-200/60 shadow-2xs">
-                                    <span className="font-bold text-slate-800">{niv}</span>
-                                    <span className="font-black text-amber-600">~{formatNumber(count)} est.</span>
-                                </div>
-                            ))}
+                            {estudiantesAfectadosStats.porNivel.length > 0 ? (
+                                estudiantesAfectadosStats.porNivel.map(([niv, count]) => (
+                                    <div key={niv} className="flex items-center justify-between text-xs bg-white p-2 rounded-xl border border-slate-200/60 shadow-2xs">
+                                        <span className="font-bold text-slate-800">{niv}</span>
+                                        <span className="font-black text-amber-600">~{formatNumber(count)} est.</span>
+                                    </div>
+                                ))
+                            ) : (
+                                <p className="text-xs text-slate-400 italic">No hay registros para este filtro.</p>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -620,7 +839,7 @@ export function ResumenView({ data }: ResumenViewProps) {
                     {ranking.map((item, index) => {
                         const style = statusStyle(item.dictamen);
                         const positive = item.deficit >= 0;
-                        const width = Math.abs(item.deficit) / maxDeficit * 100;
+                        const width = (Math.abs(item.deficit) / maxDeficit) * 100;
 
                         return (
                             <div key={item.nombre}>
