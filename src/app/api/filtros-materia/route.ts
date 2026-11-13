@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
+import { ESPECIALIDAD_SUBMATERIAS_MAP } from '@/lib/constants/submaterias';
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://dwretdtwyqsltylvnvld.supabase.co';
 const SUPABASE_KEY =
@@ -115,6 +116,7 @@ export async function GET(req: NextRequest) {
           subsistemas: Array.from(relData.subs),
           niveles: Array.from(relData.nivs),
           materias: Array.from(relData.mats),
+          submaterias_afines: ESPECIALIDAD_SUBMATERIAS_MAP[espId] || [],
           operador_carga: localData?.operador_carga || null,
           carga_especialidad: localData?.carga_especialidad || null,
           materias_condiciones: localData?.materias_condiciones || [],
@@ -123,7 +125,10 @@ export async function GET(req: NextRequest) {
           updated_at: localData?.updated_at || new Date().toISOString(),
         });
       } else if (localData) {
-        result.push(localData);
+        result.push({
+          ...localData,
+          submaterias_afines: ESPECIALIDAD_SUBMATERIAS_MAP[espId] || [],
+        });
       }
     });
 

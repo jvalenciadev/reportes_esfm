@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import materiasCatalogoMapRaw from '@/data/materiasPorSubsistemaNivel.json';
+import { ESPECIALIDAD_SUBMATERIAS_MAP } from '@/lib/constants/submaterias';
 import {
   GraduationCapIcon,
   CheckIcon,
@@ -588,6 +589,30 @@ export function FiltrosMateriaManager() {
                   {filtro?.descripcion && (
                     <div className="text-[11px] text-slate-500 italic">&quot;{filtro.descripcion}&quot;</div>
                   )}
+
+                  {ESPECIALIDAD_SUBMATERIAS_MAP[especialidad.id] && ESPECIALIDAD_SUBMATERIAS_MAP[especialidad.id].length > 0 && (
+                    <div className="pt-2 border-t border-slate-100">
+                      <div className="flex items-center gap-1.5 mb-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0" />
+                        <span className="text-slate-500 font-bold text-[10px] uppercase tracking-wider">
+                          Sub-materias Técnicas Vinculadas (Cálculo Automático):
+                        </span>
+                      </div>
+                      <div className="flex flex-wrap gap-1">
+                        {ESPECIALIDAD_SUBMATERIAS_MAP[especialidad.id].map((sm) => (
+                          <span
+                            key={sm}
+                            className="px-2 py-0.5 rounded bg-amber-50 text-amber-900 border border-amber-200 text-[10px] font-semibold"
+                          >
+                            {sm}
+                          </span>
+                        ))}
+                      </div>
+                      <span className="text-[10px] text-slate-400 italic block mt-0.5">
+                        Asociadas a Técnica Tecnológica (General / Especializada)
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
             );
@@ -657,6 +682,28 @@ export function FiltrosMateriaManager() {
 
             {/* Cuerpo del Editor */}
             <div className="p-6 space-y-5 overflow-y-auto flex-1 text-xs">
+              {/* Banner de Sub-materias Técnicas Vinculadas por Parecido */}
+              {ESPECIALIDAD_SUBMATERIAS_MAP[editingItem.especialidad_oficial_id] && (
+                <div className="p-3.5 bg-amber-50/80 border border-amber-200 rounded-xl text-xs text-amber-950 flex items-start gap-3">
+                  <span className="text-lg leading-none shrink-0 mt-0.5">⚙️</span>
+                  <div className="space-y-1">
+                    <strong className="font-bold text-amber-950 block text-[11px] uppercase tracking-wider">
+                      Sub-materias Técnicas Vinculadas (Cálculo Automático por Parecido)
+                    </strong>
+                    <div className="flex flex-wrap gap-1 mt-1">
+                      {ESPECIALIDAD_SUBMATERIAS_MAP[editingItem.especialidad_oficial_id].map((sm) => (
+                        <span key={sm} className="px-2 py-0.5 rounded bg-white text-amber-900 border border-amber-300 font-bold text-[10px] shadow-2xs">
+                          {sm}
+                        </span>
+                      ))}
+                    </div>
+                    <p className="text-[11px] text-amber-800 leading-relaxed mt-1">
+                      El sistema computa automáticamente el déficit de las materias genéricas (<em>Técnica Tecnológica, General y Especializada</em>) que contienen estas sub-materias, sumándolas a esta especialidad sin necesidad de asignarlas manualmente.
+                    </p>
+                  </div>
+                </div>
+              )}
+
               {/* PASO 1: SUBSISTEMA */}
               <div
                 className={`p-4 rounded-xl border space-y-3 transition-all ${pasoActual === 1

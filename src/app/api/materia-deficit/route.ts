@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import path from 'path';
 import fs from 'fs';
+import { ESPECIALIDAD_SUBMATERIAS_MAP, GENERIC_TECNICA_MATERIAS } from '@/lib/constants/submaterias';
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://dwretdtwyqsltylvnvld.supabase.co';
 const SUPABASE_KEY =
@@ -199,12 +200,14 @@ export async function GET(req: NextRequest) {
 
       // Consultar en sie_deficit_materia de Supabase para este departamento
       try {
-        const matOrConditions = materiasList
-          .flatMap((m) => [
+        const targetSubMaterias = ESPECIALIDAD_SUBMATERIAS_MAP[especialidadId] || [];
+        const matOrConditions = [
+          ...materiasList.flatMap((m) => [
             `materia.ilike.*${encodeURIComponent(m)}*`,
             `sub_materia.ilike.*${encodeURIComponent(m)}*`,
-          ])
-          .join(',');
+          ]),
+          ...targetSubMaterias.map((sm) => `sub_materia.ilike.*${encodeURIComponent(sm)}*`),
+        ].join(',');
 
         const fieldsWithSub = 'cod_ue,ue,cod_dep,departamento,cod_dis,distrito,area,subsistema,nivel,grado,paralelo,materia,sub_materia,hora_tra,hora_pla,deficit';
         const fieldsFallback = 'cod_ue,ue,cod_dep,departamento,cod_dis,distrito,area,subsistema,nivel,grado,paralelo,materia,hora_tra,hora_pla,deficit';
@@ -301,17 +304,26 @@ export async function GET(req: NextRequest) {
       const rowNivel = String(row.n || '').toUpperCase();
       const depId = Number(row.d);
 
-      // 1. Coincidencia de Materia o Sub-materia (exacta o contenida)
-      const matMatched = materiasList.some((m) =>
+      // 1. Coincidencia por Materia Regular o por Sub-materia Técnica afín
+      const targetSubMaterias = ESPECIALIDAD_SUBMATERIAS_MAP[especialidadId] || [];
+      const isGenericTec = GENERIC_TECNICA_MATERIAS.some((gt) => matchesMateria(rowMateria, gt));
+      const tecMatched = Boolean(
+        isGenericTec && rowSubMateria && targetSubMaterias.some((ts) => matchesMateria(rowSubMateria, ts))
+      );
+      const regMatched = materiasList.some((m) =>
         matchesMateria(rowMateria, m) || (rowSubMateria && matchesMateria(rowSubMateria, m))
       );
-      if (!matMatched) return;
 
-      // 2. Coincidencia de Subsistema (si está especificado)
-      if (subsistemasList.length > 0 && !subsistemasList.includes(rowSubsistema)) return;
+      if (!regMatched && !tecMatched) return;
 
-      // 3. Coincidencia de Nivel (si está especificado)
-      if (nivelesList.length > 0 && !nivelesList.includes(rowNivel)) return;
+      // 2. Coincidencia de Subsistema y Nivel
+      if (regMatched && !tecMatched) {
+        if (subsistemasList.length > 0 && !subsistemasList.includes(rowSubsistema)) return;
+        if (nivelesList.length > 0 && !nivelesList.includes(rowNivel)) return;
+      } else {
+        // Las sub-materias de Técnica Tecnológica pertenecen al subsistema regular (Primaria y Secundaria)
+        if (subsistemasList.length > 0 && !subsistemasList.includes(rowSubsistema)) return;
+      }
 
       const carga = Number(row.c) || 0;
       const pla = Number(row.p) || 0;
