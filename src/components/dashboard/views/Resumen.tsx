@@ -1,14 +1,10 @@
 'use client';
 
 import React, { useMemo, useState, useEffect } from 'react';
-import Papa, { ParseResult } from 'papaparse';
 import {
-    BarChart3,
     CheckCircle2,
     AlertTriangle,
-    XCircle,
     Search,
-    Sparkles,
     ShieldCheck,
     GraduationCap,
     Users,
@@ -18,7 +14,6 @@ import {
     Layers3,
     ChartNoAxesCombined,
     PieChart,
-    SearchX,
     RefreshCw,
     Filter,
     Lightbulb,
@@ -28,32 +23,50 @@ import {
 
 import { DashboardDataset } from '@/types/stats';
 
+// ─── Tipos robustos para la API de Pertinencia ───────────────────────────────
+
+type Rango = 'V' | 'A' | 'N' | 'SIN';
+
+interface RangoSummary {
+    rango: Rango | string;
+    docentes: number;
+    asignaciones?: number;
+    ues: number;
+    horas_total?: number;
+    estudiantes_atendidos?: number;
+}
+
+interface DepartamentoRangos {
+    departamento: string;
+    rangos: Record<Rango, { docentes: number; ues: number; horas: number }>;
+}
+
+interface NivelRangos {
+    nivel: string;
+    rangos: Record<Rango, { docentes: number; ues: number; horas: number }>;
+}
+
+interface EspecialidadItem {
+    especialidad: string;
+    docentes: number;
+    ues: number;
+    horas: number;
+    rangos: Record<Rango, { docentes: number; ues: number; horas: number }>;
+    por_departamento: Record<string, Record<Rango | 'total', number>>;
+}
+
+interface PertinenciaData {
+    resumen?: Record<Rango | 'TOTAL', RangoSummary & { docentes: number; ues: number; estudiantes_atendidos?: number }>;
+    por_departamento?: DepartamentoRangos[];
+    por_nivel?: NivelRangos[];
+    por_especialidad?: EspecialidadItem[];
+}
+
 interface ResumenViewProps {
     data?: DashboardDataset;
 }
 
 type Dictamen = 'TODOS' | 'ABRIR' | 'REGULAR' | 'CONGELAR';
-
-interface PertinenciaRow {
-    Departamento?: string;
-    Nivel?: string;
-    Especialidad?: string;
-    Cargo?: string;
-    color?: string;
-    Pertinencia?: string;
-    PERTINENCIA?: string;
-    RDA?: string | number;
-}
-
-interface SichRow {
-    GESTION?: string;
-    DEPARTAMENTO?: string;
-    NIVEL?: string;
-    'N° DE ESTUDIANTES'?: string | number;
-    RDA?: string | number;
-    CI?: string | number;
-    CARGO?: string;
-}
 
 const especialidadesBase = [
     { nombre: 'Matemática', nivel: 'Secundaria', dictamen: 'ABRIR', par: 3, deficit: 101 },
@@ -70,97 +83,177 @@ const COLORS = {
     ALTA: '#10b981',      // V - Verde
     MEDIA: '#3b82f6',     // A - Azul
     BAJA: '#f97316',      // N - Naranja
-    NOPERT: '#f43f5e',    // Vacío - No pertinente
+    NOPERT: '#f43f5e',    // SIN - No pertinente
 };
 
 const formatNumber = (n: number) =>
-    new Intl.NumberFormat('es-BO').format(n);
+    new Intl.NumberFormat('es-BO').format(Math.round(n || 0));
 
 export function ResumenView({ data }: ResumenViewProps) {
     const [filterDictamen, setFilterDictamen] = useState<Dictamen>('TODOS');
     const [searchTerm, setSearchTerm] = useState('');
 
-    const [csvRows, setCsvRows] = useState<PertinenciaRow[]>([]);
-    const [sichRows, setSichRows] = useState<SichRow[]>([]);
+    const [pertinenciaData, setPertinenciaData] = useState<PertinenciaData | null>(null);
     const [loadingFiles, setLoadingFiles] = useState(true);
+    const [fileError, setFileError] = useState<string | null>(null);
 
     const [selectedDpto, setSelectedDpto] = useState('TODOS');
     const [selectedNivel, setSelectedNivel] = useState('TODOS');
     const [selectedEspFilter, setSelectedEspFilter] = useState('TODOS');
 
-    // 1. Cargar Pertinencia CSV
+    // 1. Carga flexible y robusta adaptada a cualquier formato que devuelva /api/pertinencia
     useEffect(() => {
-        Papa.parse<PertinenciaRow>('/datos/Pertinencia a nivel nacional164000.csv', {
-            download: true,
-            header: true,
-            skipEmptyLines: true,
-            complete: (results) => {
-                setCsvRows(results.data);
-            },
-        });
+        let cancelado = false;
+
+        setLoadingFiles(true);
+        setFileError(null);
+
+        fetch('/api/pertinencia', { cache: 'no-store' })
+            .then(async (r) => {
+                const json = await r.json();
+                if (!r.ok) {
+                    throw new Error(json?.error || 'Error al obtener datos de pertinencia');
+                }
+                return json;
+            })
+            .then((resRaw) => {
+                if (cancelado) return;
+
+                let payload: PertinenciaData = resRaw;
+                if (resRaw && typeof resRaw === 'object' && 'data' in resRaw) {
+                    payload = resRaw.data;
+                }
+
+                if (Array.isArray(payload)) {
+                    const filas = payload;
+                    const resumenMap: Record<string, any> = {
+                        V: { rango: 'V', docentes: 0, ues: 0 },
+                        A: { rango: 'A', docentes: 0, ues: 0 },
+                        N: { rango: 'N', docentes: 0, ues: 0 },
+                        SIN: { rango: 'SIN', docentes: 0, ues: 0 },
+                        TOTAL: { rango: 'TOTAL', docentes: 0, ues: 0 }
+                    };
+
+                    filas.forEach((f: any) => {
+                        const color = String(f.color || f.Pertinencia || f.PERTINENCIA || '').trim().toUpperCase();
+                        const key = ['V', 'A', 'N', 'SIN'].includes(color) ? color : 'SIN';
+                        resumenMap[key].docentes += 1;
+                        resumenMap['TOTAL'].docentes += 1;
+                    });
+
+                    payload = {
+                        resumen: resumenMap as any,
+                        por_departamento: [],
+                        por_nivel: [],
+                        por_especialidad: []
+                    };
+                }
+
+                if (!payload || !payload.resumen) {
+                    payload = {
+                        resumen: {
+                            V: { rango: 'V', docentes: 0, ues: 0 },
+                            A: { rango: 'A', docentes: 0, ues: 0 },
+                            N: { rango: 'N', docentes: 0, ues: 0 },
+                            SIN: { rango: 'SIN', docentes: 0, ues: 0 },
+                            TOTAL: { rango: 'TOTAL', docentes: 0, ues: 0 }
+                        },
+                        por_departamento: payload?.por_departamento || [],
+                        por_nivel: payload?.por_nivel || [],
+                        por_especialidad: payload?.por_especialidad || []
+                    };
+                }
+
+                setPertinenciaData(payload);
+                setLoadingFiles(false);
+            })
+            .catch((e) => {
+                if (!cancelado) {
+                    setFileError(e instanceof Error ? e.message : String(e));
+                    setLoadingFiles(false);
+                }
+            });
+
+        return () => {
+            cancelado = true;
+        };
     }, []);
 
-    // 2. Cargar SOLICITUD SICH.csv desde public/
-    useEffect(() => {
-        Papa.parse<SichRow>('/datos/SOLICITUDSICH.csv', {
-            download: true,
-            header: true,
-            delimiter: ';',
-            skipEmptyLines: true,
-            complete: (results) => {
-                setSichRows(results.data);
-                setLoadingFiles(false);
-            },
-            error: () => {
-                setLoadingFiles(false);
-            }
-        });
-    }, []);
-
+    // Listas para selectores
     const departamentosList = useMemo(() => {
-        const setDptos = new Set(csvRows.map(r => String(r.Departamento || '').trim()).filter(Boolean));
-        return Array.from(setDptos).sort();
-    }, [csvRows]);
+        if (!pertinenciaData?.por_departamento) return [];
+        return pertinenciaData.por_departamento.map(d => d.departamento).filter(Boolean).sort();
+    }, [pertinenciaData]);
 
     const nivelesList = useMemo(() => {
-        const setNiveles = new Set(csvRows.map(r => String(r.Nivel || '').trim()).filter(Boolean));
-        return Array.from(setNiveles).sort();
-    }, [csvRows]);
+        if (!pertinenciaData?.por_nivel) return [];
+        return pertinenciaData.por_nivel.map(n => n.nivel).filter(Boolean).sort();
+    }, [pertinenciaData]);
 
     const especialidadesList = useMemo(() => {
-        const setEsps = new Set(csvRows.map(r => String(r.Especialidad || '').trim()).filter(Boolean));
-        return Array.from(setEsps).sort();
-    }, [csvRows]);
+        if (!pertinenciaData?.por_especialidad) return [];
+        return pertinenciaData.por_especialidad.map(e => e.especialidad).filter(Boolean).sort();
+    }, [pertinenciaData]);
 
-    const filteredCsvRows = useMemo(() => {
-        return csvRows.filter(r => {
-            const dpto = String(r.Departamento || '').trim();
-            const nivel = String(r.Nivel || '').trim();
-            const esp = String(r.Especialidad || '').trim();
+    // 2. Cálculo dinámico de estadísticas con filtros cruzados
+    const pertStats = useMemo(() => {
+        if (!pertinenciaData || !pertinenciaData.resumen) {
+            return { total: 0, pertinentes: 0, impertinentes: 0, alta: 0, media: 0, baja: 0, noPert: 0, pctAlta: 0, pctMedia: 0, pctBaja: 0, pctNoPert: 0, pctPertinente: 0 };
+        }
 
-            const matchDpto = selectedDpto === 'TODOS' || dpto.toUpperCase() === selectedDpto.toUpperCase();
-            const matchNivel = selectedNivel === 'TODOS' || nivel.toUpperCase() === selectedNivel.toUpperCase();
-            const matchEsp = selectedEspFilter === 'TODOS' || esp.toUpperCase() === selectedEspFilter.toUpperCase();
-
-            return matchDpto && matchNivel && matchEsp;
-        });
-    }, [csvRows, selectedDpto, selectedNivel, selectedEspFilter]);
-
-    const csvStats = useMemo(() => {
         let alta = 0;   // V
         let media = 0;  // A
         let baja = 0;   // N
-        let noPert = 0; // Vacío
+        let noPert = 0; // SIN
 
-        filteredCsvRows.forEach(r => {
-            const color = String(r.color || '').trim().toUpperCase();
-            if (color === 'V') alta++;
-            else if (color === 'A') media++;
-            else if (color === 'N') baja++;
-            else noPert++;
-        });
+        if (selectedEspFilter !== 'TODOS' && pertinenciaData.por_especialidad) {
+            const espObj = pertinenciaData.por_especialidad.find(
+                e => e.especialidad.toUpperCase() === selectedEspFilter.toUpperCase()
+            );
+            if (espObj) {
+                if (selectedDpto !== 'TODOS') {
+                    const depStats = espObj.por_departamento?.[selectedDpto];
+                    if (depStats) {
+                        alta = depStats.V ?? 0;
+                        media = depStats.A ?? 0;
+                        baja = depStats.N ?? 0;
+                        noPert = depStats.SIN ?? 0;
+                    }
+                } else {
+                    alta = espObj.rangos?.V?.docentes ?? 0;
+                    media = espObj.rangos?.A?.docentes ?? 0;
+                    baja = espObj.rangos?.N?.docentes ?? 0;
+                    noPert = espObj.rangos?.SIN?.docentes ?? 0;
+                }
+            }
+        } else if (selectedDpto !== 'TODOS' && pertinenciaData.por_departamento) {
+            const depObj = pertinenciaData.por_departamento.find(
+                d => d.departamento.toUpperCase() === selectedDpto.toUpperCase()
+            );
+            if (depObj && depObj.rangos) {
+                alta = depObj.rangos.V?.docentes ?? 0;
+                media = depObj.rangos.A?.docentes ?? 0;
+                baja = depObj.rangos.N?.docentes ?? 0;
+                noPert = depObj.rangos.SIN?.docentes ?? 0;
+            }
+        } else if (selectedNivel !== 'TODOS' && pertinenciaData.por_nivel) {
+            const nivObj = pertinenciaData.por_nivel.find(
+                n => n.nivel.toUpperCase() === selectedNivel.toUpperCase()
+            );
+            if (nivObj && nivObj.rangos) {
+                alta = nivObj.rangos.V?.docentes ?? 0;
+                media = nivObj.rangos.A?.docentes ?? 0;
+                baja = nivObj.rangos.N?.docentes ?? 0;
+                noPert = nivObj.rangos.SIN?.docentes ?? 0;
+            }
+        } else {
+            alta = pertinenciaData.resumen.V?.docentes ?? 0;
+            media = pertinenciaData.resumen.A?.docentes ?? 0;
+            baja = pertinenciaData.resumen.N?.docentes ?? 0;
+            noPert = pertinenciaData.resumen.SIN?.docentes ?? 0;
+        }
 
-        const total = filteredCsvRows.length;
+        const total = alta + media + baja + noPert;
         const pertinentes = alta + media + baja;
 
         return {
@@ -177,53 +270,45 @@ export function ResumenView({ data }: ResumenViewProps) {
             pctNoPert: total ? Number(((noPert / total) * 100).toFixed(1)) : 0,
             pctPertinente: total ? Number(((pertinentes / total) * 100).toFixed(1)) : 0,
         };
-    }, [filteredCsvRows]);
+    }, [pertinenciaData, selectedDpto, selectedNivel, selectedEspFilter]);
 
-    // 3. CRUCE INTELIGENTE ROBUSTO ENTRE SICH Y PERTINENCIA POR RDA
-    const sichAfectadosStats = useMemo(() => {
-        const pertinenciaMap = new Map<string, string>();
+    // 3. Estudiantes afectados calculados a partir de los rangos SIN / N
+    const estudiantesAfectadosStats = useMemo(() => {
+        if (!pertinenciaData?.resumen) {
+            return { totalEstudiantesAfectados: 0, porDpto: [] as [string, number][], porNivel: [] as [string, number][] };
+        }
 
-        csvRows.forEach(r => {
-            const rda = String(r.RDA || '').trim().replace(/\.0$/, '');
-            const pert = String(r.Pertinencia || r.PERTINENCIA || '').trim().toUpperCase();
-            if (rda && rda !== '0' && rda !== '') {
-                pertinenciaMap.set(rda, pert);
-            }
-        });
+        const totalDocSin = pertinenciaData.resumen.SIN?.docentes || 1;
+        const estSinNacional = pertinenciaData.resumen.SIN?.estudiantes_atendidos;
+        const ratioEstudiantes = estSinNacional ? estSinNacional / totalDocSin : 48;
 
-        let totalEstudiantesAfectados = 0;
-        const porDpto: Record<string, number> = {};
-        const porNivel: Record<string, number> = {};
+        const porDpto: [string, number][] = (pertinenciaData.por_departamento || [])
+            .filter(d => selectedDpto === 'TODOS' || d.departamento.toUpperCase() === selectedDpto.toUpperCase())
+            .map(d => {
+                const docSin = d.rangos?.SIN?.docentes ?? 0;
+                return [d.departamento, Math.round(docSin * ratioEstudiantes)] as [string, number];
+            })
+            .sort((a, b) => b[1] - a[1]);
 
-        sichRows.forEach(r => {
-            const rdaSich = String(r.RDA || '').trim().replace(/\.0$/, '');
-            const dpto = String(r.DEPARTAMENTO || '').trim();
-            const nivel = String(r.NIVEL || '').trim();
-            const estVal = Number(r['N° DE ESTUDIANTES'] || 0);
+        const porNivel: [string, number][] = (pertinenciaData.por_nivel || [])
+            .filter(n => selectedNivel === 'TODOS' || n.nivel.toUpperCase() === selectedNivel.toUpperCase())
+            .map(n => {
+                const docSin = n.rangos?.SIN?.docentes ?? 0;
+                return [n.nivel || 'No especificado', Math.round(docSin * ratioEstudiantes)] as [string, number];
+            })
+            .sort((a, b) => b[1] - a[1]);
 
-            const estadoPertinencia = pertinenciaMap.get(rdaSich);
-            // Es impertinente si explícitamente dice 'NO' o si el RDA no figura en la planilla de pertinencia
-            const esImpertinente = estadoPertinencia === 'NO' || !estadoPertinencia;
+        const totalEstudiantesAfectados =
+            selectedDpto === 'TODOS' && selectedNivel === 'TODOS' && estSinNacional !== undefined
+                ? estSinNacional
+                : porDpto.reduce((acc, [, val]) => acc + val, 0);
 
-            if (esImpertinente) {
-                if (selectedDpto === 'TODOS' || dpto.toUpperCase() === selectedDpto.toUpperCase()) {
-                    totalEstudiantesAfectados += estVal;
-                    porDpto[dpto] = (porDpto[dpto] || 0) + estVal;
-                    porNivel[nivel] = (porNivel[nivel] || 0) + estVal;
-                }
-            }
-        });
+        return { totalEstudiantesAfectados, porDpto, porNivel };
+    }, [pertinenciaData, selectedDpto, selectedNivel]);
 
-        return {
-            totalEstudiantesAfectados,
-            porDpto: Object.entries(porDpto).sort((a, b) => b[1] - a[1]),
-            porNivel: Object.entries(porNivel).sort((a, b) => b[1] - a[1]),
-        };
-    }, [csvRows, sichRows, selectedDpto]);
-
-    // Generador dinámico de interpretación estratégica
+    // Interpretación estratégica automática
     const interpretacionDinamica = useMemo(() => {
-        const { pctAlta, pctMedia, pctBaja, pctNoPert, total } = csvStats;
+        const { pctAlta, pctMedia, pctBaja, pctNoPert, total } = pertStats;
         const filtroTexto = `[Filtros activos -> Depto: ${selectedDpto} | Nivel: ${selectedNivel} | Especialidad: ${selectedEspFilter === 'TODOS' ? 'Todas' : selectedEspFilter}]`;
 
         if (total === 0) {
@@ -251,12 +336,8 @@ export function ResumenView({ data }: ResumenViewProps) {
             recomendacionFormacion = `Mantener un monitoreo trimestral del RDA y coordinar con las direcciones departamentales la apertura selectiva de paralelos en las ESFM.`;
         }
 
-        return {
-            mensajePrincipal,
-            recomendacionFormacion,
-            filtroTexto,
-        };
-    }, [csvStats, selectedDpto, selectedNivel, selectedEspFilter]);
+        return { mensajePrincipal, recomendacionFormacion, filtroTexto };
+    }, [pertStats, selectedDpto, selectedNivel, selectedEspFilter]);
 
     const stats = useMemo(() => {
         const abrir = especialidadesBase.filter(e => e.dictamen === 'ABRIR').length;
@@ -292,10 +373,10 @@ export function ResumenView({ data }: ResumenViewProps) {
 
     const donutStyle = {
         background: `conic-gradient(
-            ${COLORS.ALTA} 0% ${csvStats.pctAlta}%,
-            ${COLORS.MEDIA} ${csvStats.pctAlta}% ${csvStats.pctAlta + csvStats.pctMedia}%,
-            ${COLORS.BAJA} ${csvStats.pctAlta + csvStats.pctMedia}% ${csvStats.pctAlta + csvStats.pctMedia + csvStats.pctBaja}%,
-            ${COLORS.NOPERT} ${csvStats.pctAlta + csvStats.pctMedia + csvStats.pctBaja}% 100%
+            ${COLORS.ALTA} 0% ${pertStats.pctAlta}%,
+            ${COLORS.MEDIA} ${pertStats.pctAlta}% ${pertStats.pctAlta + pertStats.pctMedia}%,
+            ${COLORS.BAJA} ${pertStats.pctAlta + pertStats.pctMedia}% ${pertStats.pctAlta + pertStats.pctMedia + pertStats.pctBaja}%,
+            ${COLORS.NOPERT} ${pertStats.pctAlta + pertStats.pctMedia + pertStats.pctBaja}% 100%
         )`
     };
 
@@ -331,7 +412,7 @@ export function ResumenView({ data }: ResumenViewProps) {
                         </h1>
 
                         <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-300">
-                            Cruce automatizado entre planillas de pertinencia y solicitudes SICH sobre {formatNumber(csvStats.total)} registros procesados.
+                            Cruce automatizado de pertinencia curricular sobre {formatNumber(pertStats.total)} docentes evaluados en el padrón oficial.
                         </p>
                     </div>
 
@@ -351,7 +432,7 @@ export function ResumenView({ data }: ResumenViewProps) {
                     </div>
                     {loadingFiles && (
                         <span className="flex items-center gap-1.5 text-xs text-indigo-600 font-bold animate-pulse">
-                            <RefreshCw className="w-4 h-4 animate-spin" /> Cruzando bases de datos...
+                            <RefreshCw className="w-4 h-4 animate-spin" /> Cargando diagnóstico de pertinencia...
                         </span>
                     )}
                 </div>
@@ -361,7 +442,10 @@ export function ResumenView({ data }: ResumenViewProps) {
                         <label className="font-bold text-slate-600">Departamento:</label>
                         <select
                             value={selectedDpto}
-                            onChange={(e) => setSelectedDpto(e.target.value)}
+                            onChange={(e) => {
+                                setSelectedDpto(e.target.value);
+                                if (e.target.value !== 'TODOS') setSelectedNivel('TODOS');
+                            }}
                             className="w-full rounded-xl border border-slate-200 bg-slate-50 p-2.5 font-semibold text-slate-800 outline-none focus:bg-white focus:ring-2 focus:ring-indigo-500/20"
                         >
                             <option value="TODOS">TODOS LOS DEPARTAMENTOS</option>
@@ -375,7 +459,13 @@ export function ResumenView({ data }: ResumenViewProps) {
                         <label className="font-bold text-slate-600">Nivel Educativo:</label>
                         <select
                             value={selectedNivel}
-                            onChange={(e) => setSelectedNivel(e.target.value)}
+                            onChange={(e) => {
+                                setSelectedNivel(e.target.value);
+                                if (e.target.value !== 'TODOS') {
+                                    setSelectedDpto('TODOS');
+                                    setSelectedEspFilter('TODOS');
+                                }
+                            }}
                             className="w-full rounded-xl border border-slate-200 bg-slate-50 p-2.5 font-semibold text-slate-800 outline-none focus:bg-white focus:ring-2 focus:ring-indigo-500/20"
                         >
                             <option value="TODOS">TODOS LOS NIVELES</option>
@@ -389,7 +479,10 @@ export function ResumenView({ data }: ResumenViewProps) {
                         <label className="font-bold text-slate-600">Especialidad:</label>
                         <select
                             value={selectedEspFilter}
-                            onChange={(e) => setSelectedEspFilter(e.target.value)}
+                            onChange={(e) => {
+                                setSelectedEspFilter(e.target.value);
+                                if (e.target.value !== 'TODOS') setSelectedNivel('TODOS');
+                            }}
                             className="w-full rounded-xl border border-slate-200 bg-slate-50 p-2.5 font-semibold text-slate-800 outline-none focus:bg-white focus:ring-2 focus:ring-indigo-500/20 truncate"
                         >
                             <option value="TODOS">TODAS LAS ESPECIALIDADES</option>
@@ -401,12 +494,19 @@ export function ResumenView({ data }: ResumenViewProps) {
                 </div>
             </section>
 
+            {fileError && (
+                <div className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-800">
+                    <p className="font-bold">Error al cargar los datos de pertinencia.</p>
+                    <p className="mt-1">{fileError}</p>
+                </div>
+            )}
+
             {/* KPI CARDS FILTRADAS */}
             <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-                <KpiCard title="Registros Filtrados" value={formatNumber(csvStats.total)} subtitle="Base actual seleccionada" icon={<BookOpen size={21} />} color="indigo" />
-                <KpiCard title="Pertinencia Alta (V)" value={formatNumber(csvStats.alta)} subtitle={`${csvStats.pctAlta}% del total`} icon={<CheckCircle2 size={21} />} color="emerald" />
-                <KpiCard title="Pertinencia Media (A)" value={formatNumber(csvStats.media)} subtitle={`${csvStats.pctMedia}% del total`} icon={<ShieldCheck size={21} />} color="indigo" />
-                <KpiCard title="Baja / No Pertinente" value={formatNumber(csvStats.baja + csvStats.noPert)} subtitle={`${(csvStats.pctBaja + csvStats.pctNoPert).toFixed(1)}% fuera de rango`} icon={<AlertTriangle size={21} />} color="rose" />
+                <KpiCard title="Docentes Evaluados" value={formatNumber(pertStats.total)} subtitle="Base actual seleccionada" icon={<BookOpen size={21} />} color="indigo" />
+                <KpiCard title="Pertinencia Alta (V)" value={formatNumber(pertStats.alta)} subtitle={`${pertStats.pctAlta}% del total`} icon={<CheckCircle2 size={21} />} color="emerald" />
+                <KpiCard title="Pertinencia Media (A)" value={formatNumber(pertStats.media)} subtitle={`${pertStats.pctMedia}% del total`} icon={<ShieldCheck size={21} />} color="indigo" />
+                <KpiCard title="Baja / Sin Pertinencia" value={formatNumber(pertStats.baja + pertStats.noPert)} subtitle={`${(pertStats.pctBaja + pertStats.pctNoPert).toFixed(1)}% fuera de rango`} icon={<AlertTriangle size={21} />} color="rose" />
             </section>
 
             {/* GRÁFICO DE DONA E INTERPRETACIÓN ESTRATÉGICA DINÁMICA */}
@@ -416,7 +516,7 @@ export function ResumenView({ data }: ResumenViewProps) {
                         <div className="flex items-center justify-between">
                             <div>
                                 <h2 className="font-black text-slate-900">Niveles de Pertinencia</h2>
-                                <p className="mt-1 text-xs text-slate-500">Desglose por colores (V, A, N) y No Pertinente</p>
+                                <p className="mt-1 text-xs text-slate-500">Desglose por rangos (V, A, N) y Sin Pertinencia</p>
                             </div>
                             <div className="rounded-xl bg-indigo-50 p-2.5 text-indigo-600"><PieChart size={20} /></div>
                         </div>
@@ -424,18 +524,18 @@ export function ResumenView({ data }: ResumenViewProps) {
                         <div className="flex justify-center py-6">
                             <div className="relative h-52 w-52 rounded-full transition-all duration-700 shadow-inner" style={donutStyle}>
                                 <div className="absolute inset-[17px] flex flex-col items-center justify-center rounded-full bg-white shadow-sm">
-                                    <span className="text-4xl font-black tracking-tight text-slate-900">{formatNumber(csvStats.total)}</span>
-                                    <span className="mt-1 text-[9px] font-black uppercase tracking-[0.15em] text-slate-400">Total registros</span>
+                                    <span className="text-4xl font-black tracking-tight text-slate-900">{formatNumber(pertStats.total)}</span>
+                                    <span className="mt-1 text-[9px] font-black uppercase tracking-[0.15em] text-slate-400">Total docentes</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div className="space-y-2.5 pt-2 border-t border-slate-100">
-                        <LegendItem label="Alta Pertinencia (Verde - V)" count={csvStats.alta} percentage={csvStats.pctAlta} color="bg-emerald-500" />
-                        <LegendItem label="Media Pertinencia (Azul - A)" count={csvStats.media} percentage={csvStats.pctMedia} color="bg-blue-500" />
-                        <LegendItem label="Baja Pertinencia (Naranja - N)" count={csvStats.baja} percentage={csvStats.pctBaja} color="bg-orange-500" />
-                        <LegendItem label="No Pertinente (Vacío)" count={csvStats.noPert} percentage={csvStats.pctNoPert} color="bg-rose-500" />
+                        <LegendItem label="Alta Pertinencia (Verde - V)" count={pertStats.alta} percentage={pertStats.pctAlta} color="bg-emerald-500" />
+                        <LegendItem label="Media Pertinencia (Azul - A)" count={pertStats.media} percentage={pertStats.pctMedia} color="bg-blue-500" />
+                        <LegendItem label="Baja Pertinencia (Naranja - N)" count={pertStats.baja} percentage={pertStats.pctBaja} color="bg-orange-500" />
+                        <LegendItem label="Sin Pertinencia (SIN)" count={pertStats.noPert} percentage={pertStats.pctNoPert} color="bg-rose-500" />
                     </div>
                 </div>
 
@@ -475,27 +575,27 @@ export function ResumenView({ data }: ResumenViewProps) {
                     <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-slate-300">
                         <span>Estado de Cobertura Docente</span>
                         <span className="font-black text-emerald-400 flex items-center gap-1">
-                            {csvStats.pctPertinente}% Pertinente <ArrowRight size={14} />
+                            {pertStats.pctPertinente}% Pertinente <ArrowRight size={14} />
                         </span>
                     </div>
                 </div>
             </section>
 
-            {/* SECCIÓN: ESTUDIANTES AFECTADOS POR DOCENTES IMPERTINENTES (CRUCE SICH + PERTINENCIA) */}
+            {/* SECCIÓN: ESTUDIANTES AFECTADOS POR DOCENTES SIN PERTINENCIA */}
             <section className="rounded-[26px] border border-slate-200 bg-white p-5 sm:p-7 shadow-sm space-y-6">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
                         <h2 className="text-lg font-black text-slate-900 flex items-center gap-2">
                             <FileSpreadsheet className="w-5 h-5 text-indigo-600" />
-                            Estudiantes Afectados por Docentes Impertinentes (Cruce SICH)
+                            Estudiantes Afectados por Docentes Sin Pertinencia
                         </h2>
                         <p className="mt-1 text-xs text-slate-500">
-                            Matrícula estudiantil atendida por docentes sin pertinencia en {selectedDpto === 'TODOS' ? 'todos los departamentos' : selectedDpto}
+                            Matrícula estudiantil estimada atendida por docentes sin pertinencia en {selectedDpto === 'TODOS' ? 'todos los departamentos' : selectedDpto}
                         </p>
                     </div>
                     <div className="bg-rose-50 border border-rose-100 rounded-2xl px-4 py-2 text-right">
-                        <span className="text-[10px] font-bold text-rose-600 uppercase block">Estudiantes con Docentes Impertinentes</span>
-                        <span className="text-lg font-black text-rose-900">{formatNumber(sichAfectadosStats.totalEstudiantesAfectados)}</span>
+                        <span className="text-[10px] font-bold text-rose-600 uppercase block">Estudiantes con Docentes Sin Pertinencia</span>
+                        <span className="text-lg font-black text-rose-900">~{formatNumber(estudiantesAfectadosStats.totalEstudiantesAfectados)}</span>
                     </div>
                 </div>
 
@@ -503,11 +603,11 @@ export function ResumenView({ data }: ResumenViewProps) {
                     <div className="rounded-2xl border border-slate-100 bg-slate-50/70 p-4 space-y-3">
                         <h3 className="text-xs font-black uppercase tracking-wider text-slate-700">Afectados por Departamento</h3>
                         <div className="space-y-2 max-h-56 overflow-y-auto pr-1">
-                            {sichAfectadosStats.porDpto.length > 0 ? (
-                                sichAfectadosStats.porDpto.map(([dpto, count]) => (
+                            {estudiantesAfectadosStats.porDpto.length > 0 ? (
+                                estudiantesAfectadosStats.porDpto.map(([dpto, count]) => (
                                     <div key={dpto} className="flex items-center justify-between text-xs bg-white p-2 rounded-xl border border-slate-200/60 shadow-2xs">
                                         <span className="font-bold text-slate-800">{dpto}</span>
-                                        <span className="font-black text-rose-600">{formatNumber(count)} est.</span>
+                                        <span className="font-black text-rose-600">~{formatNumber(count)} est.</span>
                                     </div>
                                 ))
                             ) : (
@@ -519,11 +619,11 @@ export function ResumenView({ data }: ResumenViewProps) {
                     <div className="rounded-2xl border border-slate-100 bg-slate-50/70 p-4 space-y-3">
                         <h3 className="text-xs font-black uppercase tracking-wider text-slate-700">Afectados por Nivel Educativo</h3>
                         <div className="space-y-2 max-h-56 overflow-y-auto pr-1">
-                            {sichAfectadosStats.porNivel.length > 0 ? (
-                                sichAfectadosStats.porNivel.map(([niv, count]) => (
+                            {estudiantesAfectadosStats.porNivel.length > 0 ? (
+                                estudiantesAfectadosStats.porNivel.map(([niv, count]) => (
                                     <div key={niv} className="flex items-center justify-between text-xs bg-white p-2 rounded-xl border border-slate-200/60 shadow-2xs">
                                         <span className="font-bold text-slate-800">{niv}</span>
-                                        <span className="font-black text-amber-600">{formatNumber(count)} est.</span>
+                                        <span className="font-black text-amber-600">~{formatNumber(count)} est.</span>
                                     </div>
                                 ))
                             ) : (
