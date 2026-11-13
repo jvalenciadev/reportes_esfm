@@ -883,7 +883,7 @@ export default function PertinenciaView() {
                       </div>
                     </div>
                     <div className="text-right shrink-0">
-                      <span className="text-3xl font-black text-[#c9a751]">~3.9M</span>
+                      <span className="text-3xl font-black text-[#c9a751]">~1.58M</span>
                       <span className="text-xs text-slate-400 block font-semibold">Alumnos impactados</span>
                     </div>
                   </div>
@@ -929,8 +929,8 @@ export default function PertinenciaView() {
                       />
                     </div>
                     <div className="flex justify-between text-[10px] text-slate-500 font-semibold mt-1.5">
-                      <span className="text-[#c9a751] font-black">~3,899,892 alumnos (55.5%)</span>
-                      <span>{fmt(data.resumen.TOTAL?.estudiantes_atendidos)} total</span>
+                      <span className="text-[#c9a751] font-black">~1,575,817 alumnos (55.5%)</span>
+                      <span>{fmt(data.resumen.TOTAL?.estudiantes_atendidos)} matrícula total</span>
                     </div>
                   </div>
                 </div>

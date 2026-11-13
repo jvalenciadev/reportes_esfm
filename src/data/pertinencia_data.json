@@ -6,7 +6,7 @@
       "asignaciones": 48580,
       "ues": 1762,
       "horas_total": 4417887,
-      "estudiantes_atendidos": 1953495
+      "estudiantes_atendidos": 789179
     },
     "A": {
       "rango": "A",
@@ -14,7 +14,7 @@
       "asignaciones": 82779,
       "ues": 1433,
       "horas_total": 7858329,
-      "estudiantes_atendidos": 3684192
+      "estudiantes_atendidos": 1488674
     },
     "N": {
       "rango": "N",
@@ -22,7 +22,7 @@
       "asignaciones": 4760,
       "ues": 657,
       "horas_total": 425780,
-      "estudiantes_atendidos": 215700
+      "estudiantes_atendidos": 87143
     },
     "SIN": {
       "rango": "SIN",
@@ -30,14 +30,14 @@
       "asignaciones": 28329,
       "ues": 1907,
       "horas_total": 2465276,
-      "estudiantes_atendidos": 1174185
+      "estudiantes_atendidos": 474513
     },
     "TOTAL": {
       "docentes": 147096,
       "asignaciones": 164448,
       "ues": 2264,
       "horas_total": 15167272,
-      "estudiantes_atendidos": 7027572
+      "estudiantes_atendidos": 2839509
     }
   },
   "desalineacion": {
