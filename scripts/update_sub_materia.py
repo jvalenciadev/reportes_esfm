@@ -120,3 +120,4 @@ print(f"Grupos agregados con sub_materia: {len(sm_groups)}")
 print("Muestra:")
 for g in sm_groups[:5]:
     print(f"  {g['m']} | sm='{g['sm']}' | {g['s']} | {g['n']} | dep={g['dep']} | def={g['def']}")
+

@@ -162,3 +162,4 @@ else:
 print("=" * 60)
 print("SINCRONIZACIÓN COMPLETA")
 print("=" * 60)
+
