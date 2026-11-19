@@ -110,6 +110,8 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
   // Ordenamiento tabla
   const [sortBy, setSortBy] = useState<'deficit' | 'ues' | 'carga' | 'planilla' | 'cobertura' | 'nombre'>('deficit');
   const [sortAsc, setSortAsc] = useState<boolean>(false);
+  const [tabModoVista, setTabModoVista] = useState<'ambos' | 'grafico' | 'tabla'>('ambos');
+  const [hoverDeptIndex, setHoverDeptIndex] = useState<number | null>(null);
 
   // 1. Cargar lista de especialidades con conteo de reglas
   useEffect(() => {
@@ -674,7 +676,251 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
         </div>
       )}
 
+      {/* BARRA DE CONTROL DE VISTA (GRÁFICO vs TABLA) */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3 rounded-2xl border border-slate-200 shadow-2xs">
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-bold text-slate-700 uppercase tracking-wider ml-2">Visualización:</span>
+          <button
+            type="button"
+            onClick={() => setTabModoVista('ambos')}
+            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+              tabModoVista === 'ambos'
+                ? 'bg-indigo-600 text-white shadow-xs'
+                : 'bg-slate-100 text-slate-600 hover:text-slate-900'
+            }`}
+          >
+            📑 Ambos (Gráfico + Tabla)
+          </button>
+          <button
+            type="button"
+            onClick={() => setTabModoVista('grafico')}
+            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+              tabModoVista === 'grafico'
+                ? 'bg-indigo-600 text-white shadow-xs'
+                : 'bg-slate-100 text-slate-600 hover:text-slate-900'
+            }`}
+          >
+            📊 Solo Gráfico
+          </button>
+          <button
+            type="button"
+            onClick={() => setTabModoVista('tabla')}
+            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+              tabModoVista === 'tabla'
+                ? 'bg-indigo-600 text-white shadow-xs'
+                : 'bg-slate-100 text-slate-600 hover:text-slate-900'
+            }`}
+          >
+            📋 Solo Tabla
+          </button>
+        </div>
+
+        <div className="flex items-center gap-3 text-xs text-slate-500 font-semibold pr-2">
+          <span className="inline-flex items-center gap-1.5">
+            <span className="w-3 h-3 rounded-sm bg-rose-500 inline-block" /> Horas Déficit
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <span className="w-3 h-3 rounded-sm bg-emerald-500 inline-block" /> Horas en Planilla
+          </span>
+          <span className="text-indigo-600 font-bold ml-1">
+            🏷️ Ítems Base: {baseHorasActual}h/ítem
+          </span>
+        </div>
+      </div>
+
+      {/* ═══════════════════════════════════════════════════════════════
+          GRÁFICO VISUAL COMPARATIVO DE DÉFICIT DEPARTAMENTAL
+      ═══════════════════════════════════════════════════════════════ */}
+      {(tabModoVista === 'ambos' || tabModoVista === 'grafico') && (
+        <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
+            <div>
+              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                <ChartBarIcon className="w-4 h-4 text-indigo-500" />
+                Gráfico Comparativo de Déficit e Ítems por Departamento (9 Departamentos)
+              </h3>
+              <p className="text-xs text-slate-500 mt-0.5">
+                Comparación directa de Carga Pagada vs Déficit de Horas. Los globos superiores indican los <strong>Ítems Docentes Necesarios</strong> calculados con la base oficial de <strong>{baseHorasActual} hrs/ítem</strong>.
+              </p>
+            </div>
+            <span className="text-[11px] font-bold text-slate-400 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200 font-mono">
+              Base: {modoBase === 'bd' ? `BD Oficial (${horaItemBd}h)` : `${baseHorasActual}h`}
+            </span>
+          </div>
+
+          {loadingData ? (
+            <div className="p-16 text-center text-slate-400 text-xs">
+              Cargando gráfico analítico de materias...
+            </div>
+          ) : sortedDepartamentos.length === 0 ? (
+            <div className="p-16 text-center text-slate-400 text-xs">
+              Sin datos para graficar.
+            </div>
+          ) : (
+            <div className="w-full select-none">
+              {(() => {
+                const SVG_W = 920;
+                const SVG_H = 300;
+                const PAD = { top: 40, bottom: 65, left: 70, right: 25 };
+                const plotW = SVG_W - PAD.left - PAD.right;
+                const plotH = SVG_H - PAD.top - PAD.bottom;
+                const maxVal = Math.max(
+                  ...sortedDepartamentos.map((d) => Math.max(d.carga_horaria, d.horas_planilla, d.deficit_horas)),
+                  50
+                );
+                const maxHorasY = Math.ceil(maxVal * 1.18);
+                const stepX = plotW / sortedDepartamentos.length;
+                const barW = Math.min(stepX * 0.36, 26);
+                const yTicks = [0, 0.25, 0.5, 0.75, 1.0].map((p) => Math.round(maxHorasY * p));
+
+                return (
+                  <svg viewBox={`0 0 ${SVG_W} ${SVG_H}`} className="w-full h-auto">
+                    {/* Líneas de cuadrícula horizontales */}
+                    {yTicks.map((val) => {
+                      const y = PAD.top + plotH - (val / maxHorasY) * plotH;
+                      return (
+                        <g key={`ytick-${val}`}>
+                          <line x1={PAD.left} y1={y} x2={PAD.left + plotW} y2={y} stroke="#E2E8F0" strokeDasharray="4,4" />
+                          <text x={PAD.left - 8} y={y + 3.5} fill="#64748B" fontSize={10} fontWeight="bold" textAnchor="end">
+                            {val.toLocaleString('es-BO')}h
+                          </text>
+                        </g>
+                      );
+                    })}
+
+                    {/* Eje X */}
+                    <line x1={PAD.left} y1={PAD.top + plotH} x2={PAD.left + plotW} y2={PAD.top + plotH} stroke="#CBD5E1" strokeWidth={1.5} />
+
+                    {/* Columnas Departamentales */}
+                    {sortedDepartamentos.map((d, i) => {
+                      const cx = PAD.left + i * stepX + stepX / 2;
+                      const hPlan = Math.max(3, (d.horas_planilla / maxHorasY) * plotH);
+                      const yPlan = PAD.top + plotH - hPlan;
+                      const xPlan = cx - barW - 2;
+
+                      const hDef = Math.max(3, (d.deficit_horas / maxHorasY) * plotH);
+                      const yDef = PAD.top + plotH - hDef;
+                      const xDef = cx + 2;
+
+                      const isHover = hoverDeptIndex === i;
+                      const pillY = Math.min(yPlan, yDef) - 20;
+
+                      return (
+                        <g
+                          key={d.departamento_id}
+                          className="cursor-pointer transition-all"
+                          onMouseEnter={() => setHoverDeptIndex(i)}
+                          onMouseLeave={() => setHoverDeptIndex(null)}
+                          onClick={() => openUesModal(d.departamento_id, d.departamento)}
+                        >
+                          {/* Fondo de realce en hover */}
+                          {isHover && (
+                            <rect
+                              x={PAD.left + i * stepX + 3}
+                              y={PAD.top}
+                              width={stepX - 6}
+                              height={plotH}
+                              fill="#EEF2F6"
+                              rx={8}
+                              opacity={0.7}
+                            />
+                          )}
+
+                          {/* Barra Planilla (Verde) */}
+                          <rect
+                            x={xPlan}
+                            y={yPlan}
+                            width={barW}
+                            height={hPlan}
+                            rx={4}
+                            fill="#10B981"
+                            opacity={isHover ? 1 : 0.88}
+                          />
+
+                          {/* Barra Déficit (Rojo) */}
+                          <rect
+                            x={xDef}
+                            y={yDef}
+                            width={barW}
+                            height={hDef}
+                            rx={4}
+                            fill="#F43F5E"
+                            opacity={isHover ? 1 : 0.92}
+                          />
+
+                          {/* Badge Flotante con Ítems Necesarios */}
+                          <g>
+                            <rect
+                              x={cx - 32}
+                              y={pillY}
+                              width={64}
+                              height={17}
+                              rx={5}
+                              fill={d.deficit_horas > 0 ? '#FFF1F2' : '#F0FDF4'}
+                              stroke={d.deficit_horas > 0 ? '#FDA4AF' : '#86EFAC'}
+                              strokeWidth={1}
+                              filter="drop-shadow(0 1px 1px rgba(0,0,0,0.05))"
+                            />
+                            <text
+                              x={cx}
+                              y={pillY + 11.5}
+                              fill={d.deficit_horas > 0 ? '#9F1239' : '#166534'}
+                              fontSize={9.5}
+                              fontWeight="800"
+                              textAnchor="middle"
+                            >
+                              {d.deficit_horas > 0 ? `${d.items_deficit_equiv} ítems` : '✓ 0 ítems'}
+                            </text>
+                          </g>
+
+                          {/* Nombre del Departamento en el Eje X */}
+                          <text
+                            x={cx}
+                            y={PAD.top + plotH + 18}
+                            fill={isHover ? '#0F172A' : '#334155'}
+                            fontSize={10}
+                            fontWeight={isHover ? '900' : '700'}
+                            textAnchor="middle"
+                          >
+                            {d.departamento.length > 10 ? d.departamento.slice(0, 9) + '.' : d.departamento}
+                          </text>
+
+                          {/* Subtexto % Cobertura */}
+                          <text
+                            x={cx}
+                            y={PAD.top + plotH + 32}
+                            fill={d.pct_cobertura >= 90 ? '#059669' : d.pct_cobertura >= 75 ? '#D97706' : '#DC2626'}
+                            fontSize={9}
+                            fontWeight="800"
+                            textAnchor="middle"
+                          >
+                            {d.pct_cobertura}% cob.
+                          </text>
+
+                          {/* Horas déficit debajo de cobertura */}
+                          <text
+                            x={cx}
+                            y={PAD.top + plotH + 46}
+                            fill="#94A3B8"
+                            fontSize={8.5}
+                            fontWeight="600"
+                            textAnchor="middle"
+                          >
+                            {d.deficit_horas > 0 ? `-${d.deficit_horas.toLocaleString('es-BO')}h` : '0h def.'}
+                          </text>
+                        </g>
+                      );
+                    })}
+                  </svg>
+                );
+              })()}
+            </div>
+          )}
+        </div>
+      )}
+
       {/* TABLA DEPARTAMENTAL */}
+      {(tabModoVista === 'ambos' || tabModoVista === 'tabla') && (
       <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
         <div className="p-5 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
@@ -845,6 +1091,7 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
           </div>
         )}
       </div>
+      )}
 
       {/* MODAL DETALLE DE UNIDADES EDUCATIVAS */}
       {selectedDeptForUes && (

@@ -12,7 +12,7 @@ import {
   TrendingUpIcon,
   ScaleIcon,
 } from '../ui/Icons';
-import { Sparkles, Sun } from 'lucide-react';
+import { Sparkles, Sun, LayoutDashboard } from 'lucide-react';
 
 interface SidebarProps {
   currentTab: SourceTab;
@@ -37,6 +37,16 @@ export function Sidebar({
   onClose,
 }: SidebarProps) {
   const menuItems = [
+    {
+      id: 'dashboard' as SourceTab,
+      label: 'Dashboard Ejecutivo',
+      sublabel: 'Visión General DGFM',
+      badge: 'PRINCIPAL',
+      badgeColor: 'bg-emerald-100 text-emerald-900 border-emerald-300 font-black',
+      count: 168758,
+      tables: 'SEP, ESFM, Cobertura, UIE',
+      icon: <LayoutDashboard size={18} className="text-emerald-700" />,
+    },
     {
       id: 'proyecciones' as SourceTab,
       label: 'Proyecciones',

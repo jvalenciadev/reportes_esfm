@@ -13,6 +13,7 @@
       "QUÍMICA",
       "QUÍMICA INDUSTRIAL"
     ],
+    "submaterias_afines": [],
     "operador_carga": null,
     "carga_especialidad": null,
     "materias_condiciones": [],
@@ -35,6 +36,7 @@
       "COMUNICACIÓN Y LENGUAS, LENGUA ORIGINARIA Y EXTRANJERA",
       "MATEMÁTICAS"
     ],
+    "submaterias_afines": [],
     "operador_carga": null,
     "carga_especialidad": null,
     "materias_condiciones": [],
@@ -57,6 +59,10 @@
       "INSTRUMENTO MUSICAL: CUERDA",
       "INSTRUMENTO MUSICAL: VIENTO"
     ],
+    "submaterias_afines": [
+      "Instrumento Musical: Viento",
+      "Instrumento Musical: Cuerda"
+    ],
     "operador_carga": null,
     "carga_especialidad": null,
     "materias_condiciones": [],
@@ -78,6 +84,7 @@
       "ARTES PLÁSTICAS",
       "ARTES PLÁSTICAS Y VISUALES"
     ],
+    "submaterias_afines": [],
     "operador_carga": null,
     "carga_especialidad": null,
     "materias_condiciones": [],
@@ -99,6 +106,7 @@
       "MAESTRO DE AÑO DE ESCOLARIDAD INICIAL",
       "MATEMÁTICAS"
     ],
+    "submaterias_afines": [],
     "operador_carga": null,
     "carga_especialidad": null,
     "materias_condiciones": [],
@@ -118,9 +126,9 @@
     ],
     "materias": [
       "DEPORTES",
-      "EDUCACIÓN FÍSICA",
       "EDUCACIÓN FÍSICA Y DEPORTES"
     ],
+    "submaterias_afines": [],
     "operador_carga": null,
     "carga_especialidad": null,
     "materias_condiciones": [],
@@ -142,6 +150,10 @@
     "materias": [
       "GASTRONOMÍA",
       "TRANSFORMACIÓN DE ALIMENTOS"
+    ],
+    "submaterias_afines": [
+      "Gastronomía",
+      "Transformación de Alimentos"
     ],
     "operador_carga": null,
     "carga_especialidad": null,
@@ -165,6 +177,7 @@
       "LENGUA CASTELLANA",
       "LENGUA CASTELLANA Y ORIGINARIA"
     ],
+    "submaterias_afines": [],
     "operador_carga": null,
     "carga_especialidad": null,
     "materias_condiciones": [],
@@ -184,6 +197,7 @@
     "materias": [
       "MATEMÁTICA"
     ],
+    "submaterias_afines": [],
     "operador_carga": null,
     "carga_especialidad": null,
     "materias_condiciones": [],
@@ -206,6 +220,7 @@
       "VALORES",
       "VALORES, ESPIRITUALIDAD Y RELIGIONES"
     ],
+    "submaterias_afines": [],
     "operador_carga": null,
     "carga_especialidad": null,
     "materias_condiciones": [],
@@ -227,6 +242,7 @@
       "FILOSOFÍA",
       "SICOLOGÍA"
     ],
+    "submaterias_afines": [],
     "operador_carga": null,
     "carga_especialidad": null,
     "materias_condiciones": [],
@@ -248,6 +264,7 @@
       "CIENCIAS NATURALES : BIOLOGÍA Y GEOGRAFÍA",
       "GEOGRAFÍA"
     ],
+    "submaterias_afines": [],
     "operador_carga": null,
     "carga_especialidad": null,
     "materias_condiciones": [],
@@ -268,6 +285,9 @@
     ],
     "materias": [
       "AGROPECUARIA"
+    ],
+    "submaterias_afines": [
+      "Agropecuaria"
     ],
     "operador_carga": null,
     "carga_especialidad": null,
@@ -292,6 +312,10 @@
       "ELECTRICIDAD INDUSTRIAL",
       "ELECTRÓNICA"
     ],
+    "submaterias_afines": [
+      "Electricidad Industrial",
+      "Electrónica"
+    ],
     "operador_carga": null,
     "carga_especialidad": null,
     "materias_condiciones": [],
@@ -312,6 +336,9 @@
     ],
     "materias": [
       "MECÁNICA AUTOMOTRIZ"
+    ],
+    "submaterias_afines": [
+      "Mecánica Automotriz"
     ],
     "operador_carga": null,
     "carga_especialidad": null,
@@ -334,6 +361,9 @@
     "materias": [
       "ELECTROMECÁNICA"
     ],
+    "submaterias_afines": [
+      "Electromecánica"
+    ],
     "operador_carga": null,
     "carga_especialidad": null,
     "materias_condiciones": [],
@@ -354,6 +384,9 @@
       "INGLÉS",
       "LENGUA EXTRANJERA",
       "LENGUA EXTRANJERA: INGLES"
+    ],
+    "submaterias_afines": [
+      "Traductor e Intérprete de Lengua Extranjera: Ingles"
     ],
     "operador_carga": null,
     "carga_especialidad": null,
@@ -378,6 +411,9 @@
       "TEXTIL Y CONFECCIÓN",
       "TEXTILES Y CONFECCIONES",
       "TEXTILES, TEJIDOS Y CONFECCIONES"
+    ],
+    "submaterias_afines": [
+      "Textiles y Confecciones"
     ],
     "operador_carga": null,
     "carga_especialidad": null,
@@ -790,7 +826,8 @@
     "materias_condiciones": [],
     "activo": true,
     "descripcion": "Filtro inicial para EDUCACIÓN ESPECIAL PARA PERSONAS CON DISCAPACIDAD",
-    "updated_at": "2026-11-10T20:13:28.924Z"
+    "updated_at": "2026-11-10T20:13:28.924Z",
+    "submaterias_afines": []
   },
   {
     "id": 20,
@@ -805,6 +842,7 @@
       "CIENCIAS SOCIALES",
       "HISTORIA"
     ],
+    "submaterias_afines": [],
     "operador_carga": null,
     "carga_especialidad": null,
     "materias_condiciones": [],
@@ -828,6 +866,9 @@
       "CARPINTERÍA EN MADERA Y METAL",
       "MADERA Y METAL"
     ],
+    "submaterias_afines": [
+      "Carpintería en Madera y Metal"
+    ],
     "operador_carga": null,
     "carga_especialidad": null,
     "materias_condiciones": [],
@@ -848,6 +889,9 @@
     ],
     "materias": [
       "MECÁNICA INDUSTRIAL"
+    ],
+    "submaterias_afines": [
+      "Mecánica Industrial"
     ],
     "operador_carga": null,
     "carga_especialidad": null,

@@ -1,0 +1,6108 @@
+{
+  "metadata": {
+    "fecha_corte": "Octubre 2026",
+    "fuente": "UIE / SIE UE · Ministerio de Educación",
+    "total_especialidades": 22
+  },
+  "totales_pais": {
+    "carga_horaria": 1616492,
+    "horas_planilla": 809871,
+    "deficit_horas": 806621,
+    "items_deficit_equiv": 7803,
+    "pct_cobertura": 50.1,
+    "total_ues_afectadas": 11540,
+    "departamentos": [
+      {
+        "departamento_id": 1,
+        "departamento": "CHUQUISACA",
+        "carga_horaria": 106180,
+        "horas_planilla": 75626,
+        "deficit_horas": 30554,
+        "items_deficit_equiv": 299,
+        "pct_cobertura": 71.2,
+        "ues_afectadas": 1022
+      },
+      {
+        "departamento_id": 2,
+        "departamento": "LA PAZ",
+        "carga_horaria": 390616,
+        "horas_planilla": 206012,
+        "deficit_horas": 184604,
+        "items_deficit_equiv": 1797,
+        "pct_cobertura": 52.7,
+        "ues_afectadas": 2992
+      },
+      {
+        "departamento_id": 3,
+        "departamento": "COCHABAMBA",
+        "carga_horaria": 212616,
+        "horas_planilla": 93631,
+        "deficit_horas": 118985,
+        "items_deficit_equiv": 1176,
+        "pct_cobertura": 44.0,
+        "ues_afectadas": 1843
+      },
+      {
+        "departamento_id": 4,
+        "departamento": "ORURO",
+        "carga_horaria": 55536,
+        "horas_planilla": 27460,
+        "deficit_horas": 28076,
+        "items_deficit_equiv": 285,
+        "pct_cobertura": 49.4,
+        "ues_afectadas": 510
+      },
+      {
+        "departamento_id": 5,
+        "departamento": "POTOSÍ",
+        "carga_horaria": 241164,
+        "horas_planilla": 152962,
+        "deficit_horas": 88202,
+        "items_deficit_equiv": 856,
+        "pct_cobertura": 63.4,
+        "ues_afectadas": 1659
+      },
+      {
+        "departamento_id": 6,
+        "departamento": "TARIJA",
+        "carga_horaria": 24264,
+        "horas_planilla": 16497,
+        "deficit_horas": 7767,
+        "items_deficit_equiv": 86,
+        "pct_cobertura": 68.0,
+        "ues_afectadas": 314
+      },
+      {
+        "departamento_id": 7,
+        "departamento": "SANTA CRUZ",
+        "carga_horaria": 429772,
+        "horas_planilla": 151523,
+        "deficit_horas": 278249,
+        "items_deficit_equiv": 2705,
+        "pct_cobertura": 35.3,
+        "ues_afectadas": 2334
+      },
+      {
+        "departamento_id": 8,
+        "departamento": "BENI",
+        "carga_horaria": 132348,
+        "horas_planilla": 80885,
+        "deficit_horas": 51463,
+        "items_deficit_equiv": 499,
+        "pct_cobertura": 61.1,
+        "ues_afectadas": 696
+      },
+      {
+        "departamento_id": 9,
+        "departamento": "PANDO",
+        "carga_horaria": 23996,
+        "horas_planilla": 5275,
+        "deficit_horas": 18721,
+        "items_deficit_equiv": 186,
+        "pct_cobertura": 22.0,
+        "ues_afectadas": 170
+      }
+    ]
+  },
+  "especialidades": [
+    {
+      "id": 2,
+      "nombre": "EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL",
+      "hora_item": 120.0,
+      "carga_horaria": 421168,
+      "horas_planilla": 296573,
+      "deficit_horas": 124595,
+      "items_deficit_equiv": 1039,
+      "pct_cobertura": 70.4,
+      "ues_afectadas": 3882,
+      "materias_breakdown": [
+        {
+          "materia": "COMUNICACIÓN Y LENGUAS, LENGUA ORIGINARIA Y EXTRANJERA",
+          "nivel": "PRIMARIA",
+          "carga_horaria": 263472,
+          "deficit_horas": 65247,
+          "ues_afectadas": 2993
+        },
+        {
+          "materia": "MATEMÁTICAS",
+          "nivel": "PRIMARIA",
+          "carga_horaria": 128104,
+          "deficit_horas": 39423,
+          "ues_afectadas": 2629
+        },
+        {
+          "materia": "CIENCIAS SOCIALES",
+          "nivel": "PRIMARIA",
+          "carga_horaria": 15000,
+          "deficit_horas": 10072,
+          "ues_afectadas": 1110
+        },
+        {
+          "materia": "CIENCIAS NATURALES",
+          "nivel": "PRIMARIA",
+          "carga_horaria": 14592,
+          "deficit_horas": 9853,
+          "ues_afectadas": 1058
+        }
+      ],
+      "departamentos": [
+        {
+          "departamento_id": 1,
+          "departamento": "CHUQUISACA",
+          "carga_horaria": 53652,
+          "horas_planilla": 44182,
+          "deficit_horas": 9470,
+          "items_deficit_equiv": 79,
+          "pct_cobertura": 82.3,
+          "ues_afectadas": 491
+        },
+        {
+          "departamento_id": 2,
+          "departamento": "LA PAZ",
+          "carga_horaria": 79024,
+          "horas_planilla": 56319,
+          "deficit_horas": 22705,
+          "items_deficit_equiv": 190,
+          "pct_cobertura": 71.3,
+          "ues_afectadas": 809
+        },
+        {
+          "departamento_id": 3,
+          "departamento": "COCHABAMBA",
+          "carga_horaria": 41572,
+          "horas_planilla": 26100,
+          "deficit_horas": 15472,
+          "items_deficit_equiv": 129,
+          "pct_cobertura": 62.8,
+          "ues_afectadas": 474
+        },
+        {
+          "departamento_id": 4,
+          "departamento": "ORURO",
+          "carga_horaria": 12396,
+          "horas_planilla": 9338,
+          "deficit_horas": 3058,
+          "items_deficit_equiv": 26,
+          "pct_cobertura": 75.3,
+          "ues_afectadas": 121
+        },
+        {
+          "departamento_id": 5,
+          "departamento": "POTOSÍ",
+          "carga_horaria": 71572,
+          "horas_planilla": 56378,
+          "deficit_horas": 15194,
+          "items_deficit_equiv": 127,
+          "pct_cobertura": 78.8,
+          "ues_afectadas": 635
+        },
+        {
+          "departamento_id": 6,
+          "departamento": "TARIJA",
+          "carga_horaria": 10644,
+          "horas_planilla": 8844,
+          "deficit_horas": 1800,
+          "items_deficit_equiv": 15,
+          "pct_cobertura": 83.1,
+          "ues_afectadas": 104
+        },
+        {
+          "departamento_id": 7,
+          "departamento": "SANTA CRUZ",
+          "carga_horaria": 95244,
+          "horas_planilla": 54562,
+          "deficit_horas": 40682,
+          "items_deficit_equiv": 340,
+          "pct_cobertura": 57.3,
+          "ues_afectadas": 788
+        },
+        {
+          "departamento_id": 8,
+          "departamento": "BENI",
+          "carga_horaria": 53296,
+          "horas_planilla": 40630,
+          "deficit_horas": 12666,
+          "items_deficit_equiv": 106,
+          "pct_cobertura": 76.2,
+          "ues_afectadas": 415
+        },
+        {
+          "departamento_id": 9,
+          "departamento": "PANDO",
+          "carga_horaria": 3768,
+          "horas_planilla": 220,
+          "deficit_horas": 3548,
+          "items_deficit_equiv": 30,
+          "pct_cobertura": 5.8,
+          "ues_afectadas": 45
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "nombre": "VALORES, ESPIRITUALIDAD Y RELIGIONES",
+      "hora_item": 96.0,
+      "carga_horaria": 132792,
+      "horas_planilla": 46134,
+      "deficit_horas": 86658,
+      "items_deficit_equiv": 903,
+      "pct_cobertura": 34.7,
+      "ues_afectadas": 5981,
+      "materias_breakdown": [
+        {
+          "materia": "VALORES, ESPIRITUALIDAD Y RELIGIONES",
+          "nivel": "PRIMARIA",
+          "carga_horaria": 93676,
+          "deficit_horas": 57938,
+          "ues_afectadas": 4872
+        },
+        {
+          "materia": "VALORES, ESPIRITUALIDAD Y RELIGIONES",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 39116,
+          "deficit_horas": 28720,
+          "ues_afectadas": 1870
+        }
+      ],
+      "departamentos": [
+        {
+          "departamento_id": 1,
+          "departamento": "CHUQUISACA",
+          "carga_horaria": 7484,
+          "horas_planilla": 3748,
+          "deficit_horas": 3736,
+          "items_deficit_equiv": 39,
+          "pct_cobertura": 50.1,
+          "ues_afectadas": 417
+        },
+        {
+          "departamento_id": 2,
+          "departamento": "LA PAZ",
+          "carga_horaria": 35380,
+          "horas_planilla": 12601,
+          "deficit_horas": 22779,
+          "items_deficit_equiv": 238,
+          "pct_cobertura": 35.6,
+          "ues_afectadas": 1673
+        },
+        {
+          "departamento_id": 3,
+          "departamento": "COCHABAMBA",
+          "carga_horaria": 23572,
+          "horas_planilla": 8388,
+          "deficit_horas": 15184,
+          "items_deficit_equiv": 159,
+          "pct_cobertura": 35.6,
+          "ues_afectadas": 1046
+        },
+        {
+          "departamento_id": 4,
+          "departamento": "ORURO",
+          "carga_horaria": 5320,
+          "horas_planilla": 1790,
+          "deficit_horas": 3530,
+          "items_deficit_equiv": 37,
+          "pct_cobertura": 33.6,
+          "ues_afectadas": 280
+        },
+        {
+          "departamento_id": 5,
+          "departamento": "POTOSÍ",
+          "carga_horaria": 17432,
+          "horas_planilla": 8298,
+          "deficit_horas": 9134,
+          "items_deficit_equiv": 96,
+          "pct_cobertura": 47.6,
+          "ues_afectadas": 898
+        },
+        {
+          "departamento_id": 6,
+          "departamento": "TARIJA",
+          "carga_horaria": 2112,
+          "horas_planilla": 938,
+          "deficit_horas": 1174,
+          "items_deficit_equiv": 13,
+          "pct_cobertura": 44.4,
+          "ues_afectadas": 118
+        },
+        {
+          "departamento_id": 7,
+          "departamento": "SANTA CRUZ",
+          "carga_horaria": 33412,
+          "horas_planilla": 7677,
+          "deficit_horas": 25735,
+          "items_deficit_equiv": 269,
+          "pct_cobertura": 23.0,
+          "ues_afectadas": 1159
+        },
+        {
+          "departamento_id": 8,
+          "departamento": "BENI",
+          "carga_horaria": 6744,
+          "horas_planilla": 2566,
+          "deficit_horas": 4178,
+          "items_deficit_equiv": 44,
+          "pct_cobertura": 38.0,
+          "ues_afectadas": 296
+        },
+        {
+          "departamento_id": 9,
+          "departamento": "PANDO",
+          "carga_horaria": 1336,
+          "horas_planilla": 128,
+          "deficit_horas": 1208,
+          "items_deficit_equiv": 13,
+          "pct_cobertura": 9.6,
+          "ues_afectadas": 94
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "nombre": "EDUCACIÓN FÍSICA Y DEPORTES",
+      "hora_item": 96.0,
+      "carga_horaria": 106520,
+      "horas_planilla": 31099,
+      "deficit_horas": 75421,
+      "items_deficit_equiv": 786,
+      "pct_cobertura": 29.2,
+      "ues_afectadas": 4786,
+      "materias_breakdown": [
+        {
+          "materia": "EDUCACIÓN FÍSICA Y DEPORTES",
+          "nivel": "PRIMARIA",
+          "carga_horaria": 66144,
+          "deficit_horas": 45177,
+          "ues_afectadas": 3568
+        },
+        {
+          "materia": "EDUCACIÓN FÍSICA Y DEPORTES",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 26612,
+          "deficit_horas": 20032,
+          "ues_afectadas": 1301
+        },
+        {
+          "materia": "FÍSICA",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 13764,
+          "deficit_horas": 10212,
+          "ues_afectadas": 921
+        }
+      ],
+      "departamentos": [
+        {
+          "departamento_id": 1,
+          "departamento": "CHUQUISACA",
+          "carga_horaria": 3544,
+          "horas_planilla": 1803,
+          "deficit_horas": 1741,
+          "items_deficit_equiv": 19,
+          "pct_cobertura": 50.9,
+          "ues_afectadas": 239
+        },
+        {
+          "departamento_id": 2,
+          "departamento": "LA PAZ",
+          "carga_horaria": 23988,
+          "horas_planilla": 7914,
+          "deficit_horas": 16074,
+          "items_deficit_equiv": 168,
+          "pct_cobertura": 33.0,
+          "ues_afectadas": 1291
+        },
+        {
+          "departamento_id": 3,
+          "departamento": "COCHABAMBA",
+          "carga_horaria": 18732,
+          "horas_planilla": 5455,
+          "deficit_horas": 13277,
+          "items_deficit_equiv": 139,
+          "pct_cobertura": 29.1,
+          "ues_afectadas": 884
+        },
+        {
+          "departamento_id": 4,
+          "departamento": "ORURO",
+          "carga_horaria": 4216,
+          "horas_planilla": 1149,
+          "deficit_horas": 3067,
+          "items_deficit_equiv": 32,
+          "pct_cobertura": 27.3,
+          "ues_afectadas": 187
+        },
+        {
+          "departamento_id": 5,
+          "departamento": "POTOSÍ",
+          "carga_horaria": 12992,
+          "horas_planilla": 6008,
+          "deficit_horas": 6984,
+          "items_deficit_equiv": 73,
+          "pct_cobertura": 46.2,
+          "ues_afectadas": 624
+        },
+        {
+          "departamento_id": 6,
+          "departamento": "TARIJA",
+          "carga_horaria": 1272,
+          "horas_planilla": 506,
+          "deficit_horas": 766,
+          "items_deficit_equiv": 8,
+          "pct_cobertura": 39.8,
+          "ues_afectadas": 74
+        },
+        {
+          "departamento_id": 7,
+          "departamento": "SANTA CRUZ",
+          "carga_horaria": 34224,
+          "horas_planilla": 5642,
+          "deficit_horas": 28582,
+          "items_deficit_equiv": 298,
+          "pct_cobertura": 16.5,
+          "ues_afectadas": 1129
+        },
+        {
+          "departamento_id": 8,
+          "departamento": "BENI",
+          "carga_horaria": 6304,
+          "horas_planilla": 2518,
+          "deficit_horas": 3786,
+          "items_deficit_equiv": 40,
+          "pct_cobertura": 39.9,
+          "ues_afectadas": 268
+        },
+        {
+          "departamento_id": 9,
+          "departamento": "PANDO",
+          "carga_horaria": 1248,
+          "horas_planilla": 104,
+          "deficit_horas": 1144,
+          "items_deficit_equiv": 12,
+          "pct_cobertura": 8.3,
+          "ues_afectadas": 90
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "nombre": "EDUCACIÓN MUSICAL",
+      "hora_item": 96.0,
+      "carga_horaria": 102876,
+      "horas_planilla": 34160,
+      "deficit_horas": 68716,
+      "items_deficit_equiv": 716,
+      "pct_cobertura": 33.2,
+      "ues_afectadas": 4902,
+      "materias_breakdown": [
+        {
+          "materia": "EDUCACIÓN MUSICAL",
+          "nivel": "PRIMARIA",
+          "carga_horaria": 74472,
+          "deficit_horas": 46924,
+          "ues_afectadas": 3959
+        },
+        {
+          "materia": "EDUCACIÓN MUSICAL",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 27716,
+          "deficit_horas": 21332,
+          "ues_afectadas": 1356
+        },
+        {
+          "materia": "TÉCNICA TECNOLÓGICA GENERAL",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 336,
+          "deficit_horas": 228,
+          "ues_afectadas": 9
+        },
+        {
+          "materia": "INSTRUMENTO MUSICAL: CUERDA",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 144,
+          "deficit_horas": 112,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "INSTRUMENTO MUSICAL: VIENTO",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 160,
+          "deficit_horas": 88,
+          "ues_afectadas": 5
+        },
+        {
+          "materia": "TÉCNICA TECNOLÓGICA",
+          "nivel": "PRIMARIA",
+          "carga_horaria": 48,
+          "deficit_horas": 32,
+          "ues_afectadas": 3
+        }
+      ],
+      "departamentos": [
+        {
+          "departamento_id": 1,
+          "departamento": "CHUQUISACA",
+          "carga_horaria": 4464,
+          "horas_planilla": 2305,
+          "deficit_horas": 2159,
+          "items_deficit_equiv": 23,
+          "pct_cobertura": 51.6,
+          "ues_afectadas": 280
+        },
+        {
+          "departamento_id": 2,
+          "departamento": "LA PAZ",
+          "carga_horaria": 22808,
+          "horas_planilla": 8618,
+          "deficit_horas": 14190,
+          "items_deficit_equiv": 148,
+          "pct_cobertura": 37.8,
+          "ues_afectadas": 1298
+        },
+        {
+          "departamento_id": 3,
+          "departamento": "COCHABAMBA",
+          "carga_horaria": 19564,
+          "horas_planilla": 7088,
+          "deficit_horas": 12476,
+          "items_deficit_equiv": 130,
+          "pct_cobertura": 36.2,
+          "ues_afectadas": 923
+        },
+        {
+          "departamento_id": 4,
+          "departamento": "ORURO",
+          "carga_horaria": 3840,
+          "horas_planilla": 1192,
+          "deficit_horas": 2648,
+          "items_deficit_equiv": 28,
+          "pct_cobertura": 31.0,
+          "ues_afectadas": 190
+        },
+        {
+          "departamento_id": 5,
+          "departamento": "POTOSÍ",
+          "carga_horaria": 12744,
+          "horas_planilla": 6031,
+          "deficit_horas": 6713,
+          "items_deficit_equiv": 70,
+          "pct_cobertura": 47.3,
+          "ues_afectadas": 685
+        },
+        {
+          "departamento_id": 6,
+          "departamento": "TARIJA",
+          "carga_horaria": 1824,
+          "horas_planilla": 839,
+          "deficit_horas": 985,
+          "items_deficit_equiv": 11,
+          "pct_cobertura": 46.0,
+          "ues_afectadas": 78
+        },
+        {
+          "departamento_id": 7,
+          "departamento": "SANTA CRUZ",
+          "carga_horaria": 31000,
+          "horas_planilla": 6142,
+          "deficit_horas": 24858,
+          "items_deficit_equiv": 259,
+          "pct_cobertura": 19.8,
+          "ues_afectadas": 1123
+        },
+        {
+          "departamento_id": 8,
+          "departamento": "BENI",
+          "carga_horaria": 5440,
+          "horas_planilla": 1845,
+          "deficit_horas": 3595,
+          "items_deficit_equiv": 38,
+          "pct_cobertura": 33.9,
+          "ues_afectadas": 231
+        },
+        {
+          "departamento_id": 9,
+          "departamento": "PANDO",
+          "carga_horaria": 1192,
+          "horas_planilla": 100,
+          "deficit_horas": 1092,
+          "items_deficit_equiv": 12,
+          "pct_cobertura": 8.4,
+          "ues_afectadas": 94
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "nombre": "CIENCIAS SOCIALES",
+      "hora_item": 128.0,
+      "carga_horaria": 130800,
+      "horas_planilla": 75486,
+      "deficit_horas": 55314,
+      "items_deficit_equiv": 433,
+      "pct_cobertura": 57.7,
+      "ues_afectadas": 2575,
+      "materias_breakdown": [
+        {
+          "materia": "CIENCIAS SOCIALES",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 130800,
+          "deficit_horas": 55314,
+          "ues_afectadas": 2575
+        }
+      ],
+      "departamentos": [
+        {
+          "departamento_id": 1,
+          "departamento": "CHUQUISACA",
+          "carga_horaria": 6600,
+          "horas_planilla": 4828,
+          "deficit_horas": 1772,
+          "items_deficit_equiv": 14,
+          "pct_cobertura": 73.2,
+          "ues_afectadas": 147
+        },
+        {
+          "departamento_id": 2,
+          "departamento": "LA PAZ",
+          "carga_horaria": 38672,
+          "horas_planilla": 23995,
+          "deficit_horas": 14677,
+          "items_deficit_equiv": 115,
+          "pct_cobertura": 62.0,
+          "ues_afectadas": 729
+        },
+        {
+          "departamento_id": 3,
+          "departamento": "COCHABAMBA",
+          "carga_horaria": 13848,
+          "horas_planilla": 7467,
+          "deficit_horas": 6381,
+          "items_deficit_equiv": 50,
+          "pct_cobertura": 53.9,
+          "ues_afectadas": 319
+        },
+        {
+          "departamento_id": 4,
+          "departamento": "ORURO",
+          "carga_horaria": 4588,
+          "horas_planilla": 2572,
+          "deficit_horas": 2016,
+          "items_deficit_equiv": 16,
+          "pct_cobertura": 56.1,
+          "ues_afectadas": 112
+        },
+        {
+          "departamento_id": 5,
+          "departamento": "POTOSÍ",
+          "carga_horaria": 22340,
+          "horas_planilla": 15270,
+          "deficit_horas": 7070,
+          "items_deficit_equiv": 56,
+          "pct_cobertura": 68.4,
+          "ues_afectadas": 333
+        },
+        {
+          "departamento_id": 6,
+          "departamento": "TARIJA",
+          "carga_horaria": 1340,
+          "horas_planilla": 952,
+          "deficit_horas": 388,
+          "items_deficit_equiv": 4,
+          "pct_cobertura": 71.0,
+          "ues_afectadas": 35
+        },
+        {
+          "departamento_id": 7,
+          "departamento": "SANTA CRUZ",
+          "carga_horaria": 29728,
+          "horas_planilla": 12063,
+          "deficit_horas": 17665,
+          "items_deficit_equiv": 139,
+          "pct_cobertura": 40.6,
+          "ues_afectadas": 600
+        },
+        {
+          "departamento_id": 8,
+          "departamento": "BENI",
+          "carga_horaria": 10712,
+          "horas_planilla": 7033,
+          "deficit_horas": 3679,
+          "items_deficit_equiv": 29,
+          "pct_cobertura": 65.7,
+          "ues_afectadas": 225
+        },
+        {
+          "departamento_id": 9,
+          "departamento": "PANDO",
+          "carga_horaria": 2972,
+          "horas_planilla": 1306,
+          "deficit_horas": 1666,
+          "items_deficit_equiv": 14,
+          "pct_cobertura": 43.9,
+          "ues_afectadas": 75
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "nombre": "ARTES PLÁSTICAS Y VISUALES",
+      "hora_item": 96.0,
+      "carga_horaria": 80152,
+      "horas_planilla": 30137,
+      "deficit_horas": 50015,
+      "items_deficit_equiv": 521,
+      "pct_cobertura": 37.6,
+      "ues_afectadas": 4488,
+      "materias_breakdown": [
+        {
+          "materia": "ARTES PLÁSTICAS Y VISUALES",
+          "nivel": "PRIMARIA",
+          "carga_horaria": 47588,
+          "deficit_horas": 26530,
+          "ues_afectadas": 3267
+        },
+        {
+          "materia": "ARTES PLÁSTICAS Y VISUALES",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 32564,
+          "deficit_horas": 23485,
+          "ues_afectadas": 1663
+        }
+      ],
+      "departamentos": [
+        {
+          "departamento_id": 1,
+          "departamento": "CHUQUISACA",
+          "carga_horaria": 5596,
+          "horas_planilla": 2896,
+          "deficit_horas": 2700,
+          "items_deficit_equiv": 29,
+          "pct_cobertura": 51.8,
+          "ues_afectadas": 356
+        },
+        {
+          "departamento_id": 2,
+          "departamento": "LA PAZ",
+          "carga_horaria": 18216,
+          "horas_planilla": 7053,
+          "deficit_horas": 11163,
+          "items_deficit_equiv": 117,
+          "pct_cobertura": 38.7,
+          "ues_afectadas": 1032
+        },
+        {
+          "departamento_id": 3,
+          "departamento": "COCHABAMBA",
+          "carga_horaria": 13144,
+          "horas_planilla": 4933,
+          "deficit_horas": 8211,
+          "items_deficit_equiv": 86,
+          "pct_cobertura": 37.5,
+          "ues_afectadas": 781
+        },
+        {
+          "departamento_id": 4,
+          "departamento": "ORURO",
+          "carga_horaria": 2912,
+          "horas_planilla": 1099,
+          "deficit_horas": 1813,
+          "items_deficit_equiv": 19,
+          "pct_cobertura": 37.7,
+          "ues_afectadas": 186
+        },
+        {
+          "departamento_id": 5,
+          "departamento": "POTOSÍ",
+          "carga_horaria": 15776,
+          "horas_planilla": 7728,
+          "deficit_horas": 8048,
+          "items_deficit_equiv": 84,
+          "pct_cobertura": 49.0,
+          "ues_afectadas": 838
+        },
+        {
+          "departamento_id": 6,
+          "departamento": "TARIJA",
+          "carga_horaria": 1088,
+          "horas_planilla": 545,
+          "deficit_horas": 543,
+          "items_deficit_equiv": 6,
+          "pct_cobertura": 50.1,
+          "ues_afectadas": 76
+        },
+        {
+          "departamento_id": 7,
+          "departamento": "SANTA CRUZ",
+          "carga_horaria": 17724,
+          "horas_planilla": 3789,
+          "deficit_horas": 13935,
+          "items_deficit_equiv": 146,
+          "pct_cobertura": 21.4,
+          "ues_afectadas": 901
+        },
+        {
+          "departamento_id": 8,
+          "departamento": "BENI",
+          "carga_horaria": 4448,
+          "horas_planilla": 1960,
+          "deficit_horas": 2488,
+          "items_deficit_equiv": 26,
+          "pct_cobertura": 44.1,
+          "ues_afectadas": 227
+        },
+        {
+          "departamento_id": 9,
+          "departamento": "PANDO",
+          "carga_horaria": 1248,
+          "horas_planilla": 134,
+          "deficit_horas": 1114,
+          "items_deficit_equiv": 12,
+          "pct_cobertura": 10.7,
+          "ues_afectadas": 91
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "nombre": "EDUCACIÓN INICIAL EN FAMILIA COMUNITARIA",
+      "hora_item": 100.0,
+      "carga_horaria": 70168,
+      "horas_planilla": 27375,
+      "deficit_horas": 42793,
+      "items_deficit_equiv": 428,
+      "pct_cobertura": 39.0,
+      "ues_afectadas": 511,
+      "materias_breakdown": [
+        {
+          "materia": "MAESTRO DE AÑO DE ESCOLARIDAD INICIAL",
+          "nivel": "INICIAL",
+          "carga_horaria": 70104,
+          "deficit_horas": 42769,
+          "ues_afectadas": 510
+        },
+        {
+          "materia": "COMUNICACIÓN Y LENGUAS, LENGUA ORIGINARIA Y EXTRANJERA",
+          "nivel": "INICIAL",
+          "carga_horaria": 32,
+          "deficit_horas": 20,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "MATEMÁTICAS",
+          "nivel": "INICIAL",
+          "carga_horaria": 32,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        }
+      ],
+      "departamentos": [
+        {
+          "departamento_id": 1,
+          "departamento": "CHUQUISACA",
+          "carga_horaria": 0,
+          "horas_planilla": 0,
+          "deficit_horas": 0,
+          "items_deficit_equiv": 0,
+          "pct_cobertura": 100.0,
+          "ues_afectadas": 0
+        },
+        {
+          "departamento_id": 2,
+          "departamento": "LA PAZ",
+          "carga_horaria": 10032,
+          "horas_planilla": 3942,
+          "deficit_horas": 6090,
+          "items_deficit_equiv": 61,
+          "pct_cobertura": 39.3,
+          "ues_afectadas": 80
+        },
+        {
+          "departamento_id": 3,
+          "departamento": "COCHABAMBA",
+          "carga_horaria": 6176,
+          "horas_planilla": 600,
+          "deficit_horas": 5576,
+          "items_deficit_equiv": 56,
+          "pct_cobertura": 9.7,
+          "ues_afectadas": 53
+        },
+        {
+          "departamento_id": 4,
+          "departamento": "ORURO",
+          "carga_horaria": 588,
+          "horas_planilla": 0,
+          "deficit_horas": 588,
+          "items_deficit_equiv": 6,
+          "pct_cobertura": 0.0,
+          "ues_afectadas": 6
+        },
+        {
+          "departamento_id": 5,
+          "departamento": "POTOSÍ",
+          "carga_horaria": 1560,
+          "horas_planilla": 480,
+          "deficit_horas": 1080,
+          "items_deficit_equiv": 11,
+          "pct_cobertura": 30.8,
+          "ues_afectadas": 12
+        },
+        {
+          "departamento_id": 6,
+          "departamento": "TARIJA",
+          "carga_horaria": 0,
+          "horas_planilla": 0,
+          "deficit_horas": 0,
+          "items_deficit_equiv": 0,
+          "pct_cobertura": 100.0,
+          "ues_afectadas": 0
+        },
+        {
+          "departamento_id": 7,
+          "departamento": "SANTA CRUZ",
+          "carga_horaria": 46280,
+          "horas_planilla": 20495,
+          "deficit_horas": 25785,
+          "items_deficit_equiv": 258,
+          "pct_cobertura": 44.3,
+          "ues_afectadas": 311
+        },
+        {
+          "departamento_id": 8,
+          "departamento": "BENI",
+          "carga_horaria": 4632,
+          "horas_planilla": 1858,
+          "deficit_horas": 2774,
+          "items_deficit_equiv": 28,
+          "pct_cobertura": 40.1,
+          "ues_afectadas": 40
+        },
+        {
+          "departamento_id": 9,
+          "departamento": "PANDO",
+          "carga_horaria": 900,
+          "horas_planilla": 0,
+          "deficit_horas": 900,
+          "items_deficit_equiv": 9,
+          "pct_cobertura": 0.0,
+          "ues_afectadas": 9
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "nombre": "COMUNICACIÓN Y LENGUAJES: LENGUA CASTELLANA",
+      "hora_item": 96.0,
+      "carga_horaria": 88648,
+      "horas_planilla": 50358,
+      "deficit_horas": 38290,
+      "items_deficit_equiv": 399,
+      "pct_cobertura": 56.8,
+      "ues_afectadas": 2314,
+      "materias_breakdown": [
+        {
+          "materia": "LENGUA CASTELLANA Y ORIGINARIA",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 88600,
+          "deficit_horas": 38266,
+          "ues_afectadas": 2314
+        },
+        {
+          "materia": "COMUNICACIÓN",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 48,
+          "deficit_horas": 24,
+          "ues_afectadas": 1
+        }
+      ],
+      "departamentos": [
+        {
+          "departamento_id": 1,
+          "departamento": "CHUQUISACA",
+          "carga_horaria": 4480,
+          "horas_planilla": 3312,
+          "deficit_horas": 1168,
+          "items_deficit_equiv": 13,
+          "pct_cobertura": 73.9,
+          "ues_afectadas": 149
+        },
+        {
+          "departamento_id": 2,
+          "departamento": "LA PAZ",
+          "carga_horaria": 21504,
+          "horas_planilla": 13619,
+          "deficit_horas": 7885,
+          "items_deficit_equiv": 83,
+          "pct_cobertura": 63.3,
+          "ues_afectadas": 623
+        },
+        {
+          "departamento_id": 3,
+          "departamento": "COCHABAMBA",
+          "carga_horaria": 8576,
+          "horas_planilla": 4611,
+          "deficit_horas": 3965,
+          "items_deficit_equiv": 42,
+          "pct_cobertura": 53.8,
+          "ues_afectadas": 277
+        },
+        {
+          "departamento_id": 4,
+          "departamento": "ORURO",
+          "carga_horaria": 3216,
+          "horas_planilla": 1892,
+          "deficit_horas": 1324,
+          "items_deficit_equiv": 14,
+          "pct_cobertura": 58.8,
+          "ues_afectadas": 97
+        },
+        {
+          "departamento_id": 5,
+          "departamento": "POTOSÍ",
+          "carga_horaria": 16696,
+          "horas_planilla": 11742,
+          "deficit_horas": 4954,
+          "items_deficit_equiv": 52,
+          "pct_cobertura": 70.3,
+          "ues_afectadas": 316
+        },
+        {
+          "departamento_id": 6,
+          "departamento": "TARIJA",
+          "carga_horaria": 728,
+          "horas_planilla": 524,
+          "deficit_horas": 204,
+          "items_deficit_equiv": 3,
+          "pct_cobertura": 72.0,
+          "ues_afectadas": 28
+        },
+        {
+          "departamento_id": 7,
+          "departamento": "SANTA CRUZ",
+          "carga_horaria": 22208,
+          "horas_planilla": 7984,
+          "deficit_horas": 14224,
+          "items_deficit_equiv": 149,
+          "pct_cobertura": 36.0,
+          "ues_afectadas": 564
+        },
+        {
+          "departamento_id": 8,
+          "departamento": "BENI",
+          "carga_horaria": 9116,
+          "horas_planilla": 5744,
+          "deficit_horas": 3372,
+          "items_deficit_equiv": 36,
+          "pct_cobertura": 63.0,
+          "ues_afectadas": 199
+        },
+        {
+          "departamento_id": 9,
+          "departamento": "PANDO",
+          "carga_horaria": 2124,
+          "horas_planilla": 930,
+          "deficit_horas": 1194,
+          "items_deficit_equiv": 13,
+          "pct_cobertura": 43.8,
+          "ues_afectadas": 61
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "nombre": "MATEMÁTICA",
+      "hora_item": 120.0,
+      "carga_horaria": 89868,
+      "horas_planilla": 52252,
+      "deficit_horas": 37616,
+      "items_deficit_equiv": 314,
+      "pct_cobertura": 58.1,
+      "ues_afectadas": 2097,
+      "materias_breakdown": [
+        {
+          "materia": "MATEMÁTICA",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 89868,
+          "deficit_horas": 37616,
+          "ues_afectadas": 2097
+        }
+      ],
+      "departamentos": [
+        {
+          "departamento_id": 1,
+          "departamento": "CHUQUISACA",
+          "carga_horaria": 4756,
+          "horas_planilla": 3513,
+          "deficit_horas": 1243,
+          "items_deficit_equiv": 11,
+          "pct_cobertura": 73.9,
+          "ues_afectadas": 138
+        },
+        {
+          "departamento_id": 2,
+          "departamento": "LA PAZ",
+          "carga_horaria": 20836,
+          "horas_planilla": 13780,
+          "deficit_horas": 7056,
+          "items_deficit_equiv": 59,
+          "pct_cobertura": 66.1,
+          "ues_afectadas": 538
+        },
+        {
+          "departamento_id": 3,
+          "departamento": "COCHABAMBA",
+          "carga_horaria": 9448,
+          "horas_planilla": 5365,
+          "deficit_horas": 4083,
+          "items_deficit_equiv": 35,
+          "pct_cobertura": 56.8,
+          "ues_afectadas": 269
+        },
+        {
+          "departamento_id": 4,
+          "departamento": "ORURO",
+          "carga_horaria": 2820,
+          "horas_planilla": 1686,
+          "deficit_horas": 1134,
+          "items_deficit_equiv": 10,
+          "pct_cobertura": 59.8,
+          "ues_afectadas": 78
+        },
+        {
+          "departamento_id": 5,
+          "departamento": "POTOSÍ",
+          "carga_horaria": 17076,
+          "horas_planilla": 12165,
+          "deficit_horas": 4911,
+          "items_deficit_equiv": 41,
+          "pct_cobertura": 71.2,
+          "ues_afectadas": 279
+        },
+        {
+          "departamento_id": 6,
+          "departamento": "TARIJA",
+          "carga_horaria": 740,
+          "horas_planilla": 466,
+          "deficit_horas": 274,
+          "items_deficit_equiv": 3,
+          "pct_cobertura": 63.0,
+          "ues_afectadas": 28
+        },
+        {
+          "departamento_id": 7,
+          "departamento": "SANTA CRUZ",
+          "carga_horaria": 23880,
+          "horas_planilla": 8676,
+          "deficit_horas": 15204,
+          "items_deficit_equiv": 127,
+          "pct_cobertura": 36.3,
+          "ues_afectadas": 529
+        },
+        {
+          "departamento_id": 8,
+          "departamento": "BENI",
+          "carga_horaria": 8652,
+          "horas_planilla": 6013,
+          "deficit_horas": 2639,
+          "items_deficit_equiv": 22,
+          "pct_cobertura": 69.5,
+          "ues_afectadas": 185
+        },
+        {
+          "departamento_id": 9,
+          "departamento": "PANDO",
+          "carga_horaria": 1660,
+          "horas_planilla": 588,
+          "deficit_horas": 1072,
+          "items_deficit_equiv": 9,
+          "pct_cobertura": 35.4,
+          "ues_afectadas": 53
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "nombre": "EDUCACIÓN ESPECIAL PARA PERSONAS CON DISCAPACIDAD",
+      "hora_item": 108.0,
+      "carga_horaria": 41224,
+      "horas_planilla": 5673,
+      "deficit_horas": 35551,
+      "items_deficit_equiv": 330,
+      "pct_cobertura": 13.8,
+      "ues_afectadas": 159,
+      "materias_breakdown": [
+        {
+          "materia": "[A] PSICOPEDAGOGIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 968,
+          "deficit_horas": 968,
+          "ues_afectadas": 9
+        },
+        {
+          "materia": "[A] I-IEP",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 872,
+          "deficit_horas": 852,
+          "ues_afectadas": 8
+        },
+        {
+          "materia": "[A] FISIOTERAPIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 1056,
+          "deficit_horas": 740,
+          "ues_afectadas": 9
+        },
+        {
+          "materia": "[A] FONOAUDIOLOGIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 732,
+          "deficit_horas": 732,
+          "ues_afectadas": 7
+        },
+        {
+          "materia": "[A] DESARROLLO DE LA COMUNICACIÓN Y LENGUAJES",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 804,
+          "deficit_horas": 692,
+          "ues_afectadas": 19
+        },
+        {
+          "materia": "[A] PSICOLOGIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 660,
+          "deficit_horas": 660,
+          "ues_afectadas": 6
+        },
+        {
+          "materia": "[A] TRABAJO SOCIAL",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 640,
+          "deficit_horas": 640,
+          "ues_afectadas": 6
+        },
+        {
+          "materia": "[A] MATEMATICA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 816,
+          "deficit_horas": 605,
+          "ues_afectadas": 29
+        },
+        {
+          "materia": "[A] DESARROLLO SOCIOCULTURAL, AFECTIVO Y ESPIRITUAL",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 636,
+          "deficit_horas": 588,
+          "ues_afectadas": 19
+        },
+        {
+          "materia": "[A] COMUNICACIÓN Y LENGUAJE",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 804,
+          "deficit_horas": 568,
+          "ues_afectadas": 30
+        },
+        {
+          "materia": "[A] DESARROLLO DEL CONOCIMIENTO Y DE LA PRODUCCIÓN",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 612,
+          "deficit_horas": 532,
+          "ues_afectadas": 19
+        },
+        {
+          "materia": "[A] DESARROLLO BIOPSICOMOTRIZ",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 576,
+          "deficit_horas": 520,
+          "ues_afectadas": 19
+        },
+        {
+          "materia": "[B] I-IEP",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 468,
+          "deficit_horas": 468,
+          "ues_afectadas": 4
+        },
+        {
+          "materia": "[A] APRESTAMIENTO A LA FORMACIÓN TÉCNICA TECNOLÓGICA PRODUCTIVA",
+          "nivel": "FORMACION TECNICA TECNOLOGICA PRODUCTIVA",
+          "carga_horaria": 464,
+          "deficit_horas": 464,
+          "ues_afectadas": 5
+        },
+        {
+          "materia": "[A] I - TVA",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 544,
+          "deficit_horas": 436,
+          "ues_afectadas": 4
+        },
+        {
+          "materia": "[A] CIENCIAS SOCIALES",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 560,
+          "deficit_horas": 433,
+          "ues_afectadas": 27
+        },
+        {
+          "materia": "[A] NEUROLOGIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 424,
+          "deficit_horas": 424,
+          "ues_afectadas": 4
+        },
+        {
+          "materia": "[A] CIENCIAS NATURALES",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 512,
+          "deficit_horas": 393,
+          "ues_afectadas": 27
+        },
+        {
+          "materia": "[A] DAE-LE",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 584,
+          "deficit_horas": 388,
+          "ues_afectadas": 6
+        },
+        {
+          "materia": "[A] DESARROLLO INTEGRAL DE LA NÑA O NIÑO EN EL MARCO DE LAS ACTIVIDADES LUDICAS Y PRODCUTIVAS DE LA FAMILIA",
+          "nivel": "ATENCION TEMPRANA",
+          "carga_horaria": 388,
+          "deficit_horas": 388,
+          "ues_afectadas": 6
+        },
+        {
+          "materia": "[A] NUTRICIÓN Y SALUD INTEGRAL DE LA FAMILIA Y LA NIÑA O NIÑO CON DISCAPACIDAD INTELECTUAL",
+          "nivel": "ATENCION TEMPRANA",
+          "carga_horaria": 376,
+          "deficit_horas": 376,
+          "ues_afectadas": 6
+        },
+        {
+          "materia": "[A] DA -E",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 440,
+          "deficit_horas": 340,
+          "ues_afectadas": 5
+        },
+        {
+          "materia": "[A] FISIOTERAPIA",
+          "nivel": "FISICA MOTORA",
+          "carga_horaria": 336,
+          "deficit_horas": 336,
+          "ues_afectadas": 3
+        },
+        {
+          "materia": "[9] FISIOTERAPIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 324,
+          "deficit_horas": 324,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[A] ACTIVIDADES DE LA VIDA DIARIA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 388,
+          "deficit_horas": 288,
+          "ues_afectadas": 27
+        },
+        {
+          "materia": "[A] I - ATP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 560,
+          "deficit_horas": 288,
+          "ues_afectadas": 24
+        },
+        {
+          "materia": "[1] DAE-LE",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 292,
+          "deficit_horas": 256,
+          "ues_afectadas": 3
+        },
+        {
+          "materia": "[A] EDUCACIÓN MUSICAL",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 320,
+          "deficit_horas": 242,
+          "ues_afectadas": 27
+        },
+        {
+          "materia": "[B] DAE-LE",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 240,
+          "deficit_horas": 240,
+          "ues_afectadas": 4
+        },
+        {
+          "materia": "[A] EDUCACIÓN FÍSICA Y DEPORTIVA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 308,
+          "deficit_horas": 235,
+          "ues_afectadas": 25
+        },
+        {
+          "materia": "[A] EDUCACIÓN PLÁSTICA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 292,
+          "deficit_horas": 231,
+          "ues_afectadas": 26
+        },
+        {
+          "materia": "[B] PSICOPEDAGOGIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 316,
+          "deficit_horas": 220,
+          "ues_afectadas": 3
+        },
+        {
+          "materia": "[10] FONOAUDIOLOGIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 216,
+          "deficit_horas": 216,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[1] HABILIDADES SOCIALES",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 216,
+          "deficit_horas": 216,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[1] PSICOPEDAGOGIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 216,
+          "deficit_horas": 216,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[4] PSICOLOGIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 216,
+          "deficit_horas": 216,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[9] PSICOPEDAGOGIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 216,
+          "deficit_horas": 216,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[A] PSICOPEDAGOGIA",
+          "nivel": "DIFICULTADES EN EL APRENDIZAJE",
+          "carga_horaria": 216,
+          "deficit_horas": 216,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[A] ORIENTACION VOCACIONAL",
+          "nivel": "FORMACION TECNICA TECNOLOGICA PRODUCTIVA",
+          "carga_horaria": 208,
+          "deficit_horas": 208,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[B] MATEMATICA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 208,
+          "deficit_horas": 208,
+          "ues_afectadas": 7
+        },
+        {
+          "materia": "[C] FONOAUDIOLOGIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 208,
+          "deficit_horas": 208,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[A] I- FTO",
+          "nivel": "FORMACION TECNICA TECNOLOGICA PRODUCTIVA",
+          "carga_horaria": 200,
+          "deficit_horas": 200,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[D] DAE-LE",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 252,
+          "deficit_horas": 200,
+          "ues_afectadas": 5
+        },
+        {
+          "materia": "[A] D-ATP",
+          "nivel": "DIFICULTADES GENERALES EN EL APRENDIZAJE",
+          "carga_horaria": 348,
+          "deficit_horas": 192,
+          "ues_afectadas": 6
+        },
+        {
+          "materia": "[B] COMUNICACIÓN Y LENGUAJE",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 168,
+          "deficit_horas": 168,
+          "ues_afectadas": 7
+        },
+        {
+          "materia": "[3] DAG-ATP",
+          "nivel": "DIFICULTADES GENERALES EN EL APRENDIZAJE",
+          "carga_horaria": 164,
+          "deficit_horas": 164,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[1] DESARROLLO DE LA COMUNICACIÓN Y LENGUAJES",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 156,
+          "deficit_horas": 156,
+          "ues_afectadas": 5
+        },
+        {
+          "materia": "[C] DAE-CM",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 164,
+          "deficit_horas": 148,
+          "ues_afectadas": 3
+        },
+        {
+          "materia": "[A] DAG-ATP",
+          "nivel": "DIFICULTADES GENERALES EN EL APRENDIZAJE",
+          "carga_horaria": 248,
+          "deficit_horas": 144,
+          "ues_afectadas": 6
+        },
+        {
+          "materia": "[B] CIENCIAS SOCIALES",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 144,
+          "deficit_horas": 144,
+          "ues_afectadas": 7
+        },
+        {
+          "materia": "[3] I - TVA",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 140,
+          "deficit_horas": 140,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[G] A - ATP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 140,
+          "deficit_horas": 140,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[1] DESARROLLO SOCIOCULTURAL, AFECTIVO Y ESPIRITUAL",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 156,
+          "deficit_horas": 136,
+          "ues_afectadas": 6
+        },
+        {
+          "materia": "[A] A - ATP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 344,
+          "deficit_horas": 136,
+          "ues_afectadas": 3
+        },
+        {
+          "materia": "[A] EDUCACION FISICA Y DEPORTES",
+          "nivel": "EDUCACION PRIMARIA",
+          "carga_horaria": 140,
+          "deficit_horas": 132,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[1] DAG-ATP",
+          "nivel": "DIFICULTADES GENERALES EN EL APRENDIZAJE",
+          "carga_horaria": 224,
+          "deficit_horas": 124,
+          "ues_afectadas": 3
+        },
+        {
+          "materia": "[2] MATEMATICA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 148,
+          "deficit_horas": 124,
+          "ues_afectadas": 7
+        },
+        {
+          "materia": "[A] FONOAUDIOLOGIA",
+          "nivel": "TRASTORNO DEL ESPECTRO AUTISTA",
+          "carga_horaria": 120,
+          "deficit_horas": 120,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] PSICOMOTRIICIDAD",
+          "nivel": "FISICA MOTORA",
+          "carga_horaria": 120,
+          "deficit_horas": 120,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] PSICOPEDAGOGIA",
+          "nivel": "TRASTORNO DEL ESPECTRO AUTISTA",
+          "carga_horaria": 120,
+          "deficit_horas": 120,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[B] CIENCIAS NATURALES",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 120,
+          "deficit_horas": 120,
+          "ues_afectadas": 7
+        },
+        {
+          "materia": "[C] TALLER EDUCACIÓN MUSICAL",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 112,
+          "deficit_horas": 112,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[10] FISIOTERAPIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[1] COMUNICACIÓN Y LENGUAJE",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 6
+        },
+        {
+          "materia": "[1] DESARROLLO DEL CONOCIMIENTO Y DE LA PRODUCCIÓN",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 128,
+          "deficit_horas": 108,
+          "ues_afectadas": 6
+        },
+        {
+          "materia": "[1] FISIOTERAPIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[1] PRIMER MOMENTO: ESTIMULACION TEMPRANA",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[2] PSICOLOGIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[2] PSICOPEDAGOGIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[3] FONOAUDIOLOGIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[3] PSICOPEDAGOGIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[4] PSICOPEDAGOGIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[8] FONOAUDIOLOGIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[8] PSICOLOGIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] ADAPTACIONES CURRICULARES DE ENREQUECIMIENTO",
+          "nivel": "ESPECIAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] FONOAUDIOLOGIA",
+          "nivel": "AUDITIVA",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] FONOAUDIOLOGIA",
+          "nivel": "DIFICULTADES EN EL APRENDIZAJE",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] FONOAUDIOLOGIA",
+          "nivel": "VISUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] I- FT B",
+          "nivel": "FORMACION TECNICA TECNOLOGICA PRODUCTIVA",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] ORIENTACION Y MOVILIDAD (OM)",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[B] ADAPTACIONES CURRICULARES DE ENREQUECIMIENTO",
+          "nivel": "SERVICIO  APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[B] APRESTAMIENTO A LA FORMACIÓN TÉCNICA TECNOLÓGICA PRODUCTIVA",
+          "nivel": "FORMACION TECNICA TECNOLOGICA PRODUCTIVA",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[B] FONOAUDIOLOGIA",
+          "nivel": "DIFICULTADES EN EL APRENDIZAJE",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[B] FONOAUDIOLOGIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[B] PSICOLOGIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[B] PSICOLOGIA",
+          "nivel": "VISUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[C] PSICOPEDAGOGIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[C] PSICOPEDAGOGIA",
+          "nivel": "VISUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[D] I - TVA",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 208,
+          "deficit_horas": 108,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[E] FISIOTERAPIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[E] FONOAUDIOLOGIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[E] PSICOPEDAGOGIA",
+          "nivel": "AUDITIVA",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[F] FISIOTERAPIA",
+          "nivel": "VISUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[F] I-IEP",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[F] PSICOMOTRICIDAD",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[F] PSICOPEDAGOGIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[G] I - TVA",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[G] NEUROLOGIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[G] PSICOLOGIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[G] TRABAJO SOCIAL",
+          "nivel": "AUDITIVA",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[G] TRABAJO SOCIAL",
+          "nivel": "VISUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[H] FISIOTERAPIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[H] FONOAUDIOLOGIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[I] TRABAJO SOCIAL",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[J] PSICOLOGIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[O] FISIOTERAPIA",
+          "nivel": "VISUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[P] FISIOTERAPIA",
+          "nivel": "VISUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[Q] FISIOTERAPIA",
+          "nivel": "VISUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[R] PSICOLOGIA",
+          "nivel": "VISUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[S] PSICOLOGIA",
+          "nivel": "VISUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[T] PSICOLOGIA",
+          "nivel": "VISUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[U] PSICOPEDAGOGIA",
+          "nivel": "VISUAL",
+          "carga_horaria": 108,
+          "deficit_horas": 108,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[1] MATEMATICA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 108,
+          "deficit_horas": 104,
+          "ues_afectadas": 6
+        },
+        {
+          "materia": "[1] A-PALSB 3",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 100,
+          "deficit_horas": 100,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[3] MATEMATICA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 120,
+          "deficit_horas": 100,
+          "ues_afectadas": 6
+        },
+        {
+          "materia": "[4] DAE-LE",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 100,
+          "deficit_horas": 100,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[4] I- FTO",
+          "nivel": "FORMACION TECNICA TECNOLOGICA PRODUCTIVA",
+          "carga_horaria": 100,
+          "deficit_horas": 100,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] A-PAM",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 100,
+          "deficit_horas": 100,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] DA -E",
+          "nivel": "ESPECIAL",
+          "carga_horaria": 100,
+          "deficit_horas": 100,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] DESARROLLO INTEGRAL DE LA NÑA O NIÑO EN EL MARCO DE LAS ACTIVIDADES LUDICAS Y PRODCUTIVAS DE LA FAMILIA",
+          "nivel": "PROGRAMA DE ATENCION TEMPRANA",
+          "carga_horaria": 100,
+          "deficit_horas": 100,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[A] MATEMATICA",
+          "nivel": "ESPECIAL",
+          "carga_horaria": 100,
+          "deficit_horas": 100,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[A] ORIENTACION VOCACIONAL",
+          "nivel": "ESPECIAL",
+          "carga_horaria": 100,
+          "deficit_horas": 100,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] PSICOLOGIA",
+          "nivel": "ESPECIAL",
+          "carga_horaria": 100,
+          "deficit_horas": 100,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] SEGUNDO MOMENTO: INDEPENDENCIA PERSONAL BASICA",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 100,
+          "deficit_horas": 100,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[B] FISIOTERAPIA",
+          "nivel": "ESPECIAL",
+          "carga_horaria": 100,
+          "deficit_horas": 100,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[B] I - TVA",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 100,
+          "deficit_horas": 100,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[C] I-IEP",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 100,
+          "deficit_horas": 100,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[D] I-IEP",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 100,
+          "deficit_horas": 100,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[G] I- FTO",
+          "nivel": "FORMACION TECNICA TECNOLOGICA PRODUCTIVA",
+          "carga_horaria": 100,
+          "deficit_horas": 100,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[K] I-IEP",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 100,
+          "deficit_horas": 100,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[1] DESARROLLO BIOPSICOMOTRIZ",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 112,
+          "deficit_horas": 96,
+          "ues_afectadas": 6
+        },
+        {
+          "materia": "[2] CIENCIAS SOCIALES",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 116,
+          "deficit_horas": 96,
+          "ues_afectadas": 7
+        },
+        {
+          "materia": "[4] DAG-ATP",
+          "nivel": "DIFICULTADES GENERALES EN EL APRENDIZAJE",
+          "carga_horaria": 96,
+          "deficit_horas": 96,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[2] COMUNICACIÓN Y LENGUAJE",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 120,
+          "deficit_horas": 92,
+          "ues_afectadas": 7
+        },
+        {
+          "materia": "[A] COMUNICACIÓN Y LENGUAJE: LSB Y CASTELLANO EN MODALIDAD ESCRITA",
+          "nivel": "EDUCACION PRIMARIA",
+          "carga_horaria": 112,
+          "deficit_horas": 86,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[2] CIENCIAS NATURALES",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 104,
+          "deficit_horas": 84,
+          "ues_afectadas": 7
+        },
+        {
+          "materia": "[B] ACTIVIDADES DE LA VIDA DIARIA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 84,
+          "deficit_horas": 84,
+          "ues_afectadas": 7
+        },
+        {
+          "materia": "[A] CIENCIAS NATURALES",
+          "nivel": "ESPECIAL",
+          "carga_horaria": 80,
+          "deficit_horas": 80,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[A] CIENCIAS SOCIALES",
+          "nivel": "ESPECIAL",
+          "carga_horaria": 80,
+          "deficit_horas": 80,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[A] COMUNICACIÓN Y LENGUAJE",
+          "nivel": "ESPECIAL",
+          "carga_horaria": 80,
+          "deficit_horas": 80,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[B] DAE-CM",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 80,
+          "deficit_horas": 80,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[C] DAE-LE",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 100,
+          "deficit_horas": 80,
+          "ues_afectadas": 4
+        },
+        {
+          "materia": "[2] DAE-LE",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 84,
+          "deficit_horas": 72,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[3] CIENCIAS NATURALES",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 72,
+          "deficit_horas": 72,
+          "ues_afectadas": 5
+        },
+        {
+          "materia": "[3] CIENCIAS SOCIALES",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 72,
+          "deficit_horas": 72,
+          "ues_afectadas": 5
+        },
+        {
+          "materia": "[3] COMUNICACIÓN Y LENGUAJE",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 72,
+          "deficit_horas": 72,
+          "ues_afectadas": 5
+        },
+        {
+          "materia": "[3] DESARROLLO DEL CONOCIMIENTO Y DE LA PRODUCCIÓN",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 72,
+          "deficit_horas": 72,
+          "ues_afectadas": 3
+        },
+        {
+          "materia": "[A] NUTRICIÓN Y SALUD INTEGRAL DE LA FAMILIA Y LA NIÑA O NIÑO CON DISCAPACIDAD INTELECTUAL",
+          "nivel": "PROGRAMA DE ATENCION TEMPRANA",
+          "carga_horaria": 72,
+          "deficit_horas": 72,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[B] EDUCACIÓN MUSICAL",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 72,
+          "deficit_horas": 72,
+          "ues_afectadas": 7
+        },
+        {
+          "materia": "[B] EDUCACIÓN PLÁSTICA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 72,
+          "deficit_horas": 72,
+          "ues_afectadas": 7
+        },
+        {
+          "materia": "[B] PESPDG",
+          "nivel": "PERSONAS CON DISCAPACDIAD MULTIPLE CON COMPROMISO INTELECTUAL Y/O SENSORIAL",
+          "carga_horaria": 72,
+          "deficit_horas": 72,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[C] DAG-ATP",
+          "nivel": "DIFICULTADES GENERALES EN EL APRENDIZAJE",
+          "carga_horaria": 84,
+          "deficit_horas": 72,
+          "ues_afectadas": 3
+        },
+        {
+          "materia": "[A] MATEMATICA",
+          "nivel": "EDUCACION PRIMARIA",
+          "carga_horaria": 88,
+          "deficit_horas": 70,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[B] I - ATP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 76,
+          "deficit_horas": 68,
+          "ues_afectadas": 6
+        },
+        {
+          "materia": "[3] DESARROLLO SOCIOCULTURAL, AFECTIVO Y ESPIRITUAL",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 64,
+          "deficit_horas": 64,
+          "ues_afectadas": 3
+        },
+        {
+          "materia": "[5] I - TVA",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 64,
+          "deficit_horas": 64,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] CIENCIAS NATURALES",
+          "nivel": "EDUCACION PRIMARIA",
+          "carga_horaria": 80,
+          "deficit_horas": 64,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] CIENCIAS SOCIALES",
+          "nivel": "EDUCACION PRIMARIA",
+          "carga_horaria": 80,
+          "deficit_horas": 64,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] DESARROLLO INTEGRAL DE LA NIÑA/O, LA FAMILIA A PARTIR DE LA POSESIÓN E INTEREACCIÓN CON LA FAMILIA",
+          "nivel": "PROGRAMA DE ATENCION TEMPRANA",
+          "carga_horaria": 64,
+          "deficit_horas": 64,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[B] DESARROLLO BIOPSICOMOTRIZ",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 64,
+          "deficit_horas": 64,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[B] DESARROLLO DEL CONOCIMIENTO Y DE LA PRODUCCIÓN",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 64,
+          "deficit_horas": 64,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[B] EDUCACIÓN FÍSICA Y DEPORTIVA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 64,
+          "deficit_horas": 64,
+          "ues_afectadas": 7
+        },
+        {
+          "materia": "[D] DAE-CM",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 104,
+          "deficit_horas": 64,
+          "ues_afectadas": 3
+        },
+        {
+          "materia": "[1] EDUCACIÓN PLÁSTICA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 68,
+          "deficit_horas": 60,
+          "ues_afectadas": 6
+        },
+        {
+          "materia": "[2] ACTIVIDADES DE LA VIDA DIARIA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 72,
+          "deficit_horas": 60,
+          "ues_afectadas": 8
+        },
+        {
+          "materia": "[6] DAE-LE",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 60,
+          "deficit_horas": 60,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[7] DAG-ATP",
+          "nivel": "DIFICULTADES GENERALES EN EL APRENDIZAJE",
+          "carga_horaria": 60,
+          "deficit_horas": 60,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] I - FT A",
+          "nivel": "FORMACION TECNICA TECNOLOGICA PRODUCTIVA",
+          "carga_horaria": 60,
+          "deficit_horas": 60,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[1] ACTIVIDADES DE LA VIDA DIARIA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 64,
+          "deficit_horas": 56,
+          "ues_afectadas": 6
+        },
+        {
+          "materia": "[1] CIENCIAS NATURALES",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 64,
+          "deficit_horas": 56,
+          "ues_afectadas": 6
+        },
+        {
+          "materia": "[2] DESARROLLO BIOPSICOMOTRIZ",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 56,
+          "deficit_horas": 56,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[2] DESARROLLO DEL CONOCIMIENTO Y DE LA PRODUCCIÓN",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 56,
+          "deficit_horas": 56,
+          "ues_afectadas": 3
+        },
+        {
+          "materia": "[3] DESARROLLO BIOPSICOMOTRIZ",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 56,
+          "deficit_horas": 56,
+          "ues_afectadas": 3
+        },
+        {
+          "materia": "[3] I - ATP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 64,
+          "deficit_horas": 56,
+          "ues_afectadas": 7
+        },
+        {
+          "materia": "[D] DAG-ATP",
+          "nivel": "DIFICULTADES GENERALES EN EL APRENDIZAJE",
+          "carga_horaria": 56,
+          "deficit_horas": 56,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[3] DESARROLLO DE LA COMUNICACIÓN Y LENGUAJES",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 52,
+          "deficit_horas": 52,
+          "ues_afectadas": 3
+        },
+        {
+          "materia": "[9] I-IEP",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 104,
+          "deficit_horas": 52,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] A - ATP - TALLER",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 88,
+          "deficit_horas": 52,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[1] EDUCACIÓN MUSICAL",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 60,
+          "deficit_horas": 48,
+          "ues_afectadas": 6
+        },
+        {
+          "materia": "[2] DESARROLLO SOCIOCULTURAL, AFECTIVO Y ESPIRITUAL",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 48,
+          "deficit_horas": 48,
+          "ues_afectadas": 3
+        },
+        {
+          "materia": "[5] DAG-ATP",
+          "nivel": "DIFICULTADES GENERALES EN EL APRENDIZAJE",
+          "carga_horaria": 48,
+          "deficit_horas": 48,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[8] DAE-RVL",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 48,
+          "deficit_horas": 48,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[9] I - TVA",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 96,
+          "deficit_horas": 48,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] ACTIVIDADES DE LA VIDA DIARIA",
+          "nivel": "ESPECIAL",
+          "carga_horaria": 48,
+          "deficit_horas": 48,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[B] DESARROLLO SOCIOCULTURAL, AFECTIVO Y ESPIRITUAL",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 48,
+          "deficit_horas": 48,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[R] DAG-ATP",
+          "nivel": "DIFICULTADES GENERALES EN EL APRENDIZAJE",
+          "carga_horaria": 96,
+          "deficit_horas": 48,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[1] CIENCIAS SOCIALES",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 44,
+          "deficit_horas": 44,
+          "ues_afectadas": 5
+        },
+        {
+          "materia": "[1] EDUCACIÓN FÍSICA Y DEPORTIVA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 52,
+          "deficit_horas": 44,
+          "ues_afectadas": 6
+        },
+        {
+          "materia": "[2] DESARROLLO DE LA COMUNICACIÓN Y LENGUAJES",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 44,
+          "deficit_horas": 44,
+          "ues_afectadas": 3
+        },
+        {
+          "materia": "[2] EDUCACIÓN FÍSICA Y DEPORTIVA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 52,
+          "deficit_horas": 44,
+          "ues_afectadas": 6
+        },
+        {
+          "materia": "[2] EDUCACIÓN MUSICAL",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 52,
+          "deficit_horas": 44,
+          "ues_afectadas": 6
+        },
+        {
+          "materia": "[2] EDUCACIÓN PLÁSTICA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 44,
+          "deficit_horas": 44,
+          "ues_afectadas": 6
+        },
+        {
+          "materia": "[2] I - ATP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 56,
+          "deficit_horas": 44,
+          "ues_afectadas": 6
+        },
+        {
+          "materia": "[3] I-IEP",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 44,
+          "deficit_horas": 44,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[5] I-IEP",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 44,
+          "deficit_horas": 44,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[5] MATEMATICA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 44,
+          "deficit_horas": 44,
+          "ues_afectadas": 3
+        },
+        {
+          "materia": "[7] ORIENTACION Y MOVILIDAD (OM)",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 44,
+          "deficit_horas": 44,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[B] ACTIVIDADES DE LA VIDA DIARIA",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 44,
+          "deficit_horas": 44,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[B] DESARROLLO DE LA COMUNICACIÓN Y LENGUAJES",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 68,
+          "deficit_horas": 44,
+          "ues_afectadas": 3
+        },
+        {
+          "materia": "[E] MATEMATICA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 44,
+          "deficit_horas": 44,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[F] MATEMATICA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 68,
+          "deficit_horas": 44,
+          "ues_afectadas": 3
+        },
+        {
+          "materia": "[1] DESARROLLO INTEGRAL DE LA NÑA O NIÑO EN EL MARCO DE LAS ACTIVIDADES LUDICAS Y PRODCUTIVAS DE LA FAMILIA",
+          "nivel": "PROGRAMA DE ATENCION TEMPRANA",
+          "carga_horaria": 40,
+          "deficit_horas": 40,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[1] NUTRICIÓN Y SALUD INTEGRAL DE LA FAMILIA Y LA NIÑA O NIÑO CON DISCAPACIDAD INTELECTUAL",
+          "nivel": "PROGRAMA DE ATENCION TEMPRANA",
+          "carga_horaria": 40,
+          "deficit_horas": 40,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[2] DAE-RVL",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 40,
+          "deficit_horas": 40,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[3] ACTIVIDADES DE LA VIDA DIARIA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 40,
+          "deficit_horas": 40,
+          "ues_afectadas": 5
+        },
+        {
+          "materia": "[3] EDUCACIÓN FÍSICA Y DEPORTIVA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 44,
+          "deficit_horas": 40,
+          "ues_afectadas": 6
+        },
+        {
+          "materia": "[4] A- PA-LSB 1",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 80,
+          "deficit_horas": 40,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[6] DAE-CM",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 40,
+          "deficit_horas": 40,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[7] DESARROLLO DE LA COMUNICACIÓN Y LENGUAJES",
+          "nivel": "ESPECIAL",
+          "carga_horaria": 40,
+          "deficit_horas": 40,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] DESARROLLO CURRICULAR  (ESTUDIANTE 2)",
+          "nivel": "PERSONAS CON DISCAPACDIAD MULTIPLE CON COMPROMISO INTELECTUAL Y/O SENSORIAL",
+          "carga_horaria": 40,
+          "deficit_horas": 40,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] DESARROLLO CURRICULAR (ESTUDIANTE 1)",
+          "nivel": "PERSONAS CON DISCAPACDIAD MULTIPLE CON COMPROMISO INTELECTUAL Y/O SENSORIAL",
+          "carga_horaria": 40,
+          "deficit_horas": 40,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] EDUCACIÓN FÍSICA Y DEPORTIVA",
+          "nivel": "ESPECIAL",
+          "carga_horaria": 40,
+          "deficit_horas": 40,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[A] EDUCACIÓN MUSICAL",
+          "nivel": "ESPECIAL",
+          "carga_horaria": 40,
+          "deficit_horas": 40,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[A] EDUCACIÓN PLÁSTICA",
+          "nivel": "ESPECIAL",
+          "carga_horaria": 40,
+          "deficit_horas": 40,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[A] I - ATP - TALLER",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 44,
+          "deficit_horas": 40,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[A] TALLER EDUCACION FISICA DEPORTES Y RECREACIÓN",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 96,
+          "deficit_horas": 40,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[B] I - ATP - TALLER",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 40,
+          "deficit_horas": 40,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[E] COMUNICACIÓN Y LENGUAJE",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 40,
+          "deficit_horas": 40,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[E] DAE-LE",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 40,
+          "deficit_horas": 40,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[E] DAE-RVL",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 40,
+          "deficit_horas": 40,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[3] EDUCACIÓN PLÁSTICA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 36,
+          "deficit_horas": 36,
+          "ues_afectadas": 5
+        },
+        {
+          "materia": "[5] DAE-LE",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 36,
+          "deficit_horas": 36,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] DAE-CM",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 52,
+          "deficit_horas": 36,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[B] REHABILITACIÓN COGNITIVA",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 36,
+          "deficit_horas": 36,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[C] A - ATP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 144,
+          "deficit_horas": 36,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[D] A - ATP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 144,
+          "deficit_horas": 36,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "DESARROLLO DEL CONOCIMIENTO Y DE LA PRODUCCIÓN",
+          "nivel": "ESPECIAL",
+          "carga_horaria": 32,
+          "deficit_horas": 32,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "DESARROLLO DEL CONOCIMIENTO Y DE LA PRODUCCIÓN",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 32,
+          "deficit_horas": 32,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "DESARROLLO SOCIOCULTURAL, AFECTIVO Y ESPIRITUAL",
+          "nivel": "ESPECIAL",
+          "carga_horaria": 32,
+          "deficit_horas": 32,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "DESARROLLO SOCIOCULTURAL, AFECTIVO Y ESPIRITUAL",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 32,
+          "deficit_horas": 32,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "LIBRE",
+          "nivel": "EDUCACION PRIMARIA",
+          "carga_horaria": 32,
+          "deficit_horas": 32,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "LIBRE",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 32,
+          "deficit_horas": 32,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "LIBRE",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 32,
+          "deficit_horas": 32,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[1] I - ATP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 56,
+          "deficit_horas": 32,
+          "ues_afectadas": 4
+        },
+        {
+          "materia": "[3] EDUCACIÓN MUSICAL",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 32,
+          "deficit_horas": 32,
+          "ues_afectadas": 5
+        },
+        {
+          "materia": "[5] CIENCIAS NATURALES",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 32,
+          "deficit_horas": 32,
+          "ues_afectadas": 3
+        },
+        {
+          "materia": "[5] CIENCIAS SOCIALES",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 32,
+          "deficit_horas": 32,
+          "ues_afectadas": 3
+        },
+        {
+          "materia": "[7] DESARROLLO DEL CONOCIMIENTO Y DE LA PRODUCCIÓN",
+          "nivel": "ESPECIAL",
+          "carga_horaria": 32,
+          "deficit_horas": 32,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[E] CIENCIAS NATURALES",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 32,
+          "deficit_horas": 32,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[E] CIENCIAS SOCIALES",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 32,
+          "deficit_horas": 32,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[E] DAE-CM",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 32,
+          "deficit_horas": 32,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[E] ORIENTACION Y MOVILIDAD (OM)",
+          "nivel": "VISUAL",
+          "carga_horaria": 32,
+          "deficit_horas": 32,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[F] CIENCIAS NATURALES",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 32,
+          "deficit_horas": 32,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[F] CIENCIAS SOCIALES",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 32,
+          "deficit_horas": 32,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[F] COMUNICACIÓN Y LENGUAJE",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 32,
+          "deficit_horas": 32,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "DESARROLLO DE LA COMUNICACIÓN Y LENGUAJES",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 28,
+          "deficit_horas": 28,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[1] DAE-RVL",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 44,
+          "deficit_horas": 28,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[1] DESARROLLO INTEGRAL DE LA NIÑA/O, LA FAMILIA A PARTIR DE LA POSESIÓN E INTEREACCIÓN CON LA FAMILIA",
+          "nivel": "PROGRAMA DE ATENCION TEMPRANA",
+          "carga_horaria": 28,
+          "deficit_horas": 28,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[1] NUTRICIÓN Y SALUD INTEGRAL DE LA FAMILIA Y LA NIÑA O NIÑO CON DISCAPACIDAD INTELECTUAL",
+          "nivel": "ATENCION TEMPRANA",
+          "carga_horaria": 68,
+          "deficit_horas": 28,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[5] ACTIVIDADES DE LA VIDA DIARIA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 28,
+          "deficit_horas": 28,
+          "ues_afectadas": 3
+        },
+        {
+          "materia": "[5] COMUNICACIÓN Y LENGUAJE",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 28,
+          "deficit_horas": 28,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[5] EDUCACIÓN MUSICAL",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 28,
+          "deficit_horas": 28,
+          "ues_afectadas": 3
+        },
+        {
+          "materia": "[7] ACTIVIDADES DE LA VIDA DIARIA (AVD)",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 28,
+          "deficit_horas": 28,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[7] LECTURA  Y ESCRITURA EN SISTEMA BRAILLE, MACROTIPO, SIGNOGRAFIA, MATEMÁTICA Y ÁBACO",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 28,
+          "deficit_horas": 28,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] F - ATP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 28,
+          "deficit_horas": 28,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] OTRAS ACTIVIDADES",
+          "nivel": "PERSONAS CON DISCAPACDIAD MULTIPLE CON COMPROMISO INTELECTUAL Y/O SENSORIAL",
+          "carga_horaria": 28,
+          "deficit_horas": 28,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] PSICOEDUCACIÓN",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 28,
+          "deficit_horas": 28,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[B] A - ATP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 136,
+          "deficit_horas": 28,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[B] DAG-ATP",
+          "nivel": "DIFICULTADES GENERALES EN EL APRENDIZAJE",
+          "carga_horaria": 56,
+          "deficit_horas": 28,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[Q] DAG-ATP",
+          "nivel": "DIFICULTADES GENERALES EN EL APRENDIZAJE",
+          "carga_horaria": 40,
+          "deficit_horas": 28,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "DESARROLLO DE LA COMUNICACIÓN Y LENGUAJES",
+          "nivel": "ESPECIAL",
+          "carga_horaria": 24,
+          "deficit_horas": 24,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[1] DESARROLLO INTEGRAL DE LA NÑA O NIÑO EN EL MARCO DE LAS ACTIVIDADES LUDICAS Y PRODCUTIVAS DE LA FAMILIA",
+          "nivel": "ATENCION TEMPRANA",
+          "carga_horaria": 72,
+          "deficit_horas": 24,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[5] DAE-CM",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 24,
+          "deficit_horas": 24,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[5] EDUCACIÓN PLÁSTICA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 24,
+          "deficit_horas": 24,
+          "ues_afectadas": 3
+        },
+        {
+          "materia": "[8] ACTIVIDADES DE LA VIDA DIARIA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 24,
+          "deficit_horas": 24,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] ARTES PLASTICAS Y VISUALES",
+          "nivel": "EDUCACION PRIMARIA",
+          "carga_horaria": 32,
+          "deficit_horas": 24,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] ATP - TALLER",
+          "nivel": "APOYO EDUCATIVO A ESTUDIANTES CON DISCAPACIDAD VISUAL",
+          "carga_horaria": 92,
+          "deficit_horas": 24,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] EDUCACION MUSICAL",
+          "nivel": "EDUCACION PRIMARIA",
+          "carga_horaria": 32,
+          "deficit_horas": 24,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] I - ATP",
+          "nivel": "ESPECIAL",
+          "carga_horaria": 112,
+          "deficit_horas": 24,
+          "ues_afectadas": 3
+        },
+        {
+          "materia": "[A] TÉCNICA TECNOLÓGICA",
+          "nivel": "EDUCACION PRIMARIA",
+          "carga_horaria": 32,
+          "deficit_horas": 24,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] VALORES, ESPIRITUALIDAD Y RELIGIONES",
+          "nivel": "EDUCACION PRIMARIA",
+          "carga_horaria": 32,
+          "deficit_horas": 24,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[D] I - ATP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 24,
+          "deficit_horas": 24,
+          "ues_afectadas": 3
+        },
+        {
+          "materia": "[G] I - ATP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 24,
+          "deficit_horas": 24,
+          "ues_afectadas": 3
+        },
+        {
+          "materia": "[H] DAE-LE",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 32,
+          "deficit_horas": 24,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[K] DAG-ATP",
+          "nivel": "DIFICULTADES GENERALES EN EL APRENDIZAJE",
+          "carga_horaria": 40,
+          "deficit_horas": 24,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "DESARROLLO BIOPSICOMOTRIZ",
+          "nivel": "ESPECIAL",
+          "carga_horaria": 20,
+          "deficit_horas": 20,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[1] MATEMATICA",
+          "nivel": "ATENCION TEMPRANA",
+          "carga_horaria": 20,
+          "deficit_horas": 20,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[2] DAG-ATP",
+          "nivel": "DIFICULTADES GENERALES EN EL APRENDIZAJE",
+          "carga_horaria": 20,
+          "deficit_horas": 20,
+          "ues_afectadas": 3
+        },
+        {
+          "materia": "[2] DESARROLLO DEL CONOCIMIENTO Y DE LA PRODUCCIÓN",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 40,
+          "deficit_horas": 20,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[3] DAE-CM",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 20,
+          "deficit_horas": 20,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[3] DAE-LE",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 20,
+          "deficit_horas": 20,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[3] DAE-RVL",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 20,
+          "deficit_horas": 20,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[4] A- PET",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 40,
+          "deficit_horas": 20,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[4] A-SALSB  MÓDULO 1",
+          "nivel": "AUDITIVA",
+          "carga_horaria": 40,
+          "deficit_horas": 20,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[4] DAE-CM",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 20,
+          "deficit_horas": 20,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[5] EDUCACIÓN FÍSICA Y DEPORTIVA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 20,
+          "deficit_horas": 20,
+          "ues_afectadas": 3
+        },
+        {
+          "materia": "[7] DESARROLLO BIOPSICOMOTRIZ",
+          "nivel": "ESPECIAL",
+          "carga_horaria": 20,
+          "deficit_horas": 20,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[7] MATEMATICA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 20,
+          "deficit_horas": 20,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[8] COMUNICACIÓN Y LENGUAJE",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 20,
+          "deficit_horas": 20,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] F - ATP - TALLER",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 20,
+          "deficit_horas": 20,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] TERCER MOMENTO: INDEPENDENCIA Y TRANSICION A LA VIDA ADULTA",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 40,
+          "deficit_horas": 20,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[C] MATEMATICA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 20,
+          "deficit_horas": 20,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[D] ORIENTACION Y MOVILIDAD (OM)",
+          "nivel": "VISUAL",
+          "carga_horaria": 20,
+          "deficit_horas": 20,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[P] DAE-CM",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 40,
+          "deficit_horas": 20,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "DESARROLLO BIOPSICOMOTRIZ",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[1] A - ATP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[1] CIENCIAS NATURALES",
+          "nivel": "ATENCION TEMPRANA",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[1] CIENCIAS SOCIALES",
+          "nivel": "ATENCION TEMPRANA",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[1] COMUNICACIÓN Y LENGUAJE",
+          "nivel": "ATENCION TEMPRANA",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[2] DESARROLLO DE LA COMUNICACIÓN Y LENGUAJES",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[2] DESARROLLO SOCIOCULTURAL, AFECTIVO Y ESPIRITUAL",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 32,
+          "deficit_horas": 16,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[4] CIENCIAS NATURALES",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[4] CIENCIAS SOCIALES",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[4] COMUNICACIÓN Y LENGUAJE",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[4] I - ATP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[4] MATEMATICA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[5] DESARROLLO DE LA COMUNICACIÓN Y LENGUAJES",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[5] I - ATP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 24,
+          "deficit_horas": 16,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[7] CIENCIAS NATURALES",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[7] CIENCIAS SOCIALES",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[7] COMUNICACIÓN Y LENGUAJE",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[7] DESARROLLO SOCIOCULTURAL, AFECTIVO Y ESPIRITUAL",
+          "nivel": "ESPECIAL",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[8] CIENCIAS SOCIALES",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[8] MATEMATICA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[B] OTRAS ACTIVIDADES",
+          "nivel": "PERSONAS CON DISCAPACDIAD MULTIPLE CON COMPROMISO INTELECTUAL Y/O SENSORIAL",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[C] ATP - TALLER",
+          "nivel": "APOYO EDUCATIVO A ESTUDIANTES CON DISCAPACIDAD VISUAL",
+          "carga_horaria": 24,
+          "deficit_horas": 16,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[C] CIENCIAS NATURALES",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[C] CIENCIAS SOCIALES",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[C] COMUNICACIÓN Y LENGUAJE",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[C] I - ATP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[C] ORIENTACION Y MOVILIDAD (OM)",
+          "nivel": "VISUAL",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[E] ACTIVIDADES DE LA VIDA DIARIA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[E] EDUCACIÓN FÍSICA Y DEPORTIVA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[E] EDUCACIÓN MUSICAL",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[E] EDUCACIÓN PLÁSTICA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[F] ACTIVIDADES DE LA VIDA DIARIA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[F] EDUCACIÓN FÍSICA Y DEPORTIVA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[F] EDUCACIÓN MUSICAL",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[F] EDUCACIÓN PLÁSTICA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[F] I - ATP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "[Z] I - ATP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 16,
+          "deficit_horas": 16,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[2] DESARROLLO DE LA COMUNICACIÓN Y LENGUAJES",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 24,
+          "deficit_horas": 12,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[2] DESARROLLO SOCIOCULTURAL, AFECTIVO Y ESPIRITUAL",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 12,
+          "deficit_horas": 12,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[2] I-IEP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 24,
+          "deficit_horas": 12,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[2] LECTURA  Y ESCRITURA EN SISTEMA BRAILLE, MACROTIPO, SIGNOGRAFIA, MATEMÁTICA Y ÁBACO",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 24,
+          "deficit_horas": 12,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[2] ORIENTACION Y MOVILIDAD (OM)",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 24,
+          "deficit_horas": 12,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[4] A-PALSB 2",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 24,
+          "deficit_horas": 12,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[4] A-PALSB 3",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 24,
+          "deficit_horas": 12,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[4] ACTIVIDADES DE LA VIDA DIARIA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 12,
+          "deficit_horas": 12,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[B] D-ATP",
+          "nivel": "DIFICULTADES GENERALES EN EL APRENDIZAJE",
+          "carga_horaria": 120,
+          "deficit_horas": 12,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[B] DESARROLLO CURRICULAR (ESTUDIANTE 1)",
+          "nivel": "PERSONAS CON DISCAPACDIAD MULTIPLE CON COMPROMISO INTELECTUAL Y/O SENSORIAL",
+          "carga_horaria": 12,
+          "deficit_horas": 12,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[I] DAG-ATP",
+          "nivel": "DIFICULTADES GENERALES EN EL APRENDIZAJE",
+          "carga_horaria": 28,
+          "deficit_horas": 12,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[J] DAG-ATP",
+          "nivel": "DIFICULTADES GENERALES EN EL APRENDIZAJE",
+          "carga_horaria": 24,
+          "deficit_horas": 12,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[L] DAE-LE",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 24,
+          "deficit_horas": 12,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[R] DAE-LE",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 20,
+          "deficit_horas": 12,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] A- PA-LSB 1",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 112,
+          "deficit_horas": 10,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "LIBRE",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "LIBRE",
+          "nivel": "VISUAL",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[1] ACTIVIDADES DE LA VIDA DIARIA",
+          "nivel": "ATENCION TEMPRANA",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[1] APOYO TECNICO PEDAGOGICO",
+          "nivel": "PROGRAMA",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[1] EDUCACIÓN FÍSICA Y DEPORTIVA",
+          "nivel": "ATENCION TEMPRANA",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[1] EDUCACIÓN MUSICAL",
+          "nivel": "ATENCION TEMPRANA",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[1] EDUCACIÓN PLÁSTICA",
+          "nivel": "ATENCION TEMPRANA",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[2] ACTIVIDADES DE LA VIDA DIARIA (AVD)",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 16,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[2] DESARROLLO BIOPSICOMOTRIZ",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 16,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[2] DESARROLLO BIOPSICOMOTRIZ",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[3] DESARROLLO INTEGRAL DE LA NÑA O NIÑO EN EL MARCO DE LAS ACTIVIDADES LUDICAS Y PRODCUTIVAS DE LA FAMILIA",
+          "nivel": "ATENCION TEMPRANA",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[3] NUTRICIÓN Y SALUD INTEGRAL DE LA FAMILIA Y LA NIÑA O NIÑO CON DISCAPACIDAD INTELECTUAL",
+          "nivel": "ATENCION TEMPRANA",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[4] EDUCACIÓN FÍSICA Y DEPORTIVA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[4] EDUCACIÓN MUSICAL",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[4] EDUCACIÓN PLÁSTICA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[5] DESARROLLO BIOPSICOMOTRIZ",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[5] DESARROLLO DE LA COMUNICACIÓN Y LENGUAJES",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[5] DESARROLLO DEL CONOCIMIENTO Y DE LA PRODUCCIÓN",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[5] DESARROLLO SOCIOCULTURAL, AFECTIVO Y ESPIRITUAL",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[6] DAG-ATP",
+          "nivel": "DIFICULTADES GENERALES EN EL APRENDIZAJE",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[6] I - ATP - TALLER",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[7] ATP",
+          "nivel": "APOYO EDUCATIVO A ESTUDIANTES CON DISCAPACIDAD VISUAL",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[7] EDUCACIÓN FÍSICA Y DEPORTIVA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[7] EDUCACIÓN MUSICAL",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[7] EDUCACIÓN PLÁSTICA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[7] I - ATP",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[8] CIENCIAS NATURALES",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[8] EDUCACIÓN FÍSICA Y DEPORTIVA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[8] EDUCACIÓN MUSICAL",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[8] EDUCACIÓN PLÁSTICA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] A - ATP - TALLER",
+          "nivel": "EDUCACION PRIMARIA",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] DAG-ATP",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] FISIOTERAPIA",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] FONOAUDIOLOGIA",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] I - ATP - TALLER",
+          "nivel": "ESPECIAL",
+          "carga_horaria": 24,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] I - ATP - TALLER",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] PSICOPEDAGOGIA",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[B] DA -E",
+          "nivel": "ESPECIAL",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[B] DESARROLLO CURRICULAR  (ESTUDIANTE 2)",
+          "nivel": "PERSONAS CON DISCAPACDIAD MULTIPLE CON COMPROMISO INTELECTUAL Y/O SENSORIAL",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[B] I - ATP",
+          "nivel": "ESPECIAL",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[B] PSICOPEDAGOGIA",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[C] ACTIVIDADES DE LA VIDA DIARIA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[C] EDUCACIÓN FÍSICA Y DEPORTIVA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[C] EDUCACIÓN MUSICAL",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[C] EDUCACIÓN PLÁSTICA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[C] FONOAUDIOLOGIA",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[E] I-IEP",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[F] I - ATP - TALLER",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[G] DAE-CM",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 20,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[G] I - ATP - TALLER",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 16,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[I] I - ATP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[J] I - ATP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[K] I - ATP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[M] DAE-LE",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 20,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[N] DAE-LE",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 24,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[N] I-IEP",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[O] DAE-CM",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 16,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[P] FONOAUDIOLOGIA",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[P] I - ATP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[Q] I - ATP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[Q] TRABAJO SOCIAL",
+          "nivel": "INTELECTUAL",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[S] I - ATP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[S] I - ATP - TALLER",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[Y] I - ATP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 8,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "LIBRE",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 4,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "LIBRE",
+          "nivel": "DIFICULTADES GENERALES EN EL APRENDIZAJE",
+          "carga_horaria": 8,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "LIBRE",
+          "nivel": "PERSONAS CON DISCAPACDIAD MULTIPLE CON COMPROMISO INTELECTUAL Y/O SENSORIAL",
+          "carga_horaria": 4,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[1] DESARROLLO DEL CONOCIMIENTO Y DE LA PRODUCCIÓN",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 4,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[1] I-IEP",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 16,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[2] DAG-ATP",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 4,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[2] DESARROLLO DEL CONOCIMIENTO Y DE LA PRODUCCIÓN",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 4,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[2] I - ATP - TALLER",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 8,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[2] PSICOLOGIA",
+          "nivel": "VISUAL",
+          "carga_horaria": 100,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[4] A-SALSB  MÓDULO 2",
+          "nivel": "AUDITIVA",
+          "carga_horaria": 8,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[5] DESARROLLO BIOPSICOMOTRIZ",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 4,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[7] ACTIVIDADES DE LA VIDA DIARIA",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 24,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[7] ACTIVIDADES DE LA VIDA DIARIA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 4,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] A- PSL",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 16,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] DESARROLLO INTEGRAL DE LA NIÑA/O, LA FAMILIA A PARTIR DE LA POSESIÓN E INTEREACCIÓN CON LA FAMILIA",
+          "nivel": "DIFICULTADES ESPECIFICAS EN EL APRENDIZAJE",
+          "carga_horaria": 4,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] MATEMÁTICA",
+          "nivel": "EDUCACION PRIMARIA",
+          "carga_horaria": 16,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[B] NUTRICIÓN Y SALUD INTEGRAL DE LA FAMILIA Y LA NIÑA O NIÑO CON DISCAPACIDAD INTELECTUAL",
+          "nivel": "ATENCION TEMPRANA",
+          "carga_horaria": 40,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[C] DESARROLLO DE LA COMUNICACIÓN Y LENGUAJES",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 28,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[C] ORIENTACION Y MOVILIDAD (OM)",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 4,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[D] MATEMATICA",
+          "nivel": "INDEPENDENCIA SOCIAL",
+          "carga_horaria": 24,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[E] ATP",
+          "nivel": "APOYO EDUCATIVO A ESTUDIANTES CON DISCAPACIDAD VISUAL",
+          "carga_horaria": 4,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[E] ATP - TALLER",
+          "nivel": "APOYO EDUCATIVO A ESTUDIANTES CON DISCAPACIDAD VISUAL",
+          "carga_horaria": 4,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[F] ORIENTACION Y MOVILIDAD (OM)",
+          "nivel": "VISUAL",
+          "carga_horaria": 4,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[G] SEGUIMIENTO Y ACOMPAÑAMIENTO",
+          "nivel": "PROGRAMA DE EDUCACION SOCIO COMUNITARIA EN CASA PARA PERSONAS CON DISCAPACIDAD GRAVE Y MUY GRAVE (MAESTRO RESPONSABLE)",
+          "carga_horaria": 44,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[H] APOYO TECNICO PEDAGOGICO",
+          "nivel": "PROGRAMA",
+          "carga_horaria": 8,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[H] I - ATP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 8,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[L] BAJA VISISON - REHABILITACION VISUAL",
+          "nivel": "VISUAL",
+          "carga_horaria": 4,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[O] I - ATP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 8,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[U] I - ATP",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 4,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[U] I - ATP - TALLER",
+          "nivel": "APOYO TECNICO PEDAGOGICO",
+          "carga_horaria": 4,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A]  CIENCIAS NATURALES",
+          "nivel": "FORMACION TECNICA TECNOLOGICA PRODUCTIVA",
+          "carga_horaria": 16,
+          "deficit_horas": 2,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] A-PALSB 2",
+          "nivel": "PROGRAMAS",
+          "carga_horaria": 12,
+          "deficit_horas": 2,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] CIENCIAS NATURALES",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 32,
+          "deficit_horas": 2,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] CIENCIAS SOCIALES",
+          "nivel": "FORMACION TECNICA TECNOLOGICA PRODUCTIVA",
+          "carga_horaria": 24,
+          "deficit_horas": 2,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] CIENCIAS SOCIALES",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 20,
+          "deficit_horas": 2,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] EDUCACIÓN PLÁSTICA",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 24,
+          "deficit_horas": 2,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "[A] MATEMATICA",
+          "nivel": "INDEPENDENCIA PERSONAL",
+          "carga_horaria": 36,
+          "deficit_horas": 2,
+          "ues_afectadas": 1
+        }
+      ],
+      "departamentos": [
+        {
+          "departamento_id": 1,
+          "departamento": "CHUQUISACA",
+          "carga_horaria": 2316,
+          "horas_planilla": 637,
+          "deficit_horas": 1679,
+          "items_deficit_equiv": 16,
+          "pct_cobertura": 27.5,
+          "ues_afectadas": 9
+        },
+        {
+          "departamento_id": 2,
+          "departamento": "LA PAZ",
+          "carga_horaria": 6628,
+          "horas_planilla": 1276,
+          "deficit_horas": 5352,
+          "items_deficit_equiv": 50,
+          "pct_cobertura": 19.3,
+          "ues_afectadas": 27
+        },
+        {
+          "departamento_id": 3,
+          "departamento": "COCHABAMBA",
+          "carga_horaria": 3760,
+          "horas_planilla": 604,
+          "deficit_horas": 3156,
+          "items_deficit_equiv": 30,
+          "pct_cobertura": 16.1,
+          "ues_afectadas": 22
+        },
+        {
+          "departamento_id": 4,
+          "departamento": "ORURO",
+          "carga_horaria": 1840,
+          "horas_planilla": 424,
+          "deficit_horas": 1416,
+          "items_deficit_equiv": 14,
+          "pct_cobertura": 23.0,
+          "ues_afectadas": 8
+        },
+        {
+          "departamento_id": 5,
+          "departamento": "POTOSÍ",
+          "carga_horaria": 3176,
+          "horas_planilla": 344,
+          "deficit_horas": 2832,
+          "items_deficit_equiv": 27,
+          "pct_cobertura": 10.8,
+          "ues_afectadas": 13
+        },
+        {
+          "departamento_id": 6,
+          "departamento": "TARIJA",
+          "carga_horaria": 164,
+          "horas_planilla": 144,
+          "deficit_horas": 20,
+          "items_deficit_equiv": 1,
+          "pct_cobertura": 87.8,
+          "ues_afectadas": 2
+        },
+        {
+          "departamento_id": 7,
+          "departamento": "SANTA CRUZ",
+          "carga_horaria": 19148,
+          "horas_planilla": 1284,
+          "deficit_horas": 17864,
+          "items_deficit_equiv": 166,
+          "pct_cobertura": 6.7,
+          "ues_afectadas": 66
+        },
+        {
+          "departamento_id": 8,
+          "departamento": "BENI",
+          "carga_horaria": 2572,
+          "horas_planilla": 668,
+          "deficit_horas": 1904,
+          "items_deficit_equiv": 18,
+          "pct_cobertura": 26.0,
+          "ues_afectadas": 5
+        },
+        {
+          "departamento_id": 9,
+          "departamento": "PANDO",
+          "carga_horaria": 1620,
+          "horas_planilla": 292,
+          "deficit_horas": 1328,
+          "items_deficit_equiv": 13,
+          "pct_cobertura": 18.0,
+          "ues_afectadas": 7
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "nombre": "CIENCIAS NATURALES: BIOLOGÍA - GEOGRAFÍA",
+      "hora_item": 96.0,
+      "carga_horaria": 68736,
+      "horas_planilla": 34429,
+      "deficit_horas": 34307,
+      "items_deficit_equiv": 358,
+      "pct_cobertura": 50.1,
+      "ues_afectadas": 1856,
+      "materias_breakdown": [
+        {
+          "materia": "CIENCIAS NATURALES : BIOLOGÍA Y GEOGRAFÍA",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 68736,
+          "deficit_horas": 34307,
+          "ues_afectadas": 1856
+        }
+      ],
+      "departamentos": [
+        {
+          "departamento_id": 1,
+          "departamento": "CHUQUISACA",
+          "carga_horaria": 2448,
+          "horas_planilla": 1656,
+          "deficit_horas": 792,
+          "items_deficit_equiv": 9,
+          "pct_cobertura": 67.6,
+          "ues_afectadas": 81
+        },
+        {
+          "departamento_id": 2,
+          "departamento": "LA PAZ",
+          "carga_horaria": 17324,
+          "horas_planilla": 9718,
+          "deficit_horas": 7606,
+          "items_deficit_equiv": 80,
+          "pct_cobertura": 56.1,
+          "ues_afectadas": 479
+        },
+        {
+          "departamento_id": 3,
+          "departamento": "COCHABAMBA",
+          "carga_horaria": 6992,
+          "horas_planilla": 3146,
+          "deficit_horas": 3846,
+          "items_deficit_equiv": 41,
+          "pct_cobertura": 45.0,
+          "ues_afectadas": 219
+        },
+        {
+          "departamento_id": 4,
+          "departamento": "ORURO",
+          "carga_horaria": 2624,
+          "horas_planilla": 1450,
+          "deficit_horas": 1174,
+          "items_deficit_equiv": 13,
+          "pct_cobertura": 55.3,
+          "ues_afectadas": 78
+        },
+        {
+          "departamento_id": 5,
+          "departamento": "POTOSÍ",
+          "carga_horaria": 13428,
+          "horas_planilla": 8446,
+          "deficit_horas": 4982,
+          "items_deficit_equiv": 52,
+          "pct_cobertura": 62.9,
+          "ues_afectadas": 281
+        },
+        {
+          "departamento_id": 6,
+          "departamento": "TARIJA",
+          "carga_horaria": 640,
+          "horas_planilla": 388,
+          "deficit_horas": 252,
+          "items_deficit_equiv": 3,
+          "pct_cobertura": 60.6,
+          "ues_afectadas": 23
+        },
+        {
+          "departamento_id": 7,
+          "departamento": "SANTA CRUZ",
+          "carga_horaria": 16676,
+          "horas_planilla": 4990,
+          "deficit_horas": 11686,
+          "items_deficit_equiv": 122,
+          "pct_cobertura": 29.9,
+          "ues_afectadas": 449
+        },
+        {
+          "departamento_id": 8,
+          "departamento": "BENI",
+          "carga_horaria": 7004,
+          "horas_planilla": 4054,
+          "deficit_horas": 2950,
+          "items_deficit_equiv": 31,
+          "pct_cobertura": 57.9,
+          "ues_afectadas": 193
+        },
+        {
+          "departamento_id": 9,
+          "departamento": "PANDO",
+          "carga_horaria": 1600,
+          "horas_planilla": 581,
+          "deficit_horas": 1019,
+          "items_deficit_equiv": 11,
+          "pct_cobertura": 36.3,
+          "ues_afectadas": 53
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "nombre": "TRANSFORMACIÓN DE ALIMENTOS Y GASTRONOMÍA",
+      "hora_item": 96.0,
+      "carga_horaria": 60388,
+      "horas_planilla": 32090,
+      "deficit_horas": 28298,
+      "items_deficit_equiv": 295,
+      "pct_cobertura": 53.1,
+      "ues_afectadas": 556,
+      "materias_breakdown": [
+        {
+          "materia": "GASTRONOMÍA",
+          "nivel": "ETA",
+          "carga_horaria": 35760,
+          "deficit_horas": 13947,
+          "ues_afectadas": 205
+        },
+        {
+          "materia": "GASTRONOMÍA",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 8688,
+          "deficit_horas": 5526,
+          "ues_afectadas": 136
+        },
+        {
+          "materia": "TÉCNICA TECNOLÓGICA GENERAL",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 5560,
+          "deficit_horas": 3420,
+          "ues_afectadas": 144
+        },
+        {
+          "materia": "TRANSFORMACIÓN DE ALIMENTOS",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 6192,
+          "deficit_horas": 2944,
+          "ues_afectadas": 92
+        },
+        {
+          "materia": "TRANSFORMACIÓN DE ALIMENTOS",
+          "nivel": "ETA",
+          "carga_horaria": 2100,
+          "deficit_horas": 1281,
+          "ues_afectadas": 9
+        },
+        {
+          "materia": "TÉCNICA TECNOLÓGICA",
+          "nivel": "PRIMARIA",
+          "carga_horaria": 2000,
+          "deficit_horas": 1132,
+          "ues_afectadas": 66
+        },
+        {
+          "materia": "TÉCNICA TECNOLÓGICA ESPECIALIZADA",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 56,
+          "deficit_horas": 40,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "TÉCNICA TECNOLÓGICA",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 32,
+          "deficit_horas": 8,
+          "ues_afectadas": 1
+        }
+      ],
+      "departamentos": [
+        {
+          "departamento_id": 1,
+          "departamento": "CHUQUISACA",
+          "carga_horaria": 3224,
+          "horas_planilla": 2030,
+          "deficit_horas": 1194,
+          "items_deficit_equiv": 13,
+          "pct_cobertura": 63.0,
+          "ues_afectadas": 29
+        },
+        {
+          "departamento_id": 2,
+          "departamento": "LA PAZ",
+          "carga_horaria": 24276,
+          "horas_planilla": 13612,
+          "deficit_horas": 10664,
+          "items_deficit_equiv": 112,
+          "pct_cobertura": 56.1,
+          "ues_afectadas": 190
+        },
+        {
+          "departamento_id": 3,
+          "departamento": "COCHABAMBA",
+          "carga_horaria": 11904,
+          "horas_planilla": 6105,
+          "deficit_horas": 5799,
+          "items_deficit_equiv": 61,
+          "pct_cobertura": 51.3,
+          "ues_afectadas": 113
+        },
+        {
+          "departamento_id": 4,
+          "departamento": "ORURO",
+          "carga_horaria": 2384,
+          "horas_planilla": 984,
+          "deficit_horas": 1400,
+          "items_deficit_equiv": 15,
+          "pct_cobertura": 41.3,
+          "ues_afectadas": 29
+        },
+        {
+          "departamento_id": 5,
+          "departamento": "POTOSÍ",
+          "carga_horaria": 4544,
+          "horas_planilla": 3038,
+          "deficit_horas": 1506,
+          "items_deficit_equiv": 16,
+          "pct_cobertura": 66.9,
+          "ues_afectadas": 50
+        },
+        {
+          "departamento_id": 6,
+          "departamento": "TARIJA",
+          "carga_horaria": 920,
+          "horas_planilla": 660,
+          "deficit_horas": 260,
+          "items_deficit_equiv": 3,
+          "pct_cobertura": 71.7,
+          "ues_afectadas": 12
+        },
+        {
+          "departamento_id": 7,
+          "departamento": "SANTA CRUZ",
+          "carga_horaria": 10040,
+          "horas_planilla": 4207,
+          "deficit_horas": 5833,
+          "items_deficit_equiv": 61,
+          "pct_cobertura": 41.9,
+          "ues_afectadas": 114
+        },
+        {
+          "departamento_id": 8,
+          "departamento": "BENI",
+          "carga_horaria": 1812,
+          "horas_planilla": 996,
+          "deficit_horas": 816,
+          "items_deficit_equiv": 9,
+          "pct_cobertura": 55.0,
+          "ues_afectadas": 11
+        },
+        {
+          "departamento_id": 9,
+          "departamento": "PANDO",
+          "carga_horaria": 1284,
+          "horas_planilla": 458,
+          "deficit_horas": 826,
+          "items_deficit_equiv": 9,
+          "pct_cobertura": 35.7,
+          "ues_afectadas": 8
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "nombre": "COMUNICACIÓN Y LENGUAJES: LENGUA EXTRANJERA (INGLÉS)",
+      "hora_item": 96.0,
+      "carga_horaria": 38216,
+      "horas_planilla": 10041,
+      "deficit_horas": 28175,
+      "items_deficit_equiv": 294,
+      "pct_cobertura": 26.3,
+      "ues_afectadas": 1881,
+      "materias_breakdown": [
+        {
+          "materia": "LENGUA EXTRANJERA",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 37984,
+          "deficit_horas": 27947,
+          "ues_afectadas": 1880
+        },
+        {
+          "materia": "LENGUA EXTRANJERA: INGLES",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 160,
+          "deficit_horas": 160,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "TÉCNICA TECNOLÓGICA GENERAL",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 64,
+          "deficit_horas": 64,
+          "ues_afectadas": 2
+        },
+        {
+          "materia": "TÉCNICA TECNOLÓGICA",
+          "nivel": "PRIMARIA",
+          "carga_horaria": 8,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        }
+      ],
+      "departamentos": [
+        {
+          "departamento_id": 1,
+          "departamento": "CHUQUISACA",
+          "carga_horaria": 1136,
+          "horas_planilla": 515,
+          "deficit_horas": 621,
+          "items_deficit_equiv": 7,
+          "pct_cobertura": 45.3,
+          "ues_afectadas": 80
+        },
+        {
+          "departamento_id": 2,
+          "departamento": "LA PAZ",
+          "carga_horaria": 8788,
+          "horas_planilla": 2741,
+          "deficit_horas": 6047,
+          "items_deficit_equiv": 63,
+          "pct_cobertura": 31.2,
+          "ues_afectadas": 474
+        },
+        {
+          "departamento_id": 3,
+          "departamento": "COCHABAMBA",
+          "carga_horaria": 5560,
+          "horas_planilla": 1294,
+          "deficit_horas": 4266,
+          "items_deficit_equiv": 45,
+          "pct_cobertura": 23.3,
+          "ues_afectadas": 271
+        },
+        {
+          "departamento_id": 4,
+          "departamento": "ORURO",
+          "carga_horaria": 1392,
+          "horas_planilla": 366,
+          "deficit_horas": 1026,
+          "items_deficit_equiv": 11,
+          "pct_cobertura": 26.3,
+          "ues_afectadas": 77
+        },
+        {
+          "departamento_id": 5,
+          "departamento": "POTOSÍ",
+          "carga_horaria": 7264,
+          "horas_planilla": 2798,
+          "deficit_horas": 4466,
+          "items_deficit_equiv": 47,
+          "pct_cobertura": 38.5,
+          "ues_afectadas": 293
+        },
+        {
+          "departamento_id": 6,
+          "departamento": "TARIJA",
+          "carga_horaria": 280,
+          "horas_planilla": 76,
+          "deficit_horas": 204,
+          "items_deficit_equiv": 3,
+          "pct_cobertura": 27.1,
+          "ues_afectadas": 20
+        },
+        {
+          "departamento_id": 7,
+          "departamento": "SANTA CRUZ",
+          "carga_horaria": 10680,
+          "horas_planilla": 1343,
+          "deficit_horas": 9337,
+          "items_deficit_equiv": 98,
+          "pct_cobertura": 12.6,
+          "ues_afectadas": 483
+        },
+        {
+          "departamento_id": 8,
+          "departamento": "BENI",
+          "carga_horaria": 2332,
+          "horas_planilla": 852,
+          "deficit_horas": 1480,
+          "items_deficit_equiv": 16,
+          "pct_cobertura": 36.5,
+          "ues_afectadas": 125
+        },
+        {
+          "departamento_id": 9,
+          "departamento": "PANDO",
+          "carga_horaria": 784,
+          "horas_planilla": 56,
+          "deficit_horas": 728,
+          "items_deficit_equiv": 8,
+          "pct_cobertura": 7.1,
+          "ues_afectadas": 58
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "nombre": "COSMOVISIONES, FILOSOFÍAS Y SICOLOGÍA",
+      "hora_item": 96.0,
+      "carga_horaria": 29872,
+      "horas_planilla": 8375,
+      "deficit_horas": 21497,
+      "items_deficit_equiv": 224,
+      "pct_cobertura": 28.0,
+      "ues_afectadas": 1586,
+      "materias_breakdown": [
+        {
+          "materia": "COSMOVISIONES FILOSOFIA Y PSICOLOGIA",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 29872,
+          "deficit_horas": 21497,
+          "ues_afectadas": 1586
+        }
+      ],
+      "departamentos": [
+        {
+          "departamento_id": 1,
+          "departamento": "CHUQUISACA",
+          "carga_horaria": 664,
+          "horas_planilla": 328,
+          "deficit_horas": 336,
+          "items_deficit_equiv": 4,
+          "pct_cobertura": 49.4,
+          "ues_afectadas": 49
+        },
+        {
+          "departamento_id": 2,
+          "departamento": "LA PAZ",
+          "carga_horaria": 6724,
+          "horas_planilla": 2015,
+          "deficit_horas": 4709,
+          "items_deficit_equiv": 50,
+          "pct_cobertura": 30.0,
+          "ues_afectadas": 370
+        },
+        {
+          "departamento_id": 3,
+          "departamento": "COCHABAMBA",
+          "carga_horaria": 4360,
+          "horas_planilla": 969,
+          "deficit_horas": 3391,
+          "items_deficit_equiv": 36,
+          "pct_cobertura": 22.2,
+          "ues_afectadas": 232
+        },
+        {
+          "departamento_id": 4,
+          "departamento": "ORURO",
+          "carga_horaria": 1272,
+          "horas_planilla": 366,
+          "deficit_horas": 906,
+          "items_deficit_equiv": 10,
+          "pct_cobertura": 28.8,
+          "ues_afectadas": 66
+        },
+        {
+          "departamento_id": 5,
+          "departamento": "POTOSÍ",
+          "carga_horaria": 5328,
+          "horas_planilla": 2412,
+          "deficit_horas": 2916,
+          "items_deficit_equiv": 31,
+          "pct_cobertura": 45.3,
+          "ues_afectadas": 253
+        },
+        {
+          "departamento_id": 6,
+          "departamento": "TARIJA",
+          "carga_horaria": 528,
+          "horas_planilla": 168,
+          "deficit_horas": 360,
+          "items_deficit_equiv": 4,
+          "pct_cobertura": 31.8,
+          "ues_afectadas": 32
+        },
+        {
+          "departamento_id": 7,
+          "departamento": "SANTA CRUZ",
+          "carga_horaria": 8064,
+          "horas_planilla": 1114,
+          "deficit_horas": 6950,
+          "items_deficit_equiv": 73,
+          "pct_cobertura": 13.8,
+          "ues_afectadas": 407
+        },
+        {
+          "departamento_id": 8,
+          "departamento": "BENI",
+          "carga_horaria": 2196,
+          "horas_planilla": 937,
+          "deficit_horas": 1259,
+          "items_deficit_equiv": 14,
+          "pct_cobertura": 42.7,
+          "ues_afectadas": 119
+        },
+        {
+          "departamento_id": 9,
+          "departamento": "PANDO",
+          "carga_horaria": 736,
+          "horas_planilla": 66,
+          "deficit_horas": 670,
+          "items_deficit_equiv": 7,
+          "pct_cobertura": 9.0,
+          "ues_afectadas": 58
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "nombre": "CIENCIAS NATURALES: FÍSICA - QUÍMICA",
+      "hora_item": 96.0,
+      "carga_horaria": 28004,
+      "horas_planilla": 7367,
+      "deficit_horas": 20637,
+      "items_deficit_equiv": 215,
+      "pct_cobertura": 26.3,
+      "ues_afectadas": 1263,
+      "materias_breakdown": [
+        {
+          "materia": "QUÍMICA",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 13984,
+          "deficit_horas": 10257,
+          "ues_afectadas": 965
+        },
+        {
+          "materia": "FÍSICA",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 13764,
+          "deficit_horas": 10212,
+          "ues_afectadas": 921
+        },
+        {
+          "materia": "QUÍMICA INDUSTRIAL",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 256,
+          "deficit_horas": 168,
+          "ues_afectadas": 3
+        }
+      ],
+      "departamentos": [
+        {
+          "departamento_id": 1,
+          "departamento": "CHUQUISACA",
+          "carga_horaria": 544,
+          "horas_planilla": 277,
+          "deficit_horas": 267,
+          "items_deficit_equiv": 3,
+          "pct_cobertura": 50.9,
+          "ues_afectadas": 34
+        },
+        {
+          "departamento_id": 2,
+          "departamento": "LA PAZ",
+          "carga_horaria": 4868,
+          "horas_planilla": 1420,
+          "deficit_horas": 3448,
+          "items_deficit_equiv": 36,
+          "pct_cobertura": 29.2,
+          "ues_afectadas": 266
+        },
+        {
+          "departamento_id": 3,
+          "departamento": "COCHABAMBA",
+          "carga_horaria": 4792,
+          "horas_planilla": 1226,
+          "deficit_horas": 3566,
+          "items_deficit_equiv": 38,
+          "pct_cobertura": 25.6,
+          "ues_afectadas": 233
+        },
+        {
+          "departamento_id": 4,
+          "departamento": "ORURO",
+          "carga_horaria": 1024,
+          "horas_planilla": 304,
+          "deficit_horas": 720,
+          "items_deficit_equiv": 8,
+          "pct_cobertura": 29.7,
+          "ues_afectadas": 55
+        },
+        {
+          "departamento_id": 5,
+          "departamento": "POTOSÍ",
+          "carga_horaria": 3016,
+          "horas_planilla": 1388,
+          "deficit_horas": 1628,
+          "items_deficit_equiv": 17,
+          "pct_cobertura": 46.0,
+          "ues_afectadas": 117
+        },
+        {
+          "departamento_id": 6,
+          "departamento": "TARIJA",
+          "carga_horaria": 208,
+          "horas_planilla": 64,
+          "deficit_horas": 144,
+          "items_deficit_equiv": 2,
+          "pct_cobertura": 30.8,
+          "ues_afectadas": 19
+        },
+        {
+          "departamento_id": 7,
+          "departamento": "SANTA CRUZ",
+          "carga_horaria": 10632,
+          "horas_planilla": 1695,
+          "deficit_horas": 8937,
+          "items_deficit_equiv": 94,
+          "pct_cobertura": 15.9,
+          "ues_afectadas": 386
+        },
+        {
+          "departamento_id": 8,
+          "departamento": "BENI",
+          "carga_horaria": 2232,
+          "horas_planilla": 933,
+          "deficit_horas": 1299,
+          "items_deficit_equiv": 14,
+          "pct_cobertura": 41.8,
+          "ues_afectadas": 110
+        },
+        {
+          "departamento_id": 9,
+          "departamento": "PANDO",
+          "carga_horaria": 688,
+          "horas_planilla": 60,
+          "deficit_horas": 628,
+          "items_deficit_equiv": 7,
+          "pct_cobertura": 8.7,
+          "ues_afectadas": 43
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "nombre": "INDUSTRIA TEXTIL Y CONFECCIÓN",
+      "hora_item": 108.0,
+      "carga_horaria": 42764,
+      "horas_planilla": 24045,
+      "deficit_horas": 18719,
+      "items_deficit_equiv": 174,
+      "pct_cobertura": 56.2,
+      "ues_afectadas": 384,
+      "materias_breakdown": [
+        {
+          "materia": "TEXTIL Y CONFECCIÓN",
+          "nivel": "ETA",
+          "carga_horaria": 27100,
+          "deficit_horas": 10088,
+          "ues_afectadas": 176
+        },
+        {
+          "materia": "TEXTILES Y CONFECCIONES",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 8144,
+          "deficit_horas": 4574,
+          "ues_afectadas": 113
+        },
+        {
+          "materia": "TÉCNICA TECNOLÓGICA GENERAL",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 4832,
+          "deficit_horas": 2383,
+          "ues_afectadas": 130
+        },
+        {
+          "materia": "TÉCNICA TECNOLÓGICA",
+          "nivel": "PRIMARIA",
+          "carga_horaria": 1616,
+          "deficit_horas": 970,
+          "ues_afectadas": 71
+        },
+        {
+          "materia": "TEXTILES, TEJIDOS Y CONFECCIONES",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 816,
+          "deficit_horas": 576,
+          "ues_afectadas": 10
+        },
+        {
+          "materia": "TÉCNICA TECNOLÓGICA ESPECIALIZADA",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 224,
+          "deficit_horas": 100,
+          "ues_afectadas": 5
+        },
+        {
+          "materia": "TÉCNICA TECNOLÓGICA",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 32,
+          "deficit_horas": 28,
+          "ues_afectadas": 1
+        }
+      ],
+      "departamentos": [
+        {
+          "departamento_id": 1,
+          "departamento": "CHUQUISACA",
+          "carga_horaria": 2092,
+          "horas_planilla": 1278,
+          "deficit_horas": 814,
+          "items_deficit_equiv": 8,
+          "pct_cobertura": 61.1,
+          "ues_afectadas": 20
+        },
+        {
+          "departamento_id": 2,
+          "departamento": "LA PAZ",
+          "carga_horaria": 15728,
+          "horas_planilla": 8526,
+          "deficit_horas": 7202,
+          "items_deficit_equiv": 67,
+          "pct_cobertura": 54.2,
+          "ues_afectadas": 111
+        },
+        {
+          "departamento_id": 3,
+          "departamento": "COCHABAMBA",
+          "carga_horaria": 7888,
+          "horas_planilla": 4266,
+          "deficit_horas": 3622,
+          "items_deficit_equiv": 34,
+          "pct_cobertura": 54.1,
+          "ues_afectadas": 74
+        },
+        {
+          "departamento_id": 4,
+          "departamento": "ORURO",
+          "carga_horaria": 2708,
+          "horas_planilla": 1596,
+          "deficit_horas": 1112,
+          "items_deficit_equiv": 11,
+          "pct_cobertura": 58.9,
+          "ues_afectadas": 35
+        },
+        {
+          "departamento_id": 5,
+          "departamento": "POTOSÍ",
+          "carga_horaria": 6416,
+          "horas_planilla": 4079,
+          "deficit_horas": 2337,
+          "items_deficit_equiv": 22,
+          "pct_cobertura": 63.6,
+          "ues_afectadas": 66
+        },
+        {
+          "departamento_id": 6,
+          "departamento": "TARIJA",
+          "carga_horaria": 704,
+          "horas_planilla": 636,
+          "deficit_horas": 68,
+          "items_deficit_equiv": 1,
+          "pct_cobertura": 90.3,
+          "ues_afectadas": 6
+        },
+        {
+          "departamento_id": 7,
+          "departamento": "SANTA CRUZ",
+          "carga_horaria": 5620,
+          "horas_planilla": 2764,
+          "deficit_horas": 2856,
+          "items_deficit_equiv": 27,
+          "pct_cobertura": 49.2,
+          "ues_afectadas": 58
+        },
+        {
+          "departamento_id": 8,
+          "departamento": "BENI",
+          "carga_horaria": 1460,
+          "horas_planilla": 804,
+          "deficit_horas": 656,
+          "items_deficit_equiv": 7,
+          "pct_cobertura": 55.1,
+          "ues_afectadas": 11
+        },
+        {
+          "departamento_id": 9,
+          "departamento": "PANDO",
+          "carga_horaria": 148,
+          "horas_planilla": 96,
+          "deficit_horas": 52,
+          "items_deficit_equiv": 1,
+          "pct_cobertura": 64.9,
+          "ues_afectadas": 3
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "nombre": "MECÁNICA AUTOMOTRIZ",
+      "hora_item": 108.0,
+      "carga_horaria": 29972,
+      "horas_planilla": 15129,
+      "deficit_horas": 14843,
+      "items_deficit_equiv": 138,
+      "pct_cobertura": 50.5,
+      "ues_afectadas": 287,
+      "materias_breakdown": [
+        {
+          "materia": "MECÁNICA AUTOMOTRIZ",
+          "nivel": "ETA",
+          "carga_horaria": 15520,
+          "deficit_horas": 7227,
+          "ues_afectadas": 79
+        },
+        {
+          "materia": "MECÁNICA AUTOMOTRIZ",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 7244,
+          "deficit_horas": 3818,
+          "ues_afectadas": 111
+        },
+        {
+          "materia": "TÉCNICA TECNOLÓGICA GENERAL",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 5120,
+          "deficit_horas": 2650,
+          "ues_afectadas": 122
+        },
+        {
+          "materia": "TÉCNICA TECNOLÓGICA",
+          "nivel": "PRIMARIA",
+          "carga_horaria": 1968,
+          "deficit_horas": 1116,
+          "ues_afectadas": 72
+        },
+        {
+          "materia": "TÉCNICA TECNOLÓGICA ESPECIALIZADA",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 120,
+          "deficit_horas": 32,
+          "ues_afectadas": 4
+        }
+      ],
+      "departamentos": [
+        {
+          "departamento_id": 1,
+          "departamento": "CHUQUISACA",
+          "carga_horaria": 460,
+          "horas_planilla": 338,
+          "deficit_horas": 122,
+          "items_deficit_equiv": 2,
+          "pct_cobertura": 73.5,
+          "ues_afectadas": 5
+        },
+        {
+          "departamento_id": 2,
+          "departamento": "LA PAZ",
+          "carga_horaria": 15468,
+          "horas_planilla": 8154,
+          "deficit_horas": 7314,
+          "items_deficit_equiv": 68,
+          "pct_cobertura": 52.7,
+          "ues_afectadas": 140
+        },
+        {
+          "departamento_id": 3,
+          "departamento": "COCHABAMBA",
+          "carga_horaria": 4048,
+          "horas_planilla": 1614,
+          "deficit_horas": 2434,
+          "items_deficit_equiv": 23,
+          "pct_cobertura": 39.9,
+          "ues_afectadas": 47
+        },
+        {
+          "departamento_id": 4,
+          "departamento": "ORURO",
+          "carga_horaria": 1324,
+          "horas_planilla": 540,
+          "deficit_horas": 784,
+          "items_deficit_equiv": 8,
+          "pct_cobertura": 40.8,
+          "ues_afectadas": 12
+        },
+        {
+          "departamento_id": 5,
+          "departamento": "POTOSÍ",
+          "carga_horaria": 2580,
+          "horas_planilla": 1442,
+          "deficit_horas": 1138,
+          "items_deficit_equiv": 11,
+          "pct_cobertura": 55.9,
+          "ues_afectadas": 26
+        },
+        {
+          "departamento_id": 6,
+          "departamento": "TARIJA",
+          "carga_horaria": 516,
+          "horas_planilla": 302,
+          "deficit_horas": 214,
+          "items_deficit_equiv": 2,
+          "pct_cobertura": 58.5,
+          "ues_afectadas": 4
+        },
+        {
+          "departamento_id": 7,
+          "departamento": "SANTA CRUZ",
+          "carga_horaria": 5080,
+          "horas_planilla": 2655,
+          "deficit_horas": 2425,
+          "items_deficit_equiv": 23,
+          "pct_cobertura": 52.3,
+          "ues_afectadas": 48
+        },
+        {
+          "departamento_id": 8,
+          "departamento": "BENI",
+          "carga_horaria": 400,
+          "horas_planilla": 84,
+          "deficit_horas": 316,
+          "items_deficit_equiv": 3,
+          "pct_cobertura": 21.0,
+          "ues_afectadas": 4
+        },
+        {
+          "departamento_id": 9,
+          "departamento": "PANDO",
+          "carga_horaria": 96,
+          "horas_planilla": 0,
+          "deficit_horas": 96,
+          "items_deficit_equiv": 1,
+          "pct_cobertura": 0.0,
+          "ues_afectadas": 1
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "nombre": "ELECTRICIDAD Y ELECTRÓNICA",
+      "hora_item": 108.0,
+      "carga_horaria": 23480,
+      "horas_planilla": 12858,
+      "deficit_horas": 10622,
+      "items_deficit_equiv": 99,
+      "pct_cobertura": 54.8,
+      "ues_afectadas": 217,
+      "materias_breakdown": [
+        {
+          "materia": "ELECTRICIDAD INDUSTRIAL",
+          "nivel": "ETA",
+          "carga_horaria": 11340,
+          "deficit_horas": 4608,
+          "ues_afectadas": 71
+        },
+        {
+          "materia": "ELECTRÓNICA",
+          "nivel": "ETA",
+          "carga_horaria": 5040,
+          "deficit_horas": 1978,
+          "ues_afectadas": 34
+        },
+        {
+          "materia": "TÉCNICA TECNOLÓGICA GENERAL",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 2400,
+          "deficit_horas": 1382,
+          "ues_afectadas": 71
+        },
+        {
+          "materia": "ELECTRICIDAD INDUSTRIAL",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 1948,
+          "deficit_horas": 1002,
+          "ues_afectadas": 31
+        },
+        {
+          "materia": "ELECTRÓNICA",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 1016,
+          "deficit_horas": 696,
+          "ues_afectadas": 19
+        },
+        {
+          "materia": "TÉCNICA TECNOLÓGICA",
+          "nivel": "PRIMARIA",
+          "carga_horaria": 888,
+          "deficit_horas": 536,
+          "ues_afectadas": 33
+        },
+        {
+          "materia": "ELECTRICIDAD",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 848,
+          "deficit_horas": 420,
+          "ues_afectadas": 14
+        }
+      ],
+      "departamentos": [
+        {
+          "departamento_id": 1,
+          "departamento": "CHUQUISACA",
+          "carga_horaria": 840,
+          "horas_planilla": 620,
+          "deficit_horas": 220,
+          "items_deficit_equiv": 3,
+          "pct_cobertura": 73.8,
+          "ues_afectadas": 8
+        },
+        {
+          "departamento_id": 2,
+          "departamento": "LA PAZ",
+          "carga_horaria": 9504,
+          "horas_planilla": 5420,
+          "deficit_horas": 4084,
+          "items_deficit_equiv": 38,
+          "pct_cobertura": 57.0,
+          "ues_afectadas": 71
+        },
+        {
+          "departamento_id": 3,
+          "departamento": "COCHABAMBA",
+          "carga_horaria": 5656,
+          "horas_planilla": 2878,
+          "deficit_horas": 2778,
+          "items_deficit_equiv": 26,
+          "pct_cobertura": 50.9,
+          "ues_afectadas": 54
+        },
+        {
+          "departamento_id": 4,
+          "departamento": "ORURO",
+          "carga_horaria": 396,
+          "horas_planilla": 284,
+          "deficit_horas": 112,
+          "items_deficit_equiv": 2,
+          "pct_cobertura": 71.7,
+          "ues_afectadas": 4
+        },
+        {
+          "departamento_id": 5,
+          "departamento": "POTOSÍ",
+          "carga_horaria": 1084,
+          "horas_planilla": 770,
+          "deficit_horas": 314,
+          "items_deficit_equiv": 3,
+          "pct_cobertura": 71.0,
+          "ues_afectadas": 15
+        },
+        {
+          "departamento_id": 6,
+          "departamento": "TARIJA",
+          "carga_horaria": 212,
+          "horas_planilla": 181,
+          "deficit_horas": 31,
+          "items_deficit_equiv": 1,
+          "pct_cobertura": 85.4,
+          "ues_afectadas": 3
+        },
+        {
+          "departamento_id": 7,
+          "departamento": "SANTA CRUZ",
+          "carga_horaria": 4828,
+          "horas_planilla": 2161,
+          "deficit_horas": 2667,
+          "items_deficit_equiv": 25,
+          "pct_cobertura": 44.8,
+          "ues_afectadas": 55
+        },
+        {
+          "departamento_id": 8,
+          "departamento": "BENI",
+          "carga_horaria": 768,
+          "horas_planilla": 448,
+          "deficit_horas": 320,
+          "items_deficit_equiv": 3,
+          "pct_cobertura": 58.3,
+          "ues_afectadas": 6
+        },
+        {
+          "departamento_id": 9,
+          "departamento": "PANDO",
+          "carga_horaria": 192,
+          "horas_planilla": 96,
+          "deficit_horas": 96,
+          "items_deficit_equiv": 1,
+          "pct_cobertura": 50.0,
+          "ues_afectadas": 1
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "nombre": "AGROPECUARIA",
+      "hora_item": 108.0,
+      "carga_horaria": 11400,
+      "horas_planilla": 4757,
+      "deficit_horas": 6643,
+      "items_deficit_equiv": 62,
+      "pct_cobertura": 41.7,
+      "ues_afectadas": 98,
+      "materias_breakdown": [
+        {
+          "materia": "AGROPECUARIA",
+          "nivel": "ETA",
+          "carga_horaria": 7516,
+          "deficit_horas": 4251,
+          "ues_afectadas": 46
+        },
+        {
+          "materia": "AGROPECUARIA",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 2236,
+          "deficit_horas": 1332,
+          "ues_afectadas": 36
+        },
+        {
+          "materia": "TÉCNICA TECNOLÓGICA GENERAL",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 1312,
+          "deficit_horas": 800,
+          "ues_afectadas": 33
+        },
+        {
+          "materia": "TÉCNICA TECNOLÓGICA",
+          "nivel": "PRIMARIA",
+          "carga_horaria": 288,
+          "deficit_horas": 216,
+          "ues_afectadas": 14
+        },
+        {
+          "materia": "TÉCNICA TECNOLÓGICA ESPECIALIZADA",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 48,
+          "deficit_horas": 44,
+          "ues_afectadas": 2
+        }
+      ],
+      "departamentos": [
+        {
+          "departamento_id": 1,
+          "departamento": "CHUQUISACA",
+          "carga_horaria": 180,
+          "horas_planilla": 24,
+          "deficit_horas": 156,
+          "items_deficit_equiv": 2,
+          "pct_cobertura": 13.3,
+          "ues_afectadas": 2
+        },
+        {
+          "departamento_id": 2,
+          "departamento": "LA PAZ",
+          "carga_horaria": 4576,
+          "horas_planilla": 1953,
+          "deficit_horas": 2623,
+          "items_deficit_equiv": 25,
+          "pct_cobertura": 42.7,
+          "ues_afectadas": 28
+        },
+        {
+          "departamento_id": 3,
+          "departamento": "COCHABAMBA",
+          "carga_horaria": 812,
+          "horas_planilla": 386,
+          "deficit_horas": 426,
+          "items_deficit_equiv": 4,
+          "pct_cobertura": 47.5,
+          "ues_afectadas": 10
+        },
+        {
+          "departamento_id": 4,
+          "departamento": "ORURO",
+          "carga_horaria": 148,
+          "horas_planilla": 96,
+          "deficit_horas": 52,
+          "items_deficit_equiv": 1,
+          "pct_cobertura": 64.9,
+          "ues_afectadas": 2
+        },
+        {
+          "departamento_id": 5,
+          "departamento": "POTOSÍ",
+          "carga_horaria": 832,
+          "horas_planilla": 652,
+          "deficit_horas": 180,
+          "items_deficit_equiv": 2,
+          "pct_cobertura": 78.4,
+          "ues_afectadas": 8
+        },
+        {
+          "departamento_id": 6,
+          "departamento": "TARIJA",
+          "carga_horaria": 164,
+          "horas_planilla": 144,
+          "deficit_horas": 20,
+          "items_deficit_equiv": 1,
+          "pct_cobertura": 87.8,
+          "ues_afectadas": 3
+        },
+        {
+          "departamento_id": 7,
+          "departamento": "SANTA CRUZ",
+          "carga_horaria": 3072,
+          "horas_planilla": 986,
+          "deficit_horas": 2086,
+          "items_deficit_equiv": 20,
+          "pct_cobertura": 32.1,
+          "ues_afectadas": 35
+        },
+        {
+          "departamento_id": 8,
+          "departamento": "BENI",
+          "carga_horaria": 1216,
+          "horas_planilla": 456,
+          "deficit_horas": 760,
+          "items_deficit_equiv": 8,
+          "pct_cobertura": 37.5,
+          "ues_afectadas": 9
+        },
+        {
+          "departamento_id": 9,
+          "departamento": "PANDO",
+          "carga_horaria": 400,
+          "horas_planilla": 60,
+          "deficit_horas": 340,
+          "items_deficit_equiv": 4,
+          "pct_cobertura": 15.0,
+          "ues_afectadas": 1
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "nombre": "MECÁNICA INDUSTRIAL",
+      "hora_item": 108.0,
+      "carga_horaria": 10688,
+      "horas_planilla": 6683,
+      "deficit_horas": 4005,
+      "items_deficit_equiv": 38,
+      "pct_cobertura": 62.5,
+      "ues_afectadas": 108,
+      "materias_breakdown": [
+        {
+          "materia": "MECÁNICA INDUSTRIAL",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 4516,
+          "deficit_horas": 1667,
+          "ues_afectadas": 52
+        },
+        {
+          "materia": "MECÁNICA INDUSTRIAL",
+          "nivel": "ETA",
+          "carga_horaria": 4068,
+          "deficit_horas": 1236,
+          "ues_afectadas": 30
+        },
+        {
+          "materia": "TÉCNICA TECNOLÓGICA GENERAL",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 1664,
+          "deficit_horas": 888,
+          "ues_afectadas": 51
+        },
+        {
+          "materia": "TÉCNICA TECNOLÓGICA",
+          "nivel": "PRIMARIA",
+          "carga_horaria": 312,
+          "deficit_horas": 182,
+          "ues_afectadas": 15
+        },
+        {
+          "materia": "TÉCNICA TECNOLÓGICA",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 32,
+          "deficit_horas": 16,
+          "ues_afectadas": 1
+        },
+        {
+          "materia": "TÉCNICA TECNOLÓGICA ESPECIALIZADA",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 96,
+          "deficit_horas": 16,
+          "ues_afectadas": 1
+        }
+      ],
+      "departamentos": [
+        {
+          "departamento_id": 1,
+          "departamento": "CHUQUISACA",
+          "carga_horaria": 872,
+          "horas_planilla": 704,
+          "deficit_horas": 168,
+          "items_deficit_equiv": 2,
+          "pct_cobertura": 80.7,
+          "ues_afectadas": 8
+        },
+        {
+          "departamento_id": 2,
+          "departamento": "LA PAZ",
+          "carga_horaria": 3336,
+          "horas_planilla": 1586,
+          "deficit_horas": 1750,
+          "items_deficit_equiv": 17,
+          "pct_cobertura": 47.5,
+          "ues_afectadas": 34
+        },
+        {
+          "departamento_id": 3,
+          "departamento": "COCHABAMBA",
+          "carga_horaria": 1152,
+          "horas_planilla": 692,
+          "deficit_horas": 460,
+          "items_deficit_equiv": 5,
+          "pct_cobertura": 60.1,
+          "ues_afectadas": 19
+        },
+        {
+          "departamento_id": 4,
+          "departamento": "ORURO",
+          "carga_horaria": 216,
+          "horas_planilla": 104,
+          "deficit_horas": 112,
+          "items_deficit_equiv": 2,
+          "pct_cobertura": 48.1,
+          "ues_afectadas": 3
+        },
+        {
+          "departamento_id": 5,
+          "departamento": "POTOSÍ",
+          "carga_horaria": 3784,
+          "horas_planilla": 2527,
+          "deficit_horas": 1257,
+          "items_deficit_equiv": 12,
+          "pct_cobertura": 66.8,
+          "ues_afectadas": 34
+        },
+        {
+          "departamento_id": 6,
+          "departamento": "TARIJA",
+          "carga_horaria": 32,
+          "horas_planilla": 24,
+          "deficit_horas": 8,
+          "items_deficit_equiv": 1,
+          "pct_cobertura": 75.0,
+          "ues_afectadas": 1
+        },
+        {
+          "departamento_id": 7,
+          "departamento": "SANTA CRUZ",
+          "carga_horaria": 1096,
+          "horas_planilla": 874,
+          "deficit_horas": 222,
+          "items_deficit_equiv": 3,
+          "pct_cobertura": 79.7,
+          "ues_afectadas": 7
+        },
+        {
+          "departamento_id": 8,
+          "departamento": "BENI",
+          "carga_horaria": 200,
+          "horas_planilla": 172,
+          "deficit_horas": 28,
+          "items_deficit_equiv": 1,
+          "pct_cobertura": 86.0,
+          "ues_afectadas": 2
+        },
+        {
+          "departamento_id": 9,
+          "departamento": "PANDO",
+          "carga_horaria": 0,
+          "horas_planilla": 0,
+          "deficit_horas": 0,
+          "items_deficit_equiv": 0,
+          "pct_cobertura": 100.0,
+          "ues_afectadas": 0
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "nombre": "CARPINTERÍA INDUSTRIAL EN MADERA Y METAL",
+      "hora_item": 108.0,
+      "carga_horaria": 5996,
+      "horas_planilla": 3250,
+      "deficit_horas": 2746,
+      "items_deficit_equiv": 26,
+      "pct_cobertura": 54.2,
+      "ues_afectadas": 69,
+      "materias_breakdown": [
+        {
+          "materia": "CARPINTERÍA INDUSTRIAL",
+          "nivel": "ETA",
+          "carga_horaria": 2492,
+          "deficit_horas": 1316,
+          "ues_afectadas": 17
+        },
+        {
+          "materia": "CARPINTERÍA EN MADERA Y METAL",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 2152,
+          "deficit_horas": 866,
+          "ues_afectadas": 32
+        },
+        {
+          "materia": "TÉCNICA TECNOLÓGICA GENERAL",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 1080,
+          "deficit_horas": 408,
+          "ues_afectadas": 27
+        },
+        {
+          "materia": "TÉCNICA TECNOLÓGICA",
+          "nivel": "PRIMARIA",
+          "carga_horaria": 264,
+          "deficit_horas": 152,
+          "ues_afectadas": 16
+        },
+        {
+          "materia": "TÉCNICA TECNOLÓGICA ESPECIALIZADA",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 8,
+          "deficit_horas": 4,
+          "ues_afectadas": 1
+        }
+      ],
+      "departamentos": [
+        {
+          "departamento_id": 1,
+          "departamento": "CHUQUISACA",
+          "carga_horaria": 724,
+          "horas_planilla": 540,
+          "deficit_horas": 184,
+          "items_deficit_equiv": 2,
+          "pct_cobertura": 74.6,
+          "ues_afectadas": 10
+        },
+        {
+          "departamento_id": 2,
+          "departamento": "LA PAZ",
+          "carga_horaria": 1352,
+          "horas_planilla": 734,
+          "deficit_horas": 618,
+          "items_deficit_equiv": 6,
+          "pct_cobertura": 54.3,
+          "ues_afectadas": 16
+        },
+        {
+          "departamento_id": 3,
+          "departamento": "COCHABAMBA",
+          "carga_horaria": 720,
+          "horas_planilla": 356,
+          "deficit_horas": 364,
+          "items_deficit_equiv": 4,
+          "pct_cobertura": 49.4,
+          "ues_afectadas": 10
+        },
+        {
+          "departamento_id": 4,
+          "departamento": "ORURO",
+          "carga_horaria": 88,
+          "horas_planilla": 56,
+          "deficit_horas": 32,
+          "items_deficit_equiv": 1,
+          "pct_cobertura": 63.6,
+          "ues_afectadas": 2
+        },
+        {
+          "departamento_id": 5,
+          "departamento": "POTOSÍ",
+          "carga_horaria": 1292,
+          "horas_planilla": 862,
+          "deficit_horas": 430,
+          "items_deficit_equiv": 4,
+          "pct_cobertura": 66.7,
+          "ues_afectadas": 14
+        },
+        {
+          "departamento_id": 6,
+          "departamento": "TARIJA",
+          "carga_horaria": 148,
+          "horas_planilla": 96,
+          "deficit_horas": 52,
+          "items_deficit_equiv": 1,
+          "pct_cobertura": 64.9,
+          "ues_afectadas": 2
+        },
+        {
+          "departamento_id": 7,
+          "departamento": "SANTA CRUZ",
+          "carga_horaria": 960,
+          "horas_planilla": 372,
+          "deficit_horas": 588,
+          "items_deficit_equiv": 6,
+          "pct_cobertura": 38.8,
+          "ues_afectadas": 9
+        },
+        {
+          "departamento_id": 8,
+          "departamento": "BENI",
+          "carga_horaria": 712,
+          "horas_planilla": 234,
+          "deficit_horas": 478,
+          "items_deficit_equiv": 5,
+          "pct_cobertura": 32.9,
+          "ues_afectadas": 6
+        },
+        {
+          "departamento_id": 9,
+          "departamento": "PANDO",
+          "carga_horaria": 0,
+          "horas_planilla": 0,
+          "deficit_horas": 0,
+          "items_deficit_equiv": 0,
+          "pct_cobertura": 100.0,
+          "ues_afectadas": 0
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "nombre": "ELECTROMECÁNICA",
+      "hora_item": 108.0,
+      "carga_horaria": 2760,
+      "horas_planilla": 1600,
+      "deficit_horas": 1160,
+      "items_deficit_equiv": 11,
+      "pct_cobertura": 58.0,
+      "ues_afectadas": 33,
+      "materias_breakdown": [
+        {
+          "materia": "ELECTROMECÁNICA",
+          "nivel": "ETA",
+          "carga_horaria": 1200,
+          "deficit_horas": 616,
+          "ues_afectadas": 7
+        },
+        {
+          "materia": "TÉCNICA TECNOLÓGICA GENERAL",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 608,
+          "deficit_horas": 219,
+          "ues_afectadas": 17
+        },
+        {
+          "materia": "ELECTROMECÁNICA",
+          "nivel": "SECUNDARIA",
+          "carga_horaria": 640,
+          "deficit_horas": 180,
+          "ues_afectadas": 10
+        },
+        {
+          "materia": "TÉCNICA TECNOLÓGICA",
+          "nivel": "PRIMARIA",
+          "carga_horaria": 312,
+          "deficit_horas": 145,
+          "ues_afectadas": 11
+        }
+      ],
+      "departamentos": [
+        {
+          "departamento_id": 1,
+          "departamento": "CHUQUISACA",
+          "carga_horaria": 104,
+          "horas_planilla": 92,
+          "deficit_horas": 12,
+          "items_deficit_equiv": 1,
+          "pct_cobertura": 88.5,
+          "ues_afectadas": 2
+        },
+        {
+          "departamento_id": 2,
+          "departamento": "LA PAZ",
+          "carga_horaria": 1584,
+          "horas_planilla": 1016,
+          "deficit_horas": 568,
+          "items_deficit_equiv": 6,
+          "pct_cobertura": 64.1,
+          "ues_afectadas": 16
+        },
+        {
+          "departamento_id": 3,
+          "departamento": "COCHABAMBA",
+          "carga_horaria": 340,
+          "horas_planilla": 88,
+          "deficit_horas": 252,
+          "items_deficit_equiv": 3,
+          "pct_cobertura": 25.9,
+          "ues_afectadas": 5
+        },
+        {
+          "departamento_id": 4,
+          "departamento": "ORURO",
+          "carga_horaria": 224,
+          "horas_planilla": 172,
+          "deficit_horas": 52,
+          "items_deficit_equiv": 1,
+          "pct_cobertura": 76.8,
+          "ues_afectadas": 3
+        },
+        {
+          "departamento_id": 5,
+          "departamento": "POTOSÍ",
+          "carga_horaria": 232,
+          "horas_planilla": 104,
+          "deficit_horas": 128,
+          "items_deficit_equiv": 2,
+          "pct_cobertura": 44.8,
+          "ues_afectadas": 3
+        },
+        {
+          "departamento_id": 6,
+          "departamento": "TARIJA",
+          "carga_horaria": 0,
+          "horas_planilla": 0,
+          "deficit_horas": 0,
+          "items_deficit_equiv": 0,
+          "pct_cobertura": 100.0,
+          "ues_afectadas": 0
+        },
+        {
+          "departamento_id": 7,
+          "departamento": "SANTA CRUZ",
+          "carga_horaria": 176,
+          "horas_planilla": 48,
+          "deficit_horas": 128,
+          "items_deficit_equiv": 2,
+          "pct_cobertura": 27.3,
+          "ues_afectadas": 3
+        },
+        {
+          "departamento_id": 8,
+          "departamento": "BENI",
+          "carga_horaria": 100,
+          "horas_planilla": 80,
+          "deficit_horas": 20,
+          "items_deficit_equiv": 1,
+          "pct_cobertura": 80.0,
+          "ues_afectadas": 1
+        },
+        {
+          "departamento_id": 9,
+          "departamento": "PANDO",
+          "carga_horaria": 0,
+          "horas_planilla": 0,
+          "deficit_horas": 0,
+          "items_deficit_equiv": 0,
+          "pct_cobertura": 100.0,
+          "ues_afectadas": 0
+        }
+      ]
+    }
+  ]
+}

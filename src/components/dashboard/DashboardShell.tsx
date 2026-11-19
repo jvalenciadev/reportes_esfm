@@ -15,12 +15,13 @@ import PertinenciaView from './views/PertinenciaView';
 import Image from 'next/image';
 import { Sparkles } from 'lucide-react';
 import { ResumenView } from './views/Resumen';
+import { ExecutiveDashboardView } from './views/ExecutiveDashboardView';
 interface DashboardShellProps {
   initialData: DashboardDataset;
 }
 
 export function DashboardShell({ initialData }: DashboardShellProps) {
-  const [currentTab, setCurrentTab] = useState<SourceTab>('proyecciones');
+  const [currentTab, setCurrentTab] = useState<SourceTab>('dashboard');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   // Conteos por fuente
@@ -43,6 +44,11 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
   }, [initialData]);
 
   const titles: Record<SourceTab, { title: string; subtitle: string; tag: string }> = {
+    dashboard: {
+      title: 'Panel Ejecutivo de Mando · DGFM',
+      subtitle: 'Diagnóstico Integral del SEP, Cobertura Educativa y Proyecciones de Formación Docente al 2031',
+      tag: 'PANEL EJECUTIVO',
+    },
     proyecciones: {
       title: 'Proyecciones Escolares (2026 - 2031)',
       subtitle: 'Modelo demográfico normativo INE y escolar SIE desagregado por curso',
@@ -143,6 +149,15 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
           {/* Selector de pestañas rápido con color principal #c9a751 */}
           <div className="hidden sm:flex items-center gap-1 bg-slate-100/90 p-1 rounded-xl border border-slate-200 text-xs font-medium">
             <button
+              onClick={() => setCurrentTab('dashboard')}
+              className={`px-3 py-1.5 rounded-lg transition-all ${currentTab === 'dashboard'
+                ? 'bg-[#c9a751] text-slate-900 shadow-xs ring-1 ring-[#c9a751]/50 font-bold'
+                : 'text-slate-600 hover:text-slate-900'
+                }`}
+            >
+              Dashboard
+            </button>
+            <button
               onClick={() => setCurrentTab('proyecciones')}
               className={`px-3 py-1.5 rounded-lg transition-all ${currentTab === 'proyecciones'
                 ? 'bg-[#c9a751] text-slate-900 shadow-xs ring-1 ring-[#c9a751]/50 font-semibold'
@@ -229,6 +244,7 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
 
         {/* Cuerpo de la vista seleccionada */}
         <main className="flex-1 p-4 sm:p-8 max-w-7xl w-full mx-auto">
+          {currentTab === 'dashboard' && <ExecutiveDashboardView data={initialData} />}
           {currentTab === 'proyecciones' && <ProyeccionesView data={initialData} />}
           {currentTab === 'dgfm' && <DgfmView data={initialData} />}
           {currentTab === 'ine' && <IneView data={initialData} />}

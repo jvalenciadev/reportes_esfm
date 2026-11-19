@@ -29,7 +29,8 @@ import {
   ArrowUpDown,
   Building2,
   Check,
-  X
+  X,
+  FileSpreadsheet
 } from 'lucide-react';
 
 // ─── Tipos ────────────────────────────────────────────────────────────────────
@@ -134,22 +135,22 @@ const RANGO_INFO: Record<Rango, {
     pillBg: 'bg-amber-50 text-amber-800 border-amber-200',
     pillText: 'text-amber-700',
     label: 'Baja Pertinencia',
-    subtitle: 'Desalineación Marcada',
-    queSignifica: 'Enseña una materia sustancialmente distante a su formación inicial de egreso.',
+    subtitle: 'Sin Correspondencia con el Cargo',
+    queSignifica: 'Docente normalista asignado a una materia o cargo sin relación con su especialidad de egreso.',
     intensidadFormacion: 'Formación Larga / Reconversión Profunda',
   },
   SIN: {
     code: 'SIN',
-    badgeText: 'Sin Pertinencia / NO',
+    badgeText: 'Rango SIN · Técnico / Univ. / Otros',
     hex: '#64748b', // Slate 500
     accentBg: 'bg-slate-100',
     accentBorder: 'border-slate-200',
     pillBg: 'bg-slate-100 text-slate-700 border-slate-200',
     pillText: 'text-slate-700',
-    label: 'Sin Pertinencia Registrada',
-    subtitle: 'Fuera de Perfil Oficial',
-    queSignifica: 'Asignaciones sin correspondencia curricular identificada en el padrón.',
-    intensidadFormacion: 'Evaluación y Reasignación',
+    label: 'Sin Pertinencia Normalista',
+    subtitle: 'Técnico Superior · Universitario · Otros',
+    queSignifica: 'Docentes en aula con formación de Técnico Superior, Grado Universitario, interinos u otros perfiles no normalistas.',
+    intensidadFormacion: 'Profesionalización / Homologación Pedagógica',
   },
 };
 
@@ -293,6 +294,58 @@ export default function PertinenciaView() {
   const [selectedDeptDetail, setSelectedDeptDetail] = useState<string | null>('LA PAZ');
   const [sortDeptBy, setSortDeptBy] = useState<'total' | 'alta' | 'prioridad' | 'alfa'>('total');
 
+  // Estado de exportación de reporte Excel con gráficos
+  const [exporting, setExporting] = useState<boolean>(false);
+  const [exportingUE, setExportingUE] = useState<boolean>(false);
+
+  const handleExportExcel = async () => {
+    try {
+      setExporting(true);
+      const res = await fetch('/api/pertinencia/exportar-excel');
+      if (!res.ok) {
+        throw new Error('Error al generar el archivo en el servidor');
+      }
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Reporte_Pertinencia_Docente_Graficos.xlsx';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error('Error al descargar excel:', err);
+      alert('Ocurrió un error al generar el archivo Excel con gráficos.');
+    } finally {
+      setExporting(false);
+    }
+  };
+
+  const handleExportUE = async () => {
+    try {
+      setExportingUE(true);
+      const res = await fetch('/api/pertinencia/exportar-ue');
+      if (!res.ok) {
+        throw new Error('Error al generar el archivo por UE en el servidor');
+      }
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Reporte_Pertinencia_Por_UE.xlsx';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error('Error al descargar excel UE:', err);
+      alert('Ocurrió un error al generar el archivo Excel por Unidad Educativa.');
+    } finally {
+      setExportingUE(false);
+    }
+  };
+
   useEffect(() => {
     fetch('/api/pertinencia')
       .then((r) => r.json())
@@ -306,13 +359,8 @@ export default function PertinenciaView() {
       });
   }, []);
 
-  const totalDoc = data?.resumen?.TOTAL?.docentes ?? 147096;
-  const totalUes = data?.resumen?.TOTAL?.ues ?? 2264;
-
-  const metaDocentesPrioritarios = useMemo(() => {
-    if (!data) return 81068;
-    return (data.resumen.A?.docentes ?? 0) + (data.resumen.N?.docentes ?? 0);
-  }, [data]);
+  const totalDoc = data?.resumen?.TOTAL?.docentes ?? 168758;
+  const totalUes = data?.resumen?.TOTAL?.ues ?? 12054;
 
   const donutData = useMemo(() => {
     if (!data) return [];
@@ -320,7 +368,7 @@ export default function PertinenciaView() {
       { rango: 'V' as Rango, cantidad: data.resumen.V?.docentes ?? 0, color: '#059669', label: 'Alta Pertinencia' },
       { rango: 'A' as Rango, cantidad: data.resumen.A?.docentes ?? 0, color: '#2563eb', label: 'Media Pertinencia' },
       { rango: 'N' as Rango, cantidad: data.resumen.N?.docentes ?? 0, color: '#ea580c', label: 'Baja Pertinencia' },
-      { rango: 'SIN' as Rango, cantidad: data.resumen.SIN?.docentes ?? 0, color: '#64748b', label: 'Sin Pertinencia' },
+      { rango: 'SIN' as Rango, cantidad: data.resumen.SIN?.docentes ?? 0, color: '#64748b', label: 'Técnico / Univ. / Otros' },
     ];
   }, [data]);
 
@@ -375,6 +423,22 @@ export default function PertinenciaView() {
     if (!processedDepartamentos.length) return null;
     return processedDepartamentos.find(d => d.departamento === selectedDeptDetail) || processedDepartamentos[0];
   }, [processedDepartamentos, selectedDeptDetail]);
+
+  // Micro-KPIs territoriales dinámicos
+  const deptKPIs = useMemo(() => {
+    if (!processedDepartamentos.length) return null;
+    const sortedByTotal = [...processedDepartamentos].sort((a, b) => b.total - a.total);
+    const sortedByAlta = [...processedDepartamentos].sort((a, b) => b.pctAlta - a.pctAlta);
+    const sortedByMeta = [...processedDepartamentos].sort((a, b) => b.prioridadBID - a.prioridadBID);
+    return {
+      maxPadron: sortedByTotal[0],
+      maxAlta: sortedByAlta[0],
+      topMeta1: sortedByMeta[0],
+      topMeta2: sortedByMeta[1],
+      totalPais: sortedByTotal.reduce((acc, d) => acc + d.total, 0),
+      totalUes: data?.resumen?.TOTAL?.ues ?? 0,
+    };
+  }, [processedDepartamentos, data]);
 
   // Especialidades con mayor número de docentes A + N en el departamento activo
   const topEspecialidadesInDept = useMemo(() => {
@@ -446,6 +510,28 @@ export default function PertinenciaView() {
               Pertinencia Curricular Docente
             </h1>
           </div>
+
+          <div className="flex flex-wrap items-center gap-2.5">
+            <button
+              onClick={handleExportExcel}
+              disabled={exporting}
+              className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 active:bg-slate-900 text-slate-200 font-bold text-xs tracking-wide shadow-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed border border-slate-700"
+              title="Descarga el reporte institucional completo en formato Excel (.xlsx) con gráficos, resumen y hoja de UEs"
+            >
+              <FileSpreadsheet className={`w-4 h-4 text-emerald-400 ${exporting ? 'animate-pulse' : ''}`} />
+              <span>{exporting ? 'Generando Reporte General...' : 'Reporte General (con Gráficos)'}</span>
+            </button>
+
+            <button
+              onClick={handleExportUE}
+              disabled={exportingUE}
+              className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white font-bold text-xs tracking-wide shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed border border-emerald-400/40"
+              title="Descarga el padrón consolidado de Pertinencia por Unidad Educativa (16.313 UEs) en Excel (.xlsx)"
+            >
+              <FileSpreadsheet className={`w-4 h-4 text-emerald-100 ${exportingUE ? 'animate-pulse' : ''}`} />
+              <span>{exportingUE ? 'Generando Excel por UE...' : 'Exportar Pertinencia por UE'}</span>
+            </button>
+          </div>
         </div>
 
         {/* Pestañas de navegación */}
@@ -472,16 +558,18 @@ export default function PertinenciaView() {
             Distribución por Departamento
           </button>
 
-          <button
-            onClick={() => setActiveTab('especialidad')}
-            className={`px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 ${activeTab === 'especialidad'
-              ? 'bg-[#c9a751] text-slate-900 shadow-md font-extrabold'
-              : 'bg-slate-800/80 text-slate-300 hover:bg-slate-800'
-              }`}
-          >
-            <BookOpen className="w-4 h-4" />
-            Matriz por Especialidad
-          </button>
+          {data?.por_especialidad && data.por_especialidad.length > 0 && (
+            <button
+              onClick={() => setActiveTab('especialidad')}
+              className={`px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 ${activeTab === 'especialidad'
+                ? 'bg-[#c9a751] text-slate-900 shadow-md font-extrabold'
+                : 'bg-slate-800/80 text-slate-300 hover:bg-slate-800'
+                }`}
+            >
+              <BookOpen className="w-4 h-4" />
+              Matriz por Especialidad
+            </button>
+          )}
 
           <button
             onClick={() => setActiveTab('niveles')}
@@ -516,7 +604,7 @@ export default function PertinenciaView() {
                     </h2>
                   </div>
                   <p className="text-xs sm:text-sm text-slate-500 mt-1.5 ml-10 max-w-2xl">
-                    Caracterización oficial del universo de <strong>147,096 docentes</strong> en los tres rangos normativos de pertinencia académica del SEP.
+                    Caracterización oficial del universo de <strong>{fmt(totalDoc)} registros</strong> en los tres rangos normativos de pertinencia académica del SEP.
                   </p>
                 </div>
 
@@ -670,274 +758,6 @@ export default function PertinenciaView() {
               </div>
             </div>
 
-            {/* NECESIDADES DE FORMACIÓN & INTENSIDAD POR RANGO */}
-            <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="w-8 h-8 rounded-xl bg-[#c9a751] text-slate-900 font-black text-sm flex items-center justify-center shadow-xs">
-                  2
-                </span>
-                <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-                  Necesidades de Formación: Metas Cuantitativas y Nivel de Intensidad
-                </h2>
-              </div>
-              <p className="text-xs sm:text-sm text-slate-500 mb-6 ml-10">
-                ¿Cuántos docentes requerirían formación y cuánto duraría según el rango de pertinencia?
-              </p>
-
-              <div className="bg-slate-900 border border-[#c9a751]/30 text-white rounded-2xl p-5 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div className="flex items-center gap-3.5">
-                  <div className="w-12 h-12 rounded-xl bg-[#c9a751]/15 border border-[#c9a751]/30 flex items-center justify-center text-[#c9a751] shrink-0">
-                    <GraduationCap className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h3 className="font-extrabold text-base text-white">
-                      Meta de Formación Prioritaria Componente 2
-                    </h3>
-                    <p className="text-xs text-slate-400 mt-0.5">
-                      Docentes en ejercicio que requieren capacitación correctiva y nivelación curricular.
-                    </p>
-                  </div>
-                </div>
-                <div className="text-left sm:text-right shrink-0">
-                  <span className="text-3xl font-black text-[#c9a751]">{fmt(metaDocentesPrioritarios)}</span>
-                  <span className="text-xs text-slate-400 block font-semibold">55.1% del magisterio</span>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="rounded-2xl border-2 border-amber-300 bg-amber-50/50 p-5 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-black uppercase text-amber-800 bg-amber-200/70 px-2.5 py-0.5 rounded-full">
-                        Rango N (Naranja)
-                      </span>
-                      <span className="text-xs font-extrabold text-amber-800">Baja Pertinencia</span>
-                    </div>
-                    <h4 className="font-black text-slate-900 text-base mt-2">Formación Larga / Mayor Carga</h4>
-                    <p className="text-xs text-slate-600 mt-1">
-                      Requieren un programa de <strong>mayor carga y duración extendida (reconversión profunda)</strong> debido a la brecha sustancial entre su título y la materia que enseñan.
-                    </p>
-                  </div>
-
-                  <div className="mt-5 pt-4 border-t border-amber-200">
-                    <div className="flex items-baseline justify-between">
-                      <span className="text-2xl font-black text-amber-800">{fmt(data.resumen.N?.docentes)}</span>
-                      <span className="text-xs font-semibold text-slate-500">docentes meta</span>
-                    </div>
-                    <div className="mt-3 bg-white rounded-xl p-2.5 border border-amber-200 text-xs font-bold text-amber-900 flex items-center gap-2">
-                      <Clock className="w-4 h-4 text-amber-600 shrink-0" />
-                      <span>Intensidad: Alta (Reconversión Disciplinar)</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="rounded-2xl border-2 border-blue-300 bg-blue-50/50 p-5 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-black uppercase text-blue-800 bg-blue-200/70 px-2.5 py-0.5 rounded-full">
-                        Rango A (Azul)
-                      </span>
-                      <span className="text-xs font-extrabold text-blue-800">Media Pertinencia</span>
-                    </div>
-                    <h4 className="font-black text-slate-900 text-base mt-2">Formación Media / Duración Intermedia</h4>
-                    <p className="text-xs text-slate-600 mt-1">
-                      Requieren un programa de <strong>duración intermedia (nivelación modular)</strong> para actualizarse en contenidos y enfoque pedagógico del currículo oficial.
-                    </p>
-                  </div>
-
-                  <div className="mt-5 pt-4 border-t border-blue-200">
-                    <div className="flex items-baseline justify-between">
-                      <span className="text-2xl font-black text-blue-800">{fmt(data.resumen.A?.docentes)}</span>
-                      <span className="text-xs font-semibold text-slate-500">docentes meta</span>
-                    </div>
-                    <div className="mt-3 bg-white rounded-xl p-2.5 border border-blue-200 text-xs font-bold text-blue-900 flex items-center gap-2">
-                      <Clock className="w-4 h-4 text-blue-600 shrink-0" />
-                      <span>Intensidad: Media (Nivelación Curricular)</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="rounded-2xl border-2 border-emerald-300 bg-emerald-50/50 p-5 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-black uppercase text-emerald-800 bg-emerald-200/70 px-2.5 py-0.5 rounded-full">
-                        Rango V (Verde)
-                      </span>
-                      <span className="text-xs font-extrabold text-emerald-800">Alta Pertinencia</span>
-                    </div>
-                    <h4 className="font-black text-slate-900 text-base mt-2">Formación Corta / Talleres Breves</h4>
-                    <p className="text-xs text-slate-600 mt-1">
-                      Docentes ya alineados con su título; requieren únicamente <strong>capacitación breve de actualización continua</strong> en didáctica activa y tecnologías de aula.
-                    </p>
-                  </div>
-
-                  <div className="mt-5 pt-4 border-t border-emerald-200">
-                    <div className="flex items-baseline justify-between">
-                      <span className="text-2xl font-black text-emerald-800">{fmt(data.resumen.V?.docentes)}</span>
-                      <span className="text-xs font-semibold text-slate-500">docentes idóneos</span>
-                    </div>
-                    <div className="mt-3 bg-white rounded-xl p-2.5 border border-emerald-200 text-xs font-bold text-emerald-900 flex items-center gap-2">
-                      <Clock className="w-4 h-4 text-emerald-600 shrink-0" />
-                      <span>Intensidad: Breve (Actualización en Aula)</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* BENEFICIARIOS (UES Y ESTUDIANTES) */}
-            <div className="bg-white rounded-3xl border border-slate-200 shadow-xs overflow-hidden">
-              {/* Header de sección */}
-              <div className="p-6 sm:p-8 pb-5 border-b border-slate-100 bg-white">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="w-8 h-8 rounded-xl bg-[#c9a751] text-slate-900 font-black text-sm flex items-center justify-center shadow-xs">
-                    3
-                  </span>
-                  <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-                    Beneficiarios y Alcance de la Intervención
-                  </h2>
-                </div>
-                <p className="text-xs sm:text-sm text-slate-500 mt-1 ml-10">
-                  ¿En cuántas unidades educativas enseñan los docentes que requerirían formación y a cuántos estudiantes atienden?
-                </p>
-              </div>
-
-              <div className="p-6 sm:p-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                {/* BLOQUE UEs */}
-                <div className="flex flex-col gap-4">
-                  {/* KPI principal UEs */}
-                  <div className="bg-slate-900 border border-[#c9a751]/25 rounded-2xl p-5 text-white flex items-center justify-between gap-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-11 h-11 rounded-xl bg-[#c9a751]/15 border border-[#c9a751]/30 flex items-center justify-center shrink-0">
-                        <School className="w-5 h-5 text-[#c9a751]" />
-                      </div>
-                      <div>
-                        <span className="text-[11px] font-black uppercase tracking-widest text-slate-400 block">
-                          Alcance en Unidades Educativas
-                        </span>
-                        <span className="text-xs text-slate-400 mt-0.5 block">UEs con al menos un docente A o N</span>
-                      </div>
-                    </div>
-                    <div className="text-right shrink-0">
-                      <span className="text-3xl font-black text-[#c9a751]">1,452</span>
-                      <span className="text-xs text-slate-400 block font-semibold">UEs Focalizadas</span>
-                    </div>
-                  </div>
-
-                  {/* Desglose UEs por rango */}
-                  <div className="space-y-2.5 text-xs">
-                    <div className="bg-amber-50 p-3.5 rounded-xl border border-amber-200 flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <span className="w-2.5 h-2.5 rounded-full bg-amber-600 shrink-0" />
-                        <span className="text-slate-700 font-semibold">UEs con docentes Rango N (Baja pertinencia)</span>
-                      </div>
-                      <strong className="text-amber-800 font-black text-sm">{fmt(data.resumen.N?.ues)} UEs</strong>
-                    </div>
-                    <div className="bg-blue-50 p-3.5 rounded-xl border border-blue-200 flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <span className="w-2.5 h-2.5 rounded-full bg-blue-600 shrink-0" />
-                        <span className="text-slate-700 font-semibold">UEs con docentes Rango A (Media pertinencia)</span>
-                      </div>
-                      <strong className="text-blue-800 font-black text-sm">{fmt(data.resumen.A?.ues)} UEs</strong>
-                    </div>
-                    <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200 flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <span className="w-2.5 h-2.5 rounded-full bg-slate-500 shrink-0" />
-                        <span className="text-slate-700 font-semibold">Total UEs padrón nacional evaluado</span>
-                      </div>
-                      <strong className="text-slate-800 font-black text-sm">{fmt(data.resumen.TOTAL?.ues)} UEs</strong>
-                    </div>
-                  </div>
-
-                  {/* Barra proporcional UEs */}
-                  <div className="bg-slate-50 rounded-xl p-3.5 border border-slate-200">
-                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-wider block mb-2">Cobertura sobre padrón total</span>
-                    <div className="w-full bg-slate-200 rounded-full h-3 overflow-hidden flex">
-                      <div
-                        style={{ width: `${(1452 / (data.resumen.TOTAL?.ues ?? 2264)) * 100}%` }}
-                        className="bg-[#c9a751] h-full rounded-full"
-                        title="UEs focalizadas"
-                      />
-                    </div>
-                    <div className="flex justify-between text-[10px] text-slate-500 font-semibold mt-1.5">
-                      <span className="text-[#c9a751] font-black">1,452 UEs focalizadas ({((1452 / (data.resumen.TOTAL?.ues ?? 2264)) * 100).toFixed(1)}%)</span>
-                      <span>{fmt(data.resumen.TOTAL?.ues)} total</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* BLOQUE Estudiantes */}
-                <div className="flex flex-col gap-4">
-                  {/* KPI principal Alumnos */}
-                  <div className="bg-slate-900 border border-[#c9a751]/25 rounded-2xl p-5 text-white flex items-center justify-between gap-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-11 h-11 rounded-xl bg-[#c9a751]/15 border border-[#c9a751]/30 flex items-center justify-center shrink-0">
-                        <Users className="w-5 h-5 text-[#c9a751]" />
-                      </div>
-                      <div>
-                        <span className="text-[11px] font-black uppercase tracking-widest text-slate-400 block">
-                          Población Escolar Alcanzada
-                        </span>
-                        <span className="text-xs text-slate-400 mt-0.5 block">Alumnos con docentes Rango A o N</span>
-                      </div>
-                    </div>
-                    <div className="text-right shrink-0">
-                      <span className="text-3xl font-black text-[#c9a751]">~1.58M</span>
-                      <span className="text-xs text-slate-400 block font-semibold">Alumnos impactados</span>
-                    </div>
-                  </div>
-
-                  {/* Desglose alumnos por rango */}
-                  <div className="space-y-2.5 text-xs">
-                    <div className="bg-amber-50 p-3.5 rounded-xl border border-amber-200 flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <span className="w-2.5 h-2.5 rounded-full bg-amber-600 shrink-0" />
-                        <span className="text-slate-700 font-semibold">Alumnos impactados — Rango N</span>
-                      </div>
-                      <strong className="text-amber-800 font-black text-sm">~{fmt(data.resumen.N?.estudiantes_atendidos)}</strong>
-                    </div>
-                    <div className="bg-blue-50 p-3.5 rounded-xl border border-blue-200 flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <span className="w-2.5 h-2.5 rounded-full bg-blue-600 shrink-0" />
-                        <span className="text-slate-700 font-semibold">Alumnos impactados — Rango A</span>
-                      </div>
-                      <strong className="text-blue-800 font-black text-sm">~{fmt(data.resumen.A?.estudiantes_atendidos)}</strong>
-                    </div>
-                    <div className="bg-emerald-50 p-3.5 rounded-xl border border-emerald-200 flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-600 shrink-0" />
-                        <span className="text-slate-700 font-semibold">Beneficio sistémico acumulado</span>
-                      </div>
-                      <strong className="text-emerald-700 font-black text-sm">Mejora de calidad educativa</strong>
-                    </div>
-                  </div>
-
-                  {/* Barra proporcional alumnos */}
-                  <div className="bg-slate-50 rounded-xl p-3.5 border border-slate-200">
-                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-wider block mb-2">Población estudiantil focalizada</span>
-                    <div className="w-full bg-slate-200 rounded-full h-3 overflow-hidden flex">
-                      <div
-                        style={{ width: `${((data.resumen.N?.estudiantes_atendidos ?? 0) / (data.resumen.TOTAL?.estudiantes_atendidos ?? 1)) * 100}%` }}
-                        className="bg-amber-600 h-full"
-                        title="Rango N"
-                      />
-                      <div
-                        style={{ width: `${((data.resumen.A?.estudiantes_atendidos ?? 0) / (data.resumen.TOTAL?.estudiantes_atendidos ?? 1)) * 100}%` }}
-                        className="bg-blue-600 h-full"
-                        title="Rango A"
-                      />
-                    </div>
-                    <div className="flex justify-between text-[10px] text-slate-500 font-semibold mt-1.5">
-                      <span className="text-[#c9a751] font-black">~1,575,817 alumnos (55.5%)</span>
-                      <span>{fmt(data.resumen.TOTAL?.estudiantes_atendidos)} matrícula total</span>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
           </div>
         )
       }
@@ -1007,22 +827,36 @@ export default function PertinenciaView() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
                 <div className="bg-slate-50 rounded-2xl p-4 border border-slate-200/80">
                   <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Mayor Padrón Docente</span>
-                  <span className="text-xl font-black text-slate-900 mt-1 block">LA PAZ</span>
-                  <span className="text-xs text-slate-500 font-semibold mt-0.5">44,120 docentes (30.0%)</span>
+                  <span className="text-xl font-black text-slate-900 mt-1 block">
+                    {deptKPIs?.maxPadron?.departamento ?? '—'}
+                  </span>
+                  <span className="text-xs text-slate-500 font-semibold mt-0.5">
+                    {fmt(deptKPIs?.maxPadron?.total)} docentes ({pct(deptKPIs?.maxPadron?.total ?? 0, deptKPIs?.totalPais ?? 1)})
+                  </span>
                 </div>
                 <div className="bg-amber-50/60 rounded-2xl p-4 border border-amber-200/80">
-                  <span className="text-[11px] font-bold text-amber-800 uppercase tracking-wider block">Mayor Meta</span>
-                  <span className="text-xl font-black text-amber-900 mt-1 block">LA PAZ & STA. CRUZ</span>
-                  <span className="text-xs text-amber-700 font-semibold mt-0.5">24,130 y 21,600 docentes</span>
+                  <span className="text-[11px] font-bold text-amber-800 uppercase tracking-wider block">Mayor Meta Formación</span>
+                  <span className="text-xl font-black text-amber-900 mt-1 block truncate">
+                    {deptKPIs?.topMeta1?.departamento ?? '—'} & {deptKPIs?.topMeta2?.departamento ?? '—'}
+                  </span>
+                  <span className="text-xs text-amber-700 font-semibold mt-0.5">
+                    {fmt(deptKPIs?.topMeta1?.prioridadBID)} y {fmt(deptKPIs?.topMeta2?.prioridadBID)} docentes
+                  </span>
                 </div>
                 <div className="bg-emerald-50/60 rounded-2xl p-4 border border-emerald-200/80">
                   <span className="text-[11px] font-bold text-emerald-800 uppercase tracking-wider block">Mayor Tasa Idónea (V)</span>
-                  <span className="text-xl font-black text-emerald-900 mt-1 block">BENI (35.7%)</span>
-                  <span className="text-xs text-emerald-700 font-semibold mt-0.5">2,771 de 7,767 docentes</span>
+                  <span className="text-xl font-black text-emerald-900 mt-1 block">
+                    {deptKPIs?.maxAlta?.departamento ?? '—'} ({deptKPIs?.maxAlta?.pctAlta.toFixed(1)}%)
+                  </span>
+                  <span className="text-xs text-emerald-700 font-semibold mt-0.5">
+                    {fmt(deptKPIs?.maxAlta?.v)} de {fmt(deptKPIs?.maxAlta?.total)} docentes
+                  </span>
                 </div>
                 <div className="bg-purple-50/60 rounded-2xl p-4 border border-purple-200/80">
                   <span className="text-[11px] font-bold text-purple-800 uppercase tracking-wider block">Focalización UEs</span>
-                  <span className="text-xl font-black text-purple-900 mt-1 block">1,452 UEs en 9 Deptos</span>
+                  <span className="text-xl font-black text-purple-900 mt-1 block">
+                    {fmt(deptKPIs?.totalUes)} UEs en 9 Deptos
+                  </span>
                   <span className="text-xs text-purple-700 font-semibold mt-0.5">100% Cobertura País</span>
                 </div>
               </div>
@@ -1180,7 +1014,7 @@ export default function PertinenciaView() {
                             <span className="w-2.5 h-2.5 rounded-full bg-amber-600" />
                             <div>
                               <strong className="text-slate-800 block">Baja Pertinencia (N)</strong>
-                              <span className="text-[11px] text-slate-500">Requiere reconversión profunda</span>
+                              <span className="text-[11px] text-slate-500">Sin correspondencia con el cargo</span>
                             </div>
                           </div>
                           <div className="text-right">
@@ -1196,8 +1030,8 @@ export default function PertinenciaView() {
                           <div className="flex items-center gap-2">
                             <span className="w-2.5 h-2.5 rounded-full bg-slate-400" />
                             <div>
-                              <strong className="text-slate-700 block">Sin Pertinencia</strong>
-                              <span className="text-[11px] text-slate-500">Fuera de perfil normalista</span>
+                              <strong className="text-slate-700 block">Técnico / Univ. / Otros (SIN)</strong>
+                              <span className="text-[11px] text-slate-500">Sin pertinencia normalista</span>
                             </div>
                           </div>
                           <div className="text-right">
@@ -1522,7 +1356,7 @@ export default function PertinenciaView() {
                       <strong>{fmt(n.rangos.N?.docentes)}</strong>
                     </div>
                     <div className="flex justify-between text-slate-500">
-                      <span>Sin Pertinencia:</span>
+                      <span>Técnico / Univ. / Otros:</span>
                       <strong>{fmt(n.rangos.SIN?.docentes)}</strong>
                     </div>
                   </div>

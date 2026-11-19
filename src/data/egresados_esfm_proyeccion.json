@@ -1,0 +1,935 @@
+{
+  "metadata": {
+    "fuente_esfm": "DGFM / Sistema de Formación Docente ESFM · Ministerio de Educación",
+    "fuente_deficit": "Matriz de Calor: Déficit de Ítems Docentes UIE / SIE UE",
+    "horizonte_formacion": "5 años académicos por cohorte (2022 a 2026 -> Egresan 2027 a 2031)",
+    "tasa_titulacion_historica_pct": 82.0,
+    "tasa_abandono_historica_pct": 18.0,
+    "corte": "Noviembre 2026"
+  },
+  "totales_nacionales": {
+    "total_inscritos_2022_2026": 16886,
+    "total_egresados_82_pct": 13847,
+    "total_merma_18_pct": 3039,
+    "total_deficit_items_matriz": 7803,
+    "total_deficit_horas_matriz": 806621,
+    "total_especialidades": 22,
+    "total_esfms": 46
+  },
+  "cohortes": [
+    {
+      "gestion_ingreso": 2021,
+      "gestion_egreso": 2026,
+      "anio_academico_actual": "6º Año",
+      "total_inscritos": 3285,
+      "por_dpto": {
+        "CHUQUISACA": 252,
+        "LA PAZ": 893,
+        "COCHABAMBA": 435,
+        "ORURO": 231,
+        "POTOSÍ": 386,
+        "TARIJA": 229,
+        "SANTA CRUZ": 486,
+        "BENI": 188,
+        "PANDO": 185
+      }
+    },
+    {
+      "gestion_ingreso": 2022,
+      "gestion_egreso": 2027,
+      "anio_academico_actual": "5º Año",
+      "total_inscritos": 3503,
+      "por_dpto": {
+        "CHUQUISACA": 280,
+        "LA PAZ": 935,
+        "COCHABAMBA": 496,
+        "ORURO": 251,
+        "POTOSÍ": 437,
+        "TARIJA": 251,
+        "SANTA CRUZ": 492,
+        "BENI": 209,
+        "PANDO": 152
+      }
+    },
+    {
+      "gestion_ingreso": 2023,
+      "gestion_egreso": 2028,
+      "anio_academico_actual": "4º Año",
+      "total_inscritos": 3180,
+      "por_dpto": {
+        "CHUQUISACA": 245,
+        "LA PAZ": 640,
+        "COCHABAMBA": 418,
+        "ORURO": 224,
+        "POTOSÍ": 425,
+        "TARIJA": 211,
+        "SANTA CRUZ": 471,
+        "BENI": 312,
+        "PANDO": 234
+      }
+    },
+    {
+      "gestion_ingreso": 2024,
+      "gestion_egreso": 2029,
+      "anio_academico_actual": "3º Año",
+      "total_inscritos": 4780,
+      "por_dpto": {
+        "CHUQUISACA": 295,
+        "LA PAZ": 938,
+        "COCHABAMBA": 595,
+        "ORURO": 395,
+        "POTOSÍ": 630,
+        "TARIJA": 376,
+        "SANTA CRUZ": 834,
+        "BENI": 402,
+        "PANDO": 315
+      }
+    },
+    {
+      "gestion_ingreso": 2025,
+      "gestion_egreso": 2030,
+      "anio_academico_actual": "2º Año",
+      "total_inscritos": 3278,
+      "por_dpto": {
+        "CHUQUISACA": 280,
+        "LA PAZ": 566,
+        "COCHABAMBA": 446,
+        "ORURO": 297,
+        "POTOSÍ": 513,
+        "TARIJA": 254,
+        "SANTA CRUZ": 511,
+        "BENI": 283,
+        "PANDO": 128
+      }
+    },
+    {
+      "gestion_ingreso": 2026,
+      "gestion_egreso": 2031,
+      "anio_academico_actual": "1º Año",
+      "total_inscritos": 2856,
+      "por_dpto": {
+        "CHUQUISACA": 87,
+        "LA PAZ": 805,
+        "COCHABAMBA": 242,
+        "ORURO": 232,
+        "POTOSÍ": 228,
+        "TARIJA": 90,
+        "SANTA CRUZ": 808,
+        "BENI": 233,
+        "PANDO": 131
+      }
+    }
+  ],
+  "departamentos": [
+    {
+      "departamento_id": 1,
+      "departamento": "CHUQUISACA",
+      "total_inscritos_2022_2026": 1187,
+      "items_deficit_matriz": 299,
+      "deficit_horas_matriz": 30554,
+      "cohortes_inscritos": {
+        "2027": 280,
+        "2028": 245,
+        "2029": 295,
+        "2030": 280,
+        "2031": 87
+      }
+    },
+    {
+      "departamento_id": 2,
+      "departamento": "LA PAZ",
+      "total_inscritos_2022_2026": 3884,
+      "items_deficit_matriz": 1797,
+      "deficit_horas_matriz": 184604,
+      "cohortes_inscritos": {
+        "2027": 935,
+        "2028": 640,
+        "2029": 938,
+        "2030": 566,
+        "2031": 805
+      }
+    },
+    {
+      "departamento_id": 3,
+      "departamento": "COCHABAMBA",
+      "total_inscritos_2022_2026": 2197,
+      "items_deficit_matriz": 1176,
+      "deficit_horas_matriz": 118985,
+      "cohortes_inscritos": {
+        "2027": 496,
+        "2028": 418,
+        "2029": 595,
+        "2030": 446,
+        "2031": 242
+      }
+    },
+    {
+      "departamento_id": 4,
+      "departamento": "ORURO",
+      "total_inscritos_2022_2026": 1399,
+      "items_deficit_matriz": 285,
+      "deficit_horas_matriz": 28076,
+      "cohortes_inscritos": {
+        "2027": 251,
+        "2028": 224,
+        "2029": 395,
+        "2030": 297,
+        "2031": 232
+      }
+    },
+    {
+      "departamento_id": 5,
+      "departamento": "POTOSÍ",
+      "total_inscritos_2022_2026": 2233,
+      "items_deficit_matriz": 856,
+      "deficit_horas_matriz": 88202,
+      "cohortes_inscritos": {
+        "2027": 437,
+        "2028": 425,
+        "2029": 630,
+        "2030": 513,
+        "2031": 228
+      }
+    },
+    {
+      "departamento_id": 6,
+      "departamento": "TARIJA",
+      "total_inscritos_2022_2026": 1182,
+      "items_deficit_matriz": 86,
+      "deficit_horas_matriz": 7767,
+      "cohortes_inscritos": {
+        "2027": 251,
+        "2028": 211,
+        "2029": 376,
+        "2030": 254,
+        "2031": 90
+      }
+    },
+    {
+      "departamento_id": 7,
+      "departamento": "SANTA CRUZ",
+      "total_inscritos_2022_2026": 3116,
+      "items_deficit_matriz": 2705,
+      "deficit_horas_matriz": 278249,
+      "cohortes_inscritos": {
+        "2027": 492,
+        "2028": 471,
+        "2029": 834,
+        "2030": 511,
+        "2031": 808
+      }
+    },
+    {
+      "departamento_id": 8,
+      "departamento": "BENI",
+      "total_inscritos_2022_2026": 1439,
+      "items_deficit_matriz": 499,
+      "deficit_horas_matriz": 51463,
+      "cohortes_inscritos": {
+        "2027": 209,
+        "2028": 312,
+        "2029": 402,
+        "2030": 283,
+        "2031": 233
+      }
+    },
+    {
+      "departamento_id": 9,
+      "departamento": "PANDO",
+      "total_inscritos_2022_2026": 960,
+      "items_deficit_matriz": 186,
+      "deficit_horas_matriz": 18721,
+      "cohortes_inscritos": {
+        "2027": 152,
+        "2028": 234,
+        "2029": 315,
+        "2030": 128,
+        "2031": 131
+      }
+    }
+  ],
+  "especialidades": [
+    {
+      "especialidad_id": 2,
+      "nombre": "EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL",
+      "hora_item": 120,
+      "total_inscritos_2022_2026": 4797,
+      "items_deficit_matriz": 1039,
+      "deficit_horas_matriz": 124595,
+      "cobertura_actual_sie": 70.4,
+      "dictamen": "SOBREOFERTA",
+      "color": "rose",
+      "badge": "Sobreoferta Crítica",
+      "justificacion": "Egresarán 3,934 maestros pero la Matriz de Calor solo tiene 1,039 ítems en déficit. Hay un excedente de +2,895 graduados que quedarán sin ítem.",
+      "cohortes_inscritos": {
+        "2027": 810,
+        "2028": 676,
+        "2029": 1141,
+        "2030": 1020,
+        "2031": 1150
+      },
+      "por_dpto": {
+        "CHUQUISACA": 370,
+        "LA PAZ": 986,
+        "COCHABAMBA": 550,
+        "ORURO": 350,
+        "POTOSÍ": 662,
+        "TARIJA": 217,
+        "SANTA CRUZ": 1101,
+        "BENI": 351,
+        "PANDO": 210
+      }
+    },
+    {
+      "especialidad_id": 10,
+      "nombre": "VALORES, ESPIRITUALIDAD Y RELIGIONES",
+      "hora_item": 96,
+      "total_inscritos_2022_2026": 0,
+      "items_deficit_matriz": 903,
+      "deficit_horas_matriz": 86658,
+      "cobertura_actual_sie": 34.7,
+      "dictamen": "DÉFICIT",
+      "color": "emerald",
+      "badge": "Déficit sin Cubrir",
+      "justificacion": "La Matriz de Calor requiere 903 ítems pero solo egresarán 0 maestros. Faltarán 903 ítems por cubrir. Se deben abrir más cupos.",
+      "cohortes_inscritos": {
+        "2027": 0,
+        "2028": 0,
+        "2029": 0,
+        "2030": 0,
+        "2031": 0
+      },
+      "por_dpto": {
+        "CHUQUISACA": 0,
+        "LA PAZ": 0,
+        "COCHABAMBA": 0,
+        "ORURO": 0,
+        "POTOSÍ": 0,
+        "TARIJA": 0,
+        "SANTA CRUZ": 0,
+        "BENI": 0,
+        "PANDO": 0
+      }
+    },
+    {
+      "especialidad_id": 6,
+      "nombre": "EDUCACIÓN FÍSICA Y DEPORTES",
+      "hora_item": 96,
+      "total_inscritos_2022_2026": 797,
+      "items_deficit_matriz": 786,
+      "deficit_horas_matriz": 75421,
+      "cobertura_actual_sie": 29.2,
+      "dictamen": "DÉFICIT",
+      "color": "emerald",
+      "badge": "Déficit sin Cubrir",
+      "justificacion": "La Matriz de Calor requiere 786 ítems pero solo egresarán 654 maestros. Faltarán 132 ítems por cubrir. Se deben abrir más cupos.",
+      "cohortes_inscritos": {
+        "2027": 387,
+        "2028": 57,
+        "2029": 144,
+        "2030": 137,
+        "2031": 72
+      },
+      "por_dpto": {
+        "CHUQUISACA": 32,
+        "LA PAZ": 309,
+        "COCHABAMBA": 104,
+        "ORURO": 169,
+        "POTOSÍ": 48,
+        "TARIJA": 0,
+        "SANTA CRUZ": 73,
+        "BENI": 62,
+        "PANDO": 0
+      }
+    },
+    {
+      "especialidad_id": 3,
+      "nombre": "EDUCACIÓN MUSICAL",
+      "hora_item": 96,
+      "total_inscritos_2022_2026": 985,
+      "items_deficit_matriz": 716,
+      "deficit_horas_matriz": 68716,
+      "cobertura_actual_sie": 33.2,
+      "dictamen": "EQUILIBRIO",
+      "color": "amber",
+      "badge": "Equilibrio",
+      "justificacion": "Oferta de egreso (808 maestros) en equilibrio con los 716 ítems de déficit en aula.",
+      "cohortes_inscritos": {
+        "2027": 456,
+        "2028": 118,
+        "2029": 141,
+        "2030": 199,
+        "2031": 71
+      },
+      "por_dpto": {
+        "CHUQUISACA": 64,
+        "LA PAZ": 116,
+        "COCHABAMBA": 197,
+        "ORURO": 162,
+        "POTOSÍ": 205,
+        "TARIJA": 30,
+        "SANTA CRUZ": 115,
+        "BENI": 62,
+        "PANDO": 34
+      }
+    },
+    {
+      "especialidad_id": 4,
+      "nombre": "ARTES PLÁSTICAS Y VISUALES",
+      "hora_item": 96,
+      "total_inscritos_2022_2026": 291,
+      "items_deficit_matriz": 521,
+      "deficit_horas_matriz": 50015,
+      "cobertura_actual_sie": 37.6,
+      "dictamen": "DÉFICIT",
+      "color": "emerald",
+      "badge": "Déficit sin Cubrir",
+      "justificacion": "La Matriz de Calor requiere 521 ítems pero solo egresarán 239 maestros. Faltarán 282 ítems por cubrir. Se deben abrir más cupos.",
+      "cohortes_inscritos": {
+        "2027": 85,
+        "2028": 30,
+        "2029": 77,
+        "2030": 99,
+        "2031": 0
+      },
+      "por_dpto": {
+        "CHUQUISACA": 112,
+        "LA PAZ": 0,
+        "COCHABAMBA": 56,
+        "ORURO": 31,
+        "POTOSÍ": 33,
+        "TARIJA": 0,
+        "SANTA CRUZ": 26,
+        "BENI": 33,
+        "PANDO": 0
+      }
+    },
+    {
+      "especialidad_id": 20,
+      "nombre": "CIENCIAS SOCIALES",
+      "hora_item": 128,
+      "total_inscritos_2022_2026": 540,
+      "items_deficit_matriz": 433,
+      "deficit_horas_matriz": 55314,
+      "cobertura_actual_sie": 57.7,
+      "dictamen": "EQUILIBRIO",
+      "color": "amber",
+      "badge": "Equilibrio",
+      "justificacion": "Oferta de egreso (443 maestros) en equilibrio con los 433 ítems de déficit en aula.",
+      "cohortes_inscritos": {
+        "2027": 83,
+        "2028": 57,
+        "2029": 0,
+        "2030": 130,
+        "2031": 270
+      },
+      "por_dpto": {
+        "CHUQUISACA": 30,
+        "LA PAZ": 69,
+        "COCHABAMBA": 93,
+        "ORURO": 66,
+        "POTOSÍ": 34,
+        "TARIJA": 0,
+        "SANTA CRUZ": 130,
+        "BENI": 69,
+        "PANDO": 49
+      }
+    },
+    {
+      "especialidad_id": 5,
+      "nombre": "EDUCACIÓN INICIAL EN FAMILIA COMUNITARIA",
+      "hora_item": 100,
+      "total_inscritos_2022_2026": 2958,
+      "items_deficit_matriz": 428,
+      "deficit_horas_matriz": 42793,
+      "cobertura_actual_sie": 39.0,
+      "dictamen": "SOBREOFERTA",
+      "color": "rose",
+      "badge": "Sobreoferta Crítica",
+      "justificacion": "Egresarán 2,426 maestros pero la Matriz de Calor solo tiene 428 ítems en déficit. Hay un excedente de +1,998 graduados que quedarán sin ítem.",
+      "cohortes_inscritos": {
+        "2027": 650,
+        "2028": 548,
+        "2029": 782,
+        "2030": 553,
+        "2031": 425
+      },
+      "por_dpto": {
+        "CHUQUISACA": 112,
+        "LA PAZ": 608,
+        "COCHABAMBA": 367,
+        "ORURO": 220,
+        "POTOSÍ": 459,
+        "TARIJA": 350,
+        "SANTA CRUZ": 528,
+        "BENI": 191,
+        "PANDO": 123
+      }
+    },
+    {
+      "especialidad_id": 8,
+      "nombre": "COMUNICACIÓN Y LENGUAJES: LENGUA CASTELLANA",
+      "hora_item": 96,
+      "total_inscritos_2022_2026": 536,
+      "items_deficit_matriz": 399,
+      "deficit_horas_matriz": 38290,
+      "cobertura_actual_sie": 56.8,
+      "dictamen": "EQUILIBRIO",
+      "color": "amber",
+      "badge": "Equilibrio",
+      "justificacion": "Oferta de egreso (440 maestros) en equilibrio con los 399 ítems de déficit en aula.",
+      "cohortes_inscritos": {
+        "2027": 96,
+        "2028": 150,
+        "2029": 221,
+        "2030": 34,
+        "2031": 35
+      },
+      "por_dpto": {
+        "CHUQUISACA": 61,
+        "LA PAZ": 96,
+        "COCHABAMBA": 38,
+        "ORURO": 0,
+        "POTOSÍ": 66,
+        "TARIJA": 0,
+        "SANTA CRUZ": 106,
+        "BENI": 83,
+        "PANDO": 86
+      }
+    },
+    {
+      "especialidad_id": 12,
+      "nombre": "CIENCIAS NATURALES: BIOLOGÍA - GEOGRAFÍA",
+      "hora_item": 96,
+      "total_inscritos_2022_2026": 780,
+      "items_deficit_matriz": 358,
+      "deficit_horas_matriz": 34307,
+      "cobertura_actual_sie": 50.1,
+      "dictamen": "SOBREOFERTA",
+      "color": "rose",
+      "badge": "Sobreoferta Crítica",
+      "justificacion": "Egresarán 640 maestros pero la Matriz de Calor solo tiene 358 ítems en déficit. Hay un excedente de +282 graduados que quedarán sin ítem.",
+      "cohortes_inscritos": {
+        "2027": 143,
+        "2028": 202,
+        "2029": 204,
+        "2030": 98,
+        "2031": 133
+      },
+      "por_dpto": {
+        "CHUQUISACA": 36,
+        "LA PAZ": 220,
+        "COCHABAMBA": 111,
+        "ORURO": 35,
+        "POTOSÍ": 93,
+        "TARIJA": 0,
+        "SANTA CRUZ": 52,
+        "BENI": 150,
+        "PANDO": 83
+      }
+    },
+    {
+      "especialidad_id": 19,
+      "nombre": "EDUCACIÓN ESPECIAL PARA PERSONAS CON DISCAPACIDAD",
+      "hora_item": 108,
+      "total_inscritos_2022_2026": 576,
+      "items_deficit_matriz": 330,
+      "deficit_horas_matriz": 35551,
+      "cobertura_actual_sie": 13.8,
+      "dictamen": "EQUILIBRIO",
+      "color": "amber",
+      "badge": "Equilibrio",
+      "justificacion": "Oferta de egreso (472 maestros) en equilibrio con los 330 ítems de déficit en aula.",
+      "cohortes_inscritos": {
+        "2027": 0,
+        "2028": 81,
+        "2029": 333,
+        "2030": 132,
+        "2031": 30
+      },
+      "por_dpto": {
+        "CHUQUISACA": 39,
+        "LA PAZ": 59,
+        "COCHABAMBA": 66,
+        "ORURO": 66,
+        "POTOSÍ": 71,
+        "TARIJA": 74,
+        "SANTA CRUZ": 127,
+        "BENI": 74,
+        "PANDO": 0
+      }
+    },
+    {
+      "especialidad_id": 9,
+      "nombre": "MATEMÁTICA",
+      "hora_item": 120,
+      "total_inscritos_2022_2026": 685,
+      "items_deficit_matriz": 314,
+      "deficit_horas_matriz": 37616,
+      "cobertura_actual_sie": 58.1,
+      "dictamen": "SOBREOFERTA",
+      "color": "rose",
+      "badge": "Sobreoferta Crítica",
+      "justificacion": "Egresarán 562 maestros pero la Matriz de Calor solo tiene 314 ítems en déficit. Hay un excedente de +248 graduados que quedarán sin ítem.",
+      "cohortes_inscritos": {
+        "2027": 81,
+        "2028": 104,
+        "2029": 185,
+        "2030": 88,
+        "2031": 227
+      },
+      "por_dpto": {
+        "CHUQUISACA": 28,
+        "LA PAZ": 123,
+        "COCHABAMBA": 53,
+        "ORURO": 0,
+        "POTOSÍ": 0,
+        "TARIJA": 67,
+        "SANTA CRUZ": 170,
+        "BENI": 107,
+        "PANDO": 137
+      }
+    },
+    {
+      "especialidad_id": 7,
+      "nombre": "TRANSFORMACIÓN DE ALIMENTOS Y GASTRONOMÍA",
+      "hora_item": 96,
+      "total_inscritos_2022_2026": 645,
+      "items_deficit_matriz": 295,
+      "deficit_horas_matriz": 28298,
+      "cobertura_actual_sie": 53.1,
+      "dictamen": "SOBREOFERTA",
+      "color": "rose",
+      "badge": "Sobreoferta Crítica",
+      "justificacion": "Egresarán 529 maestros pero la Matriz de Calor solo tiene 295 ítems en déficit. Hay un excedente de +234 graduados que quedarán sin ítem.",
+      "cohortes_inscritos": {
+        "2027": 52,
+        "2028": 175,
+        "2029": 261,
+        "2030": 131,
+        "2031": 26
+      },
+      "por_dpto": {
+        "CHUQUISACA": 52,
+        "LA PAZ": 81,
+        "COCHABAMBA": 67,
+        "ORURO": 61,
+        "POTOSÍ": 126,
+        "TARIJA": 106,
+        "SANTA CRUZ": 97,
+        "BENI": 0,
+        "PANDO": 55
+      }
+    },
+    {
+      "especialidad_id": 17,
+      "nombre": "COMUNICACIÓN Y LENGUAJES: LENGUA EXTRANJERA (INGLÉS)",
+      "hora_item": 96,
+      "total_inscritos_2022_2026": 673,
+      "items_deficit_matriz": 294,
+      "deficit_horas_matriz": 28175,
+      "cobertura_actual_sie": 26.3,
+      "dictamen": "SOBREOFERTA",
+      "color": "rose",
+      "badge": "Sobreoferta Crítica",
+      "justificacion": "Egresarán 552 maestros pero la Matriz de Calor solo tiene 294 ítems en déficit. Hay un excedente de +258 graduados que quedarán sin ítem.",
+      "cohortes_inscritos": {
+        "2027": 30,
+        "2028": 68,
+        "2029": 224,
+        "2030": 0,
+        "2031": 351
+      },
+      "por_dpto": {
+        "CHUQUISACA": 38,
+        "LA PAZ": 125,
+        "COCHABAMBA": 34,
+        "ORURO": 35,
+        "POTOSÍ": 0,
+        "TARIJA": 37,
+        "SANTA CRUZ": 256,
+        "BENI": 97,
+        "PANDO": 51
+      }
+    },
+    {
+      "especialidad_id": 11,
+      "nombre": "COSMOVISIONES, FILOSOFÍAS Y SICOLOGÍA",
+      "hora_item": 96,
+      "total_inscritos_2022_2026": 278,
+      "items_deficit_matriz": 224,
+      "deficit_horas_matriz": 21497,
+      "cobertura_actual_sie": 28.0,
+      "dictamen": "EQUILIBRIO",
+      "color": "amber",
+      "badge": "Equilibrio",
+      "justificacion": "Oferta de egreso (228 maestros) en equilibrio con los 224 ítems de déficit en aula.",
+      "cohortes_inscritos": {
+        "2027": 85,
+        "2028": 83,
+        "2029": 37,
+        "2030": 73,
+        "2031": 0
+      },
+      "por_dpto": {
+        "CHUQUISACA": 32,
+        "LA PAZ": 33,
+        "COCHABAMBA": 97,
+        "ORURO": 26,
+        "POTOSÍ": 40,
+        "TARIJA": 50,
+        "SANTA CRUZ": 0,
+        "BENI": 0,
+        "PANDO": 0
+      }
+    },
+    {
+      "especialidad_id": 1,
+      "nombre": "CIENCIAS NATURALES: FÍSICA - QUÍMICA",
+      "hora_item": 96,
+      "total_inscritos_2022_2026": 892,
+      "items_deficit_matriz": 215,
+      "deficit_horas_matriz": 20637,
+      "cobertura_actual_sie": 26.3,
+      "dictamen": "SOBREOFERTA",
+      "color": "rose",
+      "badge": "Sobreoferta Crítica",
+      "justificacion": "Egresarán 731 maestros pero la Matriz de Calor solo tiene 215 ítems en déficit. Hay un excedente de +516 graduados que quedarán sin ítem.",
+      "cohortes_inscritos": {
+        "2027": 235,
+        "2028": 159,
+        "2029": 260,
+        "2030": 172,
+        "2031": 66
+      },
+      "por_dpto": {
+        "CHUQUISACA": 0,
+        "LA PAZ": 193,
+        "COCHABAMBA": 188,
+        "ORURO": 57,
+        "POTOSÍ": 91,
+        "TARIJA": 50,
+        "SANTA CRUZ": 100,
+        "BENI": 128,
+        "PANDO": 85
+      }
+    },
+    {
+      "especialidad_id": 18,
+      "nombre": "INDUSTRIA TEXTIL Y CONFECCIÓN",
+      "hora_item": 108,
+      "total_inscritos_2022_2026": 207,
+      "items_deficit_matriz": 174,
+      "deficit_horas_matriz": 18719,
+      "cobertura_actual_sie": 56.2,
+      "dictamen": "EQUILIBRIO",
+      "color": "amber",
+      "badge": "Equilibrio",
+      "justificacion": "Oferta de egreso (170 maestros) en equilibrio con los 174 ítems de déficit en aula.",
+      "cohortes_inscritos": {
+        "2027": 25,
+        "2028": 74,
+        "2029": 74,
+        "2030": 34,
+        "2031": 0
+      },
+      "por_dpto": {
+        "CHUQUISACA": 0,
+        "LA PAZ": 96,
+        "COCHABAMBA": 0,
+        "ORURO": 61,
+        "POTOSÍ": 50,
+        "TARIJA": 0,
+        "SANTA CRUZ": 0,
+        "BENI": 0,
+        "PANDO": 0
+      }
+    },
+    {
+      "especialidad_id": 15,
+      "nombre": "MECÁNICA AUTOMOTRIZ",
+      "hora_item": 108,
+      "total_inscritos_2022_2026": 308,
+      "items_deficit_matriz": 138,
+      "deficit_horas_matriz": 14843,
+      "cobertura_actual_sie": 50.5,
+      "dictamen": "EQUILIBRIO",
+      "color": "amber",
+      "badge": "Equilibrio",
+      "justificacion": "Oferta de egreso (253 maestros) en equilibrio con los 138 ítems de déficit en aula.",
+      "cohortes_inscritos": {
+        "2027": 59,
+        "2028": 78,
+        "2029": 104,
+        "2030": 67,
+        "2031": 0
+      },
+      "por_dpto": {
+        "CHUQUISACA": 0,
+        "LA PAZ": 213,
+        "COCHABAMBA": 0,
+        "ORURO": 0,
+        "POTOSÍ": 95,
+        "TARIJA": 0,
+        "SANTA CRUZ": 0,
+        "BENI": 0,
+        "PANDO": 0
+      }
+    },
+    {
+      "especialidad_id": 14,
+      "nombre": "ELECTRICIDAD Y ELECTRÓNICA",
+      "hora_item": 108,
+      "total_inscritos_2022_2026": 272,
+      "items_deficit_matriz": 99,
+      "deficit_horas_matriz": 10622,
+      "cobertura_actual_sie": 54.8,
+      "dictamen": "EQUILIBRIO",
+      "color": "amber",
+      "badge": "Equilibrio",
+      "justificacion": "Oferta de egreso (223 maestros) en equilibrio con los 99 ítems de déficit en aula.",
+      "cohortes_inscritos": {
+        "2027": 32,
+        "2028": 57,
+        "2029": 101,
+        "2030": 82,
+        "2031": 0
+      },
+      "por_dpto": {
+        "CHUQUISACA": 92,
+        "LA PAZ": 97,
+        "COCHABAMBA": 83,
+        "ORURO": 0,
+        "POTOSÍ": 0,
+        "TARIJA": 0,
+        "SANTA CRUZ": 0,
+        "BENI": 0,
+        "PANDO": 0
+      }
+    },
+    {
+      "especialidad_id": 13,
+      "nombre": "AGROPECUARIA",
+      "hora_item": 108,
+      "total_inscritos_2022_2026": 451,
+      "items_deficit_matriz": 62,
+      "deficit_horas_matriz": 6643,
+      "cobertura_actual_sie": 41.7,
+      "dictamen": "SOBREOFERTA",
+      "color": "rose",
+      "badge": "Sobreoferta Crítica",
+      "justificacion": "Egresarán 370 maestros pero la Matriz de Calor solo tiene 62 ítems en déficit. Hay un excedente de +308 graduados que quedarán sin ítem.",
+      "cohortes_inscritos": {
+        "2027": 141,
+        "2028": 139,
+        "2029": 146,
+        "2030": 25,
+        "2031": 0
+      },
+      "por_dpto": {
+        "CHUQUISACA": 57,
+        "LA PAZ": 117,
+        "COCHABAMBA": 0,
+        "ORURO": 0,
+        "POTOSÍ": 38,
+        "TARIJA": 104,
+        "SANTA CRUZ": 114,
+        "BENI": 0,
+        "PANDO": 21
+      }
+    },
+    {
+      "especialidad_id": 22,
+      "nombre": "MECÁNICA INDUSTRIAL",
+      "hora_item": 108,
+      "total_inscritos_2022_2026": 62,
+      "items_deficit_matriz": 38,
+      "deficit_horas_matriz": 4005,
+      "cobertura_actual_sie": 62.5,
+      "dictamen": "EQUILIBRIO",
+      "color": "amber",
+      "badge": "Equilibrio",
+      "justificacion": "Oferta de egreso (51 maestros) en equilibrio con los 38 ítems de déficit en aula.",
+      "cohortes_inscritos": {
+        "2027": 0,
+        "2028": 24,
+        "2029": 38,
+        "2030": 0,
+        "2031": 0
+      },
+      "por_dpto": {
+        "CHUQUISACA": 0,
+        "LA PAZ": 0,
+        "COCHABAMBA": 0,
+        "ORURO": 0,
+        "POTOSÍ": 62,
+        "TARIJA": 0,
+        "SANTA CRUZ": 0,
+        "BENI": 0,
+        "PANDO": 0
+      }
+    },
+    {
+      "especialidad_id": 21,
+      "nombre": "CARPINTERÍA INDUSTRIAL EN MADERA Y METAL",
+      "hora_item": 108,
+      "total_inscritos_2022_2026": 101,
+      "items_deficit_matriz": 26,
+      "deficit_horas_matriz": 2746,
+      "cobertura_actual_sie": 54.2,
+      "dictamen": "EQUILIBRIO",
+      "color": "amber",
+      "badge": "Equilibrio",
+      "justificacion": "Oferta de egreso (83 maestros) en equilibrio con los 26 ítems de déficit en aula.",
+      "cohortes_inscritos": {
+        "2027": 28,
+        "2028": 33,
+        "2029": 40,
+        "2030": 0,
+        "2031": 0
+      },
+      "por_dpto": {
+        "CHUQUISACA": 0,
+        "LA PAZ": 101,
+        "COCHABAMBA": 0,
+        "ORURO": 0,
+        "POTOSÍ": 0,
+        "TARIJA": 0,
+        "SANTA CRUZ": 0,
+        "BENI": 0,
+        "PANDO": 0
+      }
+    },
+    {
+      "especialidad_id": 16,
+      "nombre": "ELECTROMECÁNICA",
+      "hora_item": 108,
+      "total_inscritos_2022_2026": 52,
+      "items_deficit_matriz": 11,
+      "deficit_horas_matriz": 1160,
+      "cobertura_actual_sie": 58.0,
+      "dictamen": "EQUILIBRIO",
+      "color": "amber",
+      "badge": "Equilibrio",
+      "justificacion": "Oferta de egreso (43 maestros) en equilibrio con los 11 ítems de déficit en aula.",
+      "cohortes_inscritos": {
+        "2027": 25,
+        "2028": 27,
+        "2029": 0,
+        "2030": 0,
+        "2031": 0
+      },
+      "por_dpto": {
+        "CHUQUISACA": 0,
+        "LA PAZ": 52,
+        "COCHABAMBA": 0,
+        "ORURO": 0,
+        "POTOSÍ": 0,
+        "TARIJA": 0,
+        "SANTA CRUZ": 0,
+        "BENI": 0,
+        "PANDO": 0
+      }
+    }
+  ]
+}

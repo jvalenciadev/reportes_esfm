@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "nombre": "CIENCIAS NATURALES: FÍSICA - QUÍMICA",
+    "hora_item": 96
+  },
+  {
+    "id": 2,
+    "nombre": "EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL",
+    "hora_item": 120
+  },
+  {
+    "id": 3,
+    "nombre": "EDUCACIÓN MUSICAL",
+    "hora_item": 96
+  },
+  {
+    "id": 4,
+    "nombre": "ARTES PLÁSTICAS Y VISUALES",
+    "hora_item": 96
+  },
+  {
+    "id": 5,
+    "nombre": "EDUCACIÓN INICIAL EN FAMILIA COMUNITARIA",
+    "hora_item": 100
+  },
+  {
+    "id": 6,
+    "nombre": "EDUCACIÓN FÍSICA Y DEPORTES",
+    "hora_item": 96
+  },
+  {
+    "id": 7,
+    "nombre": "TRANSFORMACIÓN DE ALIMENTOS Y GASTRONOMÍA",
+    "hora_item": 96
+  },
+  {
+    "id": 8,
+    "nombre": "COMUNICACIÓN Y LENGUAJES: LENGUA CASTELLANA",
+    "hora_item": 96
+  },
+  {
+    "id": 9,
+    "nombre": "MATEMÁTICA",
+    "hora_item": 120
+  },
+  {
+    "id": 10,
+    "nombre": "VALORES, ESPIRITUALIDAD Y RELIGIONES",
+    "hora_item": 96
+  },
+  {
+    "id": 11,
+    "nombre": "COSMOVISIONES, FILOSOFÍAS Y SICOLOGÍA",
+    "hora_item": 96
+  },
+  {
+    "id": 12,
+    "nombre": "CIENCIAS NATURALES: BIOLOGÍA - GEOGRAFÍA",
+    "hora_item": 96
+  },
+  {
+    "id": 13,
+    "nombre": "AGROPECUARIA",
+    "hora_item": 108
+  },
+  {
+    "id": 14,
+    "nombre": "ELECTRICIDAD Y ELECTRÓNICA",
+    "hora_item": 108
+  },
+  {
+    "id": 15,
+    "nombre": "MECÁNICA AUTOMOTRIZ",
+    "hora_item": 108
+  },
+  {
+    "id": 16,
+    "nombre": "ELECTROMECÁNICA",
+    "hora_item": 108
+  },
+  {
+    "id": 17,
+    "nombre": "COMUNICACIÓN Y LENGUAJES: LENGUA EXTRANJERA (INGLÉS)",
+    "hora_item": 96
+  },
+  {
+    "id": 18,
+    "nombre": "INDUSTRIA TEXTIL Y CONFECCIÓN",
+    "hora_item": 108
+  },
+  {
+    "id": 19,
+    "nombre": "EDUCACIÓN ESPECIAL PARA PERSONAS CON DISCAPACIDAD",
+    "hora_item": 108
+  },
+  {
+    "id": 20,
+    "nombre": "CIENCIAS SOCIALES",
+    "hora_item": 128
+  },
+  {
+    "id": 21,
+    "nombre": "CARPINTERÍA INDUSTRIAL EN MADERA Y METAL",
+    "hora_item": 108
+  },
+  {
+    "id": 22,
+    "nombre": "MECÁNICA INDUSTRIAL",
+    "hora_item": 108
+  }
+]
