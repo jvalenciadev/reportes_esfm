@@ -322,56 +322,86 @@ export default function MigracionDocenteView() {
             </div>
           </div>
 
-          {/* Matriz de Transición Departamental 9x9 */}
-          <div className="bg-white rounded-3xl p-5 border border-slate-200/90 shadow-2xs space-y-3">
-            <div className="flex flex-wrap items-center justify-between pb-2 border-b border-slate-100">
+          {/* Matriz de Transición Departamental 9x9 Ampliada con Divisiones Nítidas */}
+          <div className="bg-white rounded-3xl p-6 border-2 border-slate-300 shadow-md space-y-4">
+            <div className="flex flex-wrap items-center justify-between pb-3 border-b-2 border-slate-200 gap-3">
               <div>
-                <h3 className="text-sm font-black text-slate-900 flex items-center gap-1.5">
-                  <Layers className="w-4 h-4 text-indigo-600" />
+                <h3 className="text-base font-black text-slate-900 flex items-center gap-2">
+                  <Layers className="w-5 h-5 text-indigo-700" />
                   Matriz de Transición Departamental: Sede de la ESFM vs Radicación Actual en Planilla
                 </h3>
-                <p className="text-[11px] text-slate-500">
-                  Probabilidad empírica ponderada (%) de que un egresado de la ESFM de la fila radique trabajando en el departamento de la columna.
+                <p className="text-xs text-slate-600 mt-0.5">
+                  Probabilidad empírica ponderada (%) de que un egresado de la ESFM de la <strong>fila</strong> radique trabajando en el departamento de la <strong>columna</strong>.
                 </p>
               </div>
-              <span className="text-[10px] font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 px-2.5 py-1 rounded-xl">
-                Matriz Oficial Base para el Balance Predictivo 2031
-              </span>
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-black text-indigo-900 bg-indigo-100 border border-indigo-300 px-3 py-1.5 rounded-xl shadow-2xs">
+                  Matriz Oficial Base para el Balance Predictivo 2031 (35.474 Registros)
+                </span>
+              </div>
             </div>
 
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto rounded-2xl border-2 border-slate-400 shadow-inner">
               <table className="w-full text-xs text-left border-collapse">
                 <thead>
-                  <tr className="bg-slate-800 text-white font-black text-[10px] uppercase">
-                    <th className="py-2.5 px-3 border-r border-slate-700">ESFM Origen \ Trabaja en</th>
+                  <tr className="bg-slate-900 text-white font-black text-[11px] uppercase tracking-wider">
+                    <th className="py-3.5 px-4 border-r-2 border-b-2 border-slate-500 w-48 bg-slate-950">
+                      <div className="flex flex-col">
+                        <span className="text-indigo-300 text-[10px]">FILA: Sede ESFM</span>
+                        <span className="text-amber-300 text-[10px]">COLUMNA: Radica en</span>
+                      </div>
+                    </th>
                     {Object.keys(porDeptoEst).map((d) => (
-                      <th key={d} className="py-2.5 px-2 text-center border-r border-slate-700 w-16">
-                        {d.slice(0, 4)}
+                      <th key={d} className="py-3.5 px-2 text-center border-r border-b-2 border-slate-700 min-w-[76px]">
+                        <span className="block text-xs font-black text-white">{d}</span>
+                        <span className="text-[9px] text-slate-400 font-normal">Destino</span>
                       </th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100 font-mono text-[11px]">
+                <tbody className="divide-y-2 divide-slate-300 font-mono">
                   {Object.keys(porDeptoEst).map((orig) => (
-                    <tr key={orig} className="hover:bg-slate-50">
-                      <td className="py-2 px-3 font-sans font-bold text-slate-800 border-r border-slate-200 bg-slate-50/50">
-                        {orig}
+                    <tr key={orig} className="hover:bg-slate-50/90 transition-colors">
+                      {/* Depto Origen */}
+                      <td className="py-3 px-4 font-sans font-black text-slate-900 border-r-2 border-slate-400 bg-slate-100 text-xs">
+                        <div className="flex items-center justify-between">
+                          <span>{orig}</span>
+                          <span className="text-[9px] font-mono text-slate-400 font-normal uppercase">ESFM</span>
+                        </div>
                       </td>
+                      {/* Celdas de Transición */}
                       {Object.keys(porDeptoEst).map((dest) => {
                         const val = matrizTransicion[orig]?.[dest] ?? 0;
                         const esDiagonal = orig === dest;
+
+                        let estiloCelda = 'text-slate-400 bg-white hover:bg-slate-50';
+                        if (esDiagonal) {
+                          estiloCelda = 'bg-emerald-100 text-emerald-950 font-black ring-1 ring-inset ring-emerald-300';
+                        } else if (val >= 10) {
+                          estiloCelda = 'bg-amber-100 text-amber-950 font-black ring-1 ring-inset ring-amber-300';
+                        } else if (val >= 3) {
+                          estiloCelda = 'bg-blue-50 text-blue-900 font-bold';
+                        }
+
                         return (
                           <td
                             key={dest}
-                            className={`py-2 px-1 text-center border-r border-slate-100 ${
-                              esDiagonal
-                                ? 'bg-emerald-50 text-emerald-900 font-black'
-                                : val >= 10
-                                ? 'bg-amber-50 text-amber-900 font-bold'
-                                : 'text-slate-500'
-                            }`}
+                            className={`py-3 px-1.5 text-center border-r border-slate-300 text-xs transition-colors ${estiloCelda}`}
+                            title={`De ESFM ${orig} a trabajar en ${dest}: ${val}%`}
                           >
-                            {val > 0 ? `${val}%` : '-'}
+                            <span className="tabular-nums block text-xs">
+                              {val > 0 ? `${val.toFixed(1)}%` : '0%'}
+                            </span>
+                            {esDiagonal && (
+                              <span className="block text-[8px] font-sans font-black text-emerald-800 uppercase tracking-tighter">
+                                Retención
+                              </span>
+                            )}
+                            {!esDiagonal && val >= 10 && (
+                              <span className="block text-[8px] font-sans font-black text-amber-800 uppercase tracking-tighter">
+                                Retorno
+                              </span>
+                            )}
                           </td>
                         );
                       })}
@@ -379,6 +409,27 @@ export default function MigracionDocenteView() {
                   ))}
                 </tbody>
               </table>
+            </div>
+
+            {/* Leyenda Explicativa de la Matriz */}
+            <div className="flex flex-wrap items-center justify-between gap-3 pt-2 text-xs text-slate-600 bg-slate-50 p-3 rounded-2xl border border-slate-200">
+              <div className="flex flex-wrap items-center gap-4">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-4 h-4 rounded bg-emerald-200 border border-emerald-400 inline-block" />
+                  <strong>Retención en Departamento Sede</strong> (Diagonal Principal: se quedan trabajando donde estudiaron)
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <span className="w-4 h-4 rounded bg-amber-200 border border-amber-400 inline-block" />
+                  <strong>Corredor de Retorno Fuerte</strong> (≥ 10% retorna a su departamento de origen)
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <span className="w-4 h-4 rounded bg-blue-100 border border-blue-300 inline-block" />
+                  <strong>Movilidad Moderada</strong> (3% a 9.9%)
+                </span>
+              </div>
+              <span className="text-[11px] font-bold text-slate-500">
+                Total egresados analizados: 35.474 (2014–2025)
+              </span>
             </div>
           </div>
         </div>
