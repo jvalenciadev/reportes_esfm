@@ -1083,6 +1083,37 @@ export function BalancePredictivoView() {
             ))}
           </div>
 
+          {/* Barra Rápida de Selección de Territorio (Consolidado Nacional o por Departamento) */}
+          <div className="flex flex-wrap items-center gap-1.5 pt-3 pb-1 border-t border-slate-100">
+            <div className="flex items-center gap-1 mr-1 text-[11px] font-black text-slate-500 uppercase tracking-wider shrink-0">
+              <MapPin className="w-3.5 h-3.5 text-emerald-700" />
+              <span>Territorio:</span>
+            </div>
+            <button
+              onClick={() => setFiltroDepto('TODOS')}
+              className={`px-3 py-1.5 rounded-xl text-xs font-black transition-all ${
+                filtroDepto === 'TODOS'
+                ? 'bg-emerald-800 text-white shadow-xs ring-2 ring-emerald-600/30'
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200 font-bold'
+              }`}
+            >
+              Consolidado Nacional (9 Deptos)
+            </button>
+            {departamentosList.map((dep) => (
+              <button
+                key={dep}
+                onClick={() => setFiltroDepto(dep)}
+                className={`px-2.5 py-1.5 rounded-xl text-xs transition-all ${
+                  filtroDepto === dep
+                  ? 'bg-emerald-700 text-white font-black shadow-xs ring-2 ring-emerald-500/30'
+                  : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 font-semibold'
+                }`}
+              >
+                {dep}
+              </button>
+            ))}
+          </div>
+
           {/* Buscador, Filtro por Nivel y Switches */}
           <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
             <div className="flex flex-wrap items-center gap-3">
