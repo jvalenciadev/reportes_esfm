@@ -28,7 +28,8 @@ import {
   BookOpen,
   Info,
   ArrowLeftRight,
-  Wrench
+  Wrench,
+  Calculator
 } from 'lucide-react';
 import { getNivelEspecialidad, NivelCodigo, NIVELES_CONFIG } from '@/lib/constants/especialidadNiveles';
 
@@ -110,11 +111,12 @@ export function BalancePredictivoView() {
   const [pctAbsorcionBth, setPctAbsorcionBth] = useState<number>(70);         // % de absorción de las 88,063 horas BTH (Default 70%)
   const [tipoAsignacionEgresados, setTipoAsignacionEgresados] = useState<'bolsa' | 'local'>('bolsa'); // Bolsa Nacional vs Sede Local
   const [aplicarArima, setAplicarArima] = useState<boolean>(true);            // Aplicar ajuste de matrícula ARIMA
-  const [aplicarMigracion, setAplicarMigracion] = useState<boolean>(true);    // Aplicar saldo migratorio departamental
+  const [pctMigracion, setPctMigracion] = useState<number>(100);              // % Saldo migratorio (0 a 100%, de 1 en 1)
 
   // Control de interfaz: Panel de variables y Glosario
   const [mostrarVariables, setMostrarVariables] = useState<boolean>(true);
   const [mostrarGuia, setMostrarGuia] = useState<boolean>(false);
+  const [mostrarEjercicio, setMostrarEjercicio] = useState<boolean>(true);
 
   // Cargar datos
   useEffect(() => {
@@ -183,7 +185,7 @@ export function BalancePredictivoView() {
       .map((esp) => {
         const m = filtroDepto === 'TODOS' ? esp.nacional : (esp.por_departamento[filtroDepto] || esp.nacional);
         const esBth = BTH_SPECIALTY_IDS.has(esp.especialidad_id);
-        
+
         // 1. Absorción equitativa (1/8) de las 88,063 horas BTH a las 8 carreras técnicas
         const itemsBthAbsorbidos = esBth ? Math.round((m.items_bth_bolsa || 0) * (pctAbsorcionBth / 100)) : 0;
         const deficitAjustado = m.deficit_materia + itemsBthAbsorbidos;
@@ -200,12 +202,12 @@ export function BalancePredictivoView() {
         const baseEgresados = (tipoAsignacionEgresados === 'local' && filtroDepto !== 'TODOS')
           ? (m.egresados_local ?? 0)
           : (m.egresados_bolsa_nacional ?? m.egresados_2027_2031);
-        
+
         const egresadosAjustados = Math.round((baseEgresados / 0.82) * (factorTit / 100));
 
         // 5. Parámetros exógenos: Demografía ARIMA y Migración
         const tasaArima = aplicarArima ? m.crecimiento_arima_pct : 0.0;
-        const saldoMig = aplicarMigracion ? m.saldo_migratorio : 0;
+        const saldoMig = Math.round((m.saldo_migratorio || 0) * (pctMigracion / 100));
 
         // 6. Necesidad Bruta:
         // (Déficit SIE ajustado con BTH + Jubilados + Prejubilados 26-31 + Docentes No Pertinentes) × ARIMA + Saldo Migratorio
@@ -243,7 +245,7 @@ export function BalancePredictivoView() {
     factorTit,
     tipoAsignacionEgresados,
     aplicarArima,
-    aplicarMigracion
+    pctMigracion
   ]);
 
   // Agrupamiento por Nivel Educativo
@@ -349,15 +351,26 @@ export function BalancePredictivoView() {
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2.5">
+            {/* Botón para abrir Ejercicio Demanda Bruta */}
+            <button
+              onClick={() => setMostrarEjercicio(!mostrarEjercicio)}
+              className={`flex items-center gap-2 px-3.5 py-2 rounded-2xl text-xs font-bold transition-all border ${mostrarEjercicio
+                  ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
+                  : 'bg-white text-slate-800 border-slate-200 hover:bg-slate-100'
+                }`}
+            >
+              <Calculator className="w-4 h-4 text-amber-500" />
+              <span>{mostrarEjercicio ? 'Ocultar Ejercicio' : 'Ejercicio Demanda Bruta'}</span>
+            </button>
+
             {/* Botón para abrir Glosario / Guía */}
             <button
               onClick={() => setMostrarGuia(!mostrarGuia)}
-              className={`flex items-center gap-2 px-3.5 py-2 rounded-2xl text-xs font-bold transition-all border ${
-                mostrarGuia
+              className={`flex items-center gap-2 px-3.5 py-2 rounded-2xl text-xs font-bold transition-all border ${mostrarGuia
                   ? 'bg-indigo-700 text-white border-indigo-700 shadow-sm'
                   : 'bg-white text-indigo-700 border-indigo-200 hover:bg-indigo-50'
-              }`}
+                }`}
             >
               <BookOpen className="w-4 h-4" />
               <span>{mostrarGuia ? 'Ocultar Guía' : '¿Cómo se lee esta tabla? (Guía)'}</span>
@@ -521,6 +534,199 @@ export function BalancePredictivoView() {
           </div>
         )}
 
+        {/* ── Panel Desplegable: Ejercicio Práctico de Cálculo Real (Demanda Bruta) ──── */}
+        {mostrarEjercicio && (
+          <div className="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-6 border border-indigo-500/30 shadow-xl space-y-4 animate-in slide-in-from-top-2 duration-200">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-indigo-800/60">
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 bg-indigo-600/30 rounded-2xl border border-indigo-400/30 text-amber-400">
+                  <Calculator className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h3 className="text-sm font-black text-white tracking-wide uppercase">
+                      Ejercicio Práctico: Desglose Matemático de la Demanda Bruta
+                    </h3>
+                    <span className="bg-amber-400/20 text-amber-300 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-amber-400/30">
+                      Caso Real: Educación Inicial en Familia Comunitaria (ID 5)
+                    </span>
+                  </div>
+                  <p className="text-xs text-indigo-200 mt-0.5">
+                    Comprobación paso a paso de cómo el modelo transforma los 428 ítems de Déficit SIE en <strong>335 de Demanda Bruta</strong> y <strong>-2.091 de Brecha Neta</strong>.
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setMostrarEjercicio(false)}
+                className="text-xs text-indigo-300 hover:text-white bg-indigo-900/50 hover:bg-indigo-800 px-3 py-1.5 rounded-xl border border-indigo-700/50 transition-colors cursor-pointer"
+              >
+                Ocultar Ejercicio
+              </button>
+            </div>
+
+            {/* Fórmulas Generales */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+              <div className="bg-slate-950/70 border border-indigo-800/60 rounded-2xl p-3.5 space-y-1">
+                <span className="text-[10px] uppercase font-black tracking-wider text-amber-300 block">
+                  1. Fórmula Oficial de Demanda Bruta (Total Necesidad al 2031)
+                </span>
+                <code className="text-[11px] font-mono text-emerald-300 font-bold block overflow-x-auto whitespace-nowrap">
+                  Demanda Bruta = round( (Déficit_SIE + Jubilados + Prejubilados + Sustitución) × (1 + ARIMA%) + Saldo_Migratorio )
+                </code>
+              </div>
+              <div className="bg-slate-950/70 border border-indigo-800/60 rounded-2xl p-3.5 space-y-1">
+                <span className="text-[10px] uppercase font-black tracking-wider text-sky-300 block">
+                  2. Fórmula de Brecha Neta de Admisión
+                </span>
+                <code className="text-[11px] font-mono text-sky-200 font-bold block overflow-x-auto whitespace-nowrap">
+                  Brecha Neta = Demanda Bruta − Egresados Titulados ESFM
+                </code>
+              </div>
+            </div>
+
+            {/* 4 Pasos Numéricos del Ejercicio */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+              {/* Paso 1 */}
+              <div className="bg-slate-800/70 border border-indigo-800/50 rounded-2xl p-4 flex flex-col justify-between space-y-3">
+                <div>
+                  <div className="flex items-center justify-between text-indigo-300 font-bold text-[11px] mb-2">
+                    <span className="text-amber-400 font-black">PASO 1</span>
+                    <span className="text-[9px] bg-indigo-950 text-indigo-300 px-2 py-0.5 rounded border border-indigo-700/50 uppercase font-black">
+                      Necesidad Base
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-slate-300 mb-2">Suma de vacantes estructurales requeridas:</p>
+                  <ul className="space-y-1.5 text-[11px] text-slate-200 font-mono">
+                    <li className="flex justify-between items-center bg-slate-900/60 px-2 py-1 rounded">
+                      <span className="text-slate-400">Déficit SIE (Aula):</span>
+                      <span className="font-black text-white">+428</span>
+                    </li>
+                    <li className="flex justify-between items-center bg-slate-900/60 px-2 py-1 rounded">
+                      <span className="text-slate-400">Jubilados (20% de 1.048):</span>
+                      <span className="font-black text-rose-300">+210</span>
+                    </li>
+                    <li className="flex justify-between items-center bg-slate-900/60 px-2 py-1 rounded">
+                      <span className="text-slate-400">Prejubilados (10% de 392):</span>
+                      <span className="font-black text-rose-300">+39</span>
+                    </li>
+                    <li className="flex justify-between items-center bg-slate-900/60 px-2 py-1 rounded">
+                      <span className="text-slate-400">A Sustituir (30% de 157):</span>
+                      <span className="font-black text-amber-300">+47</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="pt-2 border-t border-slate-700 flex justify-between items-center font-bold">
+                  <span className="text-indigo-200 text-[11px]">Subtotal Necesidad:</span>
+                  <span className="text-lg text-white font-mono font-black">724</span>
+                </div>
+              </div>
+
+              {/* Paso 2 */}
+              <div className="bg-slate-800/70 border border-indigo-800/50 rounded-2xl p-4 flex flex-col justify-between space-y-3">
+                <div>
+                  <div className="flex items-center justify-between text-indigo-300 font-bold text-[11px] mb-2">
+                    <span className="text-amber-400 font-black">PASO 2</span>
+                    <span className="text-[9px] bg-indigo-950 text-indigo-300 px-2 py-0.5 rounded border border-indigo-700/50 uppercase font-black">
+                      Demografía ARIMA
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-slate-300 mb-2">Ajuste por proyección de matrícula escolar al 2031:</p>
+                  <div className="bg-slate-900/80 p-2.5 rounded-xl border border-slate-700 space-y-1.5 font-mono text-[11px]">
+                    <div className="flex justify-between text-slate-400">
+                      <span>Tasa ARIMA Nacional:</span>
+                      <span className="text-rose-400 font-black">-6.8%</span>
+                    </div>
+                    <div className="flex justify-between text-slate-400">
+                      <span>Factor Aplicado:</span>
+                      <span className="text-slate-200">1 - 0.068 = 0.932</span>
+                    </div>
+                    <div className="pt-1 border-t border-slate-800 flex justify-between text-emerald-300 font-bold">
+                      <span>724 × 0.932 =</span>
+                      <span className="font-black">674.77</span>
+                    </div>
+                  </div>
+                  <p className="text-[10px] text-slate-400 italic mt-2">
+                    La contracción de natalidad reduce la necesidad de aulas en 49.2 plazas.
+                  </p>
+                </div>
+                <div className="pt-2 border-t border-slate-700 flex justify-between items-center font-bold">
+                  <span className="text-indigo-200 text-[11px]">Base ajustada ARIMA:</span>
+                  <span className="text-lg text-emerald-300 font-mono font-black">674.77</span>
+                </div>
+              </div>
+
+              {/* Paso 3 */}
+              <div className="bg-slate-800/70 border border-indigo-800/50 rounded-2xl p-4 flex flex-col justify-between space-y-3">
+                <div>
+                  <div className="flex items-center justify-between text-indigo-300 font-bold text-[11px] mb-2">
+                    <span className="text-amber-400 font-black">PASO 3</span>
+                    <span className="text-[9px] bg-indigo-950 text-indigo-300 px-2 py-0.5 rounded border border-indigo-700/50 uppercase font-black">
+                      Saldo Migratorio
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-slate-300 mb-2">Movilidad docente interdepartamental:</p>
+                  <ul className="space-y-1.5 text-[11px] text-slate-200 font-mono">
+                    <li className="flex justify-between items-center bg-slate-900/60 px-2 py-1 rounded">
+                      <span className="text-slate-400">Docentes Entrantes:</span>
+                      <span className="font-black text-emerald-400">+1.102</span>
+                    </li>
+                    <li className="flex justify-between items-center bg-slate-900/60 px-2 py-1 rounded">
+                      <span className="text-slate-400">Docentes Salientes:</span>
+                      <span className="font-black text-rose-400">-762</span>
+                    </li>
+                    <li className="flex justify-between items-center bg-slate-900/60 px-2 py-1 rounded">
+                      <span className="text-slate-400">Saldo (Sal. − Ent.):</span>
+                      <span className="font-black text-sky-300">-340 lle.</span>
+                    </li>
+                  </ul>
+                  <p className="text-[10px] text-slate-400 italic mt-1.5">
+                    Al llegar 340 docentes más de los que salieron, cubren vacantes y reducen la necesidad neta.
+                  </p>
+                </div>
+                <div className="pt-2 border-t border-slate-700 flex justify-between items-center font-bold">
+                  <span className="text-indigo-200 text-[11px]">Demanda Bruta (round):</span>
+                  <span className="text-xl text-amber-300 font-mono font-black">335</span>
+                </div>
+              </div>
+
+              {/* Paso 4 */}
+              <div className="bg-indigo-950/80 border border-indigo-600/50 rounded-2xl p-4 flex flex-col justify-between space-y-3">
+                <div>
+                  <div className="flex items-center justify-between text-indigo-300 font-bold text-[11px] mb-2">
+                    <span className="text-amber-400 font-black">PASO 4</span>
+                    <span className="text-[9px] bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded border border-emerald-700/50 uppercase font-black">
+                      Balance Final
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-indigo-200 mb-2">Comparación contra egresados ESFM (2027–2031):</p>
+                  <div className="space-y-1.5 text-[11px] font-mono">
+                    <div className="flex justify-between items-center bg-slate-900/60 px-2 py-1 rounded">
+                      <span className="text-indigo-300">Demanda Bruta:</span>
+                      <span className="font-black text-white">335</span>
+                    </div>
+                    <div className="flex justify-between items-center bg-slate-900/60 px-2 py-1 rounded">
+                      <span className="text-indigo-300">Egresados Titulados:</span>
+                      <span className="font-black text-blue-300">2.426</span>
+                    </div>
+                    <div className="pt-1.5 border-t border-indigo-700/60 flex justify-between items-center text-emerald-300 font-bold">
+                      <span>Brecha Neta (335 − 2.426):</span>
+                      <span className="text-base font-black">-2.091</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="pt-2 border-t border-indigo-700/60 bg-emerald-950/70 p-2.5 rounded-xl text-center border border-emerald-500/30">
+                  <span className="text-xs font-black text-emerald-300 uppercase tracking-wide block">
+                    Oferta Cubierta
+                  </span>
+                  <span className="text-[10px] text-emerald-400 font-medium">
+                    Superávit de 2.091 maestros. No procede apertura de plazas.
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* ── PANEL DE SIMULACIÓN MULTIVARIABLE DINÁMICA (AJUSTABLE DE 1 EN 1) ─── */}
         <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-4">
           <div className="flex items-center justify-between pb-3 border-b border-slate-200">
@@ -539,7 +745,7 @@ export function BalancePredictivoView() {
           </div>
 
           {mostrarVariables && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3.5 text-xs pt-1">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3.5 text-xs pt-1">
               {/* Variable 1: Absorción Déficit BTH (88,063 hrs) */}
               <div className="space-y-1.5 bg-white p-3 rounded-xl border border-amber-200 shadow-2xs">
                 <div className="flex justify-between items-center">
@@ -576,9 +782,8 @@ export function BalancePredictivoView() {
                       <button
                         key={val}
                         onClick={() => setPctAbsorcionBth(val)}
-                        className={`px-1.5 py-0.5 rounded font-black ${
-                          pctAbsorcionBth === val ? 'bg-amber-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                        }`}
+                        className={`px-1.5 py-0.5 rounded font-black ${pctAbsorcionBth === val ? 'bg-amber-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                          }`}
                       >
                         {val}%
                       </button>
@@ -679,16 +884,62 @@ export function BalancePredictivoView() {
                   <span className="text-slate-500">Incluir Media (A):</span>
                   <button
                     onClick={() => setReemplazarMedia(!reemplazarMedia)}
-                    className={`font-black px-1.5 py-0.5 rounded border transition-colors ${
-                      reemplazarMedia ? 'bg-amber-600 text-white border-amber-600' : 'bg-slate-100 text-slate-700 border-slate-300'
-                    }`}
+                    className={`font-black px-1.5 py-0.5 rounded border transition-colors ${reemplazarMedia ? 'bg-amber-600 text-white border-amber-600' : 'bg-slate-100 text-slate-700 border-slate-300'
+                      }`}
                   >
                     {reemplazarMedia ? 'SÍ' : 'NO'}
                   </button>
                 </div>
               </div>
 
-              {/* Variable 5: Titulación ESFM y Asignación de Egresados */}
+              {/* Variable 5: Saldo Migratorio Docente (0 a 100%) */}
+              <div className="space-y-1.5 bg-white p-3 rounded-xl border border-sky-200 shadow-2xs">
+                <div className="flex justify-between items-center">
+                  <span className="font-bold text-sky-900 flex items-center gap-1">
+                    <ArrowLeftRight className="w-3.5 h-3.5 text-sky-600" />
+                    Saldo Migratorio:
+                  </span>
+                  <div className="flex items-center gap-0.5">
+                    <input
+                      type="number"
+                      min={0}
+                      max={100}
+                      step={1}
+                      value={pctMigracion}
+                      onChange={(e) => setPctMigracion(Math.min(100, Math.max(0, Number(e.target.value))))}
+                      className="w-12 text-right font-black text-sky-800 font-mono bg-sky-50 px-1 py-0.5 rounded border border-sky-300 focus:outline-none focus:ring-1 focus:ring-sky-500 text-xs"
+                    />
+                    <span className="font-black text-sky-800">%</span>
+                  </div>
+                </div>
+                <input
+                  type="range"
+                  min={0}
+                  max={100}
+                  step={1}
+                  value={pctMigracion}
+                  onChange={(e) => setPctMigracion(Number(e.target.value))}
+                  className="w-full accent-sky-600 cursor-pointer"
+                />
+                <div className="flex items-center justify-between text-[9px]">
+                  <span className="text-slate-400">Aplicar {pctMigracion}%</span>
+                  <div className="flex gap-1">
+                    {[0, 50, 75, 100].map((val) => (
+                      <button
+                        key={val}
+                        onClick={() => setPctMigracion(val)}
+                        className={`px-1.5 py-0.5 rounded font-black ${
+                          pctMigracion === val ? 'bg-sky-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                        }`}
+                      >
+                        {val}%
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Variable 6: Titulación ESFM y Asignación de Egresados */}
               <div className="space-y-1.5 bg-white p-3 rounded-xl border border-slate-200 shadow-2xs">
                 <div className="flex justify-between items-center">
                   <span className="font-bold text-slate-700">Titulación ESFM:</span>
@@ -719,18 +970,16 @@ export function BalancePredictivoView() {
                   <div className="flex rounded overflow-hidden border border-slate-200">
                     <button
                       onClick={() => setTipoAsignacionEgresados('bolsa')}
-                      className={`px-1 py-0.5 text-[8px] font-black ${
-                        tipoAsignacionEgresados === 'bolsa' ? 'bg-blue-600 text-white' : 'bg-slate-50 text-slate-600'
-                      }`}
+                      className={`px-1 py-0.5 text-[8px] font-black ${tipoAsignacionEgresados === 'bolsa' ? 'bg-blue-600 text-white' : 'bg-slate-50 text-slate-600'
+                        }`}
                       title="Bolsa Nacional Proporcional"
                     >
                       Bolsa Nac.
                     </button>
                     <button
                       onClick={() => setTipoAsignacionEgresados('local')}
-                      className={`px-1 py-0.5 text-[8px] font-black ${
-                        tipoAsignacionEgresados === 'local' ? 'bg-blue-600 text-white' : 'bg-slate-50 text-slate-600'
-                      }`}
+                      className={`px-1 py-0.5 text-[8px] font-black ${tipoAsignacionEgresados === 'local' ? 'bg-blue-600 text-white' : 'bg-slate-50 text-slate-600'
+                        }`}
                       title="Sede Local"
                     >
                       Local
@@ -770,26 +1019,45 @@ export function BalancePredictivoView() {
                 <option value="ESPECIAL">Educación Especial</option>
               </select>
 
-              {/* Switches Exógenos */}
-              <div className="flex items-center gap-3 bg-white px-2.5 py-1.5 rounded-xl border border-slate-200 text-[10px]">
-                <label className="flex items-center gap-1.5 cursor-pointer font-bold text-slate-600">
+              {/* Switches y Controles Exógenos */}
+              <div className="flex flex-wrap items-center gap-2.5 bg-white px-3 py-1.5 rounded-xl border border-slate-200 text-[10px]">
+                <label className="flex items-center gap-1.5 cursor-pointer font-bold text-slate-600 hover:text-slate-900">
                   <input
                     type="checkbox"
                     checked={aplicarArima}
                     onChange={(e) => setAplicarArima(e.target.checked)}
-                    className="accent-indigo-600 rounded"
+                    className="accent-indigo-600 rounded cursor-pointer"
                   />
                   Ajuste ARIMA
                 </label>
-                <label className="flex items-center gap-1.5 cursor-pointer font-bold text-slate-600">
+                <div className="h-3.5 w-px bg-slate-200" />
+                <div className="flex items-center gap-1.5">
+                  <span className="font-bold text-sky-800 flex items-center gap-1">
+                    <ArrowLeftRight className="w-3 h-3 text-sky-600" />
+                    Saldo Migratorio:
+                  </span>
                   <input
-                    type="checkbox"
-                    checked={aplicarMigracion}
-                    onChange={(e) => setAplicarMigracion(e.target.checked)}
-                    className="accent-indigo-600 rounded"
+                    type="range"
+                    min={0}
+                    max={100}
+                    step={1}
+                    value={pctMigracion}
+                    onChange={(e) => setPctMigracion(Number(e.target.value))}
+                    className="w-16 h-1 accent-sky-600 cursor-pointer"
                   />
-                  Saldo Migratorio
-                </label>
+                  <div className="flex items-center">
+                    <input
+                      type="number"
+                      min={0}
+                      max={100}
+                      step={1}
+                      value={pctMigracion}
+                      onChange={(e) => setPctMigracion(Math.min(100, Math.max(0, Number(e.target.value))))}
+                      className="w-10 text-right font-black text-sky-800 font-mono bg-sky-50 px-1 py-0.5 rounded border border-sky-300 focus:outline-none focus:ring-1 focus:ring-sky-500 text-[10px]"
+                    />
+                    <span className="font-black text-sky-800 ml-0.5">%</span>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -834,14 +1102,21 @@ export function BalancePredictivoView() {
                 </th>
                 <th className="py-3 px-2 text-center w-28 border-r border-slate-700 text-sky-300">
                   <span>Migración Docente</span>
-                  <span className="block text-[8px] font-medium text-sky-400 normal-case">Entr. / Sal. (Saldo)</span>
+                  <span className="block text-[8px] font-medium text-sky-400 normal-case">Entr. / Sal. ({pctMigracion}%)</span>
                 </th>
                 <th className="py-3 px-1 text-center w-16 border-r border-slate-700 text-indigo-300">
                   <span>ARIMA</span>
                   <span className="block text-[8px] font-medium text-indigo-400 normal-case">2031</span>
                 </th>
-                <th className="py-3 px-2 text-right w-22 border-r border-slate-700 text-indigo-200 bg-indigo-950/40">
-                  <span>Demanda Bruta</span>
+                <th 
+                  onClick={() => setMostrarEjercicio(true)}
+                  title="Click para ver la fórmula y el ejercicio de cálculo paso a paso"
+                  className="py-3 px-2 text-right w-24 border-r border-slate-700 text-indigo-200 bg-indigo-950/60 cursor-pointer hover:bg-indigo-900/80 transition-colors group"
+                >
+                  <div className="flex items-center justify-end gap-1">
+                    <span>Demanda Bruta</span>
+                    <Calculator className="w-2.5 h-2.5 text-amber-400 opacity-80 group-hover:opacity-100 group-hover:scale-125 transition-all" />
+                  </div>
                   <span className="block text-[8px] font-medium text-indigo-400 normal-case">Total Necesidad</span>
                 </th>
                 <th className="py-3 px-2 text-right w-24 border-r border-slate-700 text-blue-300">
@@ -953,9 +1228,8 @@ export function BalancePredictivoView() {
                                 <span className="text-slate-300 mx-0.5">/</span>
                                 <span className="text-rose-700 font-bold">-{fmt(m.migracion_salientes)}</span>
                               </span>
-                              <span className={`text-[9px] font-black mt-0.5 ${
-                                m.saldo_mig_aplicado > 0 ? 'text-rose-700' : (m.saldo_mig_aplicado < 0 ? 'text-emerald-700' : 'text-slate-400')
-                              }`}>
+                              <span className={`text-[9px] font-black mt-0.5 ${m.saldo_mig_aplicado > 0 ? 'text-rose-700' : (m.saldo_mig_aplicado < 0 ? 'text-emerald-700' : 'text-slate-400')
+                                }`}>
                                 {m.saldo_mig_aplicado > 0 ? `+${m.saldo_mig_aplicado} rep.` : (m.saldo_mig_aplicado < 0 ? `${m.saldo_mig_aplicado} lle.` : '0 saldo')}
                               </span>
                             </div>
@@ -990,9 +1264,8 @@ export function BalancePredictivoView() {
                           </td>
 
                           {/* Brecha Neta */}
-                          <td className={`py-2 px-3 text-center font-black text-xs tabular-nums ${
-                            esSuperavit ? 'bg-emerald-50 text-emerald-900 border-l border-emerald-200' : 'bg-rose-50 text-rose-900 border-l border-rose-200'
-                          }`}>
+                          <td className={`py-2 px-3 text-center font-black text-xs tabular-nums ${esSuperavit ? 'bg-emerald-50 text-emerald-900 border-l border-emerald-200' : 'bg-rose-50 text-rose-900 border-l border-rose-200'
+                            }`}>
                             <div className="flex items-center justify-center gap-1.5">
                               {esSuperavit ? (
                                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
@@ -1055,9 +1328,8 @@ export function BalancePredictivoView() {
                 <td className="py-3 px-2 text-right border-r border-slate-800 text-blue-300 font-black tabular-nums">
                   {fmt(totales.totEgresados)}
                 </td>
-                <td className={`py-3 px-3 text-center font-black text-xs border-l border-slate-800 tabular-nums ${
-                  totales.totBrecha > 0 ? 'bg-rose-950 text-rose-300' : 'bg-emerald-950 text-emerald-300'
-                }`}>
+                <td className={`py-3 px-3 text-center font-black text-xs border-l border-slate-800 tabular-nums ${totales.totBrecha > 0 ? 'bg-rose-950 text-rose-300' : 'bg-emerald-950 text-emerald-300'
+                  }`}>
                   <span className="block text-sm">
                     {totales.totBrecha > 0 ? `+${fmt(totales.totBrecha)}` : fmt(totales.totBrecha)}
                   </span>
