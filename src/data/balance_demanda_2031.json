@@ -80,6 +80,22 @@
     "migraciones_inter_depto": 1178,
     "permanecen_depto": 946
   },
+  "metadata_bth": {
+    "total_horas_bth_sie": 88063,
+    "especialidades_bth_count": 8,
+    "horas_por_especialidad_nacional": 11008,
+    "distribucion_departamental": {
+      "SANTA CRUZ": 23854,
+      "LA PAZ": 23258,
+      "COCHABAMBA": 13470,
+      "POTOSI": 11913,
+      "CHUQUISACA": 4965,
+      "BENI": 4810,
+      "ORURO": 3729,
+      "PANDO": 1092,
+      "TARIJA": 972
+    }
+  },
   "especialidades": [
     {
       "especialidad_id": 5,
@@ -90,6 +106,8 @@
       "orden_jerarquia": 1,
       "nacional": {
         "deficit_materia": 428,
+        "horas_bth_bolsa": 0,
+        "items_bth_bolsa": 0,
         "jubilacion": 1048,
         "prejubilacion": 392,
         "egresados_2027_2031": 2426,
@@ -112,6 +130,8 @@
       "por_departamento": {
         "BENI": {
           "deficit_materia": 24,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 43,
           "prejubilacion": 16,
           "egresados_2027_2031": 138,
@@ -133,6 +153,8 @@
         },
         "CHUQUISACA": {
           "deficit_materia": 26,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 57,
           "prejubilacion": 7,
           "egresados_2027_2031": 146,
@@ -154,6 +176,8 @@
         },
         "COCHABAMBA": {
           "deficit_materia": 79,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 193,
           "prejubilacion": 95,
           "egresados_2027_2031": 450,
@@ -175,6 +199,8 @@
         },
         "LA PAZ": {
           "deficit_materia": 100,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 237,
           "prejubilacion": 101,
           "egresados_2027_2031": 567,
@@ -196,6 +222,8 @@
         },
         "ORURO": {
           "deficit_materia": 29,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 107,
           "prejubilacion": 44,
           "egresados_2027_2031": 165,
@@ -217,6 +245,8 @@
         },
         "PANDO": {
           "deficit_materia": 6,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 2,
           "prejubilacion": 0,
           "egresados_2027_2031": 35,
@@ -238,6 +268,8 @@
         },
         "POTOSI": {
           "deficit_materia": 34,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 104,
           "prejubilacion": 33,
           "egresados_2027_2031": 195,
@@ -259,6 +291,8 @@
         },
         "SANTA CRUZ": {
           "deficit_materia": 105,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 247,
           "prejubilacion": 61,
           "egresados_2027_2031": 598,
@@ -280,6 +314,8 @@
         },
         "TARIJA": {
           "deficit_materia": 23,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 58,
           "prejubilacion": 35,
           "egresados_2027_2031": 132,
@@ -310,6 +346,8 @@
       "orden_jerarquia": 2,
       "nacional": {
         "deficit_materia": 1039,
+        "horas_bth_bolsa": 0,
+        "items_bth_bolsa": 0,
         "jubilacion": 11757,
         "prejubilacion": 3804,
         "egresados_2027_2031": 3934,
@@ -332,6 +370,8 @@
       "por_departamento": {
         "BENI": {
           "deficit_materia": 62,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 915,
           "prejubilacion": 380,
           "egresados_2027_2031": 235,
@@ -353,6 +393,8 @@
         },
         "CHUQUISACA": {
           "deficit_materia": 66,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 625,
           "prejubilacion": 64,
           "egresados_2027_2031": 251,
@@ -374,6 +416,8 @@
         },
         "COCHABAMBA": {
           "deficit_materia": 174,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 1781,
           "prejubilacion": 826,
           "egresados_2027_2031": 659,
@@ -395,6 +439,8 @@
         },
         "LA PAZ": {
           "deficit_materia": 257,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 2777,
           "prejubilacion": 870,
           "egresados_2027_2031": 973,
@@ -416,6 +462,8 @@
         },
         "ORURO": {
           "deficit_materia": 51,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 704,
           "prejubilacion": 265,
           "egresados_2027_2031": 191,
@@ -437,6 +485,8 @@
         },
         "PANDO": {
           "deficit_materia": 18,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 151,
           "prejubilacion": 49,
           "egresados_2027_2031": 67,
@@ -458,6 +508,8 @@
         },
         "POTOSI": {
           "deficit_materia": 105,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 1219,
           "prejubilacion": 357,
           "egresados_2027_2031": 399,
@@ -479,6 +531,8 @@
         },
         "SANTA CRUZ": {
           "deficit_materia": 250,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 2980,
           "prejubilacion": 638,
           "egresados_2027_2031": 947,
@@ -500,6 +554,8 @@
         },
         "TARIJA": {
           "deficit_materia": 56,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 605,
           "prejubilacion": 355,
           "egresados_2027_2031": 212,
@@ -530,6 +586,8 @@
       "orden_jerarquia": 3,
       "nacional": {
         "deficit_materia": 521,
+        "horas_bth_bolsa": 0,
+        "items_bth_bolsa": 0,
         "jubilacion": 847,
         "prejubilacion": 333,
         "egresados_2027_2031": 239,
@@ -552,6 +610,8 @@
       "por_departamento": {
         "BENI": {
           "deficit_materia": 29,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 16,
           "prejubilacion": 10,
           "egresados_2027_2031": 13,
@@ -573,6 +633,8 @@
         },
         "CHUQUISACA": {
           "deficit_materia": 38,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 47,
           "prejubilacion": 3,
           "egresados_2027_2031": 17,
@@ -594,6 +656,8 @@
         },
         "COCHABAMBA": {
           "deficit_materia": 95,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 180,
           "prejubilacion": 95,
           "egresados_2027_2031": 43,
@@ -615,6 +679,8 @@
         },
         "LA PAZ": {
           "deficit_materia": 152,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 275,
           "prejubilacion": 116,
           "egresados_2027_2031": 71,
@@ -636,6 +702,8 @@
         },
         "ORURO": {
           "deficit_materia": 33,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 157,
           "prejubilacion": 62,
           "egresados_2027_2031": 15,
@@ -657,6 +725,8 @@
         },
         "PANDO": {
           "deficit_materia": 11,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 0,
           "prejubilacion": 0,
           "egresados_2027_2031": 5,
@@ -678,6 +748,8 @@
         },
         "POTOSI": {
           "deficit_materia": 43,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 72,
           "prejubilacion": 17,
           "egresados_2027_2031": 20,
@@ -699,6 +771,8 @@
         },
         "SANTA CRUZ": {
           "deficit_materia": 84,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 64,
           "prejubilacion": 17,
           "egresados_2027_2031": 38,
@@ -720,6 +794,8 @@
         },
         "TARIJA": {
           "deficit_materia": 37,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 36,
           "prejubilacion": 13,
           "egresados_2027_2031": 17,
@@ -750,6 +826,8 @@
       "orden_jerarquia": 3,
       "nacional": {
         "deficit_materia": 358,
+        "horas_bth_bolsa": 0,
+        "items_bth_bolsa": 0,
         "jubilacion": 887,
         "prejubilacion": 373,
         "egresados_2027_2031": 640,
@@ -772,6 +850,8 @@
       "por_departamento": {
         "BENI": {
           "deficit_materia": 12,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 20,
           "prejubilacion": 12,
           "egresados_2027_2031": 21,
@@ -793,6 +873,8 @@
         },
         "CHUQUISACA": {
           "deficit_materia": 25,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 42,
           "prejubilacion": 4,
           "egresados_2027_2031": 45,
@@ -814,6 +896,8 @@
         },
         "COCHABAMBA": {
           "deficit_materia": 68,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 163,
           "prejubilacion": 91,
           "egresados_2027_2031": 122,
@@ -835,6 +919,8 @@
         },
         "LA PAZ": {
           "deficit_materia": 87,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 297,
           "prejubilacion": 135,
           "egresados_2027_2031": 154,
@@ -856,6 +942,8 @@
         },
         "ORURO": {
           "deficit_materia": 23,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 68,
           "prejubilacion": 27,
           "egresados_2027_2031": 42,
@@ -877,6 +965,8 @@
         },
         "PANDO": {
           "deficit_materia": 5,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 1,
           "prejubilacion": 1,
           "egresados_2027_2031": 10,
@@ -898,6 +988,8 @@
         },
         "POTOSI": {
           "deficit_materia": 39,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 80,
           "prejubilacion": 44,
           "egresados_2027_2031": 69,
@@ -919,6 +1011,8 @@
         },
         "SANTA CRUZ": {
           "deficit_materia": 79,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 192,
           "prejubilacion": 44,
           "egresados_2027_2031": 142,
@@ -940,6 +1034,8 @@
         },
         "TARIJA": {
           "deficit_materia": 19,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 24,
           "prejubilacion": 15,
           "egresados_2027_2031": 35,
@@ -970,6 +1066,8 @@
       "orden_jerarquia": 3,
       "nacional": {
         "deficit_materia": 215,
+        "horas_bth_bolsa": 0,
+        "items_bth_bolsa": 0,
         "jubilacion": 520,
         "prejubilacion": 207,
         "egresados_2027_2031": 731,
@@ -992,6 +1090,8 @@
       "por_departamento": {
         "BENI": {
           "deficit_materia": 8,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 13,
           "prejubilacion": 6,
           "egresados_2027_2031": 28,
@@ -1013,6 +1113,8 @@
         },
         "CHUQUISACA": {
           "deficit_materia": 11,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 16,
           "prejubilacion": 3,
           "egresados_2027_2031": 39,
@@ -1034,6 +1136,8 @@
         },
         "COCHABAMBA": {
           "deficit_materia": 42,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 100,
           "prejubilacion": 41,
           "egresados_2027_2031": 141,
@@ -1055,6 +1159,8 @@
         },
         "LA PAZ": {
           "deficit_materia": 60,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 171,
           "prejubilacion": 71,
           "egresados_2027_2031": 204,
@@ -1076,6 +1182,8 @@
         },
         "ORURO": {
           "deficit_materia": 13,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 34,
           "prejubilacion": 15,
           "egresados_2027_2031": 45,
@@ -1097,6 +1205,8 @@
         },
         "PANDO": {
           "deficit_materia": 4,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 2,
           "prejubilacion": 0,
           "egresados_2027_2031": 14,
@@ -1118,6 +1228,8 @@
         },
         "POTOSI": {
           "deficit_materia": 23,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 59,
           "prejubilacion": 29,
           "egresados_2027_2031": 79,
@@ -1139,6 +1251,8 @@
         },
         "SANTA CRUZ": {
           "deficit_materia": 41,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 83,
           "prejubilacion": 18,
           "egresados_2027_2031": 138,
@@ -1160,6 +1274,8 @@
         },
         "TARIJA": {
           "deficit_materia": 13,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 42,
           "prejubilacion": 24,
           "egresados_2027_2031": 43,
@@ -1190,6 +1306,8 @@
       "orden_jerarquia": 3,
       "nacional": {
         "deficit_materia": 433,
+        "horas_bth_bolsa": 0,
+        "items_bth_bolsa": 0,
         "jubilacion": 1165,
         "prejubilacion": 409,
         "egresados_2027_2031": 443,
@@ -1212,6 +1330,8 @@
       "por_departamento": {
         "BENI": {
           "deficit_materia": 21,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 34,
           "prejubilacion": 13,
           "egresados_2027_2031": 22,
@@ -1233,6 +1353,8 @@
         },
         "CHUQUISACA": {
           "deficit_materia": 26,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 63,
           "prejubilacion": 9,
           "egresados_2027_2031": 27,
@@ -1254,6 +1376,8 @@
         },
         "COCHABAMBA": {
           "deficit_materia": 88,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 218,
           "prejubilacion": 97,
           "egresados_2027_2031": 91,
@@ -1275,6 +1399,8 @@
         },
         "LA PAZ": {
           "deficit_materia": 101,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 452,
           "prejubilacion": 154,
           "egresados_2027_2031": 101,
@@ -1296,6 +1422,8 @@
         },
         "ORURO": {
           "deficit_materia": 22,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 84,
           "prejubilacion": 31,
           "egresados_2027_2031": 23,
@@ -1317,6 +1445,8 @@
         },
         "PANDO": {
           "deficit_materia": 7,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 4,
           "prejubilacion": 0,
           "egresados_2027_2031": 8,
@@ -1338,6 +1468,8 @@
         },
         "POTOSI": {
           "deficit_materia": 47,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 122,
           "prejubilacion": 45,
           "egresados_2027_2031": 48,
@@ -1359,6 +1491,8 @@
         },
         "SANTA CRUZ": {
           "deficit_materia": 97,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 144,
           "prejubilacion": 30,
           "egresados_2027_2031": 100,
@@ -1380,6 +1514,8 @@
         },
         "TARIJA": {
           "deficit_materia": 23,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 44,
           "prejubilacion": 30,
           "egresados_2027_2031": 23,
@@ -1410,6 +1546,8 @@
       "orden_jerarquia": 3,
       "nacional": {
         "deficit_materia": 399,
+        "horas_bth_bolsa": 0,
+        "items_bth_bolsa": 0,
         "jubilacion": 1192,
         "prejubilacion": 523,
         "egresados_2027_2031": 440,
@@ -1432,6 +1570,8 @@
       "por_departamento": {
         "BENI": {
           "deficit_materia": 16,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 43,
           "prejubilacion": 22,
           "egresados_2027_2031": 18,
@@ -1453,6 +1593,8 @@
         },
         "CHUQUISACA": {
           "deficit_materia": 21,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 57,
           "prejubilacion": 11,
           "egresados_2027_2031": 23,
@@ -1474,6 +1616,8 @@
         },
         "COCHABAMBA": {
           "deficit_materia": 78,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 234,
           "prejubilacion": 140,
           "egresados_2027_2031": 86,
@@ -1495,6 +1639,8 @@
         },
         "LA PAZ": {
           "deficit_materia": 109,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 357,
           "prejubilacion": 136,
           "egresados_2027_2031": 120,
@@ -1516,6 +1662,8 @@
         },
         "ORURO": {
           "deficit_materia": 31,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 147,
           "prejubilacion": 84,
           "egresados_2027_2031": 34,
@@ -1537,6 +1685,8 @@
         },
         "PANDO": {
           "deficit_materia": 6,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 4,
           "prejubilacion": 0,
           "egresados_2027_2031": 6,
@@ -1558,6 +1708,8 @@
         },
         "POTOSI": {
           "deficit_materia": 44,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 114,
           "prejubilacion": 47,
           "egresados_2027_2031": 49,
@@ -1579,6 +1731,8 @@
         },
         "SANTA CRUZ": {
           "deficit_materia": 73,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 188,
           "prejubilacion": 52,
           "egresados_2027_2031": 81,
@@ -1600,6 +1754,8 @@
         },
         "TARIJA": {
           "deficit_materia": 21,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 48,
           "prejubilacion": 31,
           "egresados_2027_2031": 23,
@@ -1630,6 +1786,8 @@
       "orden_jerarquia": 3,
       "nacional": {
         "deficit_materia": 294,
+        "horas_bth_bolsa": 0,
+        "items_bth_bolsa": 0,
         "jubilacion": 702,
         "prejubilacion": 210,
         "egresados_2027_2031": 552,
@@ -1652,6 +1810,8 @@
       "por_departamento": {
         "BENI": {
           "deficit_materia": 14,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 8,
           "prejubilacion": 6,
           "egresados_2027_2031": 26,
@@ -1673,6 +1833,8 @@
         },
         "CHUQUISACA": {
           "deficit_materia": 17,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 94,
           "prejubilacion": 5,
           "egresados_2027_2031": 33,
@@ -1694,6 +1856,8 @@
         },
         "COCHABAMBA": {
           "deficit_materia": 61,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 135,
           "prejubilacion": 40,
           "egresados_2027_2031": 114,
@@ -1715,6 +1879,8 @@
         },
         "LA PAZ": {
           "deficit_materia": 86,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 221,
           "prejubilacion": 96,
           "egresados_2027_2031": 161,
@@ -1736,6 +1902,8 @@
         },
         "ORURO": {
           "deficit_materia": 11,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 52,
           "prejubilacion": 26,
           "egresados_2027_2031": 21,
@@ -1757,6 +1925,8 @@
         },
         "PANDO": {
           "deficit_materia": 4,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 1,
           "prejubilacion": 0,
           "egresados_2027_2031": 8,
@@ -1778,6 +1948,8 @@
         },
         "POTOSI": {
           "deficit_materia": 29,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 52,
           "prejubilacion": 14,
           "egresados_2027_2031": 54,
@@ -1799,6 +1971,8 @@
         },
         "SANTA CRUZ": {
           "deficit_materia": 48,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 109,
           "prejubilacion": 12,
           "egresados_2027_2031": 90,
@@ -1820,6 +1994,8 @@
         },
         "TARIJA": {
           "deficit_materia": 24,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 30,
           "prejubilacion": 11,
           "egresados_2027_2031": 45,
@@ -1850,6 +2026,8 @@
       "orden_jerarquia": 3,
       "nacional": {
         "deficit_materia": 224,
+        "horas_bth_bolsa": 0,
+        "items_bth_bolsa": 0,
         "jubilacion": 740,
         "prejubilacion": 278,
         "egresados_2027_2031": 228,
@@ -1872,6 +2050,8 @@
       "por_departamento": {
         "BENI": {
           "deficit_materia": 10,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 24,
           "prejubilacion": 13,
           "egresados_2027_2031": 10,
@@ -1893,6 +2073,8 @@
         },
         "CHUQUISACA": {
           "deficit_materia": 14,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 32,
           "prejubilacion": 5,
           "egresados_2027_2031": 14,
@@ -1914,6 +2096,8 @@
         },
         "COCHABAMBA": {
           "deficit_materia": 40,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 153,
           "prejubilacion": 62,
           "egresados_2027_2031": 41,
@@ -1935,6 +2119,8 @@
         },
         "LA PAZ": {
           "deficit_materia": 59,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 212,
           "prejubilacion": 80,
           "egresados_2027_2031": 60,
@@ -1956,6 +2142,8 @@
         },
         "ORURO": {
           "deficit_materia": 17,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 74,
           "prejubilacion": 26,
           "egresados_2027_2031": 17,
@@ -1977,6 +2165,8 @@
         },
         "PANDO": {
           "deficit_materia": 4,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 4,
           "prejubilacion": 2,
           "egresados_2027_2031": 4,
@@ -1998,6 +2188,8 @@
         },
         "POTOSI": {
           "deficit_materia": 22,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 63,
           "prejubilacion": 25,
           "egresados_2027_2031": 22,
@@ -2019,6 +2211,8 @@
         },
         "SANTA CRUZ": {
           "deficit_materia": 45,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 123,
           "prejubilacion": 32,
           "egresados_2027_2031": 46,
@@ -2040,6 +2234,8 @@
         },
         "TARIJA": {
           "deficit_materia": 14,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 55,
           "prejubilacion": 33,
           "egresados_2027_2031": 14,
@@ -2070,6 +2266,8 @@
       "orden_jerarquia": 3,
       "nacional": {
         "deficit_materia": 786,
+        "horas_bth_bolsa": 0,
+        "items_bth_bolsa": 0,
         "jubilacion": 1429,
         "prejubilacion": 630,
         "egresados_2027_2031": 654,
@@ -2092,6 +2290,8 @@
       "por_departamento": {
         "BENI": {
           "deficit_materia": 21,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 41,
           "prejubilacion": 19,
           "egresados_2027_2031": 18,
@@ -2113,6 +2313,8 @@
         },
         "CHUQUISACA": {
           "deficit_materia": 55,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 84,
           "prejubilacion": 4,
           "egresados_2027_2031": 46,
@@ -2134,6 +2336,8 @@
         },
         "COCHABAMBA": {
           "deficit_materia": 169,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 381,
           "prejubilacion": 194,
           "egresados_2027_2031": 140,
@@ -2155,6 +2359,8 @@
         },
         "LA PAZ": {
           "deficit_materia": 216,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 376,
           "prejubilacion": 196,
           "egresados_2027_2031": 181,
@@ -2176,6 +2382,8 @@
         },
         "ORURO": {
           "deficit_materia": 43,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 130,
           "prejubilacion": 64,
           "egresados_2027_2031": 36,
@@ -2197,6 +2405,8 @@
         },
         "PANDO": {
           "deficit_materia": 16,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 4,
           "prejubilacion": 1,
           "egresados_2027_2031": 13,
@@ -2218,6 +2428,8 @@
         },
         "POTOSI": {
           "deficit_materia": 76,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 145,
           "prejubilacion": 64,
           "egresados_2027_2031": 63,
@@ -2239,6 +2451,8 @@
         },
         "SANTA CRUZ": {
           "deficit_materia": 138,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 171,
           "prejubilacion": 22,
           "egresados_2027_2031": 115,
@@ -2260,6 +2474,8 @@
         },
         "TARIJA": {
           "deficit_materia": 51,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 97,
           "prejubilacion": 66,
           "egresados_2027_2031": 42,
@@ -2290,6 +2506,8 @@
       "orden_jerarquia": 3,
       "nacional": {
         "deficit_materia": 716,
+        "horas_bth_bolsa": 0,
+        "items_bth_bolsa": 0,
         "jubilacion": 652,
         "prejubilacion": 235,
         "egresados_2027_2031": 808,
@@ -2312,6 +2530,8 @@
       "por_departamento": {
         "BENI": {
           "deficit_materia": 19,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 18,
           "prejubilacion": 8,
           "egresados_2027_2031": 22,
@@ -2333,6 +2553,8 @@
         },
         "CHUQUISACA": {
           "deficit_materia": 42,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 40,
           "prejubilacion": 0,
           "egresados_2027_2031": 47,
@@ -2354,6 +2576,8 @@
         },
         "COCHABAMBA": {
           "deficit_materia": 148,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 152,
           "prejubilacion": 76,
           "egresados_2027_2031": 167,
@@ -2375,6 +2599,8 @@
         },
         "LA PAZ": {
           "deficit_materia": 225,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 206,
           "prejubilacion": 78,
           "egresados_2027_2031": 252,
@@ -2396,6 +2622,8 @@
         },
         "ORURO": {
           "deficit_materia": 45,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 57,
           "prejubilacion": 27,
           "egresados_2027_2031": 51,
@@ -2417,6 +2645,8 @@
         },
         "PANDO": {
           "deficit_materia": 5,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 4,
           "prejubilacion": 0,
           "egresados_2027_2031": 6,
@@ -2438,6 +2668,8 @@
         },
         "POTOSI": {
           "deficit_materia": 79,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 41,
           "prejubilacion": 9,
           "egresados_2027_2031": 90,
@@ -2459,6 +2691,8 @@
         },
         "SANTA CRUZ": {
           "deficit_materia": 101,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 105,
           "prejubilacion": 26,
           "egresados_2027_2031": 114,
@@ -2480,6 +2714,8 @@
         },
         "TARIJA": {
           "deficit_materia": 52,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 29,
           "prejubilacion": 11,
           "egresados_2027_2031": 59,
@@ -2510,6 +2746,8 @@
       "orden_jerarquia": 3,
       "nacional": {
         "deficit_materia": 314,
+        "horas_bth_bolsa": 0,
+        "items_bth_bolsa": 0,
         "jubilacion": 1943,
         "prejubilacion": 900,
         "egresados_2027_2031": 562,
@@ -2532,6 +2770,8 @@
       "por_departamento": {
         "BENI": {
           "deficit_materia": 18,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 78,
           "prejubilacion": 43,
           "egresados_2027_2031": 32,
@@ -2553,6 +2793,8 @@
         },
         "CHUQUISACA": {
           "deficit_materia": 16,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 73,
           "prejubilacion": 9,
           "egresados_2027_2031": 28,
@@ -2574,6 +2816,8 @@
         },
         "COCHABAMBA": {
           "deficit_materia": 60,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 392,
           "prejubilacion": 235,
           "egresados_2027_2031": 107,
@@ -2595,6 +2839,8 @@
         },
         "LA PAZ": {
           "deficit_materia": 84,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 666,
           "prejubilacion": 307,
           "egresados_2027_2031": 150,
@@ -2616,6 +2862,8 @@
         },
         "ORURO": {
           "deficit_materia": 20,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 239,
           "prejubilacion": 126,
           "egresados_2027_2031": 35,
@@ -2637,6 +2885,8 @@
         },
         "PANDO": {
           "deficit_materia": 5,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 10,
           "prejubilacion": 0,
           "egresados_2027_2031": 8,
@@ -2658,6 +2908,8 @@
         },
         "POTOSI": {
           "deficit_materia": 32,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 167,
           "prejubilacion": 79,
           "egresados_2027_2031": 57,
@@ -2679,6 +2931,8 @@
         },
         "SANTA CRUZ": {
           "deficit_materia": 64,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 234,
           "prejubilacion": 50,
           "egresados_2027_2031": 114,
@@ -2700,6 +2954,8 @@
         },
         "TARIJA": {
           "deficit_materia": 17,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 84,
           "prejubilacion": 51,
           "egresados_2027_2031": 31,
@@ -2730,6 +2986,8 @@
       "orden_jerarquia": 3,
       "nacional": {
         "deficit_materia": 903,
+        "horas_bth_bolsa": 0,
+        "items_bth_bolsa": 0,
         "jubilacion": 983,
         "prejubilacion": 194,
         "egresados_2027_2031": 583,
@@ -2752,6 +3010,8 @@
       "por_departamento": {
         "BENI": {
           "deficit_materia": 40,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 42,
           "prejubilacion": 9,
           "egresados_2027_2031": 26,
@@ -2773,6 +3033,8 @@
         },
         "CHUQUISACA": {
           "deficit_materia": 45,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 51,
           "prejubilacion": 3,
           "egresados_2027_2031": 29,
@@ -2794,6 +3056,8 @@
         },
         "COCHABAMBA": {
           "deficit_materia": 164,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 172,
           "prejubilacion": 36,
           "egresados_2027_2031": 106,
@@ -2815,6 +3079,8 @@
         },
         "LA PAZ": {
           "deficit_materia": 276,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 265,
           "prejubilacion": 62,
           "egresados_2027_2031": 178,
@@ -2836,6 +3102,8 @@
         },
         "ORURO": {
           "deficit_materia": 53,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 119,
           "prejubilacion": 14,
           "egresados_2027_2031": 35,
@@ -2857,6 +3125,8 @@
         },
         "PANDO": {
           "deficit_materia": 11,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 9,
           "prejubilacion": 0,
           "egresados_2027_2031": 7,
@@ -2878,6 +3148,8 @@
         },
         "POTOSI": {
           "deficit_materia": 69,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 101,
           "prejubilacion": 13,
           "egresados_2027_2031": 44,
@@ -2899,6 +3171,8 @@
         },
         "SANTA CRUZ": {
           "deficit_materia": 181,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 141,
           "prejubilacion": 22,
           "egresados_2027_2031": 117,
@@ -2920,6 +3194,8 @@
         },
         "TARIJA": {
           "deficit_materia": 64,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 83,
           "prejubilacion": 35,
           "egresados_2027_2031": 41,
@@ -2950,6 +3226,8 @@
       "orden_jerarquia": 4,
       "nacional": {
         "deficit_materia": 106,
+        "horas_bth_bolsa": 11008,
+        "items_bth_bolsa": 102,
         "jubilacion": 169,
         "prejubilacion": 44,
         "egresados_2027_2031": 370,
@@ -2972,6 +3250,8 @@
       "por_departamento": {
         "BENI": {
           "deficit_materia": 4,
+          "horas_bth_bolsa": 601,
+          "items_bth_bolsa": 6,
           "jubilacion": 6,
           "prejubilacion": 1,
           "egresados_2027_2031": 13,
@@ -2993,6 +3273,8 @@
         },
         "CHUQUISACA": {
           "deficit_materia": 6,
+          "horas_bth_bolsa": 621,
+          "items_bth_bolsa": 6,
           "jubilacion": 10,
           "prejubilacion": 1,
           "egresados_2027_2031": 21,
@@ -3014,6 +3296,8 @@
         },
         "COCHABAMBA": {
           "deficit_materia": 8,
+          "horas_bth_bolsa": 1684,
+          "items_bth_bolsa": 16,
           "jubilacion": 25,
           "prejubilacion": 9,
           "egresados_2027_2031": 29,
@@ -3035,6 +3319,8 @@
         },
         "LA PAZ": {
           "deficit_materia": 38,
+          "horas_bth_bolsa": 2907,
+          "items_bth_bolsa": 27,
           "jubilacion": 61,
           "prejubilacion": 18,
           "egresados_2027_2031": 132,
@@ -3056,6 +3342,8 @@
         },
         "ORURO": {
           "deficit_materia": 3,
+          "horas_bth_bolsa": 466,
+          "items_bth_bolsa": 4,
           "jubilacion": 21,
           "prejubilacion": 4,
           "egresados_2027_2031": 11,
@@ -3077,6 +3365,8 @@
         },
         "PANDO": {
           "deficit_materia": 5,
+          "horas_bth_bolsa": 136,
+          "items_bth_bolsa": 1,
           "jubilacion": 1,
           "prejubilacion": 0,
           "egresados_2027_2031": 17,
@@ -3098,6 +3388,8 @@
         },
         "POTOSI": {
           "deficit_materia": 6,
+          "horas_bth_bolsa": 1489,
+          "items_bth_bolsa": 14,
           "jubilacion": 16,
           "prejubilacion": 3,
           "egresados_2027_2031": 22,
@@ -3119,6 +3411,8 @@
         },
         "SANTA CRUZ": {
           "deficit_materia": 29,
+          "horas_bth_bolsa": 2982,
+          "items_bth_bolsa": 28,
           "jubilacion": 20,
           "prejubilacion": 5,
           "egresados_2027_2031": 103,
@@ -3140,6 +3434,8 @@
         },
         "TARIJA": {
           "deficit_materia": 6,
+          "horas_bth_bolsa": 122,
+          "items_bth_bolsa": 1,
           "jubilacion": 10,
           "prejubilacion": 4,
           "egresados_2027_2031": 22,
@@ -3170,6 +3466,8 @@
       "orden_jerarquia": 4,
       "nacional": {
         "deficit_materia": 26,
+        "horas_bth_bolsa": 11008,
+        "items_bth_bolsa": 102,
         "jubilacion": 146,
         "prejubilacion": 35,
         "egresados_2027_2031": 83,
@@ -3192,6 +3490,8 @@
       "por_departamento": {
         "BENI": {
           "deficit_materia": 1,
+          "horas_bth_bolsa": 601,
+          "items_bth_bolsa": 6,
           "jubilacion": 2,
           "prejubilacion": 0,
           "egresados_2027_2031": 2,
@@ -3213,6 +3513,8 @@
         },
         "CHUQUISACA": {
           "deficit_materia": 2,
+          "horas_bth_bolsa": 621,
+          "items_bth_bolsa": 6,
           "jubilacion": 9,
           "prejubilacion": 1,
           "egresados_2027_2031": 5,
@@ -3234,6 +3536,8 @@
         },
         "COCHABAMBA": {
           "deficit_materia": 3,
+          "horas_bth_bolsa": 1684,
+          "items_bth_bolsa": 16,
           "jubilacion": 21,
           "prejubilacion": 6,
           "egresados_2027_2031": 8,
@@ -3255,6 +3559,8 @@
         },
         "LA PAZ": {
           "deficit_materia": 15,
+          "horas_bth_bolsa": 2907,
+          "items_bth_bolsa": 27,
           "jubilacion": 60,
           "prejubilacion": 18,
           "egresados_2027_2031": 46,
@@ -3276,6 +3582,8 @@
         },
         "ORURO": {
           "deficit_materia": 1,
+          "horas_bth_bolsa": 466,
+          "items_bth_bolsa": 4,
           "jubilacion": 19,
           "prejubilacion": 3,
           "egresados_2027_2031": 5,
@@ -3297,6 +3605,8 @@
         },
         "PANDO": {
           "deficit_materia": 0,
+          "horas_bth_bolsa": 136,
+          "items_bth_bolsa": 1,
           "jubilacion": 1,
           "prejubilacion": 0,
           "egresados_2027_2031": 1,
@@ -3318,6 +3628,8 @@
         },
         "POTOSI": {
           "deficit_materia": 2,
+          "horas_bth_bolsa": 1489,
+          "items_bth_bolsa": 14,
           "jubilacion": 14,
           "prejubilacion": 2,
           "egresados_2027_2031": 7,
@@ -3339,6 +3651,8 @@
         },
         "SANTA CRUZ": {
           "deficit_materia": 2,
+          "horas_bth_bolsa": 2982,
+          "items_bth_bolsa": 28,
           "jubilacion": 13,
           "prejubilacion": 3,
           "egresados_2027_2031": 6,
@@ -3360,6 +3674,8 @@
         },
         "TARIJA": {
           "deficit_materia": 1,
+          "horas_bth_bolsa": 122,
+          "items_bth_bolsa": 1,
           "jubilacion": 7,
           "prejubilacion": 2,
           "egresados_2027_2031": 3,
@@ -3390,6 +3706,8 @@
       "orden_jerarquia": 4,
       "nacional": {
         "deficit_materia": 102,
+        "horas_bth_bolsa": 11008,
+        "items_bth_bolsa": 102,
         "jubilacion": 202,
         "prejubilacion": 57,
         "egresados_2027_2031": 223,
@@ -3412,6 +3730,8 @@
       "por_departamento": {
         "BENI": {
           "deficit_materia": 5,
+          "horas_bth_bolsa": 601,
+          "items_bth_bolsa": 6,
           "jubilacion": 2,
           "prejubilacion": 1,
           "egresados_2027_2031": 11,
@@ -3433,6 +3753,8 @@
         },
         "CHUQUISACA": {
           "deficit_materia": 5,
+          "horas_bth_bolsa": 621,
+          "items_bth_bolsa": 6,
           "jubilacion": 10,
           "prejubilacion": 1,
           "egresados_2027_2031": 10,
@@ -3454,6 +3776,8 @@
         },
         "COCHABAMBA": {
           "deficit_materia": 14,
+          "horas_bth_bolsa": 1684,
+          "items_bth_bolsa": 16,
           "jubilacion": 25,
           "prejubilacion": 7,
           "egresados_2027_2031": 31,
@@ -3475,6 +3799,8 @@
         },
         "LA PAZ": {
           "deficit_materia": 46,
+          "horas_bth_bolsa": 2907,
+          "items_bth_bolsa": 27,
           "jubilacion": 95,
           "prejubilacion": 36,
           "egresados_2027_2031": 99,
@@ -3496,6 +3822,8 @@
         },
         "ORURO": {
           "deficit_materia": 3,
+          "horas_bth_bolsa": 466,
+          "items_bth_bolsa": 4,
           "jubilacion": 25,
           "prejubilacion": 6,
           "egresados_2027_2031": 7,
@@ -3517,6 +3845,8 @@
         },
         "PANDO": {
           "deficit_materia": 1,
+          "horas_bth_bolsa": 136,
+          "items_bth_bolsa": 1,
           "jubilacion": 1,
           "prejubilacion": 0,
           "egresados_2027_2031": 2,
@@ -3538,6 +3868,8 @@
         },
         "POTOSI": {
           "deficit_materia": 7,
+          "horas_bth_bolsa": 1489,
+          "items_bth_bolsa": 14,
           "jubilacion": 20,
           "prejubilacion": 2,
           "egresados_2027_2031": 15,
@@ -3559,6 +3891,8 @@
         },
         "SANTA CRUZ": {
           "deficit_materia": 18,
+          "horas_bth_bolsa": 2982,
+          "items_bth_bolsa": 28,
           "jubilacion": 16,
           "prejubilacion": 3,
           "egresados_2027_2031": 40,
@@ -3580,6 +3914,8 @@
         },
         "TARIJA": {
           "deficit_materia": 4,
+          "horas_bth_bolsa": 122,
+          "items_bth_bolsa": 1,
           "jubilacion": 7,
           "prejubilacion": 2,
           "egresados_2027_2031": 8,
@@ -3610,6 +3946,8 @@
       "orden_jerarquia": 4,
       "nacional": {
         "deficit_materia": 12,
+        "horas_bth_bolsa": 11008,
+        "items_bth_bolsa": 102,
         "jubilacion": 146,
         "prejubilacion": 35,
         "egresados_2027_2031": 43,
@@ -3632,6 +3970,8 @@
       "por_departamento": {
         "BENI": {
           "deficit_materia": 0,
+          "horas_bth_bolsa": 601,
+          "items_bth_bolsa": 6,
           "jubilacion": 2,
           "prejubilacion": 0,
           "egresados_2027_2031": 2,
@@ -3653,6 +3993,8 @@
         },
         "CHUQUISACA": {
           "deficit_materia": 1,
+          "horas_bth_bolsa": 621,
+          "items_bth_bolsa": 6,
           "jubilacion": 9,
           "prejubilacion": 1,
           "egresados_2027_2031": 2,
@@ -3674,6 +4016,8 @@
         },
         "COCHABAMBA": {
           "deficit_materia": 1,
+          "horas_bth_bolsa": 1684,
+          "items_bth_bolsa": 16,
           "jubilacion": 21,
           "prejubilacion": 6,
           "egresados_2027_2031": 4,
@@ -3695,6 +4039,8 @@
         },
         "LA PAZ": {
           "deficit_materia": 7,
+          "horas_bth_bolsa": 2907,
+          "items_bth_bolsa": 27,
           "jubilacion": 60,
           "prejubilacion": 18,
           "egresados_2027_2031": 25,
@@ -3716,6 +4062,8 @@
         },
         "ORURO": {
           "deficit_materia": 1,
+          "horas_bth_bolsa": 466,
+          "items_bth_bolsa": 4,
           "jubilacion": 19,
           "prejubilacion": 3,
           "egresados_2027_2031": 2,
@@ -3737,6 +4085,8 @@
         },
         "PANDO": {
           "deficit_materia": 0,
+          "horas_bth_bolsa": 136,
+          "items_bth_bolsa": 1,
           "jubilacion": 1,
           "prejubilacion": 0,
           "egresados_2027_2031": 0,
@@ -3758,6 +4108,8 @@
         },
         "POTOSI": {
           "deficit_materia": 1,
+          "horas_bth_bolsa": 1489,
+          "items_bth_bolsa": 14,
           "jubilacion": 14,
           "prejubilacion": 2,
           "egresados_2027_2031": 3,
@@ -3779,6 +4131,8 @@
         },
         "SANTA CRUZ": {
           "deficit_materia": 1,
+          "horas_bth_bolsa": 2982,
+          "items_bth_bolsa": 28,
           "jubilacion": 13,
           "prejubilacion": 3,
           "egresados_2027_2031": 3,
@@ -3800,6 +4154,8 @@
         },
         "TARIJA": {
           "deficit_materia": 0,
+          "horas_bth_bolsa": 122,
+          "items_bth_bolsa": 1,
           "jubilacion": 7,
           "prejubilacion": 2,
           "egresados_2027_2031": 2,
@@ -3830,6 +4186,8 @@
       "orden_jerarquia": 4,
       "nacional": {
         "deficit_materia": 231,
+        "horas_bth_bolsa": 11008,
+        "items_bth_bolsa": 102,
         "jubilacion": 204,
         "prejubilacion": 61,
         "egresados_2027_2031": 170,
@@ -3852,6 +4210,8 @@
       "por_departamento": {
         "BENI": {
           "deficit_materia": 10,
+          "horas_bth_bolsa": 601,
+          "items_bth_bolsa": 6,
           "jubilacion": 6,
           "prejubilacion": 0,
           "egresados_2027_2031": 7,
@@ -3873,6 +4233,8 @@
         },
         "CHUQUISACA": {
           "deficit_materia": 17,
+          "horas_bth_bolsa": 621,
+          "items_bth_bolsa": 6,
           "jubilacion": 11,
           "prejubilacion": 1,
           "egresados_2027_2031": 12,
@@ -3894,6 +4256,8 @@
         },
         "COCHABAMBA": {
           "deficit_materia": 33,
+          "horas_bth_bolsa": 1684,
+          "items_bth_bolsa": 16,
           "jubilacion": 37,
           "prejubilacion": 16,
           "egresados_2027_2031": 24,
@@ -3915,6 +4279,8 @@
         },
         "LA PAZ": {
           "deficit_materia": 83,
+          "horas_bth_bolsa": 2907,
+          "items_bth_bolsa": 27,
           "jubilacion": 67,
           "prejubilacion": 22,
           "egresados_2027_2031": 62,
@@ -3936,6 +4302,8 @@
         },
         "ORURO": {
           "deficit_materia": 14,
+          "horas_bth_bolsa": 466,
+          "items_bth_bolsa": 4,
           "jubilacion": 31,
           "prejubilacion": 10,
           "egresados_2027_2031": 10,
@@ -3957,6 +4325,8 @@
         },
         "PANDO": {
           "deficit_materia": 1,
+          "horas_bth_bolsa": 136,
+          "items_bth_bolsa": 1,
           "jubilacion": 1,
           "prejubilacion": 0,
           "egresados_2027_2031": 1,
@@ -3978,6 +4348,8 @@
         },
         "POTOSI": {
           "deficit_materia": 34,
+          "horas_bth_bolsa": 1489,
+          "items_bth_bolsa": 14,
           "jubilacion": 18,
           "prejubilacion": 3,
           "egresados_2027_2031": 25,
@@ -3999,6 +4371,8 @@
         },
         "SANTA CRUZ": {
           "deficit_materia": 30,
+          "horas_bth_bolsa": 2982,
+          "items_bth_bolsa": 28,
           "jubilacion": 20,
           "prejubilacion": 5,
           "egresados_2027_2031": 22,
@@ -4020,6 +4394,8 @@
         },
         "TARIJA": {
           "deficit_materia": 10,
+          "horas_bth_bolsa": 122,
+          "items_bth_bolsa": 1,
           "jubilacion": 13,
           "prejubilacion": 6,
           "egresados_2027_2031": 7,
@@ -4050,6 +4426,8 @@
       "orden_jerarquia": 4,
       "nacional": {
         "deficit_materia": 140,
+        "horas_bth_bolsa": 11008,
+        "items_bth_bolsa": 102,
         "jubilacion": 157,
         "prejubilacion": 38,
         "egresados_2027_2031": 253,
@@ -4072,6 +4450,8 @@
       "por_departamento": {
         "BENI": {
           "deficit_materia": 3,
+          "horas_bth_bolsa": 601,
+          "items_bth_bolsa": 6,
           "jubilacion": 2,
           "prejubilacion": 0,
           "egresados_2027_2031": 5,
@@ -4093,6 +4473,8 @@
         },
         "CHUQUISACA": {
           "deficit_materia": 7,
+          "horas_bth_bolsa": 621,
+          "items_bth_bolsa": 6,
           "jubilacion": 9,
           "prejubilacion": 1,
           "egresados_2027_2031": 13,
@@ -4114,6 +4496,8 @@
         },
         "COCHABAMBA": {
           "deficit_materia": 20,
+          "horas_bth_bolsa": 1684,
+          "items_bth_bolsa": 16,
           "jubilacion": 21,
           "prejubilacion": 6,
           "egresados_2027_2031": 35,
@@ -4135,6 +4519,8 @@
         },
         "LA PAZ": {
           "deficit_materia": 75,
+          "horas_bth_bolsa": 2907,
+          "items_bth_bolsa": 27,
           "jubilacion": 66,
           "prejubilacion": 20,
           "egresados_2027_2031": 137,
@@ -4156,6 +4542,8 @@
         },
         "ORURO": {
           "deficit_materia": 6,
+          "horas_bth_bolsa": 466,
+          "items_bth_bolsa": 4,
           "jubilacion": 20,
           "prejubilacion": 4,
           "egresados_2027_2031": 11,
@@ -4177,6 +4565,8 @@
         },
         "PANDO": {
           "deficit_materia": 1,
+          "horas_bth_bolsa": 136,
+          "items_bth_bolsa": 1,
           "jubilacion": 1,
           "prejubilacion": 0,
           "egresados_2027_2031": 2,
@@ -4198,6 +4588,8 @@
         },
         "POTOSI": {
           "deficit_materia": 10,
+          "horas_bth_bolsa": 1489,
+          "items_bth_bolsa": 14,
           "jubilacion": 16,
           "prejubilacion": 2,
           "egresados_2027_2031": 17,
@@ -4219,6 +4611,8 @@
         },
         "SANTA CRUZ": {
           "deficit_materia": 14,
+          "horas_bth_bolsa": 2982,
+          "items_bth_bolsa": 28,
           "jubilacion": 14,
           "prejubilacion": 3,
           "egresados_2027_2031": 25,
@@ -4240,6 +4634,8 @@
         },
         "TARIJA": {
           "deficit_materia": 5,
+          "horas_bth_bolsa": 122,
+          "items_bth_bolsa": 1,
           "jubilacion": 8,
           "prejubilacion": 2,
           "egresados_2027_2031": 8,
@@ -4270,6 +4666,8 @@
       "orden_jerarquia": 4,
       "nacional": {
         "deficit_materia": 38,
+        "horas_bth_bolsa": 11008,
+        "items_bth_bolsa": 102,
         "jubilacion": 157,
         "prejubilacion": 38,
         "egresados_2027_2031": 51,
@@ -4292,6 +4690,8 @@
       "por_departamento": {
         "BENI": {
           "deficit_materia": 1,
+          "horas_bth_bolsa": 601,
+          "items_bth_bolsa": 6,
           "jubilacion": 2,
           "prejubilacion": 0,
           "egresados_2027_2031": 1,
@@ -4313,6 +4713,8 @@
         },
         "CHUQUISACA": {
           "deficit_materia": 2,
+          "horas_bth_bolsa": 621,
+          "items_bth_bolsa": 6,
           "jubilacion": 9,
           "prejubilacion": 1,
           "egresados_2027_2031": 3,
@@ -4334,6 +4736,8 @@
         },
         "COCHABAMBA": {
           "deficit_materia": 5,
+          "horas_bth_bolsa": 1684,
+          "items_bth_bolsa": 16,
           "jubilacion": 21,
           "prejubilacion": 6,
           "egresados_2027_2031": 6,
@@ -4355,6 +4759,8 @@
         },
         "LA PAZ": {
           "deficit_materia": 18,
+          "horas_bth_bolsa": 2907,
+          "items_bth_bolsa": 27,
           "jubilacion": 66,
           "prejubilacion": 20,
           "egresados_2027_2031": 24,
@@ -4376,6 +4782,8 @@
         },
         "ORURO": {
           "deficit_materia": 2,
+          "horas_bth_bolsa": 466,
+          "items_bth_bolsa": 4,
           "jubilacion": 20,
           "prejubilacion": 4,
           "egresados_2027_2031": 3,
@@ -4397,6 +4805,8 @@
         },
         "PANDO": {
           "deficit_materia": 0,
+          "horas_bth_bolsa": 136,
+          "items_bth_bolsa": 1,
           "jubilacion": 1,
           "prejubilacion": 0,
           "egresados_2027_2031": 1,
@@ -4418,6 +4828,8 @@
         },
         "POTOSI": {
           "deficit_materia": 4,
+          "horas_bth_bolsa": 1489,
+          "items_bth_bolsa": 14,
           "jubilacion": 16,
           "prejubilacion": 2,
           "egresados_2027_2031": 6,
@@ -4439,6 +4851,8 @@
         },
         "SANTA CRUZ": {
           "deficit_materia": 3,
+          "horas_bth_bolsa": 2982,
+          "items_bth_bolsa": 28,
           "jubilacion": 13,
           "prejubilacion": 3,
           "egresados_2027_2031": 4,
@@ -4460,6 +4874,8 @@
         },
         "TARIJA": {
           "deficit_materia": 2,
+          "horas_bth_bolsa": 122,
+          "items_bth_bolsa": 1,
           "jubilacion": 8,
           "prejubilacion": 2,
           "egresados_2027_2031": 3,
@@ -4490,6 +4906,8 @@
       "orden_jerarquia": 4,
       "nacional": {
         "deficit_materia": 297,
+        "horas_bth_bolsa": 11008,
+        "items_bth_bolsa": 115,
         "jubilacion": 177,
         "prejubilacion": 37,
         "egresados_2027_2031": 529,
@@ -4512,6 +4930,8 @@
       "por_departamento": {
         "BENI": {
           "deficit_materia": 9,
+          "horas_bth_bolsa": 601,
+          "items_bth_bolsa": 6,
           "jubilacion": 4,
           "prejubilacion": 0,
           "egresados_2027_2031": 17,
@@ -4533,6 +4953,8 @@
         },
         "CHUQUISACA": {
           "deficit_materia": 12,
+          "horas_bth_bolsa": 621,
+          "items_bth_bolsa": 6,
           "jubilacion": 9,
           "prejubilacion": 1,
           "egresados_2027_2031": 21,
@@ -4554,6 +4976,8 @@
         },
         "COCHABAMBA": {
           "deficit_materia": 42,
+          "horas_bth_bolsa": 1684,
+          "items_bth_bolsa": 18,
           "jubilacion": 24,
           "prejubilacion": 6,
           "egresados_2027_2031": 75,
@@ -4575,6 +4999,8 @@
         },
         "LA PAZ": {
           "deficit_materia": 142,
+          "horas_bth_bolsa": 2907,
+          "items_bth_bolsa": 30,
           "jubilacion": 81,
           "prejubilacion": 20,
           "egresados_2027_2031": 252,
@@ -4596,6 +5022,8 @@
         },
         "ORURO": {
           "deficit_materia": 10,
+          "horas_bth_bolsa": 466,
+          "items_bth_bolsa": 5,
           "jubilacion": 21,
           "prejubilacion": 4,
           "egresados_2027_2031": 17,
@@ -4617,6 +5045,8 @@
         },
         "PANDO": {
           "deficit_materia": 2,
+          "horas_bth_bolsa": 136,
+          "items_bth_bolsa": 1,
           "jubilacion": 1,
           "prejubilacion": 0,
           "egresados_2027_2031": 4,
@@ -4638,6 +5068,8 @@
         },
         "POTOSI": {
           "deficit_materia": 20,
+          "horas_bth_bolsa": 1489,
+          "items_bth_bolsa": 16,
           "jubilacion": 14,
           "prejubilacion": 2,
           "egresados_2027_2031": 36,
@@ -4659,6 +5091,8 @@
         },
         "SANTA CRUZ": {
           "deficit_materia": 49,
+          "horas_bth_bolsa": 2982,
+          "items_bth_bolsa": 31,
           "jubilacion": 16,
           "prejubilacion": 3,
           "egresados_2027_2031": 88,
@@ -4680,6 +5114,8 @@
         },
         "TARIJA": {
           "deficit_materia": 11,
+          "horas_bth_bolsa": 122,
+          "items_bth_bolsa": 1,
           "jubilacion": 7,
           "prejubilacion": 2,
           "egresados_2027_2031": 19,
@@ -4710,6 +5146,8 @@
       "orden_jerarquia": 5,
       "nacional": {
         "deficit_materia": 330,
+        "horas_bth_bolsa": 0,
+        "items_bth_bolsa": 0,
         "jubilacion": 156,
         "prejubilacion": 40,
         "egresados_2027_2031": 472,
@@ -4732,6 +5170,8 @@
       "por_departamento": {
         "BENI": {
           "deficit_materia": 14,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 6,
           "prejubilacion": 1,
           "egresados_2027_2031": 20,
@@ -4753,6 +5193,8 @@
         },
         "CHUQUISACA": {
           "deficit_materia": 16,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 5,
           "prejubilacion": 0,
           "egresados_2027_2031": 23,
@@ -4774,6 +5216,8 @@
         },
         "COCHABAMBA": {
           "deficit_materia": 60,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 38,
           "prejubilacion": 12,
           "egresados_2027_2031": 85,
@@ -4795,6 +5239,8 @@
         },
         "LA PAZ": {
           "deficit_materia": 69,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 30,
           "prejubilacion": 12,
           "egresados_2027_2031": 99,
@@ -4816,6 +5262,8 @@
         },
         "ORURO": {
           "deficit_materia": 16,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 8,
           "prejubilacion": 2,
           "egresados_2027_2031": 22,
@@ -4837,6 +5285,8 @@
         },
         "PANDO": {
           "deficit_materia": 9,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 4,
           "prejubilacion": 2,
           "egresados_2027_2031": 12,
@@ -4858,6 +5308,8 @@
         },
         "POTOSI": {
           "deficit_materia": 11,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 7,
           "prejubilacion": 1,
           "egresados_2027_2031": 16,
@@ -4879,6 +5331,8 @@
         },
         "SANTA CRUZ": {
           "deficit_materia": 107,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 45,
           "prejubilacion": 9,
           "egresados_2027_2031": 154,
@@ -4900,6 +5354,8 @@
         },
         "TARIJA": {
           "deficit_materia": 29,
+          "horas_bth_bolsa": 0,
+          "items_bth_bolsa": 0,
           "jubilacion": 13,
           "prejubilacion": 1,
           "egresados_2027_2031": 41,
