@@ -26,7 +26,8 @@ import {
   Minimize2,
   HelpCircle,
   ShieldAlert,
-  ArrowRight
+  ArrowRight,
+  MapPin
 } from 'lucide-react';
 
 interface CohorteItem {
@@ -62,6 +63,7 @@ interface EspecialidadItem {
   justificacion: string;
   cohortes_inscritos: Record<string, number>;
   por_dpto: Record<string, number>;
+  cohortes_por_dpto?: Record<string, Record<string, number>>;
 }
 
 export default function EgresadosProyeccionView() {
@@ -141,7 +143,8 @@ export default function EgresadosProyeccionView() {
       .map((c) => {
         let inscritos = c.total_inscritos;
         if (filtroDepto !== 'TODOS') {
-          inscritos = c.por_dpto[filtroDepto] || 0;
+          const altDepto = filtroDepto === 'POTOSI' ? 'POTOSÍ' : (filtroDepto === 'POTOSÍ' ? 'POTOSI' : filtroDepto);
+          inscritos = c.por_dpto[filtroDepto] ?? c.por_dpto[altDepto] ?? 0;
         }
 
         const egresados = Math.round(inscritos * factorTit);
@@ -193,9 +196,19 @@ export default function EgresadosProyeccionView() {
         const nivelInfo = getNivelEspecialidad(esp.especialidad_id, esp.nombre);
         let inscritos = esp.total_inscritos_2022_2026;
         let deficitMatriz = esp.items_deficit_matriz;
+        let cohortesInscritos = esp.cohortes_inscritos;
 
         if (filtroDepto !== 'TODOS') {
-          inscritos = esp.por_dpto[filtroDepto] || 0;
+          // Normalizar tilde para compatibilidad ('POTOSI' vs 'POTOSÍ')
+          const altDepto = filtroDepto === 'POTOSI' ? 'POTOSÍ' : (filtroDepto === 'POTOSÍ' ? 'POTOSI' : filtroDepto);
+          inscritos = esp.por_dpto[filtroDepto] ?? esp.por_dpto[altDepto] ?? 0;
+
+          const deptoCohortes = (esp.cohortes_por_dpto && (esp.cohortes_por_dpto[filtroDepto] || esp.cohortes_por_dpto[altDepto])) || null;
+          if (deptoCohortes) {
+            cohortesInscritos = deptoCohortes;
+          } else {
+            cohortesInscritos = { '2027': 0, '2028': 0, '2029': 0, '2030': 0, '2031': 0 };
+          }
         }
 
         const egresados = Math.round(inscritos * factorTit);
@@ -205,6 +218,8 @@ export default function EgresadosProyeccionView() {
         return {
           ...esp,
           nivelInfo,
+          total_inscritos_2022_2026: inscritos,
+          cohortes_inscritos: cohortesInscritos,
           inscritosDinamicos: inscritos,
           egresadosDinamicos: egresados,
           mermaDinamica: merma,
@@ -862,6 +877,7 @@ export default function EgresadosProyeccionView() {
             </div>
 
             <div className="flex flex-wrap items-center gap-2.5">
+
               {/* Buscador */}
               <div className="relative">
                 <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5" />
@@ -969,19 +985,17 @@ export default function EgresadosProyeccionView() {
                           <tr
                             key={esp.especialidad_id}
                             onClick={() => setSelectedEspId(isSelected ? null : esp.especialidad_id)}
-                            className={`cursor-pointer transition-all ${
-                              isSelected
+                            className={`cursor-pointer transition-all ${isSelected
                                 ? 'bg-indigo-50/70 shadow-xs'
                                 : 'hover:bg-slate-50/80'
-                            }`}
+                              }`}
                           >
                             {/* Celda de Especialidad como cuadro delimitado con badge y línea viva */}
                             <td
-                              className={`py-2 px-3 border-r transition-colors ${
-                                isSelected
+                              className={`py-2 px-3 border-r transition-colors ${isSelected
                                   ? 'bg-indigo-100 text-indigo-950 border-r-indigo-300 border-l-[6px] border-l-indigo-600 border-t-2 border-b-2 border-t-indigo-600 border-b-indigo-600 font-black shadow-xs'
                                   : `border-b border-slate-200 text-slate-900 ${estilo.borderLeft}`
-                              }`}
+                                }`}
                             >
                               <div className="flex items-center justify-between gap-2">
                                 <div className="flex items-center gap-2">
@@ -999,11 +1013,10 @@ export default function EgresadosProyeccionView() {
                             </td>
 
                             {/* Base Horas */}
-                            <td className={`py-2 px-1.5 text-center border-r transition-colors ${
-                              isSelected
+                            <td className={`py-2 px-1.5 text-center border-r transition-colors ${isSelected
                                 ? 'border-t-2 border-b-2 border-indigo-600 bg-indigo-100/60 text-indigo-950 border-r-indigo-200 font-bold'
                                 : 'border-b border-slate-200 text-slate-500'
-                            }`}>
+                              }`}>
                               <span className="inline-block px-2 py-0.5 rounded bg-slate-100 font-mono text-[11px] font-bold text-slate-700 border border-slate-200">
                                 {esp.hora_item ? `${esp.hora_item}h` : '—'}
                               </span>
@@ -1015,11 +1028,10 @@ export default function EgresadosProyeccionView() {
                               return (
                                 <td
                                   key={g}
-                                  className={`py-1.5 px-1.5 text-center border-r transition-colors ${
-                                    isSelected
+                                  className={`py-1.5 px-1.5 text-center border-r transition-colors ${isSelected
                                       ? 'border-t-2 border-b-2 border-indigo-600 bg-indigo-50/50 border-r-indigo-200'
                                       : 'border-b border-slate-200'
-                                  }`}
+                                    }`}
                                 >
                                   {renderCantidadBadge(cant)}
                                 </td>
@@ -1027,11 +1039,10 @@ export default function EgresadosProyeccionView() {
                             })}
 
                             {/* Total Compacto con números grandes */}
-                            <td className={`py-1.5 px-1.5 text-center transition-colors w-20 ${
-                              isSelected
+                            <td className={`py-1.5 px-1.5 text-center transition-colors w-20 ${isSelected
                                 ? 'border-t-2 border-b-2 border-indigo-600 bg-indigo-200/90 text-indigo-950 shadow-xs'
                                 : 'border-b border-slate-200 bg-slate-50/60'
-                            }`}>
+                              }`}>
                               {tot > 0 ? (
                                 <span className="inline-block min-w-[3.2rem] px-2 py-0.5 rounded-md font-mono font-black text-sm bg-slate-900 text-white shadow-2xs">
                                   {tot.toLocaleString('es-BO')}

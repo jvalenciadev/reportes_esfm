@@ -6,7 +6,7 @@ export interface ExportPdfParams {
   tasaPrejubilacion: number;
   tasaReemplazoNoPert: number;
   pctAbsorcionBth: number;
-  tipoAsignacionEgresados: 'radicacion' | 'bolsa';
+  tipoAsignacionEgresados: 'radicacion' | 'local';
   aplicarArima: boolean;
   pctMigracion: number;
   totales: {
@@ -146,7 +146,7 @@ export function exportBalancePredictivoPdf(params: ExportPdfParams) {
           <div><strong>Fecha Emisión:</strong> ${fechaHoy}</div>
           <div><strong>Ámbito:</strong> ${filtroDepto === 'TODOS' ? 'CONSOLIDADO NACIONAL (9 DEPTOS)' : 'DEPARTAMENTO: ' + filtroDepto}</div>
           <div><strong>Nivel Filtro:</strong> ${filtroNivel}</div>
-          <div><strong>Modelo Asignación:</strong> ${tipoAsignacionEgresados === 'radicacion' ? 'Radicación Real (Matriz)' : 'Bolsa Nacional (Cuota)'}</div>
+          <div><strong>Modelo Asignación:</strong> ${tipoAsignacionEgresados === 'radicacion' ? '1. Radicación Real (Retorno)' : '2. Sede Física (Formados en ESFM)'}</div>
         </div>
       </div>
 

@@ -34,7 +34,7 @@ export function distributeInteger(total: number, weights: number[]): number[] {
 export interface EgresadosDistribucionExacta {
   // [esp_id][depto] -> egresados asignados
   porEspecialidadYDeptoRadicacion: Record<number, Record<string, number>>;
-  porEspecialidadYDeptoBolsa: Record<number, Record<string, number>>;
+  porEspecialidadYDeptoLocal: Record<number, Record<string, number>>;
   // [esp_id] -> total nacional
   nacionalPorEspecialidad: Record<number, number>;
   totalNacionalGlobal: number;
@@ -66,7 +66,7 @@ export function computeDistribucionExactaEgresados(
     });
   });
 
-  // 1. Repartir totalNacionalGlobal a las carreras de forma exacta
+  // 1. Repartir totalNacionalGlobal a las 22 carreras de forma exacta
   const weightsEsp = cohorteEsps.map((esp) => esp.total_inscritos_2022_2026);
   const nacPorEspArray = distributeInteger(totalNacionalGlobal, weightsEsp);
 
@@ -78,28 +78,23 @@ export function computeDistribucionExactaEgresados(
   const P = migracionData.matriz_transicion_probabilidades as Record<string, Record<string, number>>;
 
   const porEspecialidadYDeptoRadicacion: Record<number, Record<string, number>> = {};
-  const porEspecialidadYDeptoBolsa: Record<number, Record<string, number>> = {};
+  const porEspecialidadYDeptoLocal: Record<number, Record<string, number>> = {};
 
   especialidadesRaw.forEach((esp) => {
     const totalEsp = nacionalPorEspecialidad[esp.especialidad_id] || 0;
     porEspecialidadYDeptoRadicacion[esp.especialidad_id] = {};
-    porEspecialidadYDeptoBolsa[esp.especialidad_id] = {};
+    porEspecialidadYDeptoLocal[esp.especialidad_id] = {};
 
-    // A. Bolsa Nacional (según déficit de la especialidad en cada depto)
-    const defWeights = DEPARTAMENTOS_LIST.map(
-      (dep) => esp.por_departamento[dep]?.deficit_materia || 0
-    );
-    const hasDef = defWeights.some((w) => w > 0);
-    const bWeights = hasDef
-      ? defWeights
-      : DEPARTAMENTOS_LIST.map((dep) => I[esp.especialidad_id]?.[dep] || 0);
-
-    const bAlloc = distributeInteger(totalEsp, bWeights);
+    // 1. Egresados Reales en Sede Física:
+    // Se reparte totalEsp exactamente según los alumnos inscritos físicamente en cada ESFM de cada departamento
+    const localWeights = DEPARTAMENTOS_LIST.map((dep) => I[esp.especialidad_id]?.[dep] || 0);
+    const localAlloc = distributeInteger(totalEsp, localWeights);
     DEPARTAMENTOS_LIST.forEach((dep, idx) => {
-      porEspecialidadYDeptoBolsa[esp.especialidad_id][dep] = bAlloc[idx];
+      porEspecialidadYDeptoLocal[esp.especialidad_id][dep] = localAlloc[idx];
     });
 
-    // B. Radicación Real (según producto matricial I(orig) * P(orig -> dest))
+    // 2. Radicación Real (Retorno a Depto):
+    // Se calcula con el producto de la matriz de transición empírica (35.474 egresados)
     const rWeights = DEPARTAMENTOS_LIST.map((dest) => {
       let sumDest = 0;
       DEPARTAMENTOS_LIST.forEach((orig) => {
@@ -118,7 +113,7 @@ export function computeDistribucionExactaEgresados(
 
   return {
     porEspecialidadYDeptoRadicacion,
-    porEspecialidadYDeptoBolsa,
+    porEspecialidadYDeptoLocal,
     nacionalPorEspecialidad,
     totalNacionalGlobal
   };

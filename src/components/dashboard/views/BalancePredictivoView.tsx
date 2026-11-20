@@ -52,9 +52,6 @@ interface MetricasEspecialidad {
   egresados_radicacion_real?: number;
   egresados_local_calc?: number;
   egresados_radicacion_calc?: number;
-  egresados_bolsa_calc?: number;
-  base_inscritos_rad?: number;
-  base_inscritos_bolsa?: number;
   total_docentes: number;
   alta_v: number;
   media_a: number;
@@ -120,7 +117,7 @@ export function BalancePredictivoView() {
   const [reemplazarMedia, setReemplazarMedia] = useState<boolean>(false);     // Incluir Media Pertinencia (A)
   const [factorTit, setFactorTit] = useState<number>(82);                     // Factor de titulación de egresados ESFM (70 a 100%, de 1 en 1)
   const [pctAbsorcionBth, setPctAbsorcionBth] = useState<number>(70);         // % de absorción de las 88,063 horas BTH (Default 70%)
-  const [tipoAsignacionEgresados, setTipoAsignacionEgresados] = useState<'radicacion' | 'bolsa'>('radicacion'); // Radicación Real vs Bolsa Nacional
+  const [tipoAsignacionEgresados, setTipoAsignacionEgresados] = useState<'radicacion' | 'local'>('radicacion'); // 1. Radicación Real (Retorno) vs 2. Egresados Sede Física
   const [aplicarArima, setAplicarArima] = useState<boolean>(true);            // Aplicar ajuste de matrícula ARIMA
   const [pctMigracion, setPctMigracion] = useState<number>(100);              // % Saldo migratorio (0 a 100%, de 1 en 1)
 
@@ -223,27 +220,27 @@ export function BalancePredictivoView() {
         const universoNoPert = reemplazarMedia ? (m.media_a + m.baja_n + m.sin_pert) : (m.baja_n + m.sin_pert);
         const noPertinentesAjustados = Math.round(universoNoPert * (tasaReemplazoNoPert / 100));
 
-        // 4. Egresados: Distribución Exacta Entera (garantiza que la suma de los 9 departamentos == Nacional exacto)
+        // 4. Egresados: 1. Radicación Real (Retorno) y 2. Egresados Sede Física (Local Real)
         let egrRadicacionAjustado = 0;
-        let egrBolsaAjustado = 0;
+        let egrLocalAjustado = 0;
 
         if (distribucionExacta) {
           if (filtroDepto === 'TODOS') {
             const nacVal = distribucionExacta.nacionalPorEspecialidad[esp.especialidad_id] ?? 0;
             egrRadicacionAjustado = nacVal;
-            egrBolsaAjustado = nacVal;
+            egrLocalAjustado = nacVal;
           } else {
             egrRadicacionAjustado = distribucionExacta.porEspecialidadYDeptoRadicacion[esp.especialidad_id]?.[filtroDepto] ?? 0;
-            egrBolsaAjustado = distribucionExacta.porEspecialidadYDeptoBolsa[esp.especialidad_id]?.[filtroDepto] ?? 0;
+            egrLocalAjustado = distribucionExacta.porEspecialidadYDeptoLocal[esp.especialidad_id]?.[filtroDepto] ?? 0;
           }
         } else {
           const baseRad = filtroDepto === 'TODOS' ? m.egresados_2027_2031 : (m.egresados_radicacion_real ?? 0);
-          const baseBolsa = m.egresados_bolsa_nacional ?? m.egresados_2027_2031;
+          const baseLocal = m.egresados_local ?? m.egresados_2027_2031;
           egrRadicacionAjustado = Math.round((baseRad / 0.82) * (factorTit / 100));
-          egrBolsaAjustado = Math.round((baseBolsa / 0.82) * (factorTit / 100));
+          egrLocalAjustado = Math.round((baseLocal / 0.82) * (factorTit / 100));
         }
 
-        const egresadosAjustados = tipoAsignacionEgresados === 'bolsa' ? egrBolsaAjustado : egrRadicacionAjustado;
+        const egresadosAjustados = tipoAsignacionEgresados === 'local' ? egrLocalAjustado : egrRadicacionAjustado;
 
         // 5. Parámetros exógenos: Demografía ARIMA y Migración
         const tasaArima = aplicarArima ? m.crecimiento_arima_pct : 0.0;
@@ -266,7 +263,7 @@ export function BalancePredictivoView() {
             reemplazo_nopert: noPertinentesAjustados,
             egresados_2027_2031: egresadosAjustados,
             egresados_radicacion_calc: egrRadicacionAjustado,
-            egresados_bolsa_calc: egrBolsaAjustado,
+            egresados_local_calc: egrLocalAjustado,
             demanda_total: demandaCalculada,
             brecha_neta: brechaCalculada,
             saldo_mig_aplicado: saldoMig,
@@ -325,12 +322,8 @@ export function BalancePredictivoView() {
     let totDemanda = 0;
     let totEgresados = 0;
     let totEgrRadicacion = 0;
-    let totEgrBolsa = 0;
+    let totEgrLocal = 0;
     let totBrecha = 0;
-
-    // Acumular inscritos reales filtrados para redondear UNA SOLA VEZ
-    // Evita el drift de +4 que ocurre al sumar 22 Math.round individuales
-    let totInscritos = 0;
 
     for (const esp of especialidadesCalculadas) {
       totDeficit += esp.metrics.deficit_calculado;
@@ -342,7 +335,7 @@ export function BalancePredictivoView() {
       totSaldoMig += esp.metrics.saldo_mig_aplicado;
       totDemanda += esp.metrics.demanda_total;
       totEgrRadicacion += esp.metrics.egresados_radicacion_calc || 0;
-      totEgrBolsa += esp.metrics.egresados_bolsa_calc || 0;
+      totEgrLocal += esp.metrics.egresados_local_calc || 0;
       totBrecha += esp.metrics.brecha_neta;
       totEgresados += esp.metrics.egresados_2027_2031;
     }
@@ -358,7 +351,7 @@ export function BalancePredictivoView() {
       totDemanda,
       totEgresados,
       totEgrRadicacion,
-      totEgrBolsa,
+      totEgrLocal,
       totBrecha
     };
   }, [especialidadesCalculadas]);
@@ -515,8 +508,8 @@ export function BalancePredictivoView() {
                 1. Radicación Real: {fmt(totales.totEgrRadicacion)}
               </span>
               <span className="opacity-40">|</span>
-              <span className={tipoAsignacionEgresados === 'bolsa' ? 'font-black underline text-sky-950' : 'opacity-70'}>
-                2. Bolsa Nac.: {fmt(totales.totEgrBolsa)}
+              <span className={tipoAsignacionEgresados === 'local' ? 'font-black underline text-emerald-950' : 'opacity-70'}>
+                2. Sede Física: {fmt(totales.totEgrLocal)}
               </span>
             </div>
           </div>
@@ -640,8 +633,8 @@ export function BalancePredictivoView() {
                   8. Oferta de Egresados ESFM (2 Modelos Directos)
                 </span>
                 <p className="text-slate-600 text-[11px] leading-relaxed">
-                  <strong>1. Radicación Real:</strong> Modelo empírico basado en <strong>35.474 estudiantes titulados (2014–2025)</strong>. Registra a los egresados que vuelven a ejercer en su departamento de origen tras estudiar afuera. Es el dato real de disponibilidad.<br />
-                  <strong>2. Bolsa Nacional:</strong> Modelo normativo ministerial que reparte la oferta nacional proporcionalmente a la planta docente, garantizando equidad en carreras centralizadas (BTH y Especial).
+                  <strong>1. Radicación Real:</strong> Modelo empírico basado en <strong>35.474 maestros titulados en SEP</strong>. Registra cuántos docentes radican efectivamente trabajando en el departamento (retención local + inmigración desde otras ESFMs).<br />
+                  <strong>2. Sede Física:</strong> Maestros formados físicamente en las aulas de las ESFMs del departamento (según el padrón de inscritos en aulas sin considerar migración).
                 </p>
               </div>
 
@@ -1098,17 +1091,17 @@ export function BalancePredictivoView() {
                       onClick={() => setTipoAsignacionEgresados('radicacion')}
                       className={`px-2 py-0.5 text-[8.5px] font-black ${tipoAsignacionEgresados === 'radicacion' ? 'bg-indigo-700 text-white' : 'bg-slate-50 text-slate-600 hover:bg-slate-100'
                         }`}
-                      title="Radicación Real: Retorno a Departamento de Origen por Especialidad (35.474 egresados)"
+                      title="1. Radicación Real: Retorno a Departamento donde radican trabajando según planilla SEP (35.474 egresados)"
                     >
                       1. Radicación Real
                     </button>
                     <button
-                      onClick={() => setTipoAsignacionEgresados('bolsa')}
-                      className={`px-2 py-0.5 text-[8.5px] font-black ${tipoAsignacionEgresados === 'bolsa' ? 'bg-sky-600 text-white' : 'bg-slate-50 text-slate-600 hover:bg-slate-100'
+                      onClick={() => setTipoAsignacionEgresados('local')}
+                      className={`px-2 py-0.5 text-[8.5px] font-black ${tipoAsignacionEgresados === 'local' ? 'bg-emerald-700 text-white' : 'bg-slate-50 text-slate-600 hover:bg-slate-100'
                         }`}
-                      title="Bolsa Nacional Proporcional a Docentes"
+                      title="2. Sede Física: Egresados formados físicamente en las ESFMs del departamento (sin migración)"
                     >
-                      2. Bolsa Nac.
+                      2. Sede Física
                     </button>
                   </div>
                 </div>
@@ -1284,7 +1277,7 @@ export function BalancePredictivoView() {
                     <span className="font-black">Oferta Egresados ESFM (Titulación: {factorTit}%)</span>
                   </div>
                   <span className="block text-[8px] font-normal text-slate-300 normal-case tracking-normal">
-                    Radicación Real vs Bolsa Nacional · Clic para alternar cálculo en Brecha Neta
+                    Radicación Real vs Sede Física · Clic para alternar cálculo en Brecha Neta
                   </span>
                 </th>
 
@@ -1303,7 +1296,7 @@ export function BalancePredictivoView() {
                     ? 'bg-indigo-600 text-white font-black ring-1 ring-indigo-300 shadow-inner'
                     : 'text-slate-400 hover:text-white hover:bg-slate-800'
                     }`}
-                  title="Click para calcular Brecha Neta con Radicación Real (Retorno de estudiantes a su depto)"
+                  title="Click para calcular Brecha Neta con Radicación Real (Maestros que radican trabajando en el depto según planilla SEP)"
                 >
                   <div className="flex items-center justify-end gap-1">
                     {tipoAsignacionEgresados === 'radicacion' && <span className="w-1.5 h-1.5 rounded-full bg-amber-300" />}
@@ -1312,20 +1305,20 @@ export function BalancePredictivoView() {
                   <span className="block text-[7.5px] font-normal opacity-80 normal-case">Retorno a Depto</span>
                 </th>
 
-                {/* 2. Bolsa Nacional */}
+                {/* 2. Egresados Sede Física */}
                 <th
-                  onClick={() => setTipoAsignacionEgresados('bolsa')}
-                  className={`py-2 px-2 text-right w-24 border-r border-slate-700 cursor-pointer transition-all ${tipoAsignacionEgresados === 'bolsa'
-                    ? 'bg-sky-600 text-white font-black ring-1 ring-sky-300 shadow-inner'
+                  onClick={() => setTipoAsignacionEgresados('local')}
+                  className={`py-2 px-2 text-right w-24 border-r border-slate-700 cursor-pointer transition-all ${tipoAsignacionEgresados === 'local'
+                    ? 'bg-emerald-600 text-white font-black ring-1 ring-emerald-300 shadow-inner'
                     : 'text-slate-400 hover:text-white hover:bg-slate-800'
                     }`}
-                  title="Click para calcular Brecha Neta con Bolsa Nacional Proporcional"
+                  title="Click para calcular Brecha Neta con Egresados Formados Físicamente en las ESFMs del Departamento (Sin Migración)"
                 >
                   <div className="flex items-center justify-end gap-1">
-                    {tipoAsignacionEgresados === 'bolsa' && <span className="w-1.5 h-1.5 rounded-full bg-amber-300" />}
-                    <span>2. Bolsa Nac.</span>
+                    {tipoAsignacionEgresados === 'local' && <span className="w-1.5 h-1.5 rounded-full bg-amber-300" />}
+                    <span>2. Sede Física</span>
                   </div>
-                  <span className="block text-[7.5px] font-normal opacity-80 normal-case">Cuota Deptal</span>
+                  <span className="block text-[7.5px] font-normal opacity-80 normal-case">Formados en ESFM</span>
                 </th>
               </tr>
             </thead>
@@ -1339,7 +1332,7 @@ export function BalancePredictivoView() {
                 };
                 const totalGrupoDemanda = grupo.items.reduce((acc, it) => acc + it.metrics.demanda_total, 0);
                 const totalGrupoRadicacion = grupo.items.reduce((acc, it) => acc + (it.metrics.egresados_radicacion_calc || 0), 0);
-                const totalGrupoBolsa = grupo.items.reduce((acc, it) => acc + (it.metrics.egresados_bolsa_calc || 0), 0);
+                const totalGrupoLocal = grupo.items.reduce((acc, it) => acc + (it.metrics.egresados_local_calc || 0), 0);
                 const totalGrupoBrecha = grupo.items.reduce((acc, it) => acc + it.metrics.brecha_neta, 0);
 
                 return (
@@ -1353,7 +1346,7 @@ export function BalancePredictivoView() {
                             <span>{grupo.nivelNombre}</span>
                           </span>
                           <span className="text-[10px] font-bold opacity-80 lowercase tracking-normal">
-                            ({grupo.items.length} esp. · Demanda: {fmt(totalGrupoDemanda)} · Oferta [Radic: {fmt(totalGrupoRadicacion)} | Bolsa: {fmt(totalGrupoBolsa)}] · Brecha:{' '}
+                            ({grupo.items.length} esp. · Demanda: {fmt(totalGrupoDemanda)} · Oferta [Radic: {fmt(totalGrupoRadicacion)} | Sede Fís: {fmt(totalGrupoLocal)}] · Brecha:{' '}
                             <strong className="text-current font-black">
                               {totalGrupoBrecha > 0 ? `+${fmt(totalGrupoBrecha)}` : fmt(totalGrupoBrecha)}
                             </strong>)
@@ -1458,12 +1451,12 @@ export function BalancePredictivoView() {
                             <span>{fmt(m.egresados_radicacion_calc || 0)}</span>
                           </td>
 
-                          {/* 2. Egresados Bolsa Nacional (Cuota Proporcional) */}
-                          <td className={`py-2 px-2 text-right border-r border-slate-200 tabular-nums font-mono text-[11px] ${tipoAsignacionEgresados === 'bolsa'
-                            ? 'bg-sky-50/80 text-sky-950 font-black ring-1 ring-inset ring-sky-300'
+                          {/* 2. Egresados Sede Física (Formados en ESFM) */}
+                          <td className={`py-2 px-2 text-right border-r border-slate-200 tabular-nums font-mono text-[11px] ${tipoAsignacionEgresados === 'local'
+                            ? 'bg-emerald-50/80 text-emerald-950 font-black ring-1 ring-inset ring-emerald-300'
                             : 'text-slate-600 font-semibold'
                             }`}>
-                            <span>{fmt(m.egresados_bolsa_calc || 0)}</span>
+                            <span>{fmt(m.egresados_local_calc || 0)}</span>
                           </td>
 
                           {/* Brecha Neta */}
@@ -1535,10 +1528,10 @@ export function BalancePredictivoView() {
                   {fmt(totales.totEgrRadicacion)}
                 </td>
 
-                {/* Total 2. Bolsa Nacional */}
-                <td className={`py-3 px-2 text-right border-r border-slate-800 font-black tabular-nums font-mono text-[11px] ${tipoAsignacionEgresados === 'bolsa' ? 'bg-sky-900/70 text-sky-200 ring-1 ring-sky-400' : 'text-slate-400'
+                {/* Total 2. Egresados Sede Física */}
+                <td className={`py-3 px-2 text-right border-r border-slate-800 font-black tabular-nums font-mono text-[11px] ${tipoAsignacionEgresados === 'local' ? 'bg-emerald-900/70 text-emerald-200 ring-1 ring-emerald-400' : 'text-slate-400'
                   }`}>
-                  {fmt(totales.totEgrBolsa)}
+                  {fmt(totales.totEgrLocal)}
                 </td>
 
                 <td className={`py-3 px-3 text-center font-black text-xs border-l border-slate-800 tabular-nums ${totales.totBrecha > 0 ? 'bg-rose-950 text-rose-300' : 'bg-emerald-950 text-emerald-300'
