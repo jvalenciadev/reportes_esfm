@@ -1,0 +1,272 @@
+{
+  "kpis": {
+    "2024_2025": {
+      "entrantes": 6580,
+      "salientes": 4522,
+      "continuos": 30769,
+      "sin_registro": 4445,
+      "total": 46316,
+      "tasa_renovacion_pct": 17.6,
+      "migraciones_inter_depto": 1178,
+      "permanecen_depto": 946
+    },
+    "2025_2026": {
+      "entrantes": 4824,
+      "salientes": 32420,
+      "continuos": 4929,
+      "sin_registro": 4143,
+      "total": 46316,
+      "tasa_renovacion_pct": 49.5,
+      "migraciones_inter_depto": 1080,
+      "permanecen_depto": 1044
+    }
+  },
+  "por_departamento": {
+    "2024_2025": {
+      "BENI": {
+        "entrantes": 435,
+        "salientes": 241,
+        "continuos": 1826
+      },
+      "CHUQUISACA": {
+        "entrantes": 437,
+        "salientes": 323,
+        "continuos": 1744
+      },
+      "COCHABAMBA": {
+        "entrantes": 1132,
+        "salientes": 818,
+        "continuos": 4852
+      },
+      "LA PAZ": {
+        "entrantes": 1734,
+        "salientes": 1238,
+        "continuos": 9575
+      },
+      "ORURO": {
+        "entrantes": 316,
+        "salientes": 258,
+        "continuos": 1847
+      },
+      "PANDO": {
+        "entrantes": 212,
+        "salientes": 91,
+        "continuos": 422
+      },
+      "POTOSI": {
+        "entrantes": 676,
+        "salientes": 450,
+        "continuos": 3024
+      },
+      "SANTA CRUZ": {
+        "entrantes": 1403,
+        "salientes": 901,
+        "continuos": 5765
+      },
+      "TARIJA": {
+        "entrantes": 235,
+        "salientes": 202,
+        "continuos": 1714
+      }
+    },
+    "2025_2026": {
+      "BENI": {
+        "entrantes": 330,
+        "salientes": 1927,
+        "continuos": 334
+      },
+      "CHUQUISACA": {
+        "entrantes": 267,
+        "salientes": 1878,
+        "continuos": 303
+      },
+      "COCHABAMBA": {
+        "entrantes": 759,
+        "salientes": 5128,
+        "continuos": 856
+      },
+      "LA PAZ": {
+        "entrantes": 1103,
+        "salientes": 10050,
+        "continuos": 1259
+      },
+      "ORURO": {
+        "entrantes": 181,
+        "salientes": 1929,
+        "continuos": 234
+      },
+      "PANDO": {
+        "entrantes": 195,
+        "salientes": 476,
+        "continuos": 158
+      },
+      "POTOSI": {
+        "entrantes": 577,
+        "salientes": 3214,
+        "continuos": 486
+      },
+      "SANTA CRUZ": {
+        "entrantes": 1247,
+        "salientes": 6031,
+        "continuos": 1137
+      },
+      "TARIJA": {
+        "entrantes": 165,
+        "salientes": 1787,
+        "continuos": 162
+      }
+    }
+  },
+  "flujo_interdepartamental": {
+    "2024_2025": {
+      "top_rutas": [
+        {
+          "origen": "SANTA CRUZ",
+          "destino": "COCHABAMBA",
+          "docentes": 83,
+          "ruta": "SANTA CRUZ -> COCHABAMBA"
+        },
+        {
+          "origen": "PANDO",
+          "destino": "LA PAZ",
+          "docentes": 55,
+          "ruta": "PANDO -> LA PAZ"
+        },
+        {
+          "origen": "LA PAZ",
+          "destino": "SANTA CRUZ",
+          "docentes": 54,
+          "ruta": "LA PAZ -> SANTA CRUZ"
+        },
+        {
+          "origen": "BENI",
+          "destino": "LA PAZ",
+          "docentes": 50,
+          "ruta": "BENI -> LA PAZ"
+        },
+        {
+          "origen": "POTOSI",
+          "destino": "COCHABAMBA",
+          "docentes": 50,
+          "ruta": "POTOSI -> COCHABAMBA"
+        },
+        {
+          "origen": "CHUQUISACA",
+          "destino": "SANTA CRUZ",
+          "docentes": 46,
+          "ruta": "CHUQUISACA -> SANTA CRUZ"
+        },
+        {
+          "origen": "COCHABAMBA",
+          "destino": "SANTA CRUZ",
+          "docentes": 46,
+          "ruta": "COCHABAMBA -> SANTA CRUZ"
+        },
+        {
+          "origen": "SANTA CRUZ",
+          "destino": "TARIJA",
+          "docentes": 45,
+          "ruta": "SANTA CRUZ -> TARIJA"
+        },
+        {
+          "origen": "SANTA CRUZ",
+          "destino": "LA PAZ",
+          "docentes": 43,
+          "ruta": "SANTA CRUZ -> LA PAZ"
+        },
+        {
+          "origen": "BENI",
+          "destino": "SANTA CRUZ",
+          "docentes": 42,
+          "ruta": "BENI -> SANTA CRUZ"
+        }
+      ],
+      "balance_neto": {
+        "BENI": -83,
+        "CHUQUISACA": -42,
+        "COCHABAMBA": 76,
+        "LA PAZ": 88,
+        "ORURO": 26,
+        "PANDO": -47,
+        "POTOSI": -28,
+        "SANTA CRUZ": -21,
+        "TARIJA": 31
+      }
+    },
+    "2025_2026": {
+      "top_rutas": [
+        {
+          "origen": "SANTA CRUZ",
+          "destino": "COCHABAMBA",
+          "docentes": 62,
+          "ruta": "SANTA CRUZ -> COCHABAMBA"
+        },
+        {
+          "origen": "SANTA CRUZ",
+          "destino": "LA PAZ",
+          "docentes": 59,
+          "ruta": "SANTA CRUZ -> LA PAZ"
+        },
+        {
+          "origen": "PANDO",
+          "destino": "LA PAZ",
+          "docentes": 55,
+          "ruta": "PANDO -> LA PAZ"
+        },
+        {
+          "origen": "BENI",
+          "destino": "LA PAZ",
+          "docentes": 49,
+          "ruta": "BENI -> LA PAZ"
+        },
+        {
+          "origen": "COCHABAMBA",
+          "destino": "SANTA CRUZ",
+          "docentes": 47,
+          "ruta": "COCHABAMBA -> SANTA CRUZ"
+        },
+        {
+          "origen": "BENI",
+          "destino": "SANTA CRUZ",
+          "docentes": 46,
+          "ruta": "BENI -> SANTA CRUZ"
+        },
+        {
+          "origen": "CHUQUISACA",
+          "destino": "POTOSI",
+          "docentes": 45,
+          "ruta": "CHUQUISACA -> POTOSI"
+        },
+        {
+          "origen": "PANDO",
+          "destino": "BENI",
+          "docentes": 38,
+          "ruta": "PANDO -> BENI"
+        },
+        {
+          "origen": "CHUQUISACA",
+          "destino": "SANTA CRUZ",
+          "docentes": 38,
+          "ruta": "CHUQUISACA -> SANTA CRUZ"
+        },
+        {
+          "origen": "LA PAZ",
+          "destino": "SANTA CRUZ",
+          "docentes": 37,
+          "ruta": "LA PAZ -> SANTA CRUZ"
+        }
+      ],
+      "balance_neto": {
+        "BENI": -50,
+        "CHUQUISACA": -37,
+        "COCHABAMBA": 60,
+        "LA PAZ": 79,
+        "ORURO": 25,
+        "PANDO": -77,
+        "POTOSI": 1,
+        "SANTA CRUZ": -23,
+        "TARIJA": 22
+      }
+    }
+  }
+}

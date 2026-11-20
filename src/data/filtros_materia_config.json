@@ -149,7 +149,10 @@
     ],
     "materias": [
       "GASTRONOMÍA",
-      "TRANSFORMACIÓN DE ALIMENTOS"
+      "REFRIGERACIÓN",
+      "REPOSTERÍA",
+      "TRANSFORMACIÓN DE ALIMENTOS",
+      "VITICULTURA Y ENOLOGÍA"
     ],
     "submaterias_afines": [
       "Gastronomía",
@@ -284,7 +287,14 @@
       "SECUNDARIA"
     ],
     "materias": [
-      "AGROPECUARIA"
+      "AGROECOLOGIA",
+      "AGROECOLOGÍA",
+      "AGROPECUARIA",
+      "APICULTURA",
+      "FRUTICULTURA",
+      "HORTICULTURA",
+      "PISCICULTURA",
+      "VETERINARIA Y ZOOTECNIA"
     ],
     "submaterias_afines": [
       "Agropecuaria"
@@ -294,7 +304,7 @@
     "materias_condiciones": [],
     "activo": true,
     "descripcion": "Filtro inicial para AGROPECUARIA",
-    "updated_at": "2026-11-11T21:26:29.604Z"
+    "updated_at": "2026-11-19T01:14:47.508Z"
   },
   {
     "id": 14,
@@ -308,9 +318,13 @@
       "SECUNDARIA"
     ],
     "materias": [
+      "AUTOTRÓNICA",
       "ELECTRICIDAD",
       "ELECTRICIDAD INDUSTRIAL",
-      "ELECTRÓNICA"
+      "ELECTRÓNICA",
+      "ENSAMBLAJE Y MANTENIMIENTO DE COMPUTADORAS",
+      "MANTENIMIENTO DE CELULARES",
+      "ROBÓTICA"
     ],
     "submaterias_afines": [
       "Electricidad Industrial",
@@ -335,7 +349,10 @@
       "SECUNDARIA"
     ],
     "materias": [
-      "MECÁNICA AUTOMOTRIZ"
+      "AUTOTRÓNICA",
+      "MECÁNICA AUTOMOTRIZ",
+      "MECÁNICA DE MOTOCICLETAS",
+      "MECATRÓNICA"
     ],
     "submaterias_afines": [
       "Mecánica Automotriz"
@@ -359,7 +376,8 @@
       "SECUNDARIA"
     ],
     "materias": [
-      "ELECTROMECÁNICA"
+      "ELECTROMECÁNICA",
+      "MECATRÓNICA"
     ],
     "submaterias_afines": [
       "Electromecánica"
@@ -407,7 +425,14 @@
       "SECUNDARIA"
     ],
     "materias": [
+      "ARTE Y ARTESANIAS",
+      "ARTESANÍA",
+      "CONFECCIÓN DE ROPA TÍPICA",
       "INDUSTRIA TEXTIL",
+      "TEJIDO ARTESANAL",
+      "TEJIDO INDUSTRIAL",
+      "TEJIDOS Y TELARES",
+      "TELARES ARTESANALES",
       "TEXTIL Y CONFECCIÓN",
       "TEXTILES Y CONFECCIONES",
       "TEXTILES, TEJIDOS Y CONFECCIONES"
@@ -864,7 +889,10 @@
     "materias": [
       "CARPINTERÍA",
       "CARPINTERÍA EN MADERA Y METAL",
-      "MADERA Y METAL"
+      "CARPINTERÍA INDUSTRIAL",
+      "MADERA Y METAL",
+      "MARROQUENERÍA",
+      "TALLADO DE MADERA"
     ],
     "submaterias_afines": [
       "Carpintería en Madera y Metal"

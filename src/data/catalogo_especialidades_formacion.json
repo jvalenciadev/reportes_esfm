@@ -1,0 +1,4376 @@
+[
+  {
+    "cod_especialidad": 1228,
+    "especialidad_formacion": "MAESTRO DE EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL",
+    "total_docentes": 43933,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 1231,
+    "especialidad_formacion": "MAESTRO DE MATEMÁTICA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 11419,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1221,
+    "especialidad_formacion": "MAESTRO DE COMUNICACIÓN Y LENGUAJES: CASTELLANA Y ORIGINARIA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 8734,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1220,
+    "especialidad_formacion": "MAESTRO DE CIENCIAS SOCIALES EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 8376,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1218,
+    "especialidad_formacion": "MAESTRO DE CIENCIAS NATURALES: BIOLOGÍA - GEOGRAFÍA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 6721,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1225,
+    "especialidad_formacion": "MAESTRO DE EDUCACIÓN FÍSICA Y DEPORTES EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL Y SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 6574,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1226,
+    "especialidad_formacion": "MAESTRO DE EDUCACIÓN INICIAL EN FAMILIA COMUNITARIA",
+    "total_docentes": 6473,
+    "nivel_referencial": "Inicial"
+  },
+  {
+    "cod_especialidad": 1219,
+    "especialidad_formacion": "MAESTRO DE CIENCIAS NATURALES: FÍSICA - QUÍMICA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 5641,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1227,
+    "especialidad_formacion": "MAESTRO DE EDUCACIÓN MUSICAL EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL Y SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 4902,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 175,
+    "especialidad_formacion": "PROFESOR DE CURSO DE PRIMER Y SEGUNDO CICLOS DEL NIVEL PRIMARIO",
+    "total_docentes": 4719,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 1237,
+    "especialidad_formacion": "MAESTRO DE VALORES, ESPIRITUALIDAD Y RELIGIONES EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL Y SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 4335,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1223,
+    "especialidad_formacion": "MAESTRO DE COSMOVISIONES, FILOSOFÍAS Y SICOLOGÍA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 3988,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3549,
+    "especialidad_formacion": "MAESTRO DE EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL",
+    "total_docentes": 3960,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 1217,
+    "especialidad_formacion": "MAESTRO DE ARTES PLÁSTICAS Y VISUALES EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL Y SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 3315,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1235,
+    "especialidad_formacion": "MAESTRO DE TÉCNICA TECNOLÓGICA GENERAL EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL Y SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 2822,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1224,
+    "especialidad_formacion": "MAESTRO DE EDUCACIÓN ALTERNATIVA EDUCACIÓN DE PERSONAS JÓVENES Y ADULTAS",
+    "total_docentes": 2698,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 4,
+    "especialidad_formacion": "EDUCACIÓN BÁSICA",
+    "total_docentes": 2483,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 3554,
+    "especialidad_formacion": "MAESTRO DE EDUCACIÓN FÍSICA Y DEPORTES EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL Y SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 1857,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3546,
+    "especialidad_formacion": "MAESTRO DE EDUCACIÓN INICIAL EN FAMILIA COMUNITARIA",
+    "total_docentes": 1759,
+    "nivel_referencial": "Inicial"
+  },
+  {
+    "cod_especialidad": 1222,
+    "especialidad_formacion": "MAESTRO DE COMUNICACIÓN Y LENGUAJES: LENGUA EXTRANJERA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 1549,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1,
+    "especialidad_formacion": "EDUCACIÓN PRIMARIA",
+    "total_docentes": 1275,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 1290,
+    "especialidad_formacion": "MAESTRO DE COMUNICACIÓN Y LENGUAJES: CASTELLANA E INGLÉS EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 1066,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1758,
+    "especialidad_formacion": "MAESTRO DE COMUNICACIÓN Y LENGUAJES: LENGUA EXTRANJERA (INGLÉS) EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 982,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 620,
+    "especialidad_formacion": "PROFESOR DE EDUCACIÓN FÍSICA Y DEPORTES DE LOS NIVELES PRIMARIO Y SECUNDARIO",
+    "total_docentes": 868,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3552,
+    "especialidad_formacion": "MAESTRO DE EDUCACIÓN MUSICAL EDUCACION PRIMARIA COMUNITARIA VOCACIONAL Y SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 846,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 191,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE MATEMÁTICA DEL NIVEL SECUNDARIO",
+    "total_docentes": 755,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 189,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE CIENCIAS SOCIALES DEL NIVEL SECUNDARIO",
+    "total_docentes": 724,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 177,
+    "especialidad_formacion": "PROFESOR DE MATEMÁTICA DE TERCER CICLO DEL NIVEL PRIMARIO",
+    "total_docentes": 693,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 174,
+    "especialidad_formacion": "PROFESOR DE CURSO DEL NIVEL INICIAL",
+    "total_docentes": 683,
+    "nivel_referencial": "Inicial"
+  },
+  {
+    "cod_especialidad": 1327,
+    "especialidad_formacion": "MAESTRO DE EDUCACIÓN ESPECIAL PARA PERSONAS CON DISCAPACIDAD",
+    "total_docentes": 667,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 3551,
+    "especialidad_formacion": "MAESTRO DE MATEMÁTICA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 631,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3542,
+    "especialidad_formacion": "MAESTRO DE CIENCIAS NATURALES: FÍSICA - QUÍMICA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 617,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3550,
+    "especialidad_formacion": "MAESTRO DE EDUCACIÓN MUSICAL EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL Y SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 569,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 608,
+    "especialidad_formacion": "PROFESOR DE LENGUAJE Y COMUNICACIÓN DE TERCER CICLO DEL NIVEL PRIMARIO",
+    "total_docentes": 561,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3541,
+    "especialidad_formacion": "MAESTRO DE ARTES PLÁSTICAS Y VISUALES EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL Y SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 531,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3553,
+    "especialidad_formacion": "MAESTRO DE CIENCIAS NATURALES: BIOLOGÍA - GEOGRAFÍA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 511,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1566,
+    "especialidad_formacion": "MAESTRO DE EDUCACIÓN ESPECIAL EDUCACIÓN PARA PERSONAS CON DISCAPACIDAD",
+    "total_docentes": 509,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 624,
+    "especialidad_formacion": "PROFESOR DE RELIGIÓN, ÉTICA Y MORAL DE LOS NIVELES PRIMARIO Y SECUNDARIO",
+    "total_docentes": 482,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 3539,
+    "especialidad_formacion": "MAESTRO DE COMUNICACIÓN Y LENGUAJES: CASTELLANA Y ORIGINARIA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 477,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3,
+    "especialidad_formacion": "EDUCACIÓN PRE-BÁSICA",
+    "total_docentes": 466,
+    "nivel_referencial": "Inicial"
+  },
+  {
+    "cod_especialidad": 3556,
+    "especialidad_formacion": "MAESTRO DE CIENCIAS SOCIALES EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 430,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 6,
+    "especialidad_formacion": "MATEMÁTICA",
+    "total_docentes": 408,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3559,
+    "especialidad_formacion": "MAESTRO DE COSMOVISIONES, FILOSOFÍAS Y SICOLOGÍA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 373,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 621,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE EXPRESIÓN Y CREATIVIDAD CON ESPECIALIDAD EN ARTES MUSICALES DE LOS NIVELES PRIMARIO Y SECUNDARIO",
+    "total_docentes": 325,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 34,
+    "especialidad_formacion": "ARTES PLÁSTICAS",
+    "total_docentes": 323,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 31,
+    "especialidad_formacion": "LENGUAJE Y ESTUDIOS SOCIALES",
+    "total_docentes": 323,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 193,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE COMUNICACIÓN Y LENGUAJE DEL NIVEL SECUNDARIO",
+    "total_docentes": 313,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 35,
+    "especialidad_formacion": "EDUCACIÓN MUSICAL",
+    "total_docentes": 279,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 133,
+    "especialidad_formacion": "EDUCACIÓN FÍSICA E HIGIENE ESCOLAR",
+    "total_docentes": 269,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 694,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE COMUNICACIÓN Y LENGUAJE CON ESPECIALIDAD EN LENGUAJE Y LITERATURA DEL NIVEL SECUNDARIO",
+    "total_docentes": 261,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 183,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE CIENCIAS NATURALES Y ECOLOGÍA CON ESPECIALIDAD EN BIOLOGÍA DEL NIVEL SECUNDARIO",
+    "total_docentes": 253,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3557,
+    "especialidad_formacion": "MAESTRO DE VALORES, ESPIRITUALIDAD Y RELIGIONES EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL Y SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 249,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 178,
+    "especialidad_formacion": "PROFESOR DE CIENCIAS NATURALES DE TERCER CICLO DEL NIVEL PRIMARIO",
+    "total_docentes": 247,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 2787,
+    "especialidad_formacion": "MAESTRO EN TÉCNICA TECNOLÓGICA GENERAL Y TÉCNICA TECNOLÓGICA ESPECIALIZADA EN AGROPECUARIA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 243,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 197,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE CIENCIAS NATURALES Y ECOLOGÍA CON ESPECIALIDAD EN FÍSICA Y QUÍMICA DEL NIVEL SECUNDARIO",
+    "total_docentes": 236,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 618,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE PSICOLOGÍA, FILOSOFÍA, LÓGICA Y ÉTICA DEL NIVEL SECUNDARIO",
+    "total_docentes": 230,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 179,
+    "especialidad_formacion": "PROFESOR DE CIENCIAS SOCIALES Y ÉTICA DE TERCER CICLO DEL NIVEL PRIMARIO",
+    "total_docentes": 229,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3545,
+    "especialidad_formacion": "MAESTRO DE EDUCACIÓN ALTERNATIVA EDUCACIÓN DE PERSONAS JÓVENES Y ADULTAS",
+    "total_docentes": 227,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 40,
+    "especialidad_formacion": "TÉCNICA VOCACIONAL",
+    "total_docentes": 226,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 152,
+    "especialidad_formacion": "MAESTRO DE CURSO DEL NIVEL PRIMARIO",
+    "total_docentes": 209,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 131,
+    "especialidad_formacion": "RELIGIÓN CATÓLICA Y MORAL",
+    "total_docentes": 194,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 23,
+    "especialidad_formacion": "INGLÉS",
+    "total_docentes": 187,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 617,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE CIENCIAS NATURALES Y ECOLOGÍA CON ESPECIALIDAD EN QUÍMICA Y BIOLOGÍA DEL NIVEL SECUNDARIO",
+    "total_docentes": 185,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 29,
+    "especialidad_formacion": "FÍSICA Y QUÍMICA",
+    "total_docentes": 173,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 153,
+    "especialidad_formacion": "EDUCACIÓN FÍSICA",
+    "total_docentes": 171,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 30,
+    "especialidad_formacion": "LENGUAJE Y LITERATURA",
+    "total_docentes": 170,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 67,
+    "especialidad_formacion": "MATEMÁTICAS Y CIENCIAS",
+    "total_docentes": 168,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 36,
+    "especialidad_formacion": "EDUCACIÓN FÍSICA E HIGIENE",
+    "total_docentes": 167,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 56,
+    "especialidad_formacion": "CIENCIAS BIOLÓGICAS INTEGRADAS",
+    "total_docentes": 160,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1329,
+    "especialidad_formacion": "MAESTRO DE MATEMÁTICA Y FÍSICA DE EDUCACIÓN DE PERSONAS JÓVENES Y ADULTAS EDUCACIÓN ALTERNATIVA",
+    "total_docentes": 159,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 23688,
+    "especialidad_formacion": "MAESTRO EN TECNICA TECNOLOGICA GENERAL Y TECNICA TECNOLOGICA ESPECIALIZADA EN ELECTRICIDAD Y ELECTRONICA EDUCACION SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACION ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 155,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 4219,
+    "especialidad_formacion": "MAESTRO DE TÉCNICA TECNOLÓGICA GENERAL Y TÉCNICA TECNOLÓGICA ESPECIALIZADA EN AGROPECUARIA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 152,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 187,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE CIENCIAS NATURALES Y ECOLOGÍA CON ESPECIALIDAD EN QUÍMICA DEL NIVEL SECUNDARIO",
+    "total_docentes": 140,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 17,
+    "especialidad_formacion": "ESTUDIOS SOCIALES",
+    "total_docentes": 139,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 58,
+    "especialidad_formacion": "MATEMÁTICA Y CIENCIAS INTEGRADAS",
+    "total_docentes": 138,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 51,
+    "especialidad_formacion": "MECÁNICA AUTOMOTRIZ",
+    "total_docentes": 137,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2029,
+    "especialidad_formacion": "MAESTRO DE COMUNICACIÓN Y LENGUAJES: LENGUA CASTELLANA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 136,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 4216,
+    "especialidad_formacion": "MAESTRO DE TÉCNICA TECNOLÓGICA GENERAL Y TÉCNICA TECNOLÓGICA ESPECIALIZADA EN TRANSFORMACIÓN DE ALIMENTOS Y GASTRONOMÍA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 136,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 205,
+    "especialidad_formacion": "PROFESOR DE RELIGION CATÓLICA, ETICA Y MORAL PARA LOS NIVELES PRIMARIO Y SECUNDARIO",
+    "total_docentes": 134,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 1324,
+    "especialidad_formacion": "MAESTRO DE CIENCIAS BIOLÓGICAS Y QUÍMICA DE EDUCACIÓN DE PERSONAS JÓVENES Y ADULTAS EDUCACIÓN ALTERNATIVA",
+    "total_docentes": 133,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 180,
+    "especialidad_formacion": "PROFESOR DE TECNOLOGÍA Y CONOCIMIENTO PRÁCTICO DE TERCER CICLO DEL NIVEL PRIMARIO",
+    "total_docentes": 127,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 129,
+    "especialidad_formacion": "EDUCACIÓN FÍSICA Y DEPORTES",
+    "total_docentes": 122,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 622,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE EXPRESIÓN Y CREATIVIDAD CON ESPECIALIDAD EN ARTES PLÁSTICAS DE LOS NIVELES PRIMARIO Y SECUNDARIO",
+    "total_docentes": 118,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 223,
+    "especialidad_formacion": "SISTEMAS INFORMÁTICOS",
+    "total_docentes": 114,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 762,
+    "especialidad_formacion": "GASTRONOMÍA",
+    "total_docentes": 111,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 32,
+    "especialidad_formacion": "FILOSOFÍA Y PSICOLOGÍA",
+    "total_docentes": 109,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 37,
+    "especialidad_formacion": "EDUCACIÓN TÉCNICA",
+    "total_docentes": 109,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 23728,
+    "especialidad_formacion": "MAESTRO EN TECNICA TECNOLOGICA GENERAL Y TECNICA TECNOLOGICA ESPECIALIZADO EN TRANSFORMACION DE ALIMENTOS Y GASTRONOMÍA EDUCACION SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACION ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 96,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 4214,
+    "especialidad_formacion": "MAESTRO DE TÉCNICA TECNOLÓGICA GENERAL Y TÉCNICA TECNOLÓGICA ESPECIALIZADA EN ELECTROMECÁNICA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 96,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 132,
+    "especialidad_formacion": "FILOSOFÍA, PSICOLOGÍA Y ORIENTACIÓN",
+    "total_docentes": 93,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 4217,
+    "especialidad_formacion": "MAESTRO DE TÉCNICA TECNOLÓGICA GENERAL Y TÉCNICA TECNOLÓGICA ESPECIALIZADA EN ELECTRICIDAD Y ELECTRÓNICA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 92,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 59,
+    "especialidad_formacion": "HISTORIA, GEOGRAFÍA Y EDUCACIÓN CÍVICA",
+    "total_docentes": 92,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 4163,
+    "especialidad_formacion": "MAESTRO DE TÉCNICA TECNOLÓGICA GENERAL Y TÉCNICA TECNOLÓGICA ESPECIALIZADA EN MECÁNICA AUTOMOTRIZ EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 88,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 204,
+    "especialidad_formacion": "PROFESOR DE EDUCACION FÍSICA DE LOS NIVELES PRIMARIO Y SECUNDARIO",
+    "total_docentes": 88,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1103,
+    "especialidad_formacion": "EDUCACIÓN FÍSICA Y DEPORTES EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL Y SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 84,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 841,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE COMUNICACIÓN Y LENGUA EXTRANJERA - INGLES DEL NIVEL SECUNDARIO",
+    "total_docentes": 84,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1481,
+    "especialidad_formacion": "MAESTRO DE EDUCACIÓN ALTERNATIVA EDUCACIÓN PERMANENTE",
+    "total_docentes": 82,
+    "nivel_referencial": "Permanente"
+  },
+  {
+    "cod_especialidad": 3543,
+    "especialidad_formacion": "MAESTRO DE TÉCNICA TECNOLÓGICA GENERAL EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL Y SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 81,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 23677,
+    "especialidad_formacion": "MAESTRO EN TECNICA TECNOLOGICA GENERAL Y TECNICA TECNOLOGICA ESPECIALIZADA EN MECANICA AUTOMOTRIZ EDUCACION SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACION ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 79,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2,
+    "especialidad_formacion": "EDUCACIÓN INICIAL",
+    "total_docentes": 79,
+    "nivel_referencial": "Inicial"
+  },
+  {
+    "cod_especialidad": 439,
+    "especialidad_formacion": "INGENIERO DE SISTEMAS",
+    "total_docentes": 75,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 27,
+    "especialidad_formacion": "MATEMÁTICA Y CIENCIAS NATURALES",
+    "total_docentes": 74,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 206,
+    "especialidad_formacion": "PROFESOR DE TÉCNICA VOCACIONAL DE LOS NIVELES PRIMARIO Y SECUNDARIO",
+    "total_docentes": 72,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 63,
+    "especialidad_formacion": "TALLER GENERAL",
+    "total_docentes": 70,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3544,
+    "especialidad_formacion": "MAESTRO DE COMUNICACIÓN Y LENGUAJES: LENGUA EXTRANJERA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 69,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 565,
+    "especialidad_formacion": "PROFESOR DE PRIMER Y SEGUNDO CICLO DE NIVEL PRIMARIO DE EDUCACIÓN DE JÓVENES Y ADULTOS",
+    "total_docentes": 68,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 366,
+    "especialidad_formacion": "MAESTRO DE LENGUA EXTRANJERA - IDIOMA INGLÉS",
+    "total_docentes": 67,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 211,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE EXPRESIÓN Y CREATIVIDAD EN EL NIVEL SECUNDARIO",
+    "total_docentes": 66,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 135,
+    "especialidad_formacion": "MAESTRO DE GRADO",
+    "total_docentes": 66,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 1326,
+    "especialidad_formacion": "MAESTRO DE COMUNICACIÓN Y LENGUAJES DE EDUCACIÓN DE PERSONAS JÓVENES Y ADULTAS EDUCACIÓN ALTERNATIVA",
+    "total_docentes": 65,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 1234,
+    "especialidad_formacion": "MAESTRO DE SISTEMAS INFORMÁTICOS EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 64,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1230,
+    "especialidad_formacion": "MAESTRO DE MANTENIMIENTO DE EQUIPOS Y SISTEMAS EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 63,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2916,
+    "especialidad_formacion": "MAESTRO DE TÉCNICA TECNOLÓGICA GENERAL Y TÉCNICA TECNOLÓGICA ESPECIALIZADA EN INDUSTRIAL TEXTIL Y CONFECCIÓN EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 63,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1145,
+    "especialidad_formacion": "LICENCIATURA EN EDUCACIÓN INICIAL EN FAMILIA COMUNITARIA",
+    "total_docentes": 61,
+    "nivel_referencial": "Inicial"
+  },
+  {
+    "cod_especialidad": 2914,
+    "especialidad_formacion": "MAESTRO DE TÉCNICA TECNOLÓGICA GENERAL Y TÉCNICA TECNOLÓGICA ESPECIALIZADA EN CARPINTERIA INDUSTRIAL EN MADERA Y METAL EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 61,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1146,
+    "especialidad_formacion": "LICENCIATURA EN EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL",
+    "total_docentes": 61,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 2788,
+    "especialidad_formacion": "MAESTRO EN TÉCNICA TECNOLÓGICA GENERAL Y TÉCNICA TECNOLÓGICA ESPECIALIZADA EN ADMINISTRACIÓN Y CONTABILIDAD EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 61,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1325,
+    "especialidad_formacion": "MAESTRO DE CIENCIAS SOCIALES DE EDUCACIÓN DE PERSONAS JÓVENES Y ADULTAS EDUCACIÓN ALTERNATIVA",
+    "total_docentes": 60,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 401,
+    "especialidad_formacion": "CIENCIAS DE LA EDUCACION",
+    "total_docentes": 60,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 140,
+    "especialidad_formacion": "ELECTRICIDAD INDUSTRIAL",
+    "total_docentes": 60,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1091,
+    "especialidad_formacion": "CIENCIAS NATURALES: BIOLOGÍA - GEOGRAFÍA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 59,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 215,
+    "especialidad_formacion": "BELLEZA INTEGRAL",
+    "total_docentes": 59,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 1151,
+    "especialidad_formacion": "LICENCIATURA EN CIENCIAS SOCIALES EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 58,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1101,
+    "especialidad_formacion": "EDUCACIÓN MUSICAL EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL Y SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 58,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 88,
+    "especialidad_formacion": "MECÁNICA INDUSTRIAL",
+    "total_docentes": 58,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1754,
+    "especialidad_formacion": "MAESTRO DE CIENCIAS NATURALES: MENCIÓN BIOLOGÍA - GEOGRAFÍA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 57,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 55,
+    "especialidad_formacion": "RELIGIÓN CATÓLICA",
+    "total_docentes": 56,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 134,
+    "especialidad_formacion": "CIENCIAS SOCIALES",
+    "total_docentes": 56,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1580,
+    "especialidad_formacion": "INDUSTRIA TEXTIL Y CONFECCIÓN",
+    "total_docentes": 55,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 691,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE EXPRESIÓN Y CREATIVIDAD CON ESPECIALIDAD EN ARTES MUSICALES DEL NIVEL SECUNDARIO",
+    "total_docentes": 54,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1158,
+    "especialidad_formacion": "LICENCIATURA EN EDUCACIÓN MUSICAL EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL Y SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 52,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 827,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE COMUNICACIÓN Y LENGUAJE CON ESPECIALIDAD EN LENGUAJE - LITERATURA DEL NIVEL SECUNDARIO",
+    "total_docentes": 51,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 15,
+    "especialidad_formacion": "PSICOLOGÍA",
+    "total_docentes": 51,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 319,
+    "especialidad_formacion": "EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL",
+    "total_docentes": 50,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 1288,
+    "especialidad_formacion": "MAESTRO DE AGROPECUARIA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 49,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1098,
+    "especialidad_formacion": "CIENCIAS SOCIALES EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 47,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1471,
+    "especialidad_formacion": "MAESTRO DE ADMINISTRACIÓN Y CONTABILIDAD EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 47,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1160,
+    "especialidad_formacion": "LICENCIATURA EN EDUCACIÓN FÍSICA Y DEPORTES EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL Y SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 47,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 8,
+    "especialidad_formacion": "CIENCIAS BIOLÓGICAS",
+    "total_docentes": 46,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 26,
+    "especialidad_formacion": "LETRAS Y COMUNICACIÓN",
+    "total_docentes": 45,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 255,
+    "especialidad_formacion": "CONTADOR PÚBLICO AUTORIZADO",
+    "total_docentes": 44,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 41,
+    "especialidad_formacion": "AGROPECUARIA",
+    "total_docentes": 44,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 57,
+    "especialidad_formacion": "BIOLOGÍA Y QUÍMICA",
+    "total_docentes": 43,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1148,
+    "especialidad_formacion": "LICENCIATURA EN CIENCIAS NATURALES: BIOLOGÍA - GEOGRAFÍA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 43,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1233,
+    "especialidad_formacion": "MAESTRO DE SEGURIDAD Y SOBERANÍA ALIMENTARIA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 42,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1216,
+    "especialidad_formacion": "MAESTRO DE ARTE Y ARTESANÍA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 42,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3555,
+    "especialidad_formacion": "MAESTRO DE EDUCACIÓN ESPECIAL EDUCACIÓN PARA PERSONAS CON DISCAPACIDAD",
+    "total_docentes": 41,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 1094,
+    "especialidad_formacion": "CIENCIAS NATURALES: FÍSICA - QUÍMICA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 40,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1099,
+    "especialidad_formacion": "COSMOVISIONES, FILOSOFÍAS Y SICOLOGÍA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 40,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 60,
+    "especialidad_formacion": "PROFESOR DE EXPRESIÓN Y CREATIVIDAD DE TERCER CICLO DEL NIVEL PRIMARIO, MENCIÓN EDUCACIÓN MUSICAL",
+    "total_docentes": 39,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 692,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE EXPRESIÓN Y CREATIVIDAD CON ESPECIALIDAD EN ARTES PLÁSTICAS DEL NIVEL SECUNDARIO",
+    "total_docentes": 39,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 33,
+    "especialidad_formacion": "FILOSOFÍA Y PSICO-ORIENTACIÓN",
+    "total_docentes": 39,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1492,
+    "especialidad_formacion": "MAESTRO DE FITOTECNIA Y AGROECOLOGÍA FORESTAL EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA EDUCACIÓN DE PERSONAS JÓVENES Y ADULTAS",
+    "total_docentes": 39,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 642,
+    "especialidad_formacion": "NIVEL PRIMARIO",
+    "total_docentes": 38,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 160,
+    "especialidad_formacion": "RELIGIÓN CATÓLICA, ETICA Y MORAL",
+    "total_docentes": 37,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 23691,
+    "especialidad_formacion": "MAESTRO EN TECNICA TECNOLOGICA GENERAL Y TECNICA TECNOLOGICA ESPECIALIZADA EN MECANICA INDUSTRIAL EDUCACION SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACION ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 36,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1236,
+    "especialidad_formacion": "MAESTRO DE TRANSFORMACIÓN TECNOLÓGICA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 36,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 20,
+    "especialidad_formacion": "IDIOMAS",
+    "total_docentes": 36,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1087,
+    "especialidad_formacion": "EDUCACIÓN INICIAL EN FAMILIA COMUNITARIA",
+    "total_docentes": 36,
+    "nivel_referencial": "Inicial"
+  },
+  {
+    "cod_especialidad": 28,
+    "especialidad_formacion": "MATEMÁTICA Y FÍSICA",
+    "total_docentes": 36,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1161,
+    "especialidad_formacion": "LICENCIATURA EN COMUNICACIÓN Y LENGUAJES: CASTELLANA E INGLÉS EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 36,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1472,
+    "especialidad_formacion": "MAESTRO DE SISTEMAS INFORMÁTICOS EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 36,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1756,
+    "especialidad_formacion": "MAESTRO DE CIENCIAS NATURALES: MENCIÓN FÍSICA - QUÍMICA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 35,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3292,
+    "especialidad_formacion": "MAESTRO EN TÉCNICA TECNOLÓGICA GENERAL Y TÉCNICA TECNOLÓGICA ESPECIALIZADA EN MECÁNICA AUTOMOTRIZ EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 35,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 181,
+    "especialidad_formacion": "PROFESOR DE EXPRESIÓN Y CREATIVIDAD DE TERCER CICLO DEL NIVEL PRIMARIO",
+    "total_docentes": 34,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2791,
+    "especialidad_formacion": "PSICOLOGO",
+    "total_docentes": 33,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 1102,
+    "especialidad_formacion": "ARTES PLÁSTICAS Y VISUALES EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL Y SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 33,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 23831,
+    "especialidad_formacion": "MAESTRO DE TECNICA TECNOLOGICA GENERAL Y TECNICA TECNOLOGICA ESPECIALIZADA EN CARPINTERIA INDUSTRIAL EN MADERA Y METAL EDUCACION SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACION ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 33,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1155,
+    "especialidad_formacion": "LICENCIATURA EN COSMOVISIONES, FILOSOFÍAS Y SICOLOGÍA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 33,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 573,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE CIENCIAS SOCIALES DEL NIVEL SECUNDARIO DE EDUCACIÓN DE JÓVENES Y ADULTOS",
+    "total_docentes": 31,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 570,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE CIENCIAS NATURALES Y ECOLOGIA CON MENCIÓN EN BIOLOGÍA Y QUÍMICA DEL NIVEL SECUNDARIO DE EDUCACIÓN DE JÓVENES Y ADULTOS",
+    "total_docentes": 30,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 49,
+    "especialidad_formacion": "ELECTRICIDAD",
+    "total_docentes": 30,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 23837,
+    "especialidad_formacion": "INGENIERIA DE SISTEMAS",
+    "total_docentes": 30,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1229,
+    "especialidad_formacion": "MAESTRO DE GESTIÓN INSTITUCIONAL PARTICIPATIVA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 29,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 66,
+    "especialidad_formacion": "CIENCIAS NATURALES Y QUÍMICA",
+    "total_docentes": 29,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1255,
+    "especialidad_formacion": "INDUSTRIA DE ALIMENTOS",
+    "total_docentes": 29,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 536,
+    "especialidad_formacion": "PSICOPEDAGOGIA",
+    "total_docentes": 29,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 1762,
+    "especialidad_formacion": "MAESTRO DE AGROPECUARIA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 28,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3399,
+    "especialidad_formacion": "INGENIERO INFORMÁTICO",
+    "total_docentes": 28,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1085,
+    "especialidad_formacion": "COMUNICACIÓN Y LENGUAJES:CASTELLANA Y ORIGINARIA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 27,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1149,
+    "especialidad_formacion": "LICENCIATURA EN CIENCIAS NATURALES: FÍSICA - QUÍMICA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 27,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 39,
+    "especialidad_formacion": "EDUCACIÓN DEL HOGAR",
+    "total_docentes": 27,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 164,
+    "especialidad_formacion": "POLIVALENTE DE PRIMER Y SEGUNDO CICLOS",
+    "total_docentes": 27,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 411,
+    "especialidad_formacion": "ABOGADO",
+    "total_docentes": 27,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 1147,
+    "especialidad_formacion": "LICENCIATURA EN MATEMÁTICA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 26,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1502,
+    "especialidad_formacion": "PARVULARIA",
+    "total_docentes": 26,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 2198,
+    "especialidad_formacion": "INGENIERO AGRONOMO",
+    "total_docentes": 26,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 146,
+    "especialidad_formacion": "CIENCIAS BIOLÓGICAS Y QUÍMICA",
+    "total_docentes": 26,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 601,
+    "especialidad_formacion": "EDUCACIÓN PRIMARIA",
+    "total_docentes": 26,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 572,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE MATEMÁTICA Y FÍSICA DEL NIVEL SECUNDARIO DE EDUCACIÓN DE JÓVENES Y ADULTOS",
+    "total_docentes": 25,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 171,
+    "especialidad_formacion": "POLIVALENTE",
+    "total_docentes": 25,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 685,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE EXPRESIÓN Y CREATIVIDAD CON ESPECIALIDAD EN ARTES MUSICALES DEL NIVEL PRIMARIO",
+    "total_docentes": 25,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 25231,
+    "especialidad_formacion": "MAESTRO EN TÉCNICA TECNOLÓGICA GENERAL Y TÉCNICA TECNOLÓGICA ESPECIALIZADA EN INDUSTRIA TEXTIL Y CONFECCIÓN EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 24,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 597,
+    "especialidad_formacion": "INGENIERIA INFORMATICA",
+    "total_docentes": 23,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1742,
+    "especialidad_formacion": "MAESTRO DE MECÁNICA AUTOMOTRIZ EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 23,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1635,
+    "especialidad_formacion": "MEDICO VETERINARIO Y ZOOTECNISTA",
+    "total_docentes": 23,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 686,
+    "especialidad_formacion": "PROFESOR DE EDUCACIÓN FÍSICA Y DEPORTES DEL NIVEL PRIMARIO",
+    "total_docentes": 23,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 1314,
+    "especialidad_formacion": "MAESTRO DE TRANSFORMACIÓN DE ALIMENTOS EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 22,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 409,
+    "especialidad_formacion": "ADMINISTRACION DE EMPRESAS",
+    "total_docentes": 22,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 130,
+    "especialidad_formacion": "CIENCIAS BIOLÓGICAS E INTEGRADAS Y EDUCACIÓN AMBIENTAL",
+    "total_docentes": 22,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 24036,
+    "especialidad_formacion": "MAESTRO EN TECNICA TECNOLOGICA GENERAL Y TECNICA TECNOLOGICA ESPECIALIZADA EN ELECTROMECANICA EDUCACION SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACION ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 22,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 23970,
+    "especialidad_formacion": "MAESTRO EN TECNICA TECNOLOGICA GENERAL Y TECNICA TECNOLOGICA ESPECIALIZADA EN ELECTRICIDAD INDUSTRIAL EDUCACION SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACION ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 21,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 213,
+    "especialidad_formacion": "SECRETARIADO EJECUTIVO",
+    "total_docentes": 21,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 142,
+    "especialidad_formacion": "AGRONOMÍA",
+    "total_docentes": 21,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1150,
+    "especialidad_formacion": "LICENCIATURA EN COMUNICACIÓN Y LENGUAJES: CASTELLANA Y ORIGINARIA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 21,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 809,
+    "especialidad_formacion": "CONFECCIÓN TEXTIL",
+    "total_docentes": 21,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 25145,
+    "especialidad_formacion": "MAESTRO DE EDUCACIÓN MUSICAL EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL Y EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 21,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 25143,
+    "especialidad_formacion": "MAESTRO DE EDUCACIÓN FÍSICA Y DEPORTES EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL Y EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 20,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 22,
+    "especialidad_formacion": "FRANCÉS",
+    "total_docentes": 20,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 442,
+    "especialidad_formacion": "CONTADURIA PUBLICA",
+    "total_docentes": 20,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 561,
+    "especialidad_formacion": "MUSICA",
+    "total_docentes": 19,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3548,
+    "especialidad_formacion": "MAESTRO EN EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL",
+    "total_docentes": 19,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 1159,
+    "especialidad_formacion": "LICENCIATURA EN ARTES PLÁSTICAS Y VISUALES EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL Y SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 19,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 323,
+    "especialidad_formacion": "GASTRONOMÍA Y ALIMENTACION",
+    "total_docentes": 19,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 600,
+    "especialidad_formacion": "FISIOTERAPIA Y KINESIOLOGÍA",
+    "total_docentes": 19,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 10,
+    "especialidad_formacion": "BIOLOGÍA",
+    "total_docentes": 18,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1156,
+    "especialidad_formacion": "LICENCIATURA EN VALORES, ESPIRITUALIDAD Y RELIGIONES EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL Y SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 17,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1300,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE COMUNICACIÓN Y LENGUAJE DEL NIVEL SECUNDARIO DE EDUCACIÓN DE JÓVENES Y ADULTOS",
+    "total_docentes": 17,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 427,
+    "especialidad_formacion": "PEDAGOGIA",
+    "total_docentes": 17,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 23690,
+    "especialidad_formacion": "MAESTRO DE EDUCACION INICIAL EN FAMILIA COMUNITARIA Y EDUCACION ESPECIAL PARA PERSONAS CON DISCAPACIDAD",
+    "total_docentes": 17,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 872,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE MATEMÁTICA CON ESPECIALIDAD EN MATEMÁTICA - FÍSICA DEL NIVEL SECUNDARIO",
+    "total_docentes": 17,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 75,
+    "especialidad_formacion": "ELECTRÓNICA",
+    "total_docentes": 16,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1331,
+    "especialidad_formacion": "MAESTRO DE MECÁNICA INDUSTRIAL EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 16,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 681,
+    "especialidad_formacion": "RELIGIÓN Y MORAL",
+    "total_docentes": 16,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1764,
+    "especialidad_formacion": "MAESTRO DE ELECTRICIDAD Y ELECTRÓNICA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 16,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 138,
+    "especialidad_formacion": "PROFESOR DE GRADO",
+    "total_docentes": 16,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 840,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE COMUNICACIÓN Y LENGUAJE CON ESPECIALIDAD EN LENGUA EXTRANJERA: INGLÉS DE LOS NIVELES PRIMARIO Y SECUNDARIO",
+    "total_docentes": 16,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1100,
+    "especialidad_formacion": "VALORES, ESPIRITUALIDAD Y RELIGIONES EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL Y SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 15,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 23924,
+    "especialidad_formacion": "MAESTRO EN TECNICA TECNOLOGICA GENERAL Y TECNICA TECNOLOGICA ESPECIALIZADA EN SISTEMAS INFORMATICOS EDUCACION SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACION ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 14,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1498,
+    "especialidad_formacion": "MAESTRO DE INDUSTRIA DE ALIMENTOS EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 14,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 302,
+    "especialidad_formacion": "CONTADOR GENERAL",
+    "total_docentes": 14,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 428,
+    "especialidad_formacion": "VETERINARIA Y ZOOTECNIA",
+    "total_docentes": 14,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 224,
+    "especialidad_formacion": "PARVULARIO",
+    "total_docentes": 14,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 305,
+    "especialidad_formacion": "TURISMO",
+    "total_docentes": 14,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3560,
+    "especialidad_formacion": "MAESTRO DE VALORES, ESPIRITUALIDADES Y RELIGIONES EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL Y SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 14,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 151,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE EDUCACIÓN ESPECIAL DE NIVEL PRIMARIO",
+    "total_docentes": 14,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 588,
+    "especialidad_formacion": "INGENIERIA AGRONÓMICA",
+    "total_docentes": 13,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 24211,
+    "especialidad_formacion": "PSICOLOGA",
+    "total_docentes": 13,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 830,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE ARTES DE ESPECIALIDAD EN EDUCACIÓN MUSICAL DE NIVEL TÉCNICO BÁSICO, TÉCNICO AUXILIAR Y TÉCNICO MEDIO DE EDUCACIÓN DE JÓVENES Y ADULTOS",
+    "total_docentes": 13,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 4540,
+    "especialidad_formacion": "TEXTIL Y CONFECCIÓN",
+    "total_docentes": 13,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 14,
+    "especialidad_formacion": "FILOSOFÍA",
+    "total_docentes": 12,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 196,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE CIENCIAS NATURALES Y ECOLOGÍA CON ESPECIALIDAD EN BIOLOGÍA Y QUÍMICA DEL NIVEL SECUNDARIO",
+    "total_docentes": 12,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 4218,
+    "especialidad_formacion": "MAESTRO DE EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL Y EDUCACIÓN ESPECIAL PARA PERSONAS CON DISCAPACIDAD",
+    "total_docentes": 12,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 74,
+    "especialidad_formacion": "PROFESOR DE EXPRESIÓN Y CREATIVIDAD DE TERCER CICLO DEL NIVEL PRIMARIO, MENCIÓN ARTES PLÁSTICAS",
+    "total_docentes": 12,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2205,
+    "especialidad_formacion": "INGENIERIA AGROPECUARIA",
+    "total_docentes": 12,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 198,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE PSICOLOGÍA Y FILOSOFÍA DEL NIVEL SECUNDARIO",
+    "total_docentes": 12,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 24,
+    "especialidad_formacion": "INGLÉS Y FRANCÉS",
+    "total_docentes": 12,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1605,
+    "especialidad_formacion": "MAESTRO DE MECÁNICA INDUSTRIAL EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 12,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 42,
+    "especialidad_formacion": "ARTESANÍAS",
+    "total_docentes": 11,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 154,
+    "especialidad_formacion": "TECNOLOGÍA Y CONOCIMIENTO PRÁCTICO",
+    "total_docentes": 11,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 1335,
+    "especialidad_formacion": "LICENCIATURA EN TÉCNICA TECNOLÓGICA GENERAL EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL Y SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 11,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 238,
+    "especialidad_formacion": "PROFESOR DEL ÁREA INDUSTRIAL DE ESPECIALIDAD EN INDUSTRIA MANUFACTURERA Y TEXTIL PRODUCTIVA DE NIVEL TÉCNICO BÁSICO, TÉCNICO AUXILIAR Y TÉCNICO MEDIO DE EDUCACIÓN DE JÓVENES Y ADULTOS",
+    "total_docentes": 11,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 24543,
+    "especialidad_formacion": "INGENIERO ELECTROMECÁNICO",
+    "total_docentes": 11,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 553,
+    "especialidad_formacion": "ADMINISTRADOR DE EMPRESAS",
+    "total_docentes": 11,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3344,
+    "especialidad_formacion": "INGENIERÍA DE SISTEMAS",
+    "total_docentes": 11,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 855,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE COMUNICACIÓN Y LENGUAJE CON LA ESPECIALIDAD DE LENGUA EXTRANJERA- INGLES DEL NIVEL SECUNDARIO",
+    "total_docentes": 10,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1491,
+    "especialidad_formacion": "MAESTRO DE ELECTRICIDAD INDUSTRIAL EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA EDUCACIÓN DE PERSONAS JÓVENES Y ADULTAS",
+    "total_docentes": 10,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 424,
+    "especialidad_formacion": "TRABAJO SOCIAL",
+    "total_docentes": 10,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 2183,
+    "especialidad_formacion": "MAESTRO DE SISTEMAS INFORMATICOS EDUCACION SECUNDARIA COMUNITARIA PRODUCTIVA EDUCACION DE PERSONAS JOVENES Y ADULTAS",
+    "total_docentes": 10,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 23612,
+    "especialidad_formacion": "MAESTRO DE INDUSTRIA DE ALIMENTOS EDUCACION SECUNDARIA COMUNITARIA PRODUCTIVA EDUCACIÓN DE PERSONAS JOVENES Y ADULTAS",
+    "total_docentes": 10,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 120,
+    "especialidad_formacion": "LINGUISTICA E IDIOMAS",
+    "total_docentes": 10,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 38,
+    "especialidad_formacion": "EDUCACIÓN DE LA SALUD",
+    "total_docentes": 10,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 557,
+    "especialidad_formacion": "MÚSICA",
+    "total_docentes": 10,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1254,
+    "especialidad_formacion": "INGENIERÍA EN INDUSTRIA DE ALIMENTOS",
+    "total_docentes": 10,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1089,
+    "especialidad_formacion": "MATEMÁTICA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 10,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 420,
+    "especialidad_formacion": "INGENIERO DE ALIMENTOS",
+    "total_docentes": 10,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 54,
+    "especialidad_formacion": "INFORMÁTICA",
+    "total_docentes": 9,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 76,
+    "especialidad_formacion": "PROFESOR DE EXPRESIÓN Y CREATIVIDAD DE TERCER CICLO DEL NIVEL PRIMARIO, MENCIÓN EDUCACIÓN FÍSICA",
+    "total_docentes": 9,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 1328,
+    "especialidad_formacion": "MAESTRO DE ELECTRÓNICA - ELECTRICIDAD EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 9,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 843,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE MATEMÁTICA CON ESPECIALIDAD DE MATEMÁTICA - FÍSICA DE NIVEL SECUNDARIO",
+    "total_docentes": 9,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3713,
+    "especialidad_formacion": "CONFECCIÓN TEXTIL",
+    "total_docentes": 9,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 24149,
+    "especialidad_formacion": "SISTEMAS INFORMÁTICOS",
+    "total_docentes": 9,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 831,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE ARTES DE ESPECIALIDAD EN ARTESANIAS - ARTES PLASTICAS DE NIVEL TÉCNICO BÁSICO, TÉCNICO AUXILIAR Y TÉCNICO MEDIO DE EDUCACIÓN DE JÓVENES Y ADULTOS",
+    "total_docentes": 9,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 1301,
+    "especialidad_formacion": "MAESTRO DE GESTIÓN COMUNITARIA INSTITUCIONAL EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 9,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 11,
+    "especialidad_formacion": "QUÍMICA",
+    "total_docentes": 9,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2789,
+    "especialidad_formacion": "KINESIOLOGÍA YFISIOTERAPIA",
+    "total_docentes": 9,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 837,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE SERVICIOS DE ESPECIALIDAD EN SISTEMAS COMPUTACIONALES DE NIVEL TÉCNICO BÁSICO, TÉCNICO AUXILIAR Y TÉCNICO MEDIO DE EDUCACIÓN DE JÓVENES Y ADULTOS",
+    "total_docentes": 9,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 3606,
+    "especialidad_formacion": "CONTADOR PÚBLICO",
+    "total_docentes": 9,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 93,
+    "especialidad_formacion": "ARTES PLÁSTICAS Y ARTESANÍAS",
+    "total_docentes": 9,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3586,
+    "especialidad_formacion": "MAESTRO EN TÉCNICA TECNOLÓGICA GENERAL Y TÉCNICA TECNOLÓGICA ESPECIALIZADA EN INDUSTRIAL TEXTIL Y CONFECCIÓN EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 9,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 589,
+    "especialidad_formacion": "ANALISIS DE SISTEMAS",
+    "total_docentes": 9,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 2138,
+    "especialidad_formacion": "TRANSFORMACION DE ALIMENTOS",
+    "total_docentes": 8,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 4327,
+    "especialidad_formacion": "INGENIERO AGROPECUARIO",
+    "total_docentes": 8,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3599,
+    "especialidad_formacion": "INGENIERO AGRÓNOMO",
+    "total_docentes": 8,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3628,
+    "especialidad_formacion": "PSICOPEDAGOGO",
+    "total_docentes": 8,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 1162,
+    "especialidad_formacion": "LICENCIATURA EN EDUCACIÓN ESPECIAL PARA PERSONAS CON DISCAPACIDAD",
+    "total_docentes": 8,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 48,
+    "especialidad_formacion": "MECÁNICA",
+    "total_docentes": 8,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 367,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE ELECTRÓNICA - ELECTRICIDAD INDUSTRIAL DE NIVEL TÉCNICO BÁSICO, TÉCNICO AUXILIAR Y TÉCNICO MEDIO DE EDUCACIÓN DE JÓVENES Y ADULTOS",
+    "total_docentes": 8,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 2091,
+    "especialidad_formacion": "INGENIERO AGROFORESTAL",
+    "total_docentes": 8,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3665,
+    "especialidad_formacion": "FISIOTERAPEUTA KINESIÓLOGA",
+    "total_docentes": 8,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 237,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE BELLEZA INTEGRAL DE NIVEL TÉCNICO BÁSICO, TÉCNICO AUXILIAR Y TÉCNICO MEDIO DE EDUCACIÓN DE JÓVENES Y ADULTOS",
+    "total_docentes": 8,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 185,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE CIENCIAS NATURALES Y ECOLOGÍA CON ESPECIALIDAD EN FÍSICA DEL NIVEL SECUNDARIO",
+    "total_docentes": 8,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 217,
+    "especialidad_formacion": "MECÁNICA GENERAL",
+    "total_docentes": 8,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 1260,
+    "especialidad_formacion": "CONTADURÍA GENERAL",
+    "total_docentes": 8,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 423,
+    "especialidad_formacion": "INGENIERO CIVIL",
+    "total_docentes": 7,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 4647,
+    "especialidad_formacion": "ADAPTACIONES CURRICULARES EN LOS PROCESOS EDUCATIVOS",
+    "total_docentes": 7,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 24212,
+    "especialidad_formacion": "EDUCACIÓN INICIAL EN FAMILIA COMUNITARIA",
+    "total_docentes": 7,
+    "nivel_referencial": "Inicial"
+  },
+  {
+    "cod_especialidad": 1614,
+    "especialidad_formacion": "CONTADORA GENERAL",
+    "total_docentes": 7,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 440,
+    "especialidad_formacion": "CIENCIAS RELIGIOSAS",
+    "total_docentes": 7,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 94,
+    "especialidad_formacion": "HISTORIA, GEOGRAFÍA Y SOCIOLOGÍA",
+    "total_docentes": 7,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 65,
+    "especialidad_formacion": "GRAMÁTICA Y LITERATURA",
+    "total_docentes": 7,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 4580,
+    "especialidad_formacion": "MAESTRO DE EDUCACIÓN FÍSICA Y DEPORTES EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL Y SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ESPECIAL PARA PERSONAS CON DISCAPACIDAD",
+    "total_docentes": 7,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 2622,
+    "especialidad_formacion": "LICENCIATURA EN TÉCNICA TECNOLÓGICA GENERAL Y TÉCNICA TECNOLÓGICA ESPECIALIZADA EN AGROPECUARIA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 7,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 24180,
+    "especialidad_formacion": "MEDICO VETERINARIO ZOOTECNISTA",
+    "total_docentes": 7,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1289,
+    "especialidad_formacion": "MAESTRO DE ELECTRICIDAD INDUSTRIAL EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 7,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 45,
+    "especialidad_formacion": "CORTE Y CONFECCIÓN",
+    "total_docentes": 7,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 459,
+    "especialidad_formacion": "INGENIERO ELECTRICO",
+    "total_docentes": 7,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 24542,
+    "especialidad_formacion": "MECÁNICA AUTOMOTRIZ",
+    "total_docentes": 7,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 445,
+    "especialidad_formacion": "QUECHUA",
+    "total_docentes": 7,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 644,
+    "especialidad_formacion": "PRIMARIA",
+    "total_docentes": 6,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 419,
+    "especialidad_formacion": "INGENIERO FORESTAL",
+    "total_docentes": 6,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 850,
+    "especialidad_formacion": "PARVULARIO Y CRECIMIENTO PERSONAL EN LA INFANCIA",
+    "total_docentes": 6,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 1166,
+    "especialidad_formacion": "LICENCIATURA EN CIENCIAS BIOLÓGICAS Y QUÍMICA PARA PERSONAS JÓVENES Y ADULTAS EDUCACIÓN ALTERNATIVA",
+    "total_docentes": 6,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 839,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE COMUNICACIÓN Y LENGUAJE CON LA ESPECIALIDAD EN IDIOMA NATIVO: AYMARA DE LOS NIVELES PRIMARIO Y SECUNDARIO",
+    "total_docentes": 6,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 438,
+    "especialidad_formacion": "ARTES MUSICALES",
+    "total_docentes": 6,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 4215,
+    "especialidad_formacion": "MAESTRO DE EDUCACIÓN MUSICAL EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL Y SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ESPECIAL PARA PERSONAS CON DISCAPACIDAD",
+    "total_docentes": 6,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 4361,
+    "especialidad_formacion": "MAESTRO DE ARTES PLÁSTICAS Y VISUALES EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL Y SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ESPECIAL PARA PERSONAS CON DISCAPACIDAD",
+    "total_docentes": 6,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 579,
+    "especialidad_formacion": "PROFESOR DE EXPRESIÓN Y CREATIVIDAD DE LOS NIVELES PRIMARIO Y SECUNDARIO",
+    "total_docentes": 6,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 176,
+    "especialidad_formacion": "PROFESOR DE COMUNICACIÓN Y LENGUAJE DE TERCER CICLO DEL NIVEL PRIMARIO",
+    "total_docentes": 6,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 139,
+    "especialidad_formacion": "IDIOMA QUECHUA",
+    "total_docentes": 6,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 574,
+    "especialidad_formacion": "PROFESOR DE EDUCACIÓN ESPECIAL, MENCIÓN DISCAPACIDAD VISUAL",
+    "total_docentes": 6,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 4681,
+    "especialidad_formacion": "INGENIERO EN INDUSTRIA DE ALIMENTOS",
+    "total_docentes": 6,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3259,
+    "especialidad_formacion": "INGENIERO AGRONOMO",
+    "total_docentes": 6,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 836,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE SERVICIOS DE ESPECIALIDAD EN MECÁNICA AUTOMOTRIZ DE NIVEL TÉCNICO BÁSICO, TÉCNICO AUXILIAR Y TÉCNICO MEDIO DE EDUCACIÓN DE JÓVENES Y ADULTOS",
+    "total_docentes": 6,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 628,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE ESPECIALIZACIÓN OCUPACIONAL CON ESPECIALIDAD EN SECRETARIADO EJECUTIVO DEL NIVEL SECUNDARIO",
+    "total_docentes": 6,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 71,
+    "especialidad_formacion": "FILOSOFÍA, PSICOLOGÍA Y LENGUA ESPAÑOLA",
+    "total_docentes": 6,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 46,
+    "especialidad_formacion": "PEINADOS Y COSMETOLOGÍA",
+    "total_docentes": 6,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 4231,
+    "especialidad_formacion": "PREVENCIÓN, DETECCIÓN, ACTUACIÓN Y DERIVACIÓN DE LA VIOLENCIA EN LAS UNIDADES EDUCATIVAS",
+    "total_docentes": 6,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 210,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE INDUSTRIA ALIMENTARIA Y SALUD COMUNITARIA INTEGRAL DE NIVEL TÉCNICO BÁSICO, TÉCNICO AUXILIAR Y TÉCNICO MEDIO DE EDUCACIÓN DE JÓVENES Y ADULTOS",
+    "total_docentes": 6,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 838,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE EXPRESIÓN Y CREATIVIDAD CON ESPECIALIDAD DE ARTES PLÁSTICAS DEL NIVEL SECUNDARIO",
+    "total_docentes": 6,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 208,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE COMUNICACIÓN Y LENGUAJE INTEGRAL DE NIVEL PRIMARIO Y SECUNDARIO",
+    "total_docentes": 6,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 1757,
+    "especialidad_formacion": "LICENCIATURA EN COMUNICACIÓN Y LENGUAJES: LENGUA EXTRANJERA (INGLÉS) EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 6,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 70,
+    "especialidad_formacion": "LENGUAJE Y CIENCIAS",
+    "total_docentes": 6,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1292,
+    "especialidad_formacion": "INFORMÁTICA, MENCIÓN: INGENIERÍA EN SISTEMAS INFORMÁTICOS",
+    "total_docentes": 6,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 547,
+    "especialidad_formacion": "PROFESOR DE TÉCNICA VOCACIONAL DEL NIVEL PRIMARIO",
+    "total_docentes": 6,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 633,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE ESPECIALIZACIÓN OCUPACIONAL CON ESPECIALIDAD EN ELECTRÓNICA Y TELECOMUNICACIONES DEL NIVEL SECUNDARIO",
+    "total_docentes": 6,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3600,
+    "especialidad_formacion": "INGENIERA DE ALIMENTOS",
+    "total_docentes": 6,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1277,
+    "especialidad_formacion": "SISTEMAS COMPUTACIONALES",
+    "total_docentes": 6,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 144,
+    "especialidad_formacion": "ELECTROMECÁNICA",
+    "total_docentes": 6,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 72,
+    "especialidad_formacion": "HISTORIA, GEOGRAFÍA Y ESTUDIOS SOCIALES",
+    "total_docentes": 5,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 109,
+    "especialidad_formacion": "EDUCACIÓN ESPECIAL",
+    "total_docentes": 5,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 1020,
+    "especialidad_formacion": "EDUCACIÓN FÍSICA Y DEPORTE",
+    "total_docentes": 5,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 231,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE MATEMÁTICA - FÍSICA INTEGRAL DE NIVEL PRIMARIO Y SECUNDARIO",
+    "total_docentes": 5,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 200,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE CIENCIAS NATURALES, BIOLOGÍA Y QUÍMICA INTEGRAL DE NIVEL PRIMARIO Y SECUNDARIO",
+    "total_docentes": 5,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 1258,
+    "especialidad_formacion": "GASTRONOMÍA Y HOTELERIA",
+    "total_docentes": 5,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 294,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE CIENCIAS SOCIALES INTEGRAL DE NIVEL PRIMARIO Y SECUNDARIO",
+    "total_docentes": 5,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 3403,
+    "especialidad_formacion": "FONOAUDIOLOGO",
+    "total_docentes": 5,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 832,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE AGROPECUARIA DE ESPECIALIDAD EN AGRÍCOLA - PECUARIA - FORESTAL PRODUCTIVA DE NIVEL TÉCNICO BÁSICO, TÉCNICO AUXILIAR Y TÉCNICO MEDIO DE EDUCACIÓN DE JÓVENES Y ADULTOS",
+    "total_docentes": 5,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 430,
+    "especialidad_formacion": "ENFERMERIA",
+    "total_docentes": 5,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2868,
+    "especialidad_formacion": "TEXTILES Y CONFECCIONES",
+    "total_docentes": 5,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1789,
+    "especialidad_formacion": "IDIOMA INGLÉS",
+    "total_docentes": 5,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 229,
+    "especialidad_formacion": "INGENIERO ELECTRÓNICO",
+    "total_docentes": 5,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 407,
+    "especialidad_formacion": "CIENCIAS DE LA COMUNICACION SOCIAL",
+    "total_docentes": 5,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 1097,
+    "especialidad_formacion": "COMUNICACIÓN Y LENGUAJES: LENGUA EXTRANJERA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 5,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 89,
+    "especialidad_formacion": "QUÍMICA INDUSTRIAL",
+    "total_docentes": 5,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1105,
+    "especialidad_formacion": "TÉCNICA TECNOLÓGICA GENERAL EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL Y SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 5,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 4676,
+    "especialidad_formacion": "HERRAMIENTAS DE PLANIFICACIÓN EDUCATIVA",
+    "total_docentes": 5,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 128,
+    "especialidad_formacion": "MATEMÁTICA E INFORMÁTICA",
+    "total_docentes": 5,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 24178,
+    "especialidad_formacion": "GASTRONOMÍA",
+    "total_docentes": 5,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 457,
+    "especialidad_formacion": "ACTIVIDAD FISICA",
+    "total_docentes": 4,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 195,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE COMUNICACIÓN Y LENGUAJE CON ESPECIALIDAD EN IDIOMA EXTRANJERO DEL NIVEL SECUNDARIO",
+    "total_docentes": 4,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 750,
+    "especialidad_formacion": "PROFESOR DE LENGUA ORIGINARIA: MENCION PROYECTOS SOCIOPRODUCTIVOS DE LOS NIVELES PRIMARIO Y SECUNDARIO",
+    "total_docentes": 4,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 412,
+    "especialidad_formacion": "INGLES QUECHUA",
+    "total_docentes": 4,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 521,
+    "especialidad_formacion": "LENGUAJE Y SOCIALES",
+    "total_docentes": 4,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2943,
+    "especialidad_formacion": "GESTIÓN TECNOLÓGICA DE EDUCACIÓN EN EL ÁREA DE VALORES, ESPIRITUALIDAD Y RELIGIONES ENTORNO CLASSROOM",
+    "total_docentes": 4,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1167,
+    "especialidad_formacion": "LICENCIATURA EN COMUNICACIÓN Y LENGUAJES PARA PERSONAS JÓVENES Y ADULTAS EDUCACIÓN ALTERNATIVA",
+    "total_docentes": 4,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 2039,
+    "especialidad_formacion": "SECRETARIADO EJECUTIVO EN EDUCACIÓN",
+    "total_docentes": 4,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 3742,
+    "especialidad_formacion": "CARPINTERÍA EN MADERA Y METAL",
+    "total_docentes": 4,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 23595,
+    "especialidad_formacion": "SECRETARIO EJECUTIVO",
+    "total_docentes": 4,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 3353,
+    "especialidad_formacion": "MAESTRO DE ADMINISTRACIÓN Y CONTABILIDAD EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA EDUCACIÓN DE PERSONAS JOVENES Y ADULTAS",
+    "total_docentes": 4,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 414,
+    "especialidad_formacion": "INGENIERO MECANICO",
+    "total_docentes": 4,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1016,
+    "especialidad_formacion": "ARTESANIA",
+    "total_docentes": 4,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 578,
+    "especialidad_formacion": "PROFESOR DE EDUCACIÓN FÍSICA DEL NIVEL PRIMARIO",
+    "total_docentes": 4,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 1500,
+    "especialidad_formacion": "MAESTRO DE ELECTRÓNICA Y TELECOMUNICACIONES EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA EDUCACIÓN DE PERSONAS JÓVENES Y ADULTAS",
+    "total_docentes": 4,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1029,
+    "especialidad_formacion": "ANALISTA DE SISTEMAS",
+    "total_docentes": 4,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 435,
+    "especialidad_formacion": "EDUCACION SUPERIOR",
+    "total_docentes": 4,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 170,
+    "especialidad_formacion": "INGLÉS Y QUECHUA",
+    "total_docentes": 4,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2152,
+    "especialidad_formacion": "INGENIERO EN INFORMATICA",
+    "total_docentes": 4,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 47,
+    "especialidad_formacion": "CARPINTERIA",
+    "total_docentes": 4,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 977,
+    "especialidad_formacion": "EDUCACIÓN PARVULARIA",
+    "total_docentes": 4,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 3639,
+    "especialidad_formacion": "MAESTRO EN TÉCNICA TECNOLÓGICA GENERAL Y TÉCNICA TECNOLÓGICA ESPECIALIZADA EN CARPINTERIA INDUSTRIAL EN MADERA Y METAL EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 4,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 816,
+    "especialidad_formacion": "TURISMO Y HOTELERIA",
+    "total_docentes": 4,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 199,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE ESPECIALIZACIÓN OCUPACIONAL CON ESPECIALIDAD EN AGROPECUARIA DEL NIVEL SECUNDARIO",
+    "total_docentes": 4,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 896,
+    "especialidad_formacion": "INGENIERIA ELECTROMECANICA",
+    "total_docentes": 4,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2189,
+    "especialidad_formacion": "CARPINTERIA INDUSTRIAL",
+    "total_docentes": 4,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 216,
+    "especialidad_formacion": "LITERATURA Y CASTELLANO",
+    "total_docentes": 4,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2874,
+    "especialidad_formacion": "LICENCIATURA EN TÉCNICA TECNOLÓGICA GENERAL Y TÉCNICA TECNOLÓGICA ESPECIALIZADA EN TRANSFORMACIÓN DE ALIMENTOS Y GASTRONOMÍA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 4,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 212,
+    "especialidad_formacion": "SECRETARIADO ADMINISTRATIVO",
+    "total_docentes": 4,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 769,
+    "especialidad_formacion": "METAL MECÁNICA",
+    "total_docentes": 4,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 416,
+    "especialidad_formacion": "MEDICO CIRUJANO",
+    "total_docentes": 4,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 571,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE COMUNICACIÓN Y LENGUAJE DEL NIVEL SECUNDARIO DE EDUCACIÓN DE JÓVENES Y DE ADULTOS",
+    "total_docentes": 3,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 2083,
+    "especialidad_formacion": "PRODUCCIÓN AGROPECUARIA",
+    "total_docentes": 3,
+    "nivel_referencial": "Permanente"
+  },
+  {
+    "cod_especialidad": 163,
+    "especialidad_formacion": "MÚSICA Y CANTO",
+    "total_docentes": 3,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 626,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE ESPECIALIZACIÓN OCUPACIONAL CON ESPECIALIDAD EN CONTABILIDAD GENERAL DEL NIVEL SECUNDARIO",
+    "total_docentes": 3,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 1163,
+    "especialidad_formacion": "LICENCIATURA EN MATEMÁTICA Y FÍSICA PARA PERSONAS JÓVENES Y ADULTAS EDUCACIÓN ALTERNATIVA",
+    "total_docentes": 3,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 953,
+    "especialidad_formacion": "INDUSTRIAS DE LA ALIMENTACIÓN",
+    "total_docentes": 3,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 23643,
+    "especialidad_formacion": "MAESTRO DE ADMINISTRACION Y CONTABILIDAD EDUCACION SECUNDARIA COMUNITARIA PRODUCTIVA EDUCACION DE PERSONAS JOVENES Y ADULTAS",
+    "total_docentes": 3,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 580,
+    "especialidad_formacion": "PROFESOR DE ESPECIALIZACIÓN OCUPACIONAL CON ESPECIALIDAD EN EL ÁREA COMERCIAL DEL NIVEL SECUNDARIO",
+    "total_docentes": 3,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 693,
+    "especialidad_formacion": "PROFESOR DE EDUCACIÓN FÍSICA Y DEPORTES DEL NIVEL SECUNDARIO",
+    "total_docentes": 3,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1232,
+    "especialidad_formacion": "MAESTRO DE PRESERVACIÓN DE LA VIDA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 3,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 119,
+    "especialidad_formacion": "MATEMÁTICA Y CIENCIAS BIOLÓGICAS",
+    "total_docentes": 3,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 226,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE SECRETARIADO Y CONTABILIDAD DE NIVEL TÉCNICO BÁSICO, TÉCNICO AUXILIAR Y TÉCNICO MEDIO DE EDUCACIÓN DE JÓVENES Y ADULTOS",
+    "total_docentes": 3,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 4697,
+    "especialidad_formacion": "MAESTRO EN TÉCNICA TECNOLÓGICA GENERAL Y TÉCNICA TECNOLÓGICA ESPECIALIZADA EN TRANSFORMACIÓN DE ALIMENTOS Y GASTRONOMÍA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL Y EDUCACIÓN ESPECIAL PARA PERSONAS CON DISCAPACIDAD",
+    "total_docentes": 3,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 444,
+    "especialidad_formacion": "FONOAUDIOLOGIA",
+    "total_docentes": 3,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 2217,
+    "especialidad_formacion": "MAESTRO DE EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 3,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 44,
+    "especialidad_formacion": "TEJIDOS",
+    "total_docentes": 3,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 873,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE COMUNICACIÓN Y LENGUAJE CON ESPECIALIDAD EN IDIOMAS NATIVOS - AYMARA DEL NIVEL SECUNDARIO",
+    "total_docentes": 3,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3219,
+    "especialidad_formacion": "PROGRAMACIÓN DE SISTEMAS INFORMÁTICOS",
+    "total_docentes": 3,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 584,
+    "especialidad_formacion": "PROFESOR DE ESPECIALIZACIÓN OCUPACIONAL CON ESPECIALIDAD EN EL ÁREA INDUSTRIAL DEL NIVEL SECUNDARIO",
+    "total_docentes": 3,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 408,
+    "especialidad_formacion": "AUDITOR FINANCIERO",
+    "total_docentes": 3,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 23829,
+    "especialidad_formacion": "MAESTRO EN TECNICA TECNOLOGICA GENERAL Y TECNICA TECNOLOGICA ESPECIALIZADA EN SISTEMAS INFORMATICOS",
+    "total_docentes": 3,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 4227,
+    "especialidad_formacion": "ESTRATEGIAS PARA EVALUAR LA CONCRECIÓN CURRICULAR",
+    "total_docentes": 3,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1504,
+    "especialidad_formacion": "ELECTRICIDAD Y ELECTRÓNICA AUTOMOTRIZ",
+    "total_docentes": 3,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 300,
+    "especialidad_formacion": "SECRETARIA EJECUTIVA",
+    "total_docentes": 3,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 114,
+    "especialidad_formacion": "TECNICAS FEMENINAS",
+    "total_docentes": 3,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 4678,
+    "especialidad_formacion": "USO DE HERRAMIENTAS TECNOLÓGICAS E INTELIGENCIA ARTIFICIAL ENFOCADAS A MEJORAR LA PRÁCTICA EDUCATIVA EN EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL",
+    "total_docentes": 3,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 1948,
+    "especialidad_formacion": "INGENIERÍA EN INFORMÁTICA Y SISTEMAS ADMINISTRATIVOS",
+    "total_docentes": 3,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 4677,
+    "especialidad_formacion": "INTELIGENCIA ARTIFICIAL EN LOS PROCESOS EDUCATIVOS",
+    "total_docentes": 3,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 3651,
+    "especialidad_formacion": "INGENIERO QUÍMICO",
+    "total_docentes": 3,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2015,
+    "especialidad_formacion": "MEDICINA VETERINARIA Y ZOOTECNIA",
+    "total_docentes": 3,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2998,
+    "especialidad_formacion": "GESTIÓN TECNOLÓGICA DE EDUCACIÓN EN EL ÁREA DE COMUNICACIÓN Y LENGUAJES - LENGUA EXTRANJERA ENTORNO CLASSROOM",
+    "total_docentes": 3,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1460,
+    "especialidad_formacion": "PROTESIS DENTAL",
+    "total_docentes": 3,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 13,
+    "especialidad_formacion": "LITERATURA",
+    "total_docentes": 3,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 77,
+    "especialidad_formacion": "COSTURA Y TEJIDOS",
+    "total_docentes": 3,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 24967,
+    "especialidad_formacion": "RECURSOS EDUCATIVOS CON INTELIGENCIA ARTIFICIAL PARA EL TRABAJO DOCENTE",
+    "total_docentes": 3,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 724,
+    "especialidad_formacion": "ECONOMÍA",
+    "total_docentes": 3,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 24914,
+    "especialidad_formacion": "INGENIERÍA MECÁNICA AUTOMOTRIZ Y AGROINDUSTRIAL",
+    "total_docentes": 3,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 25083,
+    "especialidad_formacion": "EMPRENDIMIENTOS PRODUCTIVOS INDIVIDUALES",
+    "total_docentes": 3,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 1478,
+    "especialidad_formacion": "LICENCIATURA EN COMUNICACIÓN Y LENGUAJES: LENGUA EXTRANJERA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 3,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 137,
+    "especialidad_formacion": "LENGUAJE Y CIENCIAS SOCIALES",
+    "total_docentes": 3,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 527,
+    "especialidad_formacion": "COMUNICACION SOCIAL",
+    "total_docentes": 3,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1330,
+    "especialidad_formacion": "MAESTRO DE MECÁNICA AUTOMOTRIZ EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 3,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2942,
+    "especialidad_formacion": "GESTIÓN TECNOLÓGICA PARA EDUCACIÓN ALTERNATIVA ENTORNO CLASSROOM",
+    "total_docentes": 3,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 522,
+    "especialidad_formacion": "EDUCACIÓN PRE-ESCOLAR",
+    "total_docentes": 3,
+    "nivel_referencial": "Inicial"
+  },
+  {
+    "cod_especialidad": 3235,
+    "especialidad_formacion": "MEDICO VETERINARIO",
+    "total_docentes": 3,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 43,
+    "especialidad_formacion": "ALIMENTACIÓN",
+    "total_docentes": 3,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 25090,
+    "especialidad_formacion": "ESTRATEGIAS PARA LA DETECCIÓN Y ATENCIÓN A ESTUDIANTES CON DIFICULTADES EN EL APRENDIZAJE",
+    "total_docentes": 3,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 87,
+    "especialidad_formacion": "EDUCADOR DE ADULTOS",
+    "total_docentes": 3,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 447,
+    "especialidad_formacion": "INGENIERIA QUÍMICA",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 24599,
+    "especialidad_formacion": "INGENIERO MECATRÓNICO",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 627,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE ESPECIALIZACIÓN OCUPACIONAL CON ESPECIALIDAD EN ADMINISTRACIÓN DE EMPRESAS DEL NIVEL SECUNDARIO",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1512,
+    "especialidad_formacion": "MECANICA AUTOMOTRIZ",
+    "total_docentes": 2,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 643,
+    "especialidad_formacion": "PRIMARIO",
+    "total_docentes": 2,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 669,
+    "especialidad_formacion": "MATEMÁTICAS Y CIENCIAS NATURALES",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2134,
+    "especialidad_formacion": "ELECTRICIDAD E INSTALACIONES",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1079,
+    "especialidad_formacion": "FORMACIÓN DE PÁRVULOS",
+    "total_docentes": 2,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 3358,
+    "especialidad_formacion": "INGENIERÍA DE ALIMENTOS",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 68,
+    "especialidad_formacion": "ARTES Y TÉCNICAS DEL HOGAR",
+    "total_docentes": 2,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 1018,
+    "especialidad_formacion": "ESTRATEGIAS DIDÁCTICAS",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 4053,
+    "especialidad_formacion": "TURISMO, MENCION: GESTIÓN TURISTICA",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 417,
+    "especialidad_formacion": "SOCIOLOGIA",
+    "total_docentes": 2,
+    "nivel_referencial": "Permanente"
+  },
+  {
+    "cod_especialidad": 631,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE ESPECIALIZACIÓN OCUPACIONAL CON ESPECIALIDAD EN MECÁNICA GENERAL DEL NIVEL SECUNDARIO",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 541,
+    "especialidad_formacion": "AUTOMOTRIZ",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 155,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE EDUCACIÓN PERMANENTE DE NIVEL TÉCNICO BÁSICO, TÉCNICO AUXILIAR Y TÉCNICO MEDIO DE EDUCACIÓN DE JÓVENES Y ADULTOS",
+    "total_docentes": 2,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 4560,
+    "especialidad_formacion": "MAGISTER SCIENTIARUM (M.SC) EN EDUCACIÓN SUPERIOR",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 513,
+    "especialidad_formacion": "DERECHO",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 668,
+    "especialidad_formacion": "MATEMÁTICAS",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3436,
+    "especialidad_formacion": "GESTIÓN DEL TURISMO",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 23818,
+    "especialidad_formacion": "GESTIÓN TECNOLÓGICA DE EDUCACIÓN EN EL ÁREA DE COMUNICACIÓN Y LENGUAJES - LENGUA EXTRANJERA ENTORNO MOODLE",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 645,
+    "especialidad_formacion": "PROFESOR DE CURSO DE PRIMER Y SEGUNDO CICLOS",
+    "total_docentes": 2,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 2732,
+    "especialidad_formacion": "OFIMÁTICA AVANZADA EN PROCESOS PEDAGÓGICOS",
+    "total_docentes": 2,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 136,
+    "especialidad_formacion": "COSTURA",
+    "total_docentes": 2,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 2070,
+    "especialidad_formacion": "LICENCIATURA EN EDUCACIÓN ESPECIAL EDUCACIÓN PARA PERSONAS CON DISCAPACIDAD",
+    "total_docentes": 2,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 422,
+    "especialidad_formacion": "CONSTRUCCIONES CIVILES",
+    "total_docentes": 2,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 1443,
+    "especialidad_formacion": "LICENCIATURA EN EDUCACIÓN TÉCNICA TECNOLÓGICA PRODUCTIVA SISTEMAS INFORMÁTICOS EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 2,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 4427,
+    "especialidad_formacion": "EDUCACIÓN DESPATRIARCALIZADORA PARA UNA VIDA LIBRE DE VIOLENCIA",
+    "total_docentes": 2,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 25030,
+    "especialidad_formacion": "EDUCACIÓN INICIAL Y PARVULARIA",
+    "total_docentes": 2,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 593,
+    "especialidad_formacion": "OPERADOR EN COMPUTADORAS",
+    "total_docentes": 2,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 990,
+    "especialidad_formacion": "OFIMATICA",
+    "total_docentes": 2,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 3260,
+    "especialidad_formacion": "ADMINISTRADOR FINANCIERO",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 23848,
+    "especialidad_formacion": "LICENCIATURA EN TECNICA  TECNOLOGICA GENERAL Y TECNICA TECNOLOGICA ESPECIALIZADA EN SISTEMAS INFORMATICOS EDUCACION SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACION ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 997,
+    "especialidad_formacion": "LINGUISTICA APLICADA A LA ENSEÑANZA DE LENGUAS",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 316,
+    "especialidad_formacion": "MAESTRO DEL ÁREA DE MATEMÁTICA Y FÍSICA EDUCACIÓN PRIMARIA DE PERSONAS JÓVENES Y ADULTAS, EDUCACIÓN SECUNDARIA DE PERSONAS JÓVENES Y ADULTAS",
+    "total_docentes": 2,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 1341,
+    "especialidad_formacion": "ANALISIS DE SISTEMAS INFORMATICOS",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 468,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE ARTES ESPECIALIDAD EN ARTESANÍAS - ARTES PLÁSTICAS DE NIVEL TÉCNICO BÁSICO, TÉCNICO AUXILIAR Y TÉCNICO MEDIO DE EDUCACIÓN DE JÓVENES Y ADULTOS",
+    "total_docentes": 2,
+    "nivel_referencial": "Permanente"
+  },
+  {
+    "cod_especialidad": 636,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE ESPECIALIZACIÓN OCUPACIONAL CON ESPECIALIDAD EN TEXTILES DEL NIVEL SECUNDARIO",
+    "total_docentes": 2,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 1088,
+    "especialidad_formacion": "EDUCACIÓN ALTERNATIVA EDUCACIÓN DE PERSONAS JÓVENES Y ADULTAS",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 158,
+    "especialidad_formacion": "FILOSOFÍA Y PEDAGOGÍA",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2010,
+    "especialidad_formacion": "MAESTRO DEL ÁREA DE CIENCIAS BIOLÓGICAS Y QUÍMICA EDUCACIÓN PRIMARIA DE PERSONAS JÓVENES Y ADULTAS EDUCACIÓN SECUNDARIA DE PERSONAS JÓVENES Y ADULTAS",
+    "total_docentes": 2,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 778,
+    "especialidad_formacion": "MÚSICA - VIOLONCELLO",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1786,
+    "especialidad_formacion": "INGENIERIA AMBIENTAL",
+    "total_docentes": 2,
+    "nivel_referencial": "Permanente"
+  },
+  {
+    "cod_especialidad": 2734,
+    "especialidad_formacion": "OFIMATICA BASICA PARA MAESTRAS Y MAESTROS",
+    "total_docentes": 2,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 1604,
+    "especialidad_formacion": "MAESTRO DE FITOTECNIA Y AGROECOLOGÍA FORESTAL EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1535,
+    "especialidad_formacion": "INGENIERO AGRICOLA",
+    "total_docentes": 2,
+    "nivel_referencial": "Permanente"
+  },
+  {
+    "cod_especialidad": 695,
+    "especialidad_formacion": "DISEÑO GRAFICO",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 968,
+    "especialidad_formacion": "INGENIERÍA ELECTRÓNICA",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1940,
+    "especialidad_formacion": "MAESTRO DE CONSTRUCCIONES CIVILES EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 9,
+    "especialidad_formacion": "CIENCIAS NATURALES",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 159,
+    "especialidad_formacion": "LENGUAJE Y COMUNICACIÓN",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 906,
+    "especialidad_formacion": "CIENCIAS DE LA EDUCACIÓN - PSICOLOGÍA",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 413,
+    "especialidad_formacion": "ARQUITECTURA",
+    "total_docentes": 2,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 443,
+    "especialidad_formacion": "INGENIERIA COMERCIAL",
+    "total_docentes": 2,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 629,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE ESPECIALIZACIÓN OCUPACIONAL CON ESPECIALIDAD EN INFORMÁTICA DEL NIVEL SECUNDARIO",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 456,
+    "especialidad_formacion": "ANTROPOLOGIA",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 796,
+    "especialidad_formacion": "EDUCACIÓN TÉCNICA Y TECNOLÓGICA",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3228,
+    "especialidad_formacion": "INGENIERÍA MECÁNICA AUTOMOTRÍZ Y AUTOTRÓNICA",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3598,
+    "especialidad_formacion": "FISIOTERAPEUTA Y KINESIÓLOGA",
+    "total_docentes": 2,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 4403,
+    "especialidad_formacion": "ROBÓTICA PARA EDUCACIÓN PRIMARIA",
+    "total_docentes": 2,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 487,
+    "especialidad_formacion": "HOTELERÍA Y GASTRONOMÍA",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 484,
+    "especialidad_formacion": "CONTABILIDAD",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 933,
+    "especialidad_formacion": "ESTRATEGIAS METODOLÓGICAS PARA TRABAJAR EN AULA",
+    "total_docentes": 2,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 433,
+    "especialidad_formacion": "INGENIERIA INDUSTRIAL",
+    "total_docentes": 2,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 1185,
+    "especialidad_formacion": "LICENCIATURA EN EDUCACIÓN TÉCNICA TECNOLÓGICA DEL ÁREA DE GESTIÓN INSTITUCIONAL PARTICIPATIVA CON MENCIÓN EN GESTIÓN COMUNITARIA INSTITUCIONAL EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 410,
+    "especialidad_formacion": "ECONOMISTA",
+    "total_docentes": 2,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 818,
+    "especialidad_formacion": "INFORMÁTICA EDUCATIVA",
+    "total_docentes": 2,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 1674,
+    "especialidad_formacion": "DISEÑO GRÁFICO Y COMUNICACIÓN VISUAL",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 83,
+    "especialidad_formacion": "HISTORIA Y GEOGRAFÍA",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2655,
+    "especialidad_formacion": "INGENIERÍA ELECTRÓNICA Y SISTEMAS",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 658,
+    "especialidad_formacion": "MÚSICA",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 421,
+    "especialidad_formacion": "PERIODISTA",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 24748,
+    "especialidad_formacion": "INNOVACIÓN Y CALIDAD EN EDUCACIÓN ALTERNATIVA",
+    "total_docentes": 2,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 1612,
+    "especialidad_formacion": "INGENIERO EN SISTEMAS ELECTRÓNICOS",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 219,
+    "especialidad_formacion": "CONSTRUCCIÓN CIVIL",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1449,
+    "especialidad_formacion": "LICENCIATURA EN EDUCACIÓN TÉCNICA TECNOLÓGICA PRODUCTIVA ADMINISTRACIÓN Y CONTABILIDAD EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 986,
+    "especialidad_formacion": "CIENCIAS JURÍDICAS",
+    "total_docentes": 2,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 4616,
+    "especialidad_formacion": "INGENIERO COMERCIAL",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 632,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE ESPECIALIZACIÓN OCUPACIONAL CON ESPECIALIDAD EN ELECTRICIDAD DEL NIVEL SECUNDARIO",
+    "total_docentes": 2,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 24897,
+    "especialidad_formacion": "INGENIERO MECÁNICO AUTOMOTRÍZ Y AUTOTRÓNICA",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 688,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE COMUNICACIÓN Y LENGUAJE CON ESPECIALIDAD EN LENGUA EXTRANJERA DEL NIVEL SECUNDARIO",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 4236,
+    "especialidad_formacion": "PROMOVIENDO LA CONVIVENCIA ARMÓNICA Y PACÍFICA EN LAS UNIDADES EDUCATIVAS",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 885,
+    "especialidad_formacion": "ENSEÑANZA DE LENGUAS Y LITERATURAS ANDINAS",
+    "total_docentes": 2,
+    "nivel_referencial": "Inicial"
+  },
+  {
+    "cod_especialidad": 4234,
+    "especialidad_formacion": "PRODUCCIÓN DE RECURSOS EDUCATIVOS MULTIMEDIA",
+    "total_docentes": 2,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 4274,
+    "especialidad_formacion": "COMUNICACIÓN ORAL Y ESCRITA EN LENGUA EXTRANJERA: INGLÉS – NIVEL BÁSICO",
+    "total_docentes": 2,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 4396,
+    "especialidad_formacion": "EMPRENDIMIENTOS PRODUCTIVOS CON ENFOQUE TECNOLÓGICO",
+    "total_docentes": 2,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 4171,
+    "especialidad_formacion": "AGRONOMO",
+    "total_docentes": 2,
+    "nivel_referencial": "Permanente"
+  },
+  {
+    "cod_especialidad": 1937,
+    "especialidad_formacion": "AGROECOLOGÍA",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3291,
+    "especialidad_formacion": "INGENIERÍA DE SISTEMAS INFORMÁTICOS",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 168,
+    "especialidad_formacion": "LITERATURA Y LENGUA ESPAÑOLA",
+    "total_docentes": 2,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 678,
+    "especialidad_formacion": "RELIGIÓN, ÉTICA MORAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 97,
+    "especialidad_formacion": "PEDAGOGÍA, CIENCIAS DE LA EDUCACIÓN",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3547,
+    "especialidad_formacion": "MAESTRO DE SEGURIDAD Y SOBERANÍA ALIMENTARIA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1311,
+    "especialidad_formacion": "MAQUINAS Y HERRAMIENTAS",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 970,
+    "especialidad_formacion": "FORMACIÓN DE EDUCADORES DE NIÑOS/AS, ADOLECENTES Y JOVENES EN DESVENTAJA SOCIAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 817,
+    "especialidad_formacion": "CONFECCIÓN INDUSTRIAL SASTRERÍA",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 24760,
+    "especialidad_formacion": "SISTEMA DE INYECCIÓN ELECTRÓNICA EN VEHÍCULOS A GASOLINA",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 167,
+    "especialidad_formacion": "FILOSOFÍA, PSICOLOGÍA Y GRAMÁTICA",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 585,
+    "especialidad_formacion": "ELECTRÓNICA Y TELECOMUNICACIONES",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2011,
+    "especialidad_formacion": "MAESTRO DEL ÁREA DE CIENCIAS SOCIALES EDUCACIÓN PRIMARIA DE PERSONAS JÓVENES Y ADULTAS EDUCACIÓN SECUNDARIA DE PERSONAS JÓVENES Y ADULTAS",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 789,
+    "especialidad_formacion": "FILOLOGIA HISPANICA",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 236,
+    "especialidad_formacion": "TECNOLOGÍAS DE ALIMENTOS",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 24853,
+    "especialidad_formacion": "ASISTENCIA SOCIAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2961,
+    "especialidad_formacion": "GESTIÓN TECNOLÓGICA DE EDUCACIÓN EN EL NIVEL INICIAL EN FAMILIA COMUNITARIA ENTORNO CLASSROOM",
+    "total_docentes": 1,
+    "nivel_referencial": "Inicial"
+  },
+  {
+    "cod_especialidad": 2968,
+    "especialidad_formacion": "GESTIÓN TECNOLÓGICA DE EDUCACIÓN EN EL ÁREA DE QUÍMICA ENTORNO CLASSROOM",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2898,
+    "especialidad_formacion": "GESTIÓN TECNOLÓGICA DE EDUCACIÓN EN EL ÁREA DE MATEMÁTICA ENTORNO CLASSROOM",
+    "total_docentes": 1,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 2680,
+    "especialidad_formacion": "COMUNICACIÓN ORAL Y ESCRITA EN LENGUA ORIGINARIA: GUARANÍ - NIVEL  INTERMEDIO",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 2618,
+    "especialidad_formacion": "LICENCIATURA EN ARTES PLÁSTICAS Y VISUALES EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL Y SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ESPECIAL PARA PERSONAS CON DISCAPACIDAD",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2861,
+    "especialidad_formacion": "MAESTRO DE GESTIÓN COMUNITARIA INSTITUCIONAL EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 690,
+    "especialidad_formacion": "PROFESOR DE RELIGIÓN CATÓLICA DEL NIVEL SECUNDARIO",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2777,
+    "especialidad_formacion": "VALORES ESPIRITUALIDADES Y RELIGIONES CICLO I DEL PROGRAMA DE ADECUACION Y COMPLEMENTACION PARA EL EJERCICIO DOCENTE -PROACED",
+    "total_docentes": 1,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 190,
+    "especialidad_formacion": "PROFESOR DE MATEMÁTICA",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 24992,
+    "especialidad_formacion": "ALIMENTOS",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2873,
+    "especialidad_formacion": "LICENCIATURA EN TÉCNICA TECNOLÓGICA GENERAL Y TÉCNICA TECNOLÓGICA ESPECIALIZADA EN INDUSTRIA TEXTIL Y CONFECCIÓN EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 24538,
+    "especialidad_formacion": "ROBÓTICA PARA EDUCACIÓN PRIMARIA",
+    "total_docentes": 1,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 2940,
+    "especialidad_formacion": "GESTIÓN TECNOLÓGICA DE EDUCACIÓN EN EL ÁREA DE EDUCACIÓN MUSICAL ENTORNO CLASSROOM",
+    "total_docentes": 1,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 25177,
+    "especialidad_formacion": "FISIOTERAPIA Y PSICOMOTRICIDAD",
+    "total_docentes": 1,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 1700,
+    "especialidad_formacion": "ZOOTECNISTA",
+    "total_docentes": 1,
+    "nivel_referencial": "Permanente"
+  },
+  {
+    "cod_especialidad": 1082,
+    "especialidad_formacion": "INGENIERIA FINANCIERA",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 301,
+    "especialidad_formacion": "SECRETARIA ADMINISTRATIVA EN EDUCACION",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 25317,
+    "especialidad_formacion": "MÚSICA CON MENCIÓN EN VIOLONCHELO",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 856,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE COMUNICACIÓN Y LENGUAJE CON LA ESPECIALIDAD EN IDIOMA NATIVO - AYMARA DEL NIVEL SECUNDARIO",
+    "total_docentes": 1,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 233,
+    "especialidad_formacion": "DISEÑO Y CONFECCIÓN INDUSTRIAL TEXTIL",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 1814,
+    "especialidad_formacion": "TEJIDO INDUSTRIAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 304,
+    "especialidad_formacion": "FISIOTERAPIA",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 4645,
+    "especialidad_formacion": "BACHILLERATO TÉCNICO HUMANÍSTICO. ENFOQUES Y CONTENIDOS COMUNES",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 3263,
+    "especialidad_formacion": "MAESTRO DE MATEMÁTICA Y FÍSICA DE EDUCACIÓN PRIMARIA DE PERSONAS JÓVENES Y ADULTAS Y EDUCACIÓN SECUNDARIA DE PERSONAS JOVENES Y ADULTAS",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 2671,
+    "especialidad_formacion": "COMUNICACIÓN ORAL Y ESCRITA EN LENGUA ORIGINARIA GUARANÍ-NIVEL BÁSICO",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 24526,
+    "especialidad_formacion": "FISIOTERAPIA Y KINESIOLOGÍA",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 595,
+    "especialidad_formacion": "AUDITORIA",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 23825,
+    "especialidad_formacion": "GESTIÓN TECNOLÓGICA DE LA EDUCACIÓN PARA EL ÁREA DE TÉCNICA TECNOLÓGICA GENERAL - CLASSROOM",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 2964,
+    "especialidad_formacion": "GESTIÓN TECNOLÓGICA DE EDUCACIÓN EN EL ÁREA DE FÍSICA ENTORNO MOODLE",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 4076,
+    "especialidad_formacion": "MAESTRO DE CURSO DEL NIVEL INICIAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Inicial"
+  },
+  {
+    "cod_especialidad": 1184,
+    "especialidad_formacion": "LICENCIATURA EN EDUCACIÓN TÉCNICA TECNOLÓGICA DEL ÁREA DE SISTEMAS INFORMÁTICOS CON MENCIÓN EN SISTEMAS INFORMÁTICOS EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 73,
+    "especialidad_formacion": "SASTRERIA",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 715,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE ESPECIALIZACIÓN OCUPACIONAL CON ESPECIALIDAD EN ALIMENTACIÓN DEL NIVEL SECUNDARIO",
+    "total_docentes": 1,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 594,
+    "especialidad_formacion": "COMPUTACIÓN",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 241,
+    "especialidad_formacion": "ADMINISTRADOR EDUCATIVO",
+    "total_docentes": 1,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 945,
+    "especialidad_formacion": "TEXTILES Y PROCESOS",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 983,
+    "especialidad_formacion": "TÉCNICO EN QUÍMICA INDUSTRIAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 3747,
+    "especialidad_formacion": "INGENIERO FINANCIERO",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 2147,
+    "especialidad_formacion": "VITICULTURA Y ENOLOGIA",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 785,
+    "especialidad_formacion": "LENGUA GUARANÍ",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3451,
+    "especialidad_formacion": "USO Y MANEJO DE LA PLATAFORMA EDUCATIVA DEL MINISTERIO DE EDUCACIÓN - EDUCACIÓN REGULAR",
+    "total_docentes": 1,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 415,
+    "especialidad_formacion": "CIENCIAS JURIDICAS Y POLITICAS",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3563,
+    "especialidad_formacion": "PSICOMOTRICIDAD Y NEUROMOTRICIDAD",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 625,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE ESPECIALIZACIÓN OCUPACIONAL CON ESPECIALIDAD EN AUDITORÍA FINANCIERA DEL NIVEL SECUNDARIO",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 1417,
+    "especialidad_formacion": "INGENIERÍA TEXTIL",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 2625,
+    "especialidad_formacion": "LICENCIATURA EN TÉCNICA TECNOLÓGICA GENERAL Y TÉCNICA TECNOLÓGICA ESPECIALIZADA EN MECÁNICA INDUSTRIAL EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 24607,
+    "especialidad_formacion": "MÚSICA, ESPECIALIDAD INTERPRETACIÓN MUSICAL SAXOFÓN",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 100,
+    "especialidad_formacion": "DANZA",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 24603,
+    "especialidad_formacion": "MÚSICA CON ESPECIALIDAD EN PIANO",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 4280,
+    "especialidad_formacion": "EDUCACIÓN INTEGRAL EN SEXUALIDAD",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 25476,
+    "especialidad_formacion": "FISIOTERAPEUTA KINESIÓLOGO",
+    "total_docentes": 1,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 2904,
+    "especialidad_formacion": "GESTIÓN TECNOLÓGICA DE EDUCACIÓN EN PRIMARIA COMUNITARIA VOCACIONAL ENTORNO CLASSROOM",
+    "total_docentes": 1,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 1606,
+    "especialidad_formacion": "MAESTRO DE ELECTRICIDAD INDUSTRIAL EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1529,
+    "especialidad_formacion": "EDUCACIÓN SUPERIOR BASADO EN EL MODELO ACADÉMICO POR COMPETENCIAS",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 24486,
+    "especialidad_formacion": "TECNOLOGÍA DE LA INFORMACIÓN DIGITAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 823,
+    "especialidad_formacion": "TECNICA EN CIENCIAS Y ARTES FEMENINAS",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 4230,
+    "especialidad_formacion": "LA EDUCACIÓN DESPATRIARCALIZADORA PARA UNA VIDA LIBRE DE VIOLENCIA",
+    "total_docentes": 1,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 434,
+    "especialidad_formacion": "ADMINISTRACION EDUCATIVA",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2865,
+    "especialidad_formacion": "PEDAGOGÍA Y DIDÁCTICA EN LA EDUCACIÓN SUPERIOR",
+    "total_docentes": 1,
+    "nivel_referencial": "Inicial"
+  },
+  {
+    "cod_especialidad": 854,
+    "especialidad_formacion": "PEDAGOGIA, MENCIÓN EN EDUCACIÓN DE JOVENES Y ADULTOS A DISTANCIA",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 1244,
+    "especialidad_formacion": "LICENCIATURA EN EDUCACIÓN ALTERNATIVA EDUCACIÓN DE PERSONAS JÓVENES Y ADULTAS",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 606,
+    "especialidad_formacion": "ESTADISTICA",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1607,
+    "especialidad_formacion": "MAESTRO DE ELECTRÓNICA Y TELECOMUNICACIONES EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 942,
+    "especialidad_formacion": "CIRUJANO DENTISTA",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 2905,
+    "especialidad_formacion": "GESTIÓN TECNOLÓGICA DE EDUCACIÓN EN PRIMARIA COMUNITARIA VOCACIONAL ENTORNO MOODLE",
+    "total_docentes": 1,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 944,
+    "especialidad_formacion": "INFORMÁTICA INDUSTRIAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 24487,
+    "especialidad_formacion": "CONTADURÍA GENERAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Permanente"
+  },
+  {
+    "cod_especialidad": 1812,
+    "especialidad_formacion": "INGENIERO EN DESARROLLO RURAL SOSTENIBLE",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 3223,
+    "especialidad_formacion": "GESTIÓN TECNOLÓGICA DE LA EDUCACIÓN PARA EL ÁREA DE TÉCNICA TECNOLÓGICA GENERAL - CHAMILO",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3401,
+    "especialidad_formacion": "ADMINISTRADORA DE TURISMO",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 842,
+    "especialidad_formacion": "MANTENIMIENTO Y REPARACION DE PC",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 662,
+    "especialidad_formacion": "CIENCIAS BIOLÓGICAS E INTEGRADAS",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1113,
+    "especialidad_formacion": "SISTEMAS INFORMÁTICOS EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2652,
+    "especialidad_formacion": "RELIGIÓN, ESPIRITUALIDADES Y VALORES ETICO MORALES",
+    "total_docentes": 1,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 24029,
+    "especialidad_formacion": "GASTRONOMÍA Y ARTE CULINARIO",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 24873,
+    "especialidad_formacion": "INGENIERO DE SISTEMAS TIC TECNOLOGÍAS DE LA INFORMACÍON Y COMUNICACIONES",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 95,
+    "especialidad_formacion": "EDUCACIÓN DEL HOGAR Y AGROPECUARIA",
+    "total_docentes": 1,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 25144,
+    "especialidad_formacion": "MAESTRO DE EDUCACIÓN FÍSICA Y DEPORTES EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL Y EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ESPECIAL PARA PERSONAS CON DISCAPACIDAD",
+    "total_docentes": 1,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 4358,
+    "especialidad_formacion": "CULTURA FÍSICA",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 24898,
+    "especialidad_formacion": "ADMINISTRACIÓN DE EMPRESAS TURÍSTICAS, HOTELERAS Y GASTRONÓMICAS",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 2899,
+    "especialidad_formacion": "LICENCIATURA EN TÉCNICA TECNOLÓGICA GENERAL Y TÉCNICA TECNOLÓGICA ESPECIALIZADA EN ELECTRICIDAD INDUSTRIAL EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 24621,
+    "especialidad_formacion": "ARTE Y DISEÑO GRÁFICO",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2539,
+    "especialidad_formacion": "LICENCIATURA EN MATEMÁTICA Y FÍSICA EDUCACIÓN PRIMARIA DE PERSONAS JÓVENES Y ADULTAS Y EDUCACIÓN SECUNDARIA DE PERSONAS JÓVENES Y ADULTAS",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 623,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE EXPRESIÓN Y CREATIVIDAD CON ESPECIALIDAD EN ARTES ESCÉNICAS DE LOS NIVELES PRIMARIO Y SECUNDARIO",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2179,
+    "especialidad_formacion": "TELARES ARTESANALES",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 679,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE EXPRESIÓN Y CREATIVIDAD CON ESPECIALIDAD EN EXPRESIÓN CORPORAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2094,
+    "especialidad_formacion": "DISEÑO INTEGRAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 928,
+    "especialidad_formacion": "DISEÑO GRÁFICO PUBLICITARIO",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2970,
+    "especialidad_formacion": "GESTIÓN TECNOLÓGICA PARA EDUCACIÓN ESPECIAL ENTORNO CLASSROOM",
+    "total_docentes": 1,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 209,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE CONSTRUCCIÓN CIVIL DE NIVEL TÉCNICO BÁSICO, TÉCNICO AUXILIAR Y TÉCNICO MEDIO DE EDUCACIÓN DE JÓVENES Y ADULTOS",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 202,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE ESPECIALIZACIÓN OCUPACIONAL CON ESPECIALIDAD EN MECÁNICA AUTOMOTRIZ DEL NIVEL SECUNDARIO",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 2682,
+    "especialidad_formacion": "COMUNICACIÓN ORAL Y ESCRITA EN LENGUA ORIGINARIA: GUARANÍ - NIVEL INTERMEDIO",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1169,
+    "especialidad_formacion": "LICENCIATURA EN CIENCIAS SOCIALES PARA PERSONAS JÓVENES Y ADULTAS EDUCACIÓN ALTERNATIVA",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 18,
+    "especialidad_formacion": "HISTORIA",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 313,
+    "especialidad_formacion": "PINTURA",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 166,
+    "especialidad_formacion": "TÉCNICO SUPERIOR EN EDUCACIÓN ALTERNATIVA, MENCIÓN EDUCACIÓN PRIMARIA DE ADULTOS",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 2710,
+    "especialidad_formacion": "EVALUACIÓN EN EL MODELO EDUCATIVO SOCIOCOMUNITARIO PRODUCTIVO",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2793,
+    "especialidad_formacion": "LICENCIATURA EN TÉCNICA TECNOLÓGICA GENERAL Y TÉCNICA TECNOLÓGICA ESPECIALIZADA EN ADMINISTRACIÓN Y CONTABILIDAD EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1353,
+    "especialidad_formacion": "TÉCNICO MEDIO BANCARIO",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 635,
+    "especialidad_formacion": "PROFESOR DEL ÁREA DE ESPECIALIZACIÓN OCUPACIONAL CON ESPECIALIDAD EN QUÍMICA INDUSTRIAL DEL NIVEL SECUNDARIO",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 4738,
+    "especialidad_formacion": "MAESTRO NORMALISTA EDUCACIÓN URBANA, NIVEL PRIMARIO Y SECUNDARIO, ESPECIALIDAD RELIGIÓ Y MORAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 25271,
+    "especialidad_formacion": "LICENCIADO EN PEDAGOGÍA",
+    "total_docentes": 1,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 23981,
+    "especialidad_formacion": "ELECTRONICA CON MENCION EN SISTEMAS DE CONTROL INDUSTRIAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 998,
+    "especialidad_formacion": "EDUCACIÓN INTERCULTURAL BILINGUE",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 261,
+    "especialidad_formacion": "PELUQUERÍA Y COSMETOLOGÍA",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 3438,
+    "especialidad_formacion": "BELLEZA Y COSMETOLOGÍA",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 315,
+    "especialidad_formacion": "TRADUCCION ESPAÑOL FRANCES",
+    "total_docentes": 1,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 23988,
+    "especialidad_formacion": "MEDICINA TRADICIONAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 2036,
+    "especialidad_formacion": "REEDUCACIÓN POSTURAL GLOBAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 655,
+    "especialidad_formacion": "EDUCACIÓN AGROPECUARIA",
+    "total_docentes": 1,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 2204,
+    "especialidad_formacion": "INGENIERO EN MECANICA AUTOMOTRIZ Y MAQUINARIA AGROINDUSTRIAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 24213,
+    "especialidad_formacion": "INGENIERO EN MECATRÓNICA",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 287,
+    "especialidad_formacion": "INGENIERÍA AGROINDUSTRIAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 515,
+    "especialidad_formacion": "PROFESOR DEL ÁREA INDUSTRIAL DE ESPECIALIDAD EN CARPINTERÍA INDUSTRIAL PRODUCTIVA DE NIVEL TÉCNICO BÁSICO, TÉCNICO AUXILIAR Y TÉCNICO MEDIO DE EDUCACIÓN DE JÓVENES Y ADULTOS",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 1586,
+    "especialidad_formacion": "OPERACIÓN INFORMÁTICA",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 661,
+    "especialidad_formacion": "CIENCIAS BIOLÓGICAS INTEGRADAS Y EDUCACIÓN AMBIENTAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 493,
+    "especialidad_formacion": "MECATRÓNICA",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 2614,
+    "especialidad_formacion": "ARTES PLÁSTICAS Y VISUALES CON MENCIÓN EN: PINTURA",
+    "total_docentes": 1,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 1579,
+    "especialidad_formacion": "TEJIDO ARTESANAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 743,
+    "especialidad_formacion": "INGENIERÍA EN MECÁNICA AUTOMOTRIZ",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 3405,
+    "especialidad_formacion": "ANALISTA DE SISTEMA DE INFORMACIÓN ADMINISTRATIVA",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 921,
+    "especialidad_formacion": "DISEÑO GRÁFICO",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 575,
+    "especialidad_formacion": "PROFESOR DE EDUCACION ESPECIAL, MENCIÓN DISCAPACIDAD AUDITIVA",
+    "total_docentes": 1,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 826,
+    "especialidad_formacion": "ALTA COSTURA",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 1186,
+    "especialidad_formacion": "PELUQUERIA DAMAS Y CABALLEROS",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 1939,
+    "especialidad_formacion": "ELECTRÓNICA U AUTOMATIZACIÓN INDUSTRIAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 1383,
+    "especialidad_formacion": "LINGUISTICA E IDIOMAS, MENCIÓN LINGUISTICA Y LENGUAS NATIVAS",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 23821,
+    "especialidad_formacion": "GESTIÓN TECNOLÓGICA DE LA EDUCACIÓN PARA EL ÁREA DE TÉCNICA TECNOLÓGICA GENERAL - MOODLE",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 943,
+    "especialidad_formacion": "EDUCACIÓN PRE-ESCOLAR Y PRIMARIA",
+    "total_docentes": 1,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 371,
+    "especialidad_formacion": "EDUCACIÓN AMBIENTAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 1120,
+    "especialidad_formacion": "EDUCACIÓN PARA PERSONAS CON DISCAPACIDAD",
+    "total_docentes": 1,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 23587,
+    "especialidad_formacion": "TEJIDO INDUSTRIAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 3706,
+    "especialidad_formacion": "MAESTRO DE MECÁNICA INDUSTRIAL EDUCACION SECUNDARIA COMUNITARIA PRODUCTIVA EDUCACION DE PERSONAS JOVENES Y ADULTAS",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 24894,
+    "especialidad_formacion": "AGROPECUARIA CON MENCIÓN EN: MEJORAMIENTO Y PRODUCCIÓN DE CEREALES Y HORTALIZAS",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 3921,
+    "especialidad_formacion": "TURISMO COMUNITARIO",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 518,
+    "especialidad_formacion": "LENGUAJE PARA EL TERCER CICLO",
+    "total_docentes": 1,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 21,
+    "especialidad_formacion": "ALEMAN",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 810,
+    "especialidad_formacion": "CONFECCIÓN INDUSTRIAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 3743,
+    "especialidad_formacion": "INGENIERÍA CIVIL",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1575,
+    "especialidad_formacion": "APICULTURA",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 24148,
+    "especialidad_formacion": "PARVULARIA",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 25517,
+    "especialidad_formacion": "TURISMÓLOGO",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 448,
+    "especialidad_formacion": "TOPOGRAFIA",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 24179,
+    "especialidad_formacion": "SISTEMAS INFORMÁTICOS",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 4097,
+    "especialidad_formacion": "TRABAJADORA SOCIAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Permanente"
+  },
+  {
+    "cod_especialidad": 307,
+    "especialidad_formacion": "ALIMENTACION",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 912,
+    "especialidad_formacion": "PEINADOS",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 24300,
+    "especialidad_formacion": "ADMINISTRACIÓN DE EMPRESAS",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1760,
+    "especialidad_formacion": "MAESTRO DE TRANSFORMACIÓN E INDUSTRIA DE ALIMENTOS EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 64,
+    "especialidad_formacion": "FILOSOFÍA Y LETRAS",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1446,
+    "especialidad_formacion": "LICENCIATURA EN EDUCACIÓN TÉCNICA TECNOLÓGICA PRODUCTIVA FITOTECNIA Y AGROECOLOGÍA FORESTAL EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2667,
+    "especialidad_formacion": "COMUNICACION ORAL Y ESCRITA EN LENGUA EXTRANJERA: INGLES - NIVEL BASICO",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 2821,
+    "especialidad_formacion": "DISEÑO GRÁFICO DIGITAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 24219,
+    "especialidad_formacion": "INSTALACIONES SANITARIAS",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 431,
+    "especialidad_formacion": "INGENIERIA PETROLERA",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 24553,
+    "especialidad_formacion": "INSTRUMENTO MUSICAL CUERDA",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 23820,
+    "especialidad_formacion": "GESTIÓN TECNOLÓGICA DE EDUCACIÓN EN EL ÁREA DE VALORES, ESPIRITUALIDAD Y RELIGIONES ENTORNO MOODLE",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 429,
+    "especialidad_formacion": "ODONTOLOGIA",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 2657,
+    "especialidad_formacion": "MAESTRO DE COMUNICACIÓN Y LENGUAJES DE LOS NIVELES DE EDUCACIÓN PRIMARIA DE PERSONAS JÓVENES Y ADULTAS - EDUCACIÓN SECUNDARIA DE PERSONAS JÓVENES Y ADULTAS",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 390,
+    "especialidad_formacion": "SERVICIOS DE ASISTENCIA PEDIÁTRICA Y GERIÁTRICA",
+    "total_docentes": 1,
+    "nivel_referencial": "Inicial"
+  },
+  {
+    "cod_especialidad": 25255,
+    "especialidad_formacion": "GESTIÓN TURÍSTICA Y HOTELERA",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 25161,
+    "especialidad_formacion": "ODONTÓLOGO",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 24640,
+    "especialidad_formacion": "CARPINTERÍA INDUSTRIAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 732,
+    "especialidad_formacion": "REPOSTERIA",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 2104,
+    "especialidad_formacion": "CONFECCIÓN DE ROPA TÍPICA",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 53,
+    "especialidad_formacion": "AUXILIAR DE CONTABILIDAD",
+    "total_docentes": 1,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 1367,
+    "especialidad_formacion": "INGENIERIA EN DESARROLLO RURAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 3885,
+    "especialidad_formacion": "TELECOMUNICACIONES",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 91,
+    "especialidad_formacion": "FUNDICIÓN",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 972,
+    "especialidad_formacion": "RELACIONES PÚBLICAS",
+    "total_docentes": 1,
+    "nivel_referencial": "Permanente"
+  },
+  {
+    "cod_especialidad": 1435,
+    "especialidad_formacion": "TECNICA VOCACIONAL Y ALTA COSTURA",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 874,
+    "especialidad_formacion": "PERITO EN BANCA Y ENTIDADES FINANCIERAS",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 4286,
+    "especialidad_formacion": "PROCESOS Y HERRAMIENTAS DE INVESTIGACIÓN",
+    "total_docentes": 1,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 309,
+    "especialidad_formacion": "FORESTAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Permanente"
+  },
+  {
+    "cod_especialidad": 25245,
+    "especialidad_formacion": "IDIOMAS INGLÉS Y FRANCÉS MENCIÓN TURISMO",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 4232,
+    "especialidad_formacion": "PRODUCCIÓN DE MATERIALES EDUCATIVOS INTERACTIVOS-AUTOCORRECTIVOS CON SOFTWARE OFIMÁTICO",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 308,
+    "especialidad_formacion": "LABORATORIO CLINICO",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 524,
+    "especialidad_formacion": "EXPRESION Y CREATIVIDAD",
+    "total_docentes": 1,
+    "nivel_referencial": "Primaria"
+  },
+  {
+    "cod_especialidad": 2005,
+    "especialidad_formacion": "LICENCIATURA EN COMUNICACIÓN Y LENGUAJES: LENGUA CASTELLANA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1198,
+    "especialidad_formacion": "AUTOMOTORES",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 23914,
+    "especialidad_formacion": "MAESTRO DE CIENCIAS SOCIALES EDUCACION SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACION ESPECIAL PARA PERSONAS CON DISCAPACIDAD",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 2623,
+    "especialidad_formacion": "LICENCIATURA EN TÉCNICA TECNOLÓGICA GENERAL Y TÉCNICA TECNOLÓGICA ESPECIALIZADA EN ELECTRICIDAD Y ELECTRÓNICA EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 303,
+    "especialidad_formacion": "AGROINDUSTRIA",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  },
+  {
+    "cod_especialidad": 999,
+    "especialidad_formacion": "MAESTRO DE CURSO DEL NIVEL PRIMARIO",
+    "total_docentes": 1,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 1932,
+    "especialidad_formacion": "EDUCACIÓN ESPECIAL DE APRENDIZAJE",
+    "total_docentes": 1,
+    "nivel_referencial": "Especial"
+  },
+  {
+    "cod_especialidad": 463,
+    "especialidad_formacion": "FARMACIA",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 406,
+    "especialidad_formacion": "BIOQUIMICO FARMACEUTICO",
+    "total_docentes": 1,
+    "nivel_referencial": "Secundaria"
+  },
+  {
+    "cod_especialidad": 1445,
+    "especialidad_formacion": "LICENCIATURA EN EDUCACIÓN TÉCNICA TECNOLÓGICA PRODUCTIVA INDUSTRIA DE ALIMENTOS EDUCACIÓN SECUNDARIA COMUNITARIA PRODUCTIVA Y EDUCACIÓN ALTERNATIVA Y ESPECIAL",
+    "total_docentes": 1,
+    "nivel_referencial": "Adultos"
+  }
+]

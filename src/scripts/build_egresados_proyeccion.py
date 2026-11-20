@@ -2,10 +2,11 @@ import json
 import unicodedata
 import os
 
-FALLBACK_PATH = 'src/data/fallbackData.json'
-SIE_PATH = 'src/data/sie_deficit_resumen_global.json'
-OFICIALES_PATH = 'src/data/especialidades_oficiales.json'
-OUTPUT_PATH = 'src/data/egresados_esfm_proyeccion.json'
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
+FALLBACK_PATH = os.path.join(ROOT_DIR, 'src/data/fallbackData.json')
+SIE_PATH = os.path.join(ROOT_DIR, 'src/data/sie_deficit_resumen_global.json')
+OFICIALES_PATH = os.path.join(ROOT_DIR, 'src/data/especialidades_oficiales.json')
+OUTPUT_PATH = os.path.join(ROOT_DIR, 'src/data/egresados_esfm_proyeccion.json')
 
 DEPTOS_MAP = {
     1: 'CHUQUISACA',
@@ -22,6 +23,19 @@ DEPTOS_MAP = {
 def norm(s):
     s = s.upper().strip()
     return ''.join(c for c in unicodedata.normalize('NFD', s) if unicodedata.category(c) != 'Mn')
+
+def get_nivel_info(esp_id, esp_nombre):
+    n = str(esp_nombre or '').upper().strip()
+    if esp_id == 5 or 'INICIAL' in n:
+        return {'nivel_codigo': 'INICIAL', 'nivel_nombre': 'Educación Inicial', 'orden_jerarquia': 1}
+    elif esp_id == 2 or 'PRIMARIA' in n:
+        return {'nivel_codigo': 'PRIMARIA', 'nivel_nombre': 'Educación Primaria', 'orden_jerarquia': 2}
+    elif esp_id == 19 or 'ESPECIAL' in n or 'DISCAPACIDAD' in n:
+        return {'nivel_codigo': 'ESPECIAL', 'nivel_nombre': 'Educación Especial', 'orden_jerarquia': 5}
+    elif esp_id in [7, 13, 14, 15, 16, 18, 21, 22] or any(k in n for k in ['AGROPECUARIA', 'ALIMENTOS', 'GASTRONOM', 'ELECTRICIDAD', 'MECÁNICA', 'MECANICA', 'ELECTROMEC', 'TEXTIL', 'CARPINTER', 'TÉCNICA', 'TECNICA']):
+        return {'nivel_codigo': 'TECNICA', 'nivel_nombre': 'Técnica Tecnológica', 'orden_jerarquia': 4}
+    else:
+        return {'nivel_codigo': 'SECUNDARIA', 'nivel_nombre': 'Educación Secundaria', 'orden_jerarquia': 3}
 
 def build():
     with open(FALLBACK_PATH, 'r', encoding='utf-8') as f:
@@ -164,10 +178,15 @@ def build():
             color = 'amber'
             justificacion = f'Oferta de egreso ({egr_82:,} maestros) en equilibrio con los {items_def_sie:,} ítems de déficit en aula.'
 
+        nivel_info = get_nivel_info(oid, nom)
+
         especialidades_data.append({
             'especialidad_id': oid,
             'nombre': nom,
             'hora_item': hora_item,
+            'nivel_codigo': nivel_info['nivel_codigo'],
+            'nivel_nombre': nivel_info['nivel_nombre'],
+            'orden_jerarquia': nivel_info['orden_jerarquia'],
             'total_inscritos_2022_2026': tot_insc,
             'items_deficit_matriz': items_def_sie,
             'deficit_horas_matriz': def_horas_sie,
@@ -180,8 +199,8 @@ def build():
             'por_dpto': por_dpto_esp
         })
 
-    # Ordenar por déficit de la Matriz de Calor descendente
-    especialidades_data.sort(key=lambda x: x['items_deficit_matriz'], reverse=True)
+    # Ordenar por nivel pedagógico: Inicial -> Primaria -> Secundaria -> Técnica -> Especial
+    especialidades_data.sort(key=lambda x: (x['orden_jerarquia'], x['nombre']))
 
     final_payload = {
         'metadata': {

@@ -256,9 +256,22 @@ export function FiltrosMateriaManager() {
         throw new Error(errJson.error || 'Error al guardar');
       }
       const nombre = especialidades.find((e) => e.id === editingItem.especialidad_oficial_id)?.nombre;
-      setActionMessage({ type: 'success', text: `Filtro de materias guardado para "${nombre}".` });
+      setActionMessage({ type: 'success', text: `Filtro de materias guardado para "${nombre}". Matriz de calor actualizada.` });
       setEditingItem(null);
       await loadData();
+
+      // Notificación en tiempo real a la Matriz de Calor
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('sie-deficit-updated'));
+        try {
+          localStorage.setItem('sie_deficit_updated_at', Date.now().toString());
+          if (typeof BroadcastChannel !== 'undefined') {
+            const bc = new BroadcastChannel('sie_deficit_channel');
+            bc.postMessage({ type: 'UPDATED', timestamp: Date.now() });
+            bc.close();
+          }
+        } catch (_) {}
+      }
     } catch (err: any) {
       setActionMessage({ type: 'error', text: err.message });
     } finally {
@@ -270,8 +283,21 @@ export function FiltrosMateriaManager() {
     if (!confirm('¿Eliminar la configuración de materias para esta especialidad?')) return;
     const res = await fetch(`/api/filtros-materia?id=${id}`, { method: 'DELETE' });
     if (res.ok) {
-      setActionMessage({ type: 'success', text: 'Filtro eliminado correctamente.' });
+      setActionMessage({ type: 'success', text: 'Filtro eliminado correctamente. Matriz de calor actualizada.' });
       await loadData();
+
+      // Notificación en tiempo real a la Matriz de Calor
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('sie-deficit-updated'));
+        try {
+          localStorage.setItem('sie_deficit_updated_at', Date.now().toString());
+          if (typeof BroadcastChannel !== 'undefined') {
+            const bc = new BroadcastChannel('sie_deficit_channel');
+            bc.postMessage({ type: 'UPDATED', timestamp: Date.now() });
+            bc.close();
+          }
+        } catch (_) {}
+      }
     }
   };
 

@@ -12,7 +12,7 @@ import {
   TrendingUpIcon,
   ScaleIcon,
 } from '../ui/Icons';
-import { Sparkles, Sun, LayoutDashboard } from 'lucide-react';
+import { Sparkles, Sun, LayoutDashboard, Link2, ArrowRight, Scale } from 'lucide-react';
 
 interface SidebarProps {
   currentTab: SourceTab;
@@ -137,6 +137,16 @@ export function Sidebar({
       tables: '19 Especialidades & Proyección',
       icon: <Sun className="w-[18px] h-[18px] text-emerald-600" />,
     },
+    {
+      id: 'balance' as SourceTab,
+      label: 'Balance Predictivo',
+      sublabel: 'Admisión ESFM 2031',
+      badge: 'DECISIÓN',
+      badgeColor: 'bg-rose-100 text-rose-950 border-rose-300 font-black',
+      count: 168758,
+      tables: 'Déficit, Egresados, ARIMA, Migr.',
+      icon: <Scale className="w-[18px] h-[18px] text-rose-700" />,
+    },
 
   ];
 
@@ -243,7 +253,22 @@ export function Sidebar({
         </div>
 
         {/* Pie de Sidebar Institucional */}
-        <div className="p-3.5 border-t border-slate-200 bg-slate-50/60">
+        <div className="p-3.5 border-t border-slate-200 bg-slate-50/60 space-y-2">
+          {/* Enlace directo a Mapeador N:N */}
+          <a
+            href="/admin/especialidades"
+            className="w-full flex items-center justify-between p-2.5 rounded-xl border border-emerald-300 bg-emerald-50/90 hover:bg-emerald-100 text-emerald-900 transition-colors shadow-2xs group"
+          >
+            <div className="flex items-center gap-2 min-w-0">
+              <Link2 className="w-4 h-4 text-emerald-700 flex-shrink-0" />
+              <div className="text-left truncate">
+                <span className="text-xs font-black block truncate">Mapeador N:N ESFM</span>
+                <span className="text-[10px] text-emerald-700 block">729 Especialidades SEP</span>
+              </div>
+            </div>
+            <ArrowRight className="w-3.5 h-3.5 text-emerald-700 group-hover:translate-x-0.5 transition-transform" />
+          </a>
+
           <div className="rounded-xl bg-white p-3 border border-slate-200/90 text-xs text-slate-600 space-y-1 shadow-2xs">
             <div className="flex items-center justify-between font-medium text-slate-800 text-[11px]">
               <span>Base Central Supabase</span>

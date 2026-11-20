@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import deficitGlobalData from '@/data/sie_deficit_resumen_global.json';
+import { getNivelEspecialidad, sortEspecialidadesPorNivel, NivelCodigo, NIVELES_CONFIG } from '@/lib/constants/especialidadNiveles';
 import {
   Scale,
   TrendingDown,
@@ -21,6 +22,7 @@ import {
   ArrowUpDown,
   Maximize2,
   Minimize2,
+  RefreshCw,
 } from 'lucide-react';
 
 interface DepartamentoDeficit {
@@ -46,6 +48,9 @@ interface EspecialidadResumen {
   id: number;
   nombre: string;
   hora_item: number;
+  nivel_codigo?: string;
+  nivel_nombre?: string;
+  orden_jerarquia?: number;
   carga_horaria: number;
   horas_planilla: number;
   deficit_horas: number;
@@ -59,10 +64,11 @@ interface EspecialidadResumen {
 export default function DeficitMateriaDinamicoView() {
   // ─── Estados de Navegación y Filtros ─────────────────────────────────────────
   const [vistaModo, setVistaModo] = useState<'heatmap' | 'barras' | 'tabla'>('heatmap');
-  const [selectedEspId, setSelectedEspId] = useState<number>(1); // 1 = FÍSICA - QUÍMICA
+  const [selectedEspId, setSelectedEspId] = useState<number>(5); // 5 = EDUCACIÓN INICIAL EN FAMILIA COMUNITARIA
   const [filtroDepto, setFiltroDepto] = useState<string>('TODOS');
+  const [filtroNivel, setFiltroNivel] = useState<string>('TODOS');
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [sortBy, setSortBy] = useState<'deficit' | 'items' | 'cobertura' | 'nombre'>('deficit');
+  const [sortBy, setSortBy] = useState<'nivel' | 'deficit' | 'items' | 'cobertura' | 'nombre'>('nivel');
   const [sortAsc, setSortAsc] = useState<boolean>(false);
   const [hoverCell, setHoverCell] = useState<{ espNombre: string; depto: string; items: number; defHoras: number; cob: number } | null>(null);
   const [deptoEscalaModo, setDeptoEscalaModo] = useState<'porcentaje' | 'absoluto'>('porcentaje');
@@ -94,8 +100,75 @@ export default function DeficitMateriaDinamicoView() {
     }
   }, [vistaModo]);
 
-  const especialidades: EspecialidadResumen[] = deficitGlobalData.especialidades as EspecialidadResumen[];
-  const totalesPais = deficitGlobalData.totales_pais;
+  // ─── Estado Reactivo y Sincronización en Tiempo Real con Filtros CRUD ────────
+  const [data, setData] = useState(deficitGlobalData);
+  const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
+  const [lastSync, setLastSync] = useState<Date | null>(null);
+
+  const fetchData = useCallback(async (silent = false) => {
+    if (!silent) setIsRefreshing(true);
+    try {
+      const res = await fetch(`/api/sie-deficit-global?t=${Date.now()}`, {
+        cache: 'no-store',
+      });
+      if (res.ok) {
+        const fresh = await res.json();
+        setData(fresh);
+        setLastSync(new Date());
+      }
+    } catch (e) {
+      console.warn('Error sincronizando déficit global:', e);
+    } finally {
+      if (!silent) setIsRefreshing(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    // 1. Cargar datos frescos de la BD al montar
+    fetchData(true);
+
+    // 2. BroadcastChannel para sincronizar entre pestañas y componentes
+    let bc: BroadcastChannel | null = null;
+    if (typeof BroadcastChannel !== 'undefined') {
+      try {
+        bc = new BroadcastChannel('sie_deficit_channel');
+        bc.onmessage = (event) => {
+          if (event.data?.type === 'UPDATED') {
+            fetchData();
+          }
+        };
+      } catch (_) { }
+    }
+
+    // 3. Custom Event en la misma ventana
+    const onCustomEvent = () => fetchData();
+    window.addEventListener('sie-deficit-updated', onCustomEvent);
+
+    // 4. Storage Event entre pestañas
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === 'sie_deficit_updated_at') {
+        fetchData();
+      }
+    };
+    window.addEventListener('storage', onStorage);
+
+    // 5. Polling suave cada 8s si la pestaña está activa
+    const interval = setInterval(() => {
+      if (typeof document !== 'undefined' && document.visibilityState === 'visible') {
+        fetchData(true);
+      }
+    }, 8000);
+
+    return () => {
+      bc?.close();
+      window.removeEventListener('sie-deficit-updated', onCustomEvent);
+      window.removeEventListener('storage', onStorage);
+      clearInterval(interval);
+    };
+  }, [fetchData]);
+
+  const especialidades: EspecialidadResumen[] = (data.especialidades || []) as EspecialidadResumen[];
+  const totalesPais = data.totales_pais;
 
   // ─── Filtrado y Ordenamiento de Especialidades ───────────────────────────────
   const especialidadesFiltradas = useMemo(() => {
@@ -106,17 +179,60 @@ export default function DeficitMateriaDinamicoView() {
       list = list.filter((e) => e.nombre.toLowerCase().includes(q));
     }
 
+    if (filtroNivel !== 'TODOS') {
+      list = list.filter((e) => {
+        const info = getNivelEspecialidad(e.id, e.nombre);
+        return info.nivelCodigo === filtroNivel;
+      });
+    }
+
     list.sort((a, b) => {
       let diff = 0;
-      if (sortBy === 'deficit') diff = b.deficit_horas - a.deficit_horas;
-      else if (sortBy === 'items') diff = b.items_deficit_equiv - a.items_deficit_equiv;
-      else if (sortBy === 'cobertura') diff = a.pct_cobertura - b.pct_cobertura;
-      else diff = a.nombre.localeCompare(b.nombre);
+      if (sortBy === 'nivel') {
+        const infoA = getNivelEspecialidad(a.id, a.nombre);
+        const infoB = getNivelEspecialidad(b.id, b.nombre);
+        if (infoA.ordenJerarquia !== infoB.ordenJerarquia) {
+          diff = infoA.ordenJerarquia - infoB.ordenJerarquia;
+        } else {
+          diff = a.nombre.localeCompare(b.nombre);
+        }
+      } else if (sortBy === 'deficit') {
+        diff = b.deficit_horas - a.deficit_horas;
+      } else if (sortBy === 'items') {
+        diff = b.items_deficit_equiv - a.items_deficit_equiv;
+      } else if (sortBy === 'cobertura') {
+        diff = a.pct_cobertura - b.pct_cobertura;
+      } else {
+        diff = a.nombre.localeCompare(b.nombre);
+      }
       return sortAsc ? -diff : diff;
     });
 
     return list;
-  }, [especialidades, searchQuery, sortBy, sortAsc]);
+  }, [especialidades, searchQuery, filtroNivel, sortBy, sortAsc]);
+
+  // Totales consolidados por departamento para el pie de la Matriz de Calor
+  const totalesHeatmapDeptos = useMemo(() => {
+    if (especialidadesFiltradas.length === 0) return { porDepto: [], granTotal: 0 };
+    const deptosPlantilla = especialidadesFiltradas[0].departamentos;
+    const sums = deptosPlantilla.map((d) => ({
+      id: d.departamento_id,
+      depto: d.departamento,
+      totalItems: 0
+    }));
+
+    let granTotal = 0;
+    especialidadesFiltradas.forEach((esp) => {
+      esp.departamentos.forEach((d, idx) => {
+        if (sums[idx]) {
+          sums[idx].totalItems += d.items_deficit_equiv || 0;
+        }
+      });
+      granTotal += esp.items_deficit_equiv || 0;
+    });
+
+    return { porDepto: sums, granTotal };
+  }, [especialidadesFiltradas]);
 
   const especialidadSeleccionada = useMemo(() => {
     return especialidades.find((e) => e.id === selectedEspId) || especialidades[0];
@@ -336,8 +452,37 @@ export default function DeficitMateriaDinamicoView() {
           </button>
         </div>
 
-        {/* Buscador y Exportador */}
-        <div className="flex items-center gap-2">
+        {/* Filtros de Nivel, Orden y Buscador */}
+        <div className="flex flex-wrap items-center gap-2">
+          {/* Selector de Nivel Pedagógico */}
+          <select
+            value={filtroNivel}
+            onChange={(e) => setFiltroNivel(e.target.value)}
+            className="text-xs bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-semibold text-slate-700"
+            title="Filtrar por Nivel Pedagógico"
+          >
+            <option value="TODOS">Todos los Niveles</option>
+            <option value="INICIAL">Nivel Inicial</option>
+            <option value="PRIMARIA">Nivel Primaria</option>
+            <option value="SECUNDARIA">Nivel Secundaria</option>
+            <option value="TECNICA">Técnica Tecnológica</option>
+            <option value="ESPECIAL">Educación Especial</option>
+          </select>
+
+          {/* Selector de Orden */}
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value as any)}
+            className="text-xs bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-semibold text-slate-700"
+            title="Criterio de ordenación"
+          >
+            <option value="nivel">Ordenar: Nivel (Inicial → Primaria → Sec → Téc)</option>
+            <option value="deficit">Ordenar: Déficit Horas (Desc)</option>
+            <option value="items">Ordenar: Ítems Requeridos (Desc)</option>
+            <option value="cobertura">Ordenar: Menor Cobertura %</option>
+            <option value="nombre">Ordenar: Alfabético</option>
+          </select>
+
           <div className="relative">
             <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5" />
             <input
@@ -345,9 +490,20 @@ export default function DeficitMateriaDinamicoView() {
               placeholder="Buscar especialidad..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="text-xs bg-slate-50 border border-slate-200 rounded-xl pl-8 pr-3 py-1.5 w-48 sm:w-60 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white font-medium"
+              className="text-xs bg-slate-50 border border-slate-200 rounded-xl pl-8 pr-3 py-1.5 w-40 sm:w-48 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white font-medium"
             />
           </div>
+
+          <button
+            type="button"
+            onClick={() => fetchData()}
+            disabled={isRefreshing}
+            title="Sincronizar en tiempo real con Filtros de Materia (CRUD)"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-50 text-slate-700 border border-slate-200 hover:bg-slate-100 transition-colors disabled:opacity-50"
+          >
+            <RefreshCw className={`w-3.5 h-3.5 text-indigo-600 ${isRefreshing ? 'animate-spin' : ''}`} />
+            <span className="hidden sm:inline">{isRefreshing ? 'Sincronizando...' : 'En vivo'}</span>
+          </button>
 
           <button
             type="button"
@@ -355,7 +511,7 @@ export default function DeficitMateriaDinamicoView() {
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-200 hover:bg-indigo-100 transition-colors"
           >
             <Download className="w-3.5 h-3.5" />
-            <span>Exportar CSV</span>
+            <span>CSV</span>
           </button>
 
           <button
@@ -380,6 +536,10 @@ export default function DeficitMateriaDinamicoView() {
               <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
                 <Grid className="w-4 h-4 text-indigo-600" />
                 Matriz de Calor: Déficit de Ítems Docentes por Especialidad y Departamento
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-50 text-emerald-700 border border-emerald-200">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  Tiempo Real (CRUD)
+                </span>
               </h3>
               <p className="text-xs text-slate-500 mt-0.5">
                 Celdas coloreadas por intensidad de déficit de ítems requeridos (base de horas oficial BD). Pasa el mouse para ver horas o haz clic para drill-down.
@@ -422,27 +582,55 @@ export default function DeficitMateriaDinamicoView() {
                   <th className="py-2.5 px-2 text-center">SC</th>
                   <th className="py-2.5 px-2 text-center">BN</th>
                   <th className="py-2.5 px-2 text-center">PD</th>
-                  <th className="py-2.5 px-3 text-right text-indigo-900 bg-indigo-50/70 font-black">Total País</th>
+                  <th className="py-2 px-2 text-center text-indigo-900 bg-indigo-50/70 font-black w-20 text-[10px]">Total</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {especialidadesFiltradas.map((esp) => {
                   const isSelected = esp.id === selectedEspId;
+                  const nivelInfo = getNivelEspecialidad(esp.id, esp.nombre);
 
                   return (
                     <tr
                       key={esp.id}
                       onClick={() => setSelectedEspId(esp.id)}
-                      className={`cursor-pointer transition-colors ${isSelected ? 'bg-indigo-50/60 font-semibold' : 'hover:bg-slate-50'
+                      className={`cursor-pointer transition-all ${isSelected
+                        ? 'bg-indigo-50/50 shadow-xs'
+                        : 'hover:bg-slate-50/80'
                         }`}
                     >
-                      <td className="py-2 px-3 font-bold text-slate-900 sticky left-0 bg-white z-10 whitespace-nowrap flex items-center justify-between gap-2 border-r border-slate-100">
-                        <span className="truncate max-w-[260px]" title={esp.nombre}>
-                          {esp.nombre}
-                        </span>
-                        {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-indigo-600" />}
+                      <td
+                        className={`py-2 px-3 font-bold sticky left-0 z-20 whitespace-nowrap flex items-center justify-between gap-2 border-r transition-colors ${isSelected
+                          ? 'bg-indigo-100 text-indigo-950 border-r-indigo-400 border-l-[6px] border-l-indigo-600 border-t-2 border-b-2 border-t-indigo-600 border-b-indigo-600 shadow-xs font-black'
+                          : 'bg-white text-slate-900 border-r-slate-100 border-b border-slate-100'
+                          }`}
+                      >
+                        <div className="flex items-center gap-2 min-w-0">
+                          <span
+                            className={`text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded border shrink-0 ${nivelInfo.badgeColor.bg} ${nivelInfo.badgeColor.text} ${nivelInfo.badgeColor.border}`}
+                          >
+                            {nivelInfo.nivelCodigo === 'INICIAL'
+                              ? 'Inicial'
+                              : nivelInfo.nivelCodigo === 'PRIMARIA'
+                                ? 'Primaria'
+                                : nivelInfo.nivelCodigo === 'SECUNDARIA'
+                                  ? 'Secundaria'
+                                  : nivelInfo.nivelCodigo === 'TECNICA'
+                                    ? 'Técnica'
+                                    : 'Especial'}
+                          </span>
+                          <span className="truncate max-w-[200px]" title={esp.nombre}>
+                            {esp.nombre}
+                          </span>
+                        </div>
+                        {isSelected && (
+                          <span className="w-2.5 h-2.5 rounded-full bg-indigo-600 animate-pulse shrink-0 ring-4 ring-indigo-300" title="Seleccionada" />
+                        )}
                       </td>
-                      <td className="py-2 px-2 text-center font-mono text-[10px] text-slate-500">
+                      <td className={`py-2 px-2 text-center font-mono text-xs font-bold border-r transition-colors ${isSelected
+                        ? 'border-t-2 border-b-2 border-indigo-600 bg-indigo-100/60 text-indigo-950 border-r-indigo-200'
+                        : 'text-slate-500 border-r-slate-100 border-b border-slate-100'
+                        }`}>
                         {esp.hora_item}h
                       </td>
 
@@ -457,7 +645,10 @@ export default function DeficitMateriaDinamicoView() {
                         return (
                           <td
                             key={dept.departamento_id}
-                            className="py-1 px-1 text-center"
+                            className={`py-1 px-1 text-center transition-colors ${isSelected
+                              ? 'border-t-2 border-b-2 border-indigo-600 bg-indigo-50/50'
+                              : 'border-b border-slate-100'
+                              }`}
                             onMouseEnter={() =>
                               setHoverCell({
                                 espNombre: esp.nombre,
@@ -469,20 +660,39 @@ export default function DeficitMateriaDinamicoView() {
                             }
                             onMouseLeave={() => setHoverCell(null)}
                           >
-                            <div className={`py-1 rounded text-[11px] font-mono transition-transform hover:scale-105 ${bgClass}`}>
+                            <div className={`py-1 rounded text-xs font-mono font-black transition-transform hover:scale-105 shadow-2xs ${bgClass}`}>
                               {items > 0 ? items : '—'}
                             </div>
                           </td>
                         );
                       })}
 
-                      <td className="py-2 px-3 text-right font-mono font-black text-indigo-900 bg-indigo-50/60">
+                      <td className={`py-1.5 px-2 text-center font-mono font-black text-[13px] w-20 transition-colors ${isSelected
+                        ? 'border-t-2 border-b-2 border-indigo-600 bg-indigo-200 text-indigo-950 shadow-xs'
+                        : 'bg-indigo-50/60 text-indigo-900 border-b border-slate-100'
+                        }`}>
                         {esp.items_deficit_equiv.toLocaleString('es-BO')}
                       </td>
                     </tr>
                   );
                 })}
               </tbody>
+              <tfoot className="bg-slate-900 text-white font-black text-xs border-t-2 border-slate-800">
+                <tr>
+                  <td className="py-2.5 px-3 sticky left-0 z-10 bg-slate-900 text-amber-300 uppercase tracking-wider font-black border-r border-slate-800">
+                    Total Déficit Ítems
+                  </td>
+                  <td className="py-2 px-2 text-center text-slate-400 font-mono border-r border-slate-800">—</td>
+                  {totalesHeatmapDeptos.porDepto.map((d) => (
+                    <td key={d.id} className="py-2 px-1 text-center font-mono font-bold text-slate-100 border-r border-slate-800 text-xs">
+                      {d.totalItems.toLocaleString('es-BO')}
+                    </td>
+                  ))}
+                  <td className="py-2 px-2 text-center font-mono font-black text-amber-300 text-[13px] bg-slate-950 w-20">
+                    {totalesHeatmapDeptos.granTotal.toLocaleString('es-BO')}
+                  </td>
+                </tr>
+              </tfoot>
             </table>
           </div>
 

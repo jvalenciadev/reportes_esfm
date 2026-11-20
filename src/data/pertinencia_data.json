@@ -4,40 +4,40 @@
       "rango": "V",
       "docentes": 127560,
       "asignaciones": 127560,
-      "ues": 11042,
+      "ues": 14789,
       "horas_total": 12245760,
-      "estudiantes_atendidos": 2359860
+      "estudiantes_atendidos": 1927181
     },
     "A": {
       "rango": "A",
       "docentes": 23585,
       "asignaciones": 23585,
-      "ues": 6287,
+      "ues": 8065,
       "horas_total": 2264160,
-      "estudiantes_atendidos": 436322
+      "estudiantes_atendidos": 358277
     },
     "N": {
       "rango": "N",
       "docentes": 13931,
       "asignaciones": 13931,
-      "ues": 4748,
+      "ues": 5996,
       "horas_total": 1337376,
-      "estudiantes_atendidos": 257724
+      "estudiantes_atendidos": 200848
     },
     "SIN": {
       "rango": "SIN",
       "docentes": 3682,
       "asignaciones": 3682,
-      "ues": 1881,
+      "ues": 2164,
       "horas_total": 353472,
-      "estudiantes_atendidos": 68117
+      "estudiantes_atendidos": 39886
     },
     "TOTAL": {
       "docentes": 168758,
       "asignaciones": 168758,
-      "ues": 12054,
+      "ues": 16308,
       "horas_total": 16200768,
-      "estudiantes_atendidos": 3122023
+      "estudiantes_atendidos": 2526192
     }
   },
   "desalineacion": {
@@ -50,123 +50,220 @@
     "pct_fuera_ambos": 2.18,
     "pct_fuera_nivel": 0.0
   },
+  "por_area": {
+    "RURAL": {
+      "area": "RURAL",
+      "docentes": 64260,
+      "pct_del_total": 38.08,
+      "ues": 9429,
+      "horas_total": 6168960,
+      "estudiantes_atendidos": 895549,
+      "pct_alta": 78.16,
+      "pct_media": 10.96,
+      "pct_baja": 8.36,
+      "pct_sin": 2.53,
+      "desalineados": 6996,
+      "pct_desalineados": 10.89,
+      "prioridad_formacion": 12410,
+      "rangos": {
+        "V": {
+          "rango": "V",
+          "docentes": 50223,
+          "pct": 78.16,
+          "ues": 8276,
+          "horas": 4821408
+        },
+        "A": {
+          "rango": "A",
+          "docentes": 7041,
+          "pct": 10.96,
+          "ues": 3614,
+          "horas": 675936
+        },
+        "N": {
+          "rango": "N",
+          "docentes": 5369,
+          "pct": 8.36,
+          "ues": 2732,
+          "horas": 515424
+        },
+        "SIN": {
+          "rango": "SIN",
+          "docentes": 1627,
+          "pct": 2.53,
+          "ues": 951,
+          "horas": 156192
+        }
+      }
+    },
+    "URBANA": {
+      "area": "URBANA",
+      "docentes": 104498,
+      "pct_del_total": 61.92,
+      "ues": 6879,
+      "horas_total": 10031808,
+      "estudiantes_atendidos": 1630643,
+      "pct_alta": 74.01,
+      "pct_media": 15.83,
+      "pct_baja": 8.19,
+      "pct_sin": 1.97,
+      "desalineados": 10617,
+      "pct_desalineados": 10.16,
+      "prioridad_formacion": 25106,
+      "rangos": {
+        "V": {
+          "rango": "V",
+          "docentes": 77337,
+          "pct": 74.01,
+          "ues": 6513,
+          "horas": 7424352
+        },
+        "A": {
+          "rango": "A",
+          "docentes": 16544,
+          "pct": 15.83,
+          "ues": 4451,
+          "horas": 1588224
+        },
+        "N": {
+          "rango": "N",
+          "docentes": 8562,
+          "pct": 8.19,
+          "ues": 3264,
+          "horas": 821952
+        },
+        "SIN": {
+          "rango": "SIN",
+          "docentes": 2055,
+          "pct": 1.97,
+          "ues": 1213,
+          "horas": 197280
+        }
+      }
+    }
+  },
   "por_departamento": [
     {
       "departamento": "BENI",
+      "ues": 900,
       "rangos": {
         "V": {
           "docentes": 5499,
-          "ues": 704,
+          "ues": 778,
           "horas": 527904
         },
         "A": {
           "docentes": 1367,
-          "ues": 517,
+          "ues": 560,
           "horas": 131232
         },
         "N": {
           "docentes": 1041,
-          "ues": 374,
+          "ues": 399,
           "horas": 99936
         },
         "SIN": {
           "docentes": 382,
-          "ues": 217,
+          "ues": 220,
           "horas": 36672
         }
       }
     },
     {
       "departamento": "CHUQUISACA",
+      "ues": 1268,
       "rangos": {
         "V": {
           "docentes": 7548,
-          "ues": 1004,
+          "ues": 1117,
           "horas": 724608
         },
         "A": {
           "docentes": 1661,
-          "ues": 533,
+          "ues": 567,
           "horas": 159456
         },
         "N": {
           "docentes": 728,
-          "ues": 305,
+          "ues": 327,
           "horas": 69888
         },
         "SIN": {
           "docentes": 260,
-          "ues": 157,
+          "ues": 166,
           "horas": 24960
         }
       }
     },
     {
       "departamento": "COCHABAMBA",
+      "ues": 2395,
       "rangos": {
         "V": {
           "docentes": 23169,
-          "ues": 1771,
+          "ues": 2204,
           "horas": 2224224
         },
         "A": {
           "docentes": 3829,
-          "ues": 1080,
+          "ues": 1291,
           "horas": 367584
         },
         "N": {
           "docentes": 2822,
-          "ues": 866,
+          "ues": 1019,
           "horas": 270912
         },
         "SIN": {
           "docentes": 843,
-          "ues": 414,
+          "ues": 451,
           "horas": 80928
         }
       }
     },
     {
       "departamento": "LA PAZ",
+      "ues": 4392,
       "rangos": {
         "V": {
           "docentes": 37289,
-          "ues": 3448,
+          "ues": 4075,
           "horas": 3579744
         },
         "A": {
           "docentes": 4675,
-          "ues": 1545,
+          "ues": 1733,
           "horas": 448800
         },
         "N": {
           "docentes": 2885,
-          "ues": 1296,
+          "ues": 1452,
           "horas": 276960
         },
         "SIN": {
           "docentes": 271,
-          "ues": 206,
+          "ues": 211,
           "horas": 26016
         }
       }
     },
     {
       "departamento": "ORURO",
+      "ues": 773,
       "rangos": {
         "V": {
           "docentes": 6431,
-          "ues": 602,
+          "ues": 702,
           "horas": 617376
         },
         "A": {
           "docentes": 1832,
-          "ues": 397,
+          "ues": 430,
           "horas": 175872
         },
         "N": {
           "docentes": 1237,
-          "ues": 342,
+          "ues": 382,
           "horas": 118752
         },
         "SIN": {
@@ -178,101 +275,782 @@
     },
     {
       "departamento": "PANDO",
+      "ues": 389,
       "rangos": {
         "V": {
           "docentes": 1823,
-          "ues": 280,
+          "ues": 318,
           "horas": 175008
         },
         "A": {
           "docentes": 429,
-          "ues": 185,
+          "ues": 211,
           "horas": 41184
         },
         "N": {
           "docentes": 363,
-          "ues": 142,
+          "ues": 149,
           "horas": 34848
         },
         "SIN": {
           "docentes": 112,
-          "ues": 61,
+          "ues": 67,
           "horas": 10752
         }
       }
     },
     {
       "departamento": "POTOSI",
+      "ues": 2223,
       "rangos": {
         "V": {
           "docentes": 12655,
-          "ues": 1677,
+          "ues": 1931,
           "horas": 1214880
         },
         "A": {
           "docentes": 2429,
-          "ues": 799,
+          "ues": 883,
           "horas": 233184
         },
         "N": {
           "docentes": 1320,
-          "ues": 570,
+          "ues": 632,
           "horas": 126720
         },
         "SIN": {
           "docentes": 330,
-          "ues": 237,
+          "ues": 242,
           "horas": 31680
         }
       }
     },
     {
       "departamento": "SANTA CRUZ",
+      "ues": 3112,
       "rangos": {
         "V": {
           "docentes": 25491,
-          "ues": 2452,
+          "ues": 2859,
           "horas": 2447136
         },
         "A": {
           "docentes": 6197,
-          "ues": 1821,
+          "ues": 2037,
           "horas": 594912
         },
         "N": {
           "docentes": 2870,
-          "ues": 1262,
+          "ues": 1364,
           "horas": 275520
         },
         "SIN": {
           "docentes": 1271,
-          "ues": 644,
+          "ues": 674,
           "horas": 122016
         }
       }
     },
     {
       "departamento": "TARIJA",
+      "ues": 856,
       "rangos": {
         "V": {
           "docentes": 7655,
-          "ues": 737,
+          "ues": 805,
           "horas": 734880
         },
         "A": {
           "docentes": 1166,
-          "ues": 338,
+          "ues": 353,
           "horas": 111936
         },
         "N": {
           "docentes": 665,
-          "ues": 261,
+          "ues": 272,
           "horas": 63840
         },
         "SIN": {
           "docentes": 164,
-          "ues": 88,
+          "ues": 91,
           "horas": 15744
+        }
+      }
+    }
+  ],
+  "por_departamento_area": [
+    {
+      "departamento": "BENI",
+      "total_docentes": 8289,
+      "total_ues": 900,
+      "pct_rural_del_depto": 17.65,
+      "pct_urbana_del_depto": 82.35,
+      "brecha_alta_urbano_rural": -1.12,
+      "brecha_desalineacion": -1.34,
+      "rural": {
+        "docentes": 1463,
+        "ues": 222,
+        "horas": 140448,
+        "pct_del_depto": 17.65,
+        "pct_alta": 67.26,
+        "pct_media": 16.68,
+        "pct_baja": 9.84,
+        "pct_sin": 6.22,
+        "desalineados": 235,
+        "pct_desalineados": 16.06,
+        "prioridad_formacion": 388,
+        "V": {
+          "docentes": 984,
+          "pct": 67.26,
+          "ues": 174
+        },
+        "A": {
+          "docentes": 244,
+          "pct": 16.68,
+          "ues": 127
+        },
+        "N": {
+          "docentes": 144,
+          "pct": 9.84,
+          "ues": 84
+        },
+        "SIN": {
+          "docentes": 91,
+          "pct": 6.22,
+          "ues": 59
+        }
+      },
+      "urbana": {
+        "docentes": 6826,
+        "ues": 678,
+        "horas": 655296,
+        "pct_del_depto": 82.35,
+        "pct_alta": 66.14,
+        "pct_media": 16.45,
+        "pct_baja": 13.14,
+        "pct_sin": 4.26,
+        "desalineados": 1188,
+        "pct_desalineados": 17.4,
+        "prioridad_formacion": 2020,
+        "V": {
+          "docentes": 4515,
+          "pct": 66.14,
+          "ues": 604
+        },
+        "A": {
+          "docentes": 1123,
+          "pct": 16.45,
+          "ues": 433
+        },
+        "N": {
+          "docentes": 897,
+          "pct": 13.14,
+          "ues": 315
+        },
+        "SIN": {
+          "docentes": 291,
+          "pct": 4.26,
+          "ues": 161
+        }
+      }
+    },
+    {
+      "departamento": "CHUQUISACA",
+      "total_docentes": 10197,
+      "total_ues": 1268,
+      "pct_rural_del_depto": 37.22,
+      "pct_urbana_del_depto": 62.78,
+      "brecha_alta_urbano_rural": -6.24,
+      "brecha_desalineacion": 1.23,
+      "rural": {
+        "docentes": 3795,
+        "ues": 717,
+        "horas": 364320,
+        "pct_del_depto": 37.22,
+        "pct_alta": 77.94,
+        "pct_media": 11.59,
+        "pct_baja": 6.56,
+        "pct_sin": 3.9,
+        "desalineados": 397,
+        "pct_desalineados": 10.46,
+        "prioridad_formacion": 689,
+        "V": {
+          "docentes": 2958,
+          "pct": 77.94,
+          "ues": 608
+        },
+        "A": {
+          "docentes": 440,
+          "pct": 11.59,
+          "ues": 274
+        },
+        "N": {
+          "docentes": 249,
+          "pct": 6.56,
+          "ues": 160
+        },
+        "SIN": {
+          "docentes": 148,
+          "pct": 3.9,
+          "ues": 90
+        }
+      },
+      "urbana": {
+        "docentes": 6402,
+        "ues": 551,
+        "horas": 614592,
+        "pct_del_depto": 62.78,
+        "pct_alta": 71.7,
+        "pct_media": 19.07,
+        "pct_baja": 7.48,
+        "pct_sin": 1.75,
+        "desalineados": 591,
+        "pct_desalineados": 9.23,
+        "prioridad_formacion": 1700,
+        "V": {
+          "docentes": 4590,
+          "pct": 71.7,
+          "ues": 509
+        },
+        "A": {
+          "docentes": 1221,
+          "pct": 19.07,
+          "ues": 293
+        },
+        "N": {
+          "docentes": 479,
+          "pct": 7.48,
+          "ues": 167
+        },
+        "SIN": {
+          "docentes": 112,
+          "pct": 1.75,
+          "ues": 76
+        }
+      }
+    },
+    {
+      "departamento": "COCHABAMBA",
+      "total_docentes": 30663,
+      "total_ues": 2395,
+      "pct_rural_del_depto": 43.45,
+      "pct_urbana_del_depto": 56.55,
+      "brecha_alta_urbano_rural": -2.23,
+      "brecha_desalineacion": 3.13,
+      "rural": {
+        "docentes": 13324,
+        "ues": 1500,
+        "horas": 1279104,
+        "pct_del_depto": 43.45,
+        "pct_alta": 76.82,
+        "pct_media": 9.46,
+        "pct_baja": 10.63,
+        "pct_sin": 3.09,
+        "desalineados": 1828,
+        "pct_desalineados": 13.72,
+        "prioridad_formacion": 2676,
+        "V": {
+          "docentes": 10236,
+          "pct": 76.82,
+          "ues": 1335
+        },
+        "A": {
+          "docentes": 1260,
+          "pct": 9.46,
+          "ues": 625
+        },
+        "N": {
+          "docentes": 1416,
+          "pct": 10.63,
+          "ues": 544
+        },
+        "SIN": {
+          "docentes": 412,
+          "pct": 3.09,
+          "ues": 202
+        }
+      },
+      "urbana": {
+        "docentes": 17339,
+        "ues": 895,
+        "horas": 1664544,
+        "pct_del_depto": 56.55,
+        "pct_alta": 74.59,
+        "pct_media": 14.82,
+        "pct_baja": 8.11,
+        "pct_sin": 2.49,
+        "desalineados": 1837,
+        "pct_desalineados": 10.59,
+        "prioridad_formacion": 3975,
+        "V": {
+          "docentes": 12933,
+          "pct": 74.59,
+          "ues": 869
+        },
+        "A": {
+          "docentes": 2569,
+          "pct": 14.82,
+          "ues": 666
+        },
+        "N": {
+          "docentes": 1406,
+          "pct": 8.11,
+          "ues": 475
+        },
+        "SIN": {
+          "docentes": 431,
+          "pct": 2.49,
+          "ues": 249
+        }
+      }
+    },
+    {
+      "departamento": "LA PAZ",
+      "total_docentes": 45120,
+      "total_ues": 4392,
+      "pct_rural_del_depto": 33.97,
+      "pct_urbana_del_depto": 66.03,
+      "brecha_alta_urbano_rural": -4.73,
+      "brecha_desalineacion": -0.21,
+      "rural": {
+        "docentes": 15326,
+        "ues": 2781,
+        "horas": 1471296,
+        "pct_del_depto": 33.97,
+        "pct_alta": 85.77,
+        "pct_media": 7.37,
+        "pct_baja": 6.11,
+        "pct_sin": 0.74,
+        "desalineados": 1051,
+        "pct_desalineados": 6.86,
+        "prioridad_formacion": 2067,
+        "V": {
+          "docentes": 13145,
+          "pct": 85.77,
+          "ues": 2517
+        },
+        "A": {
+          "docentes": 1130,
+          "pct": 7.37,
+          "ues": 729
+        },
+        "N": {
+          "docentes": 937,
+          "pct": 6.11,
+          "ues": 609
+        },
+        "SIN": {
+          "docentes": 114,
+          "pct": 0.74,
+          "ues": 82
+        }
+      },
+      "urbana": {
+        "docentes": 29794,
+        "ues": 1611,
+        "horas": 2860224,
+        "pct_del_depto": 66.03,
+        "pct_alta": 81.04,
+        "pct_media": 11.9,
+        "pct_baja": 6.54,
+        "pct_sin": 0.53,
+        "desalineados": 2105,
+        "pct_desalineados": 7.07,
+        "prioridad_formacion": 5493,
+        "V": {
+          "docentes": 24144,
+          "pct": 81.04,
+          "ues": 1558
+        },
+        "A": {
+          "docentes": 3545,
+          "pct": 11.9,
+          "ues": 1004
+        },
+        "N": {
+          "docentes": 1948,
+          "pct": 6.54,
+          "ues": 843
+        },
+        "SIN": {
+          "docentes": 157,
+          "pct": 0.53,
+          "ues": 129
+        }
+      }
+    },
+    {
+      "departamento": "ORURO",
+      "total_docentes": 9549,
+      "total_ues": 773,
+      "pct_rural_del_depto": 31.55,
+      "pct_urbana_del_depto": 68.45,
+      "brecha_alta_urbano_rural": -8.58,
+      "brecha_desalineacion": 2.49,
+      "rural": {
+        "docentes": 3013,
+        "ues": 421,
+        "horas": 289248,
+        "pct_del_depto": 31.55,
+        "pct_alta": 73.22,
+        "pct_media": 11.62,
+        "pct_baja": 14.94,
+        "pct_sin": 0.23,
+        "desalineados": 457,
+        "pct_desalineados": 15.17,
+        "prioridad_formacion": 800,
+        "V": {
+          "docentes": 2206,
+          "pct": 73.22,
+          "ues": 375
+        },
+        "A": {
+          "docentes": 350,
+          "pct": 11.62,
+          "ues": 163
+        },
+        "N": {
+          "docentes": 450,
+          "pct": 14.94,
+          "ues": 170
+        },
+        "SIN": {
+          "docentes": 7,
+          "pct": 0.23,
+          "ues": 6
+        }
+      },
+      "urbana": {
+        "docentes": 6536,
+        "ues": 352,
+        "horas": 627456,
+        "pct_del_depto": 68.45,
+        "pct_alta": 64.64,
+        "pct_media": 22.67,
+        "pct_baja": 12.04,
+        "pct_sin": 0.64,
+        "desalineados": 829,
+        "pct_desalineados": 12.68,
+        "prioridad_formacion": 2269,
+        "V": {
+          "docentes": 4225,
+          "pct": 64.64,
+          "ues": 327
+        },
+        "A": {
+          "docentes": 1482,
+          "pct": 22.67,
+          "ues": 267
+        },
+        "N": {
+          "docentes": 787,
+          "pct": 12.04,
+          "ues": 212
+        },
+        "SIN": {
+          "docentes": 42,
+          "pct": 0.64,
+          "ues": 36
+        }
+      }
+    },
+    {
+      "departamento": "PANDO",
+      "total_docentes": 2727,
+      "total_ues": 389,
+      "pct_rural_del_depto": 55.04,
+      "pct_urbana_del_depto": 44.96,
+      "brecha_alta_urbano_rural": 2.73,
+      "brecha_desalineacion": 0.09,
+      "rural": {
+        "docentes": 1501,
+        "ues": 299,
+        "horas": 144096,
+        "pct_del_depto": 55.04,
+        "pct_alta": 65.62,
+        "pct_media": 16.92,
+        "pct_baja": 11.53,
+        "pct_sin": 5.93,
+        "desalineados": 262,
+        "pct_desalineados": 17.46,
+        "prioridad_formacion": 427,
+        "V": {
+          "docentes": 985,
+          "pct": 65.62,
+          "ues": 232
+        },
+        "A": {
+          "docentes": 254,
+          "pct": 16.92,
+          "ues": 160
+        },
+        "N": {
+          "docentes": 173,
+          "pct": 11.53,
+          "ues": 102
+        },
+        "SIN": {
+          "docentes": 89,
+          "pct": 5.93,
+          "ues": 52
+        }
+      },
+      "urbana": {
+        "docentes": 1226,
+        "ues": 90,
+        "horas": 117696,
+        "pct_del_depto": 44.96,
+        "pct_alta": 68.35,
+        "pct_media": 14.27,
+        "pct_baja": 15.5,
+        "pct_sin": 1.88,
+        "desalineados": 213,
+        "pct_desalineados": 17.37,
+        "prioridad_formacion": 365,
+        "V": {
+          "docentes": 838,
+          "pct": 68.35,
+          "ues": 86
+        },
+        "A": {
+          "docentes": 175,
+          "pct": 14.27,
+          "ues": 51
+        },
+        "N": {
+          "docentes": 190,
+          "pct": 15.5,
+          "ues": 47
+        },
+        "SIN": {
+          "docentes": 23,
+          "pct": 1.88,
+          "ues": 15
+        }
+      }
+    },
+    {
+      "departamento": "POTOSI",
+      "total_docentes": 16734,
+      "total_ues": 2223,
+      "pct_rural_del_depto": 37.88,
+      "pct_urbana_del_depto": 62.12,
+      "brecha_alta_urbano_rural": -5.69,
+      "brecha_desalineacion": 1.47,
+      "rural": {
+        "docentes": 6339,
+        "ues": 1364,
+        "horas": 608544,
+        "pct_del_depto": 37.88,
+        "pct_alta": 79.16,
+        "pct_media": 10.06,
+        "pct_baja": 8.39,
+        "pct_sin": 2.38,
+        "desalineados": 683,
+        "pct_desalineados": 10.77,
+        "prioridad_formacion": 1170,
+        "V": {
+          "docentes": 5018,
+          "pct": 79.16,
+          "ues": 1120
+        },
+        "A": {
+          "docentes": 638,
+          "pct": 10.06,
+          "ues": 442
+        },
+        "N": {
+          "docentes": 532,
+          "pct": 8.39,
+          "ues": 317
+        },
+        "SIN": {
+          "docentes": 151,
+          "pct": 2.38,
+          "ues": 117
+        }
+      },
+      "urbana": {
+        "docentes": 10395,
+        "ues": 859,
+        "horas": 997920,
+        "pct_del_depto": 62.12,
+        "pct_alta": 73.47,
+        "pct_media": 17.23,
+        "pct_baja": 7.58,
+        "pct_sin": 1.72,
+        "desalineados": 967,
+        "pct_desalineados": 9.3,
+        "prioridad_formacion": 2579,
+        "V": {
+          "docentes": 7637,
+          "pct": 73.47,
+          "ues": 811
+        },
+        "A": {
+          "docentes": 1791,
+          "pct": 17.23,
+          "ues": 441
+        },
+        "N": {
+          "docentes": 788,
+          "pct": 7.58,
+          "ues": 315
+        },
+        "SIN": {
+          "docentes": 179,
+          "pct": 1.72,
+          "ues": 125
+        }
+      }
+    },
+    {
+      "departamento": "SANTA CRUZ",
+      "total_docentes": 35829,
+      "total_ues": 3112,
+      "pct_rural_del_depto": 49.37,
+      "pct_urbana_del_depto": 50.63,
+      "brecha_alta_urbano_rural": -6.73,
+      "brecha_desalineacion": -1.2,
+      "rural": {
+        "docentes": 17688,
+        "ues": 1759,
+        "horas": 1698048,
+        "pct_del_depto": 49.37,
+        "pct_alta": 74.55,
+        "pct_media": 14.5,
+        "pct_baja": 7.67,
+        "pct_sin": 3.28,
+        "desalineados": 1937,
+        "pct_desalineados": 10.95,
+        "prioridad_formacion": 3921,
+        "V": {
+          "docentes": 13187,
+          "pct": 74.55,
+          "ues": 1572
+        },
+        "A": {
+          "docentes": 2564,
+          "pct": 14.5,
+          "ues": 1015
+        },
+        "N": {
+          "docentes": 1357,
+          "pct": 7.67,
+          "ues": 676
+        },
+        "SIN": {
+          "docentes": 580,
+          "pct": 3.28,
+          "ues": 323
+        }
+      },
+      "urbana": {
+        "docentes": 18141,
+        "ues": 1353,
+        "horas": 1741536,
+        "pct_del_depto": 50.63,
+        "pct_alta": 67.82,
+        "pct_media": 20.03,
+        "pct_baja": 8.34,
+        "pct_sin": 3.81,
+        "desalineados": 2204,
+        "pct_desalineados": 12.15,
+        "prioridad_formacion": 5146,
+        "V": {
+          "docentes": 12304,
+          "pct": 67.82,
+          "ues": 1287
+        },
+        "A": {
+          "docentes": 3633,
+          "pct": 20.03,
+          "ues": 1022
+        },
+        "N": {
+          "docentes": 1513,
+          "pct": 8.34,
+          "ues": 688
+        },
+        "SIN": {
+          "docentes": 691,
+          "pct": 3.81,
+          "ues": 351
+        }
+      }
+    },
+    {
+      "departamento": "TARIJA",
+      "total_docentes": 9650,
+      "total_ues": 856,
+      "pct_rural_del_depto": 18.77,
+      "pct_urbana_del_depto": 81.23,
+      "brecha_alta_urbano_rural": -4.58,
+      "brecha_desalineacion": -0.65,
+      "rural": {
+        "docentes": 1811,
+        "ues": 366,
+        "horas": 173856,
+        "pct_del_depto": 18.77,
+        "pct_alta": 83.05,
+        "pct_media": 8.89,
+        "pct_baja": 6.13,
+        "pct_sin": 1.93,
+        "desalineados": 146,
+        "pct_desalineados": 8.06,
+        "prioridad_formacion": 272,
+        "V": {
+          "docentes": 1504,
+          "pct": 83.05,
+          "ues": 343
+        },
+        "A": {
+          "docentes": 161,
+          "pct": 8.89,
+          "ues": 79
+        },
+        "N": {
+          "docentes": 111,
+          "pct": 6.13,
+          "ues": 70
+        },
+        "SIN": {
+          "docentes": 35,
+          "pct": 1.93,
+          "ues": 20
+        }
+      },
+      "urbana": {
+        "docentes": 7839,
+        "ues": 490,
+        "horas": 752544,
+        "pct_del_depto": 81.23,
+        "pct_alta": 78.47,
+        "pct_media": 12.82,
+        "pct_baja": 7.07,
+        "pct_sin": 1.65,
+        "desalineados": 683,
+        "pct_desalineados": 8.71,
+        "prioridad_formacion": 1559,
+        "V": {
+          "docentes": 6151,
+          "pct": 78.47,
+          "ues": 462
+        },
+        "A": {
+          "docentes": 1005,
+          "pct": 12.82,
+          "ues": 274
+        },
+        "N": {
+          "docentes": 554,
+          "pct": 7.07,
+          "ues": 202
+        },
+        "SIN": {
+          "docentes": 129,
+          "pct": 1.65,
+          "ues": 71
         }
       }
     }
@@ -280,35 +1058,37 @@
   "por_nivel": [
     {
       "nivel": "Adultos",
+      "ues": 718,
       "rangos": {
         "V": {
           "docentes": 3147,
-          "ues": 581,
+          "ues": 616,
           "horas": 302112
         },
         "A": {
           "docentes": 2063,
-          "ues": 586,
+          "ues": 619,
           "horas": 198048
         },
         "N": {
           "docentes": 348,
-          "ues": 178,
+          "ues": 179,
           "horas": 33408
         },
         "SIN": {
           "docentes": 841,
-          "ues": 314,
+          "ues": 324,
           "horas": 80736
         }
       }
     },
     {
       "nivel": "Especial",
+      "ues": 288,
       "rangos": {
         "V": {
           "docentes": 1177,
-          "ues": 194,
+          "ues": 211,
           "horas": 112992
         },
         "A": {
@@ -318,43 +1098,45 @@
         },
         "N": {
           "docentes": 504,
-          "ues": 192,
+          "ues": 202,
           "horas": 48384
         },
         "SIN": {
           "docentes": 216,
-          "ues": 99,
+          "ues": 104,
           "horas": 20736
         }
       }
     },
     {
       "nivel": "Inicial",
+      "ues": 4487,
       "rangos": {
         "V": {
           "docentes": 8849,
-          "ues": 3290,
+          "ues": 4105,
           "horas": 849504
         },
         "A": {
           "docentes": 1707,
-          "ues": 1017,
+          "ues": 1144,
           "horas": 163872
         },
         "N": {
           "docentes": 486,
-          "ues": 393,
+          "ues": 415,
           "horas": 46656
         },
         "SIN": {
           "docentes": 127,
-          "ues": 120,
+          "ues": 121,
           "horas": 12192
         }
       }
     },
     {
       "nivel": "Permanente",
+      "ues": 83,
       "rangos": {
         "V": {
           "docentes": 107,
@@ -380,54 +1162,4310 @@
     },
     {
       "nivel": "Primaria",
+      "ues": 13043,
       "rangos": {
         "V": {
           "docentes": 54710,
-          "ues": 8862,
+          "ues": 11633,
           "horas": 5252160
         },
         "A": {
           "docentes": 11389,
-          "ues": 4156,
+          "ues": 5160,
           "horas": 1093344
         },
         "N": {
           "docentes": 4645,
-          "ues": 2520,
+          "ues": 2999,
           "horas": 445920
         },
         "SIN": {
           "docentes": 702,
-          "ues": 574,
+          "ues": 614,
           "horas": 67392
         }
       }
     },
     {
       "nivel": "Secundaria",
+      "ues": 5214,
       "rangos": {
         "V": {
           "docentes": 59570,
-          "ues": 4102,
+          "ues": 5146,
           "horas": 5718720
         },
         "A": {
           "docentes": 8266,
-          "ues": 2373,
+          "ues": 2820,
           "horas": 793536
         },
         "N": {
           "docentes": 7913,
-          "ues": 2499,
+          "ues": 3020,
           "horas": 759648
         },
         "SIN": {
           "docentes": 1735,
-          "ues": 980,
+          "ues": 1103,
           "horas": 166560
         }
       }
     }
   ],
-  "por_especialidad": []
+  "por_especialidad": [
+    {
+      "id": 1,
+      "especialidad": "FÍSICA - QUÍMICA",
+      "hora_item": 96,
+      "horas": 96,
+      "nivel_codigo": "SECUNDARIA",
+      "docentes": 6882,
+      "ues": 4416,
+      "V": {
+        "docentes": 5026,
+        "pct": 73.0
+      },
+      "A": {
+        "docentes": 1018,
+        "pct": 14.8
+      },
+      "N": {
+        "docentes": 838,
+        "pct": 12.2
+      },
+      "SIN": {
+        "docentes": 0,
+        "pct": 0.0
+      },
+      "pct_alta": 73.0,
+      "meta_bid": 1856,
+      "pct_meta_bid": 27.0,
+      "por_departamento": {
+        "BENI": {
+          "V": 195,
+          "A": 28,
+          "N": 36,
+          "SIN": 0,
+          "total": 259
+        },
+        "CHUQUISACA": {
+          "V": 305,
+          "A": 19,
+          "N": 39,
+          "SIN": 0,
+          "total": 363
+        },
+        "COCHABAMBA": {
+          "V": 833,
+          "A": 301,
+          "N": 196,
+          "SIN": 0,
+          "total": 1330
+        },
+        "LA PAZ": {
+          "V": 1579,
+          "A": 167,
+          "N": 185,
+          "SIN": 0,
+          "total": 1931
+        },
+        "ORURO": {
+          "V": 258,
+          "A": 62,
+          "N": 102,
+          "SIN": 0,
+          "total": 422
+        },
+        "PANDO": {
+          "V": 83,
+          "A": 26,
+          "N": 21,
+          "SIN": 0,
+          "total": 130
+        },
+        "POTOSI": {
+          "V": 569,
+          "A": 104,
+          "N": 68,
+          "SIN": 0,
+          "total": 741
+        },
+        "SANTA CRUZ": {
+          "V": 865,
+          "A": 276,
+          "N": 161,
+          "SIN": 0,
+          "total": 1302
+        },
+        "TARIJA": {
+          "V": 339,
+          "A": 35,
+          "N": 30,
+          "SIN": 0,
+          "total": 404
+        }
+      }
+    },
+    {
+      "id": 2,
+      "especialidad": "EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL",
+      "hora_item": 88,
+      "horas": 88,
+      "nivel_codigo": "PRIMARIA",
+      "docentes": 61759,
+      "ues": 13833,
+      "V": {
+        "docentes": 49544,
+        "pct": 80.2
+      },
+      "A": {
+        "docentes": 8552,
+        "pct": 13.8
+      },
+      "N": {
+        "docentes": 2117,
+        "pct": 3.4
+      },
+      "SIN": {
+        "docentes": 1546,
+        "pct": 2.5
+      },
+      "pct_alta": 80.2,
+      "meta_bid": 10669,
+      "pct_meta_bid": 17.3,
+      "por_departamento": {
+        "BENI": {
+          "V": 2491,
+          "A": 734,
+          "N": 256,
+          "SIN": 214,
+          "total": 3695
+        },
+        "CHUQUISACA": {
+          "V": 3308,
+          "A": 487,
+          "N": 98,
+          "SIN": 53,
+          "total": 3946
+        },
+        "COCHABAMBA": {
+          "V": 8502,
+          "A": 1166,
+          "N": 355,
+          "SIN": 323,
+          "total": 10346
+        },
+        "LA PAZ": {
+          "V": 13477,
+          "A": 1292,
+          "N": 351,
+          "SIN": 136,
+          "total": 15256
+        },
+        "ORURO": {
+          "V": 2274,
+          "A": 591,
+          "N": 106,
+          "SIN": 35,
+          "total": 3006
+        },
+        "PANDO": {
+          "V": 712,
+          "A": 201,
+          "N": 54,
+          "SIN": 88,
+          "total": 1055
+        },
+        "POTOSI": {
+          "V": 5032,
+          "A": 907,
+          "N": 174,
+          "SIN": 151,
+          "total": 6264
+        },
+        "SANTA CRUZ": {
+          "V": 10966,
+          "A": 2845,
+          "N": 547,
+          "SIN": 509,
+          "total": 14867
+        },
+        "TARIJA": {
+          "V": 2782,
+          "A": 329,
+          "N": 176,
+          "SIN": 37,
+          "total": 3324
+        }
+      }
+    },
+    {
+      "id": 3,
+      "especialidad": "EDUCACIÓN MUSICAL",
+      "hora_item": 96,
+      "horas": 96,
+      "nivel_codigo": "PRIMARIA Y SECUNDARIA",
+      "docentes": 7029,
+      "ues": 4882,
+      "V": {
+        "docentes": 6242,
+        "pct": 88.8
+      },
+      "A": {
+        "docentes": 635,
+        "pct": 9.0
+      },
+      "N": {
+        "docentes": 105,
+        "pct": 1.5
+      },
+      "SIN": {
+        "docentes": 47,
+        "pct": 0.7
+      },
+      "pct_alta": 88.8,
+      "meta_bid": 740,
+      "pct_meta_bid": 10.5,
+      "por_departamento": {
+        "BENI": {
+          "V": 153,
+          "A": 26,
+          "N": 4,
+          "SIN": 6,
+          "total": 189
+        },
+        "CHUQUISACA": {
+          "V": 332,
+          "A": 66,
+          "N": 12,
+          "SIN": 0,
+          "total": 410
+        },
+        "COCHABAMBA": {
+          "V": 1294,
+          "A": 124,
+          "N": 18,
+          "SIN": 13,
+          "total": 1449
+        },
+        "LA PAZ": {
+          "V": 2007,
+          "A": 176,
+          "N": 18,
+          "SIN": 5,
+          "total": 2206
+        },
+        "ORURO": {
+          "V": 389,
+          "A": 46,
+          "N": 6,
+          "SIN": 0,
+          "total": 441
+        },
+        "PANDO": {
+          "V": 30,
+          "A": 12,
+          "N": 11,
+          "SIN": 0,
+          "total": 53
+        },
+        "POTOSI": {
+          "V": 716,
+          "A": 39,
+          "N": 10,
+          "SIN": 14,
+          "total": 779
+        },
+        "SANTA CRUZ": {
+          "V": 871,
+          "A": 96,
+          "N": 18,
+          "SIN": 6,
+          "total": 991
+        },
+        "TARIJA": {
+          "V": 450,
+          "A": 50,
+          "N": 8,
+          "SIN": 3,
+          "total": 511
+        }
+      }
+    },
+    {
+      "id": 4,
+      "especialidad": "ARTES PLÁSTICAS Y VISUALES",
+      "hora_item": 96,
+      "horas": 96,
+      "nivel_codigo": "PRIMARIA Y SECUNDARIA",
+      "docentes": 4703,
+      "ues": 3253,
+      "V": {
+        "docentes": 3132,
+        "pct": 66.6
+      },
+      "A": {
+        "docentes": 1225,
+        "pct": 26.0
+      },
+      "N": {
+        "docentes": 321,
+        "pct": 6.8
+      },
+      "SIN": {
+        "docentes": 25,
+        "pct": 0.5
+      },
+      "pct_alta": 66.6,
+      "meta_bid": 1546,
+      "pct_meta_bid": 32.9,
+      "por_departamento": {
+        "BENI": {
+          "V": 154,
+          "A": 76,
+          "N": 24,
+          "SIN": 4,
+          "total": 258
+        },
+        "CHUQUISACA": {
+          "V": 192,
+          "A": 108,
+          "N": 44,
+          "SIN": 0,
+          "total": 344
+        },
+        "COCHABAMBA": {
+          "V": 608,
+          "A": 185,
+          "N": 58,
+          "SIN": 4,
+          "total": 855
+        },
+        "LA PAZ": {
+          "V": 957,
+          "A": 369,
+          "N": 49,
+          "SIN": 0,
+          "total": 1375
+        },
+        "ORURO": {
+          "V": 119,
+          "A": 149,
+          "N": 27,
+          "SIN": 0,
+          "total": 295
+        },
+        "PANDO": {
+          "V": 54,
+          "A": 23,
+          "N": 22,
+          "SIN": 0,
+          "total": 99
+        },
+        "POTOSI": {
+          "V": 262,
+          "A": 98,
+          "N": 26,
+          "SIN": 3,
+          "total": 389
+        },
+        "SANTA CRUZ": {
+          "V": 543,
+          "A": 153,
+          "N": 50,
+          "SIN": 8,
+          "total": 754
+        },
+        "TARIJA": {
+          "V": 243,
+          "A": 64,
+          "N": 21,
+          "SIN": 6,
+          "total": 334
+        }
+      }
+    },
+    {
+      "id": 5,
+      "especialidad": "EDUCACIÓN INICIAL EN FAMILIA COMUNITARIA",
+      "hora_item": 88,
+      "horas": 88,
+      "nivel_codigo": "INICIAL",
+      "docentes": 9660,
+      "ues": 4239,
+      "V": {
+        "docentes": 8194,
+        "pct": 84.8
+      },
+      "A": {
+        "docentes": 1309,
+        "pct": 13.6
+      },
+      "N": {
+        "docentes": 100,
+        "pct": 1.0
+      },
+      "SIN": {
+        "docentes": 57,
+        "pct": 0.6
+      },
+      "pct_alta": 84.8,
+      "meta_bid": 1409,
+      "pct_meta_bid": 14.6,
+      "por_departamento": {
+        "BENI": {
+          "V": 452,
+          "A": 75,
+          "N": 20,
+          "SIN": 3,
+          "total": 550
+        },
+        "CHUQUISACA": {
+          "V": 467,
+          "A": 103,
+          "N": 12,
+          "SIN": 1,
+          "total": 583
+        },
+        "COCHABAMBA": {
+          "V": 1563,
+          "A": 210,
+          "N": 13,
+          "SIN": 7,
+          "total": 1793
+        },
+        "LA PAZ": {
+          "V": 2047,
+          "A": 194,
+          "N": 10,
+          "SIN": 7,
+          "total": 2258
+        },
+        "ORURO": {
+          "V": 527,
+          "A": 121,
+          "N": 9,
+          "SIN": 0,
+          "total": 657
+        },
+        "PANDO": {
+          "V": 128,
+          "A": 7,
+          "N": 4,
+          "SIN": 1,
+          "total": 140
+        },
+        "POTOSI": {
+          "V": 643,
+          "A": 128,
+          "N": 6,
+          "SIN": 1,
+          "total": 778
+        },
+        "SANTA CRUZ": {
+          "V": 1908,
+          "A": 408,
+          "N": 23,
+          "SIN": 36,
+          "total": 2375
+        },
+        "TARIJA": {
+          "V": 459,
+          "A": 63,
+          "N": 3,
+          "SIN": 1,
+          "total": 526
+        }
+      }
+    },
+    {
+      "id": 6,
+      "especialidad": "EDUCACIÓN FÍSICA Y DEPORTES",
+      "hora_item": 96,
+      "horas": 96,
+      "nivel_codigo": "PRIMARIA Y SECUNDARIA",
+      "docentes": 10319,
+      "ues": 6328,
+      "V": {
+        "docentes": 7526,
+        "pct": 72.9
+      },
+      "A": {
+        "docentes": 2421,
+        "pct": 23.5
+      },
+      "N": {
+        "docentes": 371,
+        "pct": 3.6
+      },
+      "SIN": {
+        "docentes": 1,
+        "pct": 0.0
+      },
+      "pct_alta": 72.9,
+      "meta_bid": 2792,
+      "pct_meta_bid": 27.1,
+      "por_departamento": {
+        "BENI": {
+          "V": 201,
+          "A": 66,
+          "N": 13,
+          "SIN": 0,
+          "total": 280
+        },
+        "CHUQUISACA": {
+          "V": 445,
+          "A": 236,
+          "N": 37,
+          "SIN": 0,
+          "total": 718
+        },
+        "COCHABAMBA": {
+          "V": 1570,
+          "A": 563,
+          "N": 83,
+          "SIN": 0,
+          "total": 2216
+        },
+        "LA PAZ": {
+          "V": 2177,
+          "A": 603,
+          "N": 61,
+          "SIN": 0,
+          "total": 2841
+        },
+        "ORURO": {
+          "V": 407,
+          "A": 141,
+          "N": 17,
+          "SIN": 0,
+          "total": 565
+        },
+        "PANDO": {
+          "V": 124,
+          "A": 44,
+          "N": 44,
+          "SIN": 0,
+          "total": 212
+        },
+        "POTOSI": {
+          "V": 725,
+          "A": 258,
+          "N": 16,
+          "SIN": 0,
+          "total": 999
+        },
+        "SANTA CRUZ": {
+          "V": 1355,
+          "A": 383,
+          "N": 79,
+          "SIN": 1,
+          "total": 1818
+        },
+        "TARIJA": {
+          "V": 522,
+          "A": 127,
+          "N": 21,
+          "SIN": 0,
+          "total": 670
+        }
+      }
+    },
+    {
+      "id": 7,
+      "especialidad": "TRANSFORMACIÓN DE ALIMENTOS Y GASTRONOMÍA",
+      "hora_item": 108,
+      "horas": 108,
+      "nivel_codigo": "SECUNDARIA (BTH)",
+      "docentes": 1022,
+      "ues": 2378,
+      "V": {
+        "docentes": 575,
+        "pct": 56.3
+      },
+      "A": {
+        "docentes": 157,
+        "pct": 15.4
+      },
+      "N": {
+        "docentes": 72,
+        "pct": 7.0
+      },
+      "SIN": {
+        "docentes": 218,
+        "pct": 21.3
+      },
+      "pct_alta": 56.3,
+      "meta_bid": 229,
+      "pct_meta_bid": 22.4,
+      "por_departamento": {
+        "BENI": {
+          "V": 10,
+          "A": 5,
+          "N": 1,
+          "SIN": 16,
+          "total": 32
+        },
+        "CHUQUISACA": {
+          "V": 15,
+          "A": 13,
+          "N": 1,
+          "SIN": 12,
+          "total": 41
+        },
+        "COCHABAMBA": {
+          "V": 52,
+          "A": 10,
+          "N": 3,
+          "SIN": 79,
+          "total": 144
+        },
+        "LA PAZ": {
+          "V": 371,
+          "A": 64,
+          "N": 45,
+          "SIN": 9,
+          "total": 489
+        },
+        "ORURO": {
+          "V": 20,
+          "A": 9,
+          "N": 4,
+          "SIN": 0,
+          "total": 33
+        },
+        "PANDO": {
+          "V": 2,
+          "A": 1,
+          "N": 1,
+          "SIN": 4,
+          "total": 8
+        },
+        "POTOSI": {
+          "V": 42,
+          "A": 10,
+          "N": 1,
+          "SIN": 16,
+          "total": 69
+        },
+        "SANTA CRUZ": {
+          "V": 50,
+          "A": 34,
+          "N": 15,
+          "SIN": 71,
+          "total": 170
+        },
+        "TARIJA": {
+          "V": 14,
+          "A": 12,
+          "N": 0,
+          "SIN": 11,
+          "total": 37
+        }
+      }
+    },
+    {
+      "id": 8,
+      "especialidad": "COMUNICACIÓN Y LENGUAJES: LENGUA CASTELLANA",
+      "hora_item": 96,
+      "horas": 96,
+      "nivel_codigo": "SECUNDARIA",
+      "docentes": 12008,
+      "ues": 5616,
+      "V": {
+        "docentes": 8797,
+        "pct": 73.3
+      },
+      "A": {
+        "docentes": 976,
+        "pct": 8.1
+      },
+      "N": {
+        "docentes": 2194,
+        "pct": 18.3
+      },
+      "SIN": {
+        "docentes": 41,
+        "pct": 0.3
+      },
+      "pct_alta": 73.3,
+      "meta_bid": 3170,
+      "pct_meta_bid": 26.4,
+      "por_departamento": {
+        "BENI": {
+          "V": 302,
+          "A": 55,
+          "N": 133,
+          "SIN": 3,
+          "total": 493
+        },
+        "CHUQUISACA": {
+          "V": 452,
+          "A": 73,
+          "N": 84,
+          "SIN": 10,
+          "total": 619
+        },
+        "COCHABAMBA": {
+          "V": 1695,
+          "A": 210,
+          "N": 439,
+          "SIN": 9,
+          "total": 2353
+        },
+        "LA PAZ": {
+          "V": 2591,
+          "A": 210,
+          "N": 475,
+          "SIN": 1,
+          "total": 3277
+        },
+        "ORURO": {
+          "V": 528,
+          "A": 111,
+          "N": 278,
+          "SIN": 2,
+          "total": 919
+        },
+        "PANDO": {
+          "V": 114,
+          "A": 18,
+          "N": 44,
+          "SIN": 1,
+          "total": 177
+        },
+        "POTOSI": {
+          "V": 960,
+          "A": 83,
+          "N": 287,
+          "SIN": 0,
+          "total": 1330
+        },
+        "SANTA CRUZ": {
+          "V": 1640,
+          "A": 173,
+          "N": 372,
+          "SIN": 15,
+          "total": 2200
+        },
+        "TARIJA": {
+          "V": 515,
+          "A": 43,
+          "N": 82,
+          "SIN": 0,
+          "total": 640
+        }
+      }
+    },
+    {
+      "id": 9,
+      "especialidad": "MATEMÁTICA",
+      "hora_item": 96,
+      "horas": 96,
+      "nivel_codigo": "SECUNDARIA",
+      "docentes": 14597,
+      "ues": 6150,
+      "V": {
+        "docentes": 9430,
+        "pct": 64.6
+      },
+      "A": {
+        "docentes": 1639,
+        "pct": 11.2
+      },
+      "N": {
+        "docentes": 3413,
+        "pct": 23.4
+      },
+      "SIN": {
+        "docentes": 115,
+        "pct": 0.8
+      },
+      "pct_alta": 64.6,
+      "meta_bid": 5052,
+      "pct_meta_bid": 34.6,
+      "por_departamento": {
+        "BENI": {
+          "V": 469,
+          "A": 94,
+          "N": 248,
+          "SIN": 18,
+          "total": 829
+        },
+        "CHUQUISACA": {
+          "V": 506,
+          "A": 91,
+          "N": 123,
+          "SIN": 6,
+          "total": 726
+        },
+        "COCHABAMBA": {
+          "V": 1727,
+          "A": 254,
+          "N": 791,
+          "SIN": 14,
+          "total": 2786
+        },
+        "LA PAZ": {
+          "V": 2822,
+          "A": 312,
+          "N": 745,
+          "SIN": 5,
+          "total": 3884
+        },
+        "ORURO": {
+          "V": 483,
+          "A": 137,
+          "N": 299,
+          "SIN": 0,
+          "total": 919
+        },
+        "PANDO": {
+          "V": 157,
+          "A": 22,
+          "N": 33,
+          "SIN": 0,
+          "total": 212
+        },
+        "POTOSI": {
+          "V": 1011,
+          "A": 167,
+          "N": 297,
+          "SIN": 4,
+          "total": 1479
+        },
+        "SANTA CRUZ": {
+          "V": 1725,
+          "A": 484,
+          "N": 677,
+          "SIN": 67,
+          "total": 2953
+        },
+        "TARIJA": {
+          "V": 530,
+          "A": 78,
+          "N": 200,
+          "SIN": 1,
+          "total": 809
+        }
+      }
+    },
+    {
+      "id": 10,
+      "especialidad": "VALORES, ESPIRITUALIDADES Y RELIGIONES",
+      "hora_item": 88,
+      "horas": 88,
+      "nivel_codigo": "PRIMARIA Y SECUNDARIA",
+      "docentes": 5572,
+      "ues": 3457,
+      "V": {
+        "docentes": 4440,
+        "pct": 79.7
+      },
+      "A": {
+        "docentes": 1026,
+        "pct": 18.4
+      },
+      "N": {
+        "docentes": 86,
+        "pct": 1.5
+      },
+      "SIN": {
+        "docentes": 20,
+        "pct": 0.4
+      },
+      "pct_alta": 79.7,
+      "meta_bid": 1112,
+      "pct_meta_bid": 20.0,
+      "por_departamento": {
+        "BENI": {
+          "V": 183,
+          "A": 55,
+          "N": 10,
+          "SIN": 0,
+          "total": 248
+        },
+        "CHUQUISACA": {
+          "V": 210,
+          "A": 58,
+          "N": 11,
+          "SIN": 1,
+          "total": 280
+        },
+        "COCHABAMBA": {
+          "V": 863,
+          "A": 134,
+          "N": 8,
+          "SIN": 4,
+          "total": 1009
+        },
+        "LA PAZ": {
+          "V": 1430,
+          "A": 244,
+          "N": 17,
+          "SIN": 10,
+          "total": 1701
+        },
+        "ORURO": {
+          "V": 240,
+          "A": 87,
+          "N": 2,
+          "SIN": 1,
+          "total": 330
+        },
+        "PANDO": {
+          "V": 51,
+          "A": 12,
+          "N": 6,
+          "SIN": 0,
+          "total": 69
+        },
+        "POTOSI": {
+          "V": 305,
+          "A": 119,
+          "N": 1,
+          "SIN": 0,
+          "total": 425
+        },
+        "SANTA CRUZ": {
+          "V": 827,
+          "A": 256,
+          "N": 28,
+          "SIN": 4,
+          "total": 1115
+        },
+        "TARIJA": {
+          "V": 331,
+          "A": 61,
+          "N": 3,
+          "SIN": 0,
+          "total": 395
+        }
+      }
+    },
+    {
+      "id": 11,
+      "especialidad": "COSMOVISIONES, FILOSOFÍA Y SICOLOGÍA",
+      "hora_item": 96,
+      "horas": 96,
+      "nivel_codigo": "SECUNDARIA",
+      "docentes": 5604,
+      "ues": 3731,
+      "V": {
+        "docentes": 3793,
+        "pct": 67.7
+      },
+      "A": {
+        "docentes": 757,
+        "pct": 13.5
+      },
+      "N": {
+        "docentes": 823,
+        "pct": 14.7
+      },
+      "SIN": {
+        "docentes": 231,
+        "pct": 4.1
+      },
+      "pct_alta": 67.7,
+      "meta_bid": 1580,
+      "pct_meta_bid": 28.2,
+      "por_departamento": {
+        "BENI": {
+          "V": 148,
+          "A": 20,
+          "N": 71,
+          "SIN": 14,
+          "total": 253
+        },
+        "CHUQUISACA": {
+          "V": 222,
+          "A": 76,
+          "N": 31,
+          "SIN": 18,
+          "total": 347
+        },
+        "COCHABAMBA": {
+          "V": 724,
+          "A": 127,
+          "N": 101,
+          "SIN": 46,
+          "total": 998
+        },
+        "LA PAZ": {
+          "V": 1073,
+          "A": 155,
+          "N": 232,
+          "SIN": 8,
+          "total": 1468
+        },
+        "ORURO": {
+          "V": 204,
+          "A": 77,
+          "N": 138,
+          "SIN": 3,
+          "total": 422
+        },
+        "PANDO": {
+          "V": 58,
+          "A": 1,
+          "N": 29,
+          "SIN": 1,
+          "total": 89
+        },
+        "POTOSI": {
+          "V": 398,
+          "A": 91,
+          "N": 47,
+          "SIN": 12,
+          "total": 548
+        },
+        "SANTA CRUZ": {
+          "V": 720,
+          "A": 150,
+          "N": 152,
+          "SIN": 110,
+          "total": 1132
+        },
+        "TARIJA": {
+          "V": 246,
+          "A": 60,
+          "N": 22,
+          "SIN": 19,
+          "total": 347
+        }
+      }
+    },
+    {
+      "id": 12,
+      "especialidad": "CIENCIAS NATURALES: BIOLOGÍA - GEOGRAFÍA",
+      "hora_item": 96,
+      "horas": 96,
+      "nivel_codigo": "SECUNDARIA",
+      "docentes": 8794,
+      "ues": 4798,
+      "V": {
+        "docentes": 6068,
+        "pct": 69.0
+      },
+      "A": {
+        "docentes": 1075,
+        "pct": 12.2
+      },
+      "N": {
+        "docentes": 1645,
+        "pct": 18.7
+      },
+      "SIN": {
+        "docentes": 6,
+        "pct": 0.1
+      },
+      "pct_alta": 69.0,
+      "meta_bid": 2720,
+      "pct_meta_bid": 30.9,
+      "por_departamento": {
+        "BENI": {
+          "V": 184,
+          "A": 27,
+          "N": 74,
+          "SIN": 0,
+          "total": 285
+        },
+        "CHUQUISACA": {
+          "V": 383,
+          "A": 109,
+          "N": 125,
+          "SIN": 0,
+          "total": 617
+        },
+        "COCHABAMBA": {
+          "V": 1140,
+          "A": 140,
+          "N": 391,
+          "SIN": 0,
+          "total": 1671
+        },
+        "LA PAZ": {
+          "V": 1710,
+          "A": 150,
+          "N": 274,
+          "SIN": 0,
+          "total": 2134
+        },
+        "ORURO": {
+          "V": 315,
+          "A": 104,
+          "N": 152,
+          "SIN": 0,
+          "total": 571
+        },
+        "PANDO": {
+          "V": 89,
+          "A": 17,
+          "N": 27,
+          "SIN": 1,
+          "total": 134
+        },
+        "POTOSI": {
+          "V": 614,
+          "A": 143,
+          "N": 196,
+          "SIN": 0,
+          "total": 953
+        },
+        "SANTA CRUZ": {
+          "V": 1278,
+          "A": 310,
+          "N": 358,
+          "SIN": 5,
+          "total": 1951
+        },
+        "TARIJA": {
+          "V": 355,
+          "A": 75,
+          "N": 48,
+          "SIN": 0,
+          "total": 478
+        }
+      }
+    },
+    {
+      "id": 13,
+      "especialidad": "AGROPECUARIA",
+      "hora_item": 108,
+      "horas": 108,
+      "nivel_codigo": "SECUNDARIA (BTH)",
+      "docentes": 1129,
+      "ues": 2537,
+      "V": {
+        "docentes": 690,
+        "pct": 61.1
+      },
+      "A": {
+        "docentes": 165,
+        "pct": 14.6
+      },
+      "N": {
+        "docentes": 77,
+        "pct": 6.8
+      },
+      "SIN": {
+        "docentes": 197,
+        "pct": 17.4
+      },
+      "pct_alta": 61.1,
+      "meta_bid": 242,
+      "pct_meta_bid": 21.4,
+      "por_departamento": {
+        "BENI": {
+          "V": 9,
+          "A": 5,
+          "N": 2,
+          "SIN": 25,
+          "total": 41
+        },
+        "CHUQUISACA": {
+          "V": 16,
+          "A": 13,
+          "N": 1,
+          "SIN": 35,
+          "total": 65
+        },
+        "COCHABAMBA": {
+          "V": 42,
+          "A": 10,
+          "N": 6,
+          "SIN": 31,
+          "total": 89
+        },
+        "LA PAZ": {
+          "V": 306,
+          "A": 70,
+          "N": 19,
+          "SIN": 9,
+          "total": 404
+        },
+        "ORURO": {
+          "V": 21,
+          "A": 9,
+          "N": 5,
+          "SIN": 0,
+          "total": 35
+        },
+        "PANDO": {
+          "V": 32,
+          "A": 3,
+          "N": 12,
+          "SIN": 4,
+          "total": 51
+        },
+        "POTOSI": {
+          "V": 39,
+          "A": 10,
+          "N": 2,
+          "SIN": 15,
+          "total": 66
+        },
+        "SANTA CRUZ": {
+          "V": 190,
+          "A": 36,
+          "N": 28,
+          "SIN": 59,
+          "total": 313
+        },
+        "TARIJA": {
+          "V": 36,
+          "A": 10,
+          "N": 1,
+          "SIN": 19,
+          "total": 66
+        }
+      }
+    },
+    {
+      "id": 14,
+      "especialidad": "ELECTRICIDAD Y ELECTRÓNICA",
+      "hora_item": 108,
+      "horas": 108,
+      "nivel_codigo": "SECUNDARIA (BTH)",
+      "docentes": 1443,
+      "ues": 2538,
+      "V": {
+        "docentes": 687,
+        "pct": 47.6
+      },
+      "A": {
+        "docentes": 201,
+        "pct": 13.9
+      },
+      "N": {
+        "docentes": 85,
+        "pct": 5.9
+      },
+      "SIN": {
+        "docentes": 470,
+        "pct": 32.6
+      },
+      "pct_alta": 47.6,
+      "meta_bid": 286,
+      "pct_meta_bid": 19.8,
+      "por_departamento": {
+        "BENI": {
+          "V": 18,
+          "A": 5,
+          "N": 4,
+          "SIN": 42,
+          "total": 69
+        },
+        "CHUQUISACA": {
+          "V": 14,
+          "A": 13,
+          "N": 1,
+          "SIN": 37,
+          "total": 65
+        },
+        "COCHABAMBA": {
+          "V": 63,
+          "A": 11,
+          "N": 3,
+          "SIN": 124,
+          "total": 201
+        },
+        "LA PAZ": {
+          "V": 463,
+          "A": 98,
+          "N": 58,
+          "SIN": 30,
+          "total": 649
+        },
+        "ORURO": {
+          "V": 25,
+          "A": 11,
+          "N": 4,
+          "SIN": 4,
+          "total": 44
+        },
+        "PANDO": {
+          "V": 2,
+          "A": 1,
+          "N": 2,
+          "SIN": 10,
+          "total": 15
+        },
+        "POTOSI": {
+          "V": 38,
+          "A": 14,
+          "N": 3,
+          "SIN": 39,
+          "total": 94
+        },
+        "SANTA CRUZ": {
+          "V": 52,
+          "A": 38,
+          "N": 9,
+          "SIN": 157,
+          "total": 256
+        },
+        "TARIJA": {
+          "V": 13,
+          "A": 10,
+          "N": 0,
+          "SIN": 27,
+          "total": 50
+        }
+      }
+    },
+    {
+      "id": 15,
+      "especialidad": "MECÁNICA AUTOMOTRIZ",
+      "hora_item": 108,
+      "horas": 108,
+      "nivel_codigo": "SECUNDARIA (BTH)",
+      "docentes": 834,
+      "ues": 2312,
+      "V": {
+        "docentes": 518,
+        "pct": 62.1
+      },
+      "A": {
+        "docentes": 128,
+        "pct": 15.3
+      },
+      "N": {
+        "docentes": 32,
+        "pct": 3.8
+      },
+      "SIN": {
+        "docentes": 156,
+        "pct": 18.7
+      },
+      "pct_alta": 62.1,
+      "meta_bid": 160,
+      "pct_meta_bid": 19.2,
+      "por_departamento": {
+        "BENI": {
+          "V": 9,
+          "A": 6,
+          "N": 0,
+          "SIN": 2,
+          "total": 17
+        },
+        "CHUQUISACA": {
+          "V": 14,
+          "A": 13,
+          "N": 1,
+          "SIN": 16,
+          "total": 44
+        },
+        "COCHABAMBA": {
+          "V": 47,
+          "A": 10,
+          "N": 3,
+          "SIN": 57,
+          "total": 117
+        },
+        "LA PAZ": {
+          "V": 357,
+          "A": 50,
+          "N": 17,
+          "SIN": 20,
+          "total": 444
+        },
+        "ORURO": {
+          "V": 25,
+          "A": 9,
+          "N": 3,
+          "SIN": 0,
+          "total": 37
+        },
+        "PANDO": {
+          "V": 4,
+          "A": 2,
+          "N": 1,
+          "SIN": 0,
+          "total": 7
+        },
+        "POTOSI": {
+          "V": 32,
+          "A": 10,
+          "N": 1,
+          "SIN": 14,
+          "total": 57
+        },
+        "SANTA CRUZ": {
+          "V": 21,
+          "A": 18,
+          "N": 5,
+          "SIN": 40,
+          "total": 84
+        },
+        "TARIJA": {
+          "V": 11,
+          "A": 10,
+          "N": 0,
+          "SIN": 7,
+          "total": 28
+        }
+      }
+    },
+    {
+      "id": 16,
+      "especialidad": "ELECTROMECÁNICA",
+      "hora_item": 108,
+      "horas": 108,
+      "nivel_codigo": "SECUNDARIA (BTH)",
+      "docentes": 581,
+      "ues": 2190,
+      "V": {
+        "docentes": 394,
+        "pct": 67.8
+      },
+      "A": {
+        "docentes": 123,
+        "pct": 21.2
+      },
+      "N": {
+        "docentes": 39,
+        "pct": 6.7
+      },
+      "SIN": {
+        "docentes": 25,
+        "pct": 4.3
+      },
+      "pct_alta": 67.8,
+      "meta_bid": 162,
+      "pct_meta_bid": 27.9,
+      "por_departamento": {
+        "BENI": {
+          "V": 11,
+          "A": 5,
+          "N": 1,
+          "SIN": 4,
+          "total": 21
+        },
+        "CHUQUISACA": {
+          "V": 16,
+          "A": 13,
+          "N": 1,
+          "SIN": 3,
+          "total": 33
+        },
+        "COCHABAMBA": {
+          "V": 34,
+          "A": 10,
+          "N": 3,
+          "SIN": 7,
+          "total": 54
+        },
+        "LA PAZ": {
+          "V": 249,
+          "A": 48,
+          "N": 21,
+          "SIN": 2,
+          "total": 320
+        },
+        "ORURO": {
+          "V": 19,
+          "A": 9,
+          "N": 3,
+          "SIN": 0,
+          "total": 31
+        },
+        "PANDO": {
+          "V": 2,
+          "A": 1,
+          "N": 1,
+          "SIN": 0,
+          "total": 4
+        },
+        "POTOSI": {
+          "V": 33,
+          "A": 10,
+          "N": 2,
+          "SIN": 2,
+          "total": 47
+        },
+        "SANTA CRUZ": {
+          "V": 19,
+          "A": 16,
+          "N": 5,
+          "SIN": 7,
+          "total": 47
+        },
+        "TARIJA": {
+          "V": 12,
+          "A": 10,
+          "N": 1,
+          "SIN": 0,
+          "total": 23
+        }
+      }
+    },
+    {
+      "id": 17,
+      "especialidad": "COMUNICACIÓN Y LENGUAJES: LENGUA EXTRANJERA (INGLÉS)",
+      "hora_item": 96,
+      "horas": 96,
+      "nivel_codigo": "SECUNDARIA",
+      "docentes": 3137,
+      "ues": 2172,
+      "V": {
+        "docentes": 2276,
+        "pct": 72.6
+      },
+      "A": {
+        "docentes": 398,
+        "pct": 12.7
+      },
+      "N": {
+        "docentes": 350,
+        "pct": 11.2
+      },
+      "SIN": {
+        "docentes": 113,
+        "pct": 3.6
+      },
+      "pct_alta": 72.6,
+      "meta_bid": 748,
+      "pct_meta_bid": 23.8,
+      "por_departamento": {
+        "BENI": {
+          "V": 104,
+          "A": 5,
+          "N": 34,
+          "SIN": 2,
+          "total": 145
+        },
+        "CHUQUISACA": {
+          "V": 99,
+          "A": 37,
+          "N": 18,
+          "SIN": 31,
+          "total": 185
+        },
+        "COCHABAMBA": {
+          "V": 493,
+          "A": 75,
+          "N": 50,
+          "SIN": 30,
+          "total": 648
+        },
+        "LA PAZ": {
+          "V": 680,
+          "A": 105,
+          "N": 134,
+          "SIN": 3,
+          "total": 922
+        },
+        "ORURO": {
+          "V": 62,
+          "A": 40,
+          "N": 13,
+          "SIN": 2,
+          "total": 117
+        },
+        "PANDO": {
+          "V": 32,
+          "A": 3,
+          "N": 8,
+          "SIN": 0,
+          "total": 43
+        },
+        "POTOSI": {
+          "V": 214,
+          "A": 38,
+          "N": 51,
+          "SIN": 6,
+          "total": 309
+        },
+        "SANTA CRUZ": {
+          "V": 394,
+          "A": 64,
+          "N": 30,
+          "SIN": 26,
+          "total": 514
+        },
+        "TARIJA": {
+          "V": 198,
+          "A": 31,
+          "N": 12,
+          "SIN": 13,
+          "total": 254
+        }
+      }
+    },
+    {
+      "id": 18,
+      "especialidad": "TEXTIL Y CONFECCIÓN",
+      "hora_item": 108,
+      "horas": 108,
+      "nivel_codigo": "SECUNDARIA (BTH)",
+      "docentes": 782,
+      "ues": 2300,
+      "V": {
+        "docentes": 406,
+        "pct": 51.9
+      },
+      "A": {
+        "docentes": 133,
+        "pct": 17.0
+      },
+      "N": {
+        "docentes": 60,
+        "pct": 7.7
+      },
+      "SIN": {
+        "docentes": 183,
+        "pct": 23.4
+      },
+      "pct_alta": 51.9,
+      "meta_bid": 193,
+      "pct_meta_bid": 24.7,
+      "por_departamento": {
+        "BENI": {
+          "V": 10,
+          "A": 5,
+          "N": 0,
+          "SIN": 19,
+          "total": 34
+        },
+        "CHUQUISACA": {
+          "V": 26,
+          "A": 13,
+          "N": 3,
+          "SIN": 14,
+          "total": 56
+        },
+        "COCHABAMBA": {
+          "V": 34,
+          "A": 13,
+          "N": 14,
+          "SIN": 50,
+          "total": 111
+        },
+        "LA PAZ": {
+          "V": 195,
+          "A": 50,
+          "N": 17,
+          "SIN": 18,
+          "total": 280
+        },
+        "ORURO": {
+          "V": 26,
+          "A": 12,
+          "N": 8,
+          "SIN": 0,
+          "total": 46
+        },
+        "PANDO": {
+          "V": 2,
+          "A": 1,
+          "N": 1,
+          "SIN": 0,
+          "total": 4
+        },
+        "POTOSI": {
+          "V": 75,
+          "A": 11,
+          "N": 3,
+          "SIN": 26,
+          "total": 115
+        },
+        "SANTA CRUZ": {
+          "V": 24,
+          "A": 18,
+          "N": 10,
+          "SIN": 51,
+          "total": 103
+        },
+        "TARIJA": {
+          "V": 15,
+          "A": 10,
+          "N": 3,
+          "SIN": 5,
+          "total": 33
+        }
+      }
+    },
+    {
+      "id": 19,
+      "especialidad": "EDUCACIÓN ESPECIAL PARA PERSONAS CON DISCAPACIDAD",
+      "hora_item": 88,
+      "horas": 88,
+      "nivel_codigo": "ESPECIAL",
+      "docentes": 1392,
+      "ues": 380,
+      "V": {
+        "docentes": 1226,
+        "pct": 88.1
+      },
+      "A": {
+        "docentes": 34,
+        "pct": 2.4
+      },
+      "N": {
+        "docentes": 78,
+        "pct": 5.6
+      },
+      "SIN": {
+        "docentes": 54,
+        "pct": 3.9
+      },
+      "pct_alta": 88.1,
+      "meta_bid": 112,
+      "pct_meta_bid": 8.0,
+      "por_departamento": {
+        "BENI": {
+          "V": 58,
+          "A": 0,
+          "N": 0,
+          "SIN": 1,
+          "total": 59
+        },
+        "CHUQUISACA": {
+          "V": 59,
+          "A": 1,
+          "N": 0,
+          "SIN": 7,
+          "total": 67
+        },
+        "COCHABAMBA": {
+          "V": 223,
+          "A": 4,
+          "N": 18,
+          "SIN": 6,
+          "total": 251
+        },
+        "LA PAZ": {
+          "V": 266,
+          "A": 11,
+          "N": 13,
+          "SIN": 1,
+          "total": 291
+        },
+        "ORURO": {
+          "V": 60,
+          "A": 1,
+          "N": 5,
+          "SIN": 0,
+          "total": 66
+        },
+        "PANDO": {
+          "V": 29,
+          "A": 1,
+          "N": 5,
+          "SIN": 1,
+          "total": 36
+        },
+        "POTOSI": {
+          "V": 37,
+          "A": 4,
+          "N": 4,
+          "SIN": 2,
+          "total": 47
+        },
+        "SANTA CRUZ": {
+          "V": 387,
+          "A": 12,
+          "N": 24,
+          "SIN": 30,
+          "total": 453
+        },
+        "TARIJA": {
+          "V": 107,
+          "A": 0,
+          "N": 9,
+          "SIN": 6,
+          "total": 122
+        }
+      }
+    },
+    {
+      "id": 20,
+      "especialidad": "CIENCIAS SOCIALES",
+      "hora_item": 96,
+      "horas": 96,
+      "nivel_codigo": "SECUNDARIA",
+      "docentes": 10394,
+      "ues": 4904,
+      "V": {
+        "docentes": 7892,
+        "pct": 75.9
+      },
+      "A": {
+        "docentes": 1361,
+        "pct": 13.1
+      },
+      "N": {
+        "docentes": 1049,
+        "pct": 10.1
+      },
+      "SIN": {
+        "docentes": 92,
+        "pct": 0.9
+      },
+      "pct_alta": 75.9,
+      "meta_bid": 2410,
+      "pct_meta_bid": 23.2,
+      "por_departamento": {
+        "BENI": {
+          "V": 324,
+          "A": 66,
+          "N": 107,
+          "SIN": 9,
+          "total": 506
+        },
+        "CHUQUISACA": {
+          "V": 440,
+          "A": 96,
+          "N": 83,
+          "SIN": 3,
+          "total": 622
+        },
+        "COCHABAMBA": {
+          "V": 1592,
+          "A": 255,
+          "N": 265,
+          "SIN": 12,
+          "total": 2124
+        },
+        "LA PAZ": {
+          "V": 2109,
+          "A": 206,
+          "N": 95,
+          "SIN": 4,
+          "total": 2414
+        },
+        "ORURO": {
+          "V": 393,
+          "A": 85,
+          "N": 48,
+          "SIN": 2,
+          "total": 528
+        },
+        "PANDO": {
+          "V": 110,
+          "A": 31,
+          "N": 38,
+          "SIN": 1,
+          "total": 180
+        },
+        "POTOSI": {
+          "V": 840,
+          "A": 162,
+          "N": 124,
+          "SIN": 9,
+          "total": 1135
+        },
+        "SANTA CRUZ": {
+          "V": 1628,
+          "A": 395,
+          "N": 266,
+          "SIN": 50,
+          "total": 2339
+        },
+        "TARIJA": {
+          "V": 456,
+          "A": 65,
+          "N": 23,
+          "SIN": 2,
+          "total": 546
+        }
+      }
+    },
+    {
+      "id": 21,
+      "especialidad": "CARPINTERÍA INDUSTRIAL EN MADERA Y METAL",
+      "hora_item": 108,
+      "horas": 108,
+      "nivel_codigo": "SECUNDARIA (BTH)",
+      "docentes": 545,
+      "ues": 2173,
+      "V": {
+        "docentes": 369,
+        "pct": 67.7
+      },
+      "A": {
+        "docentes": 122,
+        "pct": 22.4
+      },
+      "N": {
+        "docentes": 41,
+        "pct": 7.5
+      },
+      "SIN": {
+        "docentes": 13,
+        "pct": 2.4
+      },
+      "pct_alta": 67.7,
+      "meta_bid": 163,
+      "pct_meta_bid": 29.9,
+      "por_departamento": {
+        "BENI": {
+          "V": 8,
+          "A": 5,
+          "N": 0,
+          "SIN": 0,
+          "total": 13
+        },
+        "CHUQUISACA": {
+          "V": 15,
+          "A": 13,
+          "N": 1,
+          "SIN": 5,
+          "total": 34
+        },
+        "COCHABAMBA": {
+          "V": 38,
+          "A": 10,
+          "N": 3,
+          "SIN": 2,
+          "total": 53
+        },
+        "LA PAZ": {
+          "V": 230,
+          "A": 48,
+          "N": 26,
+          "SIN": 0,
+          "total": 304
+        },
+        "ORURO": {
+          "V": 19,
+          "A": 9,
+          "N": 3,
+          "SIN": 0,
+          "total": 31
+        },
+        "PANDO": {
+          "V": 2,
+          "A": 1,
+          "N": 1,
+          "SIN": 0,
+          "total": 4
+        },
+        "POTOSI": {
+          "V": 32,
+          "A": 10,
+          "N": 1,
+          "SIN": 0,
+          "total": 43
+        },
+        "SANTA CRUZ": {
+          "V": 15,
+          "A": 16,
+          "N": 5,
+          "SIN": 6,
+          "total": 42
+        },
+        "TARIJA": {
+          "V": 11,
+          "A": 10,
+          "N": 0,
+          "SIN": 0,
+          "total": 21
+        }
+      }
+    },
+    {
+      "id": 22,
+      "especialidad": "MECÁNICA INDUSTRIAL",
+      "hora_item": 108,
+      "horas": 108,
+      "nivel_codigo": "SECUNDARIA (BTH)",
+      "docentes": 569,
+      "ues": 2164,
+      "V": {
+        "docentes": 334,
+        "pct": 58.7
+      },
+      "A": {
+        "docentes": 128,
+        "pct": 22.5
+      },
+      "N": {
+        "docentes": 36,
+        "pct": 6.3
+      },
+      "SIN": {
+        "docentes": 71,
+        "pct": 12.5
+      },
+      "pct_alta": 58.7,
+      "meta_bid": 164,
+      "pct_meta_bid": 28.8,
+      "por_departamento": {
+        "BENI": {
+          "V": 9,
+          "A": 5,
+          "N": 0,
+          "SIN": 0,
+          "total": 14
+        },
+        "CHUQUISACA": {
+          "V": 14,
+          "A": 13,
+          "N": 1,
+          "SIN": 8,
+          "total": 36
+        },
+        "COCHABAMBA": {
+          "V": 31,
+          "A": 10,
+          "N": 3,
+          "SIN": 24,
+          "total": 68
+        },
+        "LA PAZ": {
+          "V": 193,
+          "A": 52,
+          "N": 21,
+          "SIN": 3,
+          "total": 269
+        },
+        "ORURO": {
+          "V": 20,
+          "A": 9,
+          "N": 3,
+          "SIN": 0,
+          "total": 32
+        },
+        "PANDO": {
+          "V": 4,
+          "A": 1,
+          "N": 1,
+          "SIN": 0,
+          "total": 6
+        },
+        "POTOSI": {
+          "V": 39,
+          "A": 11,
+          "N": 1,
+          "SIN": 16,
+          "total": 67
+        },
+        "SANTA CRUZ": {
+          "V": 15,
+          "A": 16,
+          "N": 5,
+          "SIN": 13,
+          "total": 49
+        },
+        "TARIJA": {
+          "V": 11,
+          "A": 10,
+          "N": 0,
+          "SIN": 7,
+          "total": 28
+        }
+      }
+    }
+  ],
+  "jubilacion": {
+    "nacional": {
+      "jubilacion": 25382,
+      "prejubilacion": 8874,
+      "total": 168758
+    },
+    "por_departamento": [
+      {
+        "departamento": "BENI",
+        "jubilacion": 1329,
+        "prejubilacion": 562,
+        "total": 8289
+      },
+      {
+        "departamento": "CHUQUISACA",
+        "jubilacion": 1362,
+        "prejubilacion": 132,
+        "total": 10197
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "jubilacion": 4486,
+        "prejubilacion": 2101,
+        "total": 30663
+      },
+      {
+        "departamento": "LA PAZ",
+        "jubilacion": 7099,
+        "prejubilacion": 2587,
+        "total": 45120
+      },
+      {
+        "departamento": "ORURO",
+        "jubilacion": 2156,
+        "prejubilacion": 851,
+        "total": 9549
+      },
+      {
+        "departamento": "PANDO",
+        "jubilacion": 207,
+        "prejubilacion": 56,
+        "total": 2727
+      },
+      {
+        "departamento": "POTOSI",
+        "jubilacion": 2473,
+        "prejubilacion": 792,
+        "total": 16734
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "jubilacion": 4952,
+        "prejubilacion": 1058,
+        "total": 35829
+      },
+      {
+        "departamento": "TARIJA",
+        "jubilacion": 1318,
+        "prejubilacion": 735,
+        "total": 9650
+      }
+    ],
+    "por_distrito": [
+      {
+        "departamento": "BENI",
+        "distrito": "BAURES",
+        "jubilacion": 19,
+        "prejubilacion": 19,
+        "total": 135
+      },
+      {
+        "departamento": "BENI",
+        "distrito": "EXALTACION",
+        "jubilacion": 6,
+        "prejubilacion": 2,
+        "total": 83
+      },
+      {
+        "departamento": "BENI",
+        "distrito": "GUAYARAMERIN",
+        "jubilacion": 145,
+        "prejubilacion": 37,
+        "total": 922
+      },
+      {
+        "departamento": "BENI",
+        "distrito": "HUACARAJE",
+        "jubilacion": 12,
+        "prejubilacion": 11,
+        "total": 51
+      },
+      {
+        "departamento": "BENI",
+        "distrito": "LORETO",
+        "jubilacion": 10,
+        "prejubilacion": 4,
+        "total": 81
+      },
+      {
+        "departamento": "BENI",
+        "distrito": "MAGDALENA",
+        "jubilacion": 71,
+        "prejubilacion": 58,
+        "total": 357
+      },
+      {
+        "departamento": "BENI",
+        "distrito": "PUERTO SILES",
+        "jubilacion": 3,
+        "prejubilacion": 0,
+        "total": 27
+      },
+      {
+        "departamento": "BENI",
+        "distrito": "REYES",
+        "jubilacion": 27,
+        "prejubilacion": 3,
+        "total": 315
+      },
+      {
+        "departamento": "BENI",
+        "distrito": "RIBERALTA",
+        "jubilacion": 298,
+        "prejubilacion": 41,
+        "total": 1513
+      },
+      {
+        "departamento": "BENI",
+        "distrito": "RURRENABAQUE",
+        "jubilacion": 23,
+        "prejubilacion": 5,
+        "total": 369
+      },
+      {
+        "departamento": "BENI",
+        "distrito": "SAN ANDRES",
+        "jubilacion": 69,
+        "prejubilacion": 37,
+        "total": 368
+      },
+      {
+        "departamento": "BENI",
+        "distrito": "SAN BORJA",
+        "jubilacion": 110,
+        "prejubilacion": 54,
+        "total": 807
+      },
+      {
+        "departamento": "BENI",
+        "distrito": "SAN IGNACIO",
+        "jubilacion": 55,
+        "prejubilacion": 17,
+        "total": 636
+      },
+      {
+        "departamento": "BENI",
+        "distrito": "SAN JAVIER",
+        "jubilacion": 15,
+        "prejubilacion": 7,
+        "total": 141
+      },
+      {
+        "departamento": "BENI",
+        "distrito": "SAN JOAQUIN",
+        "jubilacion": 11,
+        "prejubilacion": 1,
+        "total": 125
+      },
+      {
+        "departamento": "BENI",
+        "distrito": "SAN RAMON",
+        "jubilacion": 19,
+        "prejubilacion": 10,
+        "total": 109
+      },
+      {
+        "departamento": "BENI",
+        "distrito": "SANTA ANA",
+        "jubilacion": 66,
+        "prejubilacion": 41,
+        "total": 321
+      },
+      {
+        "departamento": "BENI",
+        "distrito": "SANTA ROSA",
+        "jubilacion": 19,
+        "prejubilacion": 4,
+        "total": 201
+      },
+      {
+        "departamento": "BENI",
+        "distrito": "TRINIDAD",
+        "jubilacion": 351,
+        "prejubilacion": 211,
+        "total": 1728
+      },
+      {
+        "departamento": "CHUQUISACA",
+        "distrito": "AZURDUY",
+        "jubilacion": 10,
+        "prejubilacion": 4,
+        "total": 192
+      },
+      {
+        "departamento": "CHUQUISACA",
+        "distrito": "CAMARGO",
+        "jubilacion": 33,
+        "prejubilacion": 9,
+        "total": 283
+      },
+      {
+        "departamento": "CHUQUISACA",
+        "distrito": "CULPINA",
+        "jubilacion": 16,
+        "prejubilacion": 3,
+        "total": 292
+      },
+      {
+        "departamento": "CHUQUISACA",
+        "distrito": "HUACARETA (SAN PABLO DE HUACARETA)",
+        "jubilacion": 13,
+        "prejubilacion": 1,
+        "total": 199
+      },
+      {
+        "departamento": "CHUQUISACA",
+        "distrito": "HUACAYA (C. VILLA DE HUACAYA)",
+        "jubilacion": 3,
+        "prejubilacion": 0,
+        "total": 52
+      },
+      {
+        "departamento": "CHUQUISACA",
+        "distrito": "ICLA",
+        "jubilacion": 6,
+        "prejubilacion": 1,
+        "total": 158
+      },
+      {
+        "departamento": "CHUQUISACA",
+        "distrito": "INCAHUASI",
+        "jubilacion": 3,
+        "prejubilacion": 1,
+        "total": 225
+      },
+      {
+        "departamento": "CHUQUISACA",
+        "distrito": "MACHARETI",
+        "jubilacion": 11,
+        "prejubilacion": 3,
+        "total": 151
+      },
+      {
+        "departamento": "CHUQUISACA",
+        "distrito": "MOJOCOYA",
+        "jubilacion": 9,
+        "prejubilacion": 1,
+        "total": 141
+      },
+      {
+        "departamento": "CHUQUISACA",
+        "distrito": "MONTEAGUDO",
+        "jubilacion": 56,
+        "prejubilacion": 7,
+        "total": 517
+      },
+      {
+        "departamento": "CHUQUISACA",
+        "distrito": "PADILLA",
+        "jubilacion": 10,
+        "prejubilacion": 3,
+        "total": 205
+      },
+      {
+        "departamento": "CHUQUISACA",
+        "distrito": "POROMA",
+        "jubilacion": 18,
+        "prejubilacion": 2,
+        "total": 254
+      },
+      {
+        "departamento": "CHUQUISACA",
+        "distrito": "PRESTO",
+        "jubilacion": 2,
+        "prejubilacion": 0,
+        "total": 135
+      },
+      {
+        "departamento": "CHUQUISACA",
+        "distrito": "SAN LUCAS",
+        "jubilacion": 32,
+        "prejubilacion": 2,
+        "total": 605
+      },
+      {
+        "departamento": "CHUQUISACA",
+        "distrito": "SOPACHUY",
+        "jubilacion": 10,
+        "prejubilacion": 0,
+        "total": 121
+      },
+      {
+        "departamento": "CHUQUISACA",
+        "distrito": "SUCRE",
+        "jubilacion": 966,
+        "prejubilacion": 82,
+        "total": 4511
+      },
+      {
+        "departamento": "CHUQUISACA",
+        "distrito": "TARABUCO",
+        "jubilacion": 29,
+        "prejubilacion": 1,
+        "total": 275
+      },
+      {
+        "departamento": "CHUQUISACA",
+        "distrito": "TARVITA",
+        "jubilacion": 11,
+        "prejubilacion": 1,
+        "total": 249
+      },
+      {
+        "departamento": "CHUQUISACA",
+        "distrito": "TOMINA",
+        "jubilacion": 5,
+        "prejubilacion": 0,
+        "total": 140
+      },
+      {
+        "departamento": "CHUQUISACA",
+        "distrito": "VILLA ABECIA   LAS CARRERAS",
+        "jubilacion": 7,
+        "prejubilacion": 2,
+        "total": 113
+      },
+      {
+        "departamento": "CHUQUISACA",
+        "distrito": "VILLA ALCALA / EL VILLAR",
+        "jubilacion": 8,
+        "prejubilacion": 0,
+        "total": 154
+      },
+      {
+        "departamento": "CHUQUISACA",
+        "distrito": "VILLA CHARCAS",
+        "jubilacion": 11,
+        "prejubilacion": 5,
+        "total": 262
+      },
+      {
+        "departamento": "CHUQUISACA",
+        "distrito": "VILLA SERRANO",
+        "jubilacion": 25,
+        "prejubilacion": 2,
+        "total": 234
+      },
+      {
+        "departamento": "CHUQUISACA",
+        "distrito": "VILLA VACA GUZMAN (C. MUYUPAMPA)",
+        "jubilacion": 13,
+        "prejubilacion": 0,
+        "total": 204
+      },
+      {
+        "departamento": "CHUQUISACA",
+        "distrito": "YAMPARAEZ",
+        "jubilacion": 18,
+        "prejubilacion": 0,
+        "total": 159
+      },
+      {
+        "departamento": "CHUQUISACA",
+        "distrito": "YOTALA",
+        "jubilacion": 30,
+        "prejubilacion": 2,
+        "total": 241
+      },
+      {
+        "departamento": "CHUQUISACA",
+        "distrito": "ZUDAÑEZ",
+        "jubilacion": 7,
+        "prejubilacion": 0,
+        "total": 125
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "AIQUILE",
+        "jubilacion": 52,
+        "prejubilacion": 32,
+        "total": 617
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "ANZALDO (C. VILLA DE ANZALDO)",
+        "jubilacion": 2,
+        "prejubilacion": 0,
+        "total": 148
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "ARANI",
+        "jubilacion": 24,
+        "prejubilacion": 9,
+        "total": 221
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "ARBIETO",
+        "jubilacion": 45,
+        "prejubilacion": 24,
+        "total": 323
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "ARQUE (C. VILLA DE ARQUE)",
+        "jubilacion": 8,
+        "prejubilacion": 1,
+        "total": 190
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "AYOPAYA (C.V.DE INDEPENDENCIA)",
+        "jubilacion": 22,
+        "prejubilacion": 7,
+        "total": 470
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "BOLIVAR",
+        "jubilacion": 10,
+        "prejubilacion": 3,
+        "total": 89
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "CAPINOTA",
+        "jubilacion": 41,
+        "prejubilacion": 9,
+        "total": 490
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "CHIMORE",
+        "jubilacion": 20,
+        "prejubilacion": 3,
+        "total": 537
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "CLIZA",
+        "jubilacion": 35,
+        "prejubilacion": 12,
+        "total": 357
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "COCHABAMBA 1",
+        "jubilacion": 1253,
+        "prejubilacion": 730,
+        "total": 3582
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "COCHABAMBA 2",
+        "jubilacion": 1118,
+        "prejubilacion": 543,
+        "total": 5993
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "COLCAPIRHUA",
+        "jubilacion": 144,
+        "prejubilacion": 50,
+        "total": 828
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "COLOMI",
+        "jubilacion": 21,
+        "prejubilacion": 4,
+        "total": 402
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "ENTRE RIOS",
+        "jubilacion": 17,
+        "prejubilacion": 3,
+        "total": 732
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "MIZQUE",
+        "jubilacion": 26,
+        "prejubilacion": 9,
+        "total": 533
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "MOROCHATA",
+        "jubilacion": 27,
+        "prejubilacion": 6,
+        "total": 463
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "OMEREQUE",
+        "jubilacion": 4,
+        "prejubilacion": 1,
+        "total": 131
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "PASORAPA",
+        "jubilacion": 4,
+        "prejubilacion": 1,
+        "total": 58
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "POCONA",
+        "jubilacion": 10,
+        "prejubilacion": 5,
+        "total": 226
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "POJO",
+        "jubilacion": 9,
+        "prejubilacion": 1,
+        "total": 232
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "PUERTO VILLARROEL",
+        "jubilacion": 34,
+        "prejubilacion": 8,
+        "total": 1205
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "PUNATA (C. VILLA PUNATA)",
+        "jubilacion": 66,
+        "prejubilacion": 27,
+        "total": 602
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "QUILLACOLLO",
+        "jubilacion": 477,
+        "prejubilacion": 178,
+        "total": 2208
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "S.BENITO (C. V.J.Q.MENDOZA)",
+        "jubilacion": 26,
+        "prejubilacion": 11,
+        "total": 270
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "SACABA",
+        "jubilacion": 324,
+        "prejubilacion": 191,
+        "total": 2239
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "SACABAMBA",
+        "jubilacion": 2,
+        "prejubilacion": 1,
+        "total": 87
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "SANTIVAÑEZ (C. VILLA SANTIVAÑEZ)",
+        "jubilacion": 12,
+        "prejubilacion": 4,
+        "total": 135
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "SHINAHOTA",
+        "jubilacion": 20,
+        "prejubilacion": 4,
+        "total": 509
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "SIPE SIPE",
+        "jubilacion": 112,
+        "prejubilacion": 32,
+        "total": 985
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "TACOPAYA",
+        "jubilacion": 9,
+        "prejubilacion": 4,
+        "total": 144
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "TAPACARI",
+        "jubilacion": 31,
+        "prejubilacion": 6,
+        "total": 383
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "TARATA",
+        "jubilacion": 31,
+        "prejubilacion": 16,
+        "total": 235
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "TIQUIPAYA",
+        "jubilacion": 169,
+        "prejubilacion": 74,
+        "total": 937
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "TIRAQUE",
+        "jubilacion": 26,
+        "prejubilacion": 11,
+        "total": 444
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "TOKO",
+        "jubilacion": 5,
+        "prejubilacion": 2,
+        "total": 90
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "TOLATA",
+        "jubilacion": 17,
+        "prejubilacion": 6,
+        "total": 116
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "TOTORA",
+        "jubilacion": 6,
+        "prejubilacion": 0,
+        "total": 288
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "VACAS",
+        "jubilacion": 6,
+        "prejubilacion": 3,
+        "total": 171
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "VILA VILA",
+        "jubilacion": 8,
+        "prejubilacion": 0,
+        "total": 118
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "VILLA RIVERO(C.V.DE RIVERO)",
+        "jubilacion": 21,
+        "prejubilacion": 6,
+        "total": 174
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "VILLA TUNARI",
+        "jubilacion": 55,
+        "prejubilacion": 19,
+        "total": 1708
+      },
+      {
+        "departamento": "COCHABAMBA",
+        "distrito": "VINTO",
+        "jubilacion": 137,
+        "prejubilacion": 45,
+        "total": 993
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "ACHACACHI",
+        "jubilacion": 134,
+        "prejubilacion": 25,
+        "total": 927
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "ACHOCALLA",
+        "jubilacion": 42,
+        "prejubilacion": 11,
+        "total": 493
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "ANCORAIMES",
+        "jubilacion": 43,
+        "prejubilacion": 5,
+        "total": 264
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "APOLO",
+        "jubilacion": 44,
+        "prejubilacion": 17,
+        "total": 412
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "AUCAPATA",
+        "jubilacion": 5,
+        "prejubilacion": 0,
+        "total": 132
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "AYATA",
+        "jubilacion": 15,
+        "prejubilacion": 0,
+        "total": 174
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "AYO AYO",
+        "jubilacion": 13,
+        "prejubilacion": 3,
+        "total": 154
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "BATALLAS",
+        "jubilacion": 43,
+        "prejubilacion": 5,
+        "total": 376
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "CAIROMA",
+        "jubilacion": 33,
+        "prejubilacion": 5,
+        "total": 222
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "CAJUATA",
+        "jubilacion": 12,
+        "prejubilacion": 1,
+        "total": 216
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "CALACOTO",
+        "jubilacion": 36,
+        "prejubilacion": 2,
+        "total": 180
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "CALAMARCA",
+        "jubilacion": 31,
+        "prejubilacion": 7,
+        "total": 245
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "CAQUIAVIRI",
+        "jubilacion": 20,
+        "prejubilacion": 1,
+        "total": 161
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "CARANAVI",
+        "jubilacion": 102,
+        "prejubilacion": 22,
+        "total": 1021
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "CATACORA",
+        "jubilacion": 5,
+        "prejubilacion": 0,
+        "total": 41
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "CHACARILLA",
+        "jubilacion": 2,
+        "prejubilacion": 0,
+        "total": 31
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "CHARAÑA",
+        "jubilacion": 7,
+        "prejubilacion": 0,
+        "total": 71
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "CHULUMANI (C. VILLA DE LA LIBERTAD)",
+        "jubilacion": 21,
+        "prejubilacion": 4,
+        "total": 324
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "CHUMA",
+        "jubilacion": 20,
+        "prejubilacion": 1,
+        "total": 214
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "CIUDAD EL ALTO 1",
+        "jubilacion": 916,
+        "prejubilacion": 296,
+        "total": 7394
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "CIUDAD EL ALTO 2",
+        "jubilacion": 1110,
+        "prejubilacion": 398,
+        "total": 6275
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "COLLANA",
+        "jubilacion": 3,
+        "prejubilacion": 0,
+        "total": 30
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "COLQUENCHA",
+        "jubilacion": 12,
+        "prejubilacion": 1,
+        "total": 153
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "COLQUIRI",
+        "jubilacion": 36,
+        "prejubilacion": 4,
+        "total": 379
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "COMANCHE",
+        "jubilacion": 15,
+        "prejubilacion": 5,
+        "total": 90
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "COMBAYA",
+        "jubilacion": 13,
+        "prejubilacion": 1,
+        "total": 65
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "COPACABANA",
+        "jubilacion": 37,
+        "prejubilacion": 10,
+        "total": 298
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "CORIPATA",
+        "jubilacion": 23,
+        "prejubilacion": 2,
+        "total": 307
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "CORO CORO",
+        "jubilacion": 30,
+        "prejubilacion": 2,
+        "total": 219
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "COROICO",
+        "jubilacion": 29,
+        "prejubilacion": 7,
+        "total": 316
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "CURVA",
+        "jubilacion": 3,
+        "prejubilacion": 0,
+        "total": 96
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "DESAGUADERO",
+        "jubilacion": 4,
+        "prejubilacion": 0,
+        "total": 141
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "EL ALTO 3",
+        "jubilacion": 220,
+        "prejubilacion": 57,
+        "total": 2637
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "GRAL JUAN JOSE PEREZ (CHARAZANI)",
+        "jubilacion": 15,
+        "prejubilacion": 0,
+        "total": 176
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "GUANAY",
+        "jubilacion": 16,
+        "prejubilacion": 4,
+        "total": 284
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "GUAQUI",
+        "jubilacion": 15,
+        "prejubilacion": 1,
+        "total": 137
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "HUARINA",
+        "jubilacion": 26,
+        "prejubilacion": 1,
+        "total": 242
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "ICHOCA",
+        "jubilacion": 14,
+        "prejubilacion": 2,
+        "total": 131
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "INQUISIVI",
+        "jubilacion": 35,
+        "prejubilacion": 3,
+        "total": 293
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "IRUPANA (C. VILLA DE LANZA)",
+        "jubilacion": 20,
+        "prejubilacion": 3,
+        "total": 308
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "IXIAMAS",
+        "jubilacion": 14,
+        "prejubilacion": 2,
+        "total": 258
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "JESUS DE MACHACA",
+        "jubilacion": 60,
+        "prejubilacion": 5,
+        "total": 301
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "LA ASUNTA",
+        "jubilacion": 26,
+        "prejubilacion": 2,
+        "total": 707
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "LA PAZ 1",
+        "jubilacion": 1009,
+        "prejubilacion": 504,
+        "total": 3092
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "LA PAZ 2",
+        "jubilacion": 1109,
+        "prejubilacion": 632,
+        "total": 3029
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "LA PAZ 3",
+        "jubilacion": 779,
+        "prejubilacion": 388,
+        "total": 2628
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "LAJA",
+        "jubilacion": 40,
+        "prejubilacion": 11,
+        "total": 463
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "LICOMA PAMPA (C. LIB. LICOMA)",
+        "jubilacion": 5,
+        "prejubilacion": 0,
+        "total": 35
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "LURIBAY",
+        "jubilacion": 23,
+        "prejubilacion": 3,
+        "total": 206
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "MALLA",
+        "jubilacion": 6,
+        "prejubilacion": 0,
+        "total": 38
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "MAPIRI",
+        "jubilacion": 6,
+        "prejubilacion": 1,
+        "total": 253
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "MECAPACA",
+        "jubilacion": 38,
+        "prejubilacion": 6,
+        "total": 299
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "MOCOMOCO",
+        "jubilacion": 44,
+        "prejubilacion": 4,
+        "total": 297
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "NAZACARA DE PACAJES",
+        "jubilacion": 2,
+        "prejubilacion": 0,
+        "total": 71
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "PALCA",
+        "jubilacion": 35,
+        "prejubilacion": 6,
+        "total": 356
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "PALOS BLANCOS",
+        "jubilacion": 24,
+        "prejubilacion": 7,
+        "total": 509
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "PAPEL PAMPA",
+        "jubilacion": 10,
+        "prejubilacion": 1,
+        "total": 109
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "PATACAMAYA",
+        "jubilacion": 30,
+        "prejubilacion": 9,
+        "total": 476
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "PELECHUCO",
+        "jubilacion": 9,
+        "prejubilacion": 0,
+        "total": 179
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "PUCARANI",
+        "jubilacion": 85,
+        "prejubilacion": 13,
+        "total": 625
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "PUERTO ACOSTA",
+        "jubilacion": 50,
+        "prejubilacion": 4,
+        "total": 455
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "PUERTO CARABUCO",
+        "jubilacion": 18,
+        "prejubilacion": 2,
+        "total": 260
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "PUERTO PEREZ",
+        "jubilacion": 11,
+        "prejubilacion": 3,
+        "total": 116
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "QUIABAYA",
+        "jubilacion": 2,
+        "prejubilacion": 0,
+        "total": 38
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "QUIME",
+        "jubilacion": 7,
+        "prejubilacion": 2,
+        "total": 124
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "SAN ANDRES DE MACHACA",
+        "jubilacion": 21,
+        "prejubilacion": 5,
+        "total": 133
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "SAN BUENA VENTURA",
+        "jubilacion": 10,
+        "prejubilacion": 2,
+        "total": 209
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "SAN PEDRO DE CURAHUARA",
+        "jubilacion": 25,
+        "prejubilacion": 2,
+        "total": 136
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "SAN PEDRO DE TIQUINA",
+        "jubilacion": 6,
+        "prejubilacion": 0,
+        "total": 123
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "SANTIAGO DE CALLAPA (C. CALLAPA)",
+        "jubilacion": 22,
+        "prejubilacion": 1,
+        "total": 123
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "SANTIAGO DE HUATA",
+        "jubilacion": 25,
+        "prejubilacion": 1,
+        "total": 131
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "SANTIAGO DE MACHACA",
+        "jubilacion": 10,
+        "prejubilacion": 0,
+        "total": 84
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "SAPAHAQUI",
+        "jubilacion": 14,
+        "prejubilacion": 4,
+        "total": 208
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "SICA SICA (C. VILLA AROMA)",
+        "jubilacion": 43,
+        "prejubilacion": 5,
+        "total": 419
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "SORATA",
+        "jubilacion": 19,
+        "prejubilacion": 0,
+        "total": 336
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "TACACOMA",
+        "jubilacion": 5,
+        "prejubilacion": 0,
+        "total": 175
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "TEOPONTE",
+        "jubilacion": 10,
+        "prejubilacion": 3,
+        "total": 167
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "TIAWANACU",
+        "jubilacion": 36,
+        "prejubilacion": 8,
+        "total": 329
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "TIPUANI",
+        "jubilacion": 3,
+        "prejubilacion": 1,
+        "total": 155
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "TITO YUPANQUI (A. PARQUIPUJIO)",
+        "jubilacion": 2,
+        "prejubilacion": 0,
+        "total": 29
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "UMALA",
+        "jubilacion": 14,
+        "prejubilacion": 2,
+        "total": 138
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "VIACHA",
+        "jubilacion": 149,
+        "prejubilacion": 39,
+        "total": 1365
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "WALDO BALLIVIAN (TUMARAPI)",
+        "jubilacion": 4,
+        "prejubilacion": 1,
+        "total": 52
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "YACO",
+        "jubilacion": 16,
+        "prejubilacion": 1,
+        "total": 150
+      },
+      {
+        "departamento": "LA PAZ",
+        "distrito": "YANACACHI",
+        "jubilacion": 3,
+        "prejubilacion": 1,
+        "total": 105
+      },
+      {
+        "departamento": "ORURO",
+        "distrito": "ANDAMARCA (STGO. DE ANDAMARCA)",
+        "jubilacion": 9,
+        "prejubilacion": 3,
+        "total": 115
+      },
+      {
+        "departamento": "ORURO",
+        "distrito": "CARACOLLO",
+        "jubilacion": 77,
+        "prejubilacion": 27,
+        "total": 489
+      },
+      {
+        "departamento": "ORURO",
+        "distrito": "CHALLAPATA",
+        "jubilacion": 49,
+        "prejubilacion": 10,
+        "total": 729
+      },
+      {
+        "departamento": "ORURO",
+        "distrito": "CORQUE",
+        "jubilacion": 16,
+        "prejubilacion": 2,
+        "total": 190
+      },
+      {
+        "departamento": "ORURO",
+        "distrito": "CURAHUARA DE CARANGAS",
+        "jubilacion": 3,
+        "prejubilacion": 1,
+        "total": 81
+      },
+      {
+        "departamento": "ORURO",
+        "distrito": "EL CHORO",
+        "jubilacion": 12,
+        "prejubilacion": 5,
+        "total": 71
+      },
+      {
+        "departamento": "ORURO",
+        "distrito": "EUCALIPTUS",
+        "jubilacion": 6,
+        "prejubilacion": 0,
+        "total": 117
+      },
+      {
+        "departamento": "ORURO",
+        "distrito": "HUACHACALLA",
+        "jubilacion": 2,
+        "prejubilacion": 0,
+        "total": 50
+      },
+      {
+        "departamento": "ORURO",
+        "distrito": "HUANUNI (C. HUANUNI)",
+        "jubilacion": 64,
+        "prejubilacion": 15,
+        "total": 501
+      },
+      {
+        "departamento": "ORURO",
+        "distrito": "HUAYLLAMARCA (C. STGO. HUAYLLA)",
+        "jubilacion": 12,
+        "prejubilacion": 4,
+        "total": 96
+      },
+      {
+        "departamento": "ORURO",
+        "distrito": "LA RIVERA",
+        "jubilacion": 1,
+        "prejubilacion": 0,
+        "total": 44
+      },
+      {
+        "departamento": "ORURO",
+        "distrito": "MACHACAMARCA",
+        "jubilacion": 28,
+        "prejubilacion": 10,
+        "total": 124
+      },
+      {
+        "departamento": "ORURO",
+        "distrito": "ORURO",
+        "jubilacion": 1723,
+        "prejubilacion": 729,
+        "total": 5627
+      },
+      {
+        "departamento": "ORURO",
+        "distrito": "PAMPA AULLAGAS",
+        "jubilacion": 2,
+        "prejubilacion": 0,
+        "total": 33
+      },
+      {
+        "departamento": "ORURO",
+        "distrito": "PARIA - SORACACHI",
+        "jubilacion": 70,
+        "prejubilacion": 31,
+        "total": 266
+      },
+      {
+        "departamento": "ORURO",
+        "distrito": "PAZÑA",
+        "jubilacion": 10,
+        "prejubilacion": 1,
+        "total": 165
+      },
+      {
+        "departamento": "ORURO",
+        "distrito": "POOPO (C. VILLA DE POOPO)",
+        "jubilacion": 6,
+        "prejubilacion": 0,
+        "total": 117
+      },
+      {
+        "departamento": "ORURO",
+        "distrito": "SABAYA",
+        "jubilacion": 5,
+        "prejubilacion": 2,
+        "total": 133
+      },
+      {
+        "departamento": "ORURO",
+        "distrito": "SALINAS DE GARCI MENDOZA",
+        "jubilacion": 11,
+        "prejubilacion": 2,
+        "total": 170
+      },
+      {
+        "departamento": "ORURO",
+        "distrito": "SANTIAGO DE HUARI",
+        "jubilacion": 6,
+        "prejubilacion": 3,
+        "total": 140
+      },
+      {
+        "departamento": "ORURO",
+        "distrito": "TOLEDO",
+        "jubilacion": 8,
+        "prejubilacion": 3,
+        "total": 93
+      },
+      {
+        "departamento": "ORURO",
+        "distrito": "TOTORA",
+        "jubilacion": 26,
+        "prejubilacion": 2,
+        "total": 119
+      },
+      {
+        "departamento": "ORURO",
+        "distrito": "TURCO",
+        "jubilacion": 10,
+        "prejubilacion": 1,
+        "total": 79
+      },
+      {
+        "departamento": "PANDO",
+        "distrito": "AGUA DULCE (C.PTO.GONZALO MORENO)",
+        "jubilacion": 11,
+        "prejubilacion": 1,
+        "total": 152
+      },
+      {
+        "departamento": "PANDO",
+        "distrito": "ARROYO GRANDE C.FILADELFIA",
+        "jubilacion": 15,
+        "prejubilacion": 7,
+        "total": 240
+      },
+      {
+        "departamento": "PANDO",
+        "distrito": "BOLIVAR (C. SENA)",
+        "jubilacion": 11,
+        "prejubilacion": 1,
+        "total": 234
+      },
+      {
+        "departamento": "PANDO",
+        "distrito": "CAMPO ANA (C.PORVENIR)",
+        "jubilacion": 13,
+        "prejubilacion": 4,
+        "total": 275
+      },
+      {
+        "departamento": "PANDO",
+        "distrito": "COBIJA",
+        "jubilacion": 101,
+        "prejubilacion": 34,
+        "total": 951
+      },
+      {
+        "departamento": "PANDO",
+        "distrito": "EXALTACION (C.SAN LORENZO)",
+        "jubilacion": 16,
+        "prejubilacion": 1,
+        "total": 203
+      },
+      {
+        "departamento": "PANDO",
+        "distrito": "MUKDEN (C. BOLPEBRA)",
+        "jubilacion": 4,
+        "prejubilacion": 1,
+        "total": 77
+      },
+      {
+        "departamento": "PANDO",
+        "distrito": "NACEBE (C. SANTA ROSA DEL ABUNA)",
+        "jubilacion": 9,
+        "prejubilacion": 3,
+        "total": 147
+      },
+      {
+        "departamento": "PANDO",
+        "distrito": "NUEVO MANOA (C. NUEVA ESPERANZA)",
+        "jubilacion": 7,
+        "prejubilacion": 0,
+        "total": 184
+      },
+      {
+        "departamento": "PANDO",
+        "distrito": "VICTORIA (C. PUERTO RICO)",
+        "jubilacion": 20,
+        "prejubilacion": 4,
+        "total": 264
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "ACASIO",
+        "jubilacion": 5,
+        "prejubilacion": 2,
+        "total": 105
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "ARAMPAMPA",
+        "jubilacion": 5,
+        "prejubilacion": 0,
+        "total": 100
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "ATOCHA",
+        "jubilacion": 25,
+        "prejubilacion": 4,
+        "total": 233
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "BETANZOS",
+        "jubilacion": 62,
+        "prejubilacion": 10,
+        "total": 649
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "CAIZA \"D",
+        "jubilacion": 19,
+        "prejubilacion": 6,
+        "total": 242
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "CARIPUYO",
+        "jubilacion": 18,
+        "prejubilacion": 3,
+        "total": 144
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "CHAQUI",
+        "jubilacion": 25,
+        "prejubilacion": 7,
+        "total": 211
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "CHAYANTA",
+        "jubilacion": 20,
+        "prejubilacion": 2,
+        "total": 317
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "CKOCHAS",
+        "jubilacion": 11,
+        "prejubilacion": 2,
+        "total": 300
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "COLCHA \"K\" (C.VILLA MARTIN)",
+        "jubilacion": 41,
+        "prejubilacion": 6,
+        "total": 341
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "COLQUECHACA",
+        "jubilacion": 13,
+        "prejubilacion": 0,
+        "total": 468
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "COTAGAITA",
+        "jubilacion": 38,
+        "prejubilacion": 5,
+        "total": 550
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "LLALLAGUA",
+        "jubilacion": 180,
+        "prejubilacion": 90,
+        "total": 839
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "LLICA",
+        "jubilacion": 14,
+        "prejubilacion": 3,
+        "total": 133
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "OCURI",
+        "jubilacion": 10,
+        "prejubilacion": 1,
+        "total": 244
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "POCOATA",
+        "jubilacion": 23,
+        "prejubilacion": 5,
+        "total": 397
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "PORCO",
+        "jubilacion": 11,
+        "prejubilacion": 1,
+        "total": 181
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "POTOSI",
+        "jubilacion": 1282,
+        "prejubilacion": 451,
+        "total": 5071
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "PUNA (C.VILLA TALAVERA)",
+        "jubilacion": 39,
+        "prejubilacion": 7,
+        "total": 417
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "RAVELO (A. MORO MORO)",
+        "jubilacion": 17,
+        "prejubilacion": 1,
+        "total": 282
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "SACACA (C.VILLA DE SACACA)",
+        "jubilacion": 18,
+        "prejubilacion": 6,
+        "total": 302
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "SAN PABLO DE LIPEZ",
+        "jubilacion": 7,
+        "prejubilacion": 3,
+        "total": 147
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "SAN PEDRO (C. S.P. DE BUENA VISTA)",
+        "jubilacion": 22,
+        "prejubilacion": 7,
+        "total": 455
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "TACOBAMBA",
+        "jubilacion": 9,
+        "prejubilacion": 0,
+        "total": 197
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "TINGUIPAYA",
+        "jubilacion": 29,
+        "prejubilacion": 3,
+        "total": 338
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "TOMAVE",
+        "jubilacion": 32,
+        "prejubilacion": 8,
+        "total": 266
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "TORO TORO",
+        "jubilacion": 16,
+        "prejubilacion": 1,
+        "total": 224
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "TUPIZA",
+        "jubilacion": 178,
+        "prejubilacion": 69,
+        "total": 1063
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "UNCIA",
+        "jubilacion": 79,
+        "prejubilacion": 31,
+        "total": 556
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "URMIRI",
+        "jubilacion": 2,
+        "prejubilacion": 0,
+        "total": 22
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "UYUNI",
+        "jubilacion": 91,
+        "prejubilacion": 12,
+        "total": 665
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "VILLAZON",
+        "jubilacion": 85,
+        "prejubilacion": 26,
+        "total": 828
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "VITICHI",
+        "jubilacion": 9,
+        "prejubilacion": 1,
+        "total": 219
+      },
+      {
+        "departamento": "POTOSI",
+        "distrito": "YOCALLA",
+        "jubilacion": 38,
+        "prejubilacion": 19,
+        "total": 228
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "ASCENCION DE GUARAYOS",
+        "jubilacion": 36,
+        "prejubilacion": 10,
+        "total": 495
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "AYACUCHO (C. PORONGO)",
+        "jubilacion": 17,
+        "prejubilacion": 1,
+        "total": 238
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "BOYUIBE",
+        "jubilacion": 5,
+        "prejubilacion": 1,
+        "total": 76
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "BUENA VISTA",
+        "jubilacion": 30,
+        "prejubilacion": 4,
+        "total": 277
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "CABEZAS",
+        "jubilacion": 20,
+        "prejubilacion": 0,
+        "total": 355
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "CAMIRI",
+        "jubilacion": 147,
+        "prejubilacion": 36,
+        "total": 693
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "CHARAGUA",
+        "jubilacion": 54,
+        "prejubilacion": 15,
+        "total": 527
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "COMARAPA",
+        "jubilacion": 35,
+        "prejubilacion": 10,
+        "total": 371
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "CONCEPCION",
+        "jubilacion": 33,
+        "prejubilacion": 4,
+        "total": 482
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "COTOCA",
+        "jubilacion": 93,
+        "prejubilacion": 22,
+        "total": 1036
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "CUATRO CAÑADAS",
+        "jubilacion": 11,
+        "prejubilacion": 0,
+        "total": 327
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "CUEVO",
+        "jubilacion": 15,
+        "prejubilacion": 4,
+        "total": 118
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "EL PUENTE",
+        "jubilacion": 6,
+        "prejubilacion": 0,
+        "total": 217
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "EL TORNO",
+        "jubilacion": 83,
+        "prejubilacion": 25,
+        "total": 844
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "GRAL. SAAVEDRA",
+        "jubilacion": 18,
+        "prejubilacion": 0,
+        "total": 312
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "GUTIERREZ",
+        "jubilacion": 24,
+        "prejubilacion": 4,
+        "total": 288
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "LA GUARDIA",
+        "jubilacion": 143,
+        "prejubilacion": 14,
+        "total": 1471
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "LAGUNILLAS",
+        "jubilacion": 21,
+        "prejubilacion": 2,
+        "total": 170
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "MAIRANA",
+        "jubilacion": 24,
+        "prejubilacion": 13,
+        "total": 218
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "MINEROS",
+        "jubilacion": 71,
+        "prejubilacion": 7,
+        "total": 804
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "MONTERO",
+        "jubilacion": 290,
+        "prejubilacion": 14,
+        "total": 1614
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "MORO MORO",
+        "jubilacion": 13,
+        "prejubilacion": 0,
+        "total": 79
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "OKINAWA",
+        "jubilacion": 12,
+        "prejubilacion": 1,
+        "total": 215
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "PAILON",
+        "jubilacion": 27,
+        "prejubilacion": 0,
+        "total": 413
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "PAMPA GRANDE",
+        "jubilacion": 10,
+        "prejubilacion": 0,
+        "total": 170
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "PLAN 3000",
+        "jubilacion": 556,
+        "prejubilacion": 125,
+        "total": 4131
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "PORTACHUELO",
+        "jubilacion": 81,
+        "prejubilacion": 1,
+        "total": 440
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "POSTRER VALLE",
+        "jubilacion": 6,
+        "prejubilacion": 0,
+        "total": 35
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "PUCARA",
+        "jubilacion": 11,
+        "prejubilacion": 3,
+        "total": 49
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "PUERTO QUIJARRO",
+        "jubilacion": 25,
+        "prejubilacion": 0,
+        "total": 236
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "PUERTO SUAREZ",
+        "jubilacion": 61,
+        "prejubilacion": 2,
+        "total": 366
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "QUIRUSILLAS",
+        "jubilacion": 2,
+        "prejubilacion": 0,
+        "total": 32
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "ROBORE",
+        "jubilacion": 80,
+        "prejubilacion": 6,
+        "total": 367
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "SAIPINA",
+        "jubilacion": 7,
+        "prejubilacion": 3,
+        "total": 120
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "SAMAIPATA",
+        "jubilacion": 24,
+        "prejubilacion": 9,
+        "total": 213
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "SAN ANTONIO DE LOMERIO",
+        "jubilacion": 16,
+        "prejubilacion": 1,
+        "total": 133
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "SAN CARLOS",
+        "jubilacion": 37,
+        "prejubilacion": 1,
+        "total": 354
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "SAN IGNACIO (C. S.IGN. DE VELASCO)",
+        "jubilacion": 129,
+        "prejubilacion": 42,
+        "total": 950
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "SAN JAVIER",
+        "jubilacion": 24,
+        "prejubilacion": 4,
+        "total": 404
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "SAN JOSE (C. S.J. DE CHIQUITOS)",
+        "jubilacion": 59,
+        "prejubilacion": 1,
+        "total": 380
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "SAN JUAN DE YAPACANI",
+        "jubilacion": 8,
+        "prejubilacion": 1,
+        "total": 178
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "SAN JULIAN",
+        "jubilacion": 44,
+        "prejubilacion": 2,
+        "total": 863
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "SAN MATIAS",
+        "jubilacion": 22,
+        "prejubilacion": 0,
+        "total": 330
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "SAN MIGUEL (C.S.M. DE VELASCO)",
+        "jubilacion": 31,
+        "prejubilacion": 2,
+        "total": 218
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "SAN RAFAEL",
+        "jubilacion": 10,
+        "prejubilacion": 3,
+        "total": 112
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "SANTA CRUZ 1",
+        "jubilacion": 650,
+        "prejubilacion": 164,
+        "total": 2844
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "SANTA CRUZ 2",
+        "jubilacion": 939,
+        "prejubilacion": 306,
+        "total": 4049
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "SANTA CRUZ 3",
+        "jubilacion": 543,
+        "prejubilacion": 150,
+        "total": 3482
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "SANTA ROSA DEL SARA",
+        "jubilacion": 27,
+        "prejubilacion": 1,
+        "total": 291
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "TRIGAL",
+        "jubilacion": 10,
+        "prejubilacion": 2,
+        "total": 63
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "URUBICHA",
+        "jubilacion": 8,
+        "prejubilacion": 0,
+        "total": 118
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "VALLE GRANDE (C.JESUS DE VALLE GRANDE)",
+        "jubilacion": 75,
+        "prejubilacion": 11,
+        "total": 411
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "WARNES",
+        "jubilacion": 154,
+        "prejubilacion": 23,
+        "total": 1928
+      },
+      {
+        "departamento": "SANTA CRUZ",
+        "distrito": "YAPACANI",
+        "jubilacion": 75,
+        "prejubilacion": 8,
+        "total": 922
+      },
+      {
+        "departamento": "TARIJA",
+        "distrito": "BERMEJO",
+        "jubilacion": 85,
+        "prejubilacion": 50,
+        "total": 771
+      },
+      {
+        "departamento": "TARIJA",
+        "distrito": "CARAPARI",
+        "jubilacion": 17,
+        "prejubilacion": 7,
+        "total": 331
+      },
+      {
+        "departamento": "TARIJA",
+        "distrito": "EL PUENTE",
+        "jubilacion": 30,
+        "prejubilacion": 15,
+        "total": 194
+      },
+      {
+        "departamento": "TARIJA",
+        "distrito": "ENTRE RIOS",
+        "jubilacion": 36,
+        "prejubilacion": 20,
+        "total": 454
+      },
+      {
+        "departamento": "TARIJA",
+        "distrito": "PADCAYA",
+        "jubilacion": 46,
+        "prejubilacion": 30,
+        "total": 391
+      },
+      {
+        "departamento": "TARIJA",
+        "distrito": "SAN LORENZO (C. VILLA SAN LORENZO)",
+        "jubilacion": 80,
+        "prejubilacion": 51,
+        "total": 481
+      },
+      {
+        "departamento": "TARIJA",
+        "distrito": "TARIJA",
+        "jubilacion": 735,
+        "prejubilacion": 437,
+        "total": 4102
+      },
+      {
+        "departamento": "TARIJA",
+        "distrito": "URIONDO (A. CONCEPCION)",
+        "jubilacion": 45,
+        "prejubilacion": 21,
+        "total": 299
+      },
+      {
+        "departamento": "TARIJA",
+        "distrito": "VILLA MONTES",
+        "jubilacion": 75,
+        "prejubilacion": 30,
+        "total": 983
+      },
+      {
+        "departamento": "TARIJA",
+        "distrito": "YACUIBA",
+        "jubilacion": 157,
+        "prejubilacion": 69,
+        "total": 1525
+      },
+      {
+        "departamento": "TARIJA",
+        "distrito": "YUNCHARA",
+        "jubilacion": 12,
+        "prejubilacion": 5,
+        "total": 119
+      }
+    ]
+  }
 }

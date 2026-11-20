@@ -60,8 +60,10 @@ def generate_ue_excel(output_path=None):
     ws.title = "Pertinencia por UE"
     ws.views.sheetView[0].showGridLines = True
 
+    cant_ue = f"{len(ue_data):,}".replace(",", ".")
+
     # Banner
-    ws.merge_cells("A1:J1")
+    ws.merge_cells("A1:O1")
     c1 = ws["A1"]
     c1.value = "MINISTERIO DE EDUCACIÓN · ESTADO PLURINACIONAL DE BOLIVIA"
     c1.font = font_title
@@ -69,31 +71,35 @@ def generate_ue_excel(output_path=None):
     c1.alignment = Alignment(horizontal="left", vertical="center", indent=1)
     ws.row_dimensions[1].height = 30
 
-    ws.merge_cells("A2:J2")
+    ws.merge_cells("A2:O2")
     c2 = ws["A2"]
-    c2.value = "DIAGNÓSTICO OFICIAL DE PERTINENCIA CURRICULAR POR UNIDAD EDUCATIVA (16.313 UEs)"
+    c2.value = f"DIAGNÓSTICO OFICIAL DE PERTINENCIA CURRICULAR POR UNIDAD EDUCATIVA ({cant_ue} UEs)"
     c2.font = font_subtitle
     c2.fill = fill_navy
     c2.alignment = Alignment(horizontal="left", vertical="center", indent=1)
     ws.row_dimensions[2].height = 18
 
-    ws.merge_cells("A3:J3")
+    ws.merge_cells("A3:O3")
     ws["A3"].fill = fill_gold
     ws.row_dimensions[3].height = 3
 
-    cant_ue = f"{len(ue_data):,}".replace(",", ".")
     ws.cell(row=5, column=1, value=f"Padrón Consolidado por Unidad Educativa ({cant_ue} Establecimientos)").font = font_section
 
     headers = [
+        "Código SIE",
         "Departamento",
         "Distrito Educativo",
         "Unidad Educativa",
+        "Dependencia",
+        "Estudiantes",
         "Alta Pertinencia (V)",
         "Media Pertinencia (A)",
         "Baja Pertinencia (N)",
         "Sin Pertinencia (SIN)",
         "Total Docentes",
         "% Pertinencia Alta",
+        "Prejubilados",
+        "A Jubilar",
         "Diagnóstico Pertinencia"
     ]
 
@@ -125,15 +131,20 @@ def generate_ue_excel(output_path=None):
         tot_doc += total
 
         vals = [
+            (item.get("cod_ue", ""), align_center, "@"),
             (item.get("departamento", ""), align_left, "@"),
             (item.get("distrito", ""), align_left, "@"),
             (item.get("ue", ""), align_left, "@"),
+            (item.get("dependencia", ""), align_left, "@"),
+            (item.get("estudiantes", 0), align_right, "#,##0"),
             (v, align_right, "#,##0"),
             (a, align_right, "#,##0"),
             (n, align_right, "#,##0"),
             (sin, align_right, "#,##0"),
             (total, align_right, "#,##0"),
             (pct, align_right, "0.0%"),
+            (item.get("prejubilados", 0), align_right, "#,##0"),
+            (item.get("a_jubilar", 0), align_right, "#,##0"),
             (item.get("diagnostico", ""), align_center, "@")
         ]
 
@@ -150,46 +161,51 @@ def generate_ue_excel(output_path=None):
         curr_r += 1
 
     # Fila de Totales
-    ws.merge_cells(start_row=curr_r, start_column=1, end_row=curr_r, end_column=3)
+    ws.merge_cells(start_row=curr_r, start_column=1, end_row=curr_r, end_column=6)
     ws.cell(row=curr_r, column=1, value="TOTAL CONSOLIDADO NACIONAL").font = font_bold
     ws.cell(row=curr_r, column=1).alignment = align_center
 
     tot_pct = (tot_v / tot_doc) if tot_doc > 0 else 0.0
     tot_vals = [
-        (4, tot_v, "#,##0"),
-        (5, tot_a, "#,##0"),
-        (6, tot_n, "#,##0"),
-        (7, tot_sin, "#,##0"),
-        (8, tot_doc, "#,##0"),
-        (9, tot_pct, "0.0%"),
-        (10, "Padrón Evaluado", "@")
+        (7, tot_v, "#,##0"),
+        (8, tot_a, "#,##0"),
+        (9, tot_n, "#,##0"),
+        (10, tot_sin, "#,##0"),
+        (11, tot_doc, "#,##0"),
+        (12, tot_pct, "0.0%"),
+        (15, "Padrón Evaluado", "@")
     ]
 
     for c_i, val, num_fmt in tot_vals:
         cell = ws.cell(row=curr_r, column=c_i, value=val)
         cell.font = font_bold
-        cell.alignment = align_right if c_i < 10 else align_center
+        cell.alignment = align_right if c_i < 15 else align_center
         cell.number_format = num_fmt
 
-    for c_i in range(1, 11):
+    for c_i in range(1, 16):
         cell = ws.cell(row=curr_r, column=c_i)
         cell.fill = fill_gold_light
         cell.border = border_double_bottom
 
     ws.row_dimensions[curr_r].height = 24
 
-    ws.auto_filter.ref = f"A{start_r}:J{curr_r - 1}"
+    ws.auto_filter.ref = f"A{start_r}:O{curr_r - 1}"
 
-    ws.column_dimensions["A"].width = 16
-    ws.column_dimensions["B"].width = 22
-    ws.column_dimensions["C"].width = 38
-    ws.column_dimensions["D"].width = 18
-    ws.column_dimensions["E"].width = 18
-    ws.column_dimensions["F"].width = 18
-    ws.column_dimensions["G"].width = 20
-    ws.column_dimensions["H"].width = 16
+    ws.column_dimensions["A"].width = 14
+    ws.column_dimensions["B"].width = 16
+    ws.column_dimensions["C"].width = 22
+    ws.column_dimensions["D"].width = 38
+    ws.column_dimensions["E"].width = 16
+    ws.column_dimensions["F"].width = 14
+    ws.column_dimensions["G"].width = 18
+    ws.column_dimensions["H"].width = 18
     ws.column_dimensions["I"].width = 18
-    ws.column_dimensions["J"].width = 28
+    ws.column_dimensions["J"].width = 20
+    ws.column_dimensions["K"].width = 16
+    ws.column_dimensions["L"].width = 18
+    ws.column_dimensions["M"].width = 14
+    ws.column_dimensions["N"].width = 14
+    ws.column_dimensions["O"].width = 28
 
     wb.save(output_path)
     print(f"Reporte UE guardado en: {output_path}")

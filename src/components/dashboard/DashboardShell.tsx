@@ -12,8 +12,9 @@ import { UieDeficitView } from './views/UieDeficitView';
 import HistorialDocenteView from './views/HistorialDocenteView';
 import Exposicion2031View from './views/Exposicion2031View';
 import PertinenciaView from './views/PertinenciaView';
+import { BalancePredictivoView } from './views/BalancePredictivoView';
 import Image from 'next/image';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Scale } from 'lucide-react';
 import { ResumenView } from './views/Resumen';
 import { ExecutiveDashboardView } from './views/ExecutiveDashboardView';
 interface DashboardShellProps {
@@ -98,6 +99,11 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
       title: 'Pertinencia Docente',
       subtitle: 'Docentes que enseñan fuera de su especialidad o nivel de formación — desagregado por rango V / A / N',
       tag: 'PERTINENCIA SIE',
+    },
+    balance: {
+      title: 'Balance Predictivo de Admisión ESFM 2031',
+      subtitle: 'Matriz integral multicriterio: Déficit en Aula, Egresados en Formación, Calidad de Pertinencia, Flujo Migratorio y Demografía Escolar (ARIMA)',
+      tag: 'PLANIFICACIÓN 2031',
     },
   };
 
@@ -239,11 +245,21 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
             >
               Pertinencia
             </button>
+            <button
+              onClick={() => setCurrentTab('balance')}
+              className={`px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 ${currentTab === 'balance'
+                ? 'bg-rose-700 text-white shadow-xs ring-1 ring-rose-500 font-bold'
+                : 'text-slate-600 hover:text-slate-900'
+                }`}
+            >
+              <Scale className="w-3.5 h-3.5 text-rose-500" />
+              Balance 2031
+            </button>
           </div>
         </header>
 
-        {/* Cuerpo de la vista seleccionada */}
-        <main className="flex-1 p-4 sm:p-8 max-w-7xl w-full mx-auto">
+        {/* Cuerpo de la vista seleccionada a ancho panorámico */}
+        <main className="flex-1 p-3 sm:p-6 lg:p-8 w-full max-w-[1850px] mx-auto">
           {currentTab === 'dashboard' && <ExecutiveDashboardView data={initialData} />}
           {currentTab === 'proyecciones' && <ProyeccionesView data={initialData} />}
           {currentTab === 'dgfm' && <DgfmView data={initialData} />}
@@ -257,6 +273,8 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
           {currentTab === ('Resumen' as SourceTab) && <ResumenView />}
 
           {currentTab === 'pertinencia' && <PertinenciaView />}
+
+          {currentTab === 'balance' && <BalancePredictivoView />}
 
         </main>
       </div>

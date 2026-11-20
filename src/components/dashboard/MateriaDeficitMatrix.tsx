@@ -114,28 +114,32 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
   const [hoverDeptIndex, setHoverDeptIndex] = useState<number | null>(null);
 
   // 1. Cargar lista de especialidades con conteo de reglas
-  useEffect(() => {
-    async function loadList() {
-      setLoadingList(true);
-      try {
-        const res = await fetch('/api/materia-deficit');
-        if (res.ok) {
-          const data = await res.json();
-          const list: EspecialidadItem[] = data.especialidades || [];
-          setEspecialidades(list);
-          if (list.length > 0) {
+  const loadList = useCallback(async () => {
+    setLoadingList(true);
+    try {
+      const res = await fetch('/api/materia-deficit', { cache: 'no-store' });
+      if (res.ok) {
+        const data = await res.json();
+        const list: EspecialidadItem[] = data.especialidades || [];
+        setEspecialidades(list);
+        if (list.length > 0) {
+          setSelectedEspId((prev) => {
+            if (prev && list.some((e) => e.id === prev)) return prev;
             const primaria = list.find((e) => e.nombre.includes('PRIMARIA'));
-            setSelectedEspId(primaria ? primaria.id : list[0].id);
-          }
+            return primaria ? primaria.id : list[0].id;
+          });
         }
-      } catch (e) {
-        console.error('Error cargando especialidades (materia):', e);
-      } finally {
-        setLoadingList(false);
       }
+    } catch (e) {
+      console.error('Error cargando especialidades (materia):', e);
+    } finally {
+      setLoadingList(false);
     }
-    loadList();
   }, []);
+
+  useEffect(() => {
+    loadList();
+  }, [loadList]);
 
   // 2. Cargar reporte de déficit por materia para la especialidad seleccionada
   const fetchReport = useCallback(async (espId: number, baseHorasOverride?: string) => {
@@ -145,7 +149,7 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
       if (baseHorasOverride && !isNaN(Number(baseHorasOverride)) && Number(baseHorasOverride) > 0) {
         url += `&base_horas=${encodeURIComponent(baseHorasOverride)}`;
       }
-      const res = await fetch(url);
+      const res = await fetch(url, { cache: 'no-store' });
       if (res.ok) {
         const data = await res.json();
         setReportData(data);
@@ -159,6 +163,40 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
       setLoadingData(false);
     }
   }, []);
+
+  // 3. Suscripción en tiempo real a cambios de filtros (BroadcastChannel, CustomEvent, storage)
+  useEffect(() => {
+    const handleUpdate = () => {
+      loadList();
+      if (selectedEspId) {
+        fetchReport(selectedEspId, customBaseHoras);
+      }
+    };
+
+    let channel: BroadcastChannel | null = null;
+    if (typeof window !== 'undefined' && 'BroadcastChannel' in window) {
+      channel = new BroadcastChannel('sie_deficit_channel');
+      channel.onmessage = (event) => {
+        if (event.data?.type === 'FILTRO_UPDATED' || event.data?.type === 'REBUILD_DONE') {
+          handleUpdate();
+        }
+      };
+    }
+
+    const onCustomEvent = () => handleUpdate();
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === 'sie_deficit_updated_at') handleUpdate();
+    };
+
+    window.addEventListener('sie-deficit-updated', onCustomEvent);
+    window.addEventListener('storage', onStorage);
+
+    return () => {
+      if (channel) channel.close();
+      window.removeEventListener('sie-deficit-updated', onCustomEvent);
+      window.removeEventListener('storage', onStorage);
+    };
+  }, [loadList, fetchReport, selectedEspId, customBaseHoras]);
 
   useEffect(() => {
     if (selectedEspId) {

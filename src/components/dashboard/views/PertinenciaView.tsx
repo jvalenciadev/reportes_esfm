@@ -32,6 +32,7 @@ import {
   X,
   FileSpreadsheet
 } from 'lucide-react';
+import { getNivelEspecialidad, NivelCodigo, NIVELES_CONFIG } from '@/lib/constants/especialidadNiveles';
 
 // ─── Tipos ────────────────────────────────────────────────────────────────────
 
@@ -46,22 +47,83 @@ interface RangoSummary {
   estudiantes_atendidos?: number;
 }
 
+interface DetalleAreaRangos {
+  docentes: number;
+  ues: number;
+  horas: number;
+  pct_del_depto: number;
+  pct_alta: number;
+  pct_media: number;
+  pct_baja: number;
+  pct_sin: number;
+  desalineados: number;
+  pct_desalineados: number;
+  prioridad_formacion: number;
+  V: { docentes: number; pct: number; ues: number };
+  A: { docentes: number; pct: number; ues: number };
+  N: { docentes: number; pct: number; ues: number };
+  SIN: { docentes: number; pct: number; ues: number };
+}
+
+interface DepartamentoAreaStats {
+  departamento: string;
+  total_docentes: number;
+  total_ues: number;
+  pct_rural_del_depto: number;
+  pct_urbana_del_depto: number;
+  brecha_alta_urbano_rural: number;
+  brecha_desalineacion: number;
+  rural: DetalleAreaRangos;
+  urbana: DetalleAreaRangos;
+}
+
+interface AreaResumenData {
+  area: 'RURAL' | 'URBANA';
+  docentes: number;
+  pct_del_total: number;
+  ues: number;
+  horas_total: number;
+  estudiantes_atendidos: number;
+  pct_alta: number;
+  pct_media: number;
+  pct_baja: number;
+  pct_sin: number;
+  desalineados: number;
+  pct_desalineados: number;
+  prioridad_formacion: number;
+  rangos: Record<Rango, { rango: Rango; docentes: number; pct: number; ues: number; horas: number }>;
+}
+
 interface DepartamentoRangos {
   departamento: string;
+  ues?: number;
   rangos: Record<Rango, { docentes: number; ues: number; horas: number }>;
 }
 
 interface NivelRangos {
   nivel: string;
+  ues?: number;
   rangos: Record<Rango, { docentes: number; ues: number; horas: number }>;
 }
 
 interface EspecialidadItem {
+  id?: number;
   especialidad: string;
+  hora_item?: number;
+  nivel_codigo?: string;
   docentes: number;
   ues: number;
-  horas: number;
-  rangos: Record<Rango, { docentes: number; ues: number; horas: number }>;
+  horas?: number;
+  pct_alta?: number;
+  meta_bid?: number;
+  pct_meta_bid?: number;
+  // Estructura nueva: esp.V.docentes
+  V?: { docentes: number; pct: number };
+  A?: { docentes: number; pct: number };
+  N?: { docentes: number; pct: number };
+  SIN?: { docentes: number; pct: number };
+  // Estructura legacy: esp.rangos.V.docentes
+  rangos?: Record<Rango, { docentes: number; ues: number; horas: number }>;
   por_departamento: Record<string, Record<Rango | 'total', number>>;
 }
 
@@ -79,7 +141,9 @@ interface DesalineacionData {
 interface PertinenciaData {
   resumen: Record<Rango | 'TOTAL', RangoSummary & { docentes: number; ues: number; estudiantes_atendidos?: number }>;
   desalineacion?: DesalineacionData;
+  por_area?: Record<'RURAL' | 'URBANA', AreaResumenData>;
   por_departamento: DepartamentoRangos[];
+  por_departamento_area?: DepartamentoAreaStats[];
   por_nivel: NivelRangos[];
   por_especialidad?: EspecialidadItem[];
 }
@@ -282,13 +346,21 @@ export default function PertinenciaView() {
   const [selectedRango, setSelectedRango] = useState<Rango | null>(null);
 
   // Pestaña principal
-  const [activeTab, setActiveTab] = useState<'preguntas' | 'especialidad' | 'territorial' | 'niveles'>('preguntas');
+  const [activeTab, setActiveTab] = useState<'preguntas' | 'rural_urbano' | 'territorial' | 'especialidad' | 'niveles'>('rural_urbano');
+
+  // Estados interactivos para Área Rural vs Urbana
+  const [modoGraficoArea, setModoGraficoArea] = useState<'porcentaje' | 'docentes'>('porcentaje');
+  const [selectedDeptArea, setSelectedDeptArea] = useState<string | null>('LA PAZ');
+  const [hoverDeptArea, setHoverDeptArea] = useState<DepartamentoAreaStats | null>(null);
+  const [sortDeptArea, setSortDeptArea] = useState<'total' | 'alta_rural' | 'alta_urbano' | 'brecha' | 'rural_pct' | 'alfa'>('total');
 
   // Filtros de la Matriz Especialidad x Departamento
   // Filtros de Especialidad
   const [searchEsp, setSearchEsp] = useState<string>('');
   const [filterDepto, setFilterDepto] = useState<string>('TODOS');
   const [expandedEsp, setExpandedEsp] = useState<string | null>(null);
+  const [selectedEsp, setSelectedEsp] = useState<string | null>(null);
+  const [filterNivel, setFilterNivel] = useState<string>('TODOS');
 
   // Estados interactivos de Distribución Territorial
   const [selectedDeptDetail, setSelectedDeptDetail] = useState<string | null>('LA PAZ');
@@ -360,7 +432,7 @@ export default function PertinenciaView() {
   }, []);
 
   const totalDoc = data?.resumen?.TOTAL?.docentes ?? 168758;
-  const totalUes = data?.resumen?.TOTAL?.ues ?? 12054;
+  const totalUes = data?.resumen?.TOTAL?.ues ?? 16308;
 
   const donutData = useMemo(() => {
     if (!data) return [];
@@ -388,7 +460,7 @@ export default function PertinenciaView() {
       const n = d.rangos.N?.docentes ?? 0;
       const sin = d.rangos.SIN?.docentes ?? 0;
       const total = v + a + n + sin;
-      const ues = Math.max(...(['V', 'A', 'N', 'SIN'] as Rango[]).map(rk => d.rangos[rk]?.ues ?? 0));
+      const ues = d.ues ?? Math.max(...(['V', 'A', 'N', 'SIN'] as Rango[]).map(rk => d.rangos[rk]?.ues ?? 0));
       const prioridadBID = a + n;
       const pctAlta = total > 0 ? (v / total) * 100 : 0;
       const pctPrioridadBID = total > 0 ? (prioridadBID / total) * 100 : 0;
@@ -470,13 +542,91 @@ export default function PertinenciaView() {
     return data.por_especialidad.filter((item) => {
       const matchesSearch = item.especialidad.toLowerCase().includes(searchEsp.toLowerCase());
       if (!matchesSearch) return false;
+      const nivelInfo = getNivelEspecialidad(item.id || 0, item.especialidad);
+      if (filterNivel !== 'TODOS' && nivelInfo.nivelCodigo !== filterNivel) return false;
       if (filterDepto !== 'TODOS') {
         const deptoStats = item.por_departamento[filterDepto];
         return deptoStats && deptoStats.total > 0;
       }
       return true;
     });
-  }, [data, searchEsp, filterDepto]);
+  }, [data, searchEsp, filterDepto, filterNivel]);
+
+  // Estilos temáticos y jerarquía por Nivel Educativo Oficial
+  const NIVEL_ESTILOS: Record<string, { franja: string; borderLeft: string; badge: string; textNivel: string }> = {
+    INICIAL: {
+      franja: 'bg-pink-100/90 text-pink-950 border-pink-300',
+      borderLeft: 'border-l-4 border-l-pink-500 bg-pink-50/20',
+      badge: 'bg-pink-100 text-pink-800 border-pink-300',
+      textNivel: 'Inicial'
+    },
+    PRIMARIA: {
+      franja: 'bg-blue-100/90 text-blue-950 border-blue-300',
+      borderLeft: 'border-l-4 border-l-blue-500 bg-blue-50/20',
+      badge: 'bg-blue-100 text-blue-800 border-blue-300',
+      textNivel: 'Primaria'
+    },
+    SECUNDARIA: {
+      franja: 'bg-emerald-100/90 text-emerald-950 border-emerald-300',
+      borderLeft: 'border-l-4 border-l-emerald-500 bg-emerald-50/20',
+      badge: 'bg-emerald-100 text-emerald-800 border-emerald-300',
+      textNivel: 'Secundaria'
+    },
+    TECNICA: {
+      franja: 'bg-amber-100/90 text-amber-950 border-amber-300',
+      borderLeft: 'border-l-4 border-l-amber-500 bg-amber-50/20',
+      badge: 'bg-amber-100 text-amber-900 border-amber-300',
+      textNivel: 'Técnica BTH'
+    },
+    ESPECIAL: {
+      franja: 'bg-purple-100/90 text-purple-950 border-purple-300',
+      borderLeft: 'border-l-4 border-l-purple-500 bg-purple-50/20',
+      badge: 'bg-purple-100 text-purple-800 border-purple-300',
+      textNivel: 'Especial'
+    }
+  };
+
+  // Agrupamiento por Nivel Educativo Oficial
+  const especialidadesPorNivel = useMemo(() => {
+    const grupos: Record<string, { nivelCodigo: NivelCodigo; nivelNombre: string; ordenJerarquia: number; items: EspecialidadItem[] }> = {
+      INICIAL: { ...NIVELES_CONFIG.INICIAL, items: [] },
+      PRIMARIA: { ...NIVELES_CONFIG.PRIMARIA, items: [] },
+      SECUNDARIA: { ...NIVELES_CONFIG.SECUNDARIA, items: [] },
+      TECNICA: { ...NIVELES_CONFIG.TECNICA, items: [] },
+      ESPECIAL: { ...NIVELES_CONFIG.ESPECIAL, items: [] },
+    };
+
+    for (const esp of filteredEspecialidades) {
+      const info = getNivelEspecialidad(esp.id || 0, esp.especialidad);
+      if (grupos[info.nivelCodigo]) {
+        grupos[info.nivelCodigo].items.push(esp);
+      }
+    }
+
+    return Object.values(grupos)
+      .filter((g) => g.items.length > 0)
+      .sort((a, b) => a.ordenJerarquia - b.ordenJerarquia);
+  }, [filteredEspecialidades]);
+
+  // Departamentos clasificados por Área Rural vs Urbana
+  const departamentosAreaOrdenados = useMemo(() => {
+    if (!data?.por_departamento_area) return [];
+    const list = [...data.por_departamento_area];
+
+    return list.sort((a, b) => {
+      if (sortDeptArea === 'total') return b.total_docentes - a.total_docentes;
+      if (sortDeptArea === 'alta_rural') return b.rural.pct_alta - a.rural.pct_alta;
+      if (sortDeptArea === 'alta_urbano') return b.urbana.pct_alta - a.urbana.pct_alta;
+      if (sortDeptArea === 'brecha') return Math.abs(b.brecha_alta_urbano_rural) - Math.abs(a.brecha_alta_urbano_rural);
+      if (sortDeptArea === 'rural_pct') return b.pct_rural_del_depto - a.pct_rural_del_depto;
+      return a.departamento.localeCompare(b.departamento);
+    });
+  }, [data, sortDeptArea]);
+
+  const activeDeptArea = useMemo(() => {
+    if (!departamentosAreaOrdenados.length) return null;
+    return departamentosAreaOrdenados.find(d => d.departamento === selectedDeptArea) || departamentosAreaOrdenados[0];
+  }, [departamentosAreaOrdenados, selectedDeptArea]);
 
   if (loading) {
     return (
@@ -498,131 +648,191 @@ export default function PertinenciaView() {
   return (
     <div className="space-y-8 animate-in fade-in duration-300 pb-16">
 
-      {/* ── ENCABEZADO INSTITUCIONAL BID ──────────────────────────────────── */}
-      <div className="bg-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-sm border border-[#c9a751]/20 relative overflow-hidden">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
-          <div className="flex items-center gap-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#c9a751]/10 border border-[#c9a751]/30 text-[#c9a751] text-xs font-bold tracking-wider uppercase">
-              <Sparkles className="w-3.5 h-3.5 text-[#c9a751]" />
-              BID · Componente 2
-            </div>
-            <h1 className="text-xl sm:text-2xl font-black tracking-tight text-white">
-              Pertinencia Curricular Docente
-            </h1>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-2.5">
-            <button
-              onClick={handleExportExcel}
-              disabled={exporting}
-              className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 active:bg-slate-900 text-slate-200 font-bold text-xs tracking-wide shadow-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed border border-slate-700"
-              title="Descarga el reporte institucional completo en formato Excel (.xlsx) con gráficos, resumen y hoja de UEs"
-            >
-              <FileSpreadsheet className={`w-4 h-4 text-emerald-400 ${exporting ? 'animate-pulse' : ''}`} />
-              <span>{exporting ? 'Generando Reporte General...' : 'Reporte General (con Gráficos)'}</span>
-            </button>
-
-            <button
-              onClick={handleExportUE}
-              disabled={exportingUE}
-              className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white font-bold text-xs tracking-wide shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed border border-emerald-400/40"
-              title="Descarga el padrón consolidado de Pertinencia por Unidad Educativa (16.313 UEs) en Excel (.xlsx)"
-            >
-              <FileSpreadsheet className={`w-4 h-4 text-emerald-100 ${exportingUE ? 'animate-pulse' : ''}`} />
-              <span>{exportingUE ? 'Generando Excel por UE...' : 'Exportar Pertinencia por UE'}</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Pestañas de navegación */}
-        <div className="flex flex-wrap gap-2 mt-6 pt-5 border-t border-slate-700/80 text-xs font-bold">
+      {/* ── BARRA DE CONTROL Y PESTAÑAS (FONDO CLARO, COMPACTO) ──────────────── */}
+      <div className="bg-white p-3 rounded-2xl border border-slate-200 shadow-2xs flex flex-col md:flex-row md:items-center justify-between gap-3">
+        {/* Pestañas de navegación con botones claros */}
+        <div className="flex flex-wrap items-center gap-2 text-xs font-bold">
           <button
+            type="button"
             onClick={() => setActiveTab('preguntas')}
-            className={`px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 ${activeTab === 'preguntas'
-              ? 'bg-[#c9a751] text-slate-900 shadow-md font-extrabold'
-              : 'bg-slate-800/80 text-slate-300 hover:bg-slate-800'
-              }`}
+            className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 border ${
+              activeTab === 'preguntas'
+                ? 'bg-emerald-700 text-white border-emerald-700 shadow-xs'
+                : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50 hover:text-slate-900'
+            }`}
           >
-            <BarChart3 className="w-4 h-4" />
-            Tablero Ejecutivo BID
+            <BarChart3 className="w-4 h-4 text-emerald-500" />
+            <span>Tablero Ejecutivo BID</span>
           </button>
 
           <button
+            type="button"
+            onClick={() => setActiveTab('rural_urbano')}
+            className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 border ${
+              activeTab === 'rural_urbano'
+                ? 'bg-emerald-700 text-white border-emerald-700 shadow-xs'
+                : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50 hover:text-slate-900'
+            }`}
+          >
+            <TrendingUp className="w-4 h-4 text-emerald-500" />
+            <span>Rural vs Urbano por Departamento</span>
+            <span className={`text-[9px] font-black uppercase px-1.5 py-0.5 rounded border ${
+              activeTab === 'rural_urbano'
+                ? 'bg-emerald-800 text-emerald-100 border-emerald-600'
+                : 'bg-emerald-50 text-emerald-700 border-emerald-200'
+            }`}>
+              Gráficos
+            </span>
+          </button>
+
+          <button
+            type="button"
             onClick={() => setActiveTab('territorial')}
-            className={`px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 ${activeTab === 'territorial'
-              ? 'bg-[#c9a751] text-slate-900 shadow-md font-extrabold'
-              : 'bg-slate-800/80 text-slate-300 hover:bg-slate-800'
-              }`}
+            className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 border ${
+              activeTab === 'territorial'
+                ? 'bg-emerald-700 text-white border-emerald-700 shadow-xs'
+                : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50 hover:text-slate-900'
+            }`}
           >
-            <MapPin className="w-4 h-4" />
-            Distribución por Departamento
+            <MapPin className="w-4 h-4 text-emerald-500" />
+            <span>Distribución por Departamento</span>
           </button>
 
-          {data?.por_especialidad && data.por_especialidad.length > 0 && (
-            <button
-              onClick={() => setActiveTab('especialidad')}
-              className={`px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 ${activeTab === 'especialidad'
-                ? 'bg-[#c9a751] text-slate-900 shadow-md font-extrabold'
-                : 'bg-slate-800/80 text-slate-300 hover:bg-slate-800'
-                }`}
-            >
-              <BookOpen className="w-4 h-4" />
-              Matriz por Especialidad
-            </button>
-          )}
-
           <button
-            onClick={() => setActiveTab('niveles')}
-            className={`px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 ${activeTab === 'niveles'
-              ? 'bg-[#c9a751] text-slate-900 shadow-md font-extrabold'
-              : 'bg-slate-800/80 text-slate-300 hover:bg-slate-800'
-              }`}
+            type="button"
+            onClick={() => setActiveTab('especialidad')}
+            className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 border ${
+              activeTab === 'especialidad'
+                ? 'bg-emerald-700 text-white border-emerald-700 shadow-xs'
+                : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50 hover:text-slate-900'
+            }`}
           >
-            <Layers className="w-4 h-4" />
-            Por Nivel Educativo
+            <BookOpen className="w-4 h-4 text-emerald-500" />
+            <span>Pertinencia por Especialidad</span>
           </button>
         </div>
-      </div >
+
+        {/* Botones de exportación claros */}
+        <div className="flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            onClick={handleExportExcel}
+            disabled={exporting}
+            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white hover:bg-slate-50 active:bg-slate-100 text-slate-700 font-bold text-xs shadow-2xs transition-colors disabled:opacity-50 border border-slate-200 cursor-pointer"
+            title="Descargar Reporte Ejecutivo con Gráficos (.xlsx)"
+          >
+            <FileSpreadsheet className={`w-4 h-4 text-emerald-600 ${exporting ? 'animate-pulse' : ''}`} />
+            <span>{exporting ? 'Generando...' : 'Reporte General (con Gráficos)'}</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={handleExportUE}
+            disabled={exportingUE}
+            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 active:bg-emerald-200 text-emerald-800 font-bold text-xs shadow-2xs transition-colors disabled:opacity-50 border border-emerald-300 cursor-pointer"
+            title="Descargar consolidado por Unidad Educativa en Excel (.xlsx)"
+          >
+            <FileSpreadsheet className={`w-4 h-4 text-emerald-700 ${exportingUE ? 'animate-pulse' : ''}`} />
+            <span>{exportingUE ? 'Generando...' : 'Exportar Pertinencia por UE'}</span>
+          </button>
+        </div>
+      </div>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          PESTAÑA 1: TABLERO EJECUTIVO BID
+          PESTAÑA 1: TABLERO EJECUTIVO BID (RESUMIDO Y CLARO)
          ═══════════════════════════════════════════════════════════════════ */}
       {
         activeTab === 'preguntas' && (
-          <div className="space-y-8">
+          <div className="space-y-6">
 
-            {/* DISTRIBUCIÓN POR RANGO */}
-            <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm overflow-hidden">
-              <div className="p-6 sm:p-8 pb-4 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white">
-                <div>
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-xl bg-[#c9a751] text-slate-900 font-black text-sm flex items-center justify-center shadow-xs">
-                      1
-                    </div>
-                    <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-                      Distribución por Rango (Padrón Nacional)
-                    </h2>
+            {/* 3 Micro-KPIs Nacionales Directos */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center font-black">
+                    <School className="w-5 h-5 text-slate-700" />
                   </div>
-                  <p className="text-xs sm:text-sm text-slate-500 mt-1.5 ml-10 max-w-2xl">
-                    Caracterización oficial del universo de <strong>{fmt(totalDoc)} registros</strong> en los tres rangos normativos de pertinencia académica del SEP.
-                  </p>
+                  <div>
+                    <span className="text-[11px] font-black uppercase tracking-wider text-slate-400 block">
+                      Padrón Nacional Docente
+                    </span>
+                    <span className="text-xl font-black text-slate-900 tracking-tight">
+                      {fmt(totalDoc)} <span className="text-xs font-bold text-slate-500">docentes</span>
+                    </span>
+                  </div>
                 </div>
-
-                <div className="flex items-center gap-2 text-xs text-slate-500 bg-slate-100/80 px-3 py-1.5 rounded-xl ml-10 md:ml-0 shrink-0">
-                  <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
-                  <span>Haz clic en un rango o segmento para focalizar</span>
+                <div className="text-right">
+                  <span className="text-sm font-black text-slate-700 block">{fmt(data.resumen.TOTAL?.ues)}</span>
+                  <span className="text-[10px] text-slate-400 font-bold block">UEs en 9 Deptos</span>
                 </div>
               </div>
 
-              <div className="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-black">
+                    <CheckCircle2 className="w-5 h-5 text-emerald-600" />
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-black uppercase tracking-wider text-slate-400 block">
+                      Alta Pertinencia (Idóneos)
+                    </span>
+                    <span className="text-xl font-black text-emerald-700 tracking-tight">
+                      {pct(data.resumen.V?.docentes ?? 0, totalDoc)} <span className="text-xs font-bold text-slate-500">nacional</span>
+                    </span>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <span className="text-sm font-black text-emerald-700 block">{fmt(data.resumen.V?.docentes)}</span>
+                  <span className="text-[10px] text-slate-400 font-bold block">Rango V (Idóneos)</span>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center font-black">
+                    <Target className="w-5 h-5 text-amber-600" />
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-black uppercase tracking-wider text-slate-400 block">
+                      Meta Formación BID (A + N)
+                    </span>
+                    <span className="text-xl font-black text-amber-700 tracking-tight">
+                      {pct((data.resumen.A?.docentes ?? 0) + (data.resumen.N?.docentes ?? 0), totalDoc)} <span className="text-xs font-bold text-slate-500">a capacitar</span>
+                    </span>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <span className="text-sm font-black text-amber-800 block">
+                    {fmt((data.resumen.A?.docentes ?? 0) + (data.resumen.N?.docentes ?? 0))}
+                  </span>
+                  <span className="text-[10px] text-slate-400 font-bold block">Docentes prioridad</span>
+                </div>
+              </div>
+            </div>
+
+            {/* DISTRIBUCIÓN POR RANGO */}
+            <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm overflow-hidden">
+              <div className="p-6 sm:p-7 pb-4 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white">
+                <div>
+                  <h2 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight flex items-center gap-2">
+                    <PieIcon className="w-5 h-5 text-blue-600" />
+                    Distribución por Rango de Pertinencia Curricular
+                  </h2>
+                  <p className="text-xs text-slate-500 mt-1">
+                    Clasificación oficial del universo docente evaluado según pertinencia académica institucional.
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-2 text-xs text-slate-500 bg-slate-100/80 px-3 py-1.5 rounded-xl shrink-0">
+                  <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
+                  <span>Haz clic en un rango para focalizar</span>
+                </div>
+              </div>
+
+              <div className="p-6 sm:p-7 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
 
                 {/* Gráfico de Dona */}
                 <div className="lg:col-span-5 bg-slate-50 rounded-2xl p-6 border border-slate-200/80 flex flex-col items-center shadow-xs">
-                  <span className="text-[11px] font-black text-slate-500 uppercase tracking-widest mb-3 flex items-center gap-1.5">
-                    <PieIcon className="w-3.5 h-3.5 text-blue-600" />
-                    Estructura Proporcional del Magisterio
-                  </span>
-
                   <DonutChartPremium
                     valores={donutData}
                     total={totalDoc}
@@ -683,8 +893,8 @@ export default function PertinenciaView() {
                   </div>
                 </div>
 
-                {/* Tarjetas de los 4 Rangos */}
-                <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* Tarjetas de los 4 Rangos (Resumidas y Limpias) */}
+                <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   {(['V', 'A', 'N', 'SIN'] as Rango[]).map((rk) => {
                     const info = RANGO_INFO[rk];
                     const d = data.resumen[rk];
@@ -698,7 +908,7 @@ export default function PertinenciaView() {
                         onMouseEnter={() => setHoveredRango(rk)}
                         onMouseLeave={() => setHoveredRango(null)}
                         onClick={() => setSelectedRango(selectedRango === rk ? null : rk)}
-                        className={`group relative rounded-2xl p-5 border transition-all duration-300 cursor-pointer flex flex-col justify-between overflow-hidden ${isSelected || isHovered
+                        className={`group relative rounded-2xl p-4.5 border transition-all duration-300 cursor-pointer flex flex-col justify-between overflow-hidden ${isSelected || isHovered
                           ? 'bg-white border-slate-400 shadow-md ring-2 ring-slate-400/20 -translate-y-0.5'
                           : 'bg-white border-slate-200 hover:border-slate-300 hover:shadow-xs'
                           }`}
@@ -713,29 +923,25 @@ export default function PertinenciaView() {
                             <span className={`text-[11px] font-black px-2.5 py-0.5 rounded-full border ${info.pillBg}`}>
                               {info.badgeText}
                             </span>
-                            <span className="text-xs font-black text-slate-400 group-hover:text-slate-700 transition-colors">
+                            <span className="text-sm font-black text-slate-800">
                               {porcentaje}
                             </span>
                           </div>
 
-                          <div className="mt-3">
-                            <h4 className="text-base font-black text-slate-900 tracking-tight">
+                          <div className="mt-2.5">
+                            <h4 className="text-sm font-black text-slate-900 tracking-tight">
                               {info.label}
                             </h4>
-                            <span className={`text-xs font-bold block mt-0.5 ${info.pillText}`}>
+                            <span className={`text-[11px] font-bold block mt-0.5 ${info.pillText}`}>
                               {info.subtitle}
                             </span>
                           </div>
-
-                          <p className="text-xs text-slate-500 mt-2 leading-relaxed">
-                            {info.queSignifica}
-                          </p>
                         </div>
 
-                        <div className="mt-5 pt-3.5 border-t border-slate-100">
+                        <div className="mt-4 pt-3 border-t border-slate-100">
                           <div className="flex items-baseline justify-between">
                             <div>
-                              <span className="text-2xl font-black text-slate-900 tracking-tight">
+                              <span className="text-xl font-black text-slate-900 tracking-tight">
                                 {fmt(d?.docentes)}
                               </span>
                               <span className="text-xs text-slate-400 font-semibold ml-1.5">docentes</span>
@@ -763,110 +969,498 @@ export default function PertinenciaView() {
       }
 
       {/* ═══════════════════════════════════════════════════════════════════
-          PESTAÑA 2: MATRIZ CREATIVA POR ESPECIALIDAD Y DEPARTAMENTO
-          PESTAÑA 2: DISTRIBUCIÓN POR DEPARTAMENTO (REDISEÑADA Y FASCINANTE)
+          PESTAÑA: PERTINENCIA POR ÁREA RURAL VS URBANA (GRÁFICO LINEAL RESUMIDO)
+         ═══════════════════════════════════════════════════════════════════ */}
+      {
+        activeTab === 'rural_urbano' && (
+          <div className="space-y-6 animate-in fade-in duration-300">
+
+            {/* ── 3 KPIs Resumidos y Precisos ─────────────────────────────────── */}
+            {data?.por_area && (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {/* KPI Rural */}
+                <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-black">
+                      <School className="w-5 h-5 text-emerald-600" />
+                    </div>
+                    <div>
+                      <span className="text-[11px] font-black uppercase tracking-wider text-slate-400 block">
+                        Área Rural Nacional
+                      </span>
+                      <span className="text-xl font-black text-slate-900 tracking-tight">
+                        {data.por_area.RURAL.pct_alta}% <span className="text-xs font-bold text-slate-500">Alta Pert.</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-sm font-black text-emerald-700 block">{fmt(data.por_area.RURAL.docentes)}</span>
+                    <span className="text-[10px] text-slate-400 font-bold block">{data.por_area.RURAL.pct_del_total}% del magisterio</span>
+                  </div>
+                </div>
+
+                {/* KPI Urbano */}
+                <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center font-black">
+                      <Building2 className="w-5 h-5 text-blue-600" />
+                    </div>
+                    <div>
+                      <span className="text-[11px] font-black uppercase tracking-wider text-slate-400 block">
+                        Área Urbana Nacional
+                      </span>
+                      <span className="text-xl font-black text-slate-900 tracking-tight">
+                        {data.por_area.URBANA.pct_alta}% <span className="text-xs font-bold text-slate-500">Alta Pert.</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-sm font-black text-blue-700 block">{fmt(data.por_area.URBANA.docentes)}</span>
+                    <span className="text-[10px] text-slate-400 font-bold block">{data.por_area.URBANA.pct_del_total}% del magisterio</span>
+                  </div>
+                </div>
+
+                {/* KPI Brecha y Meta */}
+                <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center font-black">
+                      <Target className="w-5 h-5 text-amber-600" />
+                    </div>
+                    <div>
+                      <span className="text-[11px] font-black uppercase tracking-wider text-slate-400 block">
+                        Brecha Neta (R vs U)
+                      </span>
+                      <span className="text-xl font-black text-emerald-700 tracking-tight">
+                        +4.15 pp <span className="text-xs font-bold text-slate-500">Rural</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-sm font-black text-rose-700 block">
+                      {fmt((data.por_area.RURAL.prioridad_formacion || 0) + (data.por_area.URBANA.prioridad_formacion || 0))}
+                    </span>
+                    <span className="text-[10px] text-slate-400 font-bold block">Meta A+N a capacitar</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* ── Gráfico Lineal de Tendencia Departamental Rural vs Urbano ──── */}
+            <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm p-6 sm:p-7 space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-3">
+                <div>
+                  <h3 className="text-sm font-black text-slate-900 flex items-center gap-2">
+                    <TrendingUp className="w-4 h-4 text-emerald-600" />
+                    Curva Comparativa de Pertinencia (%) por Departamento: Rural vs Urbana
+                  </h3>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Comportamiento continuo de idoneidad curricular docente en los 9 departamentos de Bolivia.
+                  </p>
+                </div>
+
+                {/* Leyenda concisa */}
+                <div className="flex items-center gap-4 text-xs font-bold">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-3 h-3 rounded-full bg-emerald-600" />
+                    <span className="text-slate-700">Rural (%)</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-3 h-3 rounded-full bg-blue-600" />
+                    <span className="text-slate-700">Urbana (%)</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-4 h-0.5 bg-[#c9a751] border-t border-dashed" />
+                    <span className="text-slate-400 text-[11px]">Nacional (75.6%)</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Trazado SVG del Gráfico Lineal */}
+              {departamentosAreaOrdenados.length > 0 && (() => {
+                const depts = departamentosAreaOrdenados;
+                const W = 900;
+                const H = 260;
+                const PAD = { top: 30, right: 35, bottom: 45, left: 45 };
+                const plotW = W - PAD.left - PAD.right;
+                const plotH = H - PAD.top - PAD.bottom;
+                const n = depts.length;
+                const stepX = plotW / (n - 1);
+
+                // Escala Y acotada de 55% a 95% para máxima legibilidad estética
+                const minY = 55;
+                const maxY = 95;
+                const getY = (val: number) => PAD.top + plotH - ((val - minY) / (maxY - minY)) * plotH;
+                const getX = (i: number) => PAD.left + i * stepX;
+
+                // Trazados de líneas continuas
+                const pathRural = depts.map((d, i) => `${i === 0 ? 'M' : 'L'} ${getX(i).toFixed(1)} ${getY(d.rural.pct_alta).toFixed(1)}`).join(' ');
+                const pathUrbano = depts.map((d, i) => `${i === 0 ? 'M' : 'L'} ${getX(i).toFixed(1)} ${getY(d.urbana.pct_alta).toFixed(1)}`).join(' ');
+
+                // Áreas con degradado sutil
+                const areaRural = `${pathRural} L ${getX(n - 1).toFixed(1)} ${PAD.top + plotH} L ${getX(0).toFixed(1)} ${PAD.top + plotH} Z`;
+                const areaUrbano = `${pathUrbano} L ${getX(n - 1).toFixed(1)} ${PAD.top + plotH} L ${getX(0).toFixed(1)} ${PAD.top + plotH} Z`;
+
+                const yMeta = getY(75.6);
+
+                return (
+                  <div className="relative overflow-x-auto">
+                    <svg viewBox={`0 0 ${W} ${H}`} className="w-full min-w-[720px] h-auto select-none">
+                      <defs>
+                        <linearGradient id="gradRural" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stopColor="#059669" stopOpacity="0.18" />
+                          <stop offset="100%" stopColor="#059669" stopOpacity="0.0" />
+                        </linearGradient>
+                        <linearGradient id="gradUrbano" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stopColor="#2563eb" stopOpacity="0.14" />
+                          <stop offset="100%" stopColor="#2563eb" stopOpacity="0.0" />
+                        </linearGradient>
+                      </defs>
+
+                      {/* Ejes y líneas horizontales de referencia */}
+                      {[60, 70, 80, 90].map((v) => {
+                        const y = getY(v);
+                        return (
+                          <g key={v}>
+                            <line
+                              x1={PAD.left}
+                              y1={y}
+                              x2={PAD.left + plotW}
+                              y2={y}
+                              stroke="#f1f5f9"
+                              strokeWidth={1}
+                            />
+                            <text
+                              x={PAD.left - 8}
+                              y={y + 3.5}
+                              fill="#94a3b8"
+                              fontSize={9}
+                              fontWeight="bold"
+                              textAnchor="end"
+                            >
+                              {v}%
+                            </text>
+                          </g>
+                        );
+                      })}
+
+                      {/* Línea Promedio Nacional 75.6% */}
+                      <line
+                        x1={PAD.left}
+                        y1={yMeta}
+                        x2={PAD.left + plotW}
+                        y2={yMeta}
+                        stroke="#c9a751"
+                        strokeWidth={1.5}
+                        strokeDasharray="5 4"
+                      />
+                      <text
+                        x={PAD.left + plotW - 4}
+                        y={yMeta - 4}
+                        fill="#b45309"
+                        fontSize={8.5}
+                        fontWeight="900"
+                        textAnchor="end"
+                      >
+                        Nacional 75.6%
+                      </text>
+
+                      {/* Áreas sombreadas suaves */}
+                      <path d={areaRural} fill="url(#gradRural)" />
+                      <path d={areaUrbano} fill="url(#gradUrbano)" />
+
+                      {/* Líneas Principales */}
+                      <path
+                        d={pathRural}
+                        fill="none"
+                        stroke="#059669"
+                        strokeWidth={2.8}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d={pathUrbano}
+                        fill="none"
+                        stroke="#2563eb"
+                        strokeWidth={2.8}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+
+                      {/* Nodos de Datos y Etiquetas por Departamento */}
+                      {depts.map((d, i) => {
+                        const cx = getX(i);
+                        const cyR = getY(d.rural.pct_alta);
+                        const cyU = getY(d.urbana.pct_alta);
+
+                        const isSelected = selectedDeptArea === d.departamento;
+                        const isHovered = hoverDeptArea?.departamento === d.departamento;
+
+                        return (
+                          <g
+                            key={d.departamento}
+                            className="cursor-pointer group"
+                            onClick={() => setSelectedDeptArea(d.departamento)}
+                            onMouseEnter={() => setHoverDeptArea(d)}
+                            onMouseLeave={() => setHoverDeptArea(null)}
+                          >
+                            {/* Línea guía vertical en hover/selección */}
+                            {(isSelected || isHovered) && (
+                              <line
+                                x1={cx}
+                                y1={PAD.top}
+                                x2={cx}
+                                y2={PAD.top + plotH}
+                                stroke="#cbd5e1"
+                                strokeDasharray="3 3"
+                                strokeWidth={1}
+                              />
+                            )}
+
+                            {/* Nodo Rural */}
+                            <circle
+                              cx={cx}
+                              cy={cyR}
+                              r={isSelected || isHovered ? 6 : 4.5}
+                              fill="#059669"
+                              stroke="#ffffff"
+                              strokeWidth={2}
+                              className="transition-all duration-200"
+                            />
+                            <text
+                              x={cx}
+                              y={cyR - 8}
+                              fill="#047857"
+                              fontSize={8}
+                              fontWeight="900"
+                              textAnchor="middle"
+                            >
+                              {d.rural.pct_alta}%
+                            </text>
+
+                            {/* Nodo Urbano */}
+                            <circle
+                              cx={cx}
+                              cy={cyU}
+                              r={isSelected || isHovered ? 6 : 4.5}
+                              fill="#2563eb"
+                              stroke="#ffffff"
+                              strokeWidth={2}
+                              className="transition-all duration-200"
+                            />
+                            <text
+                              x={cx}
+                              y={cyU + 14}
+                              fill="#1d4ed8"
+                              fontSize={8}
+                              fontWeight="900"
+                              textAnchor="middle"
+                            >
+                              {d.urbana.pct_alta}%
+                            </text>
+
+                            {/* Nombre del Departamento en Eje X */}
+                            <text
+                              x={cx}
+                              y={PAD.top + plotH + 20}
+                              fill={isSelected ? '#0f172a' : '#475569'}
+                              fontSize={9.5}
+                              fontWeight={isSelected ? '900' : 'bold'}
+                              textAnchor="middle"
+                            >
+                              {d.departamento}
+                            </text>
+                          </g>
+                        );
+                      })}
+                    </svg>
+                  </div>
+                );
+              })()}
+            </div>
+
+            {/* ── Brechas Resumidas y Foco Territorial ────────────────────────── */}
+            <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm p-6 sm:p-7 space-y-4">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div>
+                  <h3 className="text-sm font-black text-slate-900 flex items-center gap-2">
+                    <Target className="w-4 h-4 text-emerald-600" />
+                    Brecha Territorial Departamental (% Urbano vs % Rural)
+                  </h3>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Diferencia neta en puntos porcentuales de idoneidad curricular docente.
+                  </p>
+                </div>
+                <span className="text-[10px] font-black uppercase text-slate-400">
+                  9 Departamentos
+                </span>
+              </div>
+
+              {/* Matriz Compacta de los 9 Departamentos */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-3">
+                {departamentosAreaOrdenados.map((d) => {
+                  const isSelected = selectedDeptArea === d.departamento;
+                  const brecha = d.brecha_alta_urbano_rural;
+                  const favorableRural = brecha < 0;
+
+                  return (
+                    <div
+                      key={d.departamento}
+                      onClick={() => setSelectedDeptArea(d.departamento)}
+                      className={`p-3.5 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
+                        isSelected
+                          ? 'bg-slate-50 border-slate-400 ring-1 ring-slate-300 shadow-xs'
+                          : 'bg-white border-slate-200/80 hover:border-slate-300'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-black text-slate-900">{d.departamento}</span>
+                        <span className={`text-[10px] font-black px-2 py-0.5 rounded-md ${
+                          favorableRural
+                            ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+                            : 'bg-blue-50 text-blue-800 border border-blue-200'
+                        }`}>
+                          {brecha > 0 ? `+${brecha}pp Urbano` : `${brecha}pp Rural`}
+                        </span>
+                      </div>
+
+                      <div className="mt-3 flex items-center justify-between text-xs">
+                        <div className="flex items-center gap-1.5">
+                          <span className="w-2 h-2 rounded-full bg-emerald-600" />
+                          <span className="text-slate-600 font-semibold">Rur:</span>
+                          <strong className="text-emerald-700">{d.rural.pct_alta}%</strong>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <span className="w-2 h-2 rounded-full bg-blue-600" />
+                          <span className="text-slate-600 font-semibold">Urb:</span>
+                          <strong className="text-blue-700">{d.urbana.pct_alta}%</strong>
+                        </div>
+                      </div>
+
+                      <div className="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400 font-medium">
+                        <span>Padrón: {fmt(d.total_docentes)} doc</span>
+                        <span className="text-rose-600 font-bold">{fmt(d.rural.prioridad_formacion)} A+N rural</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+          </div>
+        )
+      }
+
+      {/* ═══════════════════════════════════════════════════════════════════
+          PESTAÑA: DISTRIBUCIÓN POR DEPARTAMENTO (RESUMIDA Y CLARA)
          ═══════════════════════════════════════════════════════════════════ */}
       {
         activeTab === 'territorial' && (
           <div className="space-y-6 animate-in fade-in duration-300">
 
-            {/* Panel Superior: KPIs Territoriales & Controles de Ordenamiento */}
-            <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm">
-              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-slate-100">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-xl bg-[#c9a751]/10 text-[#c9a751] flex items-center justify-center font-black">
-                      <MapPin className="w-5 h-5" />
-                    </div>
-                    <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-                      Tablero Territorial: Pertinencia en los 9 Departamentos
-                    </h2>
+            {/* 3 Micro-KPIs Territoriales */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center font-black">
+                    <MapPin className="w-5 h-5 text-slate-700" />
                   </div>
-                  <p className="text-xs sm:text-sm text-slate-500 mt-1.5 ml-10">
-                    Explora el perfil de pertinencia de cada departamento, identifica dónde se concentra la meta formativa y audita las especialidades críticas por región.
-                  </p>
+                  <div>
+                    <span className="text-[11px] font-black uppercase tracking-wider text-slate-400 block">
+                      Mayor Padrón Departamental
+                    </span>
+                    <span className="text-xl font-black text-slate-900 tracking-tight">
+                      {deptKPIs?.maxPadron?.departamento ?? 'La Paz'} <span className="text-xs font-bold text-slate-500">({fmt(deptKPIs?.maxPadron?.total)} doc)</span>
+                    </span>
+                  </div>
                 </div>
-
-                {/* Selector de Criterio de Ordenamiento */}
-                <div className="flex items-center gap-2 bg-slate-50 p-1.5 rounded-2xl border border-slate-200 text-xs shrink-0 ml-10 lg:ml-0">
-                  <span className="text-slate-400 font-bold px-2 flex items-center gap-1">
-                    <ArrowUpDown className="w-3.5 h-3.5" /> Ordenar:
-                  </span>
-                  <button
-                    onClick={() => setSortDeptBy('total')}
-                    className={`px-3 py-1.5 rounded-xl font-bold transition-all ${sortDeptBy === 'total' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-500 hover:text-slate-800'
-                      }`}
-                  >
-                    Mayor Padrón
-                  </button>
-                  <button
-                    onClick={() => setSortDeptBy('prioridad')}
-                    className={`px-3 py-1.5 rounded-xl font-bold transition-all ${sortDeptBy === 'prioridad' ? 'bg-white text-amber-800 shadow-xs' : 'text-slate-500 hover:text-slate-800'
-                      }`}
-                  >
-                    Meta
-                  </button>
-                  <button
-                    onClick={() => setSortDeptBy('alta')}
-                    className={`px-3 py-1.5 rounded-xl font-bold transition-all ${sortDeptBy === 'alta' ? 'bg-white text-emerald-800 shadow-xs' : 'text-slate-500 hover:text-slate-800'
-                      }`}
-                  >
-                    % Idóneo (V)
-                  </button>
-                  <button
-                    onClick={() => setSortDeptBy('alfa')}
-                    className={`px-3 py-1.5 rounded-xl font-bold transition-all ${sortDeptBy === 'alfa' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-500 hover:text-slate-800'
-                      }`}
-                  >
-                    A-Z
-                  </button>
+                <div className="text-right">
+                  <span className="text-sm font-black text-slate-700 block">{pct(deptKPIs?.maxPadron?.total ?? 0, totalDoc)}</span>
+                  <span className="text-[10px] text-slate-400 font-bold block">del total país</span>
                 </div>
               </div>
 
-              {/* Micro-KPIs territoriales comparativos */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
-                <div className="bg-slate-50 rounded-2xl p-4 border border-slate-200/80">
-                  <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Mayor Padrón Docente</span>
-                  <span className="text-xl font-black text-slate-900 mt-1 block">
-                    {deptKPIs?.maxPadron?.departamento ?? '—'}
-                  </span>
-                  <span className="text-xs text-slate-500 font-semibold mt-0.5">
-                    {fmt(deptKPIs?.maxPadron?.total)} docentes ({pct(deptKPIs?.maxPadron?.total ?? 0, deptKPIs?.totalPais ?? 1)})
-                  </span>
+              <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-black">
+                    <CheckCircle2 className="w-5 h-5 text-emerald-600" />
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-black uppercase tracking-wider text-slate-400 block">
+                      Mayor Idoneidad Curricular (V)
+                    </span>
+                    <span className="text-xl font-black text-emerald-700 tracking-tight">
+                      {deptKPIs?.maxAlta?.departamento ?? 'Pando'} <span className="text-xs font-bold text-slate-500">({deptKPIs?.maxAlta?.pctAlta.toFixed(1)}%)</span>
+                    </span>
+                  </div>
                 </div>
-                <div className="bg-amber-50/60 rounded-2xl p-4 border border-amber-200/80">
-                  <span className="text-[11px] font-bold text-amber-800 uppercase tracking-wider block">Mayor Meta Formación</span>
-                  <span className="text-xl font-black text-amber-900 mt-1 block truncate">
-                    {deptKPIs?.topMeta1?.departamento ?? '—'} & {deptKPIs?.topMeta2?.departamento ?? '—'}
-                  </span>
-                  <span className="text-xs text-amber-700 font-semibold mt-0.5">
-                    {fmt(deptKPIs?.topMeta1?.prioridadBID)} y {fmt(deptKPIs?.topMeta2?.prioridadBID)} docentes
-                  </span>
+                <div className="text-right">
+                  <span className="text-sm font-black text-emerald-700 block">{fmt(deptKPIs?.maxAlta?.v)}</span>
+                  <span className="text-[10px] text-slate-400 font-bold block">docentes idóneos</span>
                 </div>
-                <div className="bg-emerald-50/60 rounded-2xl p-4 border border-emerald-200/80">
-                  <span className="text-[11px] font-bold text-emerald-800 uppercase tracking-wider block">Mayor Tasa Idónea (V)</span>
-                  <span className="text-xl font-black text-emerald-900 mt-1 block">
-                    {deptKPIs?.maxAlta?.departamento ?? '—'} ({deptKPIs?.maxAlta?.pctAlta.toFixed(1)}%)
-                  </span>
-                  <span className="text-xs text-emerald-700 font-semibold mt-0.5">
-                    {fmt(deptKPIs?.maxAlta?.v)} de {fmt(deptKPIs?.maxAlta?.total)} docentes
-                  </span>
+              </div>
+
+              <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center font-black">
+                    <Target className="w-5 h-5 text-amber-600" />
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-black uppercase tracking-wider text-slate-400 block">
+                      Foco Meta Formativa BID
+                    </span>
+                    <span className="text-xl font-black text-amber-700 tracking-tight">
+                      La Paz & Santa Cruz
+                    </span>
+                  </div>
                 </div>
-                <div className="bg-purple-50/60 rounded-2xl p-4 border border-purple-200/80">
-                  <span className="text-[11px] font-bold text-purple-800 uppercase tracking-wider block">Focalización UEs</span>
-                  <span className="text-xl font-black text-purple-900 mt-1 block">
-                    {fmt(deptKPIs?.totalUes)} UEs en 9 Deptos
+                <div className="text-right">
+                  <span className="text-sm font-black text-amber-800 block">
+                    {fmt((deptKPIs?.topMeta1?.prioridadBID ?? 0) + (deptKPIs?.topMeta2?.prioridadBID ?? 0))} doc.
                   </span>
-                  <span className="text-xs text-purple-700 font-semibold mt-0.5">100% Cobertura País</span>
+                  <span className="text-[10px] text-slate-400 font-bold block">54.2% meta país</span>
                 </div>
               </div>
             </div>
 
-            {/* Grid de los 9 Departamentos + Panel de Detalle al Clic */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            {/* Matriz Ejecutiva de los 9 Departamentos */}
+            <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm p-6 sm:p-7 space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-3">
+                <div>
+                  <h3 className="text-sm font-black text-slate-900 flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-blue-600" />
+                    Pertinencia en los 9 Departamentos
+                  </h3>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Resumen consolidado de idoneidad y demanda formativa por región.
+                  </p>
+                </div>
 
-              {/* 9 Tarjetas Departamentales Interactivas (7 columnas) */}
-              <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* Filtro rápido de ordenamiento */}
+                <div className="flex items-center gap-1.5 bg-slate-50 p-1 rounded-xl border border-slate-200 text-xs shrink-0">
+                  <span className="text-slate-400 font-bold px-2">Ordenar:</span>
+                  <button
+                    onClick={() => setSortDeptBy('total')}
+                    className={`px-2.5 py-1 rounded-lg font-bold transition-all ${sortDeptBy === 'total' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-500 hover:text-slate-800'}`}
+                  >
+                    Mayor Padrón
+                  </button>
+                  <button
+                    onClick={() => setSortDeptBy('alta')}
+                    className={`px-2.5 py-1 rounded-lg font-bold transition-all ${sortDeptBy === 'alta' ? 'bg-white text-emerald-800 shadow-xs' : 'text-slate-500 hover:text-slate-800'}`}
+                  >
+                    % Idóneo
+                  </button>
+                  <button
+                    onClick={() => setSortDeptBy('prioridad')}
+                    className={`px-2.5 py-1 rounded-lg font-bold transition-all ${sortDeptBy === 'prioridad' ? 'bg-white text-amber-800 shadow-xs' : 'text-slate-500 hover:text-slate-800'}`}
+                  >
+                    Meta BID
+                  </button>
+                </div>
+              </div>
+
+              {/* Grilla 3x3 de los 9 Departamentos */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
                 {processedDepartamentos.map((dept) => {
                   const isSelected = selectedDeptDetail === dept.departamento;
                   const pV = dept.total > 0 ? (dept.v / dept.total) * 100 : 0;
@@ -877,228 +1471,85 @@ export default function PertinenciaView() {
                   return (
                     <div
                       key={dept.departamento}
-                      onClick={() => setSelectedDeptDetail(dept.departamento)}
-                      className={`rounded-2xl p-4.5 border transition-all duration-200 cursor-pointer flex flex-col justify-between ${isSelected
-                        ? 'bg-white border-blue-600 shadow-md ring-2 ring-blue-600/20 -translate-y-0.5'
-                        : 'bg-white border-slate-200/90 hover:border-slate-300 hover:shadow-xs'
-                        }`}
+                      onClick={() => setSelectedDeptDetail(isSelected ? null : dept.departamento)}
+                      className={`p-4 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
+                        isSelected
+                          ? 'bg-slate-50 border-blue-500 ring-2 ring-blue-500/20 shadow-sm'
+                          : 'bg-white border-slate-200/80 hover:border-slate-300 hover:shadow-xs'
+                      }`}
                     >
                       <div>
-                        {/* Cabecera de la tarjeta departamental */}
-                        <div className="flex items-start justify-between gap-2">
-                          <div>
-                            <div className="flex items-center gap-1.5">
-                              <span className="w-2 h-2 rounded-full bg-blue-600" />
-                              <h4 className="font-black text-slate-900 text-sm tracking-tight">
-                                {dept.departamento}
-                              </h4>
+                        {/* Cabecera */}
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <span className="w-2.5 h-2.5 rounded-full bg-blue-600" />
+                            <h4 className="font-black text-slate-900 text-sm tracking-tight">{dept.departamento}</h4>
+                          </div>
+                          <span className="text-[11px] font-bold text-slate-400">
+                            {fmt(dept.ues)} UEs
+                          </span>
+                        </div>
+
+                        {/* Métricas clave resumidas */}
+                        <div className="grid grid-cols-2 gap-2 mt-3 text-xs">
+                          <div className="bg-emerald-50/70 p-2 rounded-xl border border-emerald-100">
+                            <span className="text-[10px] font-bold text-emerald-800 uppercase block">Idóneo (V)</span>
+                            <span className="text-base font-black text-emerald-700 block">{dept.pctAlta.toFixed(1)}%</span>
+                            <span className="text-[10px] text-slate-500 font-semibold">{fmt(dept.v)} doc.</span>
+                          </div>
+                          <div className="bg-amber-50/70 p-2 rounded-xl border border-amber-100">
+                            <span className="text-[10px] font-bold text-amber-800 uppercase block">Meta BID (A+N)</span>
+                            <span className="text-base font-black text-amber-800 block">{fmt(dept.prioridadBID)}</span>
+                            <span className="text-[10px] text-slate-500 font-semibold">{dept.pctPrioridadBID.toFixed(1)}% del depto</span>
+                          </div>
+                        </div>
+
+                        {/* Barra apilada institucional limpia */}
+                        <div className="mt-3">
+                          <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden flex">
+                            <div style={{ width: `${pV}%` }} className="bg-emerald-600 h-full" title={`Alta: ${pV.toFixed(1)}%`} />
+                            <div style={{ width: `${pA}%` }} className="bg-blue-600 h-full" title={`Media: ${pA.toFixed(1)}%`} />
+                            <div style={{ width: `${pN}%` }} className="bg-amber-600 h-full" title={`Baja: ${pN.toFixed(1)}%`} />
+                            <div style={{ width: `${pSIN}%` }} className="bg-slate-400 h-full" title={`Sin: ${pSIN.toFixed(1)}%`} />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Pie de tarjeta */}
+                      <div className="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-[11px]">
+                        <span className="text-slate-400 font-medium">Padrón: <strong className="text-slate-700">{fmt(dept.total)}</strong></span>
+                        <span className="text-blue-600 font-bold hover:underline">
+                          {isSelected ? 'Cerrar detalle ▲' : 'Ver detalle ▼'}
+                        </span>
+                      </div>
+
+                      {/* Desglose desplegable opcional al hacer clic */}
+                      {isSelected && (
+                        <div className="mt-3 pt-3 border-t border-slate-200/80 space-y-2 text-[11px] animate-in fade-in duration-200">
+                          <div className="grid grid-cols-4 gap-1 text-center font-bold">
+                            <div className="bg-emerald-50 text-emerald-800 p-1 rounded">
+                              <span className="block text-[9px] text-emerald-600 uppercase">V (Alta)</span>
+                              {fmt(dept.v)}
                             </div>
-                            <span className="text-[11px] text-slate-500 font-semibold block mt-0.5">
-                              {fmt(dept.total)} docentes en {fmt(dept.ues)} UEs
-                            </span>
-                          </div>
-
-                          {isSelected ? (
-                            <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-blue-600 text-white shrink-0">
-                              Activo
-                            </span>
-                          ) : (
-                            <span className="text-[10px] font-bold text-slate-400 group-hover:text-blue-600 shrink-0">
-                              Ver detalle
-                            </span>
-                          )}
-                        </div>
-
-                        {/* Métricas clave de impacto */}
-                        <div className="grid grid-cols-2 gap-2 mt-4 pt-3 border-t border-slate-100 text-xs">
-                          <div className="bg-slate-50 p-2 rounded-xl">
-                            <span className="text-[10px] font-bold text-slate-400 uppercase block">Alta (V)</span>
-                            <span className="font-black text-emerald-700 text-sm">{fmt(dept.v)}</span>
-                            <span className="text-[10px] text-slate-500 font-semibold block">({dept.pctAlta.toFixed(1)}%)</span>
-                          </div>
-                          <div className="bg-amber-50/70 p-2 rounded-xl border border-amber-200/60">
-                            <span className="text-[10px] font-bold text-amber-800 uppercase block">Meta de Formación</span>
-                            <span className="font-black text-amber-800 text-sm">{fmt(dept.prioridadBID)}</span>
-                            <span className="text-[10px] text-amber-700 font-semibold block">({dept.pctPrioridadBID.toFixed(1)}%)</span>
+                            <div className="bg-blue-50 text-blue-800 p-1 rounded">
+                              <span className="block text-[9px] text-blue-600 uppercase">A (Med)</span>
+                              {fmt(dept.a)}
+                            </div>
+                            <div className="bg-amber-50 text-amber-800 p-1 rounded">
+                              <span className="block text-[9px] text-amber-600 uppercase">N (Baja)</span>
+                              {fmt(dept.n)}
+                            </div>
+                            <div className="bg-slate-100 text-slate-700 p-1 rounded">
+                              <span className="block text-[9px] text-slate-500 uppercase">SIN</span>
+                              {fmt(dept.sin)}
+                            </div>
                           </div>
                         </div>
-
-                        {/* Barra apilada institucional */}
-                        <div className="mt-3.5">
-                          <div className="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden flex">
-                            <div style={{ width: `${pV}%` }} className="bg-emerald-600 h-full" title={`Alta: ${pV.toFixed(0)}%`} />
-                            <div style={{ width: `${pA}%` }} className="bg-blue-600 h-full" title={`Media: ${pA.toFixed(0)}%`} />
-                            <div style={{ width: `${pN}%` }} className="bg-amber-600 h-full" title={`Baja: ${pN.toFixed(0)}%`} />
-                            <div style={{ width: `${pSIN}%` }} className="bg-slate-400 h-full" title={`Sin Pert: ${pSIN.toFixed(0)}%`} />
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="mt-3.5 pt-2.5 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400 font-semibold">
-                        <span>Impacto estimado:</span>
-                        <strong className="text-slate-700">~{fmt(dept.estudiantesEst)} alumnos</strong>
-                      </div>
+                      )}
                     </div>
                   );
                 })}
               </div>
-
-              {/* Panel de Detalle Profundo del Departamento Activo (5 columnas fijas) */}
-              <div className="lg:col-span-5 bg-white rounded-3xl border border-slate-200 p-6 shadow-sm sticky top-6">
-                {activeDeptInfo && (
-                  <div className="space-y-6">
-
-                    {/* Header del departamento activo */}
-                    <div className="border-b border-slate-100 pb-4">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[11px] font-black text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full uppercase tracking-wider">
-                          Inspección Territorial Profunda
-                        </span>
-                        <span className="text-xs font-bold text-slate-400">
-                          {activeDeptInfo.departamento}
-                        </span>
-                      </div>
-                      <h3 className="text-2xl font-black text-slate-900 mt-2 tracking-tight">
-                        {activeDeptInfo.departamento}
-                      </h3>
-                      <p className="text-xs text-slate-500 mt-0.5">
-                        Padrón evaluado: <strong>{fmt(activeDeptInfo.total)} docentes</strong> en <strong>{fmt(activeDeptInfo.ues)} Unidades Educativas</strong>.
-                      </p>
-                    </div>
-
-                    {/* Tarjetas de Rangos del Departamento */}
-                    <div>
-                      <h4 className="text-xs font-black text-slate-700 uppercase tracking-wider mb-3">
-                        Composición por Rango en este Departamento
-                      </h4>
-
-                      <div className="space-y-2.5 text-xs">
-
-                        {/* V */}
-                        <div className="p-2.5 rounded-xl border border-emerald-200 bg-emerald-50/50 flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <span className="w-2.5 h-2.5 rounded-full bg-emerald-600" />
-                            <div>
-                              <strong className="text-slate-800 block">Alta Pertinencia (V)</strong>
-                              <span className="text-[11px] text-slate-500">Docentes idóneos en aula</span>
-                            </div>
-                          </div>
-                          <div className="text-right">
-                            <span className="font-black text-emerald-800 text-sm">{fmt(activeDeptInfo.v)}</span>
-                            <span className="text-[11px] text-emerald-700 font-bold block">
-                              {pct(activeDeptInfo.v, activeDeptInfo.total)}
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* A */}
-                        <div className="p-2.5 rounded-xl border border-blue-200 bg-blue-50/50 flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <span className="w-2.5 h-2.5 rounded-full bg-blue-600" />
-                            <div>
-                              <strong className="text-slate-800 block">Media Pertinencia (A)</strong>
-                              <span className="text-[11px] text-slate-500">Requiere nivelación curricular</span>
-                            </div>
-                          </div>
-                          <div className="text-right">
-                            <span className="font-black text-blue-800 text-sm">{fmt(activeDeptInfo.a)}</span>
-                            <span className="text-[11px] text-blue-700 font-bold block">
-                              {pct(activeDeptInfo.a, activeDeptInfo.total)}
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* N */}
-                        <div className="p-2.5 rounded-xl border border-amber-200 bg-amber-50/50 flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <span className="w-2.5 h-2.5 rounded-full bg-amber-600" />
-                            <div>
-                              <strong className="text-slate-800 block">Baja Pertinencia (N)</strong>
-                              <span className="text-[11px] text-slate-500">Sin correspondencia con el cargo</span>
-                            </div>
-                          </div>
-                          <div className="text-right">
-                            <span className="font-black text-amber-800 text-sm">{fmt(activeDeptInfo.n)}</span>
-                            <span className="text-[11px] text-amber-700 font-bold block">
-                              {pct(activeDeptInfo.n, activeDeptInfo.total)}
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* SIN */}
-                        <div className="p-2.5 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <span className="w-2.5 h-2.5 rounded-full bg-slate-400" />
-                            <div>
-                              <strong className="text-slate-700 block">Técnico / Univ. / Otros (SIN)</strong>
-                              <span className="text-[11px] text-slate-500">Sin pertinencia normalista</span>
-                            </div>
-                          </div>
-                          <div className="text-right">
-                            <span className="font-black text-slate-700 text-sm">{fmt(activeDeptInfo.sin)}</span>
-                            <span className="text-[11px] text-slate-500 font-bold block">
-                              {pct(activeDeptInfo.sin, activeDeptInfo.total)}
-                            </span>
-                          </div>
-                        </div>
-
-                      </div>
-                    </div>
-
-                    {/* Resumen de impacto BID para este departamento */}
-                    <div className="bg-slate-900 border border-[#c9a751]/25 text-white rounded-2xl p-4.5">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Target className="w-4 h-4 text-[#c9a751]" />
-                        <span className="text-xs font-black uppercase tracking-wider text-[#c9a751]">
-                          Meta Focalizada BID en {activeDeptInfo.departamento}
-                        </span>
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-3 mt-3 pt-3 border-t border-slate-700/80">
-                        <div>
-                          <span className="text-2xl font-black text-white">{fmt(activeDeptInfo.prioridadBID)}</span>
-                          <span className="text-[11px] text-slate-400 block font-medium">Docentes a Capacitar</span>
-                        </div>
-                        <div>
-                          <span className="text-2xl font-black text-[#c9a751]">~{fmt(activeDeptInfo.estudiantesEst)}</span>
-                          <span className="text-[11px] text-slate-400 block font-medium">Alumnos Beneficiados</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Top Especialidades críticas en este departamento */}
-                    <div>
-                      <h4 className="text-xs font-black text-slate-700 uppercase tracking-wider mb-2.5 flex items-center justify-between">
-                        <span>Especialidades con Mayor Demanda Formativa</span>
-                        <span className="text-[10px] font-bold text-slate-400">Prioridad</span>
-                      </h4>
-
-                      <div className="space-y-1.5 text-xs">
-                        {topEspecialidadesInDept.map((item, idx) => (
-                          <div
-                            key={item.especialidad}
-                            className="p-2 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between"
-                          >
-                            <div className="flex items-center gap-2 max-w-[210px]">
-                              <span className="w-4 h-4 rounded-full bg-slate-200 text-slate-700 font-black text-[10px] flex items-center justify-center shrink-0">
-                                {idx + 1}
-                              </span>
-                              <span className="font-bold text-slate-800 truncate" title={item.especialidad}>
-                                {item.especialidad}
-                              </span>
-                            </div>
-                            <span className="font-black text-amber-800 bg-amber-100/80 px-2 py-0.5 rounded-md shrink-0">
-                              {fmt(item.reqFormacion)} doc.
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                  </div>
-                )}
-              </div>
-
             </div>
 
           </div>
@@ -1119,18 +1570,18 @@ export default function PertinenciaView() {
                     <BookOpen className="w-5 h-5" />
                   </div>
                   <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-                    Matriz de Pertinencia por Especialidad Curricular
+                    Matriz de Pertinencia por Especialidad Oficial ESFM
                   </h3>
                 </div>
                 <p className="text-xs sm:text-sm text-slate-500 mt-1 ml-10">
-                  Analiza el estado de pertinencia en cada una de las 20 especialidades oficiales del SEP y cruza los datos por departamento.
+                  Analiza el estado de pertinencia en cada una de las 22 especialidades oficiales de las ESFM/SEP y cruza los datos por departamento.
                 </p>
               </div>
 
               {/* Controles de filtro */}
               <div className="flex flex-col sm:flex-row items-center gap-3">
                 {/* Buscador de Especialidad */}
-                <div className="relative w-full sm:w-72">
+                <div className="relative w-full sm:w-64">
                   <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3 pointer-events-none" />
                   <input
                     type="text"
@@ -1141,8 +1592,24 @@ export default function PertinenciaView() {
                   />
                 </div>
 
+                {/* Filtro por Nivel Educativo */}
+                <div className="relative w-full sm:w-52">
+                  <select
+                    value={filterNivel}
+                    onChange={(e) => setFilterNivel(e.target.value)}
+                    className="w-full px-3 py-2 text-xs font-bold text-slate-700 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all cursor-pointer"
+                  >
+                    <option value="TODOS">Todos los Niveles (22)</option>
+                    <option value="INICIAL">Nivel Inicial</option>
+                    <option value="PRIMARIA">Nivel Primaria</option>
+                    <option value="SECUNDARIA">Nivel Secundaria</option>
+                    <option value="TECNICA">Técnica Tecnológica (BTH)</option>
+                    <option value="ESPECIAL">Educación Especial</option>
+                  </select>
+                </div>
+
                 {/* Filtro por Departamento */}
-                <div className="relative w-full sm:w-56">
+                <div className="relative w-full sm:w-52">
                   <Filter className="w-4 h-4 text-slate-400 absolute left-3 top-3 pointer-events-none" />
                   <select
                     value={filterDepto}
@@ -1160,7 +1627,7 @@ export default function PertinenciaView() {
 
             {/* Contador de resultados */}
             <div className="flex items-center justify-between mt-4 text-xs text-slate-500 font-medium">
-              <span>Mostrando <strong>{filteredEspecialidades.length}</strong> de 20 especialidades curriculares</span>
+              <span>Mostrando <strong>{filteredEspecialidades.length}</strong> de {data?.por_especialidad?.length || 22} especialidades oficiales ESFM agrupadas por nivel</span>
               {filterDepto !== 'TODOS' && (
                 <span className="bg-blue-50 text-blue-700 px-2.5 py-1 rounded-lg font-bold">
                   Filtrado por: {filterDepto}
@@ -1169,142 +1636,216 @@ export default function PertinenciaView() {
             </div>
           </div>
 
-          {/* Tabla Matriz de Especialidades */}
-          <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+          {/* Tabla Matriz Institucional de Especialidades */}
+          <div className="bg-white rounded-3xl border border-slate-300 shadow-xs overflow-hidden">
             <div className="overflow-x-auto">
-              <table className="w-full text-xs text-left">
-                <thead className="bg-slate-50/80 text-slate-600 font-bold uppercase text-[11px] border-b border-slate-200">
+              <table className="w-full text-xs text-left border-collapse">
+                <thead className="bg-slate-800 text-white font-extrabold uppercase text-[10px] tracking-wider">
                   <tr>
-                    <th className="py-3.5 px-4">Especialidad Curricular</th>
-                    <th className="py-3.5 px-3 text-right text-emerald-700">Alta (V)</th>
-                    <th className="py-3.5 px-3 text-right text-blue-700">Media (A)</th>
-                    <th className="py-3.5 px-3 text-right text-amber-700">Baja (N)</th>
-                    <th className="py-3.5 px-3 text-right text-slate-500">Sin Pert.</th>
-                    <th className="py-3.5 px-3 text-right font-black text-slate-900">Total Docentes</th>
-                    <th className="py-3.5 px-3 text-right text-slate-600">UEs</th>
-                    <th className="py-3.5 px-4 text-center">Distribución</th>
-                    <th className="py-3.5 px-3 text-center">Desglose Depto</th>
+                    <th className="py-3 px-4 border-r border-slate-700">Especialidad Oficial ESFM</th>
+                    <th className="py-3 px-2 text-center w-16 border-r border-slate-700">Ítem</th>
+                    <th className="py-3 px-3 text-right w-24 text-emerald-400 border-r border-slate-700">Alta (V)</th>
+                    <th className="py-3 px-3 text-right w-24 text-blue-400 border-r border-slate-700">Media (A)</th>
+                    <th className="py-3 px-3 text-right w-24 text-amber-400 border-r border-slate-700">Baja (N)</th>
+                    <th className="py-3 px-3 text-right w-20 text-slate-400 border-r border-slate-700">Sin Pert.</th>
+                    <th className="py-3 px-3 text-right w-28 bg-slate-900 text-amber-300 font-black border-r border-slate-700">Total Doc.</th>
+                    <th className="py-3 px-3 text-right w-20 text-slate-300 border-r border-slate-700">UEs</th>
+                    <th className="py-3 px-4 text-center w-32 border-r border-slate-700">Distribución %</th>
+                    <th className="py-3 px-3 text-center w-24">Desglose Depto</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
-                  {filteredEspecialidades.map((esp) => {
-                    let vCount = esp.rangos.V.docentes;
-                    let aCount = esp.rangos.A.docentes;
-                    let nCount = esp.rangos.N.docentes;
-                    let sinCount = esp.rangos.SIN.docentes;
-                    let totalCount = esp.docentes;
-                    let uesCount = esp.ues;
-
-                    if (filterDepto !== 'TODOS') {
-                      const depInfo = esp.por_departamento[filterDepto];
-                      if (depInfo) {
-                        vCount = depInfo.V;
-                        aCount = depInfo.A;
-                        nCount = depInfo.N;
-                        sinCount = depInfo.SIN;
-                        totalCount = depInfo.total;
-                      } else {
-                        vCount = aCount = nCount = sinCount = totalCount = 0;
-                      }
-                    }
-
-                    const isExpanded = expandedEsp === esp.especialidad;
-                    const pV = totalCount > 0 ? (vCount / totalCount) * 100 : 0;
-                    const pA = totalCount > 0 ? (aCount / totalCount) * 100 : 0;
-                    const pN = totalCount > 0 ? (nCount / totalCount) * 100 : 0;
-                    const pSIN = totalCount > 0 ? (sinCount / totalCount) * 100 : 0;
+                <tbody>
+                  {especialidadesPorNivel.map((grupo) => {
+                    const estilo = NIVEL_ESTILOS[grupo.nivelCodigo] || {
+                      franja: 'bg-slate-100 text-slate-900 border-slate-300',
+                      borderLeft: 'border-l-4 border-l-slate-400 bg-slate-50/20',
+                      badge: 'bg-slate-100 text-slate-800 border-slate-300',
+                      textNivel: grupo.nivelNombre
+                    };
+                    const totalGrupoDocentes = grupo.items.reduce((acc, it) => acc + it.docentes, 0);
 
                     return (
-                      <React.Fragment key={esp.especialidad}>
-                        <tr className={`transition-colors ${isExpanded ? 'bg-blue-50/40' : 'hover:bg-slate-50/80'}`}>
-                          <td className="py-3.5 px-4 font-bold text-slate-900 max-w-xs">
-                            <span className="block truncate">{esp.especialidad}</span>
-                            <span className="text-[10px] font-semibold text-slate-400 block mt-0.5">
-                              {fmt(esp.horas)} horas curriculares
-                            </span>
-                          </td>
-                          <td className="py-3.5 px-3 text-right font-bold text-emerald-700">{fmt(vCount)}</td>
-                          <td className="py-3.5 px-3 text-right font-bold text-blue-700">{fmt(aCount)}</td>
-                          <td className="py-3.5 px-3 text-right font-bold text-amber-700">{fmt(nCount)}</td>
-                          <td className="py-3.5 px-3 text-right font-medium text-slate-500">{fmt(sinCount)}</td>
-                          <td className="py-3.5 px-3 text-right font-black text-slate-900 text-sm">{fmt(totalCount)}</td>
-                          <td className="py-3.5 px-3 text-right font-semibold text-slate-600">{fmt(uesCount)}</td>
-
-                          {/* Mini barra apilada */}
-                          <td className="py-3.5 px-4">
-                            <div className="w-28 bg-slate-100 rounded-full h-2.5 overflow-hidden flex mx-auto">
-                              <div style={{ width: `${pV}%` }} className="bg-emerald-600 h-full" title={`Alta: ${pV.toFixed(0)}%`} />
-                              <div style={{ width: `${pA}%` }} className="bg-blue-600 h-full" title={`Media: ${pA.toFixed(0)}%`} />
-                              <div style={{ width: `${pN}%` }} className="bg-amber-600 h-full" title={`Baja: ${pN.toFixed(0)}%`} />
-                              <div style={{ width: `${pSIN}%` }} className="bg-slate-400 h-full" title={`Sin Pert: ${pSIN.toFixed(0)}%`} />
+                      <React.Fragment key={grupo.nivelCodigo}>
+                        {/* Fila Encabezado de Nivel en Bloque Coloreado */}
+                        <tr className={`${estilo.franja} border-t-2 border-b-2 font-black uppercase tracking-wider text-[11px]`}>
+                          <td colSpan={10} className="py-2.5 px-4 border-r border-slate-300">
+                            <div className="flex items-center justify-between">
+                              <span className="flex items-center gap-2">
+                                <span className="w-2.5 h-2.5 rounded-full bg-current opacity-80" />
+                                <span>{grupo.nivelNombre}</span>
+                              </span>
+                              <span className="text-[10px] font-bold opacity-80 lowercase tracking-normal">
+                                ({grupo.items.length} {grupo.items.length === 1 ? 'especialidad' : 'especialidades'} · {fmt(totalGrupoDocentes)} docentes)
+                              </span>
                             </div>
-                          </td>
-
-                          {/* Botón para expandir por departamento */}
-                          <td className="py-3.5 px-3 text-center">
-                            <button
-                              onClick={() => setExpandedEsp(isExpanded ? null : esp.especialidad)}
-                              className="px-2.5 py-1 text-[11px] font-bold text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors inline-flex items-center gap-1"
-                            >
-                              <span>9 Deptos</span>
-                              {isExpanded ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronRight className="w-3.5 h-3.5" />}
-                            </button>
                           </td>
                         </tr>
 
-                        {/* Fila expandida con desglose por los 9 departamentos */}
-                        {isExpanded && (
-                          <tr className="bg-slate-50/90 border-y border-slate-200">
-                            <td colSpan={9} className="p-4 sm:p-6">
-                              <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-xs">
-                                <div className="flex items-center justify-between mb-3 border-b border-slate-100 pb-2">
-                                  <span className="font-black text-xs text-slate-800 uppercase tracking-wide flex items-center gap-2">
-                                    <MapPin className="w-3.5 h-3.5 text-blue-600" />
-                                    Distribución Departamental de: {esp.especialidad}
-                                  </span>
-                                  <span className="text-[11px] font-bold text-slate-500">
-                                    Total: {fmt(esp.docentes)} docentes en {fmt(esp.ues)} UEs
-                                  </span>
-                                </div>
+                        {/* Filas de Especialidades dentro del nivel */}
+                        {grupo.items.map((esp) => {
+                          let vCount   = esp.V?.docentes ?? esp.rangos?.V?.docentes ?? 0;
+                          let aCount   = esp.A?.docentes ?? esp.rangos?.A?.docentes ?? 0;
+                          let nCount   = esp.N?.docentes ?? esp.rangos?.N?.docentes ?? 0;
+                          let sinCount = esp.SIN?.docentes ?? esp.rangos?.SIN?.docentes ?? 0;
+                          let totalCount = esp.docentes;
+                          let uesCount = esp.ues;
 
-                                <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-9 gap-2 text-xs">
-                                  {departamentosList.map((depName) => {
-                                    const stats = esp.por_departamento[depName] || { V: 0, A: 0, N: 0, SIN: 0, total: 0 };
-                                    return (
-                                      <div key={depName} className="bg-slate-50 p-2.5 rounded-xl border border-slate-200/80 flex flex-col justify-between">
-                                        <span className="font-bold text-slate-800 text-[11px] truncate block">{depName}</span>
-                                        <span className="text-base font-black text-slate-900 block mt-1">{fmt(stats.total)}</span>
+                          if (filterDepto !== 'TODOS') {
+                            const depInfo = esp.por_departamento[filterDepto];
+                            if (depInfo) {
+                              vCount = depInfo.V;
+                              aCount = depInfo.A;
+                              nCount = depInfo.N;
+                              sinCount = depInfo.SIN;
+                              totalCount = depInfo.total;
+                            } else {
+                              vCount = aCount = nCount = sinCount = totalCount = 0;
+                            }
+                          }
 
-                                        <div className="space-y-0.5 mt-2 pt-2 border-t border-slate-200 text-[10px]">
-                                          <div className="flex justify-between text-emerald-700 font-bold">
-                                            <span>Alta:</span>
-                                            <span>{fmt(stats.V)}</span>
-                                          </div>
-                                          <div className="flex justify-between text-blue-700 font-bold">
-                                            <span>Media:</span>
-                                            <span>{fmt(stats.A)}</span>
-                                          </div>
-                                          <div className="flex justify-between text-amber-700 font-bold">
-                                            <span>Baja:</span>
-                                            <span>{fmt(stats.N)}</span>
-                                          </div>
-                                          <div className="flex justify-between text-slate-500">
-                                            <span>Sin:</span>
-                                            <span>{fmt(stats.SIN)}</span>
-                                          </div>
-                                        </div>
+                          const isExpanded = expandedEsp === esp.especialidad;
+                          const pV = totalCount > 0 ? (vCount / totalCount) * 100 : 0;
+                          const pA = totalCount > 0 ? (aCount / totalCount) * 100 : 0;
+                          const pN = totalCount > 0 ? (nCount / totalCount) * 100 : 0;
+                          const pSIN = totalCount > 0 ? (sinCount / totalCount) * 100 : 0;
+
+                          return (
+                            <React.Fragment key={esp.especialidad}>
+                              <tr className={`border-b border-slate-200 transition-colors ${isExpanded ? 'bg-blue-50/50' : 'hover:bg-slate-50/80'}`}>
+                                <td className={`py-2.5 px-4 border-r border-slate-200 text-slate-900 ${estilo.borderLeft}`}>
+                                  <div className="flex items-center gap-2">
+                                    <span className={`px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider border shrink-0 ${estilo.badge}`}>
+                                      {estilo.textNivel}
+                                    </span>
+                                    {esp.id && (
+                                      <span className="text-[10px] font-black px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200 shrink-0 font-mono">
+                                        ID {esp.id}
+                                      </span>
+                                    )}
+                                    <span className="font-bold text-slate-900 text-xs truncate max-w-sm" title={esp.especialidad}>
+                                      {esp.especialidad}
+                                    </span>
+                                  </div>
+                                </td>
+                                <td className="py-2.5 px-1.5 text-center border-r border-slate-200">
+                                  <span className="inline-block px-2 py-0.5 rounded bg-slate-100 font-mono text-[11px] font-bold text-slate-700 border border-slate-200">
+                                    {esp.hora_item ? `${esp.hora_item}h` : `${esp.horas || 96}h`}
+                                  </span>
+                                </td>
+                                <td className="py-2.5 px-3 text-right font-bold text-emerald-700 border-r border-slate-200 tabular-nums">
+                                  <span className="block">{fmt(vCount)}</span>
+                                  <span className="text-[9px] font-normal text-emerald-600">{pV.toFixed(1)}%</span>
+                                </td>
+                                <td className="py-2.5 px-3 text-right font-bold text-blue-700 border-r border-slate-200 tabular-nums">
+                                  <span className="block">{fmt(aCount)}</span>
+                                  <span className="text-[9px] font-normal text-blue-600">{pA.toFixed(1)}%</span>
+                                </td>
+                                <td className="py-2.5 px-3 text-right font-bold text-amber-700 border-r border-slate-200 tabular-nums">
+                                  <span className="block">{fmt(nCount)}</span>
+                                  <span className="text-[9px] font-normal text-amber-600">{pN.toFixed(1)}%</span>
+                                </td>
+                                <td className="py-2.5 px-3 text-right font-medium text-slate-500 border-r border-slate-200 tabular-nums">
+                                  <span className="block">{fmt(sinCount)}</span>
+                                  <span className="text-[9px] font-normal text-slate-400">{pSIN.toFixed(1)}%</span>
+                                </td>
+                                <td className="py-2.5 px-3 text-right font-black text-slate-900 bg-slate-50/70 border-r border-slate-200 text-xs tabular-nums">
+                                  {fmt(totalCount)}
+                                </td>
+                                <td className="py-2.5 px-3 text-right font-semibold text-slate-600 border-r border-slate-200 tabular-nums">
+                                  {fmt(uesCount)}
+                                </td>
+
+                                {/* Mini barra apilada */}
+                                <td className="py-2.5 px-4 border-r border-slate-200">
+                                  <div className="w-28 bg-slate-100 rounded-full h-2.5 overflow-hidden flex mx-auto">
+                                    <div style={{ width: `${pV}%` }} className="bg-emerald-600 h-full" title={`Alta: ${pV.toFixed(1)}%`} />
+                                    <div style={{ width: `${pA}%` }} className="bg-blue-600 h-full" title={`Media: ${pA.toFixed(1)}%`} />
+                                    <div style={{ width: `${pN}%` }} className="bg-amber-600 h-full" title={`Baja: ${pN.toFixed(1)}%`} />
+                                    <div style={{ width: `${pSIN}%` }} className="bg-slate-400 h-full" title={`Sin Pert: ${pSIN.toFixed(1)}%`} />
+                                  </div>
+                                </td>
+
+                                {/* Botón para expandir por departamento */}
+                                <td className="py-2.5 px-3 text-center">
+                                  <button
+                                    onClick={() => setExpandedEsp(isExpanded ? null : esp.especialidad)}
+                                    className="px-2.5 py-1 text-[11px] font-bold text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors inline-flex items-center gap-1 cursor-pointer"
+                                  >
+                                    <span>9 Deptos</span>
+                                    {isExpanded ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronRight className="w-3.5 h-3.5" />}
+                                  </button>
+                                </td>
+                              </tr>
+
+                              {/* Fila expandida con desglose por los 9 departamentos */}
+                              {isExpanded && (
+                                <tr className="bg-slate-50/90 border-y border-slate-200">
+                                  <td colSpan={10} className="p-4 sm:p-6">
+                                    <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-xs">
+                                      <div className="flex items-center justify-between mb-3 border-b border-slate-100 pb-2">
+                                        <span className="font-black text-xs text-slate-800 uppercase tracking-wide flex items-center gap-2">
+                                          <MapPin className="w-3.5 h-3.5 text-blue-600" />
+                                          Distribución Departamental: {esp.especialidad} (ID {esp.id})
+                                        </span>
+                                        <span className="text-[11px] font-bold text-slate-500">
+                                          Total: {fmt(esp.docentes)} docentes en {fmt(esp.ues)} UEs
+                                        </span>
                                       </div>
-                                    );
-                                  })}
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                        )}
+
+                                      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-9 gap-2 text-xs">
+                                        {departamentosList.map((depName) => {
+                                          const stats = esp.por_departamento[depName] || { V: 0, A: 0, N: 0, SIN: 0, total: 0 };
+                                          return (
+                                            <div key={depName} className="bg-slate-50 p-2.5 rounded-xl border border-slate-200/80 flex flex-col justify-between">
+                                              <span className="font-bold text-slate-800 text-[11px] truncate block">{depName}</span>
+                                              <span className="text-base font-black text-slate-900 block mt-1">{fmt(stats.total)}</span>
+
+                                              <div className="space-y-0.5 mt-2 pt-2 border-t border-slate-200 text-[10px]">
+                                                <div className="flex justify-between text-emerald-700 font-bold">
+                                                  <span>Alta:</span>
+                                                  <span>{fmt(stats.V)}</span>
+                                                </div>
+                                                <div className="flex justify-between text-blue-700 font-bold">
+                                                  <span>Media:</span>
+                                                  <span>{fmt(stats.A)}</span>
+                                                </div>
+                                                <div className="flex justify-between text-amber-700 font-bold">
+                                                  <span>Baja:</span>
+                                                  <span>{fmt(stats.N)}</span>
+                                                </div>
+                                                <div className="flex justify-between text-slate-500">
+                                                  <span>Sin:</span>
+                                                  <span>{fmt(stats.SIN)}</span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          );
+                                        })}
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                              )}
+                            </React.Fragment>
+                          );
+                        })}
                       </React.Fragment>
                     );
                   })}
                 </tbody>
+                <tfoot className="bg-slate-900 text-white font-bold text-xs border-t-2 border-slate-700">
+                  <tr>
+                    <td className="py-3 px-4 border-r border-slate-800">TOTAL CONSOLIDADO NACIONAL</td>
+                    <td className="py-3 px-2 text-center border-r border-slate-800 font-mono text-[11px] text-slate-400">—</td>
+                    <td className="py-3 px-3 text-right text-emerald-400 border-r border-slate-800">{fmt(data?.resumen?.V?.docentes || 127560)}</td>
+                    <td className="py-3 px-3 text-right text-blue-400 border-r border-slate-800">{fmt(data?.resumen?.A?.docentes || 23585)}</td>
+                    <td className="py-3 px-3 text-right text-amber-400 border-r border-slate-800">{fmt(data?.resumen?.N?.docentes || 13931)}</td>
+                    <td className="py-3 px-3 text-right text-slate-400 border-r border-slate-800">{fmt(data?.resumen?.SIN?.docentes || 3682)}</td>
+                    <td className="py-3 px-3 text-right font-black text-amber-300 bg-slate-950 border-r border-slate-800">{fmt(data?.resumen?.TOTAL?.docentes || 168758)}</td>
+                    <td className="py-3 px-3 text-right text-slate-300 border-r border-slate-800">{fmt(data?.resumen?.TOTAL?.ues || 16308)}</td>
+                    <td colSpan={2} className="py-3 px-4 text-center text-[10px] text-slate-400 font-normal">22 Especialidades Oficiales ESFM</td>
+                  </tr>
+                </tfoot>
               </table>
             </div>
           </div>

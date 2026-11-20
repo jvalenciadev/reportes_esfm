@@ -3,6 +3,9 @@ import path from 'path';
 import fs from 'fs';
 import { ESPECIALIDAD_SUBMATERIAS_MAP, GENERIC_TECNICA_MATERIAS } from '@/lib/constants/submaterias';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://dwretdtwyqsltylvnvld.supabase.co';
 const SUPABASE_KEY =
   process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
@@ -28,7 +31,30 @@ const DEPARTAMENTOS_LIST = [
 ];
 
 const CONFIG_PATH = path.join(process.cwd(), 'src/data/filtros_materia_config.json');
+const ESPECIALIDADES_PATH = path.join(process.cwd(), 'src/data/especialidades_oficiales.json');
 const AGRUPADO_PATH = path.join(process.cwd(), 'src/data/sie_materia_agrupado.json');
+
+function getLocalEspecialidades(): any[] {
+  if (fs.existsSync(ESPECIALIDADES_PATH)) {
+    try {
+      return JSON.parse(fs.readFileSync(ESPECIALIDADES_PATH, 'utf-8'));
+    } catch (e) {
+      console.warn('Error reading especialidades_oficiales.json:', e);
+    }
+  }
+  return [];
+}
+
+function getLocalFiltros(): any[] {
+  if (fs.existsSync(CONFIG_PATH)) {
+    try {
+      return JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf-8'));
+    } catch (e) {
+      console.warn('Error reading filtros_materia_config.json:', e);
+    }
+  }
+  return [];
+}
 
 let cachedAgrupado: any[] | null = null;
 
@@ -79,28 +105,18 @@ export async function GET(req: NextRequest) {
   try {
     // 1. Si no especifica especialidad_id, listar especialidades y número de reglas de materia
     if (!especialidadIdParam) {
-      const [espRes, relRes] = await Promise.all([
-        fetch(`${SUPABASE_URL}/rest/v1/especialidades_oficiales?select=id,nombre&order=id.asc`, {
-          headers,
-          next: { revalidate: 60 },
-        }),
-        fetch(`${SUPABASE_URL}/rest/v1/relacion_especialidad_materia?select=especialidad_id,materia,activo`, {
-          headers,
-          cache: 'no-store',
-        }),
-      ]);
-
-      const especialidades = espRes.ok ? await espRes.json() : [];
-      const relaciones = relRes.ok ? await relRes.json() : [];
+      const localEsp = getLocalEspecialidades();
+      const localFiltros = getLocalFiltros();
 
       const countsMap: Record<number, { total: number; activas: number }> = {};
-      relaciones.forEach((r: any) => {
-        if (!countsMap[r.especialidad_id]) countsMap[r.especialidad_id] = { total: 0, activas: 0 };
-        countsMap[r.especialidad_id].total += 1;
-        if (r.activo) countsMap[r.especialidad_id].activas += 1;
+      localFiltros.forEach((f: any) => {
+        const espId = f.especialidad_oficial_id;
+        const total = Array.isArray(f.materias) ? f.materias.length : 0;
+        const activas = f.activo ? total : 0;
+        countsMap[espId] = { total, activas };
       });
 
-      const list = especialidades.map((e: any) => ({
+      const list = localEsp.map((e: any) => ({
         id: e.id,
         nombre: e.nombre,
         hora_item: e.hora_item ?? (e.nombre?.toUpperCase().includes('ESPECIAL') ? 108 : 88),
@@ -113,67 +129,43 @@ export async function GET(req: NextRequest) {
 
     const especialidadId = Number(especialidadIdParam);
 
-    // Obtener nombre de la especialidad oficial
-    let espNombre = 'Especialidad Oficial';
-    let horaItemBd = 88.0;
-    try {
-      const resEsp = await fetch(
-        `${SUPABASE_URL}/rest/v1/especialidades_oficiales?id=eq.${especialidadId}&select=id,nombre,hora_item`,
-        { headers, next: { revalidate: 300 } }
-      );
-      if (resEsp.ok) {
-        const espData = await resEsp.json();
-        if (espData.length > 0) {
-          espNombre = espData[0].nombre;
-          horaItemBd = Number(espData[0].hora_item) || (espNombre.toUpperCase().includes('ESPECIAL') ? 108.0 : 88.0);
-        }
-      } else {
-        horaItemBd = espNombre.toUpperCase().includes('ESPECIAL') ? 108.0 : 88.0;
-      }
-    } catch (e) {
-      console.warn(e);
-    }
+    // Obtener información de la especialidad local primero
+    const localEsp = getLocalEspecialidades();
+    const espEncontrada = localEsp.find((e: any) => e.id === especialidadId);
+    let espNombre = espEncontrada ? espEncontrada.nombre : 'Especialidad Oficial';
+    let horaItemBd = espEncontrada?.hora_item ?? (espNombre.toUpperCase().includes('ESPECIAL') ? 108.0 : 88.0);
 
-    // Obtener reglas activas de la especialidad desde Supabase
-    let reglasDb: any[] = [];
-    try {
-      const resRel = await fetch(
-        `${SUPABASE_URL}/rest/v1/relacion_especialidad_materia?especialidad_id=eq.${especialidadId}&activo=eq.true&select=*`,
-        { headers, cache: 'no-store' }
-      );
-      if (resRel.ok) {
-        reglasDb = await resRel.json();
-      }
-    } catch (e) {
-      console.warn(e);
-    }
-
-    // Leer config local como fallback
-    let localFiltro: any = null;
-    if (fs.existsSync(CONFIG_PATH)) {
-      try {
-        const localAll = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf-8'));
-        localFiltro = localAll.find((f: any) => f.especialidad_oficial_id === especialidadId) || null;
-      } catch (e) {
-        console.warn(e);
-      }
-    }
+    // Leer config local
+    const localFiltros = getLocalFiltros();
+    const localFiltro = localFiltros.find((f: any) => f.especialidad_oficial_id === especialidadId) || null;
 
     // Reconstruir o consolidar configuración activa
     const subsistemasSet = new Set<string>();
     const nivelesSet = new Set<string>();
     const materiasSet = new Set<string>();
 
-    if (reglasDb.length > 0) {
-      reglasDb.forEach((r) => {
-        if (r.subsistema) subsistemasSet.add(normalizeSubsistema(r.subsistema));
-        if (r.nivel) nivelesSet.add(r.nivel.toUpperCase().trim());
-        if (r.materia) materiasSet.add(r.materia.toUpperCase().trim());
-      });
-    } else if (localFiltro && localFiltro.activo && Array.isArray(localFiltro.materias)) {
+    if (localFiltro && localFiltro.activo && Array.isArray(localFiltro.materias)) {
       (localFiltro.subsistemas || []).forEach((s: string) => subsistemasSet.add(normalizeSubsistema(s)));
       (localFiltro.niveles || []).forEach((n: string) => nivelesSet.add(n.toUpperCase().trim()));
       (localFiltro.materias || []).forEach((m: string) => materiasSet.add(m.toUpperCase().trim()));
+    } else {
+      // Fallback a Supabase si no hay config local
+      try {
+        const resRel = await fetch(
+          `${SUPABASE_URL}/rest/v1/relacion_especialidad_materia?especialidad_id=eq.${especialidadId}&activo=eq.true&select=*`,
+          { headers, cache: 'no-store' }
+        );
+        if (resRel.ok) {
+          const reglasDb = await resRel.json();
+          reglasDb.forEach((r: any) => {
+            if (r.subsistema) subsistemasSet.add(normalizeSubsistema(r.subsistema));
+            if (r.nivel) nivelesSet.add(r.nivel.toUpperCase().trim());
+            if (r.materia) materiasSet.add(r.materia.toUpperCase().trim());
+          });
+        }
+      } catch (e) {
+        console.warn('Fallback Supabase error:', e);
+      }
     }
 
     const materiasList = Array.from(materiasSet);

@@ -1,7 +1,29 @@
 import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
+import { execFile } from 'child_process';
+import { promisify } from 'util';
 import { ESPECIALIDAD_SUBMATERIAS_MAP } from '@/lib/constants/submaterias';
+
+export const dynamic = 'force-dynamic';
+
+const execFileAsync = promisify(execFile);
+
+async function rebuildGlobalDeficit() {
+  const cwd = process.cwd();
+  const scriptSie = path.join(cwd, 'src/scripts/build_sie_deficit_resumen.py');
+  const scriptEgr = path.join(cwd, 'src/scripts/build_egresados_proyeccion.py');
+  try {
+    if (fs.existsSync(scriptSie)) {
+      await execFileAsync('python', [scriptSie], { cwd });
+    }
+    if (fs.existsSync(scriptEgr)) {
+      await execFileAsync('python', [scriptEgr], { cwd });
+    }
+  } catch (e) {
+    console.warn('Aviso recalculando déficit global en backend:', e);
+  }
+}
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://dwretdtwyqsltylvnvld.supabase.co';
 const SUPABASE_KEY =
@@ -16,6 +38,7 @@ const headers = {
 };
 
 const CONFIG_PATH = path.join(process.cwd(), 'src/data/filtros_materia_config.json');
+const ESP_PATH = path.join(process.cwd(), 'src/data/especialidades_oficiales.json');
 
 function getLocalConfig(): any[] {
   try {
@@ -25,6 +48,18 @@ function getLocalConfig(): any[] {
     }
   } catch (e) {
     console.error('Error leyendo filtros_materia_config.json:', e);
+  }
+  return [];
+}
+
+function getLocalEspecialidades(): any[] {
+  try {
+    if (fs.existsSync(ESP_PATH)) {
+      const raw = fs.readFileSync(ESP_PATH, 'utf-8');
+      return JSON.parse(raw);
+    }
+  } catch (e) {
+    console.error('Error leyendo especialidades_oficiales.json:', e);
   }
   return [];
 }
@@ -53,96 +88,53 @@ export async function GET(req: NextRequest) {
 
   try {
     if (action === 'especialidades') {
-      const res = await fetch(
-        `${SUPABASE_URL}/rest/v1/especialidades_oficiales?select=id,nombre,hora_item&order=id.asc`,
-        { headers, next: { revalidate: 120 } }
-      );
-      if (res.ok) {
-        return NextResponse.json(await res.json());
+      const localEsp = getLocalEspecialidades();
+      if (localEsp.length > 0) {
+        return NextResponse.json(localEsp);
       }
       return NextResponse.json([]);
     }
 
-    // Consultar relacion_especialidad_materia en Supabase (Fuente de Verdad Persistente en la Nube)
-    const [relRes, espRes] = await Promise.all([
-      fetch(`${SUPABASE_URL}/rest/v1/relacion_especialidad_materia?select=*&order=especialidad_id.asc`, {
-        headers,
-        cache: 'no-store',
-      }),
-      fetch(`${SUPABASE_URL}/rest/v1/especialidades_oficiales?select=id,nombre,hora_item&order=id.asc`, {
-        headers,
-        next: { revalidate: 120 },
-      }),
-    ]);
-
-    const relaciones: any[] = relRes.ok ? await relRes.json() : [];
-    const especialidades: any[] = espRes.ok ? await espRes.json() : [];
     const localConfigs = getLocalConfig();
+    const especialidades = getLocalEspecialidades();
 
     const localMap = new Map<number, any>();
     localConfigs.forEach((c) => localMap.set(c.especialidad_oficial_id, c));
-
-    // Agrupar relaciones por especialidad_id
-    const relMap = new Map<number, { subs: Set<string>; nivs: Set<string>; mats: Set<string>; activo: boolean }>();
-    relaciones.forEach((r) => {
-      const espId = Number(r.especialidad_id);
-      if (!relMap.has(espId)) {
-        relMap.set(espId, {
-          subs: new Set<string>(),
-          nivs: new Set<string>(),
-          mats: new Set<string>(),
-          activo: false,
-        });
-      }
-      const item = relMap.get(espId)!;
-      if (r.activo) item.activo = true;
-      if (r.subsistema) item.subs.add(normalizeSubsistema(r.subsistema));
-      if (r.nivel) item.nivs.add(r.nivel.toUpperCase().trim());
-      if (r.materia) item.mats.add(r.materia.toUpperCase().trim());
-    });
 
     // Construir la lista consolidada para todas las especialidades oficiales
     const result: any[] = [];
 
     especialidades.forEach((esp) => {
-      const espId = esp.id;
-      const relData = relMap.get(espId);
+      const espId = Number(esp.id);
       const localData = localMap.get(espId);
 
-      if (relData && relData.mats.size > 0) {
-        result.push({
-          id: localData?.id || espId,
-          especialidad_oficial_id: espId,
-          subsistemas: Array.from(relData.subs),
-          niveles: Array.from(relData.nivs),
-          materias: Array.from(relData.mats),
-          submaterias_afines: ESPECIALIDAD_SUBMATERIAS_MAP[espId] || [],
-          operador_carga: localData?.operador_carga || null,
-          carga_especialidad: localData?.carga_especialidad || null,
-          materias_condiciones: localData?.materias_condiciones || [],
-          activo: relData.activo,
-          descripcion: localData?.descripcion || '',
-          updated_at: localData?.updated_at || new Date().toISOString(),
-        });
-      } else if (localData) {
-        result.push({
-          ...localData,
-          submaterias_afines: ESPECIALIDAD_SUBMATERIAS_MAP[espId] || [],
-        });
-      }
+      result.push({
+        id: localData?.id || espId,
+        especialidad_oficial_id: espId,
+        nombre: esp.nombre,
+        hora_item: esp.hora_item,
+        subsistemas: localData?.subsistemas || ['REGULAR'],
+        niveles: localData?.niveles || [],
+        materias: localData?.materias || [],
+        submaterias_afines: ESPECIALIDAD_SUBMATERIAS_MAP[espId] || [],
+        operador_carga: localData?.operador_carga || null,
+        carga_especialidad: localData?.carga_especialidad || null,
+        materias_condiciones: localData?.materias_condiciones || [],
+        activo: localData ? Boolean(localData.activo) : true,
+        descripcion: localData?.descripcion || '',
+        updated_at: localData?.updated_at || new Date().toISOString(),
+      });
     });
 
-    // Guardar copia local de respaldo si hay resultados
-    if (result.length > 0) {
-      saveLocalConfig(result);
-    }
-
-    return NextResponse.json(result);
+    return NextResponse.json(result, {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate',
+      },
+    });
   } catch (err: any) {
     return NextResponse.json({ error: err.message || 'Error en GET filtros-materia' }, { status: 500 });
   }
 }
-
 // 2. POST / PUT: Crear o actualizar filtro de especialidad
 export async function POST(req: NextRequest) {
   try {
@@ -189,6 +181,9 @@ export async function POST(req: NextRequest) {
       list.push(record);
     }
     saveLocalConfig(list);
+
+    // Recalcular Matriz de Calor y proyecciones en tiempo real
+    await rebuildGlobalDeficit();
 
     // Sincronizar reglas en relacion_especialidad_materia en Supabase (Persistente en Vercel)
     try {
@@ -259,6 +254,9 @@ export async function DELETE(req: NextRequest) {
 
     list = list.filter((f) => f.id !== filterId);
     saveLocalConfig(list);
+
+    // Recalcular Matriz de Calor y proyecciones en tiempo real
+    await rebuildGlobalDeficit();
 
     if (itemToDelete) {
       try {

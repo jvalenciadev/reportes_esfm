@@ -2,10 +2,11 @@ import json
 import math
 import os
 
-AGRUPADO_PATH = 'src/data/sie_materia_agrupado.json'
-FILTROS_PATH = 'src/data/filtros_materia_config.json'
-ESP_OFICIALES_PATH = 'src/data/especialidades_oficiales.json'
-OUTPUT_PATH = 'src/data/sie_deficit_resumen_global.json'
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
+AGRUPADO_PATH = os.path.join(ROOT_DIR, 'src/data/sie_materia_agrupado.json')
+FILTROS_PATH = os.path.join(ROOT_DIR, 'src/data/filtros_materia_config.json')
+ESP_OFICIALES_PATH = os.path.join(ROOT_DIR, 'src/data/especialidades_oficiales.json')
+OUTPUT_PATH = os.path.join(ROOT_DIR, 'src/data/sie_deficit_resumen_global.json')
 
 ESP_NOMBRES = {
     1: 'CIENCIAS NATURALES: FÍSICA - QUÍMICA',
@@ -83,6 +84,19 @@ def normalize_subsistema(s):
     if 'ALTERNATIVA' in val: return 'ALTERNATIVA'
     if 'ESPECIAL' in val: return 'ESPECIAL'
     return val
+
+def get_nivel_info(esp_id, esp_nombre):
+    n = str(esp_nombre or '').upper().strip()
+    if esp_id == 5 or 'INICIAL' in n:
+        return {'nivel_codigo': 'INICIAL', 'nivel_nombre': 'Educación Inicial', 'orden_jerarquia': 1}
+    elif esp_id == 2 or 'PRIMARIA' in n:
+        return {'nivel_codigo': 'PRIMARIA', 'nivel_nombre': 'Educación Primaria', 'orden_jerarquia': 2}
+    elif esp_id == 19 or 'ESPECIAL' in n or 'DISCAPACIDAD' in n:
+        return {'nivel_codigo': 'ESPECIAL', 'nivel_nombre': 'Educación Especial', 'orden_jerarquia': 5}
+    elif esp_id in [7, 13, 14, 15, 16, 18, 21, 22] or any(k in n for k in ['AGROPECUARIA', 'ALIMENTOS', 'GASTRONOM', 'ELECTRICIDAD', 'MECÁNICA', 'MECANICA', 'ELECTROMEC', 'TEXTIL', 'CARPINTER', 'TÉCNICA', 'TECNICA']):
+        return {'nivel_codigo': 'TECNICA', 'nivel_nombre': 'Técnica Tecnológica', 'orden_jerarquia': 4}
+    else:
+        return {'nivel_codigo': 'SECUNDARIA', 'nivel_nombre': 'Educación Secundaria', 'orden_jerarquia': 3}
 
 def build():
     with open(AGRUPADO_PATH, 'r', encoding='utf-8') as f:
@@ -217,10 +231,15 @@ def build():
             reverse=True
         )
 
+        nivel_info = get_nivel_info(esp_id, esp_nombre)
+
         especialidades_resumen.append({
             "id": esp_id,
             "nombre": esp_nombre,
             "hora_item": hora_item,
+            "nivel_codigo": nivel_info["nivel_codigo"],
+            "nivel_nombre": nivel_info["nivel_nombre"],
+            "orden_jerarquia": nivel_info["orden_jerarquia"],
             "carga_horaria": round(carga_nac),
             "horas_planilla": round(planilla_nac),
             "deficit_horas": round(deficit_nac),
@@ -231,8 +250,10 @@ def build():
             "departamentos": dept_list
         })
 
-    # Ordenar especialidades por mayor déficit nacional
-    especialidades_resumen.sort(key=lambda e: e['deficit_horas'], reverse=True)
+    # Ordenar estrictamente por nivel pedagógico:
+    # 1. Inicial, 2. Primaria, 3. Secundaria, 4. Técnica Tecnológica, 5. Educación Especial
+    # y dentro del mismo nivel alfabéticamente por nombre
+    especialidades_resumen.sort(key=lambda e: (e['orden_jerarquia'], e['nombre']))
 
     departamentos_totales = []
     for d in DEPARTAMENTOS_LIST:

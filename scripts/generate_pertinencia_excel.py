@@ -399,7 +399,7 @@ def create_sheet_departamentos(wb, data):
         total_d = v_doc + a_doc + n_doc + sin_doc
 
         hrs_d = sum(r.get(k, {}).get("horas", 0) for k in ["V", "A", "N", "SIN"])
-        ues_d = max(r.get(k, {}).get("ues", 0) for k in ["V", "A", "N", "SIN"]) if total_d > 0 else 0
+        ues_d = d.get("ues", max(r.get(k, {}).get("ues", 0) for k in ["V", "A", "N", "SIN"])) if total_d > 0 else 0
 
         tot_v += v_doc
         tot_a += a_doc
@@ -541,7 +541,7 @@ def create_sheet_niveles(wb, data):
         total_n = v_doc + a_doc + n_doc + sin_doc
 
         hrs_n = sum(r.get(k, {}).get("horas", 0) for k in ["V", "A", "N", "SIN"])
-        ues_n = max(r.get(k, {}).get("ues", 0) for k in ["V", "A", "N", "SIN"]) if total_n > 0 else 0
+        ues_n = n.get("ues", max(r.get(k, {}).get("ues", 0) for k in ["V", "A", "N", "SIN"])) if total_n > 0 else 0
 
         tot_v += v_doc
         tot_a += a_doc
@@ -549,7 +549,6 @@ def create_sheet_niveles(wb, data):
         tot_sin += sin_doc
         tot_doc += total_n
         tot_hrs += hrs_n
-        tot_ues += ues_n
 
         pct_alta = v_doc / total_n if total_n > 0 else 0
         pct_idoneo = (v_doc + a_doc) / total_n if total_n > 0 else 0
@@ -580,6 +579,7 @@ def create_sheet_niveles(wb, data):
     # Fila Total General
     pct_alta_nac = tot_v / tot_doc if tot_doc > 0 else 0
     pct_id_nac = (tot_v + tot_a) / tot_doc if tot_doc > 0 else 0
+    tot_ues_nac = data.get("resumen", {}).get("TOTAL", {}).get("ues", 16308)
 
     ws.cell(row=curr_r, column=1, value="TOTAL GENERAL NACIONAL").alignment = align_left
     ws.cell(row=curr_r, column=2, value=tot_v).number_format = "#,##0"
@@ -590,7 +590,7 @@ def create_sheet_niveles(wb, data):
     ws.cell(row=curr_r, column=7, value=pct_alta_nac).number_format = "0.0%"
     ws.cell(row=curr_r, column=8, value=pct_id_nac).number_format = "0.0%"
     ws.cell(row=curr_r, column=9, value=tot_hrs).number_format = "#,##0"
-    ws.cell(row=curr_r, column=10, value=tot_ues).number_format = "#,##0"
+    ws.cell(row=curr_r, column=10, value=tot_ues_nac).number_format = "#,##0"
 
     for col_i in range(1, 11):
         cell = ws.cell(row=curr_r, column=col_i)
@@ -600,6 +600,13 @@ def create_sheet_niveles(wb, data):
         if col_i >= 2:
             cell.alignment = align_right
     ws.row_dimensions[curr_r].height = 22
+
+    # Nota técnica aclaratoria
+    curr_r += 1
+    ws.merge_cells(start_row=curr_r, start_column=1, end_row=curr_r, end_column=10)
+    note_cell = ws.cell(row=curr_r, column=1, value="* NOTA TÉCNICA: Los establecimientos educativos en Bolivia suelen impartir múltiples niveles (Inicial, Primaria, Secundaria). La columna 'UEs' reporta los establecimientos con presencia en cada nivel; el Total Nacional corresponde a las 16.308 Unidades Educativas únicas del país (Padrón Oficial SIE).")
+    note_cell.font = Font(name="Segoe UI", size=8, italic=True, color="64748B")
+    note_cell.alignment = align_left
 
     # ── Gráfico 4: Columna agrupada colocado a la DERECHA en L5
     chart = BarChart()
@@ -972,6 +979,370 @@ def create_sheet_ue(wb, ue_data):
     ws.column_dimensions["J"].width = 28
 
 
+def create_sheet_rural_urbano(wb, data: dict):
+    """Crea la hoja de Pertinencia Curricular por Área Rural vs Urbana por Departamento."""
+    deptos_area = data.get("por_departamento_area", [])
+    por_area = data.get("por_area", {})
+    if not deptos_area:
+        return
+
+    ws = wb.create_sheet(title="Rural vs Urbano")
+    apply_header_banner(
+        ws,
+        "PERTINENCIA CURRICULAR POR ÁREA: RURAL VS URBANA POR DEPARTAMENTO",
+        "Diagnóstico Comparativo de Idoneidad Curricular Docente · Sistema Educativo Plurinacional (SEP)",
+        max_col=10,
+    )
+
+    # KPIs Superiores
+    r_info = por_area.get("RURAL", {})
+    u_info = por_area.get("URBANA", {})
+
+    r_doc = r_info.get("docentes", 0)
+    u_doc = u_info.get("docentes", 0)
+    tot_doc = r_doc + u_doc
+
+    r_alta = r_info.get("pct_alta", 0.0)
+    u_alta = u_info.get("pct_alta", 0.0)
+    brecha_nac = round(u_alta - r_alta, 2)
+
+    kpis = [
+        ("ÁREA RURAL NACIONAL", f"{r_doc:,.0f} doc. ({r_info.get('pct_del_total', 0)}%)", f"{r_alta}% Alta Pertinencia", COLOR_GOLD_LIGHT),
+        ("ÁREA URBANA NACIONAL", f"{u_doc:,.0f} doc. ({u_info.get('pct_del_total', 0)}%)", f"{u_alta}% Alta Pertinencia", "EFF6FF"),
+        ("BRECHA TERRITORIAL", f"{brecha_nac:+.2f} pp diferencia", "Urbana vs Rural", "F0FDF4"),
+    ]
+
+    for k_i, (k_t, k_v1, k_v2, k_bg) in enumerate(kpis):
+        col_st = 1 + k_i * 3
+        col_en = col_st + 2
+        ws.merge_cells(start_row=5, start_column=col_st, end_row=5, end_column=col_en)
+        ws.merge_cells(start_row=6, start_column=col_st, end_row=6, end_column=col_en)
+        ws.merge_cells(start_row=7, start_column=col_st, end_row=7, end_column=col_en)
+
+        c1 = ws.cell(row=5, column=col_st, value=k_t)
+        c1.font = font_kpi_lbl
+        c1.alignment = align_center
+
+        c2 = ws.cell(row=6, column=col_st, value=k_v1)
+        c2.font = font_kpi_num
+        c2.alignment = align_center
+
+        c3 = ws.cell(row=7, column=col_st, value=k_v2)
+        c3.font = font_bold
+        c3.alignment = align_center
+
+        k_fill = PatternFill(start_color=k_bg, end_color=k_bg, fill_type="solid")
+        for r_x in range(5, 8):
+            for c_x in range(col_st, col_en + 1):
+                cell = ws.cell(row=r_x, column=c_x)
+                cell.fill = k_fill
+                cell.border = border_cell
+
+    # Tabla de Datos por Departamento
+    headers = [
+        "Departamento",
+        "Padrón Total",
+        "Doc. Rural",
+        "% Rural",
+        "Alta Rural (%)",
+        "Doc. Urbano",
+        "% Urbano",
+        "Alta Urbano (%)",
+        "Brecha (U - R)",
+        "Prioridad Rural (A+N)",
+    ]
+
+    start_r = 9
+    for col_idx, h_text in enumerate(headers, 1):
+        cell = ws.cell(row=start_r, column=col_idx, value=h_text)
+        cell.font = font_header
+        cell.fill = fill_navy
+        cell.alignment = align_center
+        cell.border = border_cell
+    ws.row_dimensions[start_r].height = 24
+
+    curr_r = start_r + 1
+    for idx, d in enumerate(deptos_area):
+        row_fill = fill_zebra if idx % 2 == 1 else PatternFill(fill_type=None)
+
+        vals = [
+            (d["departamento"], align_left, "@"),
+            (d["total_docentes"], align_right, "#,##0"),
+            (d["rural"]["docentes"], align_right, "#,##0"),
+            (d["pct_rural_del_depto"] / 100.0, align_center, "0.0%"),
+            (d["rural"]["pct_alta"] / 100.0, align_right, "0.0%"),
+            (d["urbana"]["docentes"], align_right, "#,##0"),
+            (d["pct_urbana_del_depto"] / 100.0, align_center, "0.0%"),
+            (d["urbana"]["pct_alta"] / 100.0, align_right, "0.0%"),
+            (d["brecha_alta_urbano_rural"], align_center, "+0.0;-0.0;0.0"),
+            (d["rural"]["prioridad_formacion"], align_right, "#,##0"),
+        ]
+
+        for col_idx, (v_val, v_al, v_fmt) in enumerate(vals, 1):
+            cell = ws.cell(row=curr_r, column=col_idx, value=v_val)
+            cell.font = font_data
+            cell.alignment = v_al
+            cell.border = border_cell
+            cell.number_format = v_fmt
+            if row_fill.fill_type:
+                cell.fill = row_fill
+        ws.row_dimensions[curr_r].height = 19
+        curr_r += 1
+
+    # Fila de Totales
+    total_r = curr_r
+    ws.cell(row=total_r, column=1, value="TOTAL NACIONAL").font = font_bold
+    ws.cell(row=total_r, column=1).alignment = align_left
+
+    ws.cell(row=total_r, column=2, value=f"=SUM(B{start_r+1}:B{total_r-1})").number_format = "#,##0"
+    ws.cell(row=total_r, column=3, value=f"=SUM(C{start_r+1}:C{total_r-1})").number_format = "#,##0"
+    ws.cell(row=total_r, column=4, value=f"=C{total_r}/B{total_r}").number_format = "0.0%"
+    ws.cell(row=total_r, column=5, value=r_alta / 100.0).number_format = "0.0%"
+    ws.cell(row=total_r, column=6, value=f"=SUM(F{start_r+1}:F{total_r-1})").number_format = "#,##0"
+    ws.cell(row=total_r, column=7, value=f"=F{total_r}/B{total_r}").number_format = "0.0%"
+    ws.cell(row=total_r, column=8, value=u_alta / 100.0).number_format = "0.0%"
+    ws.cell(row=total_r, column=9, value=brecha_nac).number_format = "+0.0;-0.0;0.0"
+    ws.cell(row=total_r, column=10, value=f"=SUM(J{start_r+1}:J{total_r-1})").number_format = "#,##0"
+
+    for c_i in range(1, 11):
+        cell = ws.cell(row=total_r, column=c_i)
+        cell.font = font_bold
+        cell.fill = fill_gold_light
+        cell.border = border_double_bottom
+        if c_i not in [1, 4, 7, 9]:
+            cell.alignment = align_right
+        elif c_i in [4, 7, 9]:
+            cell.alignment = align_center
+
+    ws.row_dimensions[total_r].height = 22
+    ws.auto_filter.ref = f"A{start_r}:J{total_r - 1}"
+
+    # Gráfico Nativo de Excel: Barras Comparativas Rural vs Urbano (% Alta Pertinencia)
+    chart = BarChart()
+    chart.type = "col"
+    chart.style = 10
+    chart.title = "Tasa de Alta Pertinencia Curricular: Rural vs Urbana por Departamento (%)"
+    chart.y_axis.title = "% Alta Pertinencia"
+    chart.x_axis.title = "Departamento"
+    chart.width = 19
+    chart.height = 11
+
+    # Referencias de datos: Columnas E (Alta Rural) y H (Alta Urbano)
+    # Categorías: Columna A (Departamentos)
+    data_ref_r = Reference(ws, min_col=5, min_row=start_r, max_row=total_r - 1)
+    data_ref_u = Reference(ws, min_col=8, min_row=start_r, max_row=total_r - 1)
+    cats_ref = Reference(ws, min_col=1, min_row=start_r + 1, max_row=total_r - 1)
+
+    chart.add_data(data_ref_r, titles_from_data=True)
+    chart.add_data(data_ref_u, titles_from_data=True)
+    chart.set_categories(cats_ref)
+
+    if chart.series and len(chart.series) >= 2:
+        chart.series[0].graphicalProperties.solidFill = COLOR_N  # Ámbar Rural
+        chart.series[1].graphicalProperties.solidFill = COLOR_A  # Azul Urbano
+
+    ws.add_chart(chart, "B21")
+
+    # Anchos de columna
+    col_widths = {
+        "A": 18,
+        "B": 15,
+        "C": 14,
+        "D": 12,
+        "E": 15,
+        "F": 14,
+        "G": 12,
+        "H": 15,
+        "I": 15,
+        "J": 20,
+    }
+    for col_letter, width in col_widths.items():
+        ws.column_dimensions[col_letter].width = width
+
+
+def create_sheet_jubilacion(wb, data):
+    """Hoja adicional: Estadísticas de Prejubilación y Jubilación por Departamento y Distrito."""
+    ws = wb.create_sheet(title="Prejubilación y Jubilación")
+    ws.views.sheetView[0].showGridLines = True
+
+    jub_data = data.get("jubilacion", {})
+    nacional = jub_data.get("nacional", {})
+    por_depto = jub_data.get("por_departamento", [])
+    por_distrito = jub_data.get("por_distrito", [])
+
+    apply_header_banner(
+        ws,
+        "MINISTERIO DE EDUCACIÓN - ESTADO PLURINACIONAL DE BOLIVIA",
+        "ESTADÍSTICAS DE PREJUBILACIÓN Y JUBILACIÓN DOCENTE - CORTE OFICIAL (SEP)",
+        max_col=12
+    )
+
+    # KPIs Nacionales (fila 5-6)
+    tot_nacional = nacional.get("total", 1)
+    kpis = [
+        ("UNIVERSO DOCENTE", tot_nacional, 1, 2),
+        ("EN JUBILACIÓN (SI)", nacional.get("jubilacion", 0), 3, 4),
+        ("EN PREJUBILACIÓN (SI)", nacional.get("prejubilacion", 0), 5, 6),
+        ("% JUBILACIÓN", round(nacional.get("jubilacion", 0) / tot_nacional * 100, 2) if tot_nacional > 0 else 0.0, 7, 8),
+    ]
+    for title, val, c1, c2 in kpis:
+        ws.merge_cells(start_row=5, start_column=c1, end_row=5, end_column=c2)
+        cell_lbl = ws.cell(row=5, column=c1, value=title)
+        cell_lbl.font = font_kpi_lbl
+        cell_lbl.alignment = align_center
+        cell_lbl.fill = fill_gold_light
+
+        ws.merge_cells(start_row=6, start_column=c1, end_row=6, end_column=c2)
+        cell_val = ws.cell(row=6, column=c1, value=val)
+        cell_val.font = font_kpi_num
+        cell_val.number_format = "0.00%" if title.startswith("%") else "#,##0"
+        cell_val.alignment = align_center
+        cell_val.fill = fill_gold_light
+
+        for r in range(5, 7):
+            for c in range(c1, c2 + 1):
+                ws.cell(row=r, column=c).border = border_cell
+
+    ws.row_dimensions[5].height = 18
+    ws.row_dimensions[6].height = 26
+
+    # --- Tabla por Departamento ---
+    ws.cell(row=8, column=1, value="1. Jubilación y Prejubilación por Departamento").font = font_section
+
+    h_depto = ["Departamento", "Total Docentes", "Jubilación (SI)", "% Jubilación", "Prejubilación (SI)", "% Prejubilación", "Pendientes Jubilación"]
+    start_r = 9
+    for c_idx, h in enumerate(h_depto, start=1):
+        c = ws.cell(row=start_r, column=c_idx, value=h)
+        c.font = font_header
+        c.fill = fill_navy
+        c.alignment = align_center
+        c.border = border_cell
+    ws.row_dimensions[start_r].height = 22
+
+    curr_r = start_r + 1
+    for idx, d in enumerate(por_depto):
+        total_d = d.get("total", 1)
+        jub_d = d.get("jubilacion", 0)
+        pjub_d = d.get("prejubilacion", 0)
+        pct_j = jub_d / total_d if total_d > 0 else 0.0
+        pct_pj = pjub_d / total_d if total_d > 0 else 0.0
+        pendiente = total_d - jub_d
+
+        row_vals = [d.get("departamento", ""), total_d, jub_d, pct_j, pjub_d, pct_pj, pendiente]
+        for c_idx, val in enumerate(row_vals, start=1):
+            cell = ws.cell(row=curr_r, column=c_idx, value=val)
+            cell.font = font_data
+            cell.border = border_cell
+            if c_idx == 1:
+                cell.alignment = align_left
+            elif c_idx in [4, 6]:
+                cell.number_format = "0.00%"
+                cell.alignment = align_right
+            else:
+                cell.number_format = "#,##0"
+                cell.alignment = align_right
+            if idx % 2 == 1:
+                cell.fill = fill_zebra
+        ws.row_dimensions[curr_r].height = 20
+        curr_r += 1
+
+    # Fila total departamentos
+    tot_jub = sum(d.get("jubilacion", 0) for d in por_depto)
+    tot_pjub = sum(d.get("prejubilacion", 0) for d in por_depto)
+    tot_all = nacional.get("total", 1)
+    tot_row = ["TOTAL NACIONAL", tot_all, tot_jub, tot_jub / tot_all if tot_all > 0 else 0.0,
+               tot_pjub, tot_pjub / tot_all if tot_all > 0 else 0.0, tot_all - tot_jub]
+    for c_idx, val in enumerate(tot_row, start=1):
+        cell = ws.cell(row=curr_r, column=c_idx, value=val)
+        cell.font = font_bold
+        cell.fill = fill_gold_light
+        cell.border = border_double_bottom
+        cell.alignment = align_right if c_idx > 1 else align_left
+        if c_idx in [4, 6]:
+            cell.number_format = "0.00%"
+        elif c_idx != 1:
+            cell.number_format = "#,##0"
+    ws.row_dimensions[curr_r].height = 22
+    depto_end_r = curr_r
+    curr_r += 2
+
+    # --- Tabla Top 20 Distritos por Jubilación ---
+    ws.cell(row=curr_r, column=1, value="2. Top 20 Distritos con Mayor Jubilación Docente").font = font_section
+    curr_r += 1
+
+    h_dist = ["Departamento", "Distrito", "Total Docentes", "Jubilación (SI)", "% Jubilación", "Prejubilación (SI)", "% Prejubilación"]
+    for c_idx, h in enumerate(h_dist, start=1):
+        c = ws.cell(row=curr_r, column=c_idx, value=h)
+        c.font = font_header
+        c.fill = fill_navy
+        c.alignment = align_center
+        c.border = border_cell
+    ws.row_dimensions[curr_r].height = 22
+    dist_start_r = curr_r
+    curr_r += 1
+
+    top20 = sorted(por_distrito, key=lambda x: x.get("jubilacion", 0), reverse=True)[:20]
+    for idx, dist in enumerate(top20):
+        total_dt = dist.get("total", 1)
+        jub_dt = dist.get("jubilacion", 0)
+        pjub_dt = dist.get("prejubilacion", 0)
+        row_vals = [dist.get("departamento", ""), dist.get("distrito", ""), total_dt,
+                    jub_dt, jub_dt / total_dt if total_dt > 0 else 0.0,
+                    pjub_dt, pjub_dt / total_dt if total_dt > 0 else 0.0]
+        for c_idx, val in enumerate(row_vals, start=1):
+            cell = ws.cell(row=curr_r, column=c_idx, value=val)
+            cell.font = font_data
+            cell.border = border_cell
+            if c_idx in [1, 2]:
+                cell.alignment = align_left
+            elif c_idx in [5, 7]:
+                cell.number_format = "0.00%"
+                cell.alignment = align_right
+            else:
+                cell.number_format = "#,##0"
+                cell.alignment = align_right
+            if idx % 2 == 1:
+                cell.fill = fill_zebra
+        ws.row_dimensions[curr_r].height = 20
+        curr_r += 1
+
+    # --- Gráfico: Jubilación vs Prejubilación por Departamento ---
+    chart = BarChart()
+    chart.type = "col"
+    chart.title = "Jubilación vs Prejubilación por Departamento"
+    chart.y_axis.title = "Docentes"
+    chart.x_axis.title = "Departamento"
+    chart.width = 22
+    chart.height = 12
+    chart.legend.legendPos = "t"
+
+    data_ref_j = Reference(ws, min_col=3, min_row=start_r, max_row=depto_end_r - 1)
+    data_ref_pj = Reference(ws, min_col=5, min_row=start_r, max_row=depto_end_r - 1)
+    cats_ref = Reference(ws, min_col=1, min_row=start_r + 1, max_row=depto_end_r - 1)
+    chart.add_data(data_ref_j, titles_from_data=True)
+    chart.add_data(data_ref_pj, titles_from_data=True)
+    chart.set_categories(cats_ref)
+
+    chart.dataLabels = DataLabelList()
+    chart.dataLabels.showVal = True
+
+    if len(chart.series) >= 2:
+        chart.series[0].graphicalProperties.solidFill = COLOR_N    # Naranja - Jubilación
+        chart.series[1].graphicalProperties.solidFill = COLOR_A    # Azul - Prejubilación
+
+    ws.add_chart(chart, "I8")
+
+    # Anchos de columna
+    ws.column_dimensions["A"].width = 18
+    ws.column_dimensions["B"].width = 28
+    ws.column_dimensions["C"].width = 16
+    ws.column_dimensions["D"].width = 16
+    ws.column_dimensions["E"].width = 15
+    ws.column_dimensions["F"].width = 18
+    ws.column_dimensions["G"].width = 15
+    ws.column_dimensions["H"].width = 4  # Separador
+
+
 def main():
     root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     json_path = os.path.join(root_dir, "src", "data", "pertinencia_data.json")
@@ -994,8 +1365,13 @@ def main():
 
     # Construir hojas según disponibilidad de datos
     create_sheet_resumen(wb, data)
+    create_sheet_rural_urbano(wb, data)
     create_sheet_departamentos(wb, data)
     create_sheet_niveles(wb, data)
+
+    # Hoja adicional: Jubilación y Prejubilación
+    if data.get("jubilacion"):
+        create_sheet_jubilacion(wb, data)
 
     # Hoja 4: Pertinencia por Unidad Educativa
     if os.path.exists(ue_json_path):
