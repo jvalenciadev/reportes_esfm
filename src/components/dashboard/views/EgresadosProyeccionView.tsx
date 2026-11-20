@@ -396,28 +396,6 @@ export default function EgresadosProyeccionView() {
   return (
     <div ref={containerRef} className={isFullscreen ? 'bg-white overflow-y-auto p-6 space-y-6 h-full' : 'space-y-6'}>
       {/* ─── Banner Fullscreen ─────────────────────────────────────────────────── */}
-      {isFullscreen && (
-        <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-xl border border-slate-800 animate-fadeIn">
-          <div className="flex items-center gap-3">
-            <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-md bg-amber-500/20 text-amber-300 border border-amber-400/30">
-              Pantalla Completa (F11)
-            </span>
-            <span className="text-sm font-bold text-white flex items-center gap-2">
-              <GraduationCap className="w-4 h-4 text-amber-400" />
-              Proyección de Egresados ESFM (Modelo de Cohortes y Abandono)
-            </span>
-          </div>
-
-          <button
-            type="button"
-            onClick={handleFullscreen}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-600 hover:bg-rose-500 text-white transition-colors shadow-sm"
-          >
-            <Minimize2 className="w-3.5 h-3.5" />
-            <span>Salir (Esc)</span>
-          </button>
-        </div>
-      )}
 
       {/* ═══════════════════════════════════════════════════════════════
           RIBBON DE KPIS EJECUTIVOS GLOBALES
@@ -667,16 +645,6 @@ export default function EgresadosProyeccionView() {
           >
             <Download className="w-3.5 h-3.5" />
             <span>Exportar CSV</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={handleFullscreen}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-50 text-slate-700 border border-slate-200 hover:bg-slate-100 transition-colors"
-            title="Pantalla Completa (F11)"
-          >
-            {isFullscreen ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
-            <span className="hidden sm:inline">{isFullscreen ? 'Salir' : 'Pantalla Completa'}</span>
           </button>
         </div>
       </div>
@@ -986,15 +954,15 @@ export default function EgresadosProyeccionView() {
                             key={esp.especialidad_id}
                             onClick={() => setSelectedEspId(isSelected ? null : esp.especialidad_id)}
                             className={`cursor-pointer transition-all ${isSelected
-                                ? 'bg-indigo-50/70 shadow-xs'
-                                : 'hover:bg-slate-50/80'
+                              ? 'bg-indigo-50/70 shadow-xs'
+                              : 'hover:bg-slate-50/80'
                               }`}
                           >
                             {/* Celda de Especialidad como cuadro delimitado con badge y línea viva */}
                             <td
                               className={`py-2 px-3 border-r transition-colors ${isSelected
-                                  ? 'bg-indigo-100 text-indigo-950 border-r-indigo-300 border-l-[6px] border-l-indigo-600 border-t-2 border-b-2 border-t-indigo-600 border-b-indigo-600 font-black shadow-xs'
-                                  : `border-b border-slate-200 text-slate-900 ${estilo.borderLeft}`
+                                ? 'bg-indigo-100 text-indigo-950 border-r-indigo-300 border-l-[6px] border-l-indigo-600 border-t-2 border-b-2 border-t-indigo-600 border-b-indigo-600 font-black shadow-xs'
+                                : `border-b border-slate-200 text-slate-900 ${estilo.borderLeft}`
                                 }`}
                             >
                               <div className="flex items-center justify-between gap-2">
@@ -1014,8 +982,8 @@ export default function EgresadosProyeccionView() {
 
                             {/* Base Horas */}
                             <td className={`py-2 px-1.5 text-center border-r transition-colors ${isSelected
-                                ? 'border-t-2 border-b-2 border-indigo-600 bg-indigo-100/60 text-indigo-950 border-r-indigo-200 font-bold'
-                                : 'border-b border-slate-200 text-slate-500'
+                              ? 'border-t-2 border-b-2 border-indigo-600 bg-indigo-100/60 text-indigo-950 border-r-indigo-200 font-bold'
+                              : 'border-b border-slate-200 text-slate-500'
                               }`}>
                               <span className="inline-block px-2 py-0.5 rounded bg-slate-100 font-mono text-[11px] font-bold text-slate-700 border border-slate-200">
                                 {esp.hora_item ? `${esp.hora_item}h` : '—'}
@@ -1029,8 +997,8 @@ export default function EgresadosProyeccionView() {
                                 <td
                                   key={g}
                                   className={`py-1.5 px-1.5 text-center border-r transition-colors ${isSelected
-                                      ? 'border-t-2 border-b-2 border-indigo-600 bg-indigo-50/50 border-r-indigo-200'
-                                      : 'border-b border-slate-200'
+                                    ? 'border-t-2 border-b-2 border-indigo-600 bg-indigo-50/50 border-r-indigo-200'
+                                    : 'border-b border-slate-200'
                                     }`}
                                 >
                                   {renderCantidadBadge(cant)}
@@ -1040,8 +1008,8 @@ export default function EgresadosProyeccionView() {
 
                             {/* Total Compacto con números grandes */}
                             <td className={`py-1.5 px-1.5 text-center transition-colors w-20 ${isSelected
-                                ? 'border-t-2 border-b-2 border-indigo-600 bg-indigo-200/90 text-indigo-950 shadow-xs'
-                                : 'border-b border-slate-200 bg-slate-50/60'
+                              ? 'border-t-2 border-b-2 border-indigo-600 bg-indigo-200/90 text-indigo-950 shadow-xs'
+                              : 'border-b border-slate-200 bg-slate-50/60'
                               }`}>
                               {tot > 0 ? (
                                 <span className="inline-block min-w-[3.2rem] px-2 py-0.5 rounded-md font-mono font-black text-sm bg-slate-900 text-white shadow-2xs">

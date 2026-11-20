@@ -3544,14 +3544,6 @@ export default function Exposicion2031View({ data: dataset }: Props) {
           </button>
 
           <button
-            onClick={toggleFullscreen}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-all cursor-pointer"
-          >
-            {isFullscreen ? <Minimize2 className="w-4 h-4 text-indigo-600" /> : <Maximize2 className="w-4 h-4 text-indigo-600" />}
-            {isFullscreen ? "Salir" : "Pantalla Completa"}
-          </button>
-
-          <button
             onClick={handleExport}
             className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-extrabold transition-all shadow cursor-pointer"
           >

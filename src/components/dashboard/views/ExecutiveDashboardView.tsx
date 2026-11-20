@@ -51,8 +51,8 @@ export function ExecutiveDashboardView({ data }: ExecutiveDashboardViewProps) {
             type="button"
             onClick={() => setModuloPrincipal('matricula')}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${moduloPrincipal === 'matricula'
-                ? 'bg-slate-900 text-white shadow-xs'
-                : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200/70'
+              ? 'bg-slate-900 text-white shadow-xs'
+              : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200/70'
               }`}
           >
             <TrendingUp className="w-4 h-4 text-emerald-400" />
@@ -63,8 +63,8 @@ export function ExecutiveDashboardView({ data }: ExecutiveDashboardViewProps) {
             type="button"
             onClick={() => setModuloPrincipal('deficit_materia')}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${moduloPrincipal === 'deficit_materia'
-                ? 'bg-indigo-600 text-white shadow-xs'
-                : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200/70'
+              ? 'bg-indigo-600 text-white shadow-xs'
+              : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200/70'
               }`}
           >
             <Scale className="w-4 h-4 text-indigo-300" />
@@ -75,8 +75,8 @@ export function ExecutiveDashboardView({ data }: ExecutiveDashboardViewProps) {
             type="button"
             onClick={() => setModuloPrincipal('egresados_esfm')}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${moduloPrincipal === 'egresados_esfm'
-                ? 'bg-amber-600 text-white shadow-xs'
-                : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200/70'
+              ? 'bg-amber-600 text-white shadow-xs'
+              : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200/70'
               }`}
           >
             <GraduationCap className="w-4 h-4 text-amber-300" />
@@ -87,8 +87,8 @@ export function ExecutiveDashboardView({ data }: ExecutiveDashboardViewProps) {
             type="button"
             onClick={() => setModuloPrincipal('pertinencia')}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${moduloPrincipal === 'pertinencia'
-                ? 'bg-emerald-600 text-white shadow-xs'
-                : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200/70'
+              ? 'bg-emerald-600 text-white shadow-xs'
+              : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200/70'
               }`}
           >
             <ShieldCheck className="w-4 h-4 text-emerald-300" />
@@ -104,8 +104,8 @@ export function ExecutiveDashboardView({ data }: ExecutiveDashboardViewProps) {
                 : { backgroundColor: '#f0fdfa', color: '#155e75', borderColor: '#a5f3fc' }
             }
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all border shadow-2xs ${moduloPrincipal === 'migracion'
-                ? 'shadow-xs ring-2 ring-cyan-500/30'
-                : 'hover:bg-cyan-100 hover:text-cyan-900'
+              ? 'shadow-xs ring-2 ring-cyan-500/30'
+              : 'hover:bg-cyan-100 hover:text-cyan-900'
               }`}
           >
             <ArrowLeftRight className={`w-4 h-4 ${moduloPrincipal === 'migracion' ? 'text-white' : 'text-cyan-700'}`} />
@@ -137,24 +137,7 @@ export function ExecutiveDashboardView({ data }: ExecutiveDashboardViewProps) {
                     : 'Fuente: DGFM · migracion_planilla_2024_2025_2026.xls & entrantes_salientes.xlsx'}
           </span>
 
-          <button
-            type="button"
-            onClick={toggleFullScreen}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-xs shrink-0 cursor-pointer"
-            title={isFullScreen ? "Salir de Pantalla Completa" : "Ver a Pantalla Completa"}
-          >
-            {isFullScreen ? (
-              <>
-                <Minimize2 className="w-3.5 h-3.5 text-amber-300" />
-                <span>Restaurar</span>
-              </>
-            ) : (
-              <>
-                <Maximize2 className="w-3.5 h-3.5 text-amber-300" />
-                <span>Pantalla Completa</span>
-              </>
-            )}
-          </button>
+
         </div>
       </div>
 

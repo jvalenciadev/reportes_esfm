@@ -202,29 +202,6 @@ export function TrendLineChart({
               </div>
               {subtitle && <p className="text-xs text-slate-500 mt-1">{subtitle}</p>}
             </div>
-
-            {/* Botón dinámico Agrandar / Restaurar cuadro */}
-            <button
-              onClick={() => setIsExpanded(!isExpanded)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-medium border transition-all flex items-center gap-1.5 shrink-0 ${
-                fullscreen
-                  ? 'bg-[#faf5e8] text-[#c9a751] border-[#c9a751] shadow-xs ring-1 ring-[#c9a751]'
-                  : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100 hover:text-slate-900'
-              }`}
-              title={fullscreen ? 'Cerrar pantalla completa (Esc)' : 'Agrandar a pantalla completa'}
-            >
-              {fullscreen ? (
-                <>
-                  <XIcon size={14} />
-                  <span>Salir Pantalla Completa</span>
-                </>
-              ) : (
-                <>
-                  <MaximizeIcon size={14} />
-                  <span>Agrandar</span>
-                </>
-              )}
-            </button>
           </div>
 
           {/* Controles de Leyenda de Series */}
@@ -236,11 +213,10 @@ export function TrendLineChart({
                   <button
                     key={s.id}
                     onClick={() => toggleSeries(s.id)}
-                    className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium border transition-all ${
-                      isActive
+                    className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium border transition-all ${isActive
                         ? 'bg-slate-50 border-slate-300 text-slate-800 shadow-2xs'
                         : 'bg-white border-slate-200 text-slate-400 opacity-60 line-through'
-                    }`}
+                      }`}
                   >
                     <span
                       className="w-2.5 h-2.5 rounded-full shrink-0"
@@ -256,284 +232,283 @@ export function TrendLineChart({
 
         {/* Gráfico SVG en Alta Resolución */}
         <div className="relative w-full pt-1 pb-1">
-        <svg
-          viewBox={`0 0 ${width} ${dynamicHeight}`}
-          className="w-full h-auto select-none overflow-visible"
-          onMouseLeave={() => setHoveredPoint(null)}
-        >
-          <defs>
-            {visibleSeries.map((s) => (
-              <linearGradient
-                key={s.id}
-                id={`grad-${s.id}`}
-                x1="0%"
-                y1="0%"
-                x2="0%"
-                y2="100%"
-              >
-                <stop offset="0%" stopColor={s.color} stopOpacity="0.25" />
-                <stop offset="100%" stopColor={s.color} stopOpacity="0.0" />
-              </linearGradient>
-            ))}
-          </defs>
+          <svg
+            viewBox={`0 0 ${width} ${dynamicHeight}`}
+            className="w-full h-auto select-none overflow-visible"
+            onMouseLeave={() => setHoveredPoint(null)}
+          >
+            <defs>
+              {visibleSeries.map((s) => (
+                <linearGradient
+                  key={s.id}
+                  id={`grad-${s.id}`}
+                  x1="0%"
+                  y1="0%"
+                  x2="0%"
+                  y2="100%"
+                >
+                  <stop offset="0%" stopColor={s.color} stopOpacity="0.25" />
+                  <stop offset="100%" stopColor={s.color} stopOpacity="0.0" />
+                </linearGradient>
+              ))}
+            </defs>
 
-          {/* Líneas guía horizontales */}
-          {yAxisTicks.map((val, idx) => {
-            const y = getY(val);
-            return (
-              <g key={idx}>
+            {/* Líneas guía horizontales */}
+            {yAxisTicks.map((val, idx) => {
+              const y = getY(val);
+              return (
+                <g key={idx}>
+                  <line
+                    x1={padding.left}
+                    y1={y}
+                    x2={width - padding.right}
+                    y2={y}
+                    stroke="#E2E8F0"
+                    strokeDasharray="3 3"
+                    strokeWidth="1"
+                  />
+                  <text
+                    x={padding.left - 10}
+                    y={y + 3.5}
+                    textAnchor="end"
+                    fontSize={isExpanded ? '11' : '10'}
+                    fontWeight="700"
+                    fill="#64748B"
+                    fontFamily="monospace"
+                  >
+                    {val >= 1000000
+                      ? `${(val / 1000000).toFixed(1)}M`
+                      : val >= 1000
+                        ? `${(val / 1000).toFixed(0)}k`
+                        : val}
+                  </text>
+                </g>
+              );
+            })}
+
+            {/* Eje X (Años) */}
+            {xTicks.map((year) => {
+              const x = getX(year);
+              return (
+                <g key={year}>
+                  <line
+                    x1={x}
+                    y1={padding.top + innerHeight}
+                    x2={x}
+                    y2={padding.top + innerHeight + 5}
+                    stroke="#94A3B8"
+                    strokeWidth="1.2"
+                  />
+                  <text
+                    x={x}
+                    y={padding.top + innerHeight + 18}
+                    textAnchor="middle"
+                    fontSize={isExpanded ? '11' : '10'}
+                    fontWeight="500"
+                    fill="#475569"
+                  >
+                    {xLabelFormatter ? xLabelFormatter(year) : year}
+                  </text>
+                </g>
+              );
+            })}
+
+            {/* Línea cero de referencia cuando hay valores negativos */}
+            {minValue < 0 && maxValue > 0 && (
+              <g>
                 <line
                   x1={padding.left}
-                  y1={y}
+                  y1={getY(0)}
                   x2={width - padding.right}
-                  y2={y}
-                  stroke="#E2E8F0"
-                  strokeDasharray="3 3"
-                  strokeWidth="1"
+                  y2={getY(0)}
+                  stroke="#64748B"
+                  strokeWidth="1.5"
+                  strokeDasharray="4 4"
                 />
                 <text
-                  x={padding.left - 10}
-                  y={y + 3.5}
-                  textAnchor="end"
-                  fontSize={isExpanded ? '11' : '10'}
-                  fontWeight="700"
-                  fill="#64748B"
-                  fontFamily="monospace"
-                >
-                  {val >= 1000000
-                    ? `${(val / 1000000).toFixed(1)}M`
-                    : val >= 1000
-                    ? `${(val / 1000).toFixed(0)}k`
-                    : val}
-                </text>
-              </g>
-            );
-          })}
-
-          {/* Eje X (Años) */}
-          {xTicks.map((year) => {
-            const x = getX(year);
-            return (
-              <g key={year}>
-                <line
-                  x1={x}
-                  y1={padding.top + innerHeight}
-                  x2={x}
-                  y2={padding.top + innerHeight + 5}
-                  stroke="#94A3B8"
-                  strokeWidth="1.2"
-                />
-                <text
-                  x={x}
-                  y={padding.top + innerHeight + 18}
-                  textAnchor="middle"
-                  fontSize={isExpanded ? '11' : '10'}
-                  fontWeight="500"
+                  x={width - padding.right + 6}
+                  y={getY(0) + 3.5}
+                  fontSize="10"
+                  fontWeight="600"
                   fill="#475569"
                 >
-                  {xLabelFormatter ? xLabelFormatter(year) : year}
+                  0{unit}
                 </text>
               </g>
-            );
-          })}
+            )}
 
-          {/* Línea cero de referencia cuando hay valores negativos */}
-          {minValue < 0 && maxValue > 0 && (
-            <g>
-              <line
-                x1={padding.left}
-                y1={getY(0)}
-                x2={width - padding.right}
-                y2={getY(0)}
-                stroke="#64748B"
-                strokeWidth="1.5"
-                strokeDasharray="4 4"
-              />
-              <text
-                x={width - padding.right + 6}
-                y={getY(0) + 3.5}
-                fontSize="10"
-                fontWeight="600"
-                fill="#475569"
-              >
-                0{unit}
-              </text>
-            </g>
-          )}
+            {/* Línea base X */}
+            <line
+              x1={padding.left}
+              y1={padding.top + innerHeight}
+              x2={width - padding.right}
+              y2={padding.top + innerHeight}
+              stroke="#94A3B8"
+              strokeWidth="1.5"
+            />
 
-          {/* Línea base X */}
-          <line
-            x1={padding.left}
-            y1={padding.top + innerHeight}
-            x2={width - padding.right}
-            y2={padding.top + innerHeight}
-            stroke="#94A3B8"
-            strokeWidth="1.5"
-          />
+            {/* Trazos de serie */}
+            {visibleSeries.map((s) => {
+              if (s.data.length === 0) return null;
+              const sortedData = [...s.data].sort((a, b) => a.year - b.year);
 
-          {/* Trazos de serie */}
-          {visibleSeries.map((s) => {
-            if (s.data.length === 0) return null;
-            const sortedData = [...s.data].sort((a, b) => a.year - b.year);
+              const points = sortedData.map((d) => ({
+                x: getX(d.year),
+                y: getY(d.value),
+                ...d,
+              }));
 
-            const points = sortedData.map((d) => ({
-              x: getX(d.year),
-              y: getY(d.value),
-              ...d,
-            }));
+              const linePath = points
+                .map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`)
+                .join(' ');
 
-            const linePath = points
-              .map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`)
-              .join(' ');
-
-            const baselineY = minValue < 0 && maxValue > 0 ? getY(0) : (padding.top + innerHeight);
-            const areaPath = `
+              const baselineY = minValue < 0 && maxValue > 0 ? getY(0) : (padding.top + innerHeight);
+              const areaPath = `
               ${linePath}
               L ${points[points.length - 1].x.toFixed(1)} ${baselineY.toFixed(1)}
               L ${points[0].x.toFixed(1)} ${baselineY.toFixed(1)}
               Z
             `;
 
-            return (
-              <g key={s.id}>
-                {showArea && (
+              return (
+                <g key={s.id}>
+                  {showArea && (
+                    <path
+                      d={areaPath}
+                      fill={`url(#grad-${s.id})`}
+                      className="transition-opacity duration-300"
+                    />
+                  )}
+
                   <path
-                    d={areaPath}
-                    fill={`url(#grad-${s.id})`}
-                    className="transition-opacity duration-300"
+                    d={linePath}
+                    fill="none"
+                    stroke={s.color}
+                    strokeWidth={isExpanded ? '3.5' : '2.8'}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="transition-all duration-300"
                   />
-                )}
 
-                <path
-                  d={linePath}
-                  fill="none"
-                  stroke={s.color}
-                  strokeWidth={isExpanded ? '3.5' : '2.8'}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="transition-all duration-300"
-                />
+                  {showPoints &&
+                    points.map((pt, pIdx) => {
+                      const prevPt = pIdx > 0 ? sortedData[pIdx - 1] : undefined;
+                      const isHovered =
+                        hoveredPoint &&
+                        hoveredPoint.seriesName === s.name &&
+                        hoveredPoint.year === pt.year;
 
-                {showPoints &&
-                  points.map((pt, pIdx) => {
-                    const prevPt = pIdx > 0 ? sortedData[pIdx - 1] : undefined;
-                    const isHovered =
-                      hoveredPoint &&
-                      hoveredPoint.seriesName === s.name &&
-                      hoveredPoint.year === pt.year;
+                      return (
+                        <g key={pIdx}>
+                          <circle
+                            cx={pt.x}
+                            cy={pt.y}
+                            r={isHovered ? 7 : isExpanded ? 4.5 : 3.5}
+                            fill="#ffffff"
+                            stroke={s.color}
+                            strokeWidth={isHovered ? 3.5 : 2.2}
+                            className="cursor-pointer transition-all"
+                            onMouseEnter={() =>
+                              setHoveredPoint({
+                                seriesName: s.name,
+                                seriesColor: s.color,
+                                year: pt.year,
+                                value: pt.value,
+                                prevValue: prevPt?.value,
+                                x: pt.x,
+                                y: pt.y,
+                              })
+                            }
+                          />
 
-                    return (
-                      <g key={pIdx}>
-                        <circle
-                          cx={pt.x}
-                          cy={pt.y}
-                          r={isHovered ? 7 : isExpanded ? 4.5 : 3.5}
-                          fill="#ffffff"
-                          stroke={s.color}
-                          strokeWidth={isHovered ? 3.5 : 2.2}
-                          className="cursor-pointer transition-all"
-                          onMouseEnter={() =>
-                            setHoveredPoint({
-                              seriesName: s.name,
-                              seriesColor: s.color,
-                              year: pt.year,
-                              value: pt.value,
-                              prevValue: prevPt?.value,
-                              x: pt.x,
-                              y: pt.y,
-                            })
-                          }
-                        />
+                          {/* En modo agrandado, mostrar etiqueta numérica de los puntos principales */}
+                          {isExpanded && points.length <= 15 && (
+                            <text
+                              x={pt.x}
+                              y={pt.y - 9}
+                              textAnchor="middle"
+                              fontSize="9"
+                              fontWeight="800"
+                              fill={s.color}
+                              fontFamily="monospace"
+                            >
+                              {pt.value >= 1000000
+                                ? `${(pt.value / 1000000).toFixed(2)}M`
+                                : pt.value >= 1000
+                                  ? `${(pt.value / 1000).toFixed(0)}k`
+                                  : pt.value}
+                            </text>
+                          )}
+                        </g>
+                      );
+                    })}
+                </g>
+              );
+            })}
+          </svg>
 
-                        {/* En modo agrandado, mostrar etiqueta numérica de los puntos principales */}
-                        {isExpanded && points.length <= 15 && (
-                          <text
-                            x={pt.x}
-                            y={pt.y - 9}
-                            textAnchor="middle"
-                            fontSize="9"
-                            fontWeight="800"
-                            fill={s.color}
-                            fontFamily="monospace"
-                          >
-                            {pt.value >= 1000000
-                              ? `${(pt.value / 1000000).toFixed(2)}M`
-                              : pt.value >= 1000
-                              ? `${(pt.value / 1000).toFixed(0)}k`
-                              : pt.value}
-                          </text>
-                        )}
-                      </g>
-                    );
-                  })}
-              </g>
-            );
-          })}
-        </svg>
+          {/* Tooltip con detección dinámica de bordes */}
+          {hoveredPoint && (() => {
+            const isTop = hoveredPoint.y < 85;
+            const isRight = hoveredPoint.x > width * 0.72;
+            const isLeft = hoveredPoint.x < width * 0.28;
+            const xPercent = (hoveredPoint.x / width) * 100;
+            const yPercent = (hoveredPoint.y / dynamicHeight) * 100;
 
-        {/* Tooltip con detección dinámica de bordes */}
-        {hoveredPoint && (() => {
-          const isTop = hoveredPoint.y < 85;
-          const isRight = hoveredPoint.x > width * 0.72;
-          const isLeft = hoveredPoint.x < width * 0.28;
-          const xPercent = (hoveredPoint.x / width) * 100;
-          const yPercent = (hoveredPoint.y / dynamicHeight) * 100;
+            const transformX = isRight ? '-90%' : isLeft ? '-10%' : '-50%';
+            const transformY = isTop ? '12px' : '-100%';
+            const marginTop = isTop ? '14px' : '-14px';
 
-          const transformX = isRight ? '-90%' : isLeft ? '-10%' : '-50%';
-          const transformY = isTop ? '12px' : '-100%';
-          const marginTop = isTop ? '14px' : '-14px';
-
-          return (
-            <div
-              className="absolute z-30 pointer-events-none bg-slate-900/95 text-white rounded-xl p-3 text-xs shadow-xl border border-slate-700 min-w-[150px] backdrop-blur-xs transition-all"
-              style={{
-                left: `${xPercent}%`,
-                top: `${yPercent}%`,
-                transform: `translate(${transformX}, ${transformY})`,
-                marginTop,
-              }}
-            >
-              <div className="flex items-center gap-1.5 mb-1.5 pb-1 border-b border-slate-700/80 text-[10px] text-slate-300 font-medium uppercase">
-                <span
-                  className="w-2.5 h-2.5 rounded-full shrink-0"
-                  style={{ backgroundColor: hoveredPoint.seriesColor }}
-                />
-                <span className="truncate">{hoveredPoint.seriesName}</span>
-              </div>
-
-              <div className="flex items-baseline justify-between gap-3">
-                <span className="text-slate-400 text-[11px] font-medium">
-                  {xLabelFormatter ? xLabelFormatter(hoveredPoint.year) : `Gestión ${hoveredPoint.year}`}:
-                </span>
-                <strong className="text-white text-sm font-semibold">
-                  {hoveredPoint.value.toLocaleString('es-BO')} {unit}
-                </strong>
-              </div>
-
-              {hoveredPoint.prevValue !== undefined && hoveredPoint.prevValue > 0 && (
-                <div className="mt-1.5 pt-1.5 border-t border-slate-800 flex items-center justify-between text-[10px]">
-                  <span className="text-slate-400">Variación anual:</span>
+            return (
+              <div
+                className="absolute z-30 pointer-events-none bg-slate-900/95 text-white rounded-xl p-3 text-xs shadow-xl border border-slate-700 min-w-[150px] backdrop-blur-xs transition-all"
+                style={{
+                  left: `${xPercent}%`,
+                  top: `${yPercent}%`,
+                  transform: `translate(${transformX}, ${transformY})`,
+                  marginTop,
+                }}
+              >
+                <div className="flex items-center gap-1.5 mb-1.5 pb-1 border-b border-slate-700/80 text-[10px] text-slate-300 font-medium uppercase">
                   <span
-                    className={`font-semibold ${
-                      hoveredPoint.value >= hoveredPoint.prevValue
-                        ? 'text-emerald-400'
-                        : 'text-rose-400'
-                    }`}
-                  >
-                    {hoveredPoint.value >= hoveredPoint.prevValue ? '+' : ''}
-                    {(
-                      ((hoveredPoint.value - hoveredPoint.prevValue) /
-                        hoveredPoint.prevValue) *
-                      100
-                    ).toFixed(1)}
-                    %
-                  </span>
+                    className="w-2.5 h-2.5 rounded-full shrink-0"
+                    style={{ backgroundColor: hoveredPoint.seriesColor }}
+                  />
+                  <span className="truncate">{hoveredPoint.seriesName}</span>
                 </div>
-              )}
-            </div>
-          );
-        })()}
-      </div>
+
+                <div className="flex items-baseline justify-between gap-3">
+                  <span className="text-slate-400 text-[11px] font-medium">
+                    {xLabelFormatter ? xLabelFormatter(hoveredPoint.year) : `Gestión ${hoveredPoint.year}`}:
+                  </span>
+                  <strong className="text-white text-sm font-semibold">
+                    {hoveredPoint.value.toLocaleString('es-BO')} {unit}
+                  </strong>
+                </div>
+
+                {hoveredPoint.prevValue !== undefined && hoveredPoint.prevValue > 0 && (
+                  <div className="mt-1.5 pt-1.5 border-t border-slate-800 flex items-center justify-between text-[10px]">
+                    <span className="text-slate-400">Variación anual:</span>
+                    <span
+                      className={`font-semibold ${hoveredPoint.value >= hoveredPoint.prevValue
+                          ? 'text-emerald-400'
+                          : 'text-rose-400'
+                        }`}
+                    >
+                      {hoveredPoint.value >= hoveredPoint.prevValue ? '+' : ''}
+                      {(
+                        ((hoveredPoint.value - hoveredPoint.prevValue) /
+                          hoveredPoint.prevValue) *
+                        100
+                      ).toFixed(1)}
+                      %
+                    </span>
+                  </div>
+                )}
+              </div>
+            );
+          })()}
+        </div>
 
         {/* Tabla Cronológica Detallada que aparece cuando el usuario agranda el cuadro */}
         {fullscreen && (

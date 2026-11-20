@@ -872,44 +872,13 @@ export default function MatriculaEvolucionView() {
             ))}
           </div>
 
-          <button
-            type="button"
-            onClick={toggleFullscreen}
-            className="inline-flex items-center gap-1.5 bg-slate-900 hover:bg-black text-white px-3.5 py-2 rounded-xl text-xs font-extrabold shadow-sm transition-all shrink-0"
-            title="Alternar Pantalla Completa"
-          >
-            {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
-            <span>{isFullscreen ? "Salir Pantalla Completa" : "Pantalla Completa"}</span>
-          </button>
         </div>
       </div>
 
       {/* ─── Barra de Segmentación Multidimensional (Departamento, Nivel y Área) ─── */}
       <div className={`px-5 py-3 bg-slate-50/80 border-b border-slate-200 flex flex-col gap-2.5 ${isFullscreen ? "w-[92%] lg:w-[90%] mx-auto rounded-2xl bg-white border border-slate-200 shadow-2xs my-2 px-4" : ""
         }`}>
-        {/* Fila 1: Ámbito Departamental */}
-        <div className="flex items-center gap-1.5 flex-wrap">
-          <span className="text-[11px] font-black text-slate-700 flex items-center gap-1 uppercase tracking-wider mr-1">
-            <Users className="w-3.5 h-3.5 text-indigo-600" /> Departamento:
-          </span>
-          {DEPARTAMENTOS.map((dep) => (
-            <button
-              key={dep.id}
-              type="button"
-              onClick={() => setFiltroDep(dep.id as DepFilter)}
-              className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${filtroDep === dep.id
-                ? "bg-indigo-700 text-white shadow-xs font-black"
-                : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200"
-                }`}
-            >
-              <span>{dep.nombre}</span>
-              <span className={`text-[9.5px] px-1 py-0.2 rounded font-black ${filtroDep === dep.id ? "bg-indigo-800 text-indigo-100" : "bg-slate-100 text-slate-500"
-                }`}>
-                {dep.codigo}
-              </span>
-            </button>
-          ))}
-        </div>
+
 
         {/* Fila 2: Nivel Educativo y Área Urbana/Rural */}
         <div className="flex items-center justify-between gap-3 flex-wrap pt-1.5 border-t border-slate-200/60">
