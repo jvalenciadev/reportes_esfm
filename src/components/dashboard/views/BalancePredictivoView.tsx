@@ -181,6 +181,14 @@ export function BalancePredictivoView() {
     }
   };
 
+  // Mapa id→inscritos reales 2022-2026 (fuente de verdad = 17.597)
+  const inscritosBaseMap = useMemo(() => {
+    const m: Record<number, number> = {};
+    (egresadosProyeccionData.especialidades as Array<{ especialidad_id: number; total_inscritos_2022_2026: number }>)
+      .forEach(e => { m[e.especialidad_id] = e.total_inscritos_2022_2026; });
+    return m;
+  }, []);
+
   // Cálculo Dinámico Multivariable por Especialidad
   const especialidadesCalculadas = useMemo(() => {
     if (!data?.especialidades) return [];
@@ -209,13 +217,16 @@ export function BalancePredictivoView() {
         const noPertinentesAjustados = Math.round(universoNoPert * (tasaReemplazoNoPert / 100));
 
         // 4. Egresados: Los 2 Modelos de Oferta (Radicación Real y Bolsa Nacional) ajustados por factorTit
-        const baseRadicacion = filtroDepto === 'TODOS' ? m.egresados_2027_2031 : (m.egresados_radicacion_real ?? m.egresados_bolsa_nacional ?? 0);
-        const baseBolsa = m.egresados_bolsa_nacional ?? m.egresados_2027_2031;
+        // En modo 'TODOS', la fuente de verdad de inscritos directos por especialidad es inscritosBaseMap (suma 17.597 exactos)
+        const inscritosDirectosEsp = inscritosBaseMap[esp.especialidad_id];
 
-        // base_inscritos_* = base pre-merma (sin factor de titulación). Se usa para sumar en totales
-        // y redondear UNA SOLA VEZ, evitando acumulación de error por 22 Math.round individuales.
-        const baseInscritosRad = baseRadicacion / 0.82;   // float, sin redondear
-        const baseInscritosBolsa = baseBolsa / 0.82;        // float, sin redondear
+        const baseInscritosRad = filtroDepto === 'TODOS' && inscritosDirectosEsp !== undefined
+          ? inscritosDirectosEsp
+          : ((m.egresados_radicacion_real ?? m.egresados_2027_2031 ?? 0) / 0.82);
+
+        const baseInscritosBolsa = filtroDepto === 'TODOS' && inscritosDirectosEsp !== undefined
+          ? inscritosDirectosEsp
+          : ((m.egresados_bolsa_nacional ?? m.egresados_2027_2031 ?? 0) / 0.82);
 
         const egrRadicacionAjustado = Math.round(baseInscritosRad * (factorTit / 100));
         const egrBolsaAjustado = Math.round(baseInscritosBolsa * (factorTit / 100));
@@ -266,7 +277,8 @@ export function BalancePredictivoView() {
     factorTit,
     tipoAsignacionEgresados,
     aplicarArima,
-    pctMigracion
+    pctMigracion,
+    inscritosBaseMap
   ]);
 
   // Agrupamiento por Nivel Educativo
@@ -290,14 +302,6 @@ export function BalancePredictivoView() {
       .filter((g) => g.items.length > 0)
       .sort((a, b) => a.ordenJerarquia - b.ordenJerarquia);
   }, [especialidadesCalculadas]);
-
-  // Mapa id→inscritos reales 2022-2026 (fuente de verdad = 17.597)
-  const inscritosBaseMap = useMemo(() => {
-    const m: Record<number, number> = {};
-    (egresadosProyeccionData.especialidades as Array<{ especialidad_id: number; total_inscritos_2022_2026: number }>)
-      .forEach(e => { m[e.especialidad_id] = e.total_inscritos_2022_2026; });
-    return m;
-  }, []);
 
   // Totales de Cabecera y Resumen
   const totales = useMemo(() => {
