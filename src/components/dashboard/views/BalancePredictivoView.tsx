@@ -32,6 +32,7 @@ import {
   Calculator
 } from 'lucide-react';
 import { getNivelEspecialidad, NivelCodigo, NIVELES_CONFIG } from '@/lib/constants/especialidadNiveles';
+import egresadosProyeccionData from '@/data/egresados_esfm_proyeccion.json';
 
 // ─── Interfaces ──────────────────────────────────────────────────────────────
 
@@ -48,6 +49,8 @@ interface MetricasEspecialidad {
   egresados_local_calc?: number;
   egresados_radicacion_calc?: number;
   egresados_bolsa_calc?: number;
+  base_inscritos_rad?: number;
+  base_inscritos_bolsa?: number;
   total_docentes: number;
   alta_v: number;
   media_a: number;
@@ -206,8 +209,13 @@ export function BalancePredictivoView() {
         const baseRadicacion = filtroDepto === 'TODOS' ? m.egresados_2027_2031 : (m.egresados_radicacion_real ?? m.egresados_bolsa_nacional ?? 0);
         const baseBolsa = m.egresados_bolsa_nacional ?? m.egresados_2027_2031;
 
-        const egrRadicacionAjustado = Math.round((baseRadicacion / 0.82) * (factorTit / 100));
-        const egrBolsaAjustado = Math.round((baseBolsa / 0.82) * (factorTit / 100));
+        // base_inscritos_* = base pre-merma (sin factor de titulación). Se usa para sumar en totales
+        // y redondear UNA SOLA VEZ, evitando acumulación de error por 22 Math.round individuales.
+        const baseInscritosRad  = baseRadicacion / 0.82;   // float, sin redondear
+        const baseInscritosBolsa = baseBolsa / 0.82;        // float, sin redondear
+
+        const egrRadicacionAjustado = Math.round(baseInscritosRad  * (factorTit / 100));
+        const egrBolsaAjustado      = Math.round(baseInscritosBolsa * (factorTit / 100));
 
         const egresadosAjustados = tipoAsignacionEgresados === 'bolsa' ? egrBolsaAjustado : egrRadicacionAjustado;
 
@@ -233,6 +241,8 @@ export function BalancePredictivoView() {
             egresados_2027_2031: egresadosAjustados,
             egresados_radicacion_calc: egrRadicacionAjustado,
             egresados_bolsa_calc: egrBolsaAjustado,
+            base_inscritos_rad: baseInscritosRad,
+            base_inscritos_bolsa: baseInscritosBolsa,
             demanda_total: demandaCalculada,
             brecha_neta: brechaCalculada,
             saldo_mig_aplicado: saldoMig,
@@ -278,6 +288,14 @@ export function BalancePredictivoView() {
       .sort((a, b) => a.ordenJerarquia - b.ordenJerarquia);
   }, [especialidadesCalculadas]);
 
+  // Mapa id→inscritos reales 2022-2026 (fuente de verdad = 17.597)
+  const inscritosBaseMap = useMemo(() => {
+    const m: Record<number, number> = {};
+    (egresadosProyeccionData.especialidades as Array<{ especialidad_id: number; total_inscritos_2022_2026: number }>)
+      .forEach(e => { m[e.especialidad_id] = e.total_inscritos_2022_2026; });
+    return m;
+  }, []);
+
   // Totales de Cabecera y Resumen
   const totales = useMemo(() => {
     let totDeficit = 0;
@@ -293,6 +311,10 @@ export function BalancePredictivoView() {
     let totEgrBolsa = 0;
     let totBrecha = 0;
 
+    // Acumular inscritos reales filtrados para redondear UNA SOLA VEZ
+    // Evita el drift de +4 que ocurre al sumar 22 Math.round individuales
+    let totInscritos = 0;
+
     for (const esp of especialidadesCalculadas) {
       totDeficit += esp.metrics.deficit_calculado;
       totJub += esp.metrics.jubilacion_calculada;
@@ -302,11 +324,15 @@ export function BalancePredictivoView() {
       totSalientes += esp.metrics.migracion_salientes;
       totSaldoMig += esp.metrics.saldo_mig_aplicado;
       totDemanda += esp.metrics.demanda_total;
-      totEgresados += esp.metrics.egresados_2027_2031;
       totEgrRadicacion += esp.metrics.egresados_radicacion_calc || 0;
       totEgrBolsa += esp.metrics.egresados_bolsa_calc || 0;
       totBrecha += esp.metrics.brecha_neta;
+      // Inscritos reales del JSON de cohortes (fuente de verdad = 17.597 total)
+      totInscritos += inscritosBaseMap[esp.especialidad_id] ?? 0;
     }
+
+    // Un solo Math.round sobre el total → coincide exactamente con EgresadosProyeccionView
+    totEgresados = Math.round(totInscritos * (factorTit / 100));
 
     return {
       totDeficit,
@@ -322,7 +348,7 @@ export function BalancePredictivoView() {
       totEgrBolsa,
       totBrecha
     };
-  }, [especialidadesCalculadas]);
+  }, [especialidadesCalculadas, inscritosBaseMap, factorTit]);
 
   const fmt = (n?: number | null) => (n ?? 0).toLocaleString('es-BO');
 
