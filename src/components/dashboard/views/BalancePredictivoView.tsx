@@ -36,6 +36,7 @@ import {
 import { getNivelEspecialidad, NivelCodigo, NIVELES_CONFIG } from '@/lib/constants/especialidadNiveles';
 import egresadosProyeccionData from '@/data/egresados_esfm_proyeccion.json';
 import { exportBalancePredictivoPdf } from '@/lib/exportBalancePdf';
+import { computeDistribucionExactaEgresados } from '@/lib/egresadosAllocation';
 
 // ─── Interfaces ──────────────────────────────────────────────────────────────
 
@@ -189,6 +190,12 @@ export function BalancePredictivoView() {
     return m;
   }, []);
 
+  // Cálculo de Distribución Exacta Entera (Hamilton) para que los 9 departamentos sumen exactamente el Nacional
+  const distribucionExacta = useMemo(() => {
+    if (!data?.especialidades) return null;
+    return computeDistribucionExactaEgresados(factorTit, data.especialidades);
+  }, [data, factorTit]);
+
   // Cálculo Dinámico Multivariable por Especialidad
   const especialidadesCalculadas = useMemo(() => {
     if (!data?.especialidades) return [];
@@ -216,20 +223,25 @@ export function BalancePredictivoView() {
         const universoNoPert = reemplazarMedia ? (m.media_a + m.baja_n + m.sin_pert) : (m.baja_n + m.sin_pert);
         const noPertinentesAjustados = Math.round(universoNoPert * (tasaReemplazoNoPert / 100));
 
-        // 4. Egresados: Los 2 Modelos de Oferta (Radicación Real y Bolsa Nacional) ajustados por factorTit
-        // En modo 'TODOS', la fuente de verdad de inscritos directos por especialidad es inscritosBaseMap (suma 17.597 exactos)
-        const inscritosDirectosEsp = inscritosBaseMap[esp.especialidad_id];
+        // 4. Egresados: Distribución Exacta Entera (garantiza que la suma de los 9 departamentos == Nacional exacto)
+        let egrRadicacionAjustado = 0;
+        let egrBolsaAjustado = 0;
 
-        const baseInscritosRad = filtroDepto === 'TODOS' && inscritosDirectosEsp !== undefined
-          ? inscritosDirectosEsp
-          : ((m.egresados_radicacion_real ?? m.egresados_2027_2031 ?? 0) / 0.82);
-
-        const baseInscritosBolsa = filtroDepto === 'TODOS' && inscritosDirectosEsp !== undefined
-          ? inscritosDirectosEsp
-          : ((m.egresados_bolsa_nacional ?? m.egresados_2027_2031 ?? 0) / 0.82);
-
-        const egrRadicacionAjustado = Math.round(baseInscritosRad * (factorTit / 100));
-        const egrBolsaAjustado = Math.round(baseInscritosBolsa * (factorTit / 100));
+        if (distribucionExacta) {
+          if (filtroDepto === 'TODOS') {
+            const nacVal = distribucionExacta.nacionalPorEspecialidad[esp.especialidad_id] ?? 0;
+            egrRadicacionAjustado = nacVal;
+            egrBolsaAjustado = nacVal;
+          } else {
+            egrRadicacionAjustado = distribucionExacta.porEspecialidadYDeptoRadicacion[esp.especialidad_id]?.[filtroDepto] ?? 0;
+            egrBolsaAjustado = distribucionExacta.porEspecialidadYDeptoBolsa[esp.especialidad_id]?.[filtroDepto] ?? 0;
+          }
+        } else {
+          const baseRad = filtroDepto === 'TODOS' ? m.egresados_2027_2031 : (m.egresados_radicacion_real ?? 0);
+          const baseBolsa = m.egresados_bolsa_nacional ?? m.egresados_2027_2031;
+          egrRadicacionAjustado = Math.round((baseRad / 0.82) * (factorTit / 100));
+          egrBolsaAjustado = Math.round((baseBolsa / 0.82) * (factorTit / 100));
+        }
 
         const egresadosAjustados = tipoAsignacionEgresados === 'bolsa' ? egrBolsaAjustado : egrRadicacionAjustado;
 
@@ -255,8 +267,6 @@ export function BalancePredictivoView() {
             egresados_2027_2031: egresadosAjustados,
             egresados_radicacion_calc: egrRadicacionAjustado,
             egresados_bolsa_calc: egrBolsaAjustado,
-            base_inscritos_rad: baseInscritosRad,
-            base_inscritos_bolsa: baseInscritosBolsa,
             demanda_total: demandaCalculada,
             brecha_neta: brechaCalculada,
             saldo_mig_aplicado: saldoMig,
@@ -278,7 +288,7 @@ export function BalancePredictivoView() {
     tipoAsignacionEgresados,
     aplicarArima,
     pctMigracion,
-    inscritosBaseMap
+    distribucionExacta
   ]);
 
   // Agrupamiento por Nivel Educativo
@@ -334,12 +344,8 @@ export function BalancePredictivoView() {
       totEgrRadicacion += esp.metrics.egresados_radicacion_calc || 0;
       totEgrBolsa += esp.metrics.egresados_bolsa_calc || 0;
       totBrecha += esp.metrics.brecha_neta;
-      // Inscritos reales del JSON de cohortes (fuente de verdad = 17.597 total)
-      totInscritos += inscritosBaseMap[esp.especialidad_id] ?? 0;
+      totEgresados += esp.metrics.egresados_2027_2031;
     }
-
-    // Un solo Math.round sobre el total → coincide exactamente con EgresadosProyeccionView
-    totEgresados = Math.round(totInscritos * (factorTit / 100));
 
     return {
       totDeficit,
@@ -355,7 +361,7 @@ export function BalancePredictivoView() {
       totEgrBolsa,
       totBrecha
     };
-  }, [especialidadesCalculadas, inscritosBaseMap, factorTit]);
+  }, [especialidadesCalculadas]);
 
   const fmt = (n?: number | null) => (n ?? 0).toLocaleString('es-BO');
 
