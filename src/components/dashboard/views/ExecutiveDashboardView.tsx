@@ -14,8 +14,10 @@ import {
   ShieldCheck,
   ArrowLeftRight,
   Maximize2,
-  Minimize2
+  Minimize2,
+  FileText
 } from 'lucide-react';
+import { exportInformeDataSciencePdf } from '@/lib/exportInformeDataSciencePdf';
 
 interface ExecutiveDashboardViewProps {
   data: DashboardDataset;
@@ -112,6 +114,17 @@ export function ExecutiveDashboardView({ data }: ExecutiveDashboardViewProps) {
         </div>
 
         <div className="flex items-center gap-2">
+          {/* Botón Descargar Informe Técnico Data Science */}
+          <button
+            type="button"
+            onClick={exportInformeDataSciencePdf}
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-emerald-700 text-white hover:bg-emerald-800 transition-all shadow-xs shrink-0 cursor-pointer border border-emerald-800"
+            title="Descargar informe metodológico de Data Science en PDF (Modelos, Algoritmos y Fuentes)"
+          >
+            <FileText className="w-3.5 h-3.5 text-emerald-200" />
+            <span>Descargar Informe Data Science (PDF)</span>
+          </button>
+
           <span className="hidden xl:inline-block text-[11px] font-semibold text-slate-400 bg-slate-50 px-3 py-1.5 rounded-full border border-slate-100">
             {moduloPrincipal === 'matricula'
               ? 'Fuente: INE 2024-2034 + Cierre Auditado Aula SIE 2026'
