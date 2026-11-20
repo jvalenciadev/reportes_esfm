@@ -1,0 +1,876 @@
+{
+  "fuente": "datos_migracion_estudiantes.xlsx (Corte 35.474 titulados ESFM 2014-2025)",
+  "kpis_globales": {
+    "total_titulados": 35468,
+    "retencion_sede_esfm": 21921,
+    "pct_retencion_sede": 61.8,
+    "emigracion_retorno_inmediato": 6103,
+    "pct_emigracion_retorno": 17.2,
+    "emigracion_tardia": 1959,
+    "pct_emigracion_tardia": 5.5,
+    "retorno_tardio_esfm": 1671,
+    "itinerantes": 1178,
+    "sin_insercion_sep": 2636,
+    "pct_sin_insercion": 7.4
+  },
+  "series_por_gestion": [
+    {
+      "gestion": 2014,
+      "total_titulados": 6025,
+      "quedan_sede": 3964,
+      "pct_quedan_sede": 65.8,
+      "emigran_retornan_inmediato": 807,
+      "pct_emigran_retornan": 13.4,
+      "sin_ejercer": 306,
+      "pct_sin_ejercer": 5.1,
+      "espera_promedio_anos": 2.6
+    },
+    {
+      "gestion": 2015,
+      "total_titulados": 5709,
+      "quedan_sede": 3331,
+      "pct_quedan_sede": 58.3,
+      "emigran_retornan_inmediato": 1063,
+      "pct_emigran_retornan": 18.6,
+      "sin_ejercer": 275,
+      "pct_sin_ejercer": 4.8,
+      "espera_promedio_anos": 2.5
+    },
+    {
+      "gestion": 2016,
+      "total_titulados": 581,
+      "quedan_sede": 408,
+      "pct_quedan_sede": 70.2,
+      "emigran_retornan_inmediato": 66,
+      "pct_emigran_retornan": 11.4,
+      "sin_ejercer": 28,
+      "pct_sin_ejercer": 4.8,
+      "espera_promedio_anos": 1.8
+    },
+    {
+      "gestion": 2017,
+      "total_titulados": 3573,
+      "quedan_sede": 2184,
+      "pct_quedan_sede": 61.1,
+      "emigran_retornan_inmediato": 588,
+      "pct_emigran_retornan": 16.5,
+      "sin_ejercer": 93,
+      "pct_sin_ejercer": 2.6,
+      "espera_promedio_anos": 1.8
+    },
+    {
+      "gestion": 2018,
+      "total_titulados": 279,
+      "quedan_sede": 141,
+      "pct_quedan_sede": 50.5,
+      "emigran_retornan_inmediato": 47,
+      "pct_emigran_retornan": 16.8,
+      "sin_ejercer": 21,
+      "pct_sin_ejercer": 7.5,
+      "espera_promedio_anos": 1.4
+    },
+    {
+      "gestion": 2019,
+      "total_titulados": 2888,
+      "quedan_sede": 1719,
+      "pct_quedan_sede": 59.5,
+      "emigran_retornan_inmediato": 570,
+      "pct_emigran_retornan": 19.7,
+      "sin_ejercer": 86,
+      "pct_sin_ejercer": 3.0,
+      "espera_promedio_anos": 2.1
+    },
+    {
+      "gestion": 2020,
+      "total_titulados": 2229,
+      "quedan_sede": 1428,
+      "pct_quedan_sede": 64.1,
+      "emigran_retornan_inmediato": 398,
+      "pct_emigran_retornan": 17.9,
+      "sin_ejercer": 54,
+      "pct_sin_ejercer": 2.4,
+      "espera_promedio_anos": 1.3
+    },
+    {
+      "gestion": 2021,
+      "total_titulados": 2445,
+      "quedan_sede": 1590,
+      "pct_quedan_sede": 65.0,
+      "emigran_retornan_inmediato": 439,
+      "pct_emigran_retornan": 18.0,
+      "sin_ejercer": 75,
+      "pct_sin_ejercer": 3.1,
+      "espera_promedio_anos": 1.2
+    },
+    {
+      "gestion": 2022,
+      "total_titulados": 2799,
+      "quedan_sede": 1859,
+      "pct_quedan_sede": 66.4,
+      "emigran_retornan_inmediato": 542,
+      "pct_emigran_retornan": 19.4,
+      "sin_ejercer": 124,
+      "pct_sin_ejercer": 4.4,
+      "espera_promedio_anos": 1.1
+    },
+    {
+      "gestion": 2023,
+      "total_titulados": 2770,
+      "quedan_sede": 1833,
+      "pct_quedan_sede": 66.2,
+      "emigran_retornan_inmediato": 555,
+      "pct_emigran_retornan": 20.0,
+      "sin_ejercer": 158,
+      "pct_sin_ejercer": 5.7,
+      "espera_promedio_anos": 1.1
+    },
+    {
+      "gestion": 2024,
+      "total_titulados": 2988,
+      "quedan_sede": 1956,
+      "pct_quedan_sede": 65.5,
+      "emigran_retornan_inmediato": 567,
+      "pct_emigran_retornan": 19.0,
+      "sin_ejercer": 279,
+      "pct_sin_ejercer": 9.3,
+      "espera_promedio_anos": 1.0
+    },
+    {
+      "gestion": 2025,
+      "total_titulados": 3182,
+      "quedan_sede": 1508,
+      "pct_quedan_sede": 47.4,
+      "emigran_retornan_inmediato": 461,
+      "pct_emigran_retornan": 14.5,
+      "sin_ejercer": 1137,
+      "pct_sin_ejercer": 35.7,
+      "espera_promedio_anos": 0.8
+    }
+  ],
+  "por_departamento": {
+    "BENI": {
+      "total_titulados": 2223,
+      "quedan_sede": 1408,
+      "pct_quedan_sede": 63.3,
+      "emigran_inmediato": 347,
+      "pct_emigran_inmediato": 15.6,
+      "sin_ejercer": 61,
+      "pct_sin_ejercer": 2.7,
+      "principales_destinos_retorno": [
+        {
+          "depto": "PANDO",
+          "docentes": 265,
+          "pct": 11.9
+        },
+        {
+          "depto": "LA PAZ",
+          "docentes": 127,
+          "pct": 5.7
+        },
+        {
+          "depto": "SANTA CRUZ",
+          "docentes": 90,
+          "pct": 4.0
+        },
+        {
+          "depto": "COCHABAMBA",
+          "docentes": 18,
+          "pct": 0.8
+        }
+      ],
+      "radicacion_actual": [
+        {
+          "depto": "BENI",
+          "docentes": 1515,
+          "pct": 68.2
+        },
+        {
+          "depto": "LA PAZ",
+          "docentes": 202,
+          "pct": 9.1
+        },
+        {
+          "depto": "PANDO",
+          "docentes": 190,
+          "pct": 8.5
+        },
+        {
+          "depto": "SANTA CRUZ",
+          "docentes": 140,
+          "pct": 6.3
+        },
+        {
+          "depto": "COCHABAMBA",
+          "docentes": 27,
+          "pct": 1.2
+        }
+      ]
+    },
+    "CHUQUISACA": {
+      "total_titulados": 3018,
+      "quedan_sede": 1166,
+      "pct_quedan_sede": 38.6,
+      "emigran_inmediato": 1203,
+      "pct_emigran_inmediato": 39.9,
+      "sin_ejercer": 201,
+      "pct_sin_ejercer": 6.7,
+      "principales_destinos_retorno": [
+        {
+          "depto": "SANTA CRUZ",
+          "docentes": 925,
+          "pct": 30.6
+        },
+        {
+          "depto": "POTOSI",
+          "docentes": 240,
+          "pct": 8.0
+        },
+        {
+          "depto": "COCHABAMBA",
+          "docentes": 103,
+          "pct": 3.4
+        },
+        {
+          "depto": "LA PAZ",
+          "docentes": 93,
+          "pct": 3.1
+        }
+      ],
+      "radicacion_actual": [
+        {
+          "depto": "CHUQUISACA",
+          "docentes": 1273,
+          "pct": 42.2
+        },
+        {
+          "depto": "SANTA CRUZ",
+          "docentes": 855,
+          "pct": 28.3
+        },
+        {
+          "depto": "POTOSI",
+          "docentes": 267,
+          "pct": 8.8
+        },
+        {
+          "depto": "COCHABAMBA",
+          "docentes": 107,
+          "pct": 3.5
+        },
+        {
+          "depto": "LA PAZ",
+          "docentes": 97,
+          "pct": 3.2
+        }
+      ]
+    },
+    "COCHABAMBA": {
+      "total_titulados": 4428,
+      "quedan_sede": 3192,
+      "pct_quedan_sede": 72.1,
+      "emigran_inmediato": 401,
+      "pct_emigran_inmediato": 9.1,
+      "sin_ejercer": 347,
+      "pct_sin_ejercer": 7.8,
+      "principales_destinos_retorno": [
+        {
+          "depto": "SANTA CRUZ",
+          "docentes": 415,
+          "pct": 9.4
+        },
+        {
+          "depto": "POTOSI",
+          "docentes": 90,
+          "pct": 2.0
+        },
+        {
+          "depto": "LA PAZ",
+          "docentes": 73,
+          "pct": 1.6
+        },
+        {
+          "depto": "BENI",
+          "docentes": 67,
+          "pct": 1.5
+        }
+      ],
+      "radicacion_actual": [
+        {
+          "depto": "COCHABAMBA",
+          "docentes": 3419,
+          "pct": 77.2
+        },
+        {
+          "depto": "SANTA CRUZ",
+          "docentes": 286,
+          "pct": 6.5
+        },
+        {
+          "depto": "LA PAZ",
+          "docentes": 72,
+          "pct": 1.6
+        },
+        {
+          "depto": "POTOSI",
+          "docentes": 54,
+          "pct": 1.2
+        },
+        {
+          "depto": "PANDO",
+          "docentes": 28,
+          "pct": 0.6
+        }
+      ]
+    },
+    "LA PAZ": {
+      "total_titulados": 9575,
+      "quedan_sede": 6629,
+      "pct_quedan_sede": 69.2,
+      "emigran_inmediato": 695,
+      "pct_emigran_inmediato": 7.3,
+      "sin_ejercer": 940,
+      "pct_sin_ejercer": 9.8,
+      "principales_destinos_retorno": [
+        {
+          "depto": "SANTA CRUZ",
+          "docentes": 527,
+          "pct": 5.5
+        },
+        {
+          "depto": "BENI",
+          "docentes": 367,
+          "pct": 3.8
+        },
+        {
+          "depto": "COCHABAMBA",
+          "docentes": 226,
+          "pct": 2.4
+        },
+        {
+          "depto": "PANDO",
+          "docentes": 202,
+          "pct": 2.1
+        }
+      ],
+      "radicacion_actual": [
+        {
+          "depto": "LA PAZ",
+          "docentes": 7208,
+          "pct": 75.3
+        },
+        {
+          "depto": "SANTA CRUZ",
+          "docentes": 345,
+          "pct": 3.6
+        },
+        {
+          "depto": "BENI",
+          "docentes": 199,
+          "pct": 2.1
+        },
+        {
+          "depto": "COCHABAMBA",
+          "docentes": 172,
+          "pct": 1.8
+        },
+        {
+          "depto": "PANDO",
+          "docentes": 90,
+          "pct": 0.9
+        }
+      ]
+    },
+    "ORURO": {
+      "total_titulados": 3152,
+      "quedan_sede": 1051,
+      "pct_quedan_sede": 33.3,
+      "emigran_inmediato": 1187,
+      "pct_emigran_inmediato": 37.7,
+      "sin_ejercer": 406,
+      "pct_sin_ejercer": 12.9,
+      "principales_destinos_retorno": [
+        {
+          "depto": "COCHABAMBA",
+          "docentes": 463,
+          "pct": 14.7
+        },
+        {
+          "depto": "SANTA CRUZ",
+          "docentes": 432,
+          "pct": 13.7
+        },
+        {
+          "depto": "LA PAZ",
+          "docentes": 391,
+          "pct": 12.4
+        },
+        {
+          "depto": "POTOSI",
+          "docentes": 214,
+          "pct": 6.8
+        }
+      ],
+      "radicacion_actual": [
+        {
+          "depto": "ORURO",
+          "docentes": 1207,
+          "pct": 38.3
+        },
+        {
+          "depto": "COCHABAMBA",
+          "docentes": 461,
+          "pct": 14.6
+        },
+        {
+          "depto": "LA PAZ",
+          "docentes": 383,
+          "pct": 12.2
+        },
+        {
+          "depto": "SANTA CRUZ",
+          "docentes": 293,
+          "pct": 9.3
+        },
+        {
+          "depto": "POTOSI",
+          "docentes": 185,
+          "pct": 5.9
+        }
+      ]
+    },
+    "PANDO": {
+      "total_titulados": 1376,
+      "quedan_sede": 659,
+      "pct_quedan_sede": 47.9,
+      "emigran_inmediato": 386,
+      "pct_emigran_inmediato": 28.1,
+      "sin_ejercer": 40,
+      "pct_sin_ejercer": 2.9,
+      "principales_destinos_retorno": [
+        {
+          "depto": "LA PAZ",
+          "docentes": 329,
+          "pct": 23.9
+        },
+        {
+          "depto": "BENI",
+          "docentes": 52,
+          "pct": 3.8
+        },
+        {
+          "depto": "SANTA CRUZ",
+          "docentes": 44,
+          "pct": 3.2
+        },
+        {
+          "depto": "COCHABAMBA",
+          "docentes": 22,
+          "pct": 1.6
+        }
+      ],
+      "radicacion_actual": [
+        {
+          "depto": "PANDO",
+          "docentes": 678,
+          "pct": 49.3
+        },
+        {
+          "depto": "LA PAZ",
+          "docentes": 471,
+          "pct": 34.2
+        },
+        {
+          "depto": "SANTA CRUZ",
+          "docentes": 42,
+          "pct": 3.1
+        },
+        {
+          "depto": "BENI",
+          "docentes": 40,
+          "pct": 2.9
+        },
+        {
+          "depto": "COCHABAMBA",
+          "docentes": 28,
+          "pct": 2.0
+        }
+      ]
+    },
+    "POTOSI": {
+      "total_titulados": 3949,
+      "quedan_sede": 1888,
+      "pct_quedan_sede": 47.8,
+      "emigran_inmediato": 1100,
+      "pct_emigran_inmediato": 27.9,
+      "sin_ejercer": 317,
+      "pct_sin_ejercer": 8.0,
+      "principales_destinos_retorno": [
+        {
+          "depto": "LA PAZ",
+          "docentes": 581,
+          "pct": 14.7
+        },
+        {
+          "depto": "SANTA CRUZ",
+          "docentes": 431,
+          "pct": 10.9
+        },
+        {
+          "depto": "COCHABAMBA",
+          "docentes": 201,
+          "pct": 5.1
+        },
+        {
+          "depto": "CHUQUISACA",
+          "docentes": 156,
+          "pct": 4.0
+        }
+      ],
+      "radicacion_actual": [
+        {
+          "depto": "POTOSI",
+          "docentes": 2071,
+          "pct": 52.4
+        },
+        {
+          "depto": "LA PAZ",
+          "docentes": 609,
+          "pct": 15.4
+        },
+        {
+          "depto": "SANTA CRUZ",
+          "docentes": 299,
+          "pct": 7.6
+        },
+        {
+          "depto": "COCHABAMBA",
+          "docentes": 202,
+          "pct": 5.1
+        },
+        {
+          "depto": "CHUQUISACA",
+          "docentes": 119,
+          "pct": 3.0
+        }
+      ]
+    },
+    "SANTA CRUZ": {
+      "total_titulados": 5680,
+      "quedan_sede": 4945,
+      "pct_quedan_sede": 87.1,
+      "emigran_inmediato": 231,
+      "pct_emigran_inmediato": 4.1,
+      "sin_ejercer": 151,
+      "pct_sin_ejercer": 2.7,
+      "principales_destinos_retorno": [
+        {
+          "depto": "TARIJA",
+          "docentes": 110,
+          "pct": 1.9
+        },
+        {
+          "depto": "CHUQUISACA",
+          "docentes": 73,
+          "pct": 1.3
+        },
+        {
+          "depto": "BENI",
+          "docentes": 69,
+          "pct": 1.2
+        },
+        {
+          "depto": "COCHABAMBA",
+          "docentes": 39,
+          "pct": 0.7
+        }
+      ],
+      "radicacion_actual": [
+        {
+          "depto": "SANTA CRUZ",
+          "docentes": 5041,
+          "pct": 88.8
+        },
+        {
+          "depto": "TARIJA",
+          "docentes": 93,
+          "pct": 1.6
+        },
+        {
+          "depto": "CHUQUISACA",
+          "docentes": 69,
+          "pct": 1.2
+        },
+        {
+          "depto": "COCHABAMBA",
+          "docentes": 53,
+          "pct": 0.9
+        },
+        {
+          "depto": "BENI",
+          "docentes": 46,
+          "pct": 0.8
+        }
+      ]
+    },
+    "TARIJA": {
+      "total_titulados": 2067,
+      "quedan_sede": 983,
+      "pct_quedan_sede": 47.6,
+      "emigran_inmediato": 553,
+      "pct_emigran_inmediato": 26.8,
+      "sin_ejercer": 173,
+      "pct_sin_ejercer": 8.4,
+      "principales_destinos_retorno": [
+        {
+          "depto": "SANTA CRUZ",
+          "docentes": 466,
+          "pct": 22.5
+        },
+        {
+          "depto": "CHUQUISACA",
+          "docentes": 213,
+          "pct": 10.3
+        },
+        {
+          "depto": "LA PAZ",
+          "docentes": 57,
+          "pct": 2.8
+        },
+        {
+          "depto": "POTOSI",
+          "docentes": 40,
+          "pct": 1.9
+        }
+      ],
+      "radicacion_actual": [
+        {
+          "depto": "TARIJA",
+          "docentes": 1180,
+          "pct": 57.1
+        },
+        {
+          "depto": "SANTA CRUZ",
+          "docentes": 322,
+          "pct": 15.6
+        },
+        {
+          "depto": "CHUQUISACA",
+          "docentes": 170,
+          "pct": 8.2
+        },
+        {
+          "depto": "LA PAZ",
+          "docentes": 63,
+          "pct": 3.0
+        },
+        {
+          "depto": "POTOSI",
+          "docentes": 45,
+          "pct": 2.2
+        }
+      ]
+    }
+  },
+  "matriz_transicion_conteo": {
+    "BENI": {
+      "BENI": 1515,
+      "CHUQUISACA": 0,
+      "COCHABAMBA": 27,
+      "LA PAZ": 202,
+      "ORURO": 0,
+      "PANDO": 190,
+      "POTOSI": 1,
+      "SANTA CRUZ": 140,
+      "TARIJA": 3
+    },
+    "CHUQUISACA": {
+      "BENI": 12,
+      "CHUQUISACA": 1273,
+      "COCHABAMBA": 107,
+      "LA PAZ": 97,
+      "ORURO": 9,
+      "PANDO": 7,
+      "POTOSI": 267,
+      "SANTA CRUZ": 855,
+      "TARIJA": 54
+    },
+    "COCHABAMBA": {
+      "BENI": 26,
+      "CHUQUISACA": 3,
+      "COCHABAMBA": 3419,
+      "LA PAZ": 72,
+      "ORURO": 3,
+      "PANDO": 28,
+      "POTOSI": 54,
+      "SANTA CRUZ": 286,
+      "TARIJA": 6
+    },
+    "LA PAZ": {
+      "BENI": 199,
+      "CHUQUISACA": 9,
+      "COCHABAMBA": 172,
+      "LA PAZ": 7208,
+      "ORURO": 27,
+      "PANDO": 90,
+      "POTOSI": 45,
+      "SANTA CRUZ": 345,
+      "TARIJA": 14
+    },
+    "ORURO": {
+      "BENI": 41,
+      "CHUQUISACA": 12,
+      "COCHABAMBA": 461,
+      "LA PAZ": 383,
+      "ORURO": 1207,
+      "PANDO": 13,
+      "POTOSI": 185,
+      "SANTA CRUZ": 293,
+      "TARIJA": 7
+    },
+    "PANDO": {
+      "BENI": 40,
+      "CHUQUISACA": 1,
+      "COCHABAMBA": 28,
+      "LA PAZ": 471,
+      "ORURO": 0,
+      "PANDO": 678,
+      "POTOSI": 1,
+      "SANTA CRUZ": 42,
+      "TARIJA": 3
+    },
+    "POTOSI": {
+      "BENI": 37,
+      "CHUQUISACA": 119,
+      "COCHABAMBA": 202,
+      "LA PAZ": 609,
+      "ORURO": 27,
+      "PANDO": 15,
+      "POTOSI": 2071,
+      "SANTA CRUZ": 299,
+      "TARIJA": 38
+    },
+    "SANTA CRUZ": {
+      "BENI": 46,
+      "CHUQUISACA": 69,
+      "COCHABAMBA": 53,
+      "LA PAZ": 30,
+      "ORURO": 1,
+      "PANDO": 10,
+      "POTOSI": 5,
+      "SANTA CRUZ": 5041,
+      "TARIJA": 93
+    },
+    "TARIJA": {
+      "BENI": 14,
+      "CHUQUISACA": 170,
+      "COCHABAMBA": 17,
+      "LA PAZ": 63,
+      "ORURO": 1,
+      "PANDO": 10,
+      "POTOSI": 45,
+      "SANTA CRUZ": 322,
+      "TARIJA": 1180
+    }
+  },
+  "matriz_transicion_probabilidades": {
+    "BENI": {
+      "BENI": 72.9,
+      "CHUQUISACA": 0.0,
+      "COCHABAMBA": 1.3,
+      "LA PAZ": 9.7,
+      "ORURO": 0.0,
+      "PANDO": 9.1,
+      "POTOSI": 0.0,
+      "SANTA CRUZ": 6.7,
+      "TARIJA": 0.1
+    },
+    "CHUQUISACA": {
+      "BENI": 0.4,
+      "CHUQUISACA": 47.5,
+      "COCHABAMBA": 4.0,
+      "LA PAZ": 3.6,
+      "ORURO": 0.3,
+      "PANDO": 0.3,
+      "POTOSI": 10.0,
+      "SANTA CRUZ": 31.9,
+      "TARIJA": 2.0
+    },
+    "COCHABAMBA": {
+      "BENI": 0.7,
+      "CHUQUISACA": 0.1,
+      "COCHABAMBA": 87.7,
+      "LA PAZ": 1.8,
+      "ORURO": 0.1,
+      "PANDO": 0.7,
+      "POTOSI": 1.4,
+      "SANTA CRUZ": 7.3,
+      "TARIJA": 0.2
+    },
+    "LA PAZ": {
+      "BENI": 2.5,
+      "CHUQUISACA": 0.1,
+      "COCHABAMBA": 2.1,
+      "LA PAZ": 88.9,
+      "ORURO": 0.3,
+      "PANDO": 1.1,
+      "POTOSI": 0.6,
+      "SANTA CRUZ": 4.3,
+      "TARIJA": 0.2
+    },
+    "ORURO": {
+      "BENI": 1.6,
+      "CHUQUISACA": 0.5,
+      "COCHABAMBA": 17.7,
+      "LA PAZ": 14.7,
+      "ORURO": 46.4,
+      "PANDO": 0.5,
+      "POTOSI": 7.1,
+      "SANTA CRUZ": 11.3,
+      "TARIJA": 0.3
+    },
+    "PANDO": {
+      "BENI": 3.2,
+      "CHUQUISACA": 0.1,
+      "COCHABAMBA": 2.2,
+      "LA PAZ": 37.3,
+      "ORURO": 0.0,
+      "PANDO": 53.6,
+      "POTOSI": 0.1,
+      "SANTA CRUZ": 3.3,
+      "TARIJA": 0.2
+    },
+    "POTOSI": {
+      "BENI": 1.1,
+      "CHUQUISACA": 3.5,
+      "COCHABAMBA": 5.9,
+      "LA PAZ": 17.8,
+      "ORURO": 0.8,
+      "PANDO": 0.4,
+      "POTOSI": 60.6,
+      "SANTA CRUZ": 8.8,
+      "TARIJA": 1.1
+    },
+    "SANTA CRUZ": {
+      "BENI": 0.9,
+      "CHUQUISACA": 1.3,
+      "COCHABAMBA": 1.0,
+      "LA PAZ": 0.6,
+      "ORURO": 0.0,
+      "PANDO": 0.2,
+      "POTOSI": 0.1,
+      "SANTA CRUZ": 94.3,
+      "TARIJA": 1.7
+    },
+    "TARIJA": {
+      "BENI": 0.8,
+      "CHUQUISACA": 9.3,
+      "COCHABAMBA": 0.9,
+      "LA PAZ": 3.5,
+      "ORURO": 0.1,
+      "PANDO": 0.5,
+      "POTOSI": 2.5,
+      "SANTA CRUZ": 17.7,
+      "TARIJA": 64.8
+    }
+  }
+}

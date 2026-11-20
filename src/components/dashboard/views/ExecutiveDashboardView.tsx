@@ -28,11 +28,11 @@ export function ExecutiveDashboardView({ data }: ExecutiveDashboardViewProps) {
   const toggleFullScreen = () => {
     if (typeof document === 'undefined') return;
     if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen().catch(() => {});
+      document.documentElement.requestFullscreen().catch(() => { });
       setIsFullScreen(true);
     } else {
       if (document.exitFullscreen) {
-        document.exitFullscreen().catch(() => {});
+        document.exitFullscreen().catch(() => { });
       }
       setIsFullScreen(false);
     }
@@ -48,11 +48,10 @@ export function ExecutiveDashboardView({ data }: ExecutiveDashboardViewProps) {
           <button
             type="button"
             onClick={() => setModuloPrincipal('matricula')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-              moduloPrincipal === 'matricula'
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${moduloPrincipal === 'matricula'
                 ? 'bg-slate-900 text-white shadow-xs'
                 : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200/70'
-            }`}
+              }`}
           >
             <TrendingUp className="w-4 h-4 text-emerald-400" />
             <span>Evolución y Proyección de Matrícula (2011–2034)</span>
@@ -61,11 +60,10 @@ export function ExecutiveDashboardView({ data }: ExecutiveDashboardViewProps) {
           <button
             type="button"
             onClick={() => setModuloPrincipal('deficit_materia')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-              moduloPrincipal === 'deficit_materia'
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${moduloPrincipal === 'deficit_materia'
                 ? 'bg-indigo-600 text-white shadow-xs'
                 : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200/70'
-            }`}
+              }`}
           >
             <Scale className="w-4 h-4 text-indigo-300" />
             <span>Déficit por Materia (SIE / UIE)</span>
@@ -74,24 +72,22 @@ export function ExecutiveDashboardView({ data }: ExecutiveDashboardViewProps) {
           <button
             type="button"
             onClick={() => setModuloPrincipal('egresados_esfm')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-              moduloPrincipal === 'egresados_esfm'
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${moduloPrincipal === 'egresados_esfm'
                 ? 'bg-amber-600 text-white shadow-xs'
                 : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200/70'
-            }`}
+              }`}
           >
             <GraduationCap className="w-4 h-4 text-amber-300" />
-            <span>Proyección Egresados ESFM (mermando abandonos)</span>
+            <span>Proyección Egresados ESFM</span>
           </button>
 
           <button
             type="button"
             onClick={() => setModuloPrincipal('pertinencia')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-              moduloPrincipal === 'pertinencia'
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${moduloPrincipal === 'pertinencia'
                 ? 'bg-emerald-600 text-white shadow-xs'
                 : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200/70'
-            }`}
+              }`}
           >
             <ShieldCheck className="w-4 h-4 text-emerald-300" />
             <span>Pertinencia Docente SEP (Padrón Oficial)</span>
@@ -105,14 +101,13 @@ export function ExecutiveDashboardView({ data }: ExecutiveDashboardViewProps) {
                 ? { backgroundColor: '#0e7490', color: '#ffffff', borderColor: '#0e7490' }
                 : { backgroundColor: '#f0fdfa', color: '#155e75', borderColor: '#a5f3fc' }
             }
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all border shadow-2xs ${
-              moduloPrincipal === 'migracion'
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all border shadow-2xs ${moduloPrincipal === 'migracion'
                 ? 'shadow-xs ring-2 ring-cyan-500/30'
                 : 'hover:bg-cyan-100 hover:text-cyan-900'
-            }`}
+              }`}
           >
             <ArrowLeftRight className={`w-4 h-4 ${moduloPrincipal === 'migracion' ? 'text-white' : 'text-cyan-700'}`} />
-            <span>Migración: Entrantes y Salientes (2024–2026)</span>
+            <span>Movilidad y Migración (Titulados ESFM & Planilla SEP)</span>
           </button>
         </div>
 
@@ -121,12 +116,12 @@ export function ExecutiveDashboardView({ data }: ExecutiveDashboardViewProps) {
             {moduloPrincipal === 'matricula'
               ? 'Fuente: INE 2024-2034 + Cierre Auditado Aula SIE 2026'
               : moduloPrincipal === 'deficit_materia'
-              ? 'Fuente: UIE / SIE UE (Octubre 2026) · Especialidades Oficiales BD'
-              : moduloPrincipal === 'egresados_esfm'
-              ? 'Fuente: DGFM · Modelo de Cohortes Activas ESFM (Titulación 82% / Merma 18%)'
-              : moduloPrincipal === 'pertinencia'
-              ? 'Fuente: DGFM / SEP · Padrón Docente Oficial (Rangos V, A, N, SIN)'
-              : 'Fuente: DGFM · migracion_planilla_2024_2025_2026.xls & entrantes_salientes.xlsx'}
+                ? 'Fuente: UIE / SIE UE (Octubre 2026) · Especialidades Oficiales BD'
+                : moduloPrincipal === 'egresados_esfm'
+                  ? 'Fuente: DGFM · Modelo de Cohortes Activas ESFM (Titulación 82% / Merma 18%)'
+                  : moduloPrincipal === 'pertinencia'
+                    ? 'Fuente: DGFM / SEP · Padrón Docente Oficial (Rangos V, A, N, SIN)'
+                    : 'Fuente: DGFM · migracion_planilla_2024_2025_2026.xls & entrantes_salientes.xlsx'}
           </span>
 
           <button

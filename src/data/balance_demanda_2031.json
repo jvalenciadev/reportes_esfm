@@ -120,12 +120,13 @@
         "sin_pert": 57,
         "pct_alta": 84.8,
         "reemplazo_nopert": 157,
-        "migracion_salientes": 762,
-        "migracion_entrantes": 1102,
-        "saldo_migratorio": -340,
+        "migracion_salientes": 180,
+        "migracion_entrantes": 609,
+        "saldo_migratorio": -429,
         "crecimiento_arima_pct": -6.8,
         "demanda_total": 1365,
-        "brecha_neta": -1061
+        "brecha_neta": -1061,
+        "egresados_radicacion_real": 2426
       },
       "por_departamento": {
         "BENI": {
@@ -144,12 +145,13 @@
           "sin_pert": 3,
           "pct_alta": 82.2,
           "reemplazo_nopert": 23,
-          "migracion_salientes": 14,
-          "migracion_entrantes": 25,
-          "saldo_migratorio": -11,
+          "migracion_salientes": 5,
+          "migracion_entrantes": 45,
+          "saldo_migratorio": -40,
           "crecimiento_arima_pct": 0.33,
           "demanda_total": 87,
-          "brecha_neta": -51
+          "brecha_neta": -51,
+          "egresados_radicacion_real": 137
         },
         "CHUQUISACA": {
           "deficit_materia": 26,
@@ -167,12 +169,13 @@
           "sin_pert": 1,
           "pct_alta": 80.1,
           "reemplazo_nopert": 13,
-          "migracion_salientes": 19,
+          "migracion_salientes": 7,
           "migracion_entrantes": 26,
-          "saldo_migratorio": -7,
+          "saldo_migratorio": -19,
           "crecimiento_arima_pct": -2.02,
           "demanda_total": 91,
-          "brecha_neta": -55
+          "brecha_neta": -55,
+          "egresados_radicacion_real": 66
         },
         "COCHABAMBA": {
           "deficit_materia": 79,
@@ -190,12 +193,13 @@
           "sin_pert": 7,
           "pct_alta": 87.2,
           "reemplazo_nopert": 20,
-          "migracion_salientes": 152,
-          "migracion_entrantes": 210,
-          "saldo_migratorio": -58,
+          "migracion_salientes": 28,
+          "migracion_entrantes": 114,
+          "saldo_migratorio": -86,
           "crecimiento_arima_pct": -4.05,
           "demanda_total": 268,
-          "brecha_neta": -182
+          "brecha_neta": -182,
+          "egresados_radicacion_real": 347
         },
         "LA PAZ": {
           "deficit_materia": 100,
@@ -213,12 +217,13 @@
           "sin_pert": 7,
           "pct_alta": 90.7,
           "reemplazo_nopert": 17,
-          "migracion_salientes": 289,
-          "migracion_entrantes": 405,
-          "saldo_migratorio": -116,
+          "migracion_salientes": 64,
+          "migracion_entrantes": 175,
+          "saldo_migratorio": -111,
           "crecimiento_arima_pct": -3.28,
           "demanda_total": 275,
-          "brecha_neta": -292
+          "brecha_neta": -292,
+          "egresados_radicacion_real": 596
         },
         "ORURO": {
           "deficit_materia": 29,
@@ -236,12 +241,13 @@
           "sin_pert": 0,
           "pct_alta": 80.2,
           "reemplazo_nopert": 9,
-          "migracion_salientes": 18,
-          "migracion_entrantes": 21,
-          "saldo_migratorio": -3,
+          "migracion_salientes": 10,
+          "migracion_entrantes": 40,
+          "saldo_migratorio": -30,
           "crecimiento_arima_pct": -5.31,
           "demanda_total": 155,
-          "brecha_neta": -10
+          "brecha_neta": -10,
+          "egresados_radicacion_real": 131
         },
         "PANDO": {
           "deficit_materia": 6,
@@ -259,12 +265,13 @@
           "sin_pert": 1,
           "pct_alta": 91.4,
           "reemplazo_nopert": 5,
-          "migracion_salientes": 1,
-          "migracion_entrantes": 3,
-          "saldo_migratorio": -2,
+          "migracion_salientes": 2,
+          "migracion_entrantes": 14,
+          "saldo_migratorio": -12,
           "crecimiento_arima_pct": -2.23,
           "demanda_total": 11,
-          "brecha_neta": -24
+          "brecha_neta": -24,
+          "egresados_radicacion_real": 60
         },
         "POTOSI": {
           "deficit_materia": 34,
@@ -282,12 +289,13 @@
           "sin_pert": 1,
           "pct_alta": 82.6,
           "reemplazo_nopert": 7,
-          "migracion_salientes": 36,
-          "migracion_entrantes": 54,
-          "saldo_migratorio": -18,
+          "migracion_salientes": 18,
+          "migracion_entrantes": 51,
+          "saldo_migratorio": -33,
           "crecimiento_arima_pct": 1.32,
           "demanda_total": 145,
-          "brecha_neta": -50
+          "brecha_neta": -50,
+          "egresados_radicacion_real": 306
         },
         "SANTA CRUZ": {
           "deficit_materia": 105,
@@ -305,12 +313,13 @@
           "sin_pert": 36,
           "pct_alta": 80.3,
           "reemplazo_nopert": 59,
-          "migracion_salientes": 222,
-          "migracion_entrantes": 345,
-          "saldo_migratorio": -123,
+          "migracion_salientes": 37,
+          "migracion_entrantes": 136,
+          "saldo_migratorio": -99,
           "crecimiento_arima_pct": 3.34,
           "demanda_total": 333,
-          "brecha_neta": -265
+          "brecha_neta": -265,
+          "egresados_radicacion_real": 518
         },
         "TARIJA": {
           "deficit_materia": 23,
@@ -328,12 +337,13 @@
           "sin_pert": 1,
           "pct_alta": 87.3,
           "reemplazo_nopert": 4,
-          "migracion_salientes": 11,
-          "migracion_entrantes": 13,
-          "saldo_migratorio": -2,
+          "migracion_salientes": 9,
+          "migracion_entrantes": 8,
+          "saldo_migratorio": 1,
           "crecimiento_arima_pct": -2.69,
           "demanda_total": 98,
-          "brecha_neta": -34
+          "brecha_neta": -34,
+          "egresados_radicacion_real": 265
         }
       }
     },
@@ -360,12 +370,13 @@
         "sin_pert": 1546,
         "pct_alta": 80.2,
         "reemplazo_nopert": 3663,
-        "migracion_salientes": 767,
-        "migracion_entrantes": 1111,
-        "saldo_migratorio": -344,
+        "migracion_salientes": 1784,
+        "migracion_entrantes": 1271,
+        "saldo_migratorio": 513,
         "crecimiento_arima_pct": -6.8,
         "demanda_total": 16768,
-        "brecha_neta": 12834
+        "brecha_neta": 12834,
+        "egresados_radicacion_real": 3934
       },
       "por_departamento": {
         "BENI": {
@@ -384,12 +395,13 @@
           "sin_pert": 214,
           "pct_alta": 67.4,
           "reemplazo_nopert": 470,
-          "migracion_salientes": 14,
-          "migracion_entrantes": 26,
-          "saldo_migratorio": -12,
+          "migracion_salientes": 112,
+          "migracion_entrantes": 78,
+          "saldo_migratorio": 34,
           "crecimiento_arima_pct": 0.33,
           "demanda_total": 1630,
-          "brecha_neta": 1395
+          "brecha_neta": 1395,
+          "egresados_radicacion_real": 210
         },
         "CHUQUISACA": {
           "deficit_materia": 66,
@@ -407,12 +419,13 @@
           "sin_pert": 53,
           "pct_alta": 83.8,
           "reemplazo_nopert": 151,
-          "migracion_salientes": 21,
-          "migracion_entrantes": 28,
-          "saldo_migratorio": -7,
+          "migracion_salientes": 151,
+          "migracion_entrantes": 93,
+          "saldo_migratorio": 58,
           "crecimiento_arima_pct": -2.02,
           "demanda_total": 849,
-          "brecha_neta": 598
+          "brecha_neta": 598,
+          "egresados_radicacion_real": 238
         },
         "COCHABAMBA": {
           "deficit_materia": 174,
@@ -430,12 +443,13 @@
           "sin_pert": 323,
           "pct_alta": 82.2,
           "reemplazo_nopert": 678,
-          "migracion_salientes": 137,
-          "migracion_entrantes": 190,
-          "saldo_migratorio": -53,
+          "migracion_salientes": 312,
+          "migracion_entrantes": 221,
+          "saldo_migratorio": 91,
           "crecimiento_arima_pct": -4.05,
           "demanda_total": 2870,
-          "brecha_neta": 2211
+          "brecha_neta": 2211,
+          "egresados_radicacion_real": 501
         },
         "LA PAZ": {
           "deficit_materia": 257,
@@ -453,12 +467,13 @@
           "sin_pert": 136,
           "pct_alta": 88.3,
           "reemplazo_nopert": 487,
-          "migracion_salientes": 306,
-          "migracion_entrantes": 428,
-          "saldo_migratorio": -122,
+          "migracion_salientes": 415,
+          "migracion_entrantes": 297,
+          "saldo_migratorio": 118,
           "crecimiento_arima_pct": -3.28,
           "demanda_total": 3704,
-          "brecha_neta": 2731
+          "brecha_neta": 2731,
+          "egresados_radicacion_real": 1184
         },
         "ORURO": {
           "deficit_materia": 51,
@@ -476,12 +491,13 @@
           "sin_pert": 35,
           "pct_alta": 75.6,
           "reemplazo_nopert": 141,
-          "migracion_salientes": 13,
-          "migracion_entrantes": 15,
-          "saldo_migratorio": -2,
+          "migracion_salientes": 79,
+          "migracion_entrantes": 43,
+          "saldo_migratorio": 36,
           "crecimiento_arima_pct": -5.31,
           "demanda_total": 971,
-          "brecha_neta": 780
+          "brecha_neta": 780,
+          "egresados_radicacion_real": 160
         },
         "PANDO": {
           "deficit_materia": 18,
@@ -499,12 +515,13 @@
           "sin_pert": 88,
           "pct_alta": 67.5,
           "reemplazo_nopert": 142,
-          "migracion_salientes": 2,
-          "migracion_entrantes": 4,
-          "saldo_migratorio": -2,
+          "migracion_salientes": 29,
+          "migracion_entrantes": 52,
+          "saldo_migratorio": -23,
           "crecimiento_arima_pct": -2.23,
           "demanda_total": 326,
-          "brecha_neta": 259
+          "brecha_neta": 259,
+          "egresados_radicacion_real": 132
         },
         "POTOSI": {
           "deficit_materia": 105,
@@ -522,12 +539,13 @@
           "sin_pert": 151,
           "pct_alta": 80.3,
           "reemplazo_nopert": 325,
-          "migracion_salientes": 46,
-          "migracion_entrantes": 69,
-          "saldo_migratorio": -23,
+          "migracion_salientes": 202,
+          "migracion_entrantes": 146,
+          "saldo_migratorio": 56,
           "crecimiento_arima_pct": 1.32,
           "demanda_total": 1828,
-          "brecha_neta": 1429
+          "brecha_neta": 1429,
+          "egresados_radicacion_real": 354
         },
         "SANTA CRUZ": {
           "deficit_materia": 250,
@@ -545,12 +563,13 @@
           "sin_pert": 509,
           "pct_alta": 73.8,
           "reemplazo_nopert": 1056,
-          "migracion_salientes": 217,
-          "migracion_entrantes": 338,
-          "saldo_migratorio": -121,
+          "migracion_salientes": 390,
+          "migracion_entrantes": 268,
+          "saldo_migratorio": 122,
           "crecimiento_arima_pct": 3.34,
           "demanda_total": 4638,
-          "brecha_neta": 3691
+          "brecha_neta": 3691,
+          "egresados_radicacion_real": 972
         },
         "TARIJA": {
           "deficit_materia": 56,
@@ -568,12 +587,13 @@
           "sin_pert": 37,
           "pct_alta": 83.7,
           "reemplazo_nopert": 213,
-          "migracion_salientes": 11,
-          "migracion_entrantes": 13,
-          "saldo_migratorio": -2,
+          "migracion_salientes": 94,
+          "migracion_entrantes": 73,
+          "saldo_migratorio": 21,
           "crecimiento_arima_pct": -2.69,
           "demanda_total": 1022,
-          "brecha_neta": 810
+          "brecha_neta": 810,
+          "egresados_radicacion_real": 183
         }
       }
     },
@@ -600,12 +620,13 @@
         "sin_pert": 25,
         "pct_alta": 66.6,
         "reemplazo_nopert": 346,
-        "migracion_salientes": 761,
-        "migracion_entrantes": 1091,
-        "saldo_migratorio": -330,
+        "migracion_salientes": 103,
+        "migracion_entrantes": 255,
+        "saldo_migratorio": -152,
         "crecimiento_arima_pct": -6.8,
         "demanda_total": 1422,
-        "brecha_neta": 1183
+        "brecha_neta": 1183,
+        "egresados_radicacion_real": 239
       },
       "por_departamento": {
         "BENI": {
@@ -624,12 +645,13 @@
           "sin_pert": 4,
           "pct_alta": 59.7,
           "reemplazo_nopert": 28,
-          "migracion_salientes": 13,
-          "migracion_entrantes": 24,
-          "saldo_migratorio": -11,
+          "migracion_salientes": 3,
+          "migracion_entrantes": 43,
+          "saldo_migratorio": -40,
           "crecimiento_arima_pct": 0.33,
           "demanda_total": 67,
-          "brecha_neta": 54
+          "brecha_neta": 54,
+          "egresados_radicacion_real": 23
         },
         "CHUQUISACA": {
           "deficit_materia": 38,
@@ -647,12 +669,13 @@
           "sin_pert": 0,
           "pct_alta": 55.8,
           "reemplazo_nopert": 44,
-          "migracion_salientes": 24,
-          "migracion_entrantes": 32,
-          "saldo_migratorio": -8,
+          "migracion_salientes": 8,
+          "migracion_entrantes": 5,
+          "saldo_migratorio": 3,
           "crecimiento_arima_pct": -2.02,
           "demanda_total": 120,
-          "brecha_neta": 103
+          "brecha_neta": 103,
+          "egresados_radicacion_real": 56
         },
         "COCHABAMBA": {
           "deficit_materia": 95,
@@ -670,12 +693,13 @@
           "sin_pert": 4,
           "pct_alta": 71.1,
           "reemplazo_nopert": 62,
-          "migracion_salientes": 149,
-          "migracion_entrantes": 206,
-          "saldo_migratorio": -57,
+          "migracion_salientes": 26,
+          "migracion_entrantes": 21,
+          "saldo_migratorio": 5,
           "crecimiento_arima_pct": -4.05,
           "demanda_total": 312,
-          "brecha_neta": 269
+          "brecha_neta": 269,
+          "egresados_radicacion_real": 63
         },
         "LA PAZ": {
           "deficit_materia": 152,
@@ -693,12 +717,13 @@
           "sin_pert": 0,
           "pct_alta": 69.6,
           "reemplazo_nopert": 49,
-          "migracion_salientes": 362,
-          "migracion_entrantes": 507,
-          "saldo_migratorio": -145,
+          "migracion_salientes": 30,
+          "migracion_entrantes": 84,
+          "saldo_migratorio": -54,
           "crecimiento_arima_pct": -3.28,
           "demanda_total": 371,
-          "brecha_neta": 300
+          "brecha_neta": 300,
+          "egresados_radicacion_real": 11
         },
         "ORURO": {
           "deficit_materia": 33,
@@ -716,12 +741,13 @@
           "sin_pert": 0,
           "pct_alta": 40.3,
           "reemplazo_nopert": 27,
-          "migracion_salientes": 16,
-          "migracion_entrantes": 20,
-          "saldo_migratorio": -4,
+          "migracion_salientes": 7,
+          "migracion_entrantes": 8,
+          "saldo_migratorio": -1,
           "crecimiento_arima_pct": -5.31,
           "demanda_total": 231,
-          "brecha_neta": 216
+          "brecha_neta": 216,
+          "egresados_radicacion_real": 11
         },
         "PANDO": {
           "deficit_materia": 11,
@@ -739,12 +765,13 @@
           "sin_pert": 0,
           "pct_alta": 54.5,
           "reemplazo_nopert": 22,
-          "migracion_salientes": 2,
-          "migracion_entrantes": 4,
-          "saldo_migratorio": -2,
+          "migracion_salientes": 1,
+          "migracion_entrantes": 5,
+          "saldo_migratorio": -4,
           "crecimiento_arima_pct": -2.23,
           "demanda_total": 30,
-          "brecha_neta": 25
+          "brecha_neta": 25,
+          "egresados_radicacion_real": 1
         },
         "POTOSI": {
           "deficit_materia": 43,
@@ -762,12 +789,13 @@
           "sin_pert": 3,
           "pct_alta": 67.4,
           "reemplazo_nopert": 29,
-          "migracion_salientes": 37,
-          "migracion_entrantes": 56,
-          "saldo_migratorio": -19,
+          "migracion_salientes": 9,
+          "migracion_entrantes": 13,
+          "saldo_migratorio": -4,
           "crecimiento_arima_pct": 1.32,
           "demanda_total": 135,
-          "brecha_neta": 115
+          "brecha_neta": 115,
+          "egresados_radicacion_real": 27
         },
         "SANTA CRUZ": {
           "deficit_materia": 84,
@@ -785,12 +813,13 @@
           "sin_pert": 8,
           "pct_alta": 72.0,
           "reemplazo_nopert": 58,
-          "migracion_salientes": 144,
-          "migracion_entrantes": 225,
-          "saldo_migratorio": -81,
+          "migracion_salientes": 16,
+          "migracion_entrantes": 68,
+          "saldo_migratorio": -52,
           "crecimiento_arima_pct": 3.34,
           "demanda_total": 140,
-          "brecha_neta": 102
+          "brecha_neta": 102,
+          "egresados_radicacion_real": 45
         },
         "TARIJA": {
           "deficit_materia": 37,
@@ -808,12 +837,13 @@
           "sin_pert": 6,
           "pct_alta": 72.8,
           "reemplazo_nopert": 27,
-          "migracion_salientes": 14,
-          "migracion_entrantes": 17,
-          "saldo_migratorio": -3,
+          "migracion_salientes": 3,
+          "migracion_entrantes": 8,
+          "saldo_migratorio": -5,
           "crecimiento_arima_pct": -2.69,
           "demanda_total": 100,
-          "brecha_neta": 83
+          "brecha_neta": 83,
+          "egresados_radicacion_real": 2
         }
       }
     },
@@ -840,12 +870,13 @@
         "sin_pert": 6,
         "pct_alta": 69.0,
         "reemplazo_nopert": 1651,
-        "migracion_salientes": 764,
-        "migracion_entrantes": 1102,
-        "saldo_migratorio": -338,
+        "migracion_salientes": 139,
+        "migracion_entrantes": 292,
+        "saldo_migratorio": -153,
         "crecimiento_arima_pct": -6.8,
         "demanda_total": 2534,
-        "brecha_neta": 1894
+        "brecha_neta": 1894,
+        "egresados_radicacion_real": 640
       },
       "por_departamento": {
         "BENI": {
@@ -864,12 +895,13 @@
           "sin_pert": 0,
           "pct_alta": 64.6,
           "reemplazo_nopert": 74,
-          "migracion_salientes": 8,
-          "migracion_entrantes": 14,
-          "saldo_migratorio": -6,
+          "migracion_salientes": 3,
+          "migracion_entrantes": 17,
+          "saldo_migratorio": -14,
           "crecimiento_arima_pct": 0.33,
           "demanda_total": 106,
-          "brecha_neta": 85
+          "brecha_neta": 85,
+          "egresados_radicacion_real": 127
         },
         "CHUQUISACA": {
           "deficit_materia": 25,
@@ -887,12 +919,13 @@
           "sin_pert": 0,
           "pct_alta": 62.1,
           "reemplazo_nopert": 125,
-          "migracion_salientes": 23,
-          "migracion_entrantes": 31,
-          "saldo_migratorio": -8,
+          "migracion_salientes": 10,
+          "migracion_entrantes": 24,
+          "saldo_migratorio": -14,
           "crecimiento_arima_pct": -2.02,
           "demanda_total": 182,
-          "brecha_neta": 137
+          "brecha_neta": 137,
+          "egresados_radicacion_real": 17
         },
         "COCHABAMBA": {
           "deficit_materia": 68,
@@ -910,12 +943,13 @@
           "sin_pert": 0,
           "pct_alta": 68.2,
           "reemplazo_nopert": 391,
-          "migracion_salientes": 155,
-          "migracion_entrantes": 215,
-          "saldo_migratorio": -60,
+          "migracion_salientes": 22,
+          "migracion_entrantes": 43,
+          "saldo_migratorio": -21,
           "crecimiento_arima_pct": -4.05,
           "demanda_total": 581,
-          "brecha_neta": 459
+          "brecha_neta": 459,
+          "egresados_radicacion_real": 85
         },
         "LA PAZ": {
           "deficit_materia": 87,
@@ -933,12 +967,13 @@
           "sin_pert": 0,
           "pct_alta": 80.1,
           "reemplazo_nopert": 274,
-          "migracion_salientes": 300,
-          "migracion_entrantes": 421,
-          "saldo_migratorio": -121,
+          "migracion_salientes": 48,
+          "migracion_entrantes": 57,
+          "saldo_migratorio": -9,
           "crecimiento_arima_pct": -3.28,
           "demanda_total": 581,
-          "brecha_neta": 427
+          "brecha_neta": 427,
+          "egresados_radicacion_real": 205
         },
         "ORURO": {
           "deficit_materia": 23,
@@ -956,12 +991,13 @@
           "sin_pert": 0,
           "pct_alta": 55.2,
           "reemplazo_nopert": 152,
-          "migracion_salientes": 17,
-          "migracion_entrantes": 21,
-          "saldo_migratorio": -4,
+          "migracion_salientes": 9,
+          "migracion_entrantes": 20,
+          "saldo_migratorio": -11,
           "crecimiento_arima_pct": -5.31,
           "demanda_total": 239,
-          "brecha_neta": 197
+          "brecha_neta": 197,
+          "egresados_radicacion_real": 15
         },
         "PANDO": {
           "deficit_materia": 5,
@@ -979,12 +1015,13 @@
           "sin_pert": 1,
           "pct_alta": 66.4,
           "reemplazo_nopert": 28,
-          "migracion_salientes": 1,
+          "migracion_salientes": 4,
           "migracion_entrantes": 3,
-          "saldo_migratorio": -2,
+          "saldo_migratorio": 1,
           "crecimiento_arima_pct": -2.23,
           "demanda_total": 31,
-          "brecha_neta": 21
+          "brecha_neta": 21,
+          "egresados_radicacion_real": 48
         },
         "POTOSI": {
           "deficit_materia": 39,
@@ -1002,12 +1039,13 @@
           "sin_pert": 0,
           "pct_alta": 64.4,
           "reemplazo_nopert": 196,
-          "migracion_salientes": 49,
-          "migracion_entrantes": 73,
-          "saldo_migratorio": -24,
+          "migracion_salientes": 11,
+          "migracion_entrantes": 31,
+          "saldo_migratorio": -20,
           "crecimiento_arima_pct": 1.32,
           "demanda_total": 317,
-          "brecha_neta": 248
+          "brecha_neta": 248,
+          "egresados_radicacion_real": 48
         },
         "SANTA CRUZ": {
           "deficit_materia": 79,
@@ -1025,12 +1063,13 @@
           "sin_pert": 5,
           "pct_alta": 65.5,
           "reemplazo_nopert": 363,
-          "migracion_salientes": 200,
-          "migracion_entrantes": 311,
-          "saldo_migratorio": -111,
+          "migracion_salientes": 29,
+          "migracion_entrantes": 85,
+          "saldo_migratorio": -56,
           "crecimiento_arima_pct": 3.34,
           "demanda_total": 567,
-          "brecha_neta": 425
+          "brecha_neta": 425,
+          "egresados_radicacion_real": 93
         },
         "TARIJA": {
           "deficit_materia": 19,
@@ -1048,12 +1087,13 @@
           "sin_pert": 0,
           "pct_alta": 74.3,
           "reemplazo_nopert": 48,
-          "migracion_salientes": 11,
-          "migracion_entrantes": 13,
-          "saldo_migratorio": -2,
+          "migracion_salientes": 3,
+          "migracion_entrantes": 12,
+          "saldo_migratorio": -9,
           "crecimiento_arima_pct": -2.69,
           "demanda_total": 94,
-          "brecha_neta": 59
+          "brecha_neta": 59,
+          "egresados_radicacion_real": 2
         }
       }
     },
@@ -1080,12 +1120,13 @@
         "sin_pert": 0,
         "pct_alta": 73.0,
         "reemplazo_nopert": 838,
-        "migracion_salientes": 779,
-        "migracion_entrantes": 1120,
-        "saldo_migratorio": -341,
+        "migracion_salientes": 93,
+        "migracion_entrantes": 269,
+        "saldo_migratorio": -176,
         "crecimiento_arima_pct": -6.8,
         "demanda_total": 1222,
-        "brecha_neta": 491
+        "brecha_neta": 491,
+        "egresados_radicacion_real": 731
       },
       "por_departamento": {
         "BENI": {
@@ -1104,12 +1145,13 @@
           "sin_pert": 0,
           "pct_alta": 75.3,
           "reemplazo_nopert": 36,
-          "migracion_salientes": 9,
-          "migracion_entrantes": 16,
+          "migracion_salientes": 3,
+          "migracion_entrantes": 10,
           "saldo_migratorio": -7,
           "crecimiento_arima_pct": 0.33,
           "demanda_total": 53,
-          "brecha_neta": 25
+          "brecha_neta": 25,
+          "egresados_radicacion_real": 106
         },
         "CHUQUISACA": {
           "deficit_materia": 11,
@@ -1127,12 +1169,13 @@
           "sin_pert": 0,
           "pct_alta": 84.0,
           "reemplazo_nopert": 39,
-          "migracion_salientes": 17,
-          "migracion_entrantes": 23,
-          "saldo_migratorio": -6,
+          "migracion_salientes": 6,
+          "migracion_entrantes": 19,
+          "saldo_migratorio": -13,
           "crecimiento_arima_pct": -2.02,
           "demanda_total": 61,
-          "brecha_neta": 22
+          "brecha_neta": 22,
+          "egresados_radicacion_real": 7
         },
         "COCHABAMBA": {
           "deficit_materia": 42,
@@ -1150,12 +1193,13 @@
           "sin_pert": 0,
           "pct_alta": 62.6,
           "reemplazo_nopert": 196,
-          "migracion_salientes": 158,
-          "migracion_entrantes": 219,
-          "saldo_migratorio": -61,
+          "migracion_salientes": 15,
+          "migracion_entrantes": 51,
+          "saldo_migratorio": -36,
           "crecimiento_arima_pct": -4.05,
           "demanda_total": 283,
-          "brecha_neta": 142
+          "brecha_neta": 142,
+          "egresados_radicacion_real": 144
         },
         "LA PAZ": {
           "deficit_materia": 60,
@@ -1173,12 +1217,13 @@
           "sin_pert": 0,
           "pct_alta": 81.8,
           "reemplazo_nopert": 185,
-          "migracion_salientes": 347,
-          "migracion_entrantes": 487,
-          "saldo_migratorio": -140,
+          "migracion_salientes": 26,
+          "migracion_entrantes": 60,
+          "saldo_migratorio": -34,
           "crecimiento_arima_pct": -3.28,
           "demanda_total": 297,
-          "brecha_neta": 93
+          "brecha_neta": 93,
+          "egresados_radicacion_real": 196
         },
         "ORURO": {
           "deficit_materia": 13,
@@ -1196,12 +1241,13 @@
           "sin_pert": 0,
           "pct_alta": 61.1,
           "reemplazo_nopert": 102,
-          "migracion_salientes": 16,
-          "migracion_entrantes": 19,
-          "saldo_migratorio": -3,
+          "migracion_salientes": 4,
+          "migracion_entrantes": 14,
+          "saldo_migratorio": -10,
           "crecimiento_arima_pct": -5.31,
           "demanda_total": 146,
-          "brecha_neta": 101
+          "brecha_neta": 101,
+          "egresados_radicacion_real": 25
         },
         "PANDO": {
           "deficit_materia": 4,
@@ -1219,12 +1265,13 @@
           "sin_pert": 0,
           "pct_alta": 63.8,
           "reemplazo_nopert": 21,
-          "migracion_salientes": 2,
-          "migracion_entrantes": 4,
-          "saldo_migratorio": -2,
+          "migracion_salientes": 4,
+          "migracion_entrantes": 25,
+          "saldo_migratorio": -21,
           "crecimiento_arima_pct": -2.23,
           "demanda_total": 24,
-          "brecha_neta": 10
+          "brecha_neta": 10,
+          "egresados_radicacion_real": 53
         },
         "POTOSI": {
           "deficit_materia": 23,
@@ -1242,12 +1289,13 @@
           "sin_pert": 0,
           "pct_alta": 76.8,
           "reemplazo_nopert": 68,
-          "migracion_salientes": 48,
-          "migracion_entrantes": 73,
-          "saldo_migratorio": -25,
+          "migracion_salientes": 13,
+          "migracion_entrantes": 22,
+          "saldo_migratorio": -9,
           "crecimiento_arima_pct": 1.32,
           "demanda_total": 141,
-          "brecha_neta": 62
+          "brecha_neta": 62,
+          "egresados_radicacion_real": 48
         },
         "SANTA CRUZ": {
           "deficit_materia": 41,
@@ -1265,12 +1313,13 @@
           "sin_pert": 0,
           "pct_alta": 66.4,
           "reemplazo_nopert": 161,
-          "migracion_salientes": 170,
-          "migracion_entrantes": 265,
-          "saldo_migratorio": -95,
+          "migracion_salientes": 19,
+          "migracion_entrantes": 63,
+          "saldo_migratorio": -44,
           "crecimiento_arima_pct": 3.34,
           "demanda_total": 209,
-          "brecha_neta": 71
+          "brecha_neta": 71,
+          "egresados_radicacion_real": 125
         },
         "TARIJA": {
           "deficit_materia": 13,
@@ -1288,12 +1337,13 @@
           "sin_pert": 0,
           "pct_alta": 83.9,
           "reemplazo_nopert": 30,
-          "migracion_salientes": 12,
-          "migracion_entrantes": 14,
+          "migracion_salientes": 3,
+          "migracion_entrantes": 5,
           "saldo_migratorio": -2,
           "crecimiento_arima_pct": -2.69,
           "demanda_total": 92,
-          "brecha_neta": 49
+          "brecha_neta": 49,
+          "egresados_radicacion_real": 27
         }
       }
     },
@@ -1320,12 +1370,13 @@
         "sin_pert": 92,
         "pct_alta": 75.9,
         "reemplazo_nopert": 1141,
-        "migracion_salientes": 764,
-        "migracion_entrantes": 1103,
-        "saldo_migratorio": -339,
+        "migracion_salientes": 219,
+        "migracion_entrantes": 199,
+        "saldo_migratorio": 20,
         "crecimiento_arima_pct": -6.8,
         "demanda_total": 2404,
-        "brecha_neta": 1961
+        "brecha_neta": 1961,
+        "egresados_radicacion_real": 443
       },
       "por_departamento": {
         "BENI": {
@@ -1344,12 +1395,13 @@
           "sin_pert": 9,
           "pct_alta": 64.0,
           "reemplazo_nopert": 116,
-          "migracion_salientes": 12,
-          "migracion_entrantes": 21,
-          "saldo_migratorio": -9,
+          "migracion_salientes": 11,
+          "migracion_entrantes": 11,
+          "saldo_migratorio": 0,
           "crecimiento_arima_pct": 0.33,
           "demanda_total": 169,
-          "brecha_neta": 147
+          "brecha_neta": 147,
+          "egresados_radicacion_real": 53
         },
         "CHUQUISACA": {
           "deficit_materia": 26,
@@ -1367,12 +1419,13 @@
           "sin_pert": 3,
           "pct_alta": 70.7,
           "reemplazo_nopert": 86,
-          "migracion_salientes": 19,
-          "migracion_entrantes": 26,
-          "saldo_migratorio": -7,
+          "migracion_salientes": 11,
+          "migracion_entrantes": 13,
+          "saldo_migratorio": -2,
           "crecimiento_arima_pct": -2.02,
           "demanda_total": 168,
-          "brecha_neta": 141
+          "brecha_neta": 141,
+          "egresados_radicacion_real": 13
         },
         "COCHABAMBA": {
           "deficit_materia": 88,
@@ -1390,12 +1443,13 @@
           "sin_pert": 12,
           "pct_alta": 75.0,
           "reemplazo_nopert": 277,
-          "migracion_salientes": 167,
-          "migracion_entrantes": 231,
-          "saldo_migratorio": -64,
+          "migracion_salientes": 39,
+          "migracion_entrantes": 35,
+          "saldo_migratorio": 4,
           "crecimiento_arima_pct": -4.05,
           "demanda_total": 541,
-          "brecha_neta": 450
+          "brecha_neta": 450,
+          "egresados_radicacion_real": 73
         },
         "LA PAZ": {
           "deficit_materia": 101,
@@ -1413,12 +1467,13 @@
           "sin_pert": 4,
           "pct_alta": 87.4,
           "reemplazo_nopert": 99,
-          "migracion_salientes": 288,
-          "migracion_entrantes": 403,
-          "saldo_migratorio": -115,
+          "migracion_salientes": 70,
+          "migracion_entrantes": 48,
+          "saldo_migratorio": 22,
           "crecimiento_arima_pct": -3.28,
           "demanda_total": 590,
-          "brecha_neta": 489
+          "brecha_neta": 489,
+          "egresados_radicacion_real": 86
         },
         "ORURO": {
           "deficit_materia": 22,
@@ -1436,12 +1491,13 @@
           "sin_pert": 2,
           "pct_alta": 74.4,
           "reemplazo_nopert": 50,
-          "migracion_salientes": 13,
+          "migracion_salientes": 9,
           "migracion_entrantes": 16,
-          "saldo_migratorio": -3,
+          "saldo_migratorio": -7,
           "crecimiento_arima_pct": -5.31,
           "demanda_total": 160,
-          "brecha_neta": 137
+          "brecha_neta": 137,
+          "egresados_radicacion_real": 29
         },
         "PANDO": {
           "deficit_materia": 7,
@@ -1459,12 +1515,13 @@
           "sin_pert": 1,
           "pct_alta": 61.1,
           "reemplazo_nopert": 39,
-          "migracion_salientes": 2,
-          "migracion_entrantes": 4,
-          "saldo_migratorio": -2,
+          "migracion_salientes": 6,
+          "migracion_entrantes": 9,
+          "saldo_migratorio": -3,
           "crecimiento_arima_pct": -2.23,
           "demanda_total": 47,
-          "brecha_neta": 39
+          "brecha_neta": 39,
+          "egresados_radicacion_real": 32
         },
         "POTOSI": {
           "deficit_materia": 47,
@@ -1482,12 +1539,13 @@
           "sin_pert": 9,
           "pct_alta": 74.0,
           "reemplazo_nopert": 133,
-          "migracion_salientes": 49,
-          "migracion_entrantes": 74,
-          "saldo_migratorio": -25,
+          "migracion_salientes": 21,
+          "migracion_entrantes": 25,
+          "saldo_migratorio": -4,
           "crecimiento_arima_pct": 1.32,
           "demanda_total": 303,
-          "brecha_neta": 255
+          "brecha_neta": 255,
+          "egresados_radicacion_real": 21
         },
         "SANTA CRUZ": {
           "deficit_materia": 97,
@@ -1505,12 +1563,13 @@
           "sin_pert": 50,
           "pct_alta": 69.6,
           "reemplazo_nopert": 316,
-          "migracion_salientes": 203,
-          "migracion_entrantes": 316,
-          "saldo_migratorio": -113,
+          "migracion_salientes": 43,
+          "migracion_entrantes": 35,
+          "saldo_migratorio": 8,
           "crecimiento_arima_pct": 3.34,
           "demanda_total": 478,
-          "brecha_neta": 378
+          "brecha_neta": 378,
+          "egresados_radicacion_real": 132
         },
         "TARIJA": {
           "deficit_materia": 23,
@@ -1528,12 +1587,13 @@
           "sin_pert": 2,
           "pct_alta": 83.5,
           "reemplazo_nopert": 25,
-          "migracion_salientes": 11,
-          "migracion_entrantes": 12,
-          "saldo_migratorio": -1,
+          "migracion_salientes": 9,
+          "migracion_entrantes": 7,
+          "saldo_migratorio": 2,
           "crecimiento_arima_pct": -2.69,
           "demanda_total": 103,
-          "brecha_neta": 80
+          "brecha_neta": 80,
+          "egresados_radicacion_real": 4
         }
       }
     },
@@ -1560,12 +1620,13 @@
         "sin_pert": 41,
         "pct_alta": 73.3,
         "reemplazo_nopert": 2235,
-        "migracion_salientes": 772,
-        "migracion_entrantes": 1108,
-        "saldo_migratorio": -336,
+        "migracion_salientes": 246,
+        "migracion_entrantes": 377,
+        "saldo_migratorio": -131,
         "crecimiento_arima_pct": -6.8,
         "demanda_total": 3474,
-        "brecha_neta": 3034
+        "brecha_neta": 3034,
+        "egresados_radicacion_real": 440
       },
       "por_departamento": {
         "BENI": {
@@ -1584,12 +1645,13 @@
           "sin_pert": 3,
           "pct_alta": 61.3,
           "reemplazo_nopert": 136,
-          "migracion_salientes": 10,
-          "migracion_entrantes": 18,
-          "saldo_migratorio": -8,
+          "migracion_salientes": 13,
+          "migracion_entrantes": 14,
+          "saldo_migratorio": -1,
           "crecimiento_arima_pct": 0.33,
           "demanda_total": 199,
-          "brecha_neta": 181
+          "brecha_neta": 181,
+          "egresados_radicacion_real": 58
         },
         "CHUQUISACA": {
           "deficit_materia": 21,
@@ -1607,12 +1669,13 @@
           "sin_pert": 10,
           "pct_alta": 73.0,
           "reemplazo_nopert": 94,
-          "migracion_salientes": 17,
-          "migracion_entrantes": 23,
+          "migracion_salientes": 19,
+          "migracion_entrantes": 25,
           "saldo_migratorio": -6,
           "crecimiento_arima_pct": -2.02,
           "demanda_total": 168,
-          "brecha_neta": 145
+          "brecha_neta": 145,
+          "egresados_radicacion_real": 26
         },
         "COCHABAMBA": {
           "deficit_materia": 78,
@@ -1630,12 +1693,13 @@
           "sin_pert": 9,
           "pct_alta": 72.0,
           "reemplazo_nopert": 448,
-          "migracion_salientes": 160,
-          "migracion_entrantes": 222,
-          "saldo_migratorio": -62,
+          "migracion_salientes": 45,
+          "migracion_entrantes": 100,
+          "saldo_migratorio": -55,
           "crecimiento_arima_pct": -4.05,
           "demanda_total": 734,
-          "brecha_neta": 648
+          "brecha_neta": 648,
+          "egresados_radicacion_real": 37
         },
         "LA PAZ": {
           "deficit_materia": 109,
@@ -1653,12 +1717,13 @@
           "sin_pert": 1,
           "pct_alta": 79.1,
           "reemplazo_nopert": 476,
-          "migracion_salientes": 338,
-          "migracion_entrantes": 473,
-          "saldo_migratorio": -135,
+          "migracion_salientes": 62,
+          "migracion_entrantes": 78,
+          "saldo_migratorio": -16,
           "crecimiento_arima_pct": -3.28,
           "demanda_total": 842,
-          "brecha_neta": 722
+          "brecha_neta": 722,
+          "egresados_radicacion_real": 92
         },
         "ORURO": {
           "deficit_materia": 31,
@@ -1676,12 +1741,13 @@
           "sin_pert": 2,
           "pct_alta": 57.5,
           "reemplazo_nopert": 280,
-          "migracion_salientes": 20,
-          "migracion_entrantes": 24,
-          "saldo_migratorio": -4,
+          "migracion_salientes": 25,
+          "migracion_entrantes": 34,
+          "saldo_migratorio": -9,
           "crecimiento_arima_pct": -5.31,
           "demanda_total": 469,
-          "brecha_neta": 435
+          "brecha_neta": 435,
+          "egresados_radicacion_real": 0
         },
         "PANDO": {
           "deficit_materia": 6,
@@ -1699,12 +1765,13 @@
           "sin_pert": 1,
           "pct_alta": 64.4,
           "reemplazo_nopert": 45,
-          "migracion_salientes": 1,
-          "migracion_entrantes": 3,
-          "saldo_migratorio": -2,
+          "migracion_salientes": 6,
+          "migracion_entrantes": 9,
+          "saldo_migratorio": -3,
           "crecimiento_arima_pct": -2.23,
           "demanda_total": 52,
-          "brecha_neta": 46
+          "brecha_neta": 46,
+          "egresados_radicacion_real": 58
         },
         "POTOSI": {
           "deficit_materia": 44,
@@ -1722,12 +1789,13 @@
           "sin_pert": 0,
           "pct_alta": 72.2,
           "reemplazo_nopert": 287,
-          "migracion_salientes": 50,
-          "migracion_entrantes": 75,
-          "saldo_migratorio": -25,
+          "migracion_salientes": 22,
+          "migracion_entrantes": 48,
+          "saldo_migratorio": -26,
           "crecimiento_arima_pct": 1.32,
           "demanda_total": 450,
-          "brecha_neta": 401
+          "brecha_neta": 401,
+          "egresados_radicacion_real": 37
         },
         "SANTA CRUZ": {
           "deficit_materia": 73,
@@ -1745,12 +1813,13 @@
           "sin_pert": 15,
           "pct_alta": 74.5,
           "reemplazo_nopert": 387,
-          "migracion_salientes": 165,
-          "migracion_entrantes": 257,
-          "saldo_migratorio": -92,
+          "migracion_salientes": 44,
+          "migracion_entrantes": 59,
+          "saldo_migratorio": -15,
           "crecimiento_arima_pct": 3.34,
           "demanda_total": 605,
-          "brecha_neta": 524
+          "brecha_neta": 524,
+          "egresados_radicacion_real": 131
         },
         "TARIJA": {
           "deficit_materia": 21,
@@ -1768,12 +1837,13 @@
           "sin_pert": 0,
           "pct_alta": 80.5,
           "reemplazo_nopert": 82,
-          "migracion_salientes": 11,
-          "migracion_entrantes": 13,
-          "saldo_migratorio": -2,
+          "migracion_salientes": 10,
+          "migracion_entrantes": 10,
+          "saldo_migratorio": 0,
           "crecimiento_arima_pct": -2.69,
           "demanda_total": 161,
-          "brecha_neta": 138
+          "brecha_neta": 138,
+          "egresados_radicacion_real": 1
         }
       }
     },
@@ -1800,12 +1870,13 @@
         "sin_pert": 113,
         "pct_alta": 72.6,
         "reemplazo_nopert": 463,
-        "migracion_salientes": 782,
-        "migracion_entrantes": 1121,
-        "saldo_migratorio": -339,
+        "migracion_salientes": 53,
+        "migracion_entrantes": 236,
+        "saldo_migratorio": -183,
         "crecimiento_arima_pct": -6.8,
         "demanda_total": 1119,
-        "brecha_neta": 567
+        "brecha_neta": 567,
+        "egresados_radicacion_real": 552
       },
       "por_departamento": {
         "BENI": {
@@ -1824,12 +1895,13 @@
           "sin_pert": 2,
           "pct_alta": 71.7,
           "reemplazo_nopert": 36,
-          "migracion_salientes": 11,
-          "migracion_entrantes": 20,
-          "saldo_migratorio": -9,
+          "migracion_salientes": 0,
+          "migracion_entrantes": 33,
+          "saldo_migratorio": -33,
           "crecimiento_arima_pct": 0.33,
           "demanda_total": 52,
-          "brecha_neta": 26
+          "brecha_neta": 26,
+          "egresados_radicacion_real": 56
         },
         "CHUQUISACA": {
           "deficit_materia": 17,
@@ -1847,12 +1919,13 @@
           "sin_pert": 31,
           "pct_alta": 53.5,
           "reemplazo_nopert": 49,
-          "migracion_salientes": 19,
-          "migracion_entrantes": 26,
-          "saldo_migratorio": -7,
+          "migracion_salientes": 6,
+          "migracion_entrantes": 2,
+          "saldo_migratorio": 4,
           "crecimiento_arima_pct": -2.02,
           "demanda_total": 152,
-          "brecha_neta": 119
+          "brecha_neta": 119,
+          "egresados_radicacion_real": 16
         },
         "COCHABAMBA": {
           "deficit_materia": 61,
@@ -1870,12 +1943,13 @@
           "sin_pert": 30,
           "pct_alta": 76.1,
           "reemplazo_nopert": 80,
-          "migracion_salientes": 169,
-          "migracion_entrantes": 234,
-          "saldo_migratorio": -65,
+          "migracion_salientes": 9,
+          "migracion_entrantes": 28,
+          "saldo_migratorio": -19,
           "crecimiento_arima_pct": -4.05,
           "demanda_total": 219,
-          "brecha_neta": 105
+          "brecha_neta": 105,
+          "egresados_radicacion_real": 33
         },
         "LA PAZ": {
           "deficit_materia": 86,
@@ -1893,12 +1967,13 @@
           "sin_pert": 3,
           "pct_alta": 73.8,
           "reemplazo_nopert": 137,
-          "migracion_salientes": 364,
-          "migracion_entrantes": 510,
-          "saldo_migratorio": -146,
+          "migracion_salientes": 20,
+          "migracion_entrantes": 92,
+          "saldo_migratorio": -72,
           "crecimiento_arima_pct": -3.28,
           "demanda_total": 330,
-          "brecha_neta": 169
+          "brecha_neta": 169,
+          "egresados_radicacion_real": 113
         },
         "ORURO": {
           "deficit_materia": 11,
@@ -1916,12 +1991,13 @@
           "sin_pert": 2,
           "pct_alta": 53.0,
           "reemplazo_nopert": 15,
-          "migracion_salientes": 10,
-          "migracion_entrantes": 12,
-          "saldo_migratorio": -2,
+          "migracion_salientes": 1,
+          "migracion_entrantes": 4,
+          "saldo_migratorio": -3,
           "crecimiento_arima_pct": -5.31,
           "demanda_total": 84,
-          "brecha_neta": 63
+          "brecha_neta": 63,
+          "egresados_radicacion_real": 15
         },
         "PANDO": {
           "deficit_materia": 4,
@@ -1940,11 +2016,12 @@
           "pct_alta": 74.4,
           "reemplazo_nopert": 8,
           "migracion_salientes": 1,
-          "migracion_entrantes": 3,
-          "saldo_migratorio": -2,
+          "migracion_entrantes": 0,
+          "saldo_migratorio": 1,
           "crecimiento_arima_pct": -2.23,
           "demanda_total": 11,
-          "brecha_neta": 3
+          "brecha_neta": 3,
+          "egresados_radicacion_real": 31
         },
         "POTOSI": {
           "deficit_materia": 29,
@@ -1962,12 +2039,13 @@
           "sin_pert": 6,
           "pct_alta": 69.3,
           "reemplazo_nopert": 57,
-          "migracion_salientes": 44,
-          "migracion_entrantes": 67,
-          "saldo_migratorio": -23,
+          "migracion_salientes": 2,
+          "migracion_entrantes": 19,
+          "saldo_migratorio": -17,
           "crecimiento_arima_pct": 1.32,
           "demanda_total": 124,
-          "brecha_neta": 70
+          "brecha_neta": 70,
+          "egresados_radicacion_real": 3
         },
         "SANTA CRUZ": {
           "deficit_materia": 48,
@@ -1985,12 +2063,13 @@
           "sin_pert": 26,
           "pct_alta": 76.7,
           "reemplazo_nopert": 56,
-          "migracion_salientes": 148,
-          "migracion_entrantes": 230,
-          "saldo_migratorio": -82,
+          "migracion_salientes": 12,
+          "migracion_entrantes": 56,
+          "saldo_migratorio": -44,
           "crecimiento_arima_pct": 3.34,
           "demanda_total": 144,
-          "brecha_neta": 54
+          "brecha_neta": 54,
+          "egresados_radicacion_real": 270
         },
         "TARIJA": {
           "deficit_materia": 24,
@@ -2008,12 +2087,13 @@
           "sin_pert": 13,
           "pct_alta": 78.0,
           "reemplazo_nopert": 25,
-          "migracion_salientes": 16,
-          "migracion_entrantes": 19,
-          "saldo_migratorio": -3,
+          "migracion_salientes": 2,
+          "migracion_entrantes": 2,
+          "saldo_migratorio": 0,
           "crecimiento_arima_pct": -2.69,
           "demanda_total": 80,
-          "brecha_neta": 35
+          "brecha_neta": 35,
+          "egresados_radicacion_real": 15
         }
       }
     },
@@ -2040,12 +2120,13 @@
         "sin_pert": 231,
         "pct_alta": 67.7,
         "reemplazo_nopert": 1054,
-        "migracion_salientes": 760,
-        "migracion_entrantes": 1094,
-        "saldo_migratorio": -334,
+        "migracion_salientes": 142,
+        "migracion_entrantes": 231,
+        "saldo_migratorio": -89,
         "crecimiento_arima_pct": -6.8,
         "demanda_total": 1676,
-        "brecha_neta": 1448
+        "brecha_neta": 1448,
+        "egresados_radicacion_real": 228
       },
       "por_departamento": {
         "BENI": {
@@ -2064,12 +2145,13 @@
           "sin_pert": 14,
           "pct_alta": 58.5,
           "reemplazo_nopert": 85,
-          "migracion_salientes": 11,
-          "migracion_entrantes": 20,
-          "saldo_migratorio": -9,
+          "migracion_salientes": 12,
+          "migracion_entrantes": 27,
+          "saldo_migratorio": -15,
           "crecimiento_arima_pct": 0.33,
           "demanda_total": 116,
-          "brecha_neta": 106
+          "brecha_neta": 106,
+          "egresados_radicacion_real": 4
         },
         "CHUQUISACA": {
           "deficit_materia": 14,
@@ -2087,12 +2169,13 @@
           "sin_pert": 18,
           "pct_alta": 64.0,
           "reemplazo_nopert": 49,
-          "migracion_salientes": 20,
-          "migracion_entrantes": 27,
-          "saldo_migratorio": -7,
+          "migracion_salientes": 10,
+          "migracion_entrantes": 15,
+          "saldo_migratorio": -5,
           "crecimiento_arima_pct": -2.02,
           "demanda_total": 88,
-          "brecha_neta": 74
+          "brecha_neta": 74,
+          "egresados_radicacion_real": 20
         },
         "COCHABAMBA": {
           "deficit_materia": 40,
@@ -2110,12 +2193,13 @@
           "sin_pert": 46,
           "pct_alta": 72.5,
           "reemplazo_nopert": 147,
-          "migracion_salientes": 146,
-          "migracion_entrantes": 202,
-          "saldo_migratorio": -56,
+          "migracion_salientes": 28,
+          "migracion_entrantes": 29,
+          "saldo_migratorio": -1,
           "crecimiento_arima_pct": -4.05,
           "demanda_total": 300,
-          "brecha_neta": 259
+          "brecha_neta": 259,
+          "egresados_radicacion_real": 78
         },
         "LA PAZ": {
           "deficit_materia": 59,
@@ -2133,12 +2217,13 @@
           "sin_pert": 8,
           "pct_alta": 73.1,
           "reemplazo_nopert": 240,
-          "migracion_salientes": 324,
-          "migracion_entrantes": 454,
-          "saldo_migratorio": -130,
+          "migracion_salientes": 30,
+          "migracion_entrantes": 73,
+          "saldo_migratorio": -43,
           "crecimiento_arima_pct": -3.28,
           "demanda_total": 403,
-          "brecha_neta": 343
+          "brecha_neta": 343,
+          "egresados_radicacion_real": 32
         },
         "ORURO": {
           "deficit_materia": 17,
@@ -2156,12 +2241,13 @@
           "sin_pert": 3,
           "pct_alta": 48.3,
           "reemplazo_nopert": 141,
-          "migracion_salientes": 19,
-          "migracion_entrantes": 24,
-          "saldo_migratorio": -5,
+          "migracion_salientes": 11,
+          "migracion_entrantes": 18,
+          "saldo_migratorio": -7,
           "crecimiento_arima_pct": -5.31,
           "demanda_total": 227,
-          "brecha_neta": 210
+          "brecha_neta": 210,
+          "egresados_radicacion_real": 11
         },
         "PANDO": {
           "deficit_materia": 4,
@@ -2179,12 +2265,13 @@
           "sin_pert": 1,
           "pct_alta": 65.2,
           "reemplazo_nopert": 30,
-          "migracion_salientes": 1,
-          "migracion_entrantes": 3,
-          "saldo_migratorio": -2,
+          "migracion_salientes": 9,
+          "migracion_entrantes": 2,
+          "saldo_migratorio": 7,
           "crecimiento_arima_pct": -2.23,
           "demanda_total": 36,
-          "brecha_neta": 32
+          "brecha_neta": 32,
+          "egresados_radicacion_real": 1
         },
         "POTOSI": {
           "deficit_materia": 22,
@@ -2202,12 +2289,13 @@
           "sin_pert": 12,
           "pct_alta": 72.6,
           "reemplazo_nopert": 59,
-          "migracion_salientes": 44,
-          "migracion_entrantes": 66,
-          "saldo_migratorio": -22,
+          "migracion_salientes": 15,
+          "migracion_entrantes": 16,
+          "saldo_migratorio": -1,
           "crecimiento_arima_pct": 1.32,
           "demanda_total": 136,
-          "brecha_neta": 114
+          "brecha_neta": 114,
+          "egresados_radicacion_real": 28
         },
         "SANTA CRUZ": {
           "deficit_materia": 45,
@@ -2225,12 +2313,13 @@
           "sin_pert": 110,
           "pct_alta": 63.6,
           "reemplazo_nopert": 262,
-          "migracion_salientes": 182,
-          "migracion_entrantes": 283,
-          "saldo_migratorio": -101,
+          "migracion_salientes": 20,
+          "migracion_entrantes": 43,
+          "saldo_migratorio": -23,
           "crecimiento_arima_pct": 3.34,
           "demanda_total": 360,
-          "brecha_neta": 314
+          "brecha_neta": 314,
+          "egresados_radicacion_real": 26
         },
         "TARIJA": {
           "deficit_materia": 14,
@@ -2248,12 +2337,13 @@
           "sin_pert": 19,
           "pct_alta": 70.9,
           "reemplazo_nopert": 41,
-          "migracion_salientes": 13,
-          "migracion_entrantes": 15,
-          "saldo_migratorio": -2,
+          "migracion_salientes": 7,
+          "migracion_entrantes": 8,
+          "saldo_migratorio": -1,
           "crecimiento_arima_pct": -2.69,
           "demanda_total": 121,
-          "brecha_neta": 107
+          "brecha_neta": 107,
+          "egresados_radicacion_real": 28
         }
       }
     },
@@ -2280,12 +2370,13 @@
         "sin_pert": 1,
         "pct_alta": 72.9,
         "reemplazo_nopert": 372,
-        "migracion_salientes": 778,
-        "migracion_entrantes": 1110,
-        "saldo_migratorio": -332,
+        "migracion_salientes": 159,
+        "migracion_entrantes": 714,
+        "saldo_migratorio": -555,
         "crecimiento_arima_pct": -6.8,
         "demanda_total": 2373,
-        "brecha_neta": 1719
+        "brecha_neta": 1719,
+        "egresados_radicacion_real": 654
       },
       "por_departamento": {
         "BENI": {
@@ -2304,12 +2395,13 @@
           "sin_pert": 0,
           "pct_alta": 71.8,
           "reemplazo_nopert": 13,
-          "migracion_salientes": 7,
-          "migracion_entrantes": 12,
-          "saldo_migratorio": -5,
+          "migracion_salientes": 9,
+          "migracion_entrantes": 34,
+          "saldo_migratorio": -25,
           "crecimiento_arima_pct": 0.33,
           "demanda_total": 80,
-          "brecha_neta": 62
+          "brecha_neta": 62,
+          "egresados_radicacion_real": 38
         },
         "CHUQUISACA": {
           "deficit_materia": 55,
@@ -2327,12 +2419,13 @@
           "sin_pert": 0,
           "pct_alta": 62.0,
           "reemplazo_nopert": 37,
-          "migracion_salientes": 22,
-          "migracion_entrantes": 30,
-          "saldo_migratorio": -8,
+          "migracion_salientes": 5,
+          "migracion_entrantes": 56,
+          "saldo_migratorio": -51,
           "crecimiento_arima_pct": -2.02,
           "demanda_total": 166,
-          "brecha_neta": 120
+          "brecha_neta": 120,
+          "egresados_radicacion_real": 17
         },
         "COCHABAMBA": {
           "deficit_materia": 169,
@@ -2350,12 +2443,13 @@
           "sin_pert": 0,
           "pct_alta": 70.8,
           "reemplazo_nopert": 83,
-          "migracion_salientes": 176,
-          "migracion_entrantes": 243,
-          "saldo_migratorio": -67,
+          "migracion_salientes": 32,
+          "migracion_entrantes": 105,
+          "saldo_migratorio": -73,
           "crecimiento_arima_pct": -4.05,
           "demanda_total": 633,
-          "brecha_neta": 493
+          "brecha_neta": 493,
+          "egresados_radicacion_real": 101
         },
         "LA PAZ": {
           "deficit_materia": 216,
@@ -2373,12 +2467,13 @@
           "sin_pert": 0,
           "pct_alta": 76.6,
           "reemplazo_nopert": 61,
-          "migracion_salientes": 341,
-          "migracion_entrantes": 477,
-          "saldo_migratorio": -136,
+          "migracion_salientes": 41,
+          "migracion_entrantes": 175,
+          "saldo_migratorio": -134,
           "crecimiento_arima_pct": -3.28,
           "demanda_total": 590,
-          "brecha_neta": 409
+          "brecha_neta": 409,
+          "egresados_radicacion_real": 250
         },
         "ORURO": {
           "deficit_materia": 43,
@@ -2396,12 +2491,13 @@
           "sin_pert": 0,
           "pct_alta": 72.0,
           "reemplazo_nopert": 17,
-          "migracion_salientes": 14,
-          "migracion_entrantes": 17,
-          "saldo_migratorio": -3,
+          "migracion_salientes": 10,
+          "migracion_entrantes": 28,
+          "saldo_migratorio": -18,
           "crecimiento_arima_pct": -5.31,
           "demanda_total": 207,
-          "brecha_neta": 171
+          "brecha_neta": 171,
+          "egresados_radicacion_real": 87
         },
         "PANDO": {
           "deficit_materia": 16,
@@ -2419,12 +2515,13 @@
           "sin_pert": 0,
           "pct_alta": 58.5,
           "reemplazo_nopert": 44,
-          "migracion_salientes": 2,
-          "migracion_entrantes": 4,
-          "saldo_migratorio": -2,
+          "migracion_salientes": 3,
+          "migracion_entrantes": 37,
+          "saldo_migratorio": -34,
           "crecimiento_arima_pct": -2.23,
           "demanda_total": 61,
-          "brecha_neta": 48
+          "brecha_neta": 48,
+          "egresados_radicacion_real": 20
         },
         "POTOSI": {
           "deficit_materia": 76,
@@ -2442,12 +2539,13 @@
           "sin_pert": 0,
           "pct_alta": 72.6,
           "reemplazo_nopert": 16,
-          "migracion_salientes": 44,
-          "migracion_entrantes": 65,
-          "saldo_migratorio": -21,
+          "migracion_salientes": 20,
+          "migracion_entrantes": 79,
+          "saldo_migratorio": -59,
           "crecimiento_arima_pct": 1.32,
           "demanda_total": 252,
-          "brecha_neta": 189
+          "brecha_neta": 189,
+          "egresados_radicacion_real": 45
         },
         "SANTA CRUZ": {
           "deficit_materia": 138,
@@ -2465,12 +2563,13 @@
           "sin_pert": 1,
           "pct_alta": 74.5,
           "reemplazo_nopert": 80,
-          "migracion_salientes": 159,
-          "migracion_entrantes": 247,
-          "saldo_migratorio": -88,
+          "migracion_salientes": 31,
+          "migracion_entrantes": 185,
+          "saldo_migratorio": -154,
           "crecimiento_arima_pct": 3.34,
           "demanda_total": 325,
-          "brecha_neta": 210
+          "brecha_neta": 210,
+          "egresados_radicacion_real": 94
         },
         "TARIJA": {
           "deficit_materia": 51,
@@ -2488,12 +2587,13 @@
           "sin_pert": 0,
           "pct_alta": 77.9,
           "reemplazo_nopert": 21,
-          "migracion_salientes": 13,
+          "migracion_salientes": 8,
           "migracion_entrantes": 15,
-          "saldo_migratorio": -2,
+          "saldo_migratorio": -7,
           "crecimiento_arima_pct": -2.69,
           "demanda_total": 195,
-          "brecha_neta": 153
+          "brecha_neta": 153,
+          "egresados_radicacion_real": 2
         }
       }
     },
@@ -2520,12 +2620,13 @@
         "sin_pert": 47,
         "pct_alta": 88.8,
         "reemplazo_nopert": 152,
-        "migracion_salientes": 792,
-        "migracion_entrantes": 1126,
-        "saldo_migratorio": -334,
+        "migracion_salientes": 100,
+        "migracion_entrantes": 462,
+        "saldo_migratorio": -362,
         "crecimiento_arima_pct": -6.8,
         "demanda_total": 1193,
-        "brecha_neta": 385
+        "brecha_neta": 385,
+        "egresados_radicacion_real": 808
       },
       "por_departamento": {
         "BENI": {
@@ -2544,12 +2645,13 @@
           "sin_pert": 6,
           "pct_alta": 81.0,
           "reemplazo_nopert": 10,
-          "migracion_salientes": 6,
-          "migracion_entrantes": 12,
-          "saldo_migratorio": -6,
+          "migracion_salientes": 3,
+          "migracion_entrantes": 33,
+          "saldo_migratorio": -30,
           "crecimiento_arima_pct": 0.33,
           "demanda_total": 45,
-          "brecha_neta": 23
+          "brecha_neta": 23,
+          "egresados_radicacion_real": 37
         },
         "CHUQUISACA": {
           "deficit_materia": 42,
@@ -2567,12 +2669,13 @@
           "sin_pert": 0,
           "pct_alta": 81.0,
           "reemplazo_nopert": 12,
-          "migracion_salientes": 19,
+          "migracion_salientes": 7,
           "migracion_entrantes": 25,
-          "saldo_migratorio": -6,
+          "saldo_migratorio": -18,
           "crecimiento_arima_pct": -2.02,
           "demanda_total": 86,
-          "brecha_neta": 39
+          "brecha_neta": 39,
+          "egresados_radicacion_real": 37
         },
         "COCHABAMBA": {
           "deficit_materia": 148,
@@ -2590,12 +2693,13 @@
           "sin_pert": 13,
           "pct_alta": 89.3,
           "reemplazo_nopert": 31,
-          "migracion_salientes": 169,
-          "migracion_entrantes": 233,
-          "saldo_migratorio": -64,
+          "migracion_salientes": 18,
+          "migracion_entrantes": 80,
+          "saldo_migratorio": -62,
           "crecimiento_arima_pct": -4.05,
           "demanda_total": 290,
-          "brecha_neta": 123
+          "brecha_neta": 123,
+          "egresados_radicacion_real": 191
         },
         "LA PAZ": {
           "deficit_materia": 225,
@@ -2613,12 +2717,13 @@
           "sin_pert": 5,
           "pct_alta": 91.0,
           "reemplazo_nopert": 23,
-          "migracion_salientes": 389,
-          "migracion_entrantes": 544,
-          "saldo_migratorio": -155,
+          "migracion_salientes": 39,
+          "migracion_entrantes": 144,
+          "saldo_migratorio": -105,
           "crecimiento_arima_pct": -3.28,
           "demanda_total": 322,
-          "brecha_neta": 70
+          "brecha_neta": 70,
+          "egresados_radicacion_real": 161
         },
         "ORURO": {
           "deficit_materia": 45,
@@ -2636,12 +2741,13 @@
           "sin_pert": 0,
           "pct_alta": 88.2,
           "reemplazo_nopert": 6,
-          "migracion_salientes": 16,
-          "migracion_entrantes": 20,
+          "migracion_salientes": 11,
+          "migracion_entrantes": 15,
           "saldo_migratorio": -4,
           "crecimiento_arima_pct": -5.31,
           "demanda_total": 112,
-          "brecha_neta": 61
+          "brecha_neta": 61,
+          "egresados_radicacion_real": 73
         },
         "PANDO": {
           "deficit_materia": 5,
@@ -2659,12 +2765,13 @@
           "sin_pert": 0,
           "pct_alta": 56.6,
           "reemplazo_nopert": 11,
-          "migracion_salientes": 1,
-          "migracion_entrantes": 2,
-          "saldo_migratorio": -1,
+          "migracion_salientes": 0,
+          "migracion_entrantes": 9,
+          "saldo_migratorio": -9,
           "crecimiento_arima_pct": -2.23,
           "demanda_total": 19,
-          "brecha_neta": 13
+          "brecha_neta": 13,
+          "egresados_radicacion_real": 11
         },
         "POTOSI": {
           "deficit_materia": 79,
@@ -2682,12 +2789,13 @@
           "sin_pert": 14,
           "pct_alta": 91.9,
           "reemplazo_nopert": 24,
-          "migracion_salientes": 50,
-          "migracion_entrantes": 75,
-          "saldo_migratorio": -25,
+          "migracion_salientes": 8,
+          "migracion_entrantes": 56,
+          "saldo_migratorio": -48,
           "crecimiento_arima_pct": 1.32,
           "demanda_total": 125,
-          "brecha_neta": 35
+          "brecha_neta": 35,
+          "egresados_radicacion_real": 143
         },
         "SANTA CRUZ": {
           "deficit_materia": 101,
@@ -2705,12 +2813,13 @@
           "sin_pert": 6,
           "pct_alta": 87.9,
           "reemplazo_nopert": 24,
-          "migracion_salientes": 127,
-          "migracion_entrantes": 198,
-          "saldo_migratorio": -71,
+          "migracion_salientes": 8,
+          "migracion_entrantes": 84,
+          "saldo_migratorio": -76,
           "crecimiento_arima_pct": 3.34,
           "demanda_total": 180,
-          "brecha_neta": 66
+          "brecha_neta": 66,
+          "egresados_radicacion_real": 132
         },
         "TARIJA": {
           "deficit_materia": 52,
@@ -2728,12 +2837,13 @@
           "sin_pert": 3,
           "pct_alta": 88.1,
           "reemplazo_nopert": 11,
-          "migracion_salientes": 15,
-          "migracion_entrantes": 17,
-          "saldo_migratorio": -2,
+          "migracion_salientes": 6,
+          "migracion_entrantes": 16,
+          "saldo_migratorio": -10,
           "crecimiento_arima_pct": -2.69,
           "demanda_total": 93,
-          "brecha_neta": 34
+          "brecha_neta": 34,
+          "egresados_radicacion_real": 23
         }
       }
     },
@@ -2760,12 +2870,13 @@
         "sin_pert": 115,
         "pct_alta": 64.6,
         "reemplazo_nopert": 3528,
-        "migracion_salientes": 771,
-        "migracion_entrantes": 1112,
-        "saldo_migratorio": -341,
+        "migracion_salientes": 312,
+        "migracion_entrantes": 292,
+        "saldo_migratorio": 20,
         "crecimiento_arima_pct": -6.8,
         "demanda_total": 5470,
-        "brecha_neta": 4908
+        "brecha_neta": 4908,
+        "egresados_radicacion_real": 562
       },
       "por_departamento": {
         "BENI": {
@@ -2784,12 +2895,13 @@
           "sin_pert": 18,
           "pct_alta": 56.6,
           "reemplazo_nopert": 266,
-          "migracion_salientes": 14,
-          "migracion_entrantes": 25,
-          "saldo_migratorio": -11,
+          "migracion_salientes": 18,
+          "migracion_entrantes": 17,
+          "saldo_migratorio": 1,
           "crecimiento_arima_pct": 0.33,
           "demanda_total": 374,
-          "brecha_neta": 342
+          "brecha_neta": 342,
+          "egresados_radicacion_real": 78
         },
         "CHUQUISACA": {
           "deficit_materia": 16,
@@ -2807,12 +2919,13 @@
           "sin_pert": 6,
           "pct_alta": 69.7,
           "reemplazo_nopert": 129,
-          "migracion_salientes": 16,
-          "migracion_entrantes": 22,
-          "saldo_migratorio": -6,
+          "migracion_salientes": 10,
+          "migracion_entrantes": 18,
+          "saldo_migratorio": -8,
           "crecimiento_arima_pct": -2.02,
           "demanda_total": 212,
-          "brecha_neta": 184
+          "brecha_neta": 184,
+          "egresados_radicacion_real": 21
         },
         "COCHABAMBA": {
           "deficit_materia": 60,
@@ -2830,12 +2943,13 @@
           "sin_pert": 14,
           "pct_alta": 62.0,
           "reemplazo_nopert": 805,
-          "migracion_salientes": 156,
-          "migracion_entrantes": 216,
-          "saldo_migratorio": -60,
+          "migracion_salientes": 52,
+          "migracion_entrantes": 68,
+          "saldo_migratorio": -16,
           "crecimiento_arima_pct": -4.05,
           "demanda_total": 1259,
-          "brecha_neta": 1152
+          "brecha_neta": 1152,
+          "egresados_radicacion_real": 41
         },
         "LA PAZ": {
           "deficit_materia": 84,
@@ -2853,12 +2967,13 @@
           "sin_pert": 5,
           "pct_alta": 72.7,
           "reemplazo_nopert": 750,
-          "migracion_salientes": 329,
-          "migracion_entrantes": 461,
-          "saldo_migratorio": -132,
+          "migracion_salientes": 104,
+          "migracion_entrantes": 58,
+          "saldo_migratorio": 46,
           "crecimiento_arima_pct": -3.28,
           "demanda_total": 1468,
-          "brecha_neta": 1318
+          "brecha_neta": 1318,
+          "egresados_radicacion_real": 127
         },
         "ORURO": {
           "deficit_materia": 20,
@@ -2876,12 +2991,13 @@
           "sin_pert": 0,
           "pct_alta": 52.6,
           "reemplazo_nopert": 299,
-          "migracion_salientes": 16,
-          "migracion_entrantes": 20,
-          "saldo_migratorio": -4,
+          "migracion_salientes": 22,
+          "migracion_entrantes": 25,
+          "saldo_migratorio": -3,
           "crecimiento_arima_pct": -5.31,
           "demanda_total": 584,
-          "brecha_neta": 549
+          "brecha_neta": 549,
+          "egresados_radicacion_real": 0
         },
         "PANDO": {
           "deficit_materia": 5,
@@ -2899,12 +3015,13 @@
           "sin_pert": 0,
           "pct_alta": 74.1,
           "reemplazo_nopert": 33,
-          "migracion_salientes": 1,
-          "migracion_entrantes": 3,
-          "saldo_migratorio": -2,
+          "migracion_salientes": 6,
+          "migracion_entrantes": 19,
+          "saldo_migratorio": -13,
           "crecimiento_arima_pct": -2.23,
           "demanda_total": 45,
-          "brecha_neta": 37
+          "brecha_neta": 37,
+          "egresados_radicacion_real": 88
         },
         "POTOSI": {
           "deficit_materia": 32,
@@ -2922,12 +3039,13 @@
           "sin_pert": 4,
           "pct_alta": 68.4,
           "reemplazo_nopert": 301,
-          "migracion_salientes": 46,
-          "migracion_entrantes": 68,
-          "saldo_migratorio": -22,
+          "migracion_salientes": 31,
+          "migracion_entrantes": 37,
+          "saldo_migratorio": -6,
           "crecimiento_arima_pct": 1.32,
           "demanda_total": 525,
-          "brecha_neta": 468
+          "brecha_neta": 468,
+          "egresados_radicacion_real": 5
         },
         "SANTA CRUZ": {
           "deficit_materia": 64,
@@ -2945,12 +3063,13 @@
           "sin_pert": 67,
           "pct_alta": 58.4,
           "reemplazo_nopert": 744,
-          "migracion_salientes": 182,
-          "migracion_entrantes": 284,
-          "saldo_migratorio": -102,
+          "migracion_salientes": 65,
+          "migracion_entrantes": 44,
+          "saldo_migratorio": 21,
           "crecimiento_arima_pct": 3.34,
           "demanda_total": 1001,
-          "brecha_neta": 887
+          "brecha_neta": 887,
+          "egresados_radicacion_real": 156
         },
         "TARIJA": {
           "deficit_materia": 17,
@@ -2968,12 +3087,13 @@
           "sin_pert": 1,
           "pct_alta": 65.5,
           "reemplazo_nopert": 201,
-          "migracion_salientes": 11,
-          "migracion_entrantes": 13,
+          "migracion_salientes": 4,
+          "migracion_entrantes": 6,
           "saldo_migratorio": -2,
           "crecimiento_arima_pct": -2.69,
           "demanda_total": 317,
-          "brecha_neta": 286
+          "brecha_neta": 286,
+          "egresados_radicacion_real": 46
         }
       }
     },
@@ -3000,12 +3120,13 @@
         "sin_pert": 20,
         "pct_alta": 79.7,
         "reemplazo_nopert": 106,
-        "migracion_salientes": 797,
-        "migracion_entrantes": 1147,
-        "saldo_migratorio": -350,
+        "migracion_salientes": 70,
+        "migracion_entrantes": 45,
+        "saldo_migratorio": 25,
         "crecimiento_arima_pct": -6.8,
         "demanda_total": 1597,
-        "brecha_neta": 1014
+        "brecha_neta": 1014,
+        "egresados_radicacion_real": 583
       },
       "por_departamento": {
         "BENI": {
@@ -3024,12 +3145,13 @@
           "sin_pert": 0,
           "pct_alta": 73.8,
           "reemplazo_nopert": 10,
-          "migracion_salientes": 11,
-          "migracion_entrantes": 19,
-          "saldo_migratorio": -8,
+          "migracion_salientes": 5,
+          "migracion_entrantes": 4,
+          "saldo_migratorio": 1,
           "crecimiento_arima_pct": 0.33,
           "demanda_total": 88,
-          "brecha_neta": 62
+          "brecha_neta": 62,
+          "egresados_radicacion_real": 23
         },
         "CHUQUISACA": {
           "deficit_materia": 45,
@@ -3047,12 +3169,13 @@
           "sin_pert": 1,
           "pct_alta": 75.0,
           "reemplazo_nopert": 12,
-          "migracion_salientes": 16,
-          "migracion_entrantes": 22,
-          "saldo_migratorio": -6,
+          "migracion_salientes": 6,
+          "migracion_entrantes": 5,
+          "saldo_migratorio": 1,
           "crecimiento_arima_pct": -2.02,
           "demanda_total": 102,
-          "brecha_neta": 73
+          "brecha_neta": 73,
+          "egresados_radicacion_real": 22
         },
         "COCHABAMBA": {
           "deficit_materia": 164,
@@ -3070,12 +3193,13 @@
           "sin_pert": 4,
           "pct_alta": 85.5,
           "reemplazo_nopert": 12,
-          "migracion_salientes": 148,
-          "migracion_entrantes": 205,
-          "saldo_migratorio": -57,
+          "migracion_salientes": 13,
+          "migracion_entrantes": 4,
+          "saldo_migratorio": 9,
           "crecimiento_arima_pct": -4.05,
           "demanda_total": 294,
-          "brecha_neta": 188
+          "brecha_neta": 188,
+          "egresados_radicacion_real": 101
         },
         "LA PAZ": {
           "deficit_materia": 276,
@@ -3093,12 +3217,13 @@
           "sin_pert": 10,
           "pct_alta": 84.1,
           "reemplazo_nopert": 27,
-          "migracion_salientes": 378,
-          "migracion_entrantes": 529,
-          "saldo_migratorio": -151,
+          "migracion_salientes": 19,
+          "migracion_entrantes": 4,
+          "saldo_migratorio": 15,
           "crecimiento_arima_pct": -3.28,
           "demanda_total": 428,
-          "brecha_neta": 250
+          "brecha_neta": 250,
+          "egresados_radicacion_real": 154
         },
         "ORURO": {
           "deficit_materia": 53,
@@ -3116,12 +3241,13 @@
           "sin_pert": 1,
           "pct_alta": 72.7,
           "reemplazo_nopert": 3,
-          "migracion_salientes": 15,
-          "migracion_entrantes": 19,
-          "saldo_migratorio": -4,
+          "migracion_salientes": 6,
+          "migracion_entrantes": 3,
+          "saldo_migratorio": 3,
           "crecimiento_arima_pct": -5.31,
           "demanda_total": 168,
-          "brecha_neta": 133
+          "brecha_neta": 133,
+          "egresados_radicacion_real": 24
         },
         "PANDO": {
           "deficit_materia": 11,
@@ -3139,12 +3265,13 @@
           "sin_pert": 0,
           "pct_alta": 73.9,
           "reemplazo_nopert": 6,
-          "migracion_salientes": 1,
-          "migracion_entrantes": 3,
-          "saldo_migratorio": -2,
+          "migracion_salientes": 2,
+          "migracion_entrantes": 0,
+          "saldo_migratorio": 2,
           "crecimiento_arima_pct": -2.23,
           "demanda_total": 23,
-          "brecha_neta": 16
+          "brecha_neta": 16,
+          "egresados_radicacion_real": 22
         },
         "POTOSI": {
           "deficit_materia": 69,
@@ -3162,12 +3289,13 @@
           "sin_pert": 0,
           "pct_alta": 71.8,
           "reemplazo_nopert": 1,
-          "migracion_salientes": 34,
-          "migracion_entrantes": 52,
-          "saldo_migratorio": -18,
+          "migracion_salientes": 2,
+          "migracion_entrantes": 5,
+          "saldo_migratorio": -3,
           "crecimiento_arima_pct": 1.32,
           "demanda_total": 161,
-          "brecha_neta": 117
+          "brecha_neta": 117,
+          "egresados_radicacion_real": 43
         },
         "SANTA CRUZ": {
           "deficit_materia": 181,
@@ -3185,12 +3313,13 @@
           "sin_pert": 4,
           "pct_alta": 74.2,
           "reemplazo_nopert": 32,
-          "migracion_salientes": 180,
-          "migracion_entrantes": 281,
-          "saldo_migratorio": -101,
+          "migracion_salientes": 15,
+          "migracion_entrantes": 16,
+          "saldo_migratorio": -1,
           "crecimiento_arima_pct": 3.34,
           "demanda_total": 276,
-          "brecha_neta": 159
+          "brecha_neta": 159,
+          "egresados_radicacion_real": 145
         },
         "TARIJA": {
           "deficit_materia": 64,
@@ -3208,12 +3337,13 @@
           "sin_pert": 0,
           "pct_alta": 83.8,
           "reemplazo_nopert": 3,
-          "migracion_salientes": 14,
-          "migracion_entrantes": 17,
-          "saldo_migratorio": -3,
+          "migracion_salientes": 2,
+          "migracion_entrantes": 4,
+          "saldo_migratorio": -2,
           "crecimiento_arima_pct": -2.69,
           "demanda_total": 160,
-          "brecha_neta": 119
+          "brecha_neta": 119,
+          "egresados_radicacion_real": 49
         }
       }
     },
@@ -3240,12 +3370,13 @@
         "sin_pert": 197,
         "pct_alta": 61.1,
         "reemplazo_nopert": 274,
-        "migracion_salientes": 835,
-        "migracion_entrantes": 1213,
-        "saldo_migratorio": -378,
+        "migracion_salientes": 48,
+        "migracion_entrantes": 113,
+        "saldo_migratorio": -65,
         "crecimiento_arima_pct": -6.8,
         "demanda_total": 154,
-        "brecha_neta": -216
+        "brecha_neta": -216,
+        "egresados_radicacion_real": 370
       },
       "por_departamento": {
         "BENI": {
@@ -3264,12 +3395,13 @@
           "sin_pert": 25,
           "pct_alta": 22.0,
           "reemplazo_nopert": 27,
-          "migracion_salientes": 9,
-          "migracion_entrantes": 16,
-          "saldo_migratorio": -7,
+          "migracion_salientes": 2,
+          "migracion_entrantes": 6,
+          "saldo_migratorio": -4,
           "crecimiento_arima_pct": 0.33,
           "demanda_total": 30,
-          "brecha_neta": 17
+          "brecha_neta": 17,
+          "egresados_radicacion_real": 1
         },
         "CHUQUISACA": {
           "deficit_materia": 6,
@@ -3287,12 +3419,13 @@
           "sin_pert": 35,
           "pct_alta": 24.6,
           "reemplazo_nopert": 36,
-          "migracion_salientes": 19,
-          "migracion_entrantes": 25,
-          "saldo_migratorio": -6,
+          "migracion_salientes": 7,
+          "migracion_entrantes": 15,
+          "saldo_migratorio": -8,
           "crecimiento_arima_pct": -2.02,
           "demanda_total": 45,
-          "brecha_neta": 24
+          "brecha_neta": 24,
+          "egresados_radicacion_real": 29
         },
         "COCHABAMBA": {
           "deficit_materia": 8,
@@ -3310,12 +3443,13 @@
           "sin_pert": 31,
           "pct_alta": 47.2,
           "reemplazo_nopert": 37,
-          "migracion_salientes": 64,
-          "migracion_entrantes": 89,
-          "saldo_migratorio": -25,
+          "migracion_salientes": 9,
+          "migracion_entrantes": 13,
+          "saldo_migratorio": -4,
           "crecimiento_arima_pct": -4.05,
           "demanda_total": 46,
-          "brecha_neta": 17
+          "brecha_neta": 17,
+          "egresados_radicacion_real": 11
         },
         "LA PAZ": {
           "deficit_materia": 38,
@@ -3333,12 +3467,13 @@
           "sin_pert": 9,
           "pct_alta": 75.7,
           "reemplazo_nopert": 28,
-          "migracion_salientes": 443,
-          "migracion_entrantes": 620,
-          "saldo_migratorio": -177,
+          "migracion_salientes": 8,
+          "migracion_entrantes": 15,
+          "saldo_migratorio": -7,
           "crecimiento_arima_pct": -3.28,
           "demanda_total": -45,
-          "brecha_neta": -177
+          "brecha_neta": -177,
+          "egresados_radicacion_real": 103
         },
         "ORURO": {
           "deficit_materia": 3,
@@ -3356,12 +3491,13 @@
           "sin_pert": 0,
           "pct_alta": 60.0,
           "reemplazo_nopert": 5,
-          "migracion_salientes": 8,
-          "migracion_entrantes": 10,
-          "saldo_migratorio": -2,
+          "migracion_salientes": 2,
+          "migracion_entrantes": 1,
+          "saldo_migratorio": 1,
           "crecimiento_arima_pct": -5.31,
           "demanda_total": 27,
-          "brecha_neta": 16
+          "brecha_neta": 16,
+          "egresados_radicacion_real": 0
         },
         "PANDO": {
           "deficit_materia": 5,
@@ -3379,12 +3515,13 @@
           "sin_pert": 4,
           "pct_alta": 62.7,
           "reemplazo_nopert": 16,
-          "migracion_salientes": 4,
-          "migracion_entrantes": 10,
+          "migracion_salientes": 2,
+          "migracion_entrantes": 8,
           "saldo_migratorio": -6,
           "crecimiento_arima_pct": -2.23,
           "demanda_total": 16,
-          "brecha_neta": -1
+          "brecha_neta": -1,
+          "egresados_radicacion_real": 12
         },
         "POTOSI": {
           "deficit_materia": 6,
@@ -3402,12 +3539,13 @@
           "sin_pert": 15,
           "pct_alta": 59.1,
           "reemplazo_nopert": 17,
-          "migracion_salientes": 26,
-          "migracion_entrantes": 40,
-          "saldo_migratorio": -14,
+          "migracion_salientes": 0,
+          "migracion_entrantes": 12,
+          "saldo_migratorio": -12,
           "crecimiento_arima_pct": 1.32,
           "demanda_total": 28,
-          "brecha_neta": 6
+          "brecha_neta": 6,
+          "egresados_radicacion_real": 35
         },
         "SANTA CRUZ": {
           "deficit_materia": 29,
@@ -3425,12 +3563,13 @@
           "sin_pert": 59,
           "pct_alta": 60.7,
           "reemplazo_nopert": 87,
-          "migracion_salientes": 250,
-          "migracion_entrantes": 389,
-          "saldo_migratorio": -139,
+          "migracion_salientes": 11,
+          "migracion_entrantes": 37,
+          "saldo_migratorio": -26,
           "crecimiento_arima_pct": 3.34,
           "demanda_total": 4,
-          "brecha_neta": -99
+          "brecha_neta": -99,
+          "egresados_radicacion_real": 111
         },
         "TARIJA": {
           "deficit_materia": 6,
@@ -3448,12 +3587,13 @@
           "sin_pert": 19,
           "pct_alta": 54.5,
           "reemplazo_nopert": 20,
-          "migracion_salientes": 12,
-          "migracion_entrantes": 14,
-          "saldo_migratorio": -2,
+          "migracion_salientes": 7,
+          "migracion_entrantes": 6,
+          "saldo_migratorio": 1,
           "crecimiento_arima_pct": -2.69,
           "demanda_total": 35,
-          "brecha_neta": 13
+          "brecha_neta": 13,
+          "egresados_radicacion_real": 68
         }
       }
     },
@@ -3480,12 +3620,13 @@
         "sin_pert": 13,
         "pct_alta": 67.7,
         "reemplazo_nopert": 54,
-        "migracion_salientes": 926,
-        "migracion_entrantes": 1304,
-        "saldo_migratorio": -378,
+        "migracion_salientes": 2,
+        "migracion_entrantes": 7,
+        "saldo_migratorio": -5,
         "crecimiento_arima_pct": -6.8,
         "demanda_total": -151,
-        "brecha_neta": -234
+        "brecha_neta": -234,
+        "egresados_radicacion_real": 83
       },
       "por_departamento": {
         "BENI": {
@@ -3504,12 +3645,13 @@
           "sin_pert": 0,
           "pct_alta": 61.5,
           "reemplazo_nopert": 0,
-          "migracion_salientes": 6,
-          "migracion_entrantes": 10,
-          "saldo_migratorio": -4,
+          "migracion_salientes": 0,
+          "migracion_entrantes": 0,
+          "saldo_migratorio": 0,
           "crecimiento_arima_pct": 0.33,
           "demanda_total": -1,
-          "brecha_neta": -3
+          "brecha_neta": -3,
+          "egresados_radicacion_real": 0
         },
         "CHUQUISACA": {
           "deficit_materia": 2,
@@ -3527,12 +3669,13 @@
           "sin_pert": 5,
           "pct_alta": 44.1,
           "reemplazo_nopert": 6,
-          "migracion_salientes": 20,
-          "migracion_entrantes": 27,
-          "saldo_migratorio": -7,
+          "migracion_salientes": 0,
+          "migracion_entrantes": 2,
+          "saldo_migratorio": -2,
           "crecimiento_arima_pct": -2.02,
           "demanda_total": 10,
-          "brecha_neta": 5
+          "brecha_neta": 5,
+          "egresados_radicacion_real": 1
         },
         "COCHABAMBA": {
           "deficit_materia": 3,
@@ -3550,12 +3693,13 @@
           "sin_pert": 2,
           "pct_alta": 71.7,
           "reemplazo_nopert": 5,
-          "migracion_salientes": 80,
-          "migracion_entrantes": 110,
-          "saldo_migratorio": -30,
+          "migracion_salientes": 1,
+          "migracion_entrantes": 0,
+          "saldo_migratorio": 1,
           "crecimiento_arima_pct": -4.05,
           "demanda_total": 1,
-          "brecha_neta": -7
+          "brecha_neta": -7,
+          "egresados_radicacion_real": 8
         },
         "LA PAZ": {
           "deficit_materia": 15,
@@ -3573,12 +3717,13 @@
           "sin_pert": 0,
           "pct_alta": 75.7,
           "reemplazo_nopert": 26,
-          "migracion_salientes": 691,
-          "migracion_entrantes": 967,
-          "saldo_migratorio": -276,
+          "migracion_salientes": 1,
+          "migracion_entrantes": 3,
+          "saldo_migratorio": -2,
           "crecimiento_arima_pct": -3.28,
           "demanda_total": -170,
-          "brecha_neta": -216
+          "brecha_neta": -216,
+          "egresados_radicacion_real": 70
         },
         "ORURO": {
           "deficit_materia": 1,
@@ -3596,12 +3741,13 @@
           "sin_pert": 0,
           "pct_alta": 61.3,
           "reemplazo_nopert": 3,
-          "migracion_salientes": 15,
-          "migracion_entrantes": 18,
-          "saldo_migratorio": -3,
+          "migracion_salientes": 0,
+          "migracion_entrantes": 0,
+          "saldo_migratorio": 0,
           "crecimiento_arima_pct": -5.31,
           "demanda_total": 21,
-          "brecha_neta": 16
+          "brecha_neta": 16,
+          "egresados_radicacion_real": 0
         },
         "PANDO": {
           "deficit_materia": 0,
@@ -3619,12 +3765,13 @@
           "sin_pert": 0,
           "pct_alta": 50.0,
           "reemplazo_nopert": 1,
-          "migracion_salientes": 1,
-          "migracion_entrantes": 2,
-          "saldo_migratorio": -1,
+          "migracion_salientes": 0,
+          "migracion_entrantes": 0,
+          "saldo_migratorio": 0,
           "crecimiento_arima_pct": -2.23,
           "demanda_total": 1,
-          "brecha_neta": 0
+          "brecha_neta": 0,
+          "egresados_radicacion_real": 0
         },
         "POTOSI": {
           "deficit_materia": 2,
@@ -3642,12 +3789,13 @@
           "sin_pert": 0,
           "pct_alta": 74.4,
           "reemplazo_nopert": 1,
-          "migracion_salientes": 36,
-          "migracion_entrantes": 53,
-          "saldo_migratorio": -17,
+          "migracion_salientes": 0,
+          "migracion_entrantes": 0,
+          "saldo_migratorio": 0,
           "crecimiento_arima_pct": 1.32,
           "demanda_total": 1,
-          "brecha_neta": -6
+          "brecha_neta": -6,
+          "egresados_radicacion_real": 4
         },
         "SANTA CRUZ": {
           "deficit_materia": 2,
@@ -3665,12 +3813,13 @@
           "sin_pert": 6,
           "pct_alta": 35.7,
           "reemplazo_nopert": 11,
-          "migracion_salientes": 69,
-          "migracion_entrantes": 108,
-          "saldo_migratorio": -39,
+          "migracion_salientes": 0,
+          "migracion_entrantes": 2,
+          "saldo_migratorio": -2,
           "crecimiento_arima_pct": 3.34,
           "demanda_total": -10,
-          "brecha_neta": -16
+          "brecha_neta": -16,
+          "egresados_radicacion_real": 0
         },
         "TARIJA": {
           "deficit_materia": 1,
@@ -3688,12 +3837,13 @@
           "sin_pert": 0,
           "pct_alta": 52.4,
           "reemplazo_nopert": 0,
-          "migracion_salientes": 8,
-          "migracion_entrantes": 9,
-          "saldo_migratorio": -1,
+          "migracion_salientes": 0,
+          "migracion_entrantes": 0,
+          "saldo_migratorio": 0,
           "crecimiento_arima_pct": -2.69,
           "demanda_total": 8,
-          "brecha_neta": 5
+          "brecha_neta": 5,
+          "egresados_radicacion_real": 0
         }
       }
     },
@@ -3720,12 +3870,13 @@
         "sin_pert": 470,
         "pct_alta": 47.6,
         "reemplazo_nopert": 555,
-        "migracion_salientes": 903,
-        "migracion_entrantes": 1292,
-        "saldo_migratorio": -389,
+        "migracion_salientes": 93,
+        "migracion_entrantes": 243,
+        "saldo_migratorio": -150,
         "crecimiento_arima_pct": -6.8,
         "demanda_total": 438,
-        "brecha_neta": 215
+        "brecha_neta": 215,
+        "egresados_radicacion_real": 223
       },
       "por_departamento": {
         "BENI": {
@@ -3744,12 +3895,13 @@
           "sin_pert": 42,
           "pct_alta": 26.1,
           "reemplazo_nopert": 46,
-          "migracion_salientes": 12,
-          "migracion_entrantes": 21,
-          "saldo_migratorio": -9,
+          "migracion_salientes": 6,
+          "migracion_entrantes": 14,
+          "saldo_migratorio": -8,
           "crecimiento_arima_pct": 0.33,
           "demanda_total": 44,
-          "brecha_neta": 33
+          "brecha_neta": 33,
+          "egresados_radicacion_real": 3
         },
         "CHUQUISACA": {
           "deficit_materia": 5,
@@ -3767,12 +3919,13 @@
           "sin_pert": 37,
           "pct_alta": 21.5,
           "reemplazo_nopert": 38,
-          "migracion_salientes": 15,
-          "migracion_entrantes": 20,
-          "saldo_migratorio": -5,
+          "migracion_salientes": 9,
+          "migracion_entrantes": 21,
+          "saldo_migratorio": -12,
           "crecimiento_arima_pct": -2.02,
           "demanda_total": 47,
-          "brecha_neta": 37
+          "brecha_neta": 37,
+          "egresados_radicacion_real": 39
         },
         "COCHABAMBA": {
           "deficit_materia": 14,
@@ -3790,12 +3943,13 @@
           "sin_pert": 124,
           "pct_alta": 31.3,
           "reemplazo_nopert": 127,
-          "migracion_salientes": 114,
-          "migracion_entrantes": 158,
-          "saldo_migratorio": -44,
+          "migracion_salientes": 15,
+          "migracion_entrantes": 46,
+          "saldo_migratorio": -31,
           "crecimiento_arima_pct": -4.05,
           "demanda_total": 119,
-          "brecha_neta": 88
+          "brecha_neta": 88,
+          "egresados_radicacion_real": 69
         },
         "LA PAZ": {
           "deficit_materia": 46,
@@ -3813,12 +3967,13 @@
           "sin_pert": 30,
           "pct_alta": 71.3,
           "reemplazo_nopert": 88,
-          "migracion_salientes": 557,
-          "migracion_entrantes": 780,
-          "saldo_migratorio": -223,
+          "migracion_salientes": 25,
+          "migracion_entrantes": 71,
+          "saldo_migratorio": -46,
           "crecimiento_arima_pct": -3.28,
           "demanda_total": 16,
-          "brecha_neta": -83
+          "brecha_neta": -83,
+          "egresados_radicacion_real": 71
         },
         "ORURO": {
           "deficit_materia": 3,
@@ -3836,12 +3991,13 @@
           "sin_pert": 4,
           "pct_alta": 56.8,
           "reemplazo_nopert": 8,
-          "migracion_salientes": 8,
-          "migracion_entrantes": 10,
-          "saldo_migratorio": -2,
+          "migracion_salientes": 4,
+          "migracion_entrantes": 3,
+          "saldo_migratorio": 1,
           "crecimiento_arima_pct": -5.31,
           "demanda_total": 35,
-          "brecha_neta": 28
+          "brecha_neta": 28,
+          "egresados_radicacion_real": 0
         },
         "PANDO": {
           "deficit_materia": 1,
@@ -3859,12 +4015,13 @@
           "sin_pert": 10,
           "pct_alta": 13.3,
           "reemplazo_nopert": 12,
-          "migracion_salientes": 1,
-          "migracion_entrantes": 2,
+          "migracion_salientes": 3,
+          "migracion_entrantes": 4,
           "saldo_migratorio": -1,
           "crecimiento_arima_pct": -2.23,
           "demanda_total": 13,
-          "brecha_neta": 11
+          "brecha_neta": 11,
+          "egresados_radicacion_real": 1
         },
         "POTOSI": {
           "deficit_materia": 7,
@@ -3882,12 +4039,13 @@
           "sin_pert": 39,
           "pct_alta": 40.4,
           "reemplazo_nopert": 42,
-          "migracion_salientes": 29,
-          "migracion_entrantes": 44,
-          "saldo_migratorio": -15,
+          "migracion_salientes": 10,
+          "migracion_entrantes": 22,
+          "saldo_migratorio": -12,
           "crecimiento_arima_pct": 1.32,
           "demanda_total": 56,
-          "brecha_neta": 41
+          "brecha_neta": 41,
+          "egresados_radicacion_real": 9
         },
         "SANTA CRUZ": {
           "deficit_materia": 18,
@@ -3905,12 +4063,13 @@
           "sin_pert": 157,
           "pct_alta": 20.3,
           "reemplazo_nopert": 166,
-          "migracion_salientes": 160,
-          "migracion_entrantes": 249,
-          "saldo_migratorio": -89,
+          "migracion_salientes": 17,
+          "migracion_entrantes": 54,
+          "saldo_migratorio": -37,
           "crecimiento_arima_pct": 3.34,
           "demanda_total": 120,
-          "brecha_neta": 80
+          "brecha_neta": 80,
+          "egresados_radicacion_real": 29
         },
         "TARIJA": {
           "deficit_materia": 4,
@@ -3928,12 +4087,13 @@
           "sin_pert": 27,
           "pct_alta": 26.0,
           "reemplazo_nopert": 27,
-          "migracion_salientes": 7,
+          "migracion_salientes": 4,
           "migracion_entrantes": 8,
-          "saldo_migratorio": -1,
+          "saldo_migratorio": -4,
           "crecimiento_arima_pct": -2.69,
           "demanda_total": 37,
-          "brecha_neta": 29
+          "brecha_neta": 29,
+          "egresados_radicacion_real": 2
         }
       }
     },
@@ -3960,12 +4120,13 @@
         "sin_pert": 25,
         "pct_alta": 67.8,
         "reemplazo_nopert": 64,
-        "migracion_salientes": 917,
-        "migracion_entrantes": 1296,
-        "saldo_migratorio": -379,
+        "migracion_salientes": 5,
+        "migracion_entrantes": 42,
+        "saldo_migratorio": -37,
         "crecimiento_arima_pct": -6.8,
         "demanda_total": -155,
-        "brecha_neta": -198
+        "brecha_neta": -198,
+        "egresados_radicacion_real": 43
       },
       "por_departamento": {
         "BENI": {
@@ -3984,12 +4145,13 @@
           "sin_pert": 4,
           "pct_alta": 52.4,
           "reemplazo_nopert": 5,
-          "migracion_salientes": 9,
-          "migracion_entrantes": 16,
-          "saldo_migratorio": -7,
+          "migracion_salientes": 0,
+          "migracion_entrantes": 4,
+          "saldo_migratorio": -4,
           "crecimiento_arima_pct": 0.33,
           "demanda_total": 0,
-          "brecha_neta": -2
+          "brecha_neta": -2,
+          "egresados_radicacion_real": 2
         },
         "CHUQUISACA": {
           "deficit_materia": 1,
@@ -4007,12 +4169,13 @@
           "sin_pert": 3,
           "pct_alta": 48.5,
           "reemplazo_nopert": 4,
-          "migracion_salientes": 18,
-          "migracion_entrantes": 25,
-          "saldo_migratorio": -7,
+          "migracion_salientes": 0,
+          "migracion_entrantes": 0,
+          "saldo_migratorio": 0,
           "crecimiento_arima_pct": -2.02,
           "demanda_total": 7,
-          "brecha_neta": 5
+          "brecha_neta": 5,
+          "egresados_radicacion_real": 1
         },
         "COCHABAMBA": {
           "deficit_materia": 1,
@@ -4030,12 +4193,13 @@
           "sin_pert": 7,
           "pct_alta": 63.0,
           "reemplazo_nopert": 10,
-          "migracion_salientes": 76,
-          "migracion_entrantes": 105,
-          "saldo_migratorio": -29,
+          "migracion_salientes": 1,
+          "migracion_entrantes": 6,
+          "saldo_migratorio": -5,
           "crecimiento_arima_pct": -4.05,
           "demanda_total": 5,
-          "brecha_neta": 1
+          "brecha_neta": 1,
+          "egresados_radicacion_real": 2
         },
         "LA PAZ": {
           "deficit_materia": 7,
@@ -4053,12 +4217,13 @@
           "sin_pert": 2,
           "pct_alta": 77.8,
           "reemplazo_nopert": 23,
-          "migracion_salientes": 682,
-          "migracion_entrantes": 955,
-          "saldo_migratorio": -273,
+          "migracion_salientes": 2,
+          "migracion_entrantes": 28,
+          "saldo_migratorio": -26,
           "crecimiento_arima_pct": -3.28,
           "demanda_total": -177,
-          "brecha_neta": -202
+          "brecha_neta": -202,
+          "egresados_radicacion_real": 35
         },
         "ORURO": {
           "deficit_materia": 1,
@@ -4076,12 +4241,13 @@
           "sin_pert": 0,
           "pct_alta": 61.3,
           "reemplazo_nopert": 3,
-          "migracion_salientes": 14,
-          "migracion_entrantes": 17,
-          "saldo_migratorio": -3,
+          "migracion_salientes": 0,
+          "migracion_entrantes": 0,
+          "saldo_migratorio": 0,
           "crecimiento_arima_pct": -5.31,
           "demanda_total": 21,
-          "brecha_neta": 19
+          "brecha_neta": 19,
+          "egresados_radicacion_real": 0
         },
         "PANDO": {
           "deficit_materia": 0,
@@ -4099,12 +4265,13 @@
           "sin_pert": 0,
           "pct_alta": 50.0,
           "reemplazo_nopert": 1,
-          "migracion_salientes": 1,
-          "migracion_entrantes": 1,
+          "migracion_salientes": 0,
+          "migracion_entrantes": 0,
           "saldo_migratorio": 0,
           "crecimiento_arima_pct": -2.23,
           "demanda_total": 2,
-          "brecha_neta": 2
+          "brecha_neta": 2,
+          "egresados_radicacion_real": 0
         },
         "POTOSI": {
           "deficit_materia": 1,
@@ -4122,12 +4289,13 @@
           "sin_pert": 2,
           "pct_alta": 70.2,
           "reemplazo_nopert": 4,
-          "migracion_salientes": 36,
-          "migracion_entrantes": 55,
-          "saldo_migratorio": -19,
+          "migracion_salientes": 0,
+          "migracion_entrantes": 0,
+          "saldo_migratorio": 0,
           "crecimiento_arima_pct": 1.32,
           "demanda_total": 1,
-          "brecha_neta": -2
+          "brecha_neta": -2,
+          "egresados_radicacion_real": 2
         },
         "SANTA CRUZ": {
           "deficit_materia": 1,
@@ -4145,12 +4313,13 @@
           "sin_pert": 7,
           "pct_alta": 40.4,
           "reemplazo_nopert": 12,
-          "migracion_salientes": 73,
-          "migracion_entrantes": 113,
-          "saldo_migratorio": -40,
+          "migracion_salientes": 2,
+          "migracion_entrantes": 3,
+          "saldo_migratorio": -1,
           "crecimiento_arima_pct": 3.34,
           "demanda_total": -11,
-          "brecha_neta": -14
+          "brecha_neta": -14,
+          "egresados_radicacion_real": 1
         },
         "TARIJA": {
           "deficit_materia": 0,
@@ -4168,12 +4337,13 @@
           "sin_pert": 0,
           "pct_alta": 52.2,
           "reemplazo_nopert": 1,
-          "migracion_salientes": 8,
-          "migracion_entrantes": 9,
+          "migracion_salientes": 0,
+          "migracion_entrantes": 1,
           "saldo_migratorio": -1,
           "crecimiento_arima_pct": -2.69,
           "demanda_total": 8,
-          "brecha_neta": 6
+          "brecha_neta": 6,
+          "egresados_radicacion_real": 0
         }
       }
     },
@@ -4200,12 +4370,13 @@
         "sin_pert": 183,
         "pct_alta": 51.9,
         "reemplazo_nopert": 243,
-        "migracion_salientes": 801,
-        "migracion_entrantes": 1146,
-        "saldo_migratorio": -345,
+        "migracion_salientes": 36,
+        "migracion_entrantes": 62,
+        "saldo_migratorio": -26,
         "crecimiento_arima_pct": -6.8,
         "demanda_total": 315,
-        "brecha_neta": 145
+        "brecha_neta": 145,
+        "egresados_radicacion_real": 170
       },
       "por_departamento": {
         "BENI": {
@@ -4224,12 +4395,13 @@
           "sin_pert": 19,
           "pct_alta": 29.4,
           "reemplazo_nopert": 19,
-          "migracion_salientes": 10,
-          "migracion_entrantes": 19,
-          "saldo_migratorio": -9,
+          "migracion_salientes": 2,
+          "migracion_entrantes": 6,
+          "saldo_migratorio": -4,
           "crecimiento_arima_pct": 0.33,
           "demanda_total": 26,
-          "brecha_neta": 19
+          "brecha_neta": 19,
+          "egresados_radicacion_real": 1
         },
         "CHUQUISACA": {
           "deficit_materia": 17,
@@ -4247,12 +4419,13 @@
           "sin_pert": 14,
           "pct_alta": 46.4,
           "reemplazo_nopert": 17,
-          "migracion_salientes": 23,
-          "migracion_entrantes": 31,
-          "saldo_migratorio": -8,
+          "migracion_salientes": 3,
+          "migracion_entrantes": 3,
+          "saldo_migratorio": 0,
           "crecimiento_arima_pct": -2.02,
           "demanda_total": 36,
-          "brecha_neta": 24
+          "brecha_neta": 24,
+          "egresados_radicacion_real": 4
         },
         "COCHABAMBA": {
           "deficit_materia": 33,
@@ -4270,12 +4443,13 @@
           "sin_pert": 50,
           "pct_alta": 30.6,
           "reemplazo_nopert": 64,
-          "migracion_salientes": 116,
-          "migracion_entrantes": 161,
-          "saldo_migratorio": -45,
+          "migracion_salientes": 10,
+          "migracion_entrantes": 19,
+          "saldo_migratorio": -9,
           "crecimiento_arima_pct": -4.05,
           "demanda_total": 91,
-          "brecha_neta": 67
+          "brecha_neta": 67,
+          "egresados_radicacion_real": 9
         },
         "LA PAZ": {
           "deficit_materia": 83,
@@ -4293,12 +4467,13 @@
           "sin_pert": 18,
           "pct_alta": 69.6,
           "reemplazo_nopert": 35,
-          "migracion_salientes": 443,
-          "migracion_entrantes": 621,
-          "saldo_migratorio": -178,
+          "migracion_salientes": 9,
+          "migracion_entrantes": 10,
+          "saldo_migratorio": -1,
           "crecimiento_arima_pct": -3.28,
           "demanda_total": 12,
-          "brecha_neta": -50
+          "brecha_neta": -50,
+          "egresados_radicacion_real": 95
         },
         "ORURO": {
           "deficit_materia": 14,
@@ -4316,12 +4491,13 @@
           "sin_pert": 0,
           "pct_alta": 56.5,
           "reemplazo_nopert": 8,
-          "migracion_salientes": 15,
-          "migracion_entrantes": 19,
-          "saldo_migratorio": -4,
+          "migracion_salientes": 3,
+          "migracion_entrantes": 0,
+          "saldo_migratorio": 3,
           "crecimiento_arima_pct": -5.31,
           "demanda_total": 51,
-          "brecha_neta": 41
+          "brecha_neta": 41,
+          "egresados_radicacion_real": 28
         },
         "PANDO": {
           "deficit_materia": 1,
@@ -4344,7 +4520,8 @@
           "saldo_migratorio": -1,
           "crecimiento_arima_pct": -2.23,
           "demanda_total": 2,
-          "brecha_neta": 1
+          "brecha_neta": 1,
+          "egresados_radicacion_real": 0
         },
         "POTOSI": {
           "deficit_materia": 34,
@@ -4362,12 +4539,13 @@
           "sin_pert": 26,
           "pct_alta": 65.2,
           "reemplazo_nopert": 29,
-          "migracion_salientes": 66,
-          "migracion_entrantes": 99,
-          "saldo_migratorio": -33,
+          "migracion_salientes": 4,
+          "migracion_entrantes": 11,
+          "saldo_migratorio": -7,
           "crecimiento_arima_pct": 1.32,
           "demanda_total": 51,
-          "brecha_neta": 26
+          "brecha_neta": 26,
+          "egresados_radicacion_real": 26
         },
         "SANTA CRUZ": {
           "deficit_materia": 30,
@@ -4385,12 +4563,13 @@
           "sin_pert": 51,
           "pct_alta": 23.3,
           "reemplazo_nopert": 61,
-          "migracion_salientes": 119,
-          "migracion_entrantes": 185,
-          "saldo_migratorio": -66,
+          "migracion_salientes": 4,
+          "migracion_entrantes": 9,
+          "saldo_migratorio": -5,
           "crecimiento_arima_pct": 3.34,
           "demanda_total": 51,
-          "brecha_neta": 29
+          "brecha_neta": 29,
+          "egresados_radicacion_real": 7
         },
         "TARIJA": {
           "deficit_materia": 10,
@@ -4408,12 +4587,13 @@
           "sin_pert": 5,
           "pct_alta": 45.5,
           "reemplazo_nopert": 8,
-          "migracion_salientes": 9,
-          "migracion_entrantes": 10,
-          "saldo_migratorio": -1,
+          "migracion_salientes": 1,
+          "migracion_entrantes": 3,
+          "saldo_migratorio": -2,
           "crecimiento_arima_pct": -2.69,
           "demanda_total": 32,
-          "brecha_neta": 25
+          "brecha_neta": 25,
+          "egresados_radicacion_real": 0
         }
       }
     },
@@ -4440,12 +4620,13 @@
         "sin_pert": 156,
         "pct_alta": 62.1,
         "reemplazo_nopert": 188,
-        "migracion_salientes": 937,
-        "migracion_entrantes": 1325,
-        "saldo_migratorio": -388,
+        "migracion_salientes": 23,
+        "migracion_entrantes": 89,
+        "saldo_migratorio": -66,
         "crecimiento_arima_pct": -6.8,
         "demanda_total": 82,
-        "brecha_neta": -171
+        "brecha_neta": -171,
+        "egresados_radicacion_real": 253
       },
       "por_departamento": {
         "BENI": {
@@ -4464,12 +4645,13 @@
           "sin_pert": 2,
           "pct_alta": 52.9,
           "reemplazo_nopert": 2,
-          "migracion_salientes": 5,
-          "migracion_entrantes": 9,
-          "saldo_migratorio": -4,
+          "migracion_salientes": 0,
+          "migracion_entrantes": 3,
+          "saldo_migratorio": -3,
           "crecimiento_arima_pct": 0.33,
           "demanda_total": 3,
-          "brecha_neta": -2
+          "brecha_neta": -2,
+          "egresados_radicacion_real": 1
         },
         "CHUQUISACA": {
           "deficit_materia": 7,
@@ -4487,12 +4669,13 @@
           "sin_pert": 16,
           "pct_alta": 31.8,
           "reemplazo_nopert": 17,
-          "migracion_salientes": 17,
-          "migracion_entrantes": 23,
-          "saldo_migratorio": -6,
+          "migracion_salientes": 0,
+          "migracion_entrantes": 4,
+          "saldo_migratorio": -4,
           "crecimiento_arima_pct": -2.02,
           "demanda_total": 26,
-          "brecha_neta": 13
+          "brecha_neta": 13,
+          "egresados_radicacion_real": 2
         },
         "COCHABAMBA": {
           "deficit_materia": 20,
@@ -4510,12 +4693,13 @@
           "sin_pert": 57,
           "pct_alta": 40.2,
           "reemplazo_nopert": 60,
-          "migracion_salientes": 115,
-          "migracion_entrantes": 159,
-          "saldo_migratorio": -44,
+          "migracion_salientes": 7,
+          "migracion_entrantes": 20,
+          "saldo_migratorio": -13,
           "crecimiento_arima_pct": -4.05,
           "demanda_total": 56,
-          "brecha_neta": 21
+          "brecha_neta": 21,
+          "egresados_radicacion_real": 16
         },
         "LA PAZ": {
           "deficit_materia": 75,
@@ -4533,12 +4717,13 @@
           "sin_pert": 20,
           "pct_alta": 80.4,
           "reemplazo_nopert": 37,
-          "migracion_salientes": 659,
-          "migracion_entrantes": 923,
-          "saldo_migratorio": -264,
+          "migracion_salientes": 6,
+          "migracion_entrantes": 44,
+          "saldo_migratorio": -38,
           "crecimiento_arima_pct": -3.28,
           "demanda_total": -82,
-          "brecha_neta": -219
+          "brecha_neta": -219,
+          "egresados_radicacion_real": 164
         },
         "ORURO": {
           "deficit_materia": 6,
@@ -4556,12 +4741,13 @@
           "sin_pert": 0,
           "pct_alta": 67.6,
           "reemplazo_nopert": 3,
-          "migracion_salientes": 11,
-          "migracion_entrantes": 14,
-          "saldo_migratorio": -3,
+          "migracion_salientes": 1,
+          "migracion_entrantes": 2,
+          "saldo_migratorio": -1,
           "crecimiento_arima_pct": -5.31,
           "demanda_total": 26,
-          "brecha_neta": 15
+          "brecha_neta": 15,
+          "egresados_radicacion_real": 4
         },
         "PANDO": {
           "deficit_materia": 1,
@@ -4580,11 +4766,12 @@
           "pct_alta": 57.1,
           "reemplazo_nopert": 1,
           "migracion_salientes": 1,
-          "migracion_entrantes": 2,
-          "saldo_migratorio": -1,
+          "migracion_entrantes": 1,
+          "saldo_migratorio": 0,
           "crecimiento_arima_pct": -2.23,
           "demanda_total": 2,
-          "brecha_neta": 0
+          "brecha_neta": 0,
+          "egresados_radicacion_real": 1
         },
         "POTOSI": {
           "deficit_materia": 10,
@@ -4602,12 +4789,13 @@
           "sin_pert": 14,
           "pct_alta": 56.1,
           "reemplazo_nopert": 15,
-          "migracion_salientes": 31,
-          "migracion_entrantes": 46,
-          "saldo_migratorio": -15,
+          "migracion_salientes": 2,
+          "migracion_entrantes": 4,
+          "saldo_migratorio": -2,
           "crecimiento_arima_pct": 1.32,
           "demanda_total": 28,
-          "brecha_neta": 11
+          "brecha_neta": 11,
+          "egresados_radicacion_real": 52
         },
         "SANTA CRUZ": {
           "deficit_materia": 14,
@@ -4625,12 +4813,13 @@
           "sin_pert": 40,
           "pct_alta": 25.0,
           "reemplazo_nopert": 45,
-          "migracion_salientes": 91,
-          "migracion_entrantes": 141,
-          "saldo_migratorio": -50,
+          "migracion_salientes": 4,
+          "migracion_entrantes": 7,
+          "saldo_migratorio": -3,
           "crecimiento_arima_pct": 3.34,
           "demanda_total": 28,
-          "brecha_neta": 3
+          "brecha_neta": 3,
+          "egresados_radicacion_real": 12
         },
         "TARIJA": {
           "deficit_materia": 5,
@@ -4648,12 +4837,13 @@
           "sin_pert": 7,
           "pct_alta": 39.3,
           "reemplazo_nopert": 7,
-          "migracion_salientes": 7,
-          "migracion_entrantes": 8,
-          "saldo_migratorio": -1,
+          "migracion_salientes": 2,
+          "migracion_entrantes": 4,
+          "saldo_migratorio": -2,
           "crecimiento_arima_pct": -2.69,
           "demanda_total": 19,
-          "brecha_neta": 11
+          "brecha_neta": 11,
+          "egresados_radicacion_real": 1
         }
       }
     },
@@ -4680,12 +4870,13 @@
         "sin_pert": 71,
         "pct_alta": 58.7,
         "reemplazo_nopert": 107,
-        "migracion_salientes": 866,
-        "migracion_entrantes": 1227,
-        "saldo_migratorio": -361,
+        "migracion_salientes": 92,
+        "migracion_entrantes": 36,
+        "saldo_migratorio": 56,
         "crecimiento_arima_pct": -6.8,
         "demanda_total": -62,
-        "brecha_neta": -113
+        "brecha_neta": -113,
+        "egresados_radicacion_real": 51
       },
       "por_departamento": {
         "BENI": {
@@ -4704,12 +4895,13 @@
           "sin_pert": 0,
           "pct_alta": 64.3,
           "reemplazo_nopert": 0,
-          "migracion_salientes": 6,
-          "migracion_entrantes": 11,
-          "saldo_migratorio": -5,
+          "migracion_salientes": 2,
+          "migracion_entrantes": 0,
+          "saldo_migratorio": 2,
           "crecimiento_arima_pct": 0.33,
           "demanda_total": -2,
-          "brecha_neta": -3
+          "brecha_neta": -3,
+          "egresados_radicacion_real": 0
         },
         "CHUQUISACA": {
           "deficit_materia": 2,
@@ -4727,12 +4919,13 @@
           "sin_pert": 8,
           "pct_alta": 38.9,
           "reemplazo_nopert": 9,
-          "migracion_salientes": 20,
-          "migracion_entrantes": 28,
-          "saldo_migratorio": -8,
+          "migracion_salientes": 2,
+          "migracion_entrantes": 3,
+          "saldo_migratorio": -1,
           "crecimiento_arima_pct": -2.02,
           "demanda_total": 12,
-          "brecha_neta": 9
+          "brecha_neta": 9,
+          "egresados_radicacion_real": 0
         },
         "COCHABAMBA": {
           "deficit_materia": 5,
@@ -4750,12 +4943,13 @@
           "sin_pert": 24,
           "pct_alta": 45.6,
           "reemplazo_nopert": 27,
-          "migracion_salientes": 98,
-          "migracion_entrantes": 135,
-          "saldo_migratorio": -37,
+          "migracion_salientes": 18,
+          "migracion_entrantes": 9,
+          "saldo_migratorio": 9,
           "crecimiento_arima_pct": -4.05,
           "demanda_total": 17,
-          "brecha_neta": 11
+          "brecha_neta": 11,
+          "egresados_radicacion_real": 3
         },
         "LA PAZ": {
           "deficit_materia": 18,
@@ -4773,12 +4967,13 @@
           "sin_pert": 3,
           "pct_alta": 71.7,
           "reemplazo_nopert": 24,
-          "migracion_salientes": 585,
-          "migracion_entrantes": 820,
-          "saldo_migratorio": -235,
+          "migracion_salientes": 41,
+          "migracion_entrantes": 11,
+          "saldo_migratorio": 30,
           "crecimiento_arima_pct": -3.28,
           "demanda_total": -121,
-          "brecha_neta": -145
+          "brecha_neta": -145,
+          "egresados_radicacion_real": 6
         },
         "ORURO": {
           "deficit_materia": 2,
@@ -4796,12 +4991,13 @@
           "sin_pert": 0,
           "pct_alta": 62.5,
           "reemplazo_nopert": 3,
-          "migracion_salientes": 15,
-          "migracion_entrantes": 18,
-          "saldo_migratorio": -3,
+          "migracion_salientes": 10,
+          "migracion_entrantes": 0,
+          "saldo_migratorio": 10,
           "crecimiento_arima_pct": -5.31,
           "demanda_total": 23,
-          "brecha_neta": 20
+          "brecha_neta": 20,
+          "egresados_radicacion_real": 0
         },
         "PANDO": {
           "deficit_materia": 0,
@@ -4819,12 +5015,13 @@
           "sin_pert": 0,
           "pct_alta": 66.7,
           "reemplazo_nopert": 1,
-          "migracion_salientes": 1,
-          "migracion_entrantes": 2,
-          "saldo_migratorio": -1,
+          "migracion_salientes": 0,
+          "migracion_entrantes": 0,
+          "saldo_migratorio": 0,
           "crecimiento_arima_pct": -2.23,
           "demanda_total": 1,
-          "brecha_neta": 0
+          "brecha_neta": 0,
+          "egresados_radicacion_real": 0
         },
         "POTOSI": {
           "deficit_materia": 4,
@@ -4842,12 +5039,13 @@
           "sin_pert": 16,
           "pct_alta": 58.2,
           "reemplazo_nopert": 17,
-          "migracion_salientes": 53,
-          "migracion_entrantes": 80,
-          "saldo_migratorio": -27,
+          "migracion_salientes": 8,
+          "migracion_entrantes": 8,
+          "saldo_migratorio": 0,
           "crecimiento_arima_pct": 1.32,
           "demanda_total": 12,
-          "brecha_neta": 6
+          "brecha_neta": 6,
+          "egresados_radicacion_real": 39
         },
         "SANTA CRUZ": {
           "deficit_materia": 3,
@@ -4865,12 +5063,13 @@
           "sin_pert": 13,
           "pct_alta": 30.6,
           "reemplazo_nopert": 18,
-          "migracion_salientes": 78,
-          "migracion_entrantes": 121,
-          "saldo_migratorio": -43,
+          "migracion_salientes": 8,
+          "migracion_entrantes": 2,
+          "saldo_migratorio": 6,
           "crecimiento_arima_pct": 3.34,
           "demanda_total": -6,
-          "brecha_neta": -10
+          "brecha_neta": -10,
+          "egresados_radicacion_real": 0
         },
         "TARIJA": {
           "deficit_materia": 2,
@@ -4888,12 +5087,13 @@
           "sin_pert": 7,
           "pct_alta": 39.3,
           "reemplazo_nopert": 7,
-          "migracion_salientes": 10,
-          "migracion_entrantes": 12,
-          "saldo_migratorio": -2,
+          "migracion_salientes": 3,
+          "migracion_entrantes": 3,
+          "saldo_migratorio": 0,
           "crecimiento_arima_pct": -2.69,
           "demanda_total": 16,
-          "brecha_neta": 13
+          "brecha_neta": 13,
+          "egresados_radicacion_real": 3
         }
       }
     },
@@ -4920,12 +5120,13 @@
         "sin_pert": 218,
         "pct_alta": 56.3,
         "reemplazo_nopert": 290,
-        "migracion_salientes": 924,
-        "migracion_entrantes": 1321,
-        "saldo_migratorio": -397,
+        "migracion_salientes": 47,
+        "migracion_entrantes": 140,
+        "saldo_migratorio": -93,
         "crecimiento_arima_pct": -6.8,
         "demanda_total": 332,
-        "brecha_neta": -197
+        "brecha_neta": -197,
+        "egresados_radicacion_real": 529
       },
       "por_departamento": {
         "BENI": {
@@ -4944,12 +5145,13 @@
           "sin_pert": 16,
           "pct_alta": 31.2,
           "reemplazo_nopert": 17,
-          "migracion_salientes": 8,
-          "migracion_entrantes": 14,
-          "saldo_migratorio": -6,
+          "migracion_salientes": 0,
+          "migracion_entrantes": 10,
+          "saldo_migratorio": -10,
           "crecimiento_arima_pct": 0.33,
           "demanda_total": 24,
-          "brecha_neta": 7
+          "brecha_neta": 7,
+          "egresados_radicacion_real": 4
         },
         "CHUQUISACA": {
           "deficit_materia": 12,
@@ -4967,12 +5169,13 @@
           "sin_pert": 12,
           "pct_alta": 36.6,
           "reemplazo_nopert": 13,
-          "migracion_salientes": 13,
-          "migracion_entrantes": 18,
-          "saldo_migratorio": -5,
+          "migracion_salientes": 4,
+          "migracion_entrantes": 6,
+          "saldo_migratorio": -2,
           "crecimiento_arima_pct": -2.02,
           "demanda_total": 28,
-          "brecha_neta": 7
+          "brecha_neta": 7,
+          "egresados_radicacion_real": 36
         },
         "COCHABAMBA": {
           "deficit_materia": 42,
@@ -4990,12 +5193,13 @@
           "sin_pert": 79,
           "pct_alta": 36.1,
           "reemplazo_nopert": 82,
-          "migracion_salientes": 115,
-          "migracion_entrantes": 159,
-          "saldo_migratorio": -44,
+          "migracion_salientes": 19,
+          "migracion_entrantes": 28,
+          "saldo_migratorio": -9,
           "crecimiento_arima_pct": -4.05,
           "demanda_total": 101,
-          "brecha_neta": 26
+          "brecha_neta": 26,
+          "egresados_radicacion_real": 86
         },
         "LA PAZ": {
           "deficit_materia": 142,
@@ -5013,12 +5217,13 @@
           "sin_pert": 9,
           "pct_alta": 75.9,
           "reemplazo_nopert": 54,
-          "migracion_salientes": 592,
-          "migracion_entrantes": 830,
-          "saldo_migratorio": -238,
+          "migracion_salientes": 10,
+          "migracion_entrantes": 32,
+          "saldo_migratorio": -22,
           "crecimiento_arima_pct": -3.28,
           "demanda_total": 40,
-          "brecha_neta": -212
+          "brecha_neta": -212,
+          "egresados_radicacion_real": 87
         },
         "ORURO": {
           "deficit_materia": 10,
@@ -5036,12 +5241,13 @@
           "sin_pert": 0,
           "pct_alta": 60.6,
           "reemplazo_nopert": 4,
-          "migracion_salientes": 8,
-          "migracion_entrantes": 10,
-          "saldo_migratorio": -2,
+          "migracion_salientes": 0,
+          "migracion_entrantes": 1,
+          "saldo_migratorio": -1,
           "crecimiento_arima_pct": -5.31,
           "demanda_total": 33,
-          "brecha_neta": 16
+          "brecha_neta": 16,
+          "egresados_radicacion_real": 27
         },
         "PANDO": {
           "deficit_materia": 2,
@@ -5060,11 +5266,12 @@
           "pct_alta": 25.0,
           "reemplazo_nopert": 5,
           "migracion_salientes": 1,
-          "migracion_entrantes": 2,
-          "saldo_migratorio": -1,
+          "migracion_entrantes": 4,
+          "saldo_migratorio": -3,
           "crecimiento_arima_pct": -2.23,
           "demanda_total": 7,
-          "brecha_neta": 3
+          "brecha_neta": 3,
+          "egresados_radicacion_real": 26
         },
         "POTOSI": {
           "deficit_materia": 20,
@@ -5082,12 +5289,13 @@
           "sin_pert": 16,
           "pct_alta": 60.9,
           "reemplazo_nopert": 17,
-          "migracion_salientes": 30,
-          "migracion_entrantes": 46,
-          "saldo_migratorio": -16,
+          "migracion_salientes": 4,
+          "migracion_entrantes": 12,
+          "saldo_migratorio": -8,
           "crecimiento_arima_pct": 1.32,
           "demanda_total": 37,
-          "brecha_neta": 1
+          "brecha_neta": 1,
+          "egresados_radicacion_real": 83
         },
         "SANTA CRUZ": {
           "deficit_materia": 49,
@@ -5105,12 +5313,13 @@
           "sin_pert": 71,
           "pct_alta": 29.4,
           "reemplazo_nopert": 86,
-          "migracion_salientes": 150,
-          "migracion_entrantes": 233,
-          "saldo_migratorio": -83,
+          "migracion_salientes": 8,
+          "migracion_entrantes": 40,
+          "saldo_migratorio": -32,
           "crecimiento_arima_pct": 3.34,
           "demanda_total": 75,
-          "brecha_neta": -13
+          "brecha_neta": -13,
+          "egresados_radicacion_real": 112
         },
         "TARIJA": {
           "deficit_materia": 11,
@@ -5128,12 +5337,13 @@
           "sin_pert": 11,
           "pct_alta": 37.8,
           "reemplazo_nopert": 11,
-          "migracion_salientes": 7,
-          "migracion_entrantes": 9,
-          "saldo_migratorio": -2,
+          "migracion_salientes": 1,
+          "migracion_entrantes": 7,
+          "saldo_migratorio": -6,
           "crecimiento_arima_pct": -2.69,
           "demanda_total": 27,
-          "brecha_neta": 8
+          "brecha_neta": 8,
+          "egresados_radicacion_real": 68
         }
       }
     },
@@ -5160,12 +5370,13 @@
         "sin_pert": 54,
         "pct_alta": 88.1,
         "reemplazo_nopert": 132,
-        "migracion_salientes": 772,
-        "migracion_entrantes": 1126,
-        "saldo_migratorio": -354,
+        "migracion_salientes": 24,
+        "migracion_entrantes": 29,
+        "saldo_migratorio": -5,
         "crecimiento_arima_pct": -6.8,
         "demanda_total": 241,
-        "brecha_neta": -231
+        "brecha_neta": -231,
+        "egresados_radicacion_real": 472
       },
       "por_departamento": {
         "BENI": {
@@ -5184,12 +5395,13 @@
           "sin_pert": 1,
           "pct_alta": 98.3,
           "reemplazo_nopert": 1,
-          "migracion_salientes": 10,
-          "migracion_entrantes": 18,
-          "saldo_migratorio": -8,
+          "migracion_salientes": 3,
+          "migracion_entrantes": 0,
+          "saldo_migratorio": 3,
           "crecimiento_arima_pct": 0.33,
           "demanda_total": 13,
-          "brecha_neta": -7
+          "brecha_neta": -7,
+          "egresados_radicacion_real": 41
         },
         "CHUQUISACA": {
           "deficit_materia": 16,
@@ -5207,12 +5419,13 @@
           "sin_pert": 7,
           "pct_alta": 88.1,
           "reemplazo_nopert": 7,
-          "migracion_salientes": 16,
-          "migracion_entrantes": 21,
-          "saldo_migratorio": -5,
+          "migracion_salientes": 0,
+          "migracion_entrantes": 6,
+          "saldo_migratorio": -6,
           "crecimiento_arima_pct": -2.02,
           "demanda_total": 22,
-          "brecha_neta": -1
+          "brecha_neta": -1,
+          "egresados_radicacion_real": 23
         },
         "COCHABAMBA": {
           "deficit_materia": 60,
@@ -5230,12 +5443,13 @@
           "sin_pert": 6,
           "pct_alta": 88.8,
           "reemplazo_nopert": 24,
-          "migracion_salientes": 147,
-          "migracion_entrantes": 204,
-          "saldo_migratorio": -57,
+          "migracion_salientes": 4,
+          "migracion_entrantes": 3,
+          "saldo_migratorio": 1,
           "crecimiento_arima_pct": -4.05,
           "demanda_total": 66,
-          "brecha_neta": -19
+          "brecha_neta": -19,
+          "egresados_radicacion_real": 60
         },
         "LA PAZ": {
           "deficit_materia": 69,
@@ -5253,12 +5467,13 @@
           "sin_pert": 1,
           "pct_alta": 91.4,
           "reemplazo_nopert": 14,
-          "migracion_salientes": 259,
-          "migracion_entrantes": 362,
-          "saldo_migratorio": -103,
+          "migracion_salientes": 7,
+          "migracion_entrantes": 2,
+          "saldo_migratorio": 5,
           "crecimiento_arima_pct": -3.28,
           "demanda_total": 12,
-          "brecha_neta": -87
+          "brecha_neta": -87,
+          "egresados_radicacion_real": 58
         },
         "ORURO": {
           "deficit_materia": 16,
@@ -5276,12 +5491,13 @@
           "sin_pert": 0,
           "pct_alta": 90.9,
           "reemplazo_nopert": 5,
-          "migracion_salientes": 12,
-          "migracion_entrantes": 15,
-          "saldo_migratorio": -3,
+          "migracion_salientes": 2,
+          "migracion_entrantes": 0,
+          "saldo_migratorio": 2,
           "crecimiento_arima_pct": -5.31,
           "demanda_total": 25,
-          "brecha_neta": 3
+          "brecha_neta": 3,
+          "egresados_radicacion_real": 39
         },
         "PANDO": {
           "deficit_materia": 9,
@@ -5299,12 +5515,13 @@
           "sin_pert": 1,
           "pct_alta": 80.6,
           "reemplazo_nopert": 6,
-          "migracion_salientes": 2,
-          "migracion_entrantes": 5,
-          "saldo_migratorio": -3,
+          "migracion_salientes": 0,
+          "migracion_entrantes": 1,
+          "saldo_migratorio": -1,
           "crecimiento_arima_pct": -2.23,
           "demanda_total": 17,
-          "brecha_neta": 5
+          "brecha_neta": 5,
+          "egresados_radicacion_real": 22
         },
         "POTOSI": {
           "deficit_materia": 11,
@@ -5322,12 +5539,13 @@
           "sin_pert": 2,
           "pct_alta": 78.7,
           "reemplazo_nopert": 6,
-          "migracion_salientes": 15,
-          "migracion_entrantes": 23,
-          "saldo_migratorio": -8,
+          "migracion_salientes": 2,
+          "migracion_entrantes": 2,
+          "saldo_migratorio": 0,
           "crecimiento_arima_pct": 1.32,
           "demanda_total": 16,
-          "brecha_neta": 0
+          "brecha_neta": 0,
+          "egresados_radicacion_real": 47
         },
         "SANTA CRUZ": {
           "deficit_materia": 107,
@@ -5345,12 +5563,13 @@
           "sin_pert": 30,
           "pct_alta": 85.4,
           "reemplazo_nopert": 54,
-          "migracion_salientes": 293,
-          "migracion_entrantes": 457,
-          "saldo_migratorio": -164,
+          "migracion_salientes": 6,
+          "migracion_entrantes": 11,
+          "saldo_migratorio": -5,
           "crecimiento_arima_pct": 3.34,
           "demanda_total": 53,
-          "brecha_neta": -101
+          "brecha_neta": -101,
+          "egresados_radicacion_real": 145
         },
         "TARIJA": {
           "deficit_materia": 29,
@@ -5368,12 +5587,13 @@
           "sin_pert": 6,
           "pct_alta": 87.7,
           "reemplazo_nopert": 15,
-          "migracion_salientes": 18,
-          "migracion_entrantes": 21,
-          "saldo_migratorio": -3,
+          "migracion_salientes": 0,
+          "migracion_entrantes": 4,
+          "saldo_migratorio": -4,
           "crecimiento_arima_pct": -2.69,
           "demanda_total": 52,
-          "brecha_neta": 11
+          "brecha_neta": 11,
+          "egresados_radicacion_real": 37
         }
       }
     }
