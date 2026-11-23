@@ -43,8 +43,9 @@ next-env.d.ts
 # Archivos temporales de Office
 ~$*
 
-# Directorio public (no subir a GitHub)
-public/
+# Directorio public (no subir a GitHub, excepto minedu_2025.png)
+public/*
+!public/minedu_2025.png
 
 # Cache Python
 scripts/__pycache__/
