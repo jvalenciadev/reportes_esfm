@@ -7,8 +7,8 @@ import urllib.error
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import openpyxl
 
-SUPABASE_URL = os.environ.get('NEXT_PUBLIC_SUPABASE_URL', 'https://dwretdtwyqsltylvnvld.supabase.co')
-SUPABASE_KEY = os.environ.get('NEXT_PUBLIC_SUPABASE_ANON_KEY', 'sb_publishable_h-M2ogKLSXdkZNTnfe83ng_gUjNtKHq')
+SUPABASE_URL = os.environ.get('NEXT_PUBLIC_SUPABASE_URL', '')
+SUPABASE_KEY = os.environ.get('NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY') or os.environ.get('NEXT_PUBLIC_SUPABASE_ANON_KEY', '')
 
 HEADERS = {
     'apikey': SUPABASE_KEY,

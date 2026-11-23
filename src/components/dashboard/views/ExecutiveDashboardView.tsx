@@ -56,7 +56,7 @@ export function ExecutiveDashboardView({ data }: ExecutiveDashboardViewProps) {
               }`}
           >
             <TrendingUp className="w-4 h-4 text-emerald-400" />
-            <span>Evolución y Proyección de Matrícula (2011–2034)</span>
+            <span>Proyección de Matrícula (2011–2034)</span>
           </button>
 
           <button
@@ -92,20 +92,19 @@ export function ExecutiveDashboardView({ data }: ExecutiveDashboardViewProps) {
               }`}
           >
             <ShieldCheck className="w-4 h-4 text-emerald-300" />
-            <span>Pertinencia Docente SEP (Padrón Oficial)</span>
+            <span>Pertinencia Docente SEP</span>
           </button>
 
           <button
             type="button"
             onClick={() => setModuloPrincipal('migracion')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all border shadow-2xs ${
-              moduloPrincipal === 'migracion'
-                ? 'bg-cyan-700 text-white border-cyan-800 shadow-xs ring-2 ring-cyan-500/30'
-                : 'bg-cyan-50 dark:bg-cyan-950/40 text-cyan-800 dark:text-cyan-300 border-cyan-200 dark:border-cyan-800/60 hover:bg-cyan-100 dark:hover:bg-cyan-900/60'
-            }`}
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all border shadow-2xs ${moduloPrincipal === 'migracion'
+              ? 'bg-cyan-700 text-white border-cyan-800 shadow-xs ring-2 ring-cyan-500/30'
+              : 'bg-cyan-50 dark:bg-cyan-950/40 text-cyan-800 dark:text-cyan-300 border-cyan-200 dark:border-cyan-800/60 hover:bg-cyan-100 dark:hover:bg-cyan-900/60'
+              }`}
           >
             <ArrowLeftRight className={`w-4 h-4 ${moduloPrincipal === 'migracion' ? 'text-white' : 'text-cyan-600 dark:text-cyan-400'}`} />
-            <span>Movilidad y Migración (Titulados ESFM & Planilla SEP)</span>
+            <span>Movilidad y Migración</span>
           </button>
         </div>
 
@@ -118,7 +117,7 @@ export function ExecutiveDashboardView({ data }: ExecutiveDashboardViewProps) {
             title="Descargar informe metodológico de Data Science en PDF (Modelos, Algoritmos y Fuentes)"
           >
             <FileText className="w-3.5 h-3.5 text-emerald-200" />
-            <span>Descargar Informe Data Science (PDF)</span>
+            <span>Descargar Informe (PDF)</span>
           </button>
 
           <span className="hidden xl:inline-block text-[11px] font-semibold text-slate-400 bg-slate-50 px-3 py-1.5 rounded-full border border-slate-100">

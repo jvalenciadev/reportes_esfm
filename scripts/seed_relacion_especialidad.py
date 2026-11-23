@@ -164,8 +164,8 @@ with open(sql_file, 'w', encoding='utf-8') as f:
 print(f'SQL de seed generado en: {sql_file} ({os.path.getsize(sql_file):,} bytes)')
 
 # Subir a Supabase por REST API
-SUPABASE_URL = 'https://dwretdtwyqsltylvnvld.supabase.co'
-SUPABASE_KEY = 'sb_publishable_h-M2ogKLSXdkZNTnfe83ng_gUjNtKHq'
+SUPABASE_URL = os.environ.get('NEXT_PUBLIC_SUPABASE_URL', '')
+SUPABASE_KEY = os.environ.get('NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY') or os.environ.get('NEXT_PUBLIC_SUPABASE_ANON_KEY', '')
 headers = {
     'apikey': SUPABASE_KEY,
     'Authorization': f'Bearer {SUPABASE_KEY}',

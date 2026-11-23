@@ -142,8 +142,8 @@ TRUNCATE TABLE public.uie_deficit_horas RESTART IDENTITY CASCADE;
 print(f'   Archivo SQL generado exitosamente ({os.path.getsize(sql_path):,} bytes).')
 
 # 3. Intentar subir por REST API en lotes de 1000
-SUPABASE_URL = 'https://dwretdtwyqsltylvnvld.supabase.co'
-SUPABASE_KEY = 'sb_publishable_h-M2ogKLSXdkZNTnfe83ng_gUjNtKHq'
+SUPABASE_URL = os.environ.get('NEXT_PUBLIC_SUPABASE_URL', '')
+SUPABASE_KEY = os.environ.get('NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY') or os.environ.get('NEXT_PUBLIC_SUPABASE_ANON_KEY', '')
 
 headers = {
     'apikey': SUPABASE_KEY,

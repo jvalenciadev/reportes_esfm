@@ -6,8 +6,8 @@ import time
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-SUPABASE_URL = 'https://dwretdtwyqsltylvnvld.supabase.co'
-SUPABASE_KEY = 'sb_publishable_h-M2ogKLSXdkZNTnfe83ng_gUjNtKHq'
+SUPABASE_URL = os.environ.get('NEXT_PUBLIC_SUPABASE_URL', '')
+SUPABASE_KEY = os.environ.get('NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY') or os.environ.get('NEXT_PUBLIC_SUPABASE_ANON_KEY', '')
 headers = {
     'apikey': SUPABASE_KEY,
     'Authorization': f'Bearer {SUPABASE_KEY}',
