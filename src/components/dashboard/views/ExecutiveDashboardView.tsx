@@ -98,17 +98,13 @@ export function ExecutiveDashboardView({ data }: ExecutiveDashboardViewProps) {
           <button
             type="button"
             onClick={() => setModuloPrincipal('migracion')}
-            style={
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all border shadow-2xs ${
               moduloPrincipal === 'migracion'
-                ? { backgroundColor: '#0e7490', color: '#ffffff', borderColor: '#0e7490' }
-                : { backgroundColor: '#f0fdfa', color: '#155e75', borderColor: '#a5f3fc' }
-            }
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all border shadow-2xs ${moduloPrincipal === 'migracion'
-              ? 'shadow-xs ring-2 ring-cyan-500/30'
-              : 'hover:bg-cyan-100 hover:text-cyan-900'
-              }`}
+                ? 'bg-cyan-700 text-white border-cyan-800 shadow-xs ring-2 ring-cyan-500/30'
+                : 'bg-cyan-50 dark:bg-cyan-950/40 text-cyan-800 dark:text-cyan-300 border-cyan-200 dark:border-cyan-800/60 hover:bg-cyan-100 dark:hover:bg-cyan-900/60'
+            }`}
           >
-            <ArrowLeftRight className={`w-4 h-4 ${moduloPrincipal === 'migracion' ? 'text-white' : 'text-cyan-700'}`} />
+            <ArrowLeftRight className={`w-4 h-4 ${moduloPrincipal === 'migracion' ? 'text-white' : 'text-cyan-600 dark:text-cyan-400'}`} />
             <span>Movilidad y Migración (Titulados ESFM & Planilla SEP)</span>
           </button>
         </div>

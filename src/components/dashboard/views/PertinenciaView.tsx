@@ -640,33 +640,33 @@ export default function PertinenciaView() {
   // Estilos temáticos y jerarquía por Nivel Educativo Oficial
   const NIVEL_ESTILOS: Record<string, { franja: string; borderLeft: string; badge: string; textNivel: string }> = {
     INICIAL: {
-      franja: 'bg-pink-100/90 text-pink-950 border-pink-300',
-      borderLeft: 'border-l-4 border-l-pink-500 bg-pink-50/20',
-      badge: 'bg-pink-100 text-pink-800 border-pink-300',
+      franja: 'bg-pink-100/90 dark:bg-pink-950/60 text-pink-950 dark:text-pink-200 border-pink-300 dark:border-pink-900',
+      borderLeft: 'border-l-4 border-l-pink-500 bg-pink-50/20 dark:bg-pink-950/20',
+      badge: 'bg-pink-100 dark:bg-pink-950/70 text-pink-800 dark:text-pink-300 border-pink-300 dark:border-pink-800',
       textNivel: 'Inicial'
     },
     PRIMARIA: {
-      franja: 'bg-blue-100/90 text-blue-950 border-blue-300',
-      borderLeft: 'border-l-4 border-l-blue-500 bg-blue-50/20',
-      badge: 'bg-blue-100 text-blue-800 border-blue-300',
+      franja: 'bg-blue-100/90 dark:bg-blue-950/60 text-blue-950 dark:text-blue-200 border-blue-300 dark:border-blue-900',
+      borderLeft: 'border-l-4 border-l-blue-500 bg-blue-50/20 dark:bg-blue-950/20',
+      badge: 'bg-blue-100 dark:bg-blue-950/70 text-blue-800 dark:text-blue-300 border-blue-300 dark:border-blue-800',
       textNivel: 'Primaria'
     },
     SECUNDARIA: {
-      franja: 'bg-emerald-100/90 text-emerald-950 border-emerald-300',
-      borderLeft: 'border-l-4 border-l-emerald-500 bg-emerald-50/20',
-      badge: 'bg-emerald-100 text-emerald-800 border-emerald-300',
+      franja: 'bg-emerald-100/90 dark:bg-emerald-950/60 text-emerald-950 dark:text-emerald-200 border-emerald-300 dark:border-emerald-900',
+      borderLeft: 'border-l-4 border-l-emerald-500 bg-emerald-50/20 dark:bg-emerald-950/20',
+      badge: 'bg-emerald-100 dark:bg-emerald-950/70 text-emerald-800 dark:text-emerald-300 border-emerald-300 dark:border-emerald-800',
       textNivel: 'Secundaria'
     },
     TECNICA: {
-      franja: 'bg-amber-100/90 text-amber-950 border-amber-300',
-      borderLeft: 'border-l-4 border-l-amber-500 bg-amber-50/20',
-      badge: 'bg-amber-100 text-amber-900 border-amber-300',
+      franja: 'bg-amber-100/90 dark:bg-amber-950/60 text-amber-950 dark:text-amber-200 border-amber-300 dark:border-amber-900',
+      borderLeft: 'border-l-4 border-l-amber-500 bg-amber-50/20 dark:bg-amber-950/20',
+      badge: 'bg-amber-100 dark:bg-amber-950/70 text-amber-900 dark:text-amber-300 border-amber-300 dark:border-amber-800',
       textNivel: 'Técnica BTH'
     },
     ESPECIAL: {
-      franja: 'bg-purple-100/90 text-purple-950 border-purple-300',
-      borderLeft: 'border-l-4 border-l-purple-500 bg-purple-50/20',
-      badge: 'bg-purple-100 text-purple-800 border-purple-300',
+      franja: 'bg-purple-100/90 dark:bg-purple-950/60 text-purple-950 dark:text-purple-200 border-purple-300 dark:border-purple-900',
+      borderLeft: 'border-l-4 border-l-purple-500 bg-purple-50/20 dark:bg-purple-950/20',
+      badge: 'bg-purple-100 dark:bg-purple-950/70 text-purple-800 dark:text-purple-300 border-purple-300 dark:border-purple-800',
       textNivel: 'Especial'
     }
   };
@@ -938,8 +938,8 @@ export default function PertinenciaView() {
                           onMouseLeave={() => setHoveredRango(null)}
                           onClick={() => setSelectedRango(selectedRango === item.rango ? null : item.rango)}
                           className={`p-2.5 rounded-xl border transition-all duration-200 cursor-pointer ${isSelected || isHovered
-                            ? 'bg-white border-slate-300 shadow-xs ring-1 ring-slate-300'
-                            : 'bg-white/60 border-slate-200/70 hover:bg-white hover:border-slate-300'
+                            ? 'bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-700 shadow-xs ring-1 ring-slate-300 dark:ring-slate-700'
+                            : 'bg-white/80 dark:bg-slate-900/70 border-slate-200/80 dark:border-slate-800 hover:bg-white dark:hover:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
                             }`}
                         >
                           <div className="flex items-center justify-between text-xs mb-1.5">

@@ -552,9 +552,9 @@ export default function DeficitMateriaDinamicoView() {
           <div className="overflow-x-auto">
             <table className="w-full text-xs text-left border-collapse">
               <thead>
-                <tr className="bg-slate-50 border-b border-slate-200 text-slate-600 font-extrabold text-[10px] uppercase tracking-wider">
-                  <th className="py-2.5 px-3 sticky left-0 bg-slate-50 z-10 w-72">Especialidad Oficial ESFM</th>
-                  <th className="py-2.5 px-2 text-center text-slate-400">Base BD</th>
+                <tr className="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 font-extrabold text-[10px] uppercase tracking-wider">
+                  <th className="py-2.5 px-3 sticky left-0 bg-slate-50 dark:bg-slate-900 z-10 w-72 border-r border-slate-200 dark:border-slate-800">Especialidad Oficial ESFM</th>
+                  <th className="py-2.5 px-2 text-center text-slate-400 dark:text-slate-500">Base BD</th>
                   <th className="py-2.5 px-2 text-center">CH</th>
                   <th className="py-2.5 px-2 text-center">LP</th>
                   <th className="py-2.5 px-2 text-center">CB</th>
@@ -564,10 +564,10 @@ export default function DeficitMateriaDinamicoView() {
                   <th className="py-2.5 px-2 text-center">SC</th>
                   <th className="py-2.5 px-2 text-center">BN</th>
                   <th className="py-2.5 px-2 text-center">PD</th>
-                  <th className="py-2 px-2 text-center text-indigo-900 bg-indigo-50/70 font-black w-20 text-[10px]">Total</th>
+                  <th className="py-2 px-2 text-center text-indigo-900 dark:text-indigo-200 bg-indigo-50/70 dark:bg-indigo-950/80 font-black w-20 text-[10px]">Total</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {especialidadesFiltradas.map((esp) => {
                   const isSelected = esp.id === selectedEspId;
                   const nivelInfo = getNivelEspecialidad(esp.id, esp.nombre);
@@ -577,14 +577,14 @@ export default function DeficitMateriaDinamicoView() {
                       key={esp.id}
                       onClick={() => setSelectedEspId(esp.id)}
                       className={`cursor-pointer transition-all ${isSelected
-                        ? 'bg-indigo-50/50 shadow-xs'
-                        : 'hover:bg-slate-50/80'
+                        ? 'bg-indigo-50/50 dark:bg-indigo-950/40 shadow-xs'
+                        : 'hover:bg-slate-50/80 dark:hover:bg-slate-800/60'
                         }`}
                     >
                       <td
                         className={`py-2 px-3 font-bold sticky left-0 z-20 whitespace-nowrap flex items-center justify-between gap-2 border-r transition-colors ${isSelected
-                          ? 'bg-indigo-100 text-indigo-950 border-r-indigo-400 border-l-[6px] border-l-indigo-600 border-t-2 border-b-2 border-t-indigo-600 border-b-indigo-600 shadow-xs font-black'
-                          : 'bg-white text-slate-900 border-r-slate-100 border-b border-slate-100'
+                          ? 'bg-indigo-100 dark:bg-indigo-950 text-indigo-950 dark:text-indigo-100 border-r-indigo-400 dark:border-r-indigo-700 border-l-[6px] border-l-indigo-600 border-t-2 border-b-2 border-t-indigo-600 border-b-indigo-600 shadow-xs font-black'
+                          : 'bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 border-r-slate-100 dark:border-r-slate-800 border-b border-slate-100 dark:border-b-slate-800'
                           }`}
                       >
                         <div className="flex items-center gap-2 min-w-0">
@@ -610,8 +610,8 @@ export default function DeficitMateriaDinamicoView() {
                         )}
                       </td>
                       <td className={`py-2 px-2 text-center font-mono text-xs font-bold border-r transition-colors ${isSelected
-                        ? 'border-t-2 border-b-2 border-indigo-600 bg-indigo-100/60 text-indigo-950 border-r-indigo-200'
-                        : 'text-slate-500 border-r-slate-100 border-b border-slate-100'
+                        ? 'border-t-2 border-b-2 border-indigo-600 bg-indigo-100/60 dark:bg-indigo-950/60 text-indigo-950 dark:text-indigo-200 border-r-indigo-200 dark:border-r-indigo-800'
+                        : 'text-slate-500 dark:text-slate-400 border-r-slate-100 dark:border-r-slate-800 border-b border-slate-100 dark:border-b-slate-800'
                         }`}>
                         {esp.hora_item}h
                       </td>
@@ -628,8 +628,8 @@ export default function DeficitMateriaDinamicoView() {
                           <td
                             key={dept.departamento_id}
                             className={`py-1 px-1 text-center transition-colors ${isSelected
-                              ? 'border-t-2 border-b-2 border-indigo-600 bg-indigo-50/50'
-                              : 'border-b border-slate-100'
+                              ? 'border-t-2 border-b-2 border-indigo-600 bg-indigo-50/50 dark:bg-indigo-950/40'
+                              : 'border-b border-slate-100 dark:border-b-slate-800'
                               }`}
                             onMouseEnter={() =>
                               setHoverCell({
@@ -650,8 +650,8 @@ export default function DeficitMateriaDinamicoView() {
                       })}
 
                       <td className={`py-1.5 px-2 text-center font-mono font-black text-[13px] w-20 transition-colors ${isSelected
-                        ? 'border-t-2 border-b-2 border-indigo-600 bg-indigo-200 text-indigo-950 shadow-xs'
-                        : 'bg-indigo-50/60 text-indigo-900 border-b border-slate-100'
+                        ? 'border-t-2 border-b-2 border-indigo-600 bg-indigo-200 dark:bg-indigo-900 text-indigo-950 dark:text-white shadow-xs'
+                        : 'bg-indigo-50/60 dark:bg-indigo-950/50 text-indigo-900 dark:text-indigo-300 border-b border-slate-100 dark:border-b-slate-800'
                         }`}>
                         {esp.items_deficit_equiv.toLocaleString('es-BO')}
                       </td>

@@ -109,6 +109,7 @@ export function BalancePredictivoView() {
   const [filtroDepto, setFiltroDepto] = useState<string>('TODOS');
   const [filtroNivel, setFiltroNivel] = useState<string>('TODOS');
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [selectedEspId, setSelectedEspId] = useState<number | null>(null);
 
   // Variables Dinámicas del Tráfico / Simulación (Ajustables de 1 en 1)
   const [tasaJubilacion, setTasaJubilacion] = useState<number>(20);         // % de jubilados que se retiran (de 1 en 1)
@@ -148,33 +149,33 @@ export function BalancePredictivoView() {
   // Estilos temáticos por Nivel Educativo
   const NIVEL_ESTILOS: Record<string, { franja: string; borderLeft: string; badge: string; textNivel: string }> = {
     INICIAL: {
-      franja: 'bg-pink-100/90 text-pink-950 border-pink-300',
-      borderLeft: 'border-l-4 border-l-pink-500 bg-pink-50/20',
-      badge: 'bg-pink-100 text-pink-800 border-pink-300',
+      franja: 'bg-pink-100/90 dark:bg-pink-950/60 text-pink-950 dark:text-pink-100 border-pink-300 dark:border-pink-900',
+      borderLeft: 'border-l-4 border-l-pink-500 bg-pink-50/20 dark:bg-pink-950/20',
+      badge: 'bg-pink-100 dark:bg-pink-950/80 text-pink-800 dark:text-pink-200 border-pink-300 dark:border-pink-800',
       textNivel: 'Inicial'
     },
     PRIMARIA: {
-      franja: 'bg-blue-100/90 text-blue-950 border-blue-300',
-      borderLeft: 'border-l-4 border-l-blue-500 bg-blue-50/20',
-      badge: 'bg-blue-100 text-blue-800 border-blue-300',
+      franja: 'bg-blue-100/90 dark:bg-blue-950/60 text-blue-950 dark:text-blue-100 border-blue-300 dark:border-blue-900',
+      borderLeft: 'border-l-4 border-l-blue-500 bg-blue-50/20 dark:bg-blue-950/20',
+      badge: 'bg-blue-100 dark:bg-blue-950/80 text-blue-800 dark:text-blue-200 border-blue-300 dark:border-blue-800',
       textNivel: 'Primaria'
     },
     SECUNDARIA: {
-      franja: 'bg-emerald-100/90 text-emerald-950 border-emerald-300',
-      borderLeft: 'border-l-4 border-l-emerald-500 bg-emerald-50/20',
-      badge: 'bg-emerald-100 text-emerald-800 border-emerald-300',
+      franja: 'bg-emerald-100/90 dark:bg-emerald-950/60 text-emerald-950 dark:text-emerald-100 border-emerald-300 dark:border-emerald-900',
+      borderLeft: 'border-l-4 border-l-emerald-500 bg-emerald-50/20 dark:bg-emerald-950/20',
+      badge: 'bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-200 border-emerald-300 dark:border-emerald-800',
       textNivel: 'Secundaria'
     },
     TECNICA: {
-      franja: 'bg-amber-100/90 text-amber-950 border-amber-300',
-      borderLeft: 'border-l-4 border-l-amber-500 bg-amber-50/20',
-      badge: 'bg-amber-100 text-amber-900 border-amber-300',
+      franja: 'bg-amber-100/90 dark:bg-amber-950/60 text-amber-950 dark:text-amber-100 border-amber-300 dark:border-amber-900',
+      borderLeft: 'border-l-4 border-l-amber-500 bg-amber-50/20 dark:bg-amber-950/20',
+      badge: 'bg-amber-100 dark:bg-amber-950/80 text-amber-900 dark:text-amber-200 border-amber-300 dark:border-amber-800',
       textNivel: 'Técnica BTH'
     },
     ESPECIAL: {
-      franja: 'bg-purple-100/90 text-purple-950 border-purple-300',
-      borderLeft: 'border-l-4 border-l-purple-500 bg-purple-50/20',
-      badge: 'bg-purple-100 text-purple-800 border-purple-300',
+      franja: 'bg-purple-100/90 dark:bg-purple-950/60 text-purple-950 dark:text-purple-100 border-purple-300 dark:border-purple-900',
+      borderLeft: 'border-l-4 border-l-purple-500 bg-purple-50/20 dark:bg-purple-950/20',
+      badge: 'bg-purple-100 dark:bg-purple-950/80 text-purple-800 dark:text-purple-200 border-purple-300 dark:border-purple-800',
       textNivel: 'Especial'
     }
   };
@@ -310,6 +311,12 @@ export function BalancePredictivoView() {
       .sort((a, b) => a.ordenJerarquia - b.ordenJerarquia);
   }, [especialidadesCalculadas]);
 
+  // Especialidad seleccionada para inspección
+  const selectedEsp = useMemo(() => {
+    if (!selectedEspId) return null;
+    return especialidadesCalculadas.find((e) => e.especialidad_id === selectedEspId) || null;
+  }, [especialidadesCalculadas, selectedEspId]);
+
   // Totales de Cabecera y Resumen
   const totales = useMemo(() => {
     let totDeficit = 0;
@@ -444,21 +451,6 @@ export function BalancePredictivoView() {
               <BookOpen className="w-4 h-4" />
               <span>{mostrarGuia ? 'Ocultar Guía' : '¿Cómo se lee esta tabla? (Guía)'}</span>
             </button>
-
-            {/* Selector de Departamento */}
-            <div className="relative w-full sm:w-60">
-              <MapPin className="w-4 h-4 text-slate-400 absolute left-3 top-3 pointer-events-none" />
-              <select
-                value={filtroDepto}
-                onChange={(e) => setFiltroDepto(e.target.value)}
-                className="w-full pl-9 pr-3 py-2 text-xs font-bold text-slate-900 bg-slate-50 hover:bg-slate-100 border border-slate-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-700 transition-all cursor-pointer shadow-2xs"
-              >
-                <option value="TODOS">Consolidado Nacional (9 Deptos)</option>
-                {departamentosList.map((dep) => (
-                  <option key={dep} value={dep}>{dep}</option>
-                ))}
-              </select>
-            </div>
           </div>
         </div>
 
@@ -656,29 +648,29 @@ export function BalancePredictivoView() {
 
         {/* ── Panel Desplegable: Ejercicio Práctico de Cálculo Real (Demanda Bruta) ──── */}
         {mostrarEjercicio && (
-          <div className="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-6 border border-indigo-500/30 shadow-xl space-y-4 animate-in slide-in-from-top-2 duration-200">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-indigo-800/60">
+          <div className="bg-linear-to-br from-indigo-50/90 via-slate-50 to-blue-50/70 dark:from-slate-900 dark:via-indigo-950 dark:to-slate-900 text-slate-800 dark:text-white rounded-3xl p-6 border border-indigo-200/90 dark:border-indigo-500/30 shadow-lg space-y-4 animate-in slide-in-from-top-2 duration-200">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-indigo-200/80 dark:border-indigo-800/60">
               <div className="flex items-center gap-3">
-                <div className="p-2.5 bg-indigo-600/30 rounded-2xl border border-indigo-400/30 text-amber-400">
+                <div className="p-2.5 bg-indigo-100 dark:bg-indigo-600/30 rounded-2xl border border-indigo-200 dark:border-indigo-400/30 text-indigo-700 dark:text-amber-400 shadow-2xs">
                   <Calculator className="w-5 h-5" />
                 </div>
                 <div>
                   <div className="flex flex-wrap items-center gap-2">
-                    <h3 className="text-sm font-black text-white tracking-wide uppercase">
+                    <h3 className="text-sm font-black text-slate-900 dark:text-white tracking-wide uppercase">
                       Ejercicio Práctico: Desglose Matemático de la Demanda Bruta
                     </h3>
-                    <span className="bg-amber-400/20 text-amber-300 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-amber-400/30">
+                    <span className="bg-amber-100 dark:bg-amber-400/20 text-amber-800 dark:text-amber-300 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-amber-300 dark:border-amber-400/30">
                       Caso Real: Educación Inicial en Familia Comunitaria (ID 5)
                     </span>
                   </div>
-                  <p className="text-xs text-indigo-200 mt-0.5">
+                  <p className="text-xs text-slate-600 dark:text-indigo-200 mt-0.5">
                     Comprobación paso a paso de cómo el modelo transforma los 428 ítems de Déficit SIE en <strong>246 de Demanda Bruta</strong> y <strong>-2.180 de Brecha Neta</strong> con migración específica por especialidad.
                   </p>
                 </div>
               </div>
               <button
                 onClick={() => setMostrarEjercicio(false)}
-                className="text-xs text-indigo-300 hover:text-white bg-indigo-900/50 hover:bg-indigo-800 px-3 py-1.5 rounded-xl border border-indigo-700/50 transition-colors cursor-pointer"
+                className="text-xs text-indigo-700 dark:text-indigo-300 hover:text-indigo-900 dark:hover:text-white bg-indigo-100/70 hover:bg-indigo-100 dark:bg-indigo-900/50 dark:hover:bg-indigo-800 px-3 py-1.5 rounded-xl border border-indigo-200 dark:border-indigo-700/50 transition-colors cursor-pointer"
               >
                 Ocultar Ejercicio
               </button>
@@ -686,19 +678,19 @@ export function BalancePredictivoView() {
 
             {/* Fórmulas Generales */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-              <div className="bg-slate-950/70 border border-indigo-800/60 rounded-2xl p-3.5 space-y-1">
-                <span className="text-[10px] uppercase font-black tracking-wider text-amber-300 block">
+              <div className="bg-white dark:bg-slate-950/70 border border-indigo-200/90 dark:border-indigo-800/60 rounded-2xl p-3.5 space-y-1 shadow-2xs">
+                <span className="text-[10px] uppercase font-black tracking-wider text-amber-700 dark:text-amber-300 block">
                   1. Fórmula Oficial de Demanda Bruta (Total Necesidad al 2031)
                 </span>
-                <code className="text-[11px] font-mono text-emerald-300 font-bold block overflow-x-auto whitespace-nowrap">
+                <code className="text-[11px] font-mono text-emerald-800 dark:text-emerald-300 font-bold block overflow-x-auto whitespace-nowrap bg-emerald-50/60 dark:bg-transparent p-1 rounded">
                   Demanda Bruta = round( (Déficit_SIE + Jubilados + Prejubilados + Sustitución) × (1 + ARIMA%) + Saldo_Migratorio )
                 </code>
               </div>
-              <div className="bg-slate-950/70 border border-indigo-800/60 rounded-2xl p-3.5 space-y-1">
-                <span className="text-[10px] uppercase font-black tracking-wider text-sky-300 block">
+              <div className="bg-white dark:bg-slate-950/70 border border-indigo-200/90 dark:border-indigo-800/60 rounded-2xl p-3.5 space-y-1 shadow-2xs">
+                <span className="text-[10px] uppercase font-black tracking-wider text-sky-700 dark:text-sky-300 block">
                   2. Fórmula de Brecha Neta de Admisión
                 </span>
-                <code className="text-[11px] font-mono text-sky-200 font-bold block overflow-x-auto whitespace-nowrap">
+                <code className="text-[11px] font-mono text-sky-800 dark:text-sky-200 font-bold block overflow-x-auto whitespace-nowrap bg-sky-50/60 dark:bg-transparent p-1 rounded">
                   Brecha Neta = Demanda Bruta − Egresados Titulados ESFM
                 </code>
               </div>
@@ -707,138 +699,138 @@ export function BalancePredictivoView() {
             {/* 4 Pasos Numéricos del Ejercicio */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
               {/* Paso 1 */}
-              <div className="bg-slate-800/70 border border-indigo-800/50 rounded-2xl p-4 flex flex-col justify-between space-y-3">
+              <div className="bg-white dark:bg-slate-800/70 border border-indigo-200/90 dark:border-indigo-800/50 rounded-2xl p-4 flex flex-col justify-between space-y-3 shadow-2xs">
                 <div>
-                  <div className="flex items-center justify-between text-indigo-300 font-bold text-[11px] mb-2">
-                    <span className="text-amber-400 font-black">PASO 1</span>
-                    <span className="text-[9px] bg-indigo-950 text-indigo-300 px-2 py-0.5 rounded border border-indigo-700/50 uppercase font-black">
+                  <div className="flex items-center justify-between text-indigo-700 dark:text-indigo-300 font-bold text-[11px] mb-2">
+                    <span className="text-amber-600 dark:text-amber-400 font-black">PASO 1</span>
+                    <span className="text-[9px] bg-indigo-100 dark:bg-indigo-950 text-indigo-800 dark:text-indigo-300 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-700/50 uppercase font-black">
                       Necesidad Base
                     </span>
                   </div>
-                  <p className="text-[11px] text-slate-300 mb-2">Suma de vacantes estructurales requeridas:</p>
-                  <ul className="space-y-1.5 text-[11px] text-slate-200 font-mono">
-                    <li className="flex justify-between items-center bg-slate-900/60 px-2 py-1 rounded">
-                      <span className="text-slate-400">Déficit SIE (Aula):</span>
-                      <span className="font-black text-white">+428</span>
+                  <p className="text-[11px] text-slate-600 dark:text-slate-300 mb-2">Suma de vacantes estructurales requeridas:</p>
+                  <ul className="space-y-1.5 text-[11px] text-slate-700 dark:text-slate-200 font-mono">
+                    <li className="flex justify-between items-center bg-slate-50 dark:bg-slate-900/60 px-2 py-1 rounded border border-slate-100 dark:border-slate-800/60">
+                      <span className="text-slate-500 dark:text-slate-400">Déficit SIE (Aula):</span>
+                      <span className="font-black text-slate-900 dark:text-white">+428</span>
                     </li>
-                    <li className="flex justify-between items-center bg-slate-900/60 px-2 py-1 rounded">
-                      <span className="text-slate-400">Jubilados (20% de 1.048):</span>
-                      <span className="font-black text-rose-300">+210</span>
+                    <li className="flex justify-between items-center bg-slate-50 dark:bg-slate-900/60 px-2 py-1 rounded border border-slate-100 dark:border-slate-800/60">
+                      <span className="text-slate-500 dark:text-slate-400">Jubilados (20% de 1.048):</span>
+                      <span className="font-black text-rose-700 dark:text-rose-300">+210</span>
                     </li>
-                    <li className="flex justify-between items-center bg-slate-900/60 px-2 py-1 rounded">
-                      <span className="text-slate-400">Prejubilados (10% de 392):</span>
-                      <span className="font-black text-rose-300">+39</span>
+                    <li className="flex justify-between items-center bg-slate-50 dark:bg-slate-900/60 px-2 py-1 rounded border border-slate-100 dark:border-slate-800/60">
+                      <span className="text-slate-500 dark:text-slate-400">Prejubilados (10% de 392):</span>
+                      <span className="font-black text-rose-700 dark:text-rose-300">+39</span>
                     </li>
-                    <li className="flex justify-between items-center bg-slate-900/60 px-2 py-1 rounded">
-                      <span className="text-slate-400">A Sustituir (30% de 157):</span>
-                      <span className="font-black text-amber-300">+47</span>
+                    <li className="flex justify-between items-center bg-slate-50 dark:bg-slate-900/60 px-2 py-1 rounded border border-slate-100 dark:border-slate-800/60">
+                      <span className="text-slate-500 dark:text-slate-400">A Sustituir (30% de 157):</span>
+                      <span className="font-black text-amber-700 dark:text-amber-300">+47</span>
                     </li>
                   </ul>
                 </div>
-                <div className="pt-2 border-t border-slate-700 flex justify-between items-center font-bold">
-                  <span className="text-indigo-200 text-[11px]">Subtotal Necesidad:</span>
-                  <span className="text-lg text-white font-mono font-black">724</span>
+                <div className="pt-2 border-t border-slate-200 dark:border-slate-700 flex justify-between items-center font-bold">
+                  <span className="text-indigo-900 dark:text-indigo-200 text-[11px]">Subtotal Necesidad:</span>
+                  <span className="text-lg text-slate-900 dark:text-white font-mono font-black">724</span>
                 </div>
               </div>
 
               {/* Paso 2 */}
-              <div className="bg-slate-800/70 border border-indigo-800/50 rounded-2xl p-4 flex flex-col justify-between space-y-3">
+              <div className="bg-white dark:bg-slate-800/70 border border-indigo-200/90 dark:border-indigo-800/50 rounded-2xl p-4 flex flex-col justify-between space-y-3 shadow-2xs">
                 <div>
-                  <div className="flex items-center justify-between text-indigo-300 font-bold text-[11px] mb-2">
-                    <span className="text-amber-400 font-black">PASO 2</span>
-                    <span className="text-[9px] bg-indigo-950 text-indigo-300 px-2 py-0.5 rounded border border-indigo-700/50 uppercase font-black">
+                  <div className="flex items-center justify-between text-indigo-700 dark:text-indigo-300 font-bold text-[11px] mb-2">
+                    <span className="text-amber-600 dark:text-amber-400 font-black">PASO 2</span>
+                    <span className="text-[9px] bg-indigo-100 dark:bg-indigo-950 text-indigo-800 dark:text-indigo-300 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-700/50 uppercase font-black">
                       Demografía ARIMA
                     </span>
                   </div>
-                  <p className="text-[11px] text-slate-300 mb-2">Ajuste por proyección de matrícula escolar al 2031:</p>
-                  <div className="bg-slate-900/80 p-2.5 rounded-xl border border-slate-700 space-y-1.5 font-mono text-[11px]">
-                    <div className="flex justify-between text-slate-400">
+                  <p className="text-[11px] text-slate-600 dark:text-slate-300 mb-2">Ajuste por proyección de matrícula escolar al 2031:</p>
+                  <div className="bg-slate-50 dark:bg-slate-900/80 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 space-y-1.5 font-mono text-[11px]">
+                    <div className="flex justify-between text-slate-600 dark:text-slate-400">
                       <span>Tasa ARIMA Nacional:</span>
-                      <span className="text-rose-400 font-black">-6.8%</span>
+                      <span className="text-rose-600 dark:text-rose-400 font-black">-6.8%</span>
                     </div>
-                    <div className="flex justify-between text-slate-400">
+                    <div className="flex justify-between text-slate-600 dark:text-slate-400">
                       <span>Factor Aplicado:</span>
-                      <span className="text-slate-200">1 - 0.068 = 0.932</span>
+                      <span className="text-slate-800 dark:text-slate-200">1 - 0.068 = 0.932</span>
                     </div>
-                    <div className="pt-1 border-t border-slate-800 flex justify-between text-emerald-300 font-bold">
+                    <div className="pt-1 border-t border-slate-200 dark:border-slate-800 flex justify-between text-emerald-700 dark:text-emerald-300 font-bold">
                       <span>724 × 0.932 =</span>
                       <span className="font-black">674.77</span>
                     </div>
                   </div>
-                  <p className="text-[10px] text-slate-400 italic mt-2">
+                  <p className="text-[10px] text-slate-500 dark:text-slate-400 italic mt-2">
                     La contracción de natalidad reduce la necesidad de aulas en 49.2 plazas.
                   </p>
                 </div>
-                <div className="pt-2 border-t border-slate-700 flex justify-between items-center font-bold">
-                  <span className="text-indigo-200 text-[11px]">Base ajustada ARIMA:</span>
-                  <span className="text-lg text-emerald-300 font-mono font-black">674.77</span>
+                <div className="pt-2 border-t border-slate-200 dark:border-slate-700 flex justify-between items-center font-bold">
+                  <span className="text-indigo-900 dark:text-indigo-200 text-[11px]">Base ajustada ARIMA:</span>
+                  <span className="text-lg text-emerald-700 dark:text-emerald-300 font-mono font-black">674.77</span>
                 </div>
               </div>
 
               {/* Paso 3 */}
-              <div className="bg-slate-800/70 border border-indigo-800/50 rounded-2xl p-4 flex flex-col justify-between space-y-3">
+              <div className="bg-white dark:bg-slate-800/70 border border-indigo-200/90 dark:border-indigo-800/50 rounded-2xl p-4 flex flex-col justify-between space-y-3 shadow-2xs">
                 <div>
-                  <div className="flex items-center justify-between text-indigo-300 font-bold text-[11px] mb-2">
-                    <span className="text-amber-400 font-black">PASO 3</span>
-                    <span className="text-[9px] bg-indigo-950 text-indigo-300 px-2 py-0.5 rounded border border-indigo-700/50 uppercase font-black">
+                  <div className="flex items-center justify-between text-indigo-700 dark:text-indigo-300 font-bold text-[11px] mb-2">
+                    <span className="text-amber-600 dark:text-amber-400 font-black">PASO 3</span>
+                    <span className="text-[9px] bg-indigo-100 dark:bg-indigo-950 text-indigo-800 dark:text-indigo-300 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-700/50 uppercase font-black">
                       Saldo Migratorio
                     </span>
                   </div>
-                  <p className="text-[11px] text-slate-300 mb-2">Movilidad docente real de Inicial (2024–2025):</p>
-                  <ul className="space-y-1.5 text-[11px] text-slate-200 font-mono">
-                    <li className="flex justify-between items-center bg-slate-900/60 px-2 py-1 rounded">
-                      <span className="text-slate-400">Docentes Entrantes:</span>
-                      <span className="font-black text-emerald-400">+609</span>
+                  <p className="text-[11px] text-slate-600 dark:text-slate-300 mb-2">Movilidad docente real de Inicial (2024–2025):</p>
+                  <ul className="space-y-1.5 text-[11px] text-slate-700 dark:text-slate-200 font-mono">
+                    <li className="flex justify-between items-center bg-slate-50 dark:bg-slate-900/60 px-2 py-1 rounded border border-slate-100 dark:border-slate-800/60">
+                      <span className="text-slate-500 dark:text-slate-400">Docentes Entrantes:</span>
+                      <span className="font-black text-emerald-700 dark:text-emerald-400">+609</span>
                     </li>
-                    <li className="flex justify-between items-center bg-slate-900/60 px-2 py-1 rounded">
-                      <span className="text-slate-400">Docentes Salientes:</span>
-                      <span className="font-black text-rose-400">-180</span>
+                    <li className="flex justify-between items-center bg-slate-50 dark:bg-slate-900/60 px-2 py-1 rounded border border-slate-100 dark:border-slate-800/60">
+                      <span className="text-slate-500 dark:text-slate-400">Docentes Salientes:</span>
+                      <span className="font-black text-rose-700 dark:text-rose-400">-180</span>
                     </li>
-                    <li className="flex justify-between items-center bg-slate-900/60 px-2 py-1 rounded">
-                      <span className="text-slate-400">Saldo (Sal. − Ent.):</span>
-                      <span className="font-black text-sky-300">-429 lle.</span>
+                    <li className="flex justify-between items-center bg-slate-50 dark:bg-slate-900/60 px-2 py-1 rounded border border-slate-100 dark:border-slate-800/60">
+                      <span className="text-slate-500 dark:text-slate-400">Saldo (Sal. − Ent.):</span>
+                      <span className="font-black text-sky-700 dark:text-sky-300">-429 lle.</span>
                     </li>
                   </ul>
-                  <p className="text-[10px] text-slate-400 italic mt-1.5">
+                  <p className="text-[10px] text-slate-500 dark:text-slate-400 italic mt-1.5">
                     Entraron 429 maestros más de Inicial de los que salieron, absorbiendo vacantes y reduciendo la necesidad.
                   </p>
                 </div>
-                <div className="pt-2 border-t border-slate-700 flex justify-between items-center font-bold">
-                  <span className="text-indigo-200 text-[11px]">Demanda Bruta (round):</span>
-                  <span className="text-xl text-amber-300 font-mono font-black">246</span>
+                <div className="pt-2 border-t border-slate-200 dark:border-slate-700 flex justify-between items-center font-bold">
+                  <span className="text-indigo-900 dark:text-indigo-200 text-[11px]">Demanda Bruta (round):</span>
+                  <span className="text-xl text-amber-700 dark:text-amber-300 font-mono font-black">246</span>
                 </div>
               </div>
 
               {/* Paso 4 */}
-              <div className="bg-indigo-950/80 border border-indigo-600/50 rounded-2xl p-4 flex flex-col justify-between space-y-3">
+              <div className="bg-indigo-50/80 dark:bg-indigo-950/80 border border-indigo-200 dark:border-indigo-600/50 rounded-2xl p-4 flex flex-col justify-between space-y-3 shadow-2xs">
                 <div>
-                  <div className="flex items-center justify-between text-indigo-300 font-bold text-[11px] mb-2">
-                    <span className="text-amber-400 font-black">PASO 4</span>
-                    <span className="text-[9px] bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded border border-emerald-700/50 uppercase font-black">
+                  <div className="flex items-center justify-between text-indigo-700 dark:text-indigo-300 font-bold text-[11px] mb-2">
+                    <span className="text-amber-700 dark:text-amber-400 font-black">PASO 4</span>
+                    <span className="text-[9px] bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 px-2 py-0.5 rounded border border-emerald-300 dark:border-emerald-700/50 uppercase font-black">
                       Balance Final
                     </span>
                   </div>
-                  <p className="text-[11px] text-indigo-200 mb-2">Comparación contra egresados ESFM (2027–2031):</p>
+                  <p className="text-[11px] text-indigo-950 dark:text-indigo-200 mb-2">Comparación contra egresados ESFM (2027–2031):</p>
                   <div className="space-y-1.5 text-[11px] font-mono">
-                    <div className="flex justify-between items-center bg-slate-900/60 px-2 py-1 rounded">
-                      <span className="text-indigo-300">Demanda Bruta:</span>
-                      <span className="font-black text-white">246</span>
+                    <div className="flex justify-between items-center bg-white dark:bg-slate-900/60 px-2 py-1 rounded border border-indigo-100 dark:border-transparent">
+                      <span className="text-indigo-900 dark:text-indigo-300">Demanda Bruta:</span>
+                      <span className="font-black text-slate-900 dark:text-white">246</span>
                     </div>
-                    <div className="flex justify-between items-center bg-slate-900/60 px-2 py-1 rounded">
-                      <span className="text-indigo-300">Egresados Titulados:</span>
-                      <span className="font-black text-blue-300">2.426</span>
+                    <div className="flex justify-between items-center bg-white dark:bg-slate-900/60 px-2 py-1 rounded border border-indigo-100 dark:border-transparent">
+                      <span className="text-indigo-900 dark:text-indigo-300">Egresados Titulados:</span>
+                      <span className="font-black text-blue-700 dark:text-blue-300">2.426</span>
                     </div>
-                    <div className="pt-1.5 border-t border-indigo-700/60 flex justify-between items-center text-emerald-300 font-bold">
+                    <div className="pt-1.5 border-t border-indigo-200 dark:border-indigo-700/60 flex justify-between items-center text-emerald-800 dark:text-emerald-300 font-bold">
                       <span>Brecha Neta (246 − 2.426):</span>
                       <span className="text-base font-black">-2.180</span>
                     </div>
                   </div>
                 </div>
-                <div className="pt-2 border-t border-indigo-700/60 bg-emerald-950/70 p-2.5 rounded-xl text-center border border-emerald-500/30">
-                  <span className="text-xs font-black text-emerald-300 uppercase tracking-wide block">
+                <div className="pt-2 border-t border-indigo-200 dark:border-indigo-700/60 bg-emerald-100/80 dark:bg-emerald-950/70 p-2.5 rounded-xl text-center border border-emerald-300 dark:border-emerald-500/30">
+                  <span className="text-xs font-black text-emerald-900 dark:text-emerald-300 uppercase tracking-wide block">
                     Oferta Cubierta
                   </span>
-                  <span className="text-[10px] text-emerald-400 font-medium">
+                  <span className="text-[10px] text-emerald-800 dark:text-emerald-400 font-medium">
                     Superávit de 2.180 maestros. No procede apertura de plazas.
                   </span>
                 </div>
@@ -1209,15 +1201,31 @@ export function BalancePredictivoView() {
               </div>
             </div>
 
-            <div className="text-[11px] font-bold text-slate-500">
-              Mostrando {especialidadesCalculadas.length} de {data.especialidades.length} especialidades oficiales
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="text-[11px] font-bold text-slate-500 dark:text-slate-400">
+                Mostrando {especialidadesCalculadas.length} de {data.especialidades.length} especialidades oficiales
+              </div>
+              {selectedEsp && (
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-amber-100 dark:bg-amber-950/70 border border-amber-300 dark:border-amber-700 text-amber-900 dark:text-amber-200">
+                  <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                  <span>Selección activa: <strong className="font-black">{selectedEsp.nombre}</strong> (ID {selectedEsp.especialidad_id})</span>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedEspId(null)}
+                    className="ml-1 text-amber-800 dark:text-amber-300 hover:text-amber-950 dark:hover:text-white font-black text-xs px-1.5 py-0.5 rounded-full hover:bg-amber-200/60 dark:hover:bg-amber-900/60 transition-colors"
+                    title="Desmarcar especialidad"
+                  >
+                    ✕ Desmarcar
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>
       </div>
 
       {/* ── Matriz Institucional Consolidada ─────────────────────────────────── */}
-      <div className="bg-white rounded-3xl border border-slate-300 shadow-xs overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-300 dark:border-slate-800 shadow-xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-xs text-left border-collapse">
             <thead className="bg-slate-800 text-white font-extrabold uppercase text-[10px] tracking-wider">
@@ -1360,37 +1368,55 @@ export function BalancePredictivoView() {
                       const m = esp.metrics;
                       const esSuperavit = m.brecha_neta <= 0;
                       const esBth = BTH_SPECIALTY_IDS.has(esp.especialidad_id);
+                      const isSelected = selectedEspId === esp.especialidad_id;
 
                       return (
-                        <tr key={esp.especialidad_id} className="border-b border-slate-200 hover:bg-slate-50/80 transition-colors">
+                        <tr
+                          key={esp.especialidad_id}
+                          onClick={() => setSelectedEspId(isSelected ? null : esp.especialidad_id)}
+                          className={`cursor-pointer transition-all border-b ${
+                            isSelected
+                              ? 'bg-amber-500/15 dark:bg-amber-400/20 ring-2 ring-inset ring-amber-500 dark:ring-amber-400 border-amber-300 dark:border-amber-700 font-medium'
+                              : 'border-slate-200 dark:border-slate-800/80 hover:bg-slate-50/90 dark:hover:bg-slate-800/60'
+                          }`}
+                        >
                           {/* Especialidad */}
-                          <td className={`py-2 px-3 border-r border-slate-200 text-slate-900 ${estilo.borderLeft}`}>
+                          <td className={`py-2 px-3 border-r ${
+                            isSelected
+                              ? 'border-amber-400/50 dark:border-amber-600/50 border-l-[6px] border-l-amber-500 dark:border-l-amber-400 bg-amber-200/40 dark:bg-amber-900/40 text-slate-900 dark:text-white font-bold'
+                              : `border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 ${estilo.borderLeft}`
+                          }`}>
                             <div className="flex items-center gap-2">
+                              {isSelected && (
+                                <span className="w-2.5 h-2.5 rounded-full bg-amber-500 dark:bg-amber-400 animate-pulse shrink-0 ring-4 ring-amber-400/40" />
+                              )}
                               <span className={`px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider border shrink-0 ${estilo.badge}`}>
                                 {estilo.textNivel}
                               </span>
-                              <span className="text-[9px] font-black px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200 shrink-0 font-mono">
+                              <span className="text-[9px] font-black px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 shrink-0 font-mono">
                                 ID {esp.especialidad_id}
                               </span>
-                              <span className="font-bold text-slate-900 text-xs truncate max-w-xs" title={esp.nombre}>
+                              <span className={`font-bold text-xs truncate max-w-xs ${isSelected ? 'text-amber-950 dark:text-amber-200 font-black' : 'text-slate-900 dark:text-slate-100'}`} title={esp.nombre}>
                                 {esp.nombre}
                               </span>
                             </div>
                           </td>
 
                           {/* Ítem */}
-                          <td className="py-2 px-1 text-center border-r border-slate-200">
-                            <span className="inline-block px-1 py-0.5 rounded bg-slate-100 font-mono text-[9px] font-bold text-slate-700 border border-slate-200">
+                          <td className={`py-2 px-1 text-center border-r ${isSelected ? 'border-amber-400/50 dark:border-amber-600/50' : 'border-slate-200 dark:border-slate-800'}`}>
+                            <span className="inline-block px-1 py-0.5 rounded bg-slate-100 dark:bg-slate-800 font-mono text-[9px] font-bold text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
                               {esp.hora_item ? `${esp.hora_item}h` : '96h'}
                             </span>
                           </td>
 
                           {/* Déficit SIE con Absorción BTH */}
-                          <td className="py-2 px-2 text-right border-r border-slate-200 font-semibold text-slate-800 tabular-nums">
+                          <td className={`py-2 px-2 text-right border-r font-semibold tabular-nums ${
+                            isSelected ? 'border-amber-400/50 dark:border-amber-600/50 text-slate-950 dark:text-white' : 'border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200'
+                          }`}>
                             <div>
                               <span>{fmt(m.deficit_calculado)}</span>
                               {esBth && m.items_bth_absorbidos > 0 && (
-                                <span className="block text-[8px] font-black text-amber-700 bg-amber-50 rounded px-1 mt-0.5">
+                                <span className="block text-[8px] font-black text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 rounded px-1 mt-0.5">
                                   +{fmt(m.items_bth_absorbidos)} BTH
                                 </span>
                               )}
@@ -1398,75 +1424,93 @@ export function BalancePredictivoView() {
                           </td>
 
                           {/* Jubilados Reales Calculados */}
-                          <td className="py-2 px-2 text-right border-r border-slate-200 font-bold text-rose-700 tabular-nums">
+                          <td className={`py-2 px-2 text-right border-r font-bold text-rose-700 dark:text-rose-400 tabular-nums ${isSelected ? 'border-amber-400/50 dark:border-amber-600/50' : 'border-slate-200 dark:border-slate-800'}`}>
                             {fmt(m.jubilacion_calculada)}
                           </td>
 
                           {/* Prejubilados Reales Calculados */}
-                          <td className="py-2 px-2 text-right border-r border-slate-200 font-semibold text-orange-700 tabular-nums">
+                          <td className={`py-2 px-2 text-right border-r font-semibold text-orange-700 dark:text-orange-400 tabular-nums ${isSelected ? 'border-amber-400/50 dark:border-amber-600/50' : 'border-slate-200 dark:border-slate-800'}`}>
                             {fmt(m.prejubilacion_calculada)}
                           </td>
 
                           {/* Docentes a Sustituir (No Pertinentes) */}
-                          <td className="py-2 px-2 text-right border-r border-slate-200 font-bold text-amber-800 tabular-nums">
+                          <td className={`py-2 px-2 text-right border-r font-bold text-amber-800 dark:text-amber-400 tabular-nums ${isSelected ? 'border-amber-400/50 dark:border-amber-600/50' : 'border-slate-200 dark:border-slate-800'}`}>
                             {fmt(m.reemplazo_nopert)}
                           </td>
 
                           {/* Migración Detallada: Entrantes / Salientes (Saldo) */}
-                          <td className="py-2 px-2 text-center border-r border-slate-200 font-mono text-[11px] tabular-nums">
+                          <td className={`py-2 px-2 text-center border-r font-mono text-[11px] tabular-nums ${isSelected ? 'border-amber-400/50 dark:border-amber-600/50' : 'border-slate-200 dark:border-slate-800'}`}>
                             <div className="flex flex-col items-center justify-center">
-                              <span className="text-[10px] text-slate-600 font-semibold">
-                                <span className="text-emerald-700 font-bold">+{fmt(m.migracion_entrantes)}</span>
-                                <span className="text-slate-300 mx-0.5">/</span>
-                                <span className="text-rose-700 font-bold">-{fmt(m.migracion_salientes)}</span>
+                              <span className="text-[10px] text-slate-600 dark:text-slate-300 font-semibold">
+                                <span className="text-emerald-700 dark:text-emerald-400 font-bold">+{fmt(m.migracion_entrantes)}</span>
+                                <span className="text-slate-300 dark:text-slate-600 mx-0.5">/</span>
+                                <span className="text-rose-700 dark:text-rose-400 font-bold">-{fmt(m.migracion_salientes)}</span>
                               </span>
-                              <span className={`text-[9px] font-black mt-0.5 ${m.saldo_mig_aplicado > 0 ? 'text-rose-700' : (m.saldo_mig_aplicado < 0 ? 'text-emerald-700' : 'text-slate-400')
-                                }`}>
+                              <span className={`text-[9px] font-black mt-0.5 ${
+                                m.saldo_mig_aplicado > 0
+                                  ? 'text-rose-700 dark:text-rose-400'
+                                  : m.saldo_mig_aplicado < 0
+                                  ? 'text-emerald-700 dark:text-emerald-400'
+                                  : 'text-slate-400 dark:text-slate-500'
+                              }`}>
                                 {m.saldo_mig_aplicado > 0 ? `+${m.saldo_mig_aplicado} rep.` : (m.saldo_mig_aplicado < 0 ? `${m.saldo_mig_aplicado} lle.` : '0 saldo')}
                               </span>
                             </div>
                           </td>
 
                           {/* ARIMA 2031 */}
-                          <td className="py-2 px-1 text-center border-r border-slate-200 font-mono text-[10px] tabular-nums">
+                          <td className={`py-2 px-1 text-center border-r font-mono text-[10px] tabular-nums ${isSelected ? 'border-amber-400/50 dark:border-amber-600/50' : 'border-slate-200 dark:border-slate-800'}`}>
                             {!aplicarArima ? (
-                              <span className="text-slate-400">0%</span>
+                              <span className="text-slate-400 dark:text-slate-500">0%</span>
                             ) : (
-                              <span className={m.arima_aplicado >= 0 ? 'text-emerald-700 font-bold' : 'text-slate-500 font-bold'}>
+                              <span className={m.arima_aplicado >= 0 ? 'text-emerald-700 dark:text-emerald-400 font-bold' : 'text-slate-500 dark:text-slate-400 font-bold'}>
                                 {m.arima_aplicado >= 0 ? `+${m.arima_aplicado.toFixed(1)}%` : `${m.arima_aplicado.toFixed(1)}%`}
                               </span>
                             )}
                           </td>
 
                           {/* Demanda Bruta */}
-                          <td className="py-2 px-2 text-right border-r border-slate-200 font-black text-indigo-950 bg-indigo-50/30 tabular-nums">
+                          <td className={`py-2 px-2 text-right border-r font-black tabular-nums ${
+                            isSelected
+                              ? 'border-amber-400/50 dark:border-amber-600/50 bg-amber-200/50 dark:bg-amber-900/50 text-indigo-950 dark:text-indigo-200'
+                              : 'border-slate-200 dark:border-slate-800 text-indigo-950 dark:text-indigo-200 bg-indigo-50/30 dark:bg-indigo-950/30'
+                          }`}>
                             {fmt(m.demanda_total)}
                           </td>
 
                           {/* 1. Egresados Radicación Real (Retorno de Estudiantes) */}
-                          <td className={`py-2 px-2 text-right border-r border-slate-200 tabular-nums font-mono text-[11px] ${tipoAsignacionEgresados === 'radicacion'
-                            ? 'bg-indigo-50/80 text-indigo-950 font-black ring-1 ring-inset ring-indigo-300'
-                            : 'text-slate-600 font-semibold'
-                            }`}>
+                          <td className={`py-2 px-2 text-right border-r tabular-nums font-mono text-[11px] ${
+                            isSelected ? 'border-amber-400/50 dark:border-amber-600/50' : 'border-slate-200 dark:border-slate-800'
+                          } ${
+                            tipoAsignacionEgresados === 'radicacion'
+                              ? 'bg-indigo-50/80 dark:bg-indigo-950/80 text-indigo-950 dark:text-indigo-200 font-black ring-1 ring-inset ring-indigo-300 dark:ring-indigo-700'
+                              : 'text-slate-600 dark:text-slate-300 font-semibold'
+                          }`}>
                             <span>{fmt(m.egresados_radicacion_calc || 0)}</span>
                           </td>
 
                           {/* 2. Egresados Sede Física (Formados en ESFM) */}
-                          <td className={`py-2 px-2 text-right border-r border-slate-200 tabular-nums font-mono text-[11px] ${tipoAsignacionEgresados === 'local'
-                            ? 'bg-emerald-50/80 text-emerald-950 font-black ring-1 ring-inset ring-emerald-300'
-                            : 'text-slate-600 font-semibold'
-                            }`}>
+                          <td className={`py-2 px-2 text-right border-r tabular-nums font-mono text-[11px] ${
+                            isSelected ? 'border-amber-400/50 dark:border-amber-600/50' : 'border-slate-200 dark:border-slate-800'
+                          } ${
+                            tipoAsignacionEgresados === 'local'
+                              ? 'bg-emerald-50/80 dark:bg-emerald-950/80 text-emerald-950 dark:text-emerald-200 font-black ring-1 ring-inset ring-emerald-300 dark:ring-emerald-700'
+                              : 'text-slate-600 dark:text-slate-300 font-semibold'
+                          }`}>
                             <span>{fmt(m.egresados_local_calc || 0)}</span>
                           </td>
 
                           {/* Brecha Neta */}
-                          <td className={`py-2 px-3 text-center font-black text-xs tabular-nums ${esSuperavit ? 'bg-emerald-50 text-emerald-900 border-l border-emerald-200' : 'bg-rose-50 text-rose-900 border-l border-rose-200'
-                            }`}>
+                          <td className={`py-2 px-3 text-center font-black text-xs tabular-nums ${
+                            esSuperavit
+                              ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-200 border-l border-emerald-200 dark:border-emerald-800'
+                              : 'bg-rose-50 dark:bg-rose-950/40 text-rose-900 dark:text-rose-200 border-l border-rose-200 dark:border-rose-800'
+                          }`}>
                             <div className="flex items-center justify-center gap-1.5">
                               {esSuperavit ? (
-                                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
                               ) : (
-                                <AlertTriangle className="w-3.5 h-3.5 text-rose-600 shrink-0" />
+                                <AlertTriangle className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400 shrink-0" />
                               )}
                               <span>{m.brecha_neta > 0 ? `+${fmt(m.brecha_neta)}` : fmt(m.brecha_neta)}</span>
                             </div>

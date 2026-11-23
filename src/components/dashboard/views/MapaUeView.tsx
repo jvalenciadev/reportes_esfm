@@ -951,14 +951,14 @@ export default function MapaUeView() {
       {/* ── Barra Superior Flotante Compacta (Estilo GIS Profesional) ─────────── */}
       <div className="absolute top-3 left-3 right-3 z-10 flex flex-wrap items-center justify-between gap-2 pointer-events-none">
         {/* Controles de Búsqueda y Territorio */}
-        <div className="pointer-events-auto bg-white/95 backdrop-blur-md rounded-2xl shadow-lg border border-slate-200/90 px-3 py-2 flex flex-wrap items-center gap-2">
+        <div className="pointer-events-auto bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-2xl shadow-lg border border-slate-200/90 dark:border-slate-800 px-3 py-2 flex flex-wrap items-center gap-2">
           {/* Brand Badge */}
-          <div className="flex items-center gap-2 pr-2 border-r border-slate-200">
+          <div className="flex items-center gap-2 pr-2 border-r border-slate-200 dark:border-slate-800">
             <div className="w-7 h-7 rounded-lg bg-blue-600 text-white flex items-center justify-center shadow-xs">
               <MapPin className="w-4 h-4" />
             </div>
             <div className="hidden sm:block">
-              <span className="text-xs font-black text-slate-900 leading-none block">Cartografía SEP</span>
+              <span className="text-xs font-black text-slate-900 dark:text-white leading-none block">Cartografía SEP</span>
               <span className="text-[10px] text-slate-500 font-bold leading-none block">Bolivia</span>
             </div>
           </div>
@@ -971,7 +971,7 @@ export default function MapaUeView() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Buscar SIE o UE..."
-              className="w-36 sm:w-44 pl-8 pr-6 py-1.5 text-xs rounded-xl border border-slate-200 bg-slate-50/70 placeholder-slate-400 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 font-medium"
+              className="w-36 sm:w-44 pl-8 pr-6 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/70 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 font-medium"
             />
             {searchQuery && (
               <button
@@ -991,7 +991,7 @@ export default function MapaUeView() {
               setSelectedDepto(e.target.value);
               setSelectedDistrito('TODOS');
             }}
-            className="px-2.5 py-1.5 text-xs rounded-xl border border-slate-200 bg-white text-slate-800 font-bold focus:outline-hidden cursor-pointer"
+            className="px-2.5 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold focus:outline-hidden cursor-pointer"
           >
             <option value="TODOS">Bolivia (Todos)</option>
             {Object.keys(DEPT_CENTERS).filter(k => k !== 'TODOS').map(d => (
@@ -1016,7 +1016,7 @@ export default function MapaUeView() {
           <select
             value={selectedSubsistema}
             onChange={(e) => setSelectedSubsistema(e.target.value)}
-            className="hidden md:block px-2.5 py-1.5 text-xs rounded-xl border border-slate-200 bg-white text-slate-800 font-bold focus:outline-hidden cursor-pointer"
+            className="hidden md:block px-2.5 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold focus:outline-hidden cursor-pointer"
           >
             <option value="TODOS">Subsistema: Todos</option>
             <option value="Regular">Regular</option>
@@ -1025,7 +1025,7 @@ export default function MapaUeView() {
         </div>
 
         {/* Acciones, Botón de Capas/Niveles y Capas Base */}
-        <div className="pointer-events-auto bg-white/95 backdrop-blur-md rounded-2xl shadow-lg border border-slate-200/90 px-3 py-2 flex items-center gap-2">
+        <div className="pointer-events-auto bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-2xl shadow-lg border border-slate-200/90 dark:border-slate-800 px-3 py-2 flex items-center gap-2">
           {/* Botón para Abrir/Cerrar Panel de Capas y Niveles */}
           <button
             type="button"
@@ -1062,7 +1062,7 @@ export default function MapaUeView() {
           </button>
 
           {/* Selector de Capas OSM / Claro / Satélite */}
-          <div className="inline-flex rounded-lg p-0.5 bg-slate-100 border border-slate-200 text-[11px] font-bold text-slate-600">
+          <div className="inline-flex rounded-lg p-0.5 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-bold text-slate-600 dark:text-slate-300">
             <button
               type="button"
               onClick={() => handleTileChange('osm')}
@@ -1108,7 +1108,7 @@ export default function MapaUeView() {
 
       {/* ── Panel Flotante Desplegable de Niveles (No empuja el mapa) ─────────── */}
       {isFilterPanelOpen && (
-        <div className="absolute top-16 left-3 z-20 w-[470px] max-w-[calc(100vw-1.5rem)] max-h-[calc(100vh-85px)] overflow-y-auto bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-slate-200/90 p-4 space-y-3 animate-in fade-in slide-in-from-top-2 duration-200">
+        <div className="absolute top-16 left-3 z-20 w-[470px] max-w-[calc(100vw-1.5rem)] max-h-[calc(100vh-85px)] overflow-y-auto bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-2xl shadow-2xl border border-slate-200/90 dark:border-slate-800 p-4 space-y-3 animate-in fade-in slide-in-from-top-2 duration-200">
           {/* Cabecera del Panel Flotante */}
           <div className="flex items-center justify-between pb-2 border-b border-slate-100">
             <div>
@@ -1371,7 +1371,7 @@ export default function MapaUeView() {
 
       {/* ── Panel Drawer Lateral (Ficha de UE Seleccionada) ───────────────── */}
       {selectedUe && (
-        <div className="absolute top-16 right-3 bottom-3 w-96 max-w-[calc(100vw-1.5rem)] bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-slate-200/90 z-30 flex flex-col overflow-hidden animate-in slide-in-from-right-4 duration-300">
+        <div className="absolute top-16 right-3 bottom-3 w-96 max-w-[calc(100vw-1.5rem)] bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-2xl shadow-2xl border border-slate-200/90 dark:border-slate-800 z-30 flex flex-col overflow-hidden animate-in slide-in-from-right-4 duration-300">
           {/* Cabecera del Panel */}
           <div className="p-4 border-b border-slate-100 flex items-start justify-between bg-slate-50/70">
             <div className="min-w-0 pr-2">

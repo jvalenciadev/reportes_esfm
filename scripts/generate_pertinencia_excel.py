@@ -855,30 +855,39 @@ def create_sheet_cruzada(wb, data):
 
 
 def create_sheet_ue(wb, ue_data):
-    """Hoja 4: Padrón Consolidado de Pertinencia por Unidad Educativa."""
+    """Hoja 4: Padrón Consolidado de Pertinencia por Unidad Educativa / UA con Geolocalización."""
     ws = wb.create_sheet(title="4. Pertinencia por UE")
     ws.views.sheetView[0].showGridLines = True
 
     apply_header_banner(
         ws,
         "MINISTERIO DE EDUCACIÓN - ESTADO PLURINACIONAL DE BOLIVIA",
-        "DIAGNÓSTICO OFICIAL DE PERTINENCIA CURRICULAR POR UNIDAD EDUCATIVA",
-        max_col=10
+        "DIAGNÓSTICO OFICIAL DE PERTINENCIA CURRICULAR POR UNIDAD EDUCATIVA / UNIDAD ACADÉMICA (UE / UA)",
+        max_col=18
     )
 
     cant_ue = f"{len(ue_data):,}".replace(",", ".")
-    ws.cell(row=5, column=1, value=f"Padrón Consolidado por Unidad Educativa ({cant_ue} Establecimientos)").font = font_section
+    ws.cell(row=5, column=1, value=f"Padrón Consolidado por Unidad Educativa / UA ({cant_ue} Establecimientos)").font = font_section
 
     headers = [
+        "Código SIE",
         "Departamento",
         "Distrito Educativo",
-        "Unidad Educativa",
+        "Unidad Educativa / UA",
+        "Subsistema",
+        "Nivel Autorizado",
+        "Turno",
+        "Dependencia",
+        "Dirección",
+        "Cord X",
+        "Cord Y",
         "Alta Pertinencia (V)",
         "Media Pertinencia (A)",
         "Baja Pertinencia (N)",
         "Sin Pertinencia (SIN)",
         "Total Docentes",
         "% Pertinencia Alta",
+        "No Prejubilados No Pertinentes",
         "Diagnóstico Oficial"
     ]
 
@@ -891,7 +900,7 @@ def create_sheet_ue(wb, ue_data):
         c.border = border_cell
     ws.row_dimensions[start_r].height = 24
 
-    tot_v = tot_a = tot_n = tot_sin = tot_doc = 0
+    tot_v = tot_a = tot_n = tot_sin = tot_doc = tot_no_prejub_np = 0
     curr_r = start_r + 1
 
     for row_idx, item in enumerate(ue_data):
@@ -902,23 +911,34 @@ def create_sheet_ue(wb, ue_data):
         sin = item.get("docentes_sin_pertinencia", 0)
         total = item.get("total_docentes", 0)
         pct = (v / total) if total > 0 else 0.0
+        no_prejub_np = item.get("no_prejubilados_no_pertinentes", 0)
 
         tot_v += v
         tot_a += a
         tot_n += n
         tot_sin += sin
         tot_doc += total
+        tot_no_prejub_np += no_prejub_np
 
         vals = [
+            (item.get("cod_ue", ""), align_center, "@"),
             (item.get("departamento", ""), align_left, "@"),
             (item.get("distrito", ""), align_left, "@"),
             (item.get("ue", ""), align_left, "@"),
+            (item.get("subsistema", "Regular"), align_left, "@"),
+            (item.get("nivel_autorizado", ""), align_left, "@"),
+            (item.get("turno", ""), align_center, "@"),
+            (item.get("dependencia", ""), align_center, "@"),
+            (item.get("direccion", ""), align_left, "@"),
+            (item.get("cord_x"), align_right, "0.0000000"),
+            (item.get("cord_y"), align_right, "0.0000000"),
             (v, align_right, "#,##0"),
             (a, align_right, "#,##0"),
             (n, align_right, "#,##0"),
             (sin, align_right, "#,##0"),
             (total, align_right, "#,##0"),
             (pct, align_right, "0.0%"),
+            (no_prejub_np, align_right, "#,##0"),
             (item.get("diagnostico", ""), align_center, "@")
         ]
 
@@ -935,48 +955,56 @@ def create_sheet_ue(wb, ue_data):
         curr_r += 1
 
     # Fila de Totales
-    ws.merge_cells(start_row=curr_r, start_column=1, end_row=curr_r, end_column=3)
+    ws.merge_cells(start_row=curr_r, start_column=1, end_row=curr_r, end_column=11)
     ws.cell(row=curr_r, column=1, value="TOTAL CONSOLIDADO NACIONAL").font = font_bold
     ws.cell(row=curr_r, column=1).alignment = align_center
 
     tot_pct = (tot_v / tot_doc) if tot_doc > 0 else 0.0
     tot_vals = [
-        (4, tot_v, "#,##0"),
-        (5, tot_a, "#,##0"),
-        (6, tot_n, "#,##0"),
-        (7, tot_sin, "#,##0"),
-        (8, tot_doc, "#,##0"),
-        (9, tot_pct, "0.0%"),
-        (10, "Padrón Evaluado", "@")
+        (12, tot_v, "#,##0"),
+        (13, tot_a, "#,##0"),
+        (14, tot_n, "#,##0"),
+        (15, tot_sin, "#,##0"),
+        (16, tot_doc, "#,##0"),
+        (17, tot_pct, "0.0%"),
+        (18, tot_no_prejub_np, "#,##0"),
+        (19, "Padrón Evaluado 100%", "@")
     ]
 
     for c_i, val, num_fmt in tot_vals:
         cell = ws.cell(row=curr_r, column=c_i, value=val)
         cell.font = font_bold
-        cell.alignment = align_right if c_i < 10 else align_center
+        cell.alignment = align_right if c_i < 19 else align_center
         cell.number_format = num_fmt
 
-    for c_i in range(1, 11):
+    for c_i in range(1, 20):
         cell = ws.cell(row=curr_r, column=c_i)
         cell.fill = fill_gold_light
         cell.border = border_double_bottom
 
     ws.row_dimensions[curr_r].height = 24
 
-    # Habilitar autofiltro en la tabla
-    ws.auto_filter.ref = f"A{start_r}:J{curr_r - 1}"
+    ws.auto_filter.ref = f"A{start_r}:S{curr_r - 1}"
 
-    # Anchos fijos optimizados para UE
-    ws.column_dimensions["A"].width = 16
-    ws.column_dimensions["B"].width = 22
-    ws.column_dimensions["C"].width = 38
-    ws.column_dimensions["D"].width = 18
-    ws.column_dimensions["E"].width = 18
-    ws.column_dimensions["F"].width = 18
-    ws.column_dimensions["G"].width = 20
-    ws.column_dimensions["H"].width = 16
-    ws.column_dimensions["I"].width = 18
-    ws.column_dimensions["J"].width = 28
+    ws.column_dimensions["A"].width = 13
+    ws.column_dimensions["B"].width = 15
+    ws.column_dimensions["C"].width = 20
+    ws.column_dimensions["D"].width = 34
+    ws.column_dimensions["E"].width = 16
+    ws.column_dimensions["F"].width = 24
+    ws.column_dimensions["G"].width = 12
+    ws.column_dimensions["H"].width = 14
+    ws.column_dimensions["I"].width = 26
+    ws.column_dimensions["J"].width = 14
+    ws.column_dimensions["K"].width = 14
+    ws.column_dimensions["L"].width = 18
+    ws.column_dimensions["M"].width = 18
+    ws.column_dimensions["N"].width = 18
+    ws.column_dimensions["O"].width = 18
+    ws.column_dimensions["P"].width = 15
+    ws.column_dimensions["Q"].width = 16
+    ws.column_dimensions["R"].width = 24
+    ws.column_dimensions["S"].width = 28
 
 
 def create_sheet_rural_urbano(wb, data: dict):
@@ -1343,6 +1371,314 @@ def create_sheet_jubilacion(wb, data):
     ws.column_dimensions["H"].width = 4  # Separador
 
 
+def create_sheet_prejub_genero(wb, data):
+    """Hoja adicional: Análisis Estratégico de No Prejubilados x No Pertinentes y Composición de Género."""
+    ws = wb.create_sheet(title="No Prejubilados y Género")
+    ws.views.sheetView[0].showGridLines = True
+
+    pj_data = data.get("prejubilacion_pertinencia", {})
+    gen_data = data.get("genero", {})
+    nac_pj = pj_data.get("nacional", {})
+    depto_pj = pj_data.get("por_departamento", [])
+    nac_gen = gen_data.get("nacional", {})
+    depto_gen = gen_data.get("por_departamento", [])
+
+    apply_header_banner(
+        ws,
+        "MINISTERIO DE EDUCACIÓN - ESTADO PLURINACIONAL DE BOLIVIA",
+        "ANÁLISIS DE NO PREJUBILADOS X NO PERTINENTES Y COMPOSICIÓN DE GÉNERO (SEP)",
+        max_col=14
+    )
+
+    tot_padron = nac_pj.get("total_docentes", 168758)
+    no_prejub = nac_pj.get("no_prejubilados", {})
+    prejub = nac_pj.get("prejubilados", {})
+    fem = nac_gen.get("femenino", {})
+    masc = nac_gen.get("masculino", {})
+
+    # Tarjetas KPI (Filas 5-6)
+    kpis = [
+        ("UNIVERSO DOCENTE", tot_padron, "#,##0", 1, 2),
+        ("DOCENTES ACTIVOS (NO PREJUBILADOS)", no_prejub.get("total", 0), "#,##0", 3, 4),
+        ("NO PREJUBILADOS NO PERTINENTES (N+SIN)", nac_pj.get("no_prejubilados_no_pertinentes", 0), "#,##0", 5, 7),
+        ("% NO PERTINENTE EN SERVICIO ACTIVO", nac_pj.get("pct_no_prejubilados_no_pertinentes_sobre_no_prejub", 0) / 100.0, "0.00%", 8, 9),
+        ("DOCENTES MUJERES", fem.get("total", 0), "#,##0", 10, 11),
+        ("DOCENTES VARONES", masc.get("total", 0), "#,##0", 12, 13)
+    ]
+
+    for title, val, num_fmt, c1, c2 in kpis:
+        ws.merge_cells(start_row=5, start_column=c1, end_row=5, end_column=c2)
+        cell_lbl = ws.cell(row=5, column=c1, value=title)
+        cell_lbl.font = font_kpi_lbl
+        cell_lbl.alignment = align_center
+        cell_lbl.fill = fill_gold_light
+
+        ws.merge_cells(start_row=6, start_column=c1, end_row=6, end_column=c2)
+        cell_val = ws.cell(row=6, column=c1, value=val)
+        cell_val.font = font_kpi_num
+        cell_val.number_format = num_fmt
+        cell_val.alignment = align_center
+        cell_val.fill = fill_gold_light
+
+        for r in range(5, 7):
+            for c in range(c1, c2 + 1):
+                ws.cell(row=r, column=c).border = border_cell
+
+    ws.row_dimensions[5].height = 18
+    ws.row_dimensions[6].height = 26
+
+    # ── Tabla 1: Matriz Cruzada Prejubilación x Pertinencia (Fila 8)
+    curr_r = 8
+    ws.cell(row=curr_r, column=1, value="1. Matriz Cruzada Nacional: Condición de Prejubilación vs Pertinencia Curricular").font = font_section
+    curr_r += 1
+
+    h_matriz = [
+        "Condición Docente", "Total", "Alta (V)", "Media (A)", "Baja (N)", "Sin Pert. (SIN)",
+        "No Pertinentes (N+SIN)", "% No Pertinente", "% Alta Pertinencia"
+    ]
+    for c_i, h in enumerate(h_matriz, start=1):
+        c = ws.cell(row=curr_r, column=c_i, value=h)
+        c.font = font_header
+        c.fill = fill_navy
+        c.alignment = align_center
+        c.border = border_cell
+    ws.row_dimensions[curr_r].height = 22
+    curr_r += 1
+
+    filas_matriz = [
+        ("Docentes en Servicio Activo (No Prejubilados)", no_prejub),
+        ("Docentes en Proceso de Prejubilación (SI)", prejub),
+    ]
+
+    for label, item in filas_matriz:
+        t = item.get("total", 0)
+        v = item.get("V", 0)
+        a = item.get("A", 0)
+        n = item.get("N", 0)
+        sin = item.get("SIN", 0)
+        np = item.get("no_pertinentes", n + sin)
+        pct_np = (np / t) if t > 0 else 0.0
+        pct_v = (v / t) if t > 0 else 0.0
+
+        vals = [label, t, v, a, n, sin, np, pct_np, pct_v]
+        for c_i, val in enumerate(vals, start=1):
+            cell = ws.cell(row=curr_r, column=c_i, value=val)
+            cell.font = font_data
+            cell.border = border_cell
+            if c_i == 1:
+                cell.alignment = align_left
+            elif c_i in [8, 9]:
+                cell.alignment = align_right
+                cell.number_format = "0.00%"
+            else:
+                cell.alignment = align_right
+                cell.number_format = "#,##0"
+        ws.row_dimensions[curr_r].height = 20
+        curr_r += 1
+
+    # Total Nacional Matriz
+    t_tot = tot_padron
+    v_tot = no_prejub.get("V", 0) + prejub.get("V", 0)
+    a_tot = no_prejub.get("A", 0) + prejub.get("A", 0)
+    n_tot = no_prejub.get("N", 0) + prejub.get("N", 0)
+    sin_tot = no_prejub.get("SIN", 0) + prejub.get("SIN", 0)
+    np_tot = n_tot + sin_tot
+    pct_np_tot = (np_tot / t_tot) if t_tot > 0 else 0.0
+    pct_v_tot = (v_tot / t_tot) if t_tot > 0 else 0.0
+
+    tot_vals_m = ["TOTAL GENERAL NACIONAL", t_tot, v_tot, a_tot, n_tot, sin_tot, np_tot, pct_np_tot, pct_v_tot]
+    for c_i, val in enumerate(tot_vals_m, start=1):
+        cell = ws.cell(row=curr_r, column=c_i, value=val)
+        cell.font = font_bold
+        cell.fill = fill_gold_light
+        cell.border = border_double_bottom
+        if c_i == 1:
+            cell.alignment = align_left
+        elif c_i in [8, 9]:
+            cell.alignment = align_right
+            cell.number_format = "0.00%"
+        else:
+            cell.alignment = align_right
+            cell.number_format = "#,##0"
+    ws.row_dimensions[curr_r].height = 22
+    curr_r += 2
+
+    # ── Tabla 2: Desglose Departamental de No Prejubilados No Pertinentes
+    ws.cell(row=curr_r, column=1, value="2. Población Objetivo Activa: No Prejubilados No Pertinentes por Departamento").font = font_section
+    curr_r += 1
+
+    h_depto_np = [
+        "Departamento", "Total Docentes", "No Prejubilados", "No Pertinentes Activos (N+SIN)",
+        "% No Pertinentes Activos", "No Prejubilados V (Alta)", "No Prejubilados A (Media)", "Prejubilados No Pertinentes"
+    ]
+    for c_i, h in enumerate(h_depto_np, start=1):
+        c = ws.cell(row=curr_r, column=c_i, value=h)
+        c.font = font_header
+        c.fill = fill_navy
+        c.alignment = align_center
+        c.border = border_cell
+    ws.row_dimensions[curr_r].height = 22
+    start_depto_r = curr_r
+    curr_r += 1
+
+    for idx, d in enumerate(depto_pj):
+        d_nom = d.get("departamento", "")
+        tot_d = d.get("total", 0)
+        no_pj = d.get("no_prejubilados", 0)
+        no_pj_np = d.get("no_prejub_no_pert", 0)
+        pct_np_act = (no_pj_np / no_pj) if no_pj > 0 else 0.0
+        v_act = d.get("no_prejub_v", 0)
+        a_act = d.get("no_prejub_a", 0)
+        pj_np = d.get("prejub_no_pert", 0)
+
+        row_vals = [d_nom, tot_d, no_pj, no_pj_np, pct_np_act, v_act, a_act, pj_np]
+        for c_i, val in enumerate(row_vals, start=1):
+            cell = ws.cell(row=curr_r, column=c_i, value=val)
+            cell.font = font_data
+            cell.border = border_cell
+            if c_i == 1:
+                cell.alignment = align_left
+            elif c_i == 5:
+                cell.alignment = align_right
+                cell.number_format = "0.00%"
+            else:
+                cell.alignment = align_right
+                cell.number_format = "#,##0"
+            if idx % 2 == 1:
+                cell.fill = fill_zebra
+        ws.row_dimensions[curr_r].height = 20
+        curr_r += 1
+
+    end_depto_r = curr_r - 1
+
+    # Fila Total Departamental
+    tot_pj_np = sum(d.get("prejub_no_pert", 0) for d in depto_pj)
+    tot_row_d = [
+        "TOTAL NACIONAL", tot_padron, no_prejub.get("total", 0),
+        nac_pj.get("no_prejubilados_no_pertinentes", 0),
+        nac_pj.get("pct_no_prejubilados_no_pertinentes_sobre_no_prejub", 0) / 100.0,
+        no_prejub.get("V", 0), no_prejub.get("A", 0), tot_pj_np
+    ]
+    for c_i, val in enumerate(tot_row_d, start=1):
+        cell = ws.cell(row=curr_r, column=c_i, value=val)
+        cell.font = font_bold
+        cell.fill = fill_gold_light
+        cell.border = border_double_bottom
+        if c_i == 1:
+            cell.alignment = align_left
+        elif c_i == 5:
+            cell.alignment = align_right
+            cell.number_format = "0.00%"
+        else:
+            cell.alignment = align_right
+            cell.number_format = "#,##0"
+    ws.row_dimensions[curr_r].height = 22
+    curr_r += 2
+
+    # ── Tabla 3: Composición por Género y Desempeño Curricular por Departamento
+    ws.cell(row=curr_r, column=1, value="3. Composición y Desempeño Curricular por Género por Departamento").font = font_section
+    curr_r += 1
+
+    h_gen = [
+        "Departamento", "Mujeres Total", "% Alta Mujeres", "Mujeres No Pert. Activas",
+        "Varones Total", "% Alta Varones", "Varones No Pert. Activos"
+    ]
+    for c_i, h in enumerate(h_gen, start=1):
+        c = ws.cell(row=curr_r, column=c_i, value=h)
+        c.font = font_header
+        c.fill = fill_navy
+        c.alignment = align_center
+        c.border = border_cell
+    ws.row_dimensions[curr_r].height = 22
+    curr_r += 1
+
+    for idx, d in enumerate(depto_gen):
+        d_nom = d.get("departamento", "")
+        f_tot = d.get("total_femenino", 0)
+        f_pct = d.get("pct_femenino_alta", 0.0) / 100.0
+        f_np = d.get("femenino_no_prejub_no_pert", 0)
+        m_tot = d.get("total_masculino", 0)
+        m_pct = d.get("pct_masculino_alta", 0.0) / 100.0
+        m_np = d.get("masculino_no_prejub_no_pert", 0)
+
+        row_vals = [d_nom, f_tot, f_pct, f_np, m_tot, m_pct, m_np]
+        for c_i, val in enumerate(row_vals, start=1):
+            cell = ws.cell(row=curr_r, column=c_i, value=val)
+            cell.font = font_data
+            cell.border = border_cell
+            if c_i == 1:
+                cell.alignment = align_left
+            elif c_i in [3, 6]:
+                cell.alignment = align_right
+                cell.number_format = "0.00%"
+            else:
+                cell.alignment = align_right
+                cell.number_format = "#,##0"
+            if idx % 2 == 1:
+                cell.fill = fill_zebra
+        ws.row_dimensions[curr_r].height = 20
+        curr_r += 1
+
+    # Total Nacional Género
+    f_nac_tot = fem.get("total", 0)
+    f_nac_pct = fem.get("pct_alta", 0.0) / 100.0
+    f_nac_np = fem.get("no_prejub_no_pert", 0)
+    m_nac_tot = masc.get("total", 0)
+    m_nac_pct = masc.get("pct_alta", 0.0) / 100.0
+    m_nac_np = masc.get("no_prejub_no_pert", 0)
+
+    tot_gen_row = ["TOTAL GENERAL NACIONAL", f_nac_tot, f_nac_pct, f_nac_np, m_nac_tot, m_nac_pct, m_nac_np]
+    for c_i, val in enumerate(tot_gen_row, start=1):
+        cell = ws.cell(row=curr_r, column=c_i, value=val)
+        cell.font = font_bold
+        cell.fill = fill_gold_light
+        cell.border = border_double_bottom
+        if c_i == 1:
+            cell.alignment = align_left
+        elif c_i in [3, 6]:
+            cell.alignment = align_right
+            cell.number_format = "0.00%"
+        else:
+            cell.alignment = align_right
+            cell.number_format = "#,##0"
+    ws.row_dimensions[curr_r].height = 22
+
+    # Gráfico de Barras: No Prejubilados No Pertinentes por Departamento
+    chart = BarChart()
+    chart.type = "col"
+    chart.title = "Docentes Activos No Pertinentes (N+SIN) por Departamento"
+    chart.y_axis.title = "Docentes Prioritarios"
+    chart.x_axis.title = "Departamento"
+    chart.width = 18
+    chart.height = 10
+    chart.legend = None
+
+    data_ref_np = Reference(ws, min_col=4, min_row=start_depto_r, max_row=end_depto_r)
+    cats_ref_np = Reference(ws, min_col=1, min_row=start_depto_r + 1, max_row=end_depto_r)
+    chart.add_data(data_ref_np, titles_from_data=True)
+    chart.set_categories(cats_ref_np)
+
+    chart.dataLabels = DataLabelList()
+    chart.dataLabels.showVal = True
+
+    if chart.series:
+        chart.series[0].graphicalProperties.solidFill = COLOR_N
+
+    ws.add_chart(chart, "J8")
+
+    # Anchos de columna
+    ws.column_dimensions["A"].width = 24
+    ws.column_dimensions["B"].width = 16
+    ws.column_dimensions["C"].width = 16
+    ws.column_dimensions["D"].width = 22
+    ws.column_dimensions["E"].width = 18
+    ws.column_dimensions["F"].width = 16
+    ws.column_dimensions["G"].width = 16
+    ws.column_dimensions["H"].width = 18
+    ws.column_dimensions["I"].width = 4
+
+
+
 def main():
     root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     json_path = os.path.join(root_dir, "src", "data", "pertinencia_data.json")
@@ -1372,6 +1708,10 @@ def main():
     # Hoja adicional: Jubilación y Prejubilación
     if data.get("jubilacion"):
         create_sheet_jubilacion(wb, data)
+
+    # Hoja estratégica: No Prejubilados x No Pertinentes y Género
+    if data.get("prejubilacion_pertinencia") or data.get("genero"):
+        create_sheet_prejub_genero(wb, data)
 
     # Hoja 4: Pertinencia por Unidad Educativa
     if os.path.exists(ue_json_path):

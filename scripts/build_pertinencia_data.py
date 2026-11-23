@@ -2,15 +2,18 @@
 # -*- coding: utf-8 -*-
 """
 Script de procesamiento de Pertinencia Curricular Docente - Corte Oficial Definitivo.
-Fuente: public/datos/Pertinencia_oficial.xlsx (168,758 registros).
-Genera: src/data/pertinencia_data.json con cuadre matemático al 100%.
+Fuente: public/datos/Pertinencia_oficial - copia.xlsx (168,758 registros, 30 columnas).
+Genera:
+  - src/data/pertinencia_data.json (Métricas agregadas, cruce No Prejubilados x No Pertinentes, género)
+  - src/data/pertinencia_por_ue.json (Consolidado por UE / UA con coordenadas, subsistema, nivel, turno, mapa)
+  - src/data/ue_jubilacion_data.json (Lookup rápido de jubilación por UE)
 """
 
 import os
 import json
 import openpyxl
 import sqlite3
-from collections import defaultdict
+from collections import defaultdict, Counter
 
 def build_pertinencia_oficial():
     root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -18,8 +21,10 @@ def build_pertinencia_oficial():
     pert_xlsx_path = os.path.join(root_dir, "public", "datos", "pertinencia.xlsx")
     db_path = os.path.join(root_dir, "src", "data", "sie_materia.db")
     out_json_path = os.path.join(root_dir, "src", "data", "pertinencia_data.json")
+    out_ue_json_path = os.path.join(root_dir, "src", "data", "pertinencia_por_ue.json")
+    out_ue_jub_path = os.path.join(root_dir, "src", "data", "ue_jubilacion_data.json")
 
-    # 1. Cargar Mapeo de Área Rural / Urbana
+    # 1. Cargar Mapeo de Área Rural / Urbana de apoyo
     print("Cargando catálogo territorial Rural/Urbano...")
     ue_area_map = {}
     dist_area_map = {}
@@ -46,7 +51,7 @@ def build_pertinencia_oficial():
     print(f"Catálogo cargado: {len(ue_area_map)} UEs de pertinencia y {len(sie_ue_areas)} UEs de SIE.")
 
     print(f"Cargando datos oficiales desde: {xlsx_path}...")
-    wb = openpyxl.load_workbook(xlsx_path, read_only=True)
+    wb = openpyxl.load_workbook(xlsx_path, data_only=True, read_only=True)
     sheet_name = wb.sheetnames[0]
     ws = wb[sheet_name]
     print(f"Procesando hoja: {sheet_name}")
@@ -128,6 +133,14 @@ def build_pertinencia_oficial():
         'SIN': {'docentes': 0, 'ues': set(), 'horas': 0.0},
     })
 
+    # Especialidades
+    especialidades_data = defaultdict(lambda: {
+        'docentes': 0,
+        'ues': set(),
+        'V': 0, 'A': 0, 'N': 0, 'SIN': 0,
+        'por_departamento': defaultdict(lambda: {'V': 0, 'A': 0, 'N': 0, 'SIN': 0, 'total': 0})
+    })
+
     desalineacion_counts = {
         'fuera_especialidad': 0,
         'fuera_nivel': 0,
@@ -142,11 +155,56 @@ def build_pertinencia_oficial():
     jub_por_distrito = defaultdict(lambda: {'jubilacion': 0, 'prejubilacion': 0, 'total': 0})
     jub_nacional = {'jubilacion': 0, 'prejubilacion': 0, 'total': 0}
 
-    # Acumuladores por UE para enriquecer pertinencia_por_ue.json
-    ue_jub_data = defaultdict(lambda: {
-        'jubilacion': 0, 'prejubilacion': 0,
-        'estudiantes': 0, 'dependencias': set()
+    # NUEVO: Estructura Cruzada No Prejubilados x No Pertinentes
+    # Prejubilacion (SI / NO) x Rango (V, A, N, SIN)
+    prejub_pert_nac = {
+        'prejubilados': {'total': 0, 'V': 0, 'A': 0, 'N': 0, 'SIN': 0, 'no_pertinentes': 0},
+        'no_prejubilados': {'total': 0, 'V': 0, 'A': 0, 'N': 0, 'SIN': 0, 'no_pertinentes': 0}
+    }
+    prejub_pert_depto = defaultdict(lambda: {
+        'total': 0,
+        'prejubilados': 0,
+        'no_prejubilados': 0,
+        'prejub_v': 0, 'prejub_a': 0, 'prejub_n': 0, 'prejub_sin': 0, 'prejub_no_pert': 0,
+        'no_prejub_v': 0, 'no_prejub_a': 0, 'no_prejub_n': 0, 'no_prejub_sin': 0, 'no_prejub_no_pert': 0,
     })
+
+    # NUEVO: Estructura de Género (Femenino / Masculino / Otro)
+    genero_nac = {
+        'femenino': {'total': 0, 'V': 0, 'A': 0, 'N': 0, 'SIN': 0, 'prejub': 0, 'no_prejub_no_pert': 0},
+        'masculino': {'total': 0, 'V': 0, 'A': 0, 'N': 0, 'SIN': 0, 'prejub': 0, 'no_prejub_no_pert': 0},
+        'otro': {'total': 0, 'V': 0, 'A': 0, 'N': 0, 'SIN': 0, 'prejub': 0, 'no_prejub_no_pert': 0}
+    }
+    genero_depto = defaultdict(lambda: {
+        'femenino': {'total': 0, 'V': 0, 'A': 0, 'N': 0, 'SIN': 0, 'no_prejub_no_pert': 0},
+        'masculino': {'total': 0, 'V': 0, 'A': 0, 'N': 0, 'SIN': 0, 'no_prejub_no_pert': 0},
+    })
+
+    # Acumulador unívoco para UE / UA
+    ue_map = defaultdict(lambda: {
+        'depto': '',
+        'distrito': '',
+        'distritos': Counter(),
+        'ue': '',
+        'subsistema': '',
+        'subsistemas': Counter(),
+        'turno': '',
+        'turnos': Counter(),
+        'nivel_autorizado': '',
+        'direccion': '',
+        'cord_x': None,
+        'cord_y': None,
+        'dependencia': 'FISCAL',
+        'dependencias': Counter(),
+        'estudiantes': 0,
+        'V': 0, 'A': 0, 'N': 0, 'SIN': 0, 'total': 0,
+        'prejubilados': 0,
+        'a_jubilar': 0,
+        'no_prejub_no_pert': 0,
+        'genero_fem': 0,
+        'genero_masc': 0
+    })
+
     ue_fixed_area = {}
     ue_matr_stats = defaultdict(lambda: {
         'V': 0, 'A': 0, 'N': 0, 'SIN': 0, 'total': 0,
@@ -154,37 +212,73 @@ def build_pertinencia_oficial():
     })
 
     total_filas = 0
-    # Índices exactos verificados:
+
+    # 30 columnas verificadas:
     # 0: dep_id, 1: departamento, 2: dis_id, 3: distrito, 4: ID_UE, 5: ue,
-    # 6: cantidad_Est, 7: Dependencia, 8: ci, 9: fecha_naci, 10: años,
-    # 11: codigo_cargo, 12: cargo, 13: cod_especialidad, 14: especialidad_formacion,
-    # 15: condicion_formacion, 16: caso_aplicado, 17: detalle_caso,
-    # 18: pertinencia, 19: nivel, 20: Jubilacion, 21: PreJubilacion
+    # 6: cantidad_est, 7: Dependencia, 8: Subsistema, 9: Dependencia_dup, 10: Turno,
+    # 11: Nivel Autorizado, 12: Dirección, 13: Cord X, 14: Cord Y, 15: ci,
+    # 16: fecha_naci, 17: sexo, 18: años, 19: codigo_cargo, 20: cargo,
+    # 21: cod_especialidad, 22: especialidad_formacion, 23: condicion_formacion,
+    # 24: caso_aplicado, 25: detalle_caso, 26: pertinencia, 27: nivel,
+    # 28: Jubilacion, 29: PreJubilacion
     for r in ws.iter_rows(min_row=2, values_only=True):
         total_filas += 1
         depto = str(r[1]).strip().upper() if r[1] else 'DESCONOCIDO'
         distrito = str(r[3]).strip().upper() if r[3] else 'DESCONOCIDO'
-        id_ue = r[4]
-        ue = str(r[5]).strip().upper() if r[5] else ''
+        id_ue = int(r[4]) if r[4] and str(r[4]).isdigit() else (r[4] or 0)
+        ue = str(r[5]).strip().upper() if r[5] else 'SIN NOMBRE'
         cantidad_est = int(r[6]) if r[6] and str(r[6]).isdigit() else (int(r[6]) if isinstance(r[6], (int, float)) else 0)
-        dependencia = str(r[7]).strip() if r[7] else 'SIN DATOS'
-        condicion = str(r[15]).strip().upper() if r[15] else 'OTRO'
-        caso = str(r[16]).strip() if r[16] else 'SIN CASO'
-        pert_raw = str(r[18]).strip().upper() if r[18] else 'SIN PERTINENCIA'
-        nivel = str(r[19]).strip() if r[19] else 'OTRO'
-        jubilacion = str(r[20]).strip().upper() if r[20] else 'NO'
-        prejubilacion = str(r[21]).strip().upper() if r[21] else 'NO'
+        dependencia = str(r[7]).strip() if r[7] else 'FISCAL'
+        subsistema = str(r[8]).strip() if r[8] else 'Regular'
+        turno = str(r[10]).strip() if r[10] else 'Mañana'
+        nivel_aut = str(r[11]).strip() if r[11] else ''
+        direccion = str(r[12]).strip() if r[12] else ''
+        cord_x = r[13] if isinstance(r[13], (int, float)) else None
+        cord_y = r[14] if isinstance(r[14], (int, float)) else None
 
-        # Acumular Jubilación y Prejubilación por UE
-        ue_key = id_ue
-        ue_jub_data[ue_key]['estudiantes'] = cantidad_est  # El valor es por UE, se sobreescribe pero es consistente
-        ue_jub_data[ue_key]['dependencias'].add(dependencia)
-        if jubilacion == 'SI':
-            ue_jub_data[ue_key]['jubilacion'] += 1
-        if prejubilacion == 'SI':
-            ue_jub_data[ue_key]['prejubilacion'] += 1
+        # Género (1: Masculino, 2: Femenino)
+        sexo_raw = str(r[17]).strip() if r[17] is not None else ''
+        if sexo_raw in ['2', 'F', 'FEMENINO']:
+            gen_key = 'femenino'
+        elif sexo_raw in ['1', 'M', 'MASCULINO']:
+            gen_key = 'masculino'
+        else:
+            gen_key = 'otro'
 
-        # Acumular por departamento y distrito
+        cargo = str(r[20]).strip().upper() if r[20] else ''
+        esp_form = str(r[22]).strip().upper() if r[22] else 'SIN ESPECIALIDAD ESPECIFICADA'
+        condicion = str(r[23]).strip().upper() if r[23] else 'OTRO'
+        caso = str(r[24]).strip() if r[24] else 'SIN CASO'
+        pert_raw = str(r[26]).strip().upper() if r[26] else 'SIN PERTINENCIA'
+        nivel = str(r[27]).strip() if r[27] else 'OTRO'
+        # Jubilación: Columna 28 (Padrón Oficial: =IF(S>=60, "SI", "NO"))
+        is_jub = False
+        jub_val = str(r[28]).strip().upper() if r[28] is not None else ''
+        if jub_val == 'SI':
+            is_jub = True
+        else:
+            try:
+                if r[18] is not None and float(r[18]) >= 60:
+                    is_jub = True
+            except (ValueError, TypeError):
+                pass
+        jubilacion = 'SI' if is_jub else 'NO'
+        prejubilacion = str(r[29]).strip().upper() if r[29] is not None else 'NO'
+
+        # Mapeo oficial de rangos
+        if 'ALTA' in pert_raw or pert_raw == 'V':
+            color = 'V'
+        elif 'MEDIA' in pert_raw or pert_raw == 'A':
+            color = 'A'
+        elif 'BAJA' in pert_raw or pert_raw == 'N':
+            color = 'N'
+        else:
+            color = 'SIN'
+
+        is_prejub = (prejubilacion == 'SI')
+        is_no_pert = color in ['N', 'SIN']
+
+        # Acumular Jubilación tradicional
         jub_key_d = depto
         jub_key_dist = (depto, distrito)
         jub_nacional['total'] += 1
@@ -194,12 +288,80 @@ def build_pertinencia_oficial():
             jub_nacional['jubilacion'] += 1
             jub_por_depto[jub_key_d]['jubilacion'] += 1
             jub_por_distrito[jub_key_dist]['jubilacion'] += 1
-        if prejubilacion == 'SI':
+        if is_prejub:
             jub_nacional['prejubilacion'] += 1
             jub_por_depto[jub_key_d]['prejubilacion'] += 1
             jub_por_distrito[jub_key_dist]['prejubilacion'] += 1
 
-        # Determinar Área Rural / Urbana (unívoca por ID_UE)
+        # Acumular Prejubilación x Pertinencia
+        if is_prejub:
+            prejub_pert_nac['prejubilados']['total'] += 1
+            prejub_pert_nac['prejubilados'][color] += 1
+            if is_no_pert:
+                prejub_pert_nac['prejubilados']['no_pertinentes'] += 1
+
+            prejub_pert_depto[depto]['total'] += 1
+            prejub_pert_depto[depto]['prejubilados'] += 1
+            prejub_pert_depto[depto][f'prejub_{color.lower()}'] += 1
+            if is_no_pert:
+                prejub_pert_depto[depto]['prejub_no_pert'] += 1
+        else:
+            prejub_pert_nac['no_prejubilados']['total'] += 1
+            prejub_pert_nac['no_prejubilados'][color] += 1
+            if is_no_pert:
+                prejub_pert_nac['no_prejubilados']['no_pertinentes'] += 1
+
+            prejub_pert_depto[depto]['total'] += 1
+            prejub_pert_depto[depto]['no_prejubilados'] += 1
+            prejub_pert_depto[depto][f'no_prejub_{color.lower()}'] += 1
+            if is_no_pert:
+                prejub_pert_depto[depto]['no_prejub_no_pert'] += 1
+
+        # Acumular Género
+        genero_nac[gen_key]['total'] += 1
+        genero_nac[gen_key][color] += 1
+        if is_prejub:
+            genero_nac[gen_key]['prejub'] += 1
+        if not is_prejub and is_no_pert:
+            genero_nac[gen_key]['no_prejub_no_pert'] += 1
+
+        if gen_key in ['femenino', 'masculino']:
+            genero_depto[depto][gen_key]['total'] += 1
+            genero_depto[depto][gen_key][color] += 1
+            if not is_prejub and is_no_pert:
+                genero_depto[depto][gen_key]['no_prejub_no_pert'] += 1
+
+        # Acumular Especialidad
+        if esp_form:
+            especialidades_data[esp_form]['docentes'] += 1
+            especialidades_data[esp_form][color] += 1
+            if id_ue:
+                especialidades_data[esp_form]['ues'].add(id_ue)
+            especialidades_data[esp_form]['por_departamento'][depto][color] += 1
+            especialidades_data[esp_form]['por_departamento'][depto]['total'] += 1
+
+        # Acumular datos enriquecidos por UE / UA
+        u_rec = ue_map[id_ue]
+        u_rec['depto'] = depto
+        u_rec['distritos'][distrito] += 1
+        u_rec['ue'] = ue
+        u_rec['total'] += 1
+        u_rec[color] += 1
+        u_rec['estudiantes'] = cantidad_est
+        if subsistema: u_rec['subsistemas'][subsistema] += 1
+        if turno: u_rec['turnos'][turno] += 1
+        if dependencia: u_rec['dependencias'][dependencia] += 1
+        if nivel_aut and not u_rec['nivel_autorizado']: u_rec['nivel_autorizado'] = nivel_aut
+        if direccion and not u_rec['direccion']: u_rec['direccion'] = direccion
+        if cord_x is not None and u_rec['cord_x'] is None: u_rec['cord_x'] = cord_x
+        if cord_y is not None and u_rec['cord_y'] is None: u_rec['cord_y'] = cord_y
+        if is_prejub: u_rec['prejubilados'] += 1
+        if jubilacion == 'SI': u_rec['a_jubilar'] += 1
+        if not is_prejub and is_no_pert: u_rec['no_prejub_no_pert'] += 1
+        if gen_key == 'femenino': u_rec['genero_fem'] += 1
+        elif gen_key == 'masculino': u_rec['genero_masc'] += 1
+
+        # Determinar Área Rural / Urbana
         if id_ue in ue_fixed_area:
             area = ue_fixed_area[id_ue]
         else:
@@ -213,16 +375,6 @@ def build_pertinencia_oficial():
             else:
                 area = 'RURAL' if any(w in distrito for w in ['RURAL', 'CANTON', 'PROVINCIA', 'SEGUNDA', 'TERCERA', 'CUARTA']) else 'URBANA'
             ue_fixed_area[id_ue] = area
-
-        # Mapeo oficial de rangos
-        if 'ALTA' in pert_raw or pert_raw == 'V':
-            color = 'V'
-        elif 'MEDIA' in pert_raw or pert_raw == 'A':
-            color = 'A'
-        elif 'BAJA' in pert_raw or pert_raw == 'N':
-            color = 'N'
-        else:
-            color = 'SIN'
 
         # Acumular estadística para cálculo exacto de estudiantes
         u_stat = ue_matr_stats[id_ue]
@@ -292,6 +444,7 @@ def build_pertinencia_oficial():
             desalineacion_counts['total'] += 1
 
     wb.close()
+    print(f"Lectura completa finalizada: {total_filas} registros procesados.")
 
     # Cálculo exacto de estudiantes según columna oficial cantidad_Est por UE
     estudiantes_por_rango_calc = {'V': 0.0, 'A': 0.0, 'N': 0.0, 'SIN': 0.0}
@@ -309,13 +462,11 @@ def build_pertinencia_oficial():
             for rk in ['V', 'A', 'N', 'SIN']:
                 estudiantes_por_rango_calc[rk] += est_ue * (uinfo[rk] / tot_d)
 
-    # Ajuste por redondeo para cuadre entero exacto
     est_rango_enteros = {k: int(round(v)) for k, v in estudiantes_por_rango_calc.items()}
     diff_redondeo = total_estudiantes_nacional - sum(est_rango_enteros.values())
     if diff_redondeo != 0:
         est_rango_enteros['V'] += diff_redondeo
 
-    # Construir JSON estructurado
     resumen_json = {}
     for k in ['V', 'A', 'N', 'SIN']:
         v = resumen_rangos[k]
@@ -384,7 +535,7 @@ def build_pertinencia_oficial():
             }
         por_nivel_list.append(n_dict)
 
-    # Construir Estructura Consolidada por Área (RURAL / URBANA)
+    # Estructura por Área
     por_area_json = {}
     for a_key in ['RURAL', 'URBANA']:
         a_info = area_resumen[a_key]
@@ -420,7 +571,7 @@ def build_pertinencia_oficial():
             }
         }
 
-    # Construir Estructura por Departamento x Área (Rural vs Urbana)
+    # Estructura Departamento x Área
     por_depto_area_list = []
     for d in all_deptos:
         d_rural = deptos_area_data[d]['RURAL']
@@ -493,7 +644,28 @@ def build_pertinencia_oficial():
             }
         })
 
-    # Serializar datos de Jubilación por departamento y distrito
+    # Especialidades destacadas
+    top_esp_list = []
+    for esp_nom, esp_val in sorted(especialidades_data.items(), key=lambda x: x[1]['docentes'], reverse=True)[:100]:
+        tot_esp = esp_val['docentes']
+        dept_dict = {}
+        for d_name in deptos_orden:
+            dept_dict[d_name] = dict(esp_val['por_departamento'][d_name])
+        top_esp_list.append({
+            'especialidad': esp_nom,
+            'docentes': tot_esp,
+            'total_docentes': tot_esp,
+            'ues': len(esp_val['ues']),
+            'pct_alta': round((esp_val['V'] / tot_esp) * 100, 2) if tot_esp > 0 else 0.0,
+            'pct_alta_pertinencia': round((esp_val['V'] / tot_esp) * 100, 2) if tot_esp > 0 else 0.0,
+            'V': {'docentes': esp_val['V'], 'pct': round((esp_val['V'] / tot_esp) * 100, 2) if tot_esp > 0 else 0.0},
+            'A': {'docentes': esp_val['A'], 'pct': round((esp_val['A'] / tot_esp) * 100, 2) if tot_esp > 0 else 0.0},
+            'N': {'docentes': esp_val['N'], 'pct': round((esp_val['N'] / tot_esp) * 100, 2) if tot_esp > 0 else 0.0},
+            'SIN': {'docentes': esp_val['SIN'], 'pct': round((esp_val['SIN'] / tot_esp) * 100, 2) if tot_esp > 0 else 0.0},
+            'por_departamento': dept_dict
+        })
+
+    # Jubilación por depto y distrito
     jubilacion_json = {
         'nacional': jub_nacional,
         'por_departamento': [
@@ -506,20 +678,99 @@ def build_pertinencia_oficial():
         ]
     }
 
-    # Persistir ue_jub_data como lookup JSON (para enriquecer pertinencia_por_ue.json)
-    ue_jub_out = {}
-    for ue_key, d in ue_jub_data.items():
-        ue_jub_out[str(ue_key)] = {
-            'jubilacion': d['jubilacion'],
-            'prejubilacion': d['prejubilacion'],
-            'estudiantes': d['estudiantes'],
-            'dependencia': max(d['dependencias'], key=list(d['dependencias']).count) if d['dependencias'] else 'SIN DATOS'
-        }
+    # NUEVO: Serializar No Prejubilados x No Pertinentes
+    tot_no_prejub = prejub_pert_nac['no_prejubilados']['total']
+    tot_no_prejub_no_pert = prejub_pert_nac['no_prejubilados']['no_pertinentes']
+    tot_prejub = prejub_pert_nac['prejubilados']['total']
+    tot_prejub_no_pert = prejub_pert_nac['prejubilados']['no_pertinentes']
 
-    ue_jub_json_path = os.path.join(root_dir, 'src', 'data', 'ue_jubilacion_data.json')
-    with open(ue_jub_json_path, 'w', encoding='utf-8') as f:
-        json.dump(ue_jub_out, f, ensure_ascii=False, indent=1)
-    print(f"ue_jubilacion_data.json guardado: {len(ue_jub_out)} UEs con datos de jubilación.")
+    prejubilacion_pertinencia_json = {
+        'nacional': {
+            'total_docentes': total_filas,
+            'prejubilados': {
+                'total': tot_prejub,
+                'pct_del_padron': round((tot_prejub / total_filas) * 100, 2) if total_filas > 0 else 0.0,
+                'V': prejub_pert_nac['prejubilados']['V'],
+                'A': prejub_pert_nac['prejubilados']['A'],
+                'N': prejub_pert_nac['prejubilados']['N'],
+                'SIN': prejub_pert_nac['prejubilados']['SIN'],
+                'no_pertinentes': tot_prejub_no_pert,
+                'pct_no_pertinentes': round((tot_prejub_no_pert / tot_prejub) * 100, 2) if tot_prejub > 0 else 0.0,
+                'pct_alta': round((prejub_pert_nac['prejubilados']['V'] / tot_prejub) * 100, 2) if tot_prejub > 0 else 0.0
+            },
+            'no_prejubilados': {
+                'total': tot_no_prejub,
+                'pct_del_padron': round((tot_no_prejub / total_filas) * 100, 2) if total_filas > 0 else 0.0,
+                'V': prejub_pert_nac['no_prejubilados']['V'],
+                'A': prejub_pert_nac['no_prejubilados']['A'],
+                'N': prejub_pert_nac['no_prejubilados']['N'],
+                'SIN': prejub_pert_nac['no_prejubilados']['SIN'],
+                'no_pertinentes': tot_no_prejub_no_pert,
+                'pct_no_pertinentes': round((tot_no_prejub_no_pert / tot_no_prejub) * 100, 2) if tot_no_prejub > 0 else 0.0,
+                'pct_alta': round((prejub_pert_nac['no_prejubilados']['V'] / tot_no_prejub) * 100, 2) if tot_no_prejub > 0 else 0.0
+            },
+            'no_prejubilados_no_pertinentes': tot_no_prejub_no_pert,
+            'pct_no_prejubilados_no_pertinentes_sobre_total': round((tot_no_prejub_no_pert / total_filas) * 100, 2) if total_filas > 0 else 0.0,
+            'pct_no_prejubilados_no_pertinentes_sobre_no_prejub': round((tot_no_prejub_no_pert / tot_no_prejub) * 100, 2) if tot_no_prejub > 0 else 0.0,
+        },
+        'por_departamento': [
+            {
+                'departamento': d,
+                'total': prejub_pert_depto[d]['total'],
+                'prejubilados': prejub_pert_depto[d]['prejubilados'],
+                'no_prejubilados': prejub_pert_depto[d]['no_prejubilados'],
+                'prejub_no_pert': prejub_pert_depto[d]['prejub_no_pert'],
+                'no_prejub_no_pert': prejub_pert_depto[d]['no_prejub_no_pert'],
+                'pct_no_prejub_no_pert': round((prejub_pert_depto[d]['no_prejub_no_pert'] / prejub_pert_depto[d]['no_prejubilados']) * 100, 2) if prejub_pert_depto[d]['no_prejubilados'] > 0 else 0.0,
+                'no_prejub_v': prejub_pert_depto[d]['no_prejub_v'],
+                'no_prejub_a': prejub_pert_depto[d]['no_prejub_a'],
+                'no_prejub_n': prejub_pert_depto[d]['no_prejub_n'],
+                'no_prejub_sin': prejub_pert_depto[d]['no_prejub_sin'],
+            }
+            for d in all_deptos
+        ]
+    }
+
+    # NUEVO: Serializar Métricas por Género
+    tot_fem = genero_nac['femenino']['total']
+    tot_masc = genero_nac['masculino']['total']
+    genero_json = {
+        'nacional': {
+            'total_docentes': total_filas,
+            'femenino': {
+                'total': tot_fem,
+                'pct_del_padron': round((tot_fem / total_filas) * 100, 2) if total_filas > 0 else 0.0,
+                'V': genero_nac['femenino']['V'],
+                'A': genero_nac['femenino']['A'],
+                'N': genero_nac['femenino']['N'],
+                'SIN': genero_nac['femenino']['SIN'],
+                'pct_alta': round((genero_nac['femenino']['V'] / tot_fem) * 100, 2) if tot_fem > 0 else 0.0,
+                'no_prejub_no_pert': genero_nac['femenino']['no_prejub_no_pert'],
+            },
+            'masculino': {
+                'total': tot_masc,
+                'pct_del_padron': round((tot_masc / total_filas) * 100, 2) if total_filas > 0 else 0.0,
+                'V': genero_nac['masculino']['V'],
+                'A': genero_nac['masculino']['A'],
+                'N': genero_nac['masculino']['N'],
+                'SIN': genero_nac['masculino']['SIN'],
+                'pct_alta': round((genero_nac['masculino']['V'] / tot_masc) * 100, 2) if tot_masc > 0 else 0.0,
+                'no_prejub_no_pert': genero_nac['masculino']['no_prejub_no_pert'],
+            }
+        },
+        'por_departamento': [
+            {
+                'departamento': d,
+                'total_femenino': genero_depto[d]['femenino']['total'],
+                'pct_femenino_alta': round((genero_depto[d]['femenino']['V'] / genero_depto[d]['femenino']['total']) * 100, 2) if genero_depto[d]['femenino']['total'] > 0 else 0.0,
+                'femenino_no_prejub_no_pert': genero_depto[d]['femenino']['no_prejub_no_pert'],
+                'total_masculino': genero_depto[d]['masculino']['total'],
+                'pct_masculino_alta': round((genero_depto[d]['masculino']['V'] / genero_depto[d]['masculino']['total']) * 100, 2) if genero_depto[d]['masculino']['total'] > 0 else 0.0,
+                'masculino_no_prejub_no_pert': genero_depto[d]['masculino']['no_prejub_no_pert'],
+            }
+            for d in all_deptos
+        ]
+    }
 
     final_payload = {
         'resumen': resumen_json,
@@ -528,21 +779,111 @@ def build_pertinencia_oficial():
         'por_departamento': por_depto_list,
         'por_departamento_area': por_depto_area_list,
         'por_nivel': por_nivel_list,
-        'por_especialidad': [],  # Dimensión de especialidad no presente
-        'jubilacion': jubilacion_json
+        'por_especialidad': top_esp_list,
+        'jubilacion': jubilacion_json,
+        'prejubilacion_pertinencia': prejubilacion_pertinencia_json,
+        'genero': genero_json
     }
 
+    os.makedirs(os.path.dirname(out_json_path), exist_ok=True)
     with open(out_json_path, 'w', encoding='utf-8') as f:
         json.dump(final_payload, f, ensure_ascii=False, indent=2)
+    print(f"pertinencia_data.json guardado exitosamente.")
+
+    # Construir lista completa de Unidades Educativas / Unidades Académicas (UA)
+    ue_list = []
+    ue_jub_out = {}
+
+    for id_ue, counts in ue_map.items():
+        v = counts['V']
+        a = counts['A']
+        n = counts['N']
+        sin = counts['SIN']
+        total = counts['total']
+        pct_alta = round((v / total) * 100, 1) if total > 0 else 0.0
+
+        if v == total:
+            diagnostico = "Alta Óptima (100%)"
+        elif pct_alta >= 75.0:
+            diagnostico = "Alta Pertinencia General"
+        elif pct_alta >= 50.0:
+            diagnostico = "Pertinencia Moderada"
+        elif (n + sin) > v:
+            diagnostico = "Prioritaria (Requiere Nivelación)"
+        else:
+            diagnostico = "Baja Pertinencia / Sin Pertinencia"
+
+        distrito_principal = max(counts['distritos'].items(), key=lambda x: x[1])[0] if counts['distritos'] else 'DESCONOCIDO'
+        subsistema_principal = max(counts['subsistemas'].items(), key=lambda x: x[1])[0] if counts['subsistemas'] else 'Regular'
+        turno_principal = max(counts['turnos'].items(), key=lambda x: x[1])[0] if counts['turnos'] else 'Mañana'
+        dependencia_principal = max(counts['dependencias'].items(), key=lambda x: x[1])[0] if counts['dependencias'] else 'Fiscal'
+
+        cord_x = counts['cord_x']
+        cord_y = counts['cord_y']
+        url_ubicacion = f"https://www.google.com/maps?q={cord_x},{cord_y}" if (cord_x is not None and cord_y is not None) else ""
+
+        ue_item = {
+            'cod_ue': id_ue,
+            'departamento': counts['depto'],
+            'distrito': distrito_principal,
+            'ue': counts['ue'],
+            'subsistema': subsistema_principal,
+            'nivel_autorizado': counts['nivel_autorizado'] or 'Sin Registro',
+            'turno': turno_principal,
+            'dependencia': dependencia_principal,
+            'direccion': counts['direccion'] or 'Sin Dirección Registrada',
+            'cord_x': cord_x,
+            'cord_y': cord_y,
+            'url_ubicacion': url_ubicacion,
+            'estudiantes': counts['estudiantes'],
+            'docentes_alta_v': v,
+            'docentes_media_a': a,
+            'docentes_baja_n': n,
+            'docentes_sin_pertinencia': sin,
+            'total_docentes': total,
+            'pct_alta_pertinencia': pct_alta,
+            'prejubilados': counts['prejubilados'],
+            'no_prejubilados_no_pertinentes': counts['no_prejub_no_pert'],
+            'a_jubilar': counts['a_jubilar'],
+            'jubilacion': counts['a_jubilar'],
+            'genero_femenino': counts['genero_fem'],
+            'genero_masculino': counts['genero_masc'],
+            'diagnostico': diagnostico
+        }
+        ue_list.append(ue_item)
+
+        ue_jub_out[str(id_ue)] = {
+            'jubilacion': counts['a_jubilar'],
+            'prejubilacion': counts['prejubilados'],
+            'estudiantes': counts['estudiantes'],
+            'dependencia': dependencia_principal
+        }
+
+    def sort_key(item):
+        d = item['departamento']
+        d_idx = deptos_orden.index(d) if d in deptos_orden else 99
+        return (d_idx, item['distrito'], item['ue'])
+
+    ue_list.sort(key=sort_key)
+
+    with open(out_ue_json_path, 'w', encoding='utf-8') as f:
+        json.dump(ue_list, f, ensure_ascii=False, indent=1)
+    print(f"pertinencia_por_ue.json guardado con {len(ue_list)} UEs / UAs con coordenadas y campos completos.")
+
+    with open(out_ue_jub_path, 'w', encoding='utf-8') as f:
+        json.dump(ue_jub_out, f, ensure_ascii=False, indent=1)
+    print(f"ue_jubilacion_data.json guardado.")
 
     print("==================================================")
-    print(f"EXITO: {total_filas} registros procesados e integrados desde Pertinencia_oficial.xlsx.")
-    print(f"Total Alta (V): {resumen_rangos['V']['docentes']}")
-    print(f"Total Media (A): {resumen_rangos['A']['docentes']}")
-    print(f"Total Baja (N): {resumen_rangos['N']['docentes']}")
-    print(f"Total Sin Pert (SIN): {resumen_rangos['SIN']['docentes']}")
-    print(f"Suma departamentos: {sum(sum(d['rangos'][k]['docentes'] for k in ['V','A','N','SIN']) for d in por_depto_list)}")
-    print(f"Suma niveles: {sum(sum(n['rangos'][k]['docentes'] for k in ['V','A','N','SIN']) for n in por_nivel_list)}")
+    print(f"PROCESAMIENTO EXITOSO:")
+    print(f"Docentes evaluados: {total_filas}")
+    print(f"Alta (V): {resumen_rangos['V']['docentes']}")
+    print(f"Media (A): {resumen_rangos['A']['docentes']}")
+    print(f"Baja (N): {resumen_rangos['N']['docentes']}")
+    print(f"Sin Pertinencia (SIN): {resumen_rangos['SIN']['docentes']}")
+    print(f"No Prejubilados No Pertinentes: {tot_no_prejub_no_pert}")
+    print(f"Docentes Femenino: {tot_fem} | Masculino: {tot_masc}")
+    print(f"Total UEs consolidadas: {len(ue_list)}")
     print("==================================================")
 
 if __name__ == "__main__":
