@@ -99,7 +99,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 45,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "40630046": {
   "jubilacion": 0,
@@ -273,7 +273,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 20,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81980551": {
   "jubilacion": 2,
@@ -447,7 +447,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 13,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "61880180": {
   "jubilacion": 3,
@@ -720,7 +720,7 @@
   "dependencia": "FISCAL"
  },
  "80730293": {
-  "jubilacion": 6,
+  "jubilacion": 5,
   "prejubilacion": 2,
   "estudiantes": 295,
   "dependencia": "CONVENIO"
@@ -795,7 +795,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 45,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "40730632": {
   "jubilacion": 1,
@@ -909,7 +909,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "60890155": {
   "jubilacion": 0,
@@ -1035,7 +1035,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "50950005": {
   "jubilacion": 0,
@@ -1083,7 +1083,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 8,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "82200045": {
   "jubilacion": 0,
@@ -1167,7 +1167,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "71890026": {
   "jubilacion": 0,
@@ -1584,7 +1584,7 @@
   "dependencia": "FISCAL"
  },
  "72210003": {
-  "jubilacion": 9,
+  "jubilacion": 8,
   "prejubilacion": 7,
   "estudiantes": 725,
   "dependencia": "FISCAL"
@@ -1857,7 +1857,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 19,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "72220001": {
   "jubilacion": 0,
@@ -2313,7 +2313,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 29,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "60870030": {
   "jubilacion": 1,
@@ -2967,7 +2967,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 10,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80980685": {
   "jubilacion": 0,
@@ -3381,7 +3381,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "71900016": {
   "jubilacion": 0,
@@ -3399,7 +3399,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 34,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80620081": {
   "jubilacion": 0,
@@ -3873,10 +3873,10 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 11,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81981019": {
-  "jubilacion": 3,
+  "jubilacion": 2,
   "prejubilacion": 1,
   "estudiantes": 480,
   "dependencia": "FISCAL"
@@ -4215,7 +4215,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 16,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "71710022": {
   "jubilacion": 0,
@@ -4293,7 +4293,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 11,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81980794": {
   "jubilacion": 2,
@@ -4749,7 +4749,7 @@
   "jubilacion": 1,
   "prejubilacion": 1,
   "estudiantes": 30,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "70900088": {
   "jubilacion": 0,
@@ -5031,7 +5031,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 10,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81450091": {
   "jubilacion": 0,
@@ -5049,7 +5049,7 @@
   "jubilacion": 1,
   "prejubilacion": 0,
   "estudiantes": 9,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "82210037": {
   "jubilacion": 0,
@@ -5079,7 +5079,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 33,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "70720047": {
   "jubilacion": 2,
@@ -5379,7 +5379,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 16,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81970151": {
   "jubilacion": 0,
@@ -5457,7 +5457,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81410011": {
   "jubilacion": 7,
@@ -5583,7 +5583,7 @@
   "jubilacion": 4,
   "prejubilacion": 1,
   "estudiantes": 319,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "72220025": {
   "jubilacion": 3,
@@ -5640,7 +5640,7 @@
   "dependencia": "CONVENIO"
  },
  "81980059": {
-  "jubilacion": 4,
+  "jubilacion": 5,
   "prejubilacion": 0,
   "estudiantes": 271,
   "dependencia": "FISCAL"
@@ -5712,7 +5712,7 @@
   "dependencia": "FISCAL"
  },
  "81981296": {
-  "jubilacion": 0,
+  "jubilacion": 1,
   "prejubilacion": 0,
   "estudiantes": 219,
   "dependencia": "FISCAL"
@@ -5760,7 +5760,7 @@
   "dependencia": "FISCAL"
  },
  "80980321": {
-  "jubilacion": 4,
+  "jubilacion": 5,
   "prejubilacion": 1,
   "estudiantes": 0,
   "dependencia": "FISCAL"
@@ -6189,7 +6189,7 @@
   "jubilacion": 1,
   "prejubilacion": 0,
   "estudiantes": 68,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "61710003": {
   "jubilacion": 5,
@@ -6909,7 +6909,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "60890080": {
   "jubilacion": 0,
@@ -7410,7 +7410,7 @@
   "dependencia": "FISCAL"
  },
  "40730185": {
-  "jubilacion": 3,
+  "jubilacion": 4,
   "prejubilacion": 1,
   "estudiantes": 388,
   "dependencia": "FISCAL"
@@ -7863,7 +7863,7 @@
   "jubilacion": 2,
   "prejubilacion": 0,
   "estudiantes": 86,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81730095": {
   "jubilacion": 0,
@@ -7881,7 +7881,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 20,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80540024": {
   "jubilacion": 0,
@@ -8085,7 +8085,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81980113": {
   "jubilacion": 1,
@@ -10029,7 +10029,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81230262": {
   "jubilacion": 1,
@@ -10095,7 +10095,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 40,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "71430004": {
   "jubilacion": 0,
@@ -10143,13 +10143,13 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "31920066": {
   "jubilacion": 2,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81981590": {
   "jubilacion": 1,
@@ -10167,7 +10167,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "70730033": {
   "jubilacion": 0,
@@ -10341,7 +10341,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80640001": {
   "jubilacion": 0,
@@ -10425,7 +10425,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "40730162": {
   "jubilacion": 4,
@@ -10650,7 +10650,7 @@
   "dependencia": "FISCAL"
  },
  "80900031": {
-  "jubilacion": 15,
+  "jubilacion": 16,
   "prejubilacion": 12,
   "estudiantes": 684,
   "dependencia": "FISCAL"
@@ -11091,7 +11091,7 @@
   "jubilacion": 3,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81230284": {
   "jubilacion": 7,
@@ -11367,7 +11367,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "71480111": {
   "jubilacion": 1,
@@ -11673,7 +11673,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 191,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81981333": {
   "jubilacion": 1,
@@ -11781,7 +11781,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "60480059": {
   "jubilacion": 0,
@@ -11805,7 +11805,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "70470051": {
   "jubilacion": 0,
@@ -11841,7 +11841,7 @@
   "jubilacion": 1,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80610003": {
   "jubilacion": 1,
@@ -12165,7 +12165,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "50730049": {
   "jubilacion": 0,
@@ -12675,7 +12675,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 8,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "71980075": {
   "jubilacion": 0,
@@ -12705,7 +12705,7 @@
   "jubilacion": 3,
   "prejubilacion": 2,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "51980081": {
   "jubilacion": 2,
@@ -12729,7 +12729,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 15,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "82200016": {
   "jubilacion": 0,
@@ -12951,7 +12951,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 10,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81480117": {
   "jubilacion": 8,
@@ -13683,7 +13683,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 9,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "82220066": {
   "jubilacion": 0,
@@ -14169,7 +14169,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 4,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81350012": {
   "jubilacion": 0,
@@ -14229,67 +14229,67 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "1215": {
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "1221": {
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "1241": {
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "1211": {
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "1219": {
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "1213": {
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "1216": {
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "1209": {
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "1319": {
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "1207": {
   "jubilacion": 1,
   "prejubilacion": 1,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "40650007": {
   "jubilacion": 0,
@@ -14301,7 +14301,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "71380044": {
   "jubilacion": 0,
@@ -14343,7 +14343,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 8,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "40630010": {
   "jubilacion": 0,
@@ -14610,7 +14610,7 @@
   "dependencia": "FISCAL"
  },
  "81980817": {
-  "jubilacion": 7,
+  "jubilacion": 8,
   "prejubilacion": 1,
   "estudiantes": 583,
   "dependencia": "FISCAL"
@@ -15417,7 +15417,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "40730432": {
   "jubilacion": 3,
@@ -15603,7 +15603,7 @@
   "jubilacion": 2,
   "prejubilacion": 0,
   "estudiantes": 28,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "61460015": {
   "jubilacion": 0,
@@ -15753,7 +15753,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 20,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81870013": {
   "jubilacion": 1,
@@ -15867,7 +15867,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81380126": {
   "jubilacion": 0,
@@ -16173,7 +16173,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 16,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "70400003": {
   "jubilacion": 0,
@@ -16263,7 +16263,7 @@
   "jubilacion": 1,
   "prejubilacion": 0,
   "estudiantes": 142,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "71420048": {
   "jubilacion": 0,
@@ -16896,7 +16896,7 @@
   "dependencia": "FISCAL"
  },
  "81980148": {
-  "jubilacion": 3,
+  "jubilacion": 4,
   "prejubilacion": 2,
   "estudiantes": 179,
   "dependencia": "FISCAL"
@@ -17163,7 +17163,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 10,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81230178": {
   "jubilacion": 11,
@@ -17691,7 +17691,7 @@
   "jubilacion": 3,
   "prejubilacion": 1,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81710121": {
   "jubilacion": 0,
@@ -17829,25 +17829,25 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80420066": {
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80970104": {
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81420089": {
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80540271": {
   "jubilacion": 0,
@@ -17895,13 +17895,13 @@
   "jubilacion": 3,
   "prejubilacion": 1,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81230267": {
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "51980123": {
   "jubilacion": 0,
@@ -18399,7 +18399,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 27,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "71430012": {
   "jubilacion": 0,
@@ -21237,7 +21237,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 16,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80680012": {
   "jubilacion": 0,
@@ -21615,7 +21615,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81710103": {
   "jubilacion": 2,
@@ -21690,7 +21690,7 @@
   "dependencia": "FISCAL"
  },
  "80570038": {
-  "jubilacion": 5,
+  "jubilacion": 4,
   "prejubilacion": 2,
   "estudiantes": 513,
   "dependencia": "FISCAL"
@@ -23817,7 +23817,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 8,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "40710009": {
   "jubilacion": 0,
@@ -24099,7 +24099,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81730247": {
   "jubilacion": 2,
@@ -24108,7 +24108,7 @@
   "dependencia": "CONVENIO"
  },
  "61710036": {
-  "jubilacion": 1,
+  "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 380,
   "dependencia": "FISCAL"
@@ -24225,7 +24225,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 10,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "72180067": {
   "jubilacion": 2,
@@ -24471,7 +24471,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 12,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "71380006": {
   "jubilacion": 0,
@@ -24627,7 +24627,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "70400062": {
   "jubilacion": 0,
@@ -24831,7 +24831,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 6,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "71470022": {
   "jubilacion": 1,
@@ -24927,7 +24927,7 @@
   "jubilacion": 1,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "82220219": {
   "jubilacion": 0,
@@ -25092,7 +25092,7 @@
   "dependencia": "FISCAL"
  },
  "81890001": {
-  "jubilacion": 14,
+  "jubilacion": 15,
   "prejubilacion": 0,
   "estudiantes": 1154,
   "dependencia": "FISCAL"
@@ -25425,7 +25425,7 @@
   "jubilacion": 4,
   "prejubilacion": 3,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "82450008": {
   "jubilacion": 0,
@@ -26334,7 +26334,7 @@
   "dependencia": "FISCAL"
  },
  "80900100": {
-  "jubilacion": 3,
+  "jubilacion": 4,
   "prejubilacion": 2,
   "estudiantes": 301,
   "dependencia": "FISCAL"
@@ -26361,7 +26361,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81890145": {
   "jubilacion": 0,
@@ -27741,7 +27741,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 34,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "62210014": {
   "jubilacion": 0,
@@ -27819,7 +27819,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "82220081": {
   "jubilacion": 0,
@@ -28401,7 +28401,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 13,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80890111": {
   "jubilacion": 1,
@@ -28863,7 +28863,7 @@
   "jubilacion": 1,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81860049": {
   "jubilacion": 0,
@@ -29103,7 +29103,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 35,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81970044": {
   "jubilacion": 3,
@@ -29685,7 +29685,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 36,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81970134": {
   "jubilacion": 3,
@@ -29823,7 +29823,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 13,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "70460021": {
   "jubilacion": 0,
@@ -30063,13 +30063,13 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81390029": {
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "82470065": {
   "jubilacion": 0,
@@ -30105,7 +30105,7 @@
   "jubilacion": 2,
   "prejubilacion": 1,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80870031": {
   "jubilacion": 0,
@@ -30327,7 +30327,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "71860011": {
   "jubilacion": 0,
@@ -30621,37 +30621,37 @@
   "jubilacion": 7,
   "prejubilacion": 3,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "587": {
   "jubilacion": 4,
   "prejubilacion": 2,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "820": {
   "jubilacion": 6,
   "prejubilacion": 5,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "105": {
   "jubilacion": 7,
   "prejubilacion": 1,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "103": {
   "jubilacion": 4,
   "prejubilacion": 3,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "383": {
   "jubilacion": 10,
   "prejubilacion": 6,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81440048": {
   "jubilacion": 0,
@@ -30675,7 +30675,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 10,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81410125": {
   "jubilacion": 0,
@@ -30786,7 +30786,7 @@
   "dependencia": "FISCAL"
  },
  "81980203": {
-  "jubilacion": 7,
+  "jubilacion": 8,
   "prejubilacion": 1,
   "estudiantes": 516,
   "dependencia": "FISCAL"
@@ -31047,7 +31047,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 10,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "71440044": {
   "jubilacion": 0,
@@ -31719,7 +31719,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "71890024": {
   "jubilacion": 0,
@@ -31815,7 +31815,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 22,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80900006": {
   "jubilacion": 13,
@@ -31827,7 +31827,7 @@
   "jubilacion": 6,
   "prejubilacion": 1,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80900005": {
   "jubilacion": 14,
@@ -32064,7 +32064,7 @@
   "dependencia": "FISCAL"
  },
  "71920023": {
-  "jubilacion": 0,
+  "jubilacion": 1,
   "prejubilacion": 0,
   "estudiantes": 4,
   "dependencia": "FISCAL"
@@ -33150,7 +33150,7 @@
   "dependencia": "CONVENIO"
  },
  "81380001": {
-  "jubilacion": 0,
+  "jubilacion": 1,
   "prejubilacion": 0,
   "estudiantes": 101,
   "dependencia": "FISCAL"
@@ -33384,7 +33384,7 @@
   "dependencia": "FISCAL"
  },
  "81980181": {
-  "jubilacion": 7,
+  "jubilacion": 8,
   "prejubilacion": 5,
   "estudiantes": 530,
   "dependencia": "FISCAL"
@@ -34137,7 +34137,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "71880022": {
   "jubilacion": 0,
@@ -34197,7 +34197,7 @@
   "jubilacion": 3,
   "prejubilacion": 0,
   "estudiantes": 37,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "60650020": {
   "jubilacion": 1,
@@ -34254,7 +34254,7 @@
   "dependencia": "FISCAL"
  },
  "81370068": {
-  "jubilacion": 0,
+  "jubilacion": 1,
   "prejubilacion": 0,
   "estudiantes": 138,
   "dependencia": "FISCAL"
@@ -34662,7 +34662,7 @@
   "dependencia": "FISCAL"
  },
  "70890036": {
-  "jubilacion": 0,
+  "jubilacion": 1,
   "prejubilacion": 0,
   "estudiantes": 0,
   "dependencia": "FISCAL"
@@ -35676,7 +35676,7 @@
   "dependencia": "FISCAL"
  },
  "70620003": {
-  "jubilacion": 1,
+  "jubilacion": 2,
   "prejubilacion": 1,
   "estudiantes": 106,
   "dependencia": "FISCAL"
@@ -35715,7 +35715,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 154,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80540158": {
   "jubilacion": 1,
@@ -35790,7 +35790,7 @@
   "dependencia": "FISCAL"
  },
  "81980572": {
-  "jubilacion": 1,
+  "jubilacion": 2,
   "prejubilacion": 0,
   "estudiantes": 680,
   "dependencia": "FISCAL"
@@ -36075,7 +36075,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80980200": {
   "jubilacion": 5,
@@ -36957,7 +36957,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "40610051": {
   "jubilacion": 1,
@@ -37044,7 +37044,7 @@
   "dependencia": "FISCAL"
  },
  "80980076": {
-  "jubilacion": 5,
+  "jubilacion": 4,
   "prejubilacion": 1,
   "estudiantes": 553,
   "dependencia": "FISCAL"
@@ -37062,7 +37062,7 @@
   "dependencia": "FISCAL"
  },
  "80980695": {
-  "jubilacion": 8,
+  "jubilacion": 7,
   "prejubilacion": 2,
   "estudiantes": 716,
   "dependencia": "FISCAL"
@@ -38019,7 +38019,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80720195": {
   "jubilacion": 0,
@@ -38433,7 +38433,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 105,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "70960026": {
   "jubilacion": 0,
@@ -38619,7 +38619,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "40650016": {
   "jubilacion": 0,
@@ -38877,7 +38877,7 @@
   "jubilacion": 8,
   "prejubilacion": 4,
   "estudiantes": 737,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "72180032": {
   "jubilacion": 1,
@@ -38895,7 +38895,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 10,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80650039": {
   "jubilacion": 0,
@@ -39213,7 +39213,7 @@
   "jubilacion": 1,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "61920052": {
   "jubilacion": 3,
@@ -39573,7 +39573,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "61890049": {
   "jubilacion": 2,
@@ -39897,13 +39897,13 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "61950085": {
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81981473": {
   "jubilacion": 0,
@@ -39987,7 +39987,7 @@
   "jubilacion": 1,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "40450031": {
   "jubilacion": 1,
@@ -40242,7 +40242,7 @@
   "dependencia": "FISCAL"
  },
  "31920019": {
-  "jubilacion": 10,
+  "jubilacion": 11,
   "prejubilacion": 6,
   "estudiantes": 497,
   "dependencia": "CONVENIO"
@@ -40713,7 +40713,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80440024": {
   "jubilacion": 0,
@@ -41031,7 +41031,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80400007": {
   "jubilacion": 0,
@@ -41085,7 +41085,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 11,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80730546": {
   "jubilacion": 2,
@@ -42009,7 +42009,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "61470025": {
   "jubilacion": 0,
@@ -42165,7 +42165,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 248,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "40730499": {
   "jubilacion": 1,
@@ -42183,7 +42183,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80980011": {
   "jubilacion": 6,
@@ -42231,7 +42231,7 @@
   "jubilacion": 1,
   "prejubilacion": 1,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81981301": {
   "jubilacion": 3,
@@ -42327,7 +42327,7 @@
   "jubilacion": 3,
   "prejubilacion": 0,
   "estudiantes": 400,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "71840013": {
   "jubilacion": 0,
@@ -43173,7 +43173,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 90,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81840007": {
   "jubilacion": 1,
@@ -43398,7 +43398,7 @@
   "dependencia": "FISCAL"
  },
  "81230110": {
-  "jubilacion": 13,
+  "jubilacion": 14,
   "prejubilacion": 1,
   "estudiantes": 495,
   "dependencia": "CONVENIO"
@@ -43602,7 +43602,7 @@
   "dependencia": "FISCAL"
  },
  "81970018": {
-  "jubilacion": 4,
+  "jubilacion": 5,
   "prejubilacion": 1,
   "estudiantes": 636,
   "dependencia": "FISCAL"
@@ -43755,7 +43755,7 @@
   "jubilacion": 12,
   "prejubilacion": 1,
   "estudiantes": 599,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80480168": {
   "jubilacion": 1,
@@ -43779,7 +43779,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 107,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81710009": {
   "jubilacion": 3,
@@ -44385,7 +44385,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81230359": {
   "jubilacion": 1,
@@ -44748,7 +44748,7 @@
   "dependencia": "FISCAL"
  },
  "81480106": {
-  "jubilacion": 21,
+  "jubilacion": 22,
   "prejubilacion": 11,
   "estudiantes": 934,
   "dependencia": "FISCAL"
@@ -44973,7 +44973,7 @@
   "jubilacion": 7,
   "prejubilacion": 4,
   "estudiantes": 608,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81970125": {
   "jubilacion": 1,
@@ -45594,7 +45594,7 @@
   "dependencia": "FISCAL"
  },
  "81890121": {
-  "jubilacion": 7,
+  "jubilacion": 8,
   "prejubilacion": 1,
   "estudiantes": 1391,
   "dependencia": "FISCAL"
@@ -45723,7 +45723,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80930052": {
   "jubilacion": 0,
@@ -45798,7 +45798,7 @@
   "dependencia": "FISCAL"
  },
  "81980274": {
-  "jubilacion": 4,
+  "jubilacion": 3,
   "prejubilacion": 0,
   "estudiantes": 0,
   "dependencia": "FISCAL"
@@ -46083,7 +46083,7 @@
   "jubilacion": 5,
   "prejubilacion": 3,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80480031": {
   "jubilacion": 10,
@@ -47241,7 +47241,7 @@
   "jubilacion": 1,
   "prejubilacion": 0,
   "estudiantes": 335,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "70620016": {
   "jubilacion": 1,
@@ -47697,7 +47697,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 13,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "60700043": {
   "jubilacion": 0,
@@ -48165,7 +48165,7 @@
   "jubilacion": 1,
   "prejubilacion": 0,
   "estudiantes": 16,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81890099": {
   "jubilacion": 1,
@@ -48549,7 +48549,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81720048": {
   "jubilacion": 1,
@@ -48645,7 +48645,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 45,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80590053": {
   "jubilacion": 0,
@@ -48831,7 +48831,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 85,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "51910007": {
   "jubilacion": 0,
@@ -49077,7 +49077,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 16,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81880101": {
   "jubilacion": 0,
@@ -49125,7 +49125,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 31,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "72170014": {
   "jubilacion": 2,
@@ -49155,7 +49155,7 @@
   "jubilacion": 6,
   "prejubilacion": 4,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80640066": {
   "jubilacion": 0,
@@ -49521,7 +49521,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80580006": {
   "jubilacion": 0,
@@ -50271,7 +50271,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80960113": {
   "jubilacion": 0,
@@ -50280,7 +50280,7 @@
   "dependencia": "FISCAL"
  },
  "80980160": {
-  "jubilacion": 7,
+  "jubilacion": 5,
   "prejubilacion": 2,
   "estudiantes": 965,
   "dependencia": "FISCAL"
@@ -51951,7 +51951,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 7,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "70460005": {
   "jubilacion": 0,
@@ -52188,7 +52188,7 @@
   "dependencia": "FISCAL"
  },
  "81730233": {
-  "jubilacion": 1,
+  "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
   "dependencia": "FISCAL"
@@ -52890,7 +52890,7 @@
   "dependencia": "FISCAL"
  },
  "40730095": {
-  "jubilacion": 9,
+  "jubilacion": 10,
   "prejubilacion": 3,
   "estudiantes": 784,
   "dependencia": "FISCAL"
@@ -53034,7 +53034,7 @@
   "dependencia": "FISCAL"
  },
  "80980308": {
-  "jubilacion": 21,
+  "jubilacion": 20,
   "prejubilacion": 13,
   "estudiantes": 539,
   "dependencia": "CONVENIO"
@@ -55179,7 +55179,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "60680008": {
   "jubilacion": 0,
@@ -55263,13 +55263,13 @@
   "jubilacion": 1,
   "prejubilacion": 0,
   "estudiantes": 205,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81981792": {
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 28,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "50900058": {
   "jubilacion": 0,
@@ -55311,7 +55311,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81470087": {
   "jubilacion": 0,
@@ -55917,7 +55917,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 267,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "30680021": {
   "jubilacion": 1,
@@ -56109,7 +56109,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 10,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80970009": {
   "jubilacion": 0,
@@ -56169,7 +56169,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "61980037": {
   "jubilacion": 0,
@@ -56271,7 +56271,7 @@
   "jubilacion": 1,
   "prejubilacion": 0,
   "estudiantes": 117,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "61480048": {
   "jubilacion": 4,
@@ -56685,13 +56685,13 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 6,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "10680004": {
   "jubilacion": 2,
   "prejubilacion": 0,
   "estudiantes": 679,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "70680045": {
   "jubilacion": 0,
@@ -58695,7 +58695,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80860007": {
   "jubilacion": 0,
@@ -58953,7 +58953,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81380133": {
   "jubilacion": 0,
@@ -60291,7 +60291,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 109,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81220068": {
   "jubilacion": 2,
@@ -61212,7 +61212,7 @@
   "dependencia": "FISCAL"
  },
  "70970020": {
-  "jubilacion": 1,
+  "jubilacion": 2,
   "prejubilacion": 0,
   "estudiantes": 180,
   "dependencia": "FISCAL"
@@ -61953,7 +61953,7 @@
   "jubilacion": 1,
   "prejubilacion": 1,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80670052": {
   "jubilacion": 1,
@@ -62037,7 +62037,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "50630081": {
   "jubilacion": 0,
@@ -62055,7 +62055,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81980402": {
   "jubilacion": 2,
@@ -62112,7 +62112,7 @@
   "dependencia": "FISCAL"
  },
  "81480150": {
-  "jubilacion": 6,
+  "jubilacion": 7,
   "prejubilacion": 2,
   "estudiantes": 0,
   "dependencia": "FISCAL"
@@ -62397,7 +62397,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81980601": {
   "jubilacion": 6,
@@ -62763,7 +62763,7 @@
   "jubilacion": 1,
   "prejubilacion": 0,
   "estudiantes": 11,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "70960140": {
   "jubilacion": 0,
@@ -63093,7 +63093,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "50610037": {
   "jubilacion": 1,
@@ -63261,7 +63261,7 @@
   "jubilacion": 1,
   "prejubilacion": 1,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81910107": {
   "jubilacion": 0,
@@ -63759,13 +63759,13 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "60970031": {
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "61920051": {
   "jubilacion": 0,
@@ -63978,7 +63978,7 @@
   "dependencia": "FISCAL"
  },
  "81230073": {
-  "jubilacion": 20,
+  "jubilacion": 21,
   "prejubilacion": 5,
   "estudiantes": 708,
   "dependencia": "FISCAL"
@@ -64089,7 +64089,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81980307": {
   "jubilacion": 2,
@@ -64515,7 +64515,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81130013": {
   "jubilacion": 0,
@@ -64575,7 +64575,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80660143": {
   "jubilacion": 0,
@@ -64623,7 +64623,7 @@
   "jubilacion": 16,
   "prejubilacion": 1,
   "estudiantes": 467,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80910011": {
   "jubilacion": 1,
@@ -64809,7 +64809,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "60420054": {
   "jubilacion": 1,
@@ -65067,7 +65067,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "70420057": {
   "jubilacion": 2,
@@ -65241,7 +65241,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 16,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "71440002": {
   "jubilacion": 0,
@@ -65883,7 +65883,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 11,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81960080": {
   "jubilacion": 0,
@@ -66267,7 +66267,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80460011": {
   "jubilacion": 0,
@@ -66399,7 +66399,7 @@
   "jubilacion": 1,
   "prejubilacion": 0,
   "estudiantes": 10,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80670014": {
   "jubilacion": 0,
@@ -66645,7 +66645,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80730270": {
   "jubilacion": 0,
@@ -67071,7 +67071,7 @@
   "jubilacion": 1,
   "prejubilacion": 0,
   "estudiantes": 318,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81440074": {
   "jubilacion": 1,
@@ -67434,7 +67434,7 @@
   "dependencia": "FISCAL"
  },
  "82220019": {
-  "jubilacion": 7,
+  "jubilacion": 8,
   "prejubilacion": 0,
   "estudiantes": 630,
   "dependencia": "FISCAL"
@@ -67683,7 +67683,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 9,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "31920032": {
   "jubilacion": 1,
@@ -68493,7 +68493,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 129,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81410146": {
   "jubilacion": 0,
@@ -68664,7 +68664,7 @@
   "dependencia": "FISCAL"
  },
  "81480118": {
-  "jubilacion": 17,
+  "jubilacion": 19,
   "prejubilacion": 12,
   "estudiantes": 581,
   "dependencia": "FISCAL"
@@ -68703,7 +68703,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 16,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81400046": {
   "jubilacion": 1,
@@ -69159,7 +69159,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "62440026": {
   "jubilacion": 0,
@@ -69249,7 +69249,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "70870051": {
   "jubilacion": 1,
@@ -69303,7 +69303,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "82460022": {
   "jubilacion": 0,
@@ -69423,7 +69423,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81930067": {
   "jubilacion": 0,
@@ -69549,7 +69549,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81980065": {
   "jubilacion": 4,
@@ -69561,7 +69561,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81700043": {
   "jubilacion": 4,
@@ -69801,7 +69801,7 @@
   "jubilacion": 1,
   "prejubilacion": 1,
   "estudiantes": 34,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81230042": {
   "jubilacion": 1,
@@ -70647,7 +70647,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "70470020": {
   "jubilacion": 0,
@@ -70941,7 +70941,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 12,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "70670006": {
   "jubilacion": 0,
@@ -71811,19 +71811,19 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 25,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "61470055": {
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "40730604": {
   "jubilacion": 7,
   "prejubilacion": 4,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "40730596": {
   "jubilacion": 4,
@@ -71841,7 +71841,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "40900002": {
   "jubilacion": 3,
@@ -72405,7 +72405,7 @@
   "jubilacion": 9,
   "prejubilacion": 3,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "82210041": {
   "jubilacion": 0,
@@ -72525,13 +72525,13 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 7,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "40680030": {
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81980649": {
   "jubilacion": 4,
@@ -72993,7 +72993,7 @@
   "jubilacion": 1,
   "prejubilacion": 1,
   "estudiantes": 571,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "40730521": {
   "jubilacion": 0,
@@ -73173,7 +73173,7 @@
   "jubilacion": 2,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "40730589": {
   "jubilacion": 1,
@@ -73359,7 +73359,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 11,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81981467": {
   "jubilacion": 2,
@@ -73617,7 +73617,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81690040": {
   "jubilacion": 0,
@@ -73740,7 +73740,7 @@
   "dependencia": "FISCAL"
  },
  "81370008": {
-  "jubilacion": 1,
+  "jubilacion": 2,
   "prejubilacion": 0,
   "estudiantes": 171,
   "dependencia": "FISCAL"
@@ -74025,7 +74025,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 10,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80890063": {
   "jubilacion": 0,
@@ -74859,7 +74859,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "61460033": {
   "jubilacion": 0,
@@ -74895,7 +74895,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80890085": {
   "jubilacion": 12,
@@ -75183,7 +75183,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 8,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "70470050": {
   "jubilacion": 0,
@@ -75255,7 +75255,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 7,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80730628": {
   "jubilacion": 10,
@@ -75315,7 +75315,7 @@
   "jubilacion": 2,
   "prejubilacion": 0,
   "estudiantes": 98,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80660241": {
   "jubilacion": 0,
@@ -75435,7 +75435,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 21,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "70680019": {
   "jubilacion": 0,
@@ -75531,7 +75531,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 10,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80920024": {
   "jubilacion": 0,
@@ -75846,7 +75846,7 @@
   "dependencia": "FISCAL"
  },
  "80980220": {
-  "jubilacion": 11,
+  "jubilacion": 9,
   "prejubilacion": 4,
   "estudiantes": 687,
   "dependencia": "FISCAL"
@@ -77124,7 +77124,7 @@
   "dependencia": "FISCAL"
  },
  "81981568": {
-  "jubilacion": 5,
+  "jubilacion": 4,
   "prejubilacion": 1,
   "estudiantes": 615,
   "dependencia": "FISCAL"
@@ -78183,7 +78183,7 @@
   "jubilacion": 1,
   "prejubilacion": 0,
   "estudiantes": 5,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "82230076": {
   "jubilacion": 8,
@@ -79365,7 +79365,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "70460024": {
   "jubilacion": 0,
@@ -79791,7 +79791,7 @@
   "jubilacion": 4,
   "prejubilacion": 1,
   "estudiantes": 629,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "71480108": {
   "jubilacion": 1,
@@ -79806,7 +79806,7 @@
   "dependencia": "FISCAL"
  },
  "81980107": {
-  "jubilacion": 2,
+  "jubilacion": 3,
   "prejubilacion": 0,
   "estudiantes": 575,
   "dependencia": "FISCAL"
@@ -80241,7 +80241,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 9,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "71430010": {
   "jubilacion": 0,
@@ -80385,7 +80385,7 @@
   "jubilacion": 2,
   "prejubilacion": 0,
   "estudiantes": 12,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "60700020": {
   "jubilacion": 0,
@@ -80787,7 +80787,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 7,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81730140": {
   "jubilacion": 0,
@@ -81255,7 +81255,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80860006": {
   "jubilacion": 0,
@@ -81552,7 +81552,7 @@
   "dependencia": "FISCAL"
  },
  "81980490": {
-  "jubilacion": 3,
+  "jubilacion": 4,
   "prejubilacion": 1,
   "estudiantes": 516,
   "dependencia": "FISCAL"
@@ -82947,7 +82947,7 @@
   "jubilacion": 2,
   "prejubilacion": 1,
   "estudiantes": 236,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81960072": {
   "jubilacion": 3,
@@ -83085,7 +83085,7 @@
   "jubilacion": 1,
   "prejubilacion": 0,
   "estudiantes": 24,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "71960033": {
   "jubilacion": 0,
@@ -83403,7 +83403,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 10,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81900009": {
   "jubilacion": 1,
@@ -83571,10 +83571,10 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 11,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80980108": {
-  "jubilacion": 7,
+  "jubilacion": 8,
   "prejubilacion": 5,
   "estudiantes": 745,
   "dependencia": "FISCAL"
@@ -83649,13 +83649,13 @@
   "jubilacion": 1,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80670096": {
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 10,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "72440018": {
   "jubilacion": 0,
@@ -83859,7 +83859,7 @@
   "jubilacion": 1,
   "prejubilacion": 0,
   "estudiantes": 4,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80430048": {
   "jubilacion": 0,
@@ -84135,7 +84135,7 @@
   "jubilacion": 1,
   "prejubilacion": 1,
   "estudiantes": 80,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81160023": {
   "jubilacion": 1,
@@ -84336,7 +84336,7 @@
   "dependencia": "FISCAL"
  },
  "80730632": {
-  "jubilacion": 2,
+  "jubilacion": 1,
   "prejubilacion": 1,
   "estudiantes": 0,
   "dependencia": "FISCAL"
@@ -84390,7 +84390,7 @@
   "dependencia": "FISCAL"
  },
  "72480015": {
-  "jubilacion": 1,
+  "jubilacion": 3,
   "prejubilacion": 0,
   "estudiantes": 402,
   "dependencia": "FISCAL"
@@ -84489,7 +84489,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "61890014": {
   "jubilacion": 1,
@@ -85509,7 +85509,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 15,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81690055": {
   "jubilacion": 5,
@@ -85764,7 +85764,7 @@
   "dependencia": "FISCAL"
  },
  "80980500": {
-  "jubilacion": 6,
+  "jubilacion": 7,
   "prejubilacion": 4,
   "estudiantes": 0,
   "dependencia": "CONVENIO"
@@ -86223,7 +86223,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 13,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "62460025": {
   "jubilacion": 0,
@@ -86319,7 +86319,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81960115": {
   "jubilacion": 1,
@@ -86349,7 +86349,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 42,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80650012": {
   "jubilacion": 0,
@@ -86733,7 +86733,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80480242": {
   "jubilacion": 0,
@@ -86889,7 +86889,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "20710003": {
   "jubilacion": 0,
@@ -87057,7 +87057,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 8,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "70890018": {
   "jubilacion": 0,
@@ -87318,7 +87318,7 @@
   "dependencia": "FISCAL"
  },
  "40730195": {
-  "jubilacion": 7,
+  "jubilacion": 8,
   "prejubilacion": 3,
   "estudiantes": 1162,
   "dependencia": "FISCAL"
@@ -87561,7 +87561,7 @@
   "jubilacion": 1,
   "prejubilacion": 0,
   "estudiantes": 20,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "70420088": {
   "jubilacion": 0,
@@ -88155,7 +88155,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "50460023": {
   "jubilacion": 1,
@@ -88167,7 +88167,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80700033": {
   "jubilacion": 1,
@@ -88590,7 +88590,7 @@
   "dependencia": "FISCAL"
  },
  "81970100": {
-  "jubilacion": 5,
+  "jubilacion": 6,
   "prejubilacion": 0,
   "estudiantes": 1157,
   "dependencia": "FISCAL"
@@ -89940,7 +89940,7 @@
   "dependencia": "FISCAL"
  },
  "60480061": {
-  "jubilacion": 0,
+  "jubilacion": 1,
   "prejubilacion": 0,
   "estudiantes": 29,
   "dependencia": "CONVENIO"
@@ -89949,7 +89949,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 30,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80480297": {
   "jubilacion": 2,
@@ -90063,7 +90063,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 26,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80700078": {
   "jubilacion": 1,
@@ -91341,7 +91341,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 38,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "61950057": {
   "jubilacion": 0,
@@ -91473,7 +91473,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81410020": {
   "jubilacion": 2,
@@ -91485,13 +91485,13 @@
   "jubilacion": 1,
   "prejubilacion": 1,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80710059": {
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "71360009": {
   "jubilacion": 0,
@@ -91527,7 +91527,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 16,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "71480072": {
   "jubilacion": 0,
@@ -92121,7 +92121,7 @@
   "jubilacion": 3,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "60890082": {
   "jubilacion": 0,
@@ -92151,7 +92151,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80690051": {
   "jubilacion": 1,
@@ -92313,7 +92313,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80420042": {
   "jubilacion": 0,
@@ -92427,7 +92427,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 10,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81370078": {
   "jubilacion": 0,
@@ -92685,7 +92685,7 @@
   "jubilacion": 2,
   "prejubilacion": 1,
   "estudiantes": 392,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "70870043": {
   "jubilacion": 0,
@@ -92703,7 +92703,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 239,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "72220012": {
   "jubilacion": 1,
@@ -92865,7 +92865,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80980540": {
   "jubilacion": 7,
@@ -93069,7 +93069,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80920037": {
   "jubilacion": 5,
@@ -93225,7 +93225,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 33,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "82160066": {
   "jubilacion": 2,
@@ -93375,7 +93375,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80980117": {
   "jubilacion": 7,
@@ -94575,7 +94575,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 667,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81460002": {
   "jubilacion": 1,
@@ -94815,7 +94815,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 15,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81410129": {
   "jubilacion": 0,
@@ -94929,7 +94929,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80540084": {
   "jubilacion": 0,
@@ -95043,7 +95043,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80700072": {
   "jubilacion": 3,
@@ -95340,7 +95340,7 @@
   "dependencia": "FISCAL"
  },
  "80900066": {
-  "jubilacion": 9,
+  "jubilacion": 10,
   "prejubilacion": 3,
   "estudiantes": 1071,
   "dependencia": "FISCAL"
@@ -95760,7 +95760,7 @@
   "dependencia": "CONVENIO"
  },
  "81890030": {
-  "jubilacion": 1,
+  "jubilacion": 2,
   "prejubilacion": 0,
   "estudiantes": 395,
   "dependencia": "CONVENIO"
@@ -96345,7 +96345,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 21,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "70960096": {
   "jubilacion": 0,
@@ -96561,7 +96561,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "70710076": {
   "jubilacion": 0,
@@ -96576,7 +96576,7 @@
   "dependencia": "FISCAL"
  },
  "81980178": {
-  "jubilacion": 3,
+  "jubilacion": 4,
   "prejubilacion": 0,
   "estudiantes": 209,
   "dependencia": "FISCAL"
@@ -96699,7 +96699,7 @@
   "jubilacion": 1,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "81460043": {
   "jubilacion": 0,
@@ -96735,19 +96735,19 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80830070": {
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80830069": {
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "60650019": {
   "jubilacion": 0,
@@ -96768,7 +96768,7 @@
   "dependencia": "FISCAL"
  },
  "81710077": {
-  "jubilacion": 5,
+  "jubilacion": 6,
   "prejubilacion": 0,
   "estudiantes": 0,
   "dependencia": "FISCAL"
@@ -96933,7 +96933,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "60630024": {
   "jubilacion": 0,
@@ -97395,7 +97395,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 37,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "80570035": {
   "jubilacion": 1,
@@ -97443,7 +97443,7 @@
   "jubilacion": 0,
   "prejubilacion": 0,
   "estudiantes": 15,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  },
  "71440045": {
   "jubilacion": 1,
@@ -97845,6 +97845,6 @@
   "jubilacion": 0,
   "prejubilacion": 1,
   "estudiantes": 0,
-  "dependencia": "SIN DATOS"
+  "dependencia": "FISCAL"
  }
 }

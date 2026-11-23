@@ -138,6 +138,89 @@ interface DesalineacionData {
   pct_fuera_nivel: number;
 }
 
+interface PrejubilacionPertinenciaDepto {
+  departamento: string;
+  total: number;
+  prejubilados: number;
+  no_prejubilados: number;
+  prejub_no_pert: number;
+  no_prejub_no_pert: number;
+  pct_no_prejub_no_pert: number;
+  no_prejub_v: number;
+  no_prejub_a: number;
+  no_prejub_n: number;
+  no_prejub_sin: number;
+}
+
+interface PrejubilacionPertinenciaData {
+  nacional: {
+    total_docentes: number;
+    prejubilados: {
+      total: number;
+      pct_del_padron: number;
+      V: number;
+      A: number;
+      N: number;
+      SIN: number;
+      no_pertinentes: number;
+      pct_no_pertinentes: number;
+      pct_alta: number;
+    };
+    no_prejubilados: {
+      total: number;
+      pct_del_padron: number;
+      V: number;
+      A: number;
+      N: number;
+      SIN: number;
+      no_pertinentes: number;
+      pct_no_pertinentes: number;
+      pct_alta: number;
+    };
+    no_prejubilados_no_pertinentes: number;
+    pct_no_prejubilados_no_pertinentes_sobre_total: number;
+    pct_no_prejubilados_no_pertinentes_sobre_no_prejub: number;
+  };
+  por_departamento: PrejubilacionPertinenciaDepto[];
+}
+
+interface GeneroDepto {
+  departamento: string;
+  total_femenino: number;
+  pct_femenino_alta: number;
+  femenino_no_prejub_no_pert: number;
+  total_masculino: number;
+  pct_masculino_alta: number;
+  masculino_no_prejub_no_pert: number;
+}
+
+interface GeneroData {
+  nacional: {
+    total_docentes: number;
+    femenino: {
+      total: number;
+      pct_del_padron: number;
+      V: number;
+      A: number;
+      N: number;
+      SIN: number;
+      pct_alta: number;
+      no_prejub_no_pert: number;
+    };
+    masculino: {
+      total: number;
+      pct_del_padron: number;
+      V: number;
+      A: number;
+      N: number;
+      SIN: number;
+      pct_alta: number;
+      no_prejub_no_pert: number;
+    };
+  };
+  por_departamento: GeneroDepto[];
+}
+
 interface PertinenciaData {
   resumen: Record<Rango | 'TOTAL', RangoSummary & { docentes: number; ues: number; estudiantes_atendidos?: number }>;
   desalineacion?: DesalineacionData;
@@ -146,6 +229,8 @@ interface PertinenciaData {
   por_departamento_area?: DepartamentoAreaStats[];
   por_nivel: NivelRangos[];
   por_especialidad?: EspecialidadItem[];
+  prejubilacion_pertinencia?: PrejubilacionPertinenciaData;
+  genero?: GeneroData;
 }
 
 // ─── Paleta y Metadatos Institucionales (Sin Emoticones) ──────────────────────
@@ -519,7 +604,7 @@ export default function PertinenciaView() {
 
     return data.por_especialidad
       .map(esp => {
-        const dInfo = esp.por_departamento[deptName] || { V: 0, A: 0, N: 0, SIN: 0, total: 0 };
+        const dInfo = esp?.por_departamento?.[deptName] || { V: 0, A: 0, N: 0, SIN: 0, total: 0 };
         const reqFormacion = (dInfo.A || 0) + (dInfo.N || 0);
         return {
           especialidad: esp.especialidad,
@@ -540,12 +625,12 @@ export default function PertinenciaView() {
   const filteredEspecialidades = useMemo(() => {
     if (!data?.por_especialidad) return [];
     return data.por_especialidad.filter((item) => {
-      const matchesSearch = item.especialidad.toLowerCase().includes(searchEsp.toLowerCase());
+      const matchesSearch = item.especialidad?.toLowerCase().includes(searchEsp.toLowerCase());
       if (!matchesSearch) return false;
       const nivelInfo = getNivelEspecialidad(item.id || 0, item.especialidad);
       if (filterNivel !== 'TODOS' && nivelInfo.nivelCodigo !== filterNivel) return false;
       if (filterDepto !== 'TODOS') {
-        const deptoStats = item.por_departamento[filterDepto];
+        const deptoStats = item?.por_departamento?.[filterDepto];
         return deptoStats && deptoStats.total > 0;
       }
       return true;
@@ -655,11 +740,10 @@ export default function PertinenciaView() {
           <button
             type="button"
             onClick={() => setActiveTab('preguntas')}
-            className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 border ${
-              activeTab === 'preguntas'
+            className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 border ${activeTab === 'preguntas'
                 ? 'bg-emerald-700 text-white border-emerald-700 shadow-xs'
                 : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50 hover:text-slate-900'
-            }`}
+              }`}
           >
             <BarChart3 className="w-4 h-4 text-emerald-500" />
             <span>Tablero Ejecutivo BID</span>
@@ -668,19 +752,17 @@ export default function PertinenciaView() {
           <button
             type="button"
             onClick={() => setActiveTab('rural_urbano')}
-            className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 border ${
-              activeTab === 'rural_urbano'
+            className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 border ${activeTab === 'rural_urbano'
                 ? 'bg-emerald-700 text-white border-emerald-700 shadow-xs'
                 : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50 hover:text-slate-900'
-            }`}
+              }`}
           >
             <TrendingUp className="w-4 h-4 text-emerald-500" />
             <span>Rural vs Urbano por Departamento</span>
-            <span className={`text-[9px] font-black uppercase px-1.5 py-0.5 rounded border ${
-              activeTab === 'rural_urbano'
+            <span className={`text-[9px] font-black uppercase px-1.5 py-0.5 rounded border ${activeTab === 'rural_urbano'
                 ? 'bg-emerald-800 text-emerald-100 border-emerald-600'
                 : 'bg-emerald-50 text-emerald-700 border-emerald-200'
-            }`}>
+              }`}>
               Gráficos
             </span>
           </button>
@@ -688,11 +770,10 @@ export default function PertinenciaView() {
           <button
             type="button"
             onClick={() => setActiveTab('territorial')}
-            className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 border ${
-              activeTab === 'territorial'
+            className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 border ${activeTab === 'territorial'
                 ? 'bg-emerald-700 text-white border-emerald-700 shadow-xs'
                 : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50 hover:text-slate-900'
-            }`}
+              }`}
           >
             <MapPin className="w-4 h-4 text-emerald-500" />
             <span>Distribución por Departamento</span>
@@ -701,11 +782,10 @@ export default function PertinenciaView() {
           <button
             type="button"
             onClick={() => setActiveTab('especialidad')}
-            className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 border ${
-              activeTab === 'especialidad'
+            className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 border ${activeTab === 'especialidad'
                 ? 'bg-emerald-700 text-white border-emerald-700 shadow-xs'
                 : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50 hover:text-slate-900'
-            }`}
+              }`}
           >
             <BookOpen className="w-4 h-4 text-emerald-500" />
             <span>Pertinencia por Especialidad</span>
@@ -730,10 +810,13 @@ export default function PertinenciaView() {
             onClick={handleExportUE}
             disabled={exportingUE}
             className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 active:bg-emerald-200 text-emerald-800 font-bold text-xs shadow-2xs transition-colors disabled:opacity-50 border border-emerald-300 cursor-pointer"
-            title="Descargar consolidado por Unidad Educativa en Excel (.xlsx)"
+            title="Descargar consolidado por Unidad Educativa / UA en Excel (.xlsx) con Nivel Autorizado, Subsistema, Turno, Dirección, Coordenadas y Enlace a Google Maps"
           >
             <FileSpreadsheet className={`w-4 h-4 text-emerald-700 ${exportingUE ? 'animate-pulse' : ''}`} />
-            <span>{exportingUE ? 'Generando...' : 'Exportar Pertinencia por UE'}</span>
+            <span>{exportingUE ? 'Generando...' : 'Exportar Pertinencia por UE / UA'}</span>
+            <span className="text-[9px] bg-emerald-200/60 text-emerald-900 px-1.5 py-0.5 rounded font-black">
+              Geolocalizado
+            </span>
           </button>
         </div>
       </div>
@@ -963,6 +1046,232 @@ export default function PertinenciaView() {
 
               </div>
             </div>
+
+            {/* ═══════════════════════════════════════════════════════════════════
+                SECCIÓN: COMPARACIÓN NO PREJUBILADOS X NO PERTINENTES
+               ═══════════════════════════════════════════════════════════════════ */}
+            {data?.prejubilacion_pertinencia && (
+              <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm overflow-hidden p-6 sm:p-7 space-y-6">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-rose-50 text-rose-700 border border-rose-200">
+                        Población Objetivo Activa
+                      </span>
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-slate-100 text-slate-600 border border-slate-200">
+                        Corte Oficial
+                      </span>
+                    </div>
+                    <h3 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight flex items-center gap-2 mt-1.5">
+                      <Target className="w-5 h-5 text-rose-600" />
+                      Docentes No Prejubilados vs No Pertinentes
+                    </h3>
+                    <p className="text-xs text-slate-500 mt-1 max-w-3xl">
+                      Foco crítico de reconversión institucional: Docentes en servicio activo fuera de edad de jubilación que ejercen en cargos o materias desalineadas con su formación de egreso.
+                    </p>
+                  </div>
+
+                  <div className="text-right bg-rose-50/80 border border-rose-200/80 rounded-2xl p-3 px-4 shrink-0">
+                    <span className="text-[10px] font-extrabold text-rose-600 uppercase tracking-wider block">
+                      No Prejubilados No Pertinentes
+                    </span>
+                    <span className="text-2xl font-black text-rose-700 tracking-tight block">
+                      {fmt(data.prejubilacion_pertinencia.nacional.no_prejubilados_no_pertinentes)}
+                    </span>
+                    <span className="text-[11px] font-bold text-rose-600/80 block">
+                      {data.prejubilacion_pertinencia.nacional.pct_no_prejubilados_no_pertinentes_sobre_no_prejub}% de los docentes activos
+                    </span>
+                  </div>
+                </div>
+
+                {/* 4 Métricas Comparativas Clave */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div className="bg-slate-50/80 rounded-2xl p-4 border border-slate-200/70">
+                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider block">
+                      Docentes Activos (No Prejubilados)
+                    </span>
+                    <span className="text-xl font-black text-slate-900 tracking-tight mt-1 block">
+                      {fmt(data.prejubilacion_pertinencia.nacional.no_prejubilados.total)}
+                    </span>
+                    <span className="text-xs font-semibold text-slate-500 block mt-0.5">
+                      {data.prejubilacion_pertinencia.nacional.no_prejubilados.pct_del_padron}% del universo docente
+                    </span>
+                  </div>
+
+                  <div className="bg-emerald-50/60 rounded-2xl p-4 border border-emerald-200/60">
+                    <span className="text-[10px] font-black text-emerald-600 uppercase tracking-wider block">
+                      Activos Idóneos (V + A)
+                    </span>
+                    <span className="text-xl font-black text-emerald-700 tracking-tight mt-1 block">
+                      {fmt(data.prejubilacion_pertinencia.nacional.no_prejubilados.V + data.prejubilacion_pertinencia.nacional.no_prejubilados.A)}
+                    </span>
+                    <span className="text-xs font-semibold text-emerald-600 block mt-0.5">
+                      {pct(
+                        data.prejubilacion_pertinencia.nacional.no_prejubilados.V + data.prejubilacion_pertinencia.nacional.no_prejubilados.A,
+                        data.prejubilacion_pertinencia.nacional.no_prejubilados.total
+                      )} idoneidad activa
+                    </span>
+                  </div>
+
+                  <div className="bg-amber-50/60 rounded-2xl p-4 border border-amber-200/60">
+                    <span className="text-[10px] font-black text-amber-700 uppercase tracking-wider block">
+                      Prejubilados No Pertinentes
+                    </span>
+                    <span className="text-xl font-black text-amber-800 tracking-tight mt-1 block">
+                      {fmt(data.prejubilacion_pertinencia.nacional.prejubilados.no_pertinentes)}
+                    </span>
+                    <span className="text-xs font-semibold text-amber-700/80 block mt-0.5">
+                      Retiro natural en el corto plazo
+                    </span>
+                  </div>
+
+                  <div className="bg-rose-50/60 rounded-2xl p-4 border border-rose-200/60">
+                    <span className="text-[10px] font-black text-rose-700 uppercase tracking-wider block">
+                      Meta de Recambio / Formación
+                    </span>
+                    <span className="text-xl font-black text-rose-800 tracking-tight mt-1 block">
+                      {fmt(data.prejubilacion_pertinencia.nacional.no_prejubilados_no_pertinentes)}
+                    </span>
+                    <span className="text-xs font-semibold text-rose-700/80 block mt-0.5">
+                      Requieren atención formativa activa
+                    </span>
+                  </div>
+                </div>
+
+                {/* Desglose Departamental: No Prejubilados No Pertinentes */}
+                <div>
+                  <h4 className="text-xs font-black uppercase tracking-wider text-slate-700 mb-3 flex items-center gap-1.5">
+                    <MapPin className="w-4 h-4 text-slate-500" />
+                    Distribución Departamental de Docentes Activos No Pertinentes
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    {data.prejubilacion_pertinencia.por_departamento.map((dep) => {
+                      return (
+                        <div key={dep.departamento} className="p-3.5 rounded-2xl bg-slate-50/70 border border-slate-200/80 flex flex-col justify-between">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="font-extrabold text-xs text-slate-800">{dep.departamento}</span>
+                            <span className="text-[11px] font-black text-rose-700 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded-full">
+                              {dep.pct_no_prejub_no_pert}% no pert.
+                            </span>
+                          </div>
+                          <div className="flex items-baseline justify-between text-xs mb-1.5">
+                            <span className="text-slate-500 font-semibold">Docentes activos N+SIN:</span>
+                            <span className="font-black text-slate-900">{fmt(dep.no_prejub_no_pert)}</span>
+                          </div>
+                          <div className="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden">
+                            <div
+                              className="bg-rose-600 h-full rounded-full"
+                              style={{ width: `${Math.min(100, dep.pct_no_prejub_no_pert * 3.5)}%` }}
+                            />
+                          </div>
+                          <div className="flex items-center justify-between text-[10px] text-slate-400 mt-2 font-medium">
+                            <span>Total activos: {fmt(dep.no_prejubilados)}</span>
+                            <span>Prejubilados N+SIN: {fmt(dep.prejub_no_pert)}</span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* ═══════════════════════════════════════════════════════════════════
+                SECCIÓN: DISTRIBUCIÓN Y ENFOQUE DE GÉNERO
+               ═══════════════════════════════════════════════════════════════════ */}
+            {data?.genero && (
+              <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm overflow-hidden p-6 sm:p-7 space-y-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+                  <div>
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-indigo-50 text-indigo-700 border border-indigo-200">
+                      Enfoque Demográfico
+                    </span>
+                    <h3 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight flex items-center gap-2 mt-1.5">
+                      <Users className="w-5 h-5 text-indigo-600" />
+                      Estructura Docente por Género y Pertinencia
+                    </h3>
+                    <p className="text-xs text-slate-500 mt-1">
+                      Desglose del magisterio boliviano por género, evaluando tasas de idoneidad y necesidades formativas.
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-4 text-xs font-bold text-slate-600 bg-slate-50 border border-slate-200 p-2.5 px-4 rounded-2xl shrink-0">
+                    <div>
+                      <span className="text-[10px] text-slate-400 uppercase block font-extrabold">Mujeres</span>
+                      <span className="text-indigo-700 font-black">{data.genero.nacional.femenino.pct_del_padron}%</span>
+                    </div>
+                    <div className="w-px h-6 bg-slate-200" />
+                    <div>
+                      <span className="text-[10px] text-slate-400 uppercase block font-extrabold">Varones</span>
+                      <span className="text-slate-700 font-black">{data.genero.nacional.masculino.pct_del_padron}%</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Tarjeta Femenina */}
+                  <div className="rounded-2xl p-5 bg-gradient-to-br from-indigo-50/50 via-white to-purple-50/30 border border-indigo-100 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-9 h-9 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-black text-sm shadow-xs">
+                          F
+                        </div>
+                        <div>
+                          <h4 className="font-black text-slate-900 text-sm">Docentes Mujeres</h4>
+                          <span className="text-[11px] font-bold text-indigo-600">61.2% del Magisterio Nacional</span>
+                        </div>
+                      </div>
+                      <span className="text-xl font-black text-slate-900">
+                        {fmt(data.genero.nacional.femenino.total)}
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2 text-xs pt-1">
+                      <div className="p-2.5 rounded-xl bg-white border border-indigo-100/80">
+                        <span className="text-[10px] text-slate-400 font-bold block uppercase">Alta Pertinencia</span>
+                        <span className="text-base font-black text-emerald-700">{data.genero.nacional.femenino.pct_alta}%</span>
+                        <span className="text-[10px] text-slate-500 font-medium block">{fmt(data.genero.nacional.femenino.V)} idóneas</span>
+                      </div>
+                      <div className="p-2.5 rounded-xl bg-white border border-indigo-100/80">
+                        <span className="text-[10px] text-slate-400 font-bold block uppercase">Activas N+SIN</span>
+                        <span className="text-base font-black text-rose-700">{fmt(data.genero.nacional.femenino.no_prejub_no_pert)}</span>
+                        <span className="text-[10px] text-slate-500 font-medium block">a capacitar/reconversión</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Tarjeta Masculina */}
+                  <div className="rounded-2xl p-5 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 border border-slate-200/80 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-9 h-9 rounded-xl bg-slate-700 text-white flex items-center justify-center font-black text-sm shadow-xs">
+                          M
+                        </div>
+                        <div>
+                          <h4 className="font-black text-slate-900 text-sm">Docentes Varones</h4>
+                          <span className="text-[11px] font-bold text-slate-600">38.7% del Magisterio Nacional</span>
+                        </div>
+                      </div>
+                      <span className="text-xl font-black text-slate-900">
+                        {fmt(data.genero.nacional.masculino.total)}
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2 text-xs pt-1">
+                      <div className="p-2.5 rounded-xl bg-white border border-slate-200/80">
+                        <span className="text-[10px] text-slate-400 font-bold block uppercase">Alta Pertinencia</span>
+                        <span className="text-base font-black text-emerald-700">{data.genero.nacional.masculino.pct_alta}%</span>
+                        <span className="text-[10px] text-slate-500 font-medium block">{fmt(data.genero.nacional.masculino.V)} idóneos</span>
+                      </div>
+                      <div className="p-2.5 rounded-xl bg-white border border-slate-200/80">
+                        <span className="text-[10px] text-slate-400 font-bold block uppercase">Activos N+SIN</span>
+                        <span className="text-base font-black text-rose-700">{fmt(data.genero.nacional.masculino.no_prejub_no_pert)}</span>
+                        <span className="text-[10px] text-slate-500 font-medium block">a capacitar/reconversión</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
           </div>
         )
@@ -1306,19 +1615,17 @@ export default function PertinenciaView() {
                     <div
                       key={d.departamento}
                       onClick={() => setSelectedDeptArea(d.departamento)}
-                      className={`p-3.5 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
-                        isSelected
+                      className={`p-3.5 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${isSelected
                           ? 'bg-slate-50 border-slate-400 ring-1 ring-slate-300 shadow-xs'
                           : 'bg-white border-slate-200/80 hover:border-slate-300'
-                      }`}
+                        }`}
                     >
                       <div className="flex items-center justify-between">
                         <span className="text-xs font-black text-slate-900">{d.departamento}</span>
-                        <span className={`text-[10px] font-black px-2 py-0.5 rounded-md ${
-                          favorableRural
+                        <span className={`text-[10px] font-black px-2 py-0.5 rounded-md ${favorableRural
                             ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
                             : 'bg-blue-50 text-blue-800 border border-blue-200'
-                        }`}>
+                          }`}>
                           {brecha > 0 ? `+${brecha}pp Urbano` : `${brecha}pp Rural`}
                         </span>
                       </div>
@@ -1472,11 +1779,10 @@ export default function PertinenciaView() {
                     <div
                       key={dept.departamento}
                       onClick={() => setSelectedDeptDetail(isSelected ? null : dept.departamento)}
-                      className={`p-4 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
-                        isSelected
+                      className={`p-4 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${isSelected
                           ? 'bg-slate-50 border-blue-500 ring-2 ring-blue-500/20 shadow-sm'
                           : 'bg-white border-slate-200/80 hover:border-slate-300 hover:shadow-xs'
-                      }`}
+                        }`}
                     >
                       <div>
                         {/* Cabecera */}
@@ -1683,15 +1989,15 @@ export default function PertinenciaView() {
 
                         {/* Filas de Especialidades dentro del nivel */}
                         {grupo.items.map((esp) => {
-                          let vCount   = esp.V?.docentes ?? esp.rangos?.V?.docentes ?? 0;
-                          let aCount   = esp.A?.docentes ?? esp.rangos?.A?.docentes ?? 0;
-                          let nCount   = esp.N?.docentes ?? esp.rangos?.N?.docentes ?? 0;
+                          let vCount = esp.V?.docentes ?? esp.rangos?.V?.docentes ?? 0;
+                          let aCount = esp.A?.docentes ?? esp.rangos?.A?.docentes ?? 0;
+                          let nCount = esp.N?.docentes ?? esp.rangos?.N?.docentes ?? 0;
                           let sinCount = esp.SIN?.docentes ?? esp.rangos?.SIN?.docentes ?? 0;
                           let totalCount = esp.docentes;
                           let uesCount = esp.ues;
 
                           if (filterDepto !== 'TODOS') {
-                            const depInfo = esp.por_departamento[filterDepto];
+                            const depInfo = esp?.por_departamento?.[filterDepto];
                             if (depInfo) {
                               vCount = depInfo.V;
                               aCount = depInfo.A;
@@ -1794,7 +2100,7 @@ export default function PertinenciaView() {
 
                                       <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-9 gap-2 text-xs">
                                         {departamentosList.map((depName) => {
-                                          const stats = esp.por_departamento[depName] || { V: 0, A: 0, N: 0, SIN: 0, total: 0 };
+                                          const stats = esp?.por_departamento?.[depName] || { V: 0, A: 0, N: 0, SIN: 0, total: 0 };
                                           return (
                                             <div key={depName} className="bg-slate-50 p-2.5 rounded-xl border border-slate-200/80 flex flex-col justify-between">
                                               <span className="font-bold text-slate-800 text-[11px] truncate block">{depName}</span>

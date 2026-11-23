@@ -13,8 +13,9 @@ import HistorialDocenteView from './views/HistorialDocenteView';
 import Exposicion2031View from './views/Exposicion2031View';
 import PertinenciaView from './views/PertinenciaView';
 import { BalancePredictivoView } from './views/BalancePredictivoView';
+import MapaUeView from './views/MapaUeView';
 import Image from 'next/image';
-import { Sparkles, Scale } from 'lucide-react';
+import { Sparkles, Scale, MapPin } from 'lucide-react';
 import { ResumenView } from './views/Resumen';
 import { ExecutiveDashboardView } from './views/ExecutiveDashboardView';
 interface DashboardShellProps {
@@ -99,6 +100,11 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
       title: 'Pertinencia Docente',
       subtitle: 'Docentes que enseñan fuera de su especialidad o nivel de formación — desagregado por rango V / A / N',
       tag: 'PERTINENCIA SIE',
+    },
+    mapa: {
+      title: 'Geolocalización y Cartografía de Unidades Educativas',
+      subtitle: 'Cartografía nacional interactiva OpenStreetMap · 16.204 UEs georreferenciadas con semáforo de pertinencia docente',
+      tag: 'GEO-PORTAL SEP',
     },
     balance: {
       title: 'Balance Predictivo de Admisión ESFM 2031',
@@ -246,6 +252,16 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
               Pertinencia
             </button>
             <button
+              onClick={() => setCurrentTab('mapa')}
+              className={`px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 ${currentTab === 'mapa'
+                ? 'bg-emerald-600 text-white shadow-xs ring-1 ring-emerald-400 font-bold'
+                : 'text-slate-600 hover:text-slate-900'
+                }`}
+            >
+              <MapPin className="w-3.5 h-3.5 text-emerald-300" />
+              Mapa UE
+            </button>
+            <button
               onClick={() => setCurrentTab('balance')}
               className={`px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 ${currentTab === 'balance'
                 ? 'bg-rose-700 text-white shadow-xs ring-1 ring-rose-500 font-bold'
@@ -259,7 +275,13 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
         </header>
 
         {/* Cuerpo de la vista seleccionada a ancho panorámico */}
-        <main className="flex-1 p-3 sm:p-6 lg:p-8 w-full max-w-[1850px] mx-auto">
+        <main
+          className={`flex-1 w-full ${
+            currentTab === 'mapa'
+              ? 'p-0 h-[calc(100vh-61px)] overflow-hidden max-w-none'
+              : 'p-3 sm:p-6 lg:p-8 max-w-[1850px] mx-auto'
+          }`}
+        >
           {currentTab === 'dashboard' && <ExecutiveDashboardView data={initialData} />}
           {currentTab === 'proyecciones' && <ProyeccionesView data={initialData} />}
           {currentTab === 'dgfm' && <DgfmView data={initialData} />}
@@ -273,6 +295,8 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
           {currentTab === ('Resumen' as SourceTab) && <ResumenView />}
 
           {currentTab === 'pertinencia' && <PertinenciaView />}
+
+          {currentTab === 'mapa' && <MapaUeView />}
 
           {currentTab === 'balance' && <BalancePredictivoView />}
 

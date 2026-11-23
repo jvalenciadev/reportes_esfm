@@ -12,7 +12,7 @@ import {
   TrendingUpIcon,
   ScaleIcon,
 } from '../ui/Icons';
-import { Sparkles, Sun, LayoutDashboard, Link2, ArrowRight, Scale } from 'lucide-react';
+import { Sparkles, Sun, LayoutDashboard, Link2, ArrowRight, Scale, MapPin, Compass } from 'lucide-react';
 
 interface SidebarProps {
   currentTab: SourceTab;
@@ -146,6 +146,26 @@ export function Sidebar({
       count: 168758,
       tables: 'Déficit, Egresados, ARIMA, Migr.',
       icon: <Scale className="w-[18px] h-[18px] text-rose-700" />,
+    },
+    {
+      id: 'pertinencia' as SourceTab,
+      label: 'Pertinencia Docente',
+      sublabel: 'Padrón Oficial SEP',
+      badge: '168.7K DOC.',
+      badgeColor: 'bg-emerald-100 text-emerald-950 border-emerald-300 font-black',
+      count: 168758,
+      tables: 'Rangos V, A, N, Prejubilación',
+      icon: <Compass className="w-[18px] h-[18px] text-emerald-700" />,
+    },
+    {
+      id: 'mapa' as SourceTab,
+      label: 'Geolocalización UE',
+      sublabel: 'Mapa Dinámico OpenStreetMap',
+      badge: '16.2K UEs',
+      badgeColor: 'bg-blue-100 text-blue-950 border-blue-300 font-black',
+      count: 16204,
+      tables: 'OSM, Coordenadas, Distritos',
+      icon: <MapPin className="w-[18px] h-[18px] text-blue-700" />,
     },
 
   ];
