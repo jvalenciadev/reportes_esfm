@@ -25,6 +25,7 @@ import {
   Moon,
   ChevronRight,
   Info,
+  HelpCircle,
   Check,
   Clock,
   Hourglass,
@@ -381,6 +382,7 @@ export default function MapaUeView() {
   // Selección múltiple de niveles (puede seleccionar 1 o más de los 10 niveles)
   const [selectedLevels, setSelectedLevels] = useState<string[]>([]);
   const [isFilterPanelOpen, setIsFilterPanelOpen] = useState<boolean>(false);
+  const [isLegendOpen, setIsLegendOpen] = useState<boolean>(false);
 
   // Detalle de UE seleccionada (Drawer)
   const [selectedUe, setSelectedUe] = useState<UeCompact | null>(null);
@@ -1061,6 +1063,21 @@ export default function MapaUeView() {
             <span className="hidden sm:inline">Solo Críticos</span>
           </button>
 
+          {/* Botón Detalle: Resumen de colores, números y racimos */}
+          <button
+            type="button"
+            onClick={() => setIsLegendOpen(!isLegendOpen)}
+            className={`px-2.5 py-1.5 text-xs rounded-xl font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
+              isLegendOpen
+                ? 'bg-indigo-600 text-white shadow-xs ring-2 ring-indigo-400'
+                : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+            }`}
+            title="Ver guía y resumen de colores, números y racimos de UEs"
+          >
+            <HelpCircle className={`w-3.5 h-3.5 ${isLegendOpen ? 'text-white' : 'text-indigo-600'} shrink-0`} />
+            <span>Detalle</span>
+          </button>
+
           {/* Selector de Capas OSM / Claro / Satélite */}
           <div className="inline-flex rounded-lg p-0.5 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-bold text-slate-600 dark:text-slate-300">
             <button
@@ -1357,6 +1374,163 @@ export default function MapaUeView() {
               <span>Docentes Jubilación Oficial:</span>
               <strong className="font-black">{selectionStats.totalJubilacion.toLocaleString('es-BO')}</strong>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Modal Flotante: Guía y Detalle de Colores, Números y Racimos ───────── */}
+      {isLegendOpen && (
+        <div className="absolute top-16 right-3 z-30 w-[460px] max-w-[calc(100vw-1.5rem)] max-h-[calc(100vh-85px)] overflow-y-auto bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-2xl shadow-2xl border border-slate-200/90 dark:border-slate-800 p-4 space-y-3.5 animate-in fade-in slide-in-from-top-2 duration-200">
+          {/* Cabecera */}
+          <div className="flex items-center justify-between pb-2.5 border-b border-slate-100 dark:border-slate-800">
+            <div className="flex items-center gap-2">
+              <div className="p-1.5 bg-indigo-50 dark:bg-indigo-950/70 rounded-lg text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800">
+                <HelpCircle className="w-4 h-4" />
+              </div>
+              <div>
+                <h3 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">
+                  Guía de Colores y Números del Mapa
+                </h3>
+                <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">
+                  Interpretación de racimos (clusters) y pines individuales de UEs
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => setIsLegendOpen(false)}
+              className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors cursor-pointer"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Bloque 1: Racimos Geográficos (Zoom Alejado) */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] font-black uppercase text-indigo-900 dark:text-indigo-300 flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-indigo-600" />
+                1. Racimos de Unidades Educativas (Zoom Alejado)
+              </span>
+              <span className="text-[9px] font-bold bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded text-slate-600 dark:text-slate-400">
+                Cantidad de UEs
+              </span>
+            </div>
+            <p className="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+              El número dentro del círculo representa la <strong>cantidad de colegios agrupados</strong> en esa zona geográfica:
+            </p>
+            <div className="grid grid-cols-1 gap-1.5 text-[11px]">
+              <div className="flex items-center justify-between p-2 rounded-xl bg-emerald-50/70 dark:bg-emerald-950/40 border border-emerald-200/80 dark:border-emerald-800/60">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-6 h-6 rounded-full bg-emerald-500/30 border-2 border-emerald-600 text-emerald-800 dark:text-emerald-300 font-black text-[10px] flex items-center justify-center shrink-0">
+                    4
+                  </span>
+                  <div>
+                    <span className="font-black text-emerald-900 dark:text-emerald-300 block">Verde (2 a 9 UEs)</span>
+                    <span className="text-[10px] text-emerald-700 dark:text-emerald-400">Baja densidad escolar (ej: micro-áreas rurales con 4 colegios).</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between p-2 rounded-xl bg-amber-50/70 dark:bg-amber-950/40 border border-amber-200/80 dark:border-amber-800/60">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-6 h-6 rounded-full bg-amber-500/30 border-2 border-amber-600 text-amber-800 dark:text-amber-300 font-black text-[10px] flex items-center justify-center shrink-0">
+                    27
+                  </span>
+                  <div>
+                    <span className="font-black text-amber-900 dark:text-amber-300 block">Amarillo / Ámbar (10 a 99 UEs)</span>
+                    <span className="text-[10px] text-amber-700 dark:text-amber-400">Densidad municipal (ej: Santa Ana 27, Guayaramerín 81).</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between p-2 rounded-xl bg-rose-50/70 dark:bg-rose-950/40 border border-rose-200/80 dark:border-rose-800/60">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-6 h-6 rounded-full bg-rose-500/30 border-2 border-rose-600 text-rose-800 dark:text-rose-300 font-black text-[10px] flex items-center justify-center shrink-0">
+                    119
+                  </span>
+                  <div>
+                    <span className="font-black text-rose-900 dark:text-rose-300 block">Naranja / Salmón (≥ 100 UEs)</span>
+                    <span className="text-[10px] text-rose-700 dark:text-rose-400">Alta concentración urbana (Trinidad 119, Cobija 115, Riberalta 137, La Paz 1.261).</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bloque 2: Pines Individuales (Zoom Cercano) */}
+          <div className="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] font-black uppercase text-indigo-900 dark:text-indigo-300 flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-rose-600" />
+                2. Pines Individuales de Colegio (Al Acercarse)
+              </span>
+              <span className="text-[9px] font-bold bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded text-slate-600 dark:text-slate-400">
+                Estado Docente
+              </span>
+            </div>
+            <p className="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+              Al hacer clic en un racimo o acercar el mapa (zoom), se desglosa en los <strong>pines de cada colegio</strong>. El color y número indican la condición del plantel:
+            </p>
+            <div className="space-y-1.5 text-[11px]">
+              <div className="flex items-center gap-2.5 p-2 rounded-xl bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800/60">
+                <span className="w-5 h-5 rounded-full bg-purple-600 text-white font-black text-[9px] flex items-center justify-center shadow-xs shrink-0">
+                  5
+                </span>
+                <div>
+                  <span className="font-black text-purple-900 dark:text-purple-300">Púrpura Baliza:</span>
+                  <span className="text-purple-700 dark:text-purple-400 ml-1">
+                    Hipercrítico (≥5 maestros sin pertinencia o ≥10 jubilaciones).
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2.5 p-2 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800/60">
+                <span className="w-5 h-5 rounded-full bg-rose-500 text-white font-black text-[9px] flex items-center justify-center shadow-xs shrink-0">
+                  2
+                </span>
+                <div>
+                  <span className="font-black text-rose-900 dark:text-rose-300">Rojo Carmesí:</span>
+                  <span className="text-rose-700 dark:text-rose-400 ml-1">
+                    Crítico (1 a 4 docentes fuera de especialidad formativa).
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2.5 p-2 rounded-xl bg-orange-50 dark:bg-orange-950/40 border border-orange-200 dark:border-orange-800/60">
+                <span className="w-5 h-5 rounded-full bg-orange-500 text-white font-black text-[9px] flex items-center justify-center shadow-xs shrink-0">
+                  pj
+                </span>
+                <div>
+                  <span className="font-black text-orange-900 dark:text-orange-300">Naranja / Ámbar:</span>
+                  <span className="text-orange-700 dark:text-orange-400 ml-1">
+                    Docentes en edad de prejubilación (2026–2031) o pertinencia media (50-74%).
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2.5 p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60">
+                <span className="w-5 h-5 rounded-full bg-emerald-600 text-amber-300 font-black text-[11px] flex items-center justify-center shadow-xs shrink-0">
+                  ★
+                </span>
+                <div>
+                  <span className="font-black text-emerald-900 dark:text-emerald-300">Verde Esmeralda:</span>
+                  <span className="text-emerald-700 dark:text-emerald-400 ml-1">
+                    100% Plena pertinencia (todos los maestros titulados en su área).
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bloque 3: Desglose Institucional */}
+          <div className="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-1 bg-slate-50 dark:bg-slate-800/50 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700/50">
+            <span className="text-[10px] font-black uppercase text-slate-800 dark:text-slate-200 block">
+              3. Desglose en Ficha Institucional (Clic en Pin)
+            </span>
+            <p className="text-[10px] text-slate-600 dark:text-slate-300 leading-relaxed">
+              Al tocar un pin se abre la ficha con el <strong>Código SIE</strong>, matrícula, total de docentes y desglose por pertinencia (Alta, Media, Baja, Sin Pertinencia) y retiros previstos.
+            </p>
           </div>
         </div>
       )}
