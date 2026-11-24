@@ -1526,13 +1526,25 @@ export default function MapaUeView() {
               </div>
 
               <div className="flex items-center gap-2.5 p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60">
-                <span className="w-5 h-5 rounded-full bg-emerald-600 text-amber-300 font-black text-[11px] flex items-center justify-center shadow-xs shrink-0">
+                <span className="w-5 h-5 rounded-full bg-emerald-500 text-white font-black text-[10px] flex items-center justify-center shadow-xs shrink-0">
+                  ✓
+                </span>
+                <div>
+                  <span className="font-black text-emerald-900 dark:text-emerald-300">Verde con Icono de Bien (✓):</span>
+                  <span className="text-emerald-700 dark:text-emerald-400 ml-1">
+                    Alta Pertinencia (≥75%). La gran mayoría del plantel docente (75% a 99%) enseña con título oficial en su especialidad.
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2.5 p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-700/60 ring-1 ring-amber-300/50">
+                <span className="w-5 h-5 rounded-full bg-emerald-700 text-amber-300 font-black text-[11px] flex items-center justify-center shadow-xs shrink-0 border border-amber-300">
                   ★
                 </span>
                 <div>
-                  <span className="font-black text-emerald-900 dark:text-emerald-300">Verde Esmeralda:</span>
+                  <span className="font-black text-emerald-900 dark:text-emerald-300">Verde con Estrella Dorada (★):</span>
                   <span className="text-emerald-700 dark:text-emerald-400 ml-1">
-                    Alta Pertinencia (≥75%) y Plena (100% con estrella dorada, todos en su especialidad).
+                    Pertinencia Plena (100%). Excelencia docente: la totalidad de los maestros enseña estrictamente en su especialidad formativa.
                   </span>
                 </div>
               </div>
