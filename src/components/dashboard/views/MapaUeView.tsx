@@ -152,8 +152,8 @@ export const FILTER_LEVELS: FilterLevel[] = [
     dotBg: 'bg-blue-600',
     badgeActive: 'bg-blue-600 text-white border-blue-500 shadow-sm shadow-blue-500/30',
     iconName: 'compass',
-    desc: 'Planteles en rango regular de 50% a 74% de pertinencia alta',
-    match: (u) => u.pct >= 50 && u.pct < 75 && u.np === 0,
+    desc: 'Planteles en rango regular de 50% a 74% de pertinencia alta o con docentes de formación afín (Media)',
+    match: (u) => ((u.pct >= 50 && u.pct < 75) || (u.a > 0 && u.nb === 0 && u.sin === 0) || (((u.v + u.a) / (u.tot || 1) >= 0.5) && u.nb === 0 && u.sin === 0)) && u.np === 0,
   },
   {
     id: 'v_baja',
@@ -164,8 +164,8 @@ export const FILTER_LEVELS: FilterLevel[] = [
     dotBg: 'bg-amber-500',
     badgeActive: 'bg-amber-500 text-white border-amber-400 shadow-sm shadow-amber-500/30',
     iconName: 'alert-circle',
-    desc: 'Menor al 50% de docentes en su especialidad (sin no-pertinentes activos declarados)',
-    match: (u) => u.pct < 50 && u.np === 0,
+    desc: 'Menor al 50% de docentes en su especialidad (con docentes en baja/sin pertinencia)',
+    match: (u) => u.pct < 50 && !(u.a > 0 && u.nb === 0 && u.sin === 0) && u.np === 0,
   },
   {
     id: 'critica',
@@ -752,56 +752,60 @@ export default function MapaUeView() {
         animationCss = 'animation: radar-beacon-purple 2.4s infinite;';
         innerContent = `<span style="color: #ffffff; font-size: 9px; font-weight: 900; line-height: 1;">${u.jub}</span>`;
       } else if (u.pj >= 10) {
-        // Alta Prejubilación ≥10 → Naranja oscuro con reloj
+        // Alta Prejubilación ≥10 → Naranja oscuro
         colorHex = '#9a3412';
         size = 20;
         border = '2px solid #fed7aa';
         shadow = '0 0 12px rgba(154, 52, 18, 0.9), 0 3px 6px rgba(0,0,0,0.4)';
         animationCss = 'animation: radar-beacon-red 2s infinite;';
-        innerContent = `<span style="color: #fed7aa; font-size: 10px; font-weight: 900; line-height: 1;">${u.pj}</span>`;
+        innerContent = `<span style="color: #ffffff; font-size: 9px; font-weight: 900; line-height: 1;">pj</span>`;
       } else if (u.pj >= 5) {
         // Media Prejubilación 5-9 → Naranja
         colorHex = '#ea580c';
-        size = 17;
+        size = 19;
         border = '2px solid #ffffff';
         shadow = '0 0 10px rgba(234, 88, 12, 0.7), 0 2px 5px rgba(0,0,0,0.3)';
         animationCss = 'animation: radar-beacon-red 2.4s infinite;';
-        innerContent = `<span style="color: #ffffff; font-size: 9px; font-weight: 900; line-height: 1;">${u.pj}</span>`;
+        innerContent = `<span style="color: #ffffff; font-size: 9px; font-weight: 900; line-height: 1;">pj</span>`;
       } else if (u.pj >= 1) {
-        // Baja Prejubilación 1-4 → Ámbar
-        colorHex = '#d97706';
-        size = 14;
+        // Baja Prejubilación 1-4 → Naranja notorio que dice "pj"
+        colorHex = '#f97316';
+        size = 18;
         border = '2px solid #ffffff';
-        shadow = '0 2px 6px rgba(217, 119, 6, 0.6)';
-        innerContent = `<span style="background: white; width: 3px; height: 3px; border-radius: 50%;"></span>`;
+        shadow = '0 2px 8px rgba(249, 115, 22, 0.8), 0 1px 3px rgba(0,0,0,0.3)';
+        innerContent = `<span style="color: #ffffff; font-size: 9px; font-weight: 900; line-height: 1; letter-spacing: -0.5px;">pj</span>`;
       } else if (u.pct === 100 && u.tot > 0) {
         // Plena 100% → Verde con halo dorado
         colorHex = '#059669';
-        size = 16;
+        size = 17;
         border = '2px solid #fde047';
         shadow = '0 0 10px rgba(5, 150, 105, 0.8)';
-        innerContent = `<span style="color: #fde047; font-size: 9px; line-height: 1;">★</span>`;
-      } else if (u.pct < 50) {
-        // Baja pertinencia → Naranja cálido
-        colorHex = '#f59e0b';
+        innerContent = `<span style="color: #fde047; font-size: 10px; line-height: 1;">★</span>`;
+      } else if (u.pct >= 75) {
+        // Alta pertinencia (≥75%) → Verde esmeralda
+        colorHex = '#10b981';
         size = 16;
         border = '2px solid #ffffff';
-        shadow = '0 2px 8px rgba(245, 158, 11, 0.7)';
-        innerContent = `<span style="background: white; width: 4px; height: 4px; border-radius: 50%;"></span>`;
-      } else if (u.pct < 75) {
-        // Moderada → Azul cobalto
+        shadow = '0 2px 6px rgba(16, 185, 129, 0.6)';
+        innerContent = `<span style="color: #ffffff; font-size: 9px; font-weight: 900; line-height: 1;">✓</span>`;
+      } else if (
+        u.pct >= 50 ||
+        (u.a > 0 && u.nb === 0 && u.sin === 0) ||
+        (((u.v + u.a) / (u.tot || 1)) >= 0.5 && u.nb === 0 && u.sin === 0)
+      ) {
+        // Pertinencia Media / Moderada → Azul cobalto notorio con "A"
         colorHex = '#2563eb';
-        size = 14;
+        size = 18;
         border = '2px solid #ffffff';
-        shadow = '0 2px 6px rgba(37, 99, 235, 0.6)';
-        innerContent = `<span style="background: white; width: 3px; height: 3px; border-radius: 50%;"></span>`;
+        shadow = '0 2px 8px rgba(37, 99, 235, 0.8), 0 1px 3px rgba(0,0,0,0.3)';
+        innerContent = `<span style="color: #ffffff; font-size: 10px; font-weight: 900; line-height: 1;">A</span>`;
       } else {
-        // Alta pertinencia → Verde esmeralda
-        colorHex = '#10b981';
-        size = 13;
+        // Baja pertinencia (<50%) → Naranja cálido
+        colorHex = '#f59e0b';
+        size = 17;
         border = '2px solid #ffffff';
-        shadow = '0 2px 6px rgba(16, 185, 129, 0.5)';
-        innerContent = `<span style="background: white; width: 3px; height: 3px; border-radius: 50%;"></span>`;
+        shadow = '0 2px 8px rgba(245, 158, 11, 0.7)';
+        innerContent = `<span style="background: white; width: 5px; height: 5px; border-radius: 50%;"></span>`;
       }
 
       const anchor = Math.round(size / 2);
@@ -844,9 +848,9 @@ export default function MapaUeView() {
           <div style="margin-top: 6px; padding: 6px 8px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
             <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 3px;">
               <span><strong>Alta Pertinencia:</strong></span>
-              <span style="font-weight: 900; color: ${u.pct >= 75 ? '#059669' : u.pct >= 50 ? '#2563eb' : '#d97706'};">${u.pct}%</span>
+              <span style="font-weight: 900; color: ${u.pct >= 75 ? '#059669' : (u.pct >= 50 || (u.a > 0 && u.nb === 0 && u.sin === 0)) ? '#2563eb' : '#d97706'};">${u.pct}%</span>
             </div>
-            <div style="font-size: 11px; color: #475569;">Plantel: <strong>${u.tot} docentes</strong> (${u.v} en especialidad)</div>
+            <div style="font-size: 11px; color: #475569;">Plantel: <strong>${u.tot} docentes</strong> (${u.v} alta${u.a > 0 ? `, ${u.a} media` : ''}${u.nb + u.sin > 0 ? `, ${u.nb + u.sin} no pert.` : ''})</div>
             ${(u.pj > 0 || (u.jub || 0) > 0) ? `
               <div style="margin-top: 4px; display: flex; gap: 4px; font-size: 10px; font-weight: 800;">
                 ${u.pj > 0 ? `<span style="background: #ffedd5; color: #9a3412; padding: 1px 5px; border-radius: 4px;">Prejub: ${u.pj}</span>` : ''}
@@ -1504,7 +1508,19 @@ export default function MapaUeView() {
                 <div>
                   <span className="font-black text-orange-900 dark:text-orange-300">Naranja / Ámbar:</span>
                   <span className="text-orange-700 dark:text-orange-400 ml-1">
-                    Docentes en edad de prejubilación (2026–2031) o pertinencia media (50-74%).
+                    Docentes en edad de prejubilación (2026–2031) o Baja Pertinencia residual (&lt;50%).
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2.5 p-2 rounded-xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800/60">
+                <span className="w-5 h-5 rounded-full bg-blue-600 text-white font-black text-[9px] flex items-center justify-center shadow-xs shrink-0">
+                  A
+                </span>
+                <div>
+                  <span className="font-black text-blue-900 dark:text-blue-300">Azul Cobalto:</span>
+                  <span className="text-blue-700 dark:text-blue-400 ml-1">
+                    Pertinencia Media / Moderada (50% a 74%, ej. 1 alta + 1 media, o docentes en especialidad afín Media sin impertinencias como SIE 81960106).
                   </span>
                 </div>
               </div>
@@ -1516,7 +1532,7 @@ export default function MapaUeView() {
                 <div>
                   <span className="font-black text-emerald-900 dark:text-emerald-300">Verde Esmeralda:</span>
                   <span className="text-emerald-700 dark:text-emerald-400 ml-1">
-                    100% Plena pertinencia (todos los maestros titulados en su área).
+                    Alta Pertinencia (≥75%) y Plena (100% con estrella dorada, todos en su especialidad).
                   </span>
                 </div>
               </div>
