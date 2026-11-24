@@ -27,7 +27,6 @@ import {
   RefreshCw,
   BookOpen,
   Info,
-  ArrowLeftRight,
   Wrench,
   Calculator,
   Download,
@@ -120,7 +119,6 @@ export function BalancePredictivoView() {
   const [pctAbsorcionBth, setPctAbsorcionBth] = useState<number>(70);         // % de absorción de las 88,063 horas BTH (Default 70%)
   const [tipoAsignacionEgresados, setTipoAsignacionEgresados] = useState<'radicacion' | 'local'>('radicacion'); // 1. Radicación Real (Retorno) vs 2. Egresados Sede Física
   const [aplicarArima, setAplicarArima] = useState<boolean>(true);            // Aplicar ajuste de matrícula ARIMA
-  const [pctMigracion, setPctMigracion] = useState<number>(100);              // % Saldo migratorio (0 a 100%, de 1 en 1)
 
   // Control de interfaz: Panel de variables y Glosario
   const [mostrarVariables, setMostrarVariables] = useState<boolean>(true);
@@ -243,14 +241,14 @@ export function BalancePredictivoView() {
 
         const egresadosAjustados = tipoAsignacionEgresados === 'local' ? egrLocalAjustado : egrRadicacionAjustado;
 
-        // 5. Parámetros exógenos: Demografía ARIMA y Migración
+        // 5. Parámetros exógenos: Demografía ARIMA (INE 2031)
         const tasaArima = aplicarArima ? m.crecimiento_arima_pct : 0.0;
-        const saldoMig = Math.round((m.saldo_migratorio || 0) * (pctMigracion / 100));
+        const saldoMig = 0;
 
         // 6. Necesidad Bruta:
-        // (Déficit SIE ajustado con BTH + Jubilados + Prejubilados 26-31 + Docentes No Pertinentes) × ARIMA + Saldo Migratorio
+        // (Déficit SIE ajustado con BTH + Jubilados + Prejubilados 26-31 + Docentes No Pertinentes) × ARIMA
         const subtotalNecesidad = deficitAjustado + jubEfectiva + prejubEfectiva + noPertinentesAjustados;
-        const demandaCalculada = Math.round(subtotalNecesidad * (1 + tasaArima / 100.0) + saldoMig);
+        const demandaCalculada = Math.round(subtotalNecesidad * (1 + tasaArima / 100.0));
         const brechaCalculada = demandaCalculada - egresadosAjustados;
 
         return {
@@ -285,7 +283,6 @@ export function BalancePredictivoView() {
     factorTit,
     tipoAsignacionEgresados,
     aplicarArima,
-    pctMigracion,
     distribucionExacta
   ]);
 
@@ -417,7 +414,6 @@ export function BalancePredictivoView() {
                 pctAbsorcionBth,
                 tipoAsignacionEgresados,
                 aplicarArima,
-                pctMigracion,
                 totales,
                 especialidades: especialidadesCalculadas
               })}
@@ -582,47 +578,36 @@ export function BalancePredictivoView() {
                 </p>
               </div>
 
-              {/* Card 5: Migración Docente */}
-              <div className="bg-white p-4 rounded-2xl border border-indigo-100 space-y-1.5 shadow-2xs">
-                <span className="font-black text-sky-900 flex items-center gap-2 text-xs">
-                  <span className="w-2.5 h-2.5 rounded-full bg-sky-500" />
-                  5. Migración Docente (Planilla SEP 2024–2026)
-                </span>
-                <p className="text-slate-600 text-[11px] leading-relaxed">
-                  <strong>Entrantes (+):</strong> Docentes transferidos que llegan al departamento. <strong>Salientes (−):</strong> Docentes que se trasladan a otro departamento. <strong>Saldo Neto:</strong> Si salen más maestros de los que entran (<span className="text-rose-700 font-bold">+ rep.</span>), genera necesidad de reposición; si entran más (<span className="text-emerald-700 font-bold">− lle.</span>), cubren vacantes y reducen la necesidad de contratación.
-                </p>
-              </div>
-
-              {/* Card 6: ARIMA Demográfico */}
+              {/* Card 5: ARIMA Demográfico */}
               <div className="bg-white p-4 rounded-2xl border border-indigo-100 space-y-1.5 shadow-2xs">
                 <span className="font-black text-indigo-900 flex items-center gap-2 text-xs">
                   <span className="w-2.5 h-2.5 rounded-full bg-indigo-600" />
-                  6. Proyección Demográfica ARIMA (INE 2024–2031)
+                  5. Proyección Demográfica ARIMA (INE 2024–2031)
                 </span>
                 <p className="text-slate-600 text-[11px] leading-relaxed">
                   Modela la evolución de la población en edad escolar por departamento según los datos del Censo 2024 (-6.8% nacional). En departamentos con crecimiento vegetativo positivo (Santa Cruz +2.8%, Pando +7.1%) incrementa la necesidad de aulas; en departamentos con contracción (La Paz -9.2%, Oruro -12.4%) previene la sobreoferta de plazas.
                 </p>
               </div>
 
-              {/* Card 7: Demanda Bruta */}
+              {/* Card 6: Demanda Bruta */}
               <div className="bg-white p-4 rounded-2xl border border-indigo-100 space-y-1.5 shadow-2xs">
                 <span className="font-black text-indigo-950 flex items-center gap-2 text-xs">
                   <span className="w-2.5 h-2.5 rounded-full bg-indigo-950" />
-                  7. Demanda Bruta (Total Necesidad)
+                  6. Demanda Bruta (Total Necesidad)
                 </span>
                 <p className="text-slate-600 text-[11px] leading-relaxed">
                   Cálculo consolidado de necesidad de plazas docentes al 2031:<br />
                   <code className="text-[10px] font-mono text-indigo-900 bg-indigo-50 px-1 py-0.5 rounded">
-                    Demanda = round[(Déficit + Jubilados + Prejubilados + No Pertinentes) × (1 + ARIMA)] + Saldo Migratorio
+                    Demanda = round[(Déficit + Jubilados + Prejubilados + No Pertinentes) × (1 + ARIMA)]
                   </code>
                 </p>
               </div>
 
-              {/* Card 8: Oferta Egresados */}
+              {/* Card 7: Oferta Egresados */}
               <div className="bg-white p-4 rounded-2xl border border-indigo-100 space-y-1.5 shadow-2xs">
                 <span className="font-black text-blue-900 flex items-center gap-2 text-xs">
                   <span className="w-2.5 h-2.5 rounded-full bg-blue-600" />
-                  8. Oferta de Egresados ESFM (2 Modelos Directos)
+                  7. Oferta de Egresados ESFM (2 Modelos Directos)
                 </span>
                 <p className="text-slate-600 text-[11px] leading-relaxed">
                   <strong>1. Radicación Real:</strong> Modelo empírico basado en <strong>35.474 maestros titulados en SEP</strong>. Registra cuántos docentes radican efectivamente trabajando en el departamento (retención local + inmigración desde otras ESFMs).<br />
@@ -630,11 +615,11 @@ export function BalancePredictivoView() {
                 </p>
               </div>
 
-              {/* Card 9: Brecha Neta */}
+              {/* Card 8: Brecha Neta */}
               <div className="bg-white p-4 rounded-2xl border border-indigo-100 space-y-1.5 shadow-2xs">
                 <span className="font-black text-emerald-900 flex items-center gap-2 text-xs">
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-600" />
-                  9. Brecha Neta y Criterio de Admisión ESFM
+                  8. Brecha Neta y Criterio de Admisión ESFM
                 </span>
                 <p className="text-slate-600 text-[11px] leading-relaxed">
                   <strong>Demanda Bruta − Oferta de Egresados.</strong><br />
@@ -773,31 +758,31 @@ export function BalancePredictivoView() {
                   <div className="flex items-center justify-between text-indigo-700 dark:text-indigo-300 font-bold text-[11px] mb-2">
                     <span className="text-amber-600 dark:text-amber-400 font-black">PASO 3</span>
                     <span className="text-[9px] bg-indigo-100 dark:bg-indigo-950 text-indigo-800 dark:text-indigo-300 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-700/50 uppercase font-black">
-                      Saldo Migratorio
+                      Demanda Bruta
                     </span>
                   </div>
-                  <p className="text-[11px] text-slate-600 dark:text-slate-300 mb-2">Movilidad docente real de Inicial (2024–2025):</p>
+                  <p className="text-[11px] text-slate-600 dark:text-slate-300 mb-2">Consolidación de plazas requeridas al 2031:</p>
                   <ul className="space-y-1.5 text-[11px] text-slate-700 dark:text-slate-200 font-mono">
                     <li className="flex justify-between items-center bg-slate-50 dark:bg-slate-900/60 px-2 py-1 rounded border border-slate-100 dark:border-slate-800/60">
-                      <span className="text-slate-500 dark:text-slate-400">Docentes Entrantes:</span>
-                      <span className="font-black text-emerald-700 dark:text-emerald-400">+609</span>
+                      <span className="text-slate-500 dark:text-slate-400">Subtotal Necesidad:</span>
+                      <span className="font-black text-slate-900 dark:text-white">724</span>
                     </li>
                     <li className="flex justify-between items-center bg-slate-50 dark:bg-slate-900/60 px-2 py-1 rounded border border-slate-100 dark:border-slate-800/60">
-                      <span className="text-slate-500 dark:text-slate-400">Docentes Salientes:</span>
-                      <span className="font-black text-rose-700 dark:text-rose-400">-180</span>
+                      <span className="text-slate-500 dark:text-slate-400">Factor ARIMA:</span>
+                      <span className="font-black text-rose-700 dark:text-rose-400">× 0.932</span>
                     </li>
                     <li className="flex justify-between items-center bg-slate-50 dark:bg-slate-900/60 px-2 py-1 rounded border border-slate-100 dark:border-slate-800/60">
-                      <span className="text-slate-500 dark:text-slate-400">Saldo (Sal. − Ent.):</span>
-                      <span className="font-black text-sky-700 dark:text-sky-300">-429 lle.</span>
+                      <span className="text-slate-500 dark:text-slate-400">Cálculo exacto:</span>
+                      <span className="font-black text-emerald-700 dark:text-emerald-400">674.77</span>
                     </li>
                   </ul>
                   <p className="text-[10px] text-slate-500 dark:text-slate-400 italic mt-1.5">
-                    Entraron 429 maestros más de Inicial de los que salieron, absorbiendo vacantes y reduciendo la necesidad.
+                    Ajuste matemático por contracción vegetativa escolar hacia 2031.
                   </p>
                 </div>
                 <div className="pt-2 border-t border-slate-200 dark:border-slate-700 flex justify-between items-center font-bold">
                   <span className="text-indigo-900 dark:text-indigo-200 text-[11px]">Demanda Bruta (round):</span>
-                  <span className="text-xl text-amber-700 dark:text-amber-300 font-mono font-black">246</span>
+                  <span className="text-xl text-amber-700 dark:text-amber-300 font-mono font-black">675</span>
                 </div>
               </div>
 
@@ -814,15 +799,15 @@ export function BalancePredictivoView() {
                   <div className="space-y-1.5 text-[11px] font-mono">
                     <div className="flex justify-between items-center bg-white dark:bg-slate-900/60 px-2 py-1 rounded border border-indigo-100 dark:border-transparent">
                       <span className="text-indigo-900 dark:text-indigo-300">Demanda Bruta:</span>
-                      <span className="font-black text-slate-900 dark:text-white">246</span>
+                      <span className="font-black text-slate-900 dark:text-white">675</span>
                     </div>
                     <div className="flex justify-between items-center bg-white dark:bg-slate-900/60 px-2 py-1 rounded border border-indigo-100 dark:border-transparent">
                       <span className="text-indigo-900 dark:text-indigo-300">Egresados Titulados:</span>
                       <span className="font-black text-blue-700 dark:text-blue-300">2.426</span>
                     </div>
                     <div className="pt-1.5 border-t border-indigo-200 dark:border-indigo-700/60 flex justify-between items-center text-emerald-800 dark:text-emerald-300 font-bold">
-                      <span>Brecha Neta (246 − 2.426):</span>
-                      <span className="text-base font-black">-2.180</span>
+                      <span>Brecha Neta (675 − 2.426):</span>
+                      <span className="text-base font-black">-1.751</span>
                     </div>
                   </div>
                 </div>
@@ -831,7 +816,7 @@ export function BalancePredictivoView() {
                     Oferta Cubierta
                   </span>
                   <span className="text-[10px] text-emerald-800 dark:text-emerald-400 font-medium">
-                    Superávit de 2.180 maestros. No procede apertura de plazas.
+                    Superávit de 1.751 maestros. No procede apertura de plazas.
                   </span>
                 </div>
               </div>
@@ -857,7 +842,7 @@ export function BalancePredictivoView() {
           </div>
 
           {mostrarVariables && (
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3.5 text-xs pt-1">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3.5 text-xs pt-1">
               {/* Variable 1: Absorción Déficit BTH (88,063 hrs) */}
               <div className="space-y-1.5 bg-white p-3 rounded-xl border border-amber-200 shadow-2xs">
                 <div className="flex justify-between items-center">
@@ -1004,53 +989,7 @@ export function BalancePredictivoView() {
                 </div>
               </div>
 
-              {/* Variable 5: Saldo Migratorio Docente (0 a 100%) */}
-              <div className="space-y-1.5 bg-white p-3 rounded-xl border border-sky-200 shadow-2xs">
-                <div className="flex justify-between items-center">
-                  <span className="font-bold text-sky-900 flex items-center gap-1">
-                    <ArrowLeftRight className="w-3.5 h-3.5 text-sky-600" />
-                    Saldo Migratorio:
-                  </span>
-                  <div className="flex items-center gap-0.5">
-                    <input
-                      type="number"
-                      min={0}
-                      max={100}
-                      step={1}
-                      value={pctMigracion}
-                      onChange={(e) => setPctMigracion(Math.min(100, Math.max(0, Number(e.target.value))))}
-                      className="w-12 text-right font-black text-sky-800 font-mono bg-sky-50 px-1 py-0.5 rounded border border-sky-300 focus:outline-none focus:ring-1 focus:ring-sky-500 text-xs"
-                    />
-                    <span className="font-black text-sky-800">%</span>
-                  </div>
-                </div>
-                <input
-                  type="range"
-                  min={0}
-                  max={100}
-                  step={1}
-                  value={pctMigracion}
-                  onChange={(e) => setPctMigracion(Number(e.target.value))}
-                  className="w-full accent-sky-600 cursor-pointer"
-                />
-                <div className="flex items-center justify-between text-[9px]">
-                  <span className="text-slate-400">Aplicar {pctMigracion}%</span>
-                  <div className="flex gap-1">
-                    {[0, 50, 75, 100].map((val) => (
-                      <button
-                        key={val}
-                        onClick={() => setPctMigracion(val)}
-                        className={`px-1.5 py-0.5 rounded font-black ${pctMigracion === val ? 'bg-sky-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                          }`}
-                      >
-                        {val}%
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Variable 6: Titulación ESFM y Asignación de Egresados */}
+              {/* Variable 5: Titulación ESFM y Asignación de Egresados */}
               <div className="space-y-1.5 bg-white p-3 rounded-xl border border-slate-200 shadow-2xs">
                 <div className="flex justify-between items-center">
                   <span className="font-bold text-slate-700">Titulación ESFM:</span>
@@ -1160,44 +1099,16 @@ export function BalancePredictivoView() {
               </select>
 
               {/* Switches y Controles Exógenos */}
-              <div className="flex flex-wrap items-center gap-2.5 bg-white px-3 py-1.5 rounded-xl border border-slate-200 text-[10px]">
-                <label className="flex items-center gap-1.5 cursor-pointer font-bold text-slate-600 hover:text-slate-900">
+              <div className="flex flex-wrap items-center gap-2.5 bg-white dark:bg-slate-800 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 text-[10px]">
+                <label className="flex items-center gap-1.5 cursor-pointer font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">
                   <input
                     type="checkbox"
                     checked={aplicarArima}
                     onChange={(e) => setAplicarArima(e.target.checked)}
                     className="accent-indigo-600 rounded cursor-pointer"
                   />
-                  Ajuste ARIMA
+                  Ajuste Demográfico ARIMA (INE 2031)
                 </label>
-                <div className="h-3.5 w-px bg-slate-200" />
-                <div className="flex items-center gap-1.5">
-                  <span className="font-bold text-sky-800 flex items-center gap-1">
-                    <ArrowLeftRight className="w-3 h-3 text-sky-600" />
-                    Saldo Migratorio:
-                  </span>
-                  <input
-                    type="range"
-                    min={0}
-                    max={100}
-                    step={1}
-                    value={pctMigracion}
-                    onChange={(e) => setPctMigracion(Number(e.target.value))}
-                    className="w-16 h-1 accent-sky-600 cursor-pointer"
-                  />
-                  <div className="flex items-center">
-                    <input
-                      type="number"
-                      min={0}
-                      max={100}
-                      step={1}
-                      value={pctMigracion}
-                      onChange={(e) => setPctMigracion(Math.min(100, Math.max(0, Number(e.target.value))))}
-                      className="w-10 text-right font-black text-sky-800 font-mono bg-sky-50 px-1 py-0.5 rounded border border-sky-300 focus:outline-none focus:ring-1 focus:ring-sky-500 text-[10px]"
-                    />
-                    <span className="font-black text-sky-800 ml-0.5">%</span>
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -1256,10 +1167,6 @@ export function BalancePredictivoView() {
                 <th rowSpan={2} className="py-3 px-2 text-right w-20 border-r border-slate-700 text-amber-300 align-bottom">
                   <span>A Sustituir</span>
                   <span className="block text-[8px] font-medium text-amber-400 normal-case">({tasaReemplazoNoPert}%)</span>
-                </th>
-                <th rowSpan={2} className="py-3 px-2 text-center w-28 border-r border-slate-700 text-sky-300 align-bottom">
-                  <span>Migración Docente</span>
-                  <span className="block text-[8px] font-medium text-sky-400 normal-case">Entr. / Sal. ({pctMigracion}%)</span>
                 </th>
                 <th rowSpan={2} className="py-3 px-1 text-center w-16 border-r border-slate-700 text-indigo-300 align-bottom">
                   <span>ARIMA</span>
@@ -1347,7 +1254,7 @@ export function BalancePredictivoView() {
                   <React.Fragment key={grupo.nivelCodigo}>
                     {/* Encabezado Coloreado por Nivel */}
                     <tr className={`${estilo.franja} border-t-2 border-b-2 font-black uppercase tracking-wider text-[11px]`}>
-                      <td colSpan={12} className="py-2.5 px-4 border-r border-slate-300">
+                      <td colSpan={11} className="py-2.5 px-4 border-r border-slate-300">
                         <div className="flex items-center justify-between">
                           <span className="flex items-center gap-2">
                             <span className="w-2.5 h-2.5 rounded-full bg-current opacity-80" />
@@ -1435,25 +1342,6 @@ export function BalancePredictivoView() {
                             {fmt(m.reemplazo_nopert)}
                           </td>
 
-                          {/* Migración Detallada: Entrantes / Salientes (Saldo) */}
-                          <td className={`py-2 px-2 text-center border-r font-mono text-[11px] tabular-nums ${isSelected ? 'border-amber-400/50 dark:border-amber-600/50' : 'border-slate-200 dark:border-slate-800'}`}>
-                            <div className="flex flex-col items-center justify-center">
-                              <span className="text-[10px] text-slate-600 dark:text-slate-300 font-semibold">
-                                <span className="text-emerald-700 dark:text-emerald-400 font-bold">+{fmt(m.migracion_entrantes)}</span>
-                                <span className="text-slate-300 dark:text-slate-600 mx-0.5">/</span>
-                                <span className="text-rose-700 dark:text-rose-400 font-bold">-{fmt(m.migracion_salientes)}</span>
-                              </span>
-                              <span className={`text-[9px] font-black mt-0.5 ${m.saldo_mig_aplicado > 0
-                                ? 'text-rose-700 dark:text-rose-400'
-                                : m.saldo_mig_aplicado < 0
-                                  ? 'text-emerald-700 dark:text-emerald-400'
-                                  : 'text-slate-400 dark:text-slate-500'
-                                }`}>
-                                {m.saldo_mig_aplicado > 0 ? `+${m.saldo_mig_aplicado} rep.` : (m.saldo_mig_aplicado < 0 ? `${m.saldo_mig_aplicado} lle.` : '0 saldo')}
-                              </span>
-                            </div>
-                          </td>
-
                           {/* ARIMA 2031 */}
                           <td className={`py-2 px-1 text-center border-r font-mono text-[10px] tabular-nums ${isSelected ? 'border-amber-400/50 dark:border-amber-600/50' : 'border-slate-200 dark:border-slate-800'}`}>
                             {!aplicarArima ? (
@@ -1536,18 +1424,6 @@ export function BalancePredictivoView() {
                 </td>
                 <td className="py-3 px-2 text-right border-r border-slate-800 text-amber-300 font-bold tabular-nums">
                   {fmt(totales.totNoPert)}
-                </td>
-                <td className="py-3 px-2 text-center border-r border-slate-800 font-mono text-[10px]">
-                  <div className="flex flex-col items-center">
-                    <span className="text-[10px]">
-                      <span className="text-emerald-400">+{fmt(totales.totEntrantes)}</span>
-                      <span className="text-slate-500 mx-0.5">/</span>
-                      <span className="text-rose-400">-{fmt(totales.totSalientes)}</span>
-                    </span>
-                    <span className="text-[9px] text-slate-400 font-bold">
-                      {totales.totSaldoMig > 0 ? `+${fmt(totales.totSaldoMig)} rep.` : `${fmt(totales.totSaldoMig)}`}
-                    </span>
-                  </div>
                 </td>
                 <td className="py-3 px-1 text-center border-r border-slate-800 text-indigo-300 font-mono text-[10px]">
                   {!aplicarArima ? '0%' : (filtroDepto === 'TODOS' ? '-6.8%' : `${data.crecimiento_arima_por_depto[filtroDepto] || 0}%`)}

@@ -8,13 +8,13 @@ export interface ExportPdfParams {
   pctAbsorcionBth: number;
   tipoAsignacionEgresados: 'radicacion' | 'local';
   aplicarArima: boolean;
-  pctMigracion: number;
+  pctMigracion?: number;
   totales: {
     totDeficit: number;
     totJub: number;
     totPrejub: number;
     totNoPert: number;
-    totSaldoMig: number;
+    totSaldoMig?: number;
     totDemanda: number;
     totEgresados: number;
     totBrecha: number;
@@ -30,7 +30,7 @@ export interface ExportPdfParams {
       jubilacion_calculada: number;
       prejubilacion_calculada: number;
       reemplazo_nopert: number;
-      saldo_mig_aplicado: number;
+      saldo_mig_aplicado?: number;
       demanda_total: number;
       egresados_2027_2031: number;
       brecha_neta: number;
@@ -49,7 +49,6 @@ export function exportBalancePredictivoPdf(params: ExportPdfParams) {
     pctAbsorcionBth,
     tipoAsignacionEgresados,
     aplicarArima,
-    pctMigracion,
     totales,
     especialidades
   } = params;
@@ -81,9 +80,6 @@ export function exportBalancePredictivoPdf(params: ExportPdfParams) {
         <td style="padding: 4px 6px; text-align: right;">${fmt(m.jubilacion_calculada)}</td>
         <td style="padding: 4px 6px; text-align: right;">${fmt(m.prejubilacion_calculada)}</td>
         <td style="padding: 4px 6px; text-align: right;">${fmt(m.reemplazo_nopert)}</td>
-        <td style="padding: 4px 6px; text-align: right; color: ${m.saldo_mig_aplicado >= 0 ? '#047857' : '#b91c1c'};">
-          ${m.saldo_mig_aplicado >= 0 ? '+' : ''}${fmt(m.saldo_mig_aplicado)}
-        </td>
         <td style="padding: 4px 6px; text-align: right; font-weight: bold; background: #eff6ff; color: #1e3a8a;">
           ${fmt(m.demanda_total)}
         </td>
@@ -158,8 +154,7 @@ export function exportBalancePredictivoPdf(params: ExportPdfParams) {
         Prejubilación 26-31: <b>${tasaPrejubilacion}%</b> |
         Reemplazo No Pertinentes: <b>${tasaReemplazoNoPert}%</b> |
         Absorción BTH: <b>${pctAbsorcionBth}%</b> (de 88.063 hrs) |
-        Demografía ARIMA: <b>${aplicarArima ? 'Activada' : 'Desactivada'}</b> |
-        Saldo Migratorio: <b>${pctMigracion}%</b>
+        Demografía ARIMA: <b>${aplicarArima ? 'Activada' : 'Desactivada'}</b>
       </div>
 
       <!-- RIBBON DE KPIS -->
@@ -211,7 +206,6 @@ export function exportBalancePredictivoPdf(params: ExportPdfParams) {
             <th style="width:60px;">Jubilados</th>
             <th style="width:60px;">Prejub.</th>
             <th style="width:65px;">Sust. NoPert</th>
-            <th style="width:65px;">Saldo Mig.</th>
             <th style="width:80px; background:#1e3a8a;">Demanda Total</th>
             <th style="width:80px; background:#065f46;">Oferta Egres.</th>
             <th style="width:90px; background:#0f172a;">Brecha Neta</th>
@@ -228,9 +222,6 @@ export function exportBalancePredictivoPdf(params: ExportPdfParams) {
             <td style="text-align:right;">${fmt(totales.totJub)}</td>
             <td style="text-align:right;">${fmt(totales.totPrejub)}</td>
             <td style="text-align:right;">${fmt(totales.totNoPert)}</td>
-            <td style="text-align:right; color:${totales.totSaldoMig >= 0 ? '#047857' : '#b91c1c'};">
-              ${totales.totSaldoMig >= 0 ? '+' : ''}${fmt(totales.totSaldoMig)}
-            </td>
             <td style="text-align:right; color:#1e3a8a;">${fmt(totales.totDemanda)}</td>
             <td style="text-align:right; color:#065f46;">${fmt(totales.totEgresados)}</td>
             <td style="text-align:right; color:${totales.totBrecha > 0 ? '#b91c1c' : '#047857'};">
@@ -247,7 +238,7 @@ export function exportBalancePredictivoPdf(params: ExportPdfParams) {
           <div class="doc-box">
             <strong>1. Demanda Bruta Quinquenal</strong>
             Cuantifica las necesidades docentes reales proyectadas al 2031 sumando déficit histórico acumulado en unidades educativas, vacancias por retiro legal y regularización de pertinencia académica.
-            <span class="formula">Demanda = (Déficit + BTH + Jub + Prejub + NoPert) × (1 + ARIMA) + SaldoMig</span>
+            <span class="formula">Demanda = (Déficit + BTH + Jub + Prejub + NoPert) × (1 + ARIMA)</span>
           </div>
 
           <div class="doc-box">
