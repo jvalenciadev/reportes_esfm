@@ -14,6 +14,7 @@ import {
   XIcon,
   ChartBarIcon,
   GridIcon,
+  LayersIcon,
 } from '../ui/Icons';
 
 interface DepartamentoDato {
@@ -551,34 +552,34 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
 
           {showMetodologia && (
             <div className="p-5 space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-indigo-50/50 p-4 rounded-xl border border-indigo-200">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-indigo-50/50 dark:bg-indigo-950/50 p-4 rounded-xl border border-indigo-200 dark:border-indigo-800">
                 <div>
-                  <span className="text-[11px] font-bold uppercase text-indigo-900 block">
+                  <span className="text-[11px] font-bold uppercase text-indigo-900 dark:text-indigo-200 block">
                     Fórmula de Horas por Ítem
                   </span>
-                  <div className="font-mono text-xs font-bold text-slate-900 mt-1">
+                  <div className="font-mono text-xs font-bold text-slate-900 dark:text-slate-100 mt-1">
                     Carga Horaria ({reportData.resumen_nacional.carga_horaria.toLocaleString('es-BO')}h) ÷ UEs ({reportData.resumen_nacional.total_ues.toLocaleString('es-BO')})
                   </div>
-                  <div className="text-xs font-bold text-indigo-700 mt-0.5">
+                  <div className="text-xs font-bold text-indigo-700 dark:text-indigo-300 mt-0.5">
                     = {promedioHorasDocente} hrs/UE promedio
                   </div>
                 </div>
 
                 <div>
-                  <span className="text-[11px] font-bold uppercase text-slate-600 block">
+                  <span className="text-[11px] font-bold uppercase text-slate-600 dark:text-slate-300 block">
                     Cálculo del Déficit en Ítems
                   </span>
-                  <div className="font-mono text-xs font-bold text-slate-900 mt-1">
+                  <div className="font-mono text-xs font-bold text-slate-900 dark:text-slate-100 mt-1">
                     Déficit ({reportData.resumen_nacional.deficit_horas.toLocaleString('es-BO')}h) ÷ Base ({baseHorasActual}h)
                   </div>
-                  <div className="text-xs font-bold text-red-700 mt-0.5">
+                  <div className="text-xs font-bold text-red-700 dark:text-red-400 mt-0.5">
                     = {reportData.resumen_nacional.items_deficit_equiv.toLocaleString('es-BO')} Ítems Necesarios
                   </div>
                 </div>
 
                 <div>
                   <div className="flex items-center justify-between mb-1">
-                    <label className="text-[11px] font-bold uppercase text-slate-700 block">
+                    <label className="text-[11px] font-bold uppercase text-slate-700 dark:text-slate-300 block">
                       Ajustar Base Horas por Ítem:
                     </label>
                   </div>
@@ -594,9 +595,9 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
                         setModoBase('manual');
                         setCustomBaseHoras(e.target.value);
                       }}
-                      className="w-24 text-xs font-bold px-2.5 py-1.5 border border-slate-300 rounded-lg bg-white focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                      className="w-24 text-xs font-bold px-2.5 py-1.5 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500"
                     />
-                    <span className="text-xs text-slate-500 font-semibold">hrs</span>
+                    <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold">hrs</span>
                   </div>
 
                   {/* 2 OPCIONES: BASE BD vs PROMEDIO */}
@@ -609,7 +610,7 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
                       }}
                       className={`px-2.5 py-1 text-[11px] rounded-lg border font-bold transition-all flex items-center gap-1 ${modoBase === 'bd'
                         ? 'bg-indigo-600 text-white border-indigo-700 shadow-xs'
-                        : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
+                        : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700'
                         }`}
                       title="Usar valor oficial hora_item configurado en especialidades_oficiales"
                     >
@@ -623,7 +624,7 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
                       }}
                       className={`px-2.5 py-1 text-[11px] rounded-lg border font-bold transition-all flex items-center gap-1 ${modoBase === 'promedio'
                         ? 'bg-indigo-600 text-white border-indigo-700 shadow-xs'
-                        : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
+                        : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700'
                         }`}
                       title="Calcular con promedio Carga ÷ UEs"
                     >
@@ -631,7 +632,7 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
                     </button>
                   </div>
 
-                  <p className="text-[10px] text-slate-500 mt-1.5 font-medium">
+                  <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-1.5 font-medium">
                     {modoBase === 'bd' && `Usando base oficial de la base de datos (${horaItemBd}h)`}
                     {modoBase === 'promedio' && `Usando promedio calculado: ${promedioHorasDocente}h`}
                     {modoBase === 'manual' && `Usando base manual: ${customBaseHoras}h`}
@@ -715,53 +716,57 @@ export function MateriaDeficitMatrix({ onGoToConfig }: MateriaDeficitMatrixProps
       )}
 
       {/* BARRA DE CONTROL DE VISTA (GRÁFICO vs TABLA) */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3 rounded-2xl border border-slate-200 shadow-2xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white dark:bg-slate-900 p-3 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-2xs">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-bold text-slate-700 uppercase tracking-wider ml-2">Visualización:</span>
+          <span className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider ml-2">Visualización:</span>
           <button
             type="button"
             onClick={() => setTabModoVista('ambos')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
               tabModoVista === 'ambos'
                 ? 'bg-indigo-600 text-white shadow-xs'
-                : 'bg-slate-100 text-slate-600 hover:text-slate-900'
+                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
-            📑 Ambos (Gráfico + Tabla)
+            <LayersIcon size={13} />
+            Ambos (Gráfico + Tabla)
           </button>
           <button
             type="button"
             onClick={() => setTabModoVista('grafico')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
               tabModoVista === 'grafico'
                 ? 'bg-indigo-600 text-white shadow-xs'
-                : 'bg-slate-100 text-slate-600 hover:text-slate-900'
+                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
-            📊 Solo Gráfico
+            <ChartBarIcon size={13} />
+            Solo Gráfico
           </button>
           <button
             type="button"
             onClick={() => setTabModoVista('tabla')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
               tabModoVista === 'tabla'
                 ? 'bg-indigo-600 text-white shadow-xs'
-                : 'bg-slate-100 text-slate-600 hover:text-slate-900'
+                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
-            📋 Solo Tabla
+            <GridIcon size={13} />
+            Solo Tabla
           </button>
         </div>
 
-        <div className="flex items-center gap-3 text-xs text-slate-500 font-semibold pr-2">
+        <div className="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400 font-semibold pr-2">
           <span className="inline-flex items-center gap-1.5">
             <span className="w-3 h-3 rounded-sm bg-rose-500 inline-block" /> Horas Déficit
           </span>
           <span className="inline-flex items-center gap-1.5">
             <span className="w-3 h-3 rounded-sm bg-emerald-500 inline-block" /> Horas en Planilla
           </span>
-          <span className="text-indigo-600 font-bold ml-1">
-            🏷️ Ítems Base: {baseHorasActual}h/ítem
+          <span className="inline-flex items-center gap-1.5 text-indigo-600 dark:text-indigo-400 font-bold ml-1">
+            <ScaleIcon size={12} />
+            Ítems Base: {baseHorasActual}h/ítem
           </span>
         </div>
       </div>
