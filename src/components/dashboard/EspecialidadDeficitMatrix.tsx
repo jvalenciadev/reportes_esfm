@@ -867,8 +867,8 @@ export function EspecialidadDeficitMatrix({ onGoToConfig }: EspecialidadDeficitM
                   Cargando escuelas de {selectedDeptForUes.nombre}...
                 </div>
               ) : filteredUes.length === 0 ? (
-                <div className="py-12 text-center text-slate-400 text-xs">
-                  No se encontraron unidades educativas.
+                <div className="py-12 text-center text-slate-500 text-xs">
+                  {searchUe ? `No se encontraron unidades educativas que coincidan con "${searchUe}".` : `No se registraron unidades educativas con déficit en ${selectedDeptForUes.nombre}.`}
                 </div>
               ) : (
                 <div className="divide-y divide-slate-100">

@@ -33,6 +33,29 @@ const DEPARTAMENTOS_LIST = [
 const CONFIG_PATH = path.join(process.cwd(), 'src/data/filtros_materia_config.json');
 const ESPECIALIDADES_PATH = path.join(process.cwd(), 'src/data/especialidades_oficiales.json');
 const AGRUPADO_PATH = path.join(process.cwd(), 'src/data/sie_materia_agrupado.json');
+const SICH_CACHE_PATH = path.join(process.cwd(), 'src/data/sich_especialidades_cache.json');
+const PERTINENCIA_PATH = path.join(process.cwd(), 'src/data/pertinencia_por_ue.json');
+
+let cachedUeMetaMap: Map<number, any> | null = null;
+
+function getUeMetaMap(): Map<number, any> {
+  if (!cachedUeMetaMap) {
+    cachedUeMetaMap = new Map();
+    if (fs.existsSync(PERTINENCIA_PATH)) {
+      try {
+        const raw = JSON.parse(fs.readFileSync(PERTINENCIA_PATH, 'utf-8'));
+        if (Array.isArray(raw)) {
+          raw.forEach((u: any) => {
+            if (u.cod_ue) cachedUeMetaMap!.set(Number(u.cod_ue), u);
+          });
+        }
+      } catch (e) {
+        console.error('Error leyendo pertinencia_por_ue.json:', e);
+      }
+    }
+  }
+  return cachedUeMetaMap;
+}
 
 function getLocalEspecialidades(): any[] {
   if (fs.existsSync(ESPECIALIDADES_PATH)) {
@@ -190,15 +213,18 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({ ues: [], count: 0 });
       }
 
-      // Consultar en sie_deficit_materia de Supabase para este departamento
+      const baseHoras = customBaseHoras && customBaseHoras > 0 ? customBaseHoras : horaItemBd;
+
+      // 1. Intentar consultar en sie_deficit_materia de Supabase para este departamento
       try {
         const targetSubMaterias = ESPECIALIDAD_SUBMATERIAS_MAP[especialidadId] || [];
+        const cleanTerm = (t: string) => encodeURIComponent(t.replace(/"/g, ''));
         const matOrConditions = [
           ...materiasList.flatMap((m) => [
-            `materia.ilike.*${encodeURIComponent(m)}*`,
-            `sub_materia.ilike.*${encodeURIComponent(m)}*`,
+            `materia.ilike."*${cleanTerm(m)}*"`,
+            `sub_materia.ilike."*${cleanTerm(m)}*"`,
           ]),
-          ...targetSubMaterias.map((sm) => `sub_materia.ilike.*${encodeURIComponent(sm)}*`),
+          ...targetSubMaterias.map((sm) => `sub_materia.ilike."*${cleanTerm(sm)}*"`),
         ].join(',');
 
         const fieldsWithSub = 'cod_ue,ue,cod_dep,departamento,cod_dis,distrito,area,subsistema,nivel,grado,paralelo,materia,sub_materia,hora_tra,hora_pla,deficit';
@@ -212,32 +238,127 @@ export async function GET(req: NextRequest) {
         }
         if (resUes.ok) {
           const rawUes = await resUes.json();
-          const baseHoras = customBaseHoras && customBaseHoras > 0 ? customBaseHoras : horaItemBd;
+          if (Array.isArray(rawUes) && rawUes.length > 0) {
+            const ues = rawUes.map((r: any) => ({
+              cod_ue: Number(r.cod_ue),
+              ue: r.ue || 'SIN NOMBRE',
+              distrito: r.distrito || '',
+              area: r.area || 'U',
+              subsistema: r.subsistema || '',
+              nivel: r.nivel || '',
+              grado: r.grado !== null && r.grado !== undefined ? r.grado : '',
+              paralelo: r.paralelo || '',
+              materia: r.materia || '',
+              sub_materia: r.sub_materia || '',
+              hora_tra: Number(r.hora_tra) || 0,
+              hora_pla: Number(r.hora_pla) || 0,
+              deficit: Number(r.deficit) || 0,
+              items_deficit_equiv: Number((Number(r.deficit) / baseHoras).toFixed(2)),
+            }));
 
-          const ues = rawUes.map((r: any) => ({
-            cod_ue: Number(r.cod_ue),
-            ue: r.ue || 'SIN NOMBRE',
-            distrito: r.distrito || '',
-            area: r.area || 'U',
-            subsistema: r.subsistema || '',
-            nivel: r.nivel || '',
-            grado: r.grado !== null && r.grado !== undefined ? r.grado : '',
-            paralelo: r.paralelo || '',
-            materia: r.materia || '',
-            sub_materia: r.sub_materia || '',
-            hora_tra: Number(r.hora_tra) || 0,
-            hora_pla: Number(r.hora_pla) || 0,
-            deficit: Number(r.deficit) || 0,
-            items_deficit_equiv: Number((Number(r.deficit) / baseHoras).toFixed(2)),
-          }));
-
-          return NextResponse.json({ ues, count: ues.length });
+            return NextResponse.json({ ues, count: ues.length });
+          }
         }
       } catch (eUe) {
-        console.error('Error buscando UEs:', eUe);
+        console.error('Error buscando UEs en Supabase:', eUe);
       }
 
-      return NextResponse.json({ ues: [], count: 0 });
+      // 2. Fallback analítico local garantizado: sich_especialidades_cache.json
+      if (fs.existsSync(SICH_CACHE_PATH)) {
+        try {
+          const cacheRaw = JSON.parse(fs.readFileSync(SICH_CACHE_PATH, 'utf-8'));
+          const cachedEsp = cacheRaw[String(especialidadId)];
+          const uesDept = cachedEsp?.unidades_educativas_por_dpto?.[String(depId)];
+          if (Array.isArray(uesDept) && uesDept.length > 0) {
+            const ues = uesDept.map((u: any) => ({
+              cod_ue: Number(u.cod_ue),
+              ue: u.unidad_educativa || 'UNIDAD EDUCATIVA',
+              distrito: u.distrito || '',
+              area: u.area || 'U',
+              subsistema: u.subsistema || 'REGULAR',
+              nivel: u.nivel || 'INICIAL',
+              grado: u.grado ?? '1',
+              paralelo: u.paralelo || 'A',
+              materia: espNombre,
+              sub_materia: u.cargo || '',
+              hora_tra: Number(u.carga_horaria) || 0,
+              hora_pla: Number(u.horas_planilla) || 0,
+              deficit: Number(u.deficit_horas) || 0,
+              items_deficit_equiv: Number(((Number(u.deficit_horas) || 0) / baseHoras).toFixed(2)),
+            }));
+            return NextResponse.json({ ues, count: ues.length });
+          }
+        } catch (eCache) {
+          console.error('Error leyendo caché sich_especialidades_cache:', eCache);
+        }
+      }
+
+      // 3. Fallback de agregación analítica de sie_materia_agrupado.json + pertinencia_por_ue.json
+      const agrupado = getAgrupadoData();
+      const metaMap = getUeMetaMap();
+      const targetSubMaterias = ESPECIALIDAD_SUBMATERIAS_MAP[especialidadId] || [];
+      const localUesMap = new Map<number, any>();
+
+      agrupado.forEach((row: any) => {
+        if (Number(row.d) !== depId) return;
+
+        const rowMateria = String(row.m || '').toUpperCase();
+        const rowSubMateria = String(row.sm || '');
+        const rowSubsistema = normalizeSubsistema(row.s);
+        const rowNivel = String(row.n || '').toUpperCase();
+
+        const isGenericTec = GENERIC_TECNICA_MATERIAS.some((gt) => matchesMateria(rowMateria, gt));
+        const tecMatched = Boolean(
+          isGenericTec && rowSubMateria && targetSubMaterias.some((ts) => matchesMateria(rowSubMateria, ts))
+        );
+        const regMatched = materiasList.some((m) =>
+          matchesMateria(rowMateria, m) || (rowSubMateria && matchesMateria(rowSubMateria, m))
+        );
+
+        if (!regMatched && !tecMatched) return;
+        if (regMatched && !tecMatched) {
+          if (subsistemasList.length > 0 && !subsistemasList.includes(rowSubsistema)) return;
+          if (nivelesList.length > 0 && !nivelesList.includes(rowNivel)) return;
+        }
+
+        const uList = Array.isArray(row.u) ? row.u : [];
+        const count = Math.max(uList.length, 1);
+        const cargaEach = Math.round((Number(row.c) || 0) / count);
+        const planEach = Math.round((Number(row.p) || 0) / count);
+        const defEach = Math.round((Number(row.def) || 0) / count);
+
+        uList.forEach((cod: number) => {
+          const numCod = Number(cod);
+          if (localUesMap.has(numCod)) {
+            const existing = localUesMap.get(numCod);
+            existing.hora_tra += cargaEach;
+            existing.hora_pla += planEach;
+            existing.deficit += defEach;
+            existing.items_deficit_equiv = Number((existing.deficit / baseHoras).toFixed(2));
+          } else {
+            const meta = metaMap.get(numCod);
+            localUesMap.set(numCod, {
+              cod_ue: numCod,
+              ue: meta?.ue || `UNIDAD EDUCATIVA #${numCod}`,
+              distrito: meta?.distrito || '',
+              area: meta?.area || 'U',
+              subsistema: row.s || 'REGULAR',
+              nivel: row.n || '',
+              grado: '1',
+              paralelo: 'A',
+              materia: row.m || espNombre,
+              sub_materia: row.sm || '',
+              hora_tra: cargaEach,
+              hora_pla: planEach,
+              deficit: defEach,
+              items_deficit_equiv: Number((defEach / baseHoras).toFixed(2)),
+            });
+          }
+        });
+      });
+
+      const uesListBuilt = Array.from(localUesMap.values()).sort((a, b) => b.deficit - a.deficit);
+      return NextResponse.json({ ues: uesListBuilt, count: uesListBuilt.length });
     }
 
     // 3. Si no hay filtro configurado, devolver datos vacíos consistentes

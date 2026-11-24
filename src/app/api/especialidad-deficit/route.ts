@@ -98,7 +98,73 @@ export async function GET(req: NextRequest) {
         // Desglose de Unidades Educativas
         if (viewUes && departamentoIdParam) {
           const deptObj = DEPARTAMENTOS_LIST.find((d) => d.id === Number(departamentoIdParam));
-          const ues = cached.unidades_educativas_por_dpto?.[String(departamentoIdParam)] || [];
+          let ues = cached.unidades_educativas_por_dpto?.[String(departamentoIdParam)] || [];
+
+          // Si el caché no tiene UEs desglosadas para este departamento, generar desde sie_materia_agrupado
+          if (ues.length === 0) {
+            try {
+              const agrupadoPath = path.join(process.cwd(), 'src/data/sie_materia_agrupado.json');
+              const pertinenciaPath = path.join(process.cwd(), 'src/data/pertinencia_por_ue.json');
+              if (fs.existsSync(agrupadoPath)) {
+                const agrupadoData: any[] = JSON.parse(fs.readFileSync(agrupadoPath, 'utf-8'));
+                const metaMap = new Map<number, any>();
+                if (fs.existsSync(pertinenciaPath)) {
+                  const rawPert = JSON.parse(fs.readFileSync(pertinenciaPath, 'utf-8'));
+                  if (Array.isArray(rawPert)) {
+                    rawPert.forEach((u: any) => { if (u.cod_ue) metaMap.set(Number(u.cod_ue), u); });
+                  }
+                }
+
+                const espNomUpper = String(cached.especialidad?.nombre || '').toUpperCase();
+                const depRows = agrupadoData.filter((r: any) => {
+                  if (Number(r.d) !== Number(departamentoIdParam)) return false;
+                  const rowM = String(r.m || '').toUpperCase();
+                  const rowN = String(r.n || '').toUpperCase();
+                  if (espNomUpper.includes('INICIAL')) return rowM.includes('INICIAL') || rowN.includes('INICIAL');
+                  if (espNomUpper.includes('PRIMARIA')) return rowM.includes('PRIMARIA') || rowN.includes('PRIMARIA');
+                  return rowM.includes(espNomUpper) || espNomUpper.includes(rowM);
+                });
+
+                const localUesMap = new Map<number, any>();
+                depRows.forEach((row: any) => {
+                  const uList = Array.isArray(row.u) ? row.u : [];
+                  const count = Math.max(uList.length, 1);
+                  const cargaEach = Math.round((Number(row.c) || 0) / count);
+                  const planEach = Math.round((Number(row.p) || 0) / count);
+                  const defEach = Math.round((Number(row.def) || 0) / count);
+
+                  uList.forEach((cod: number) => {
+                    const numCod = Number(cod);
+                    if (localUesMap.has(numCod)) {
+                      const item = localUesMap.get(numCod);
+                      item.carga_horaria += cargaEach;
+                      item.horas_planilla += planEach;
+                      item.deficit_horas += defEach;
+                    } else {
+                      const meta = metaMap.get(numCod);
+                      localUesMap.set(numCod, {
+                        id: numCod,
+                        cod_ue: numCod,
+                        unidad_educativa: meta?.ue || `UNIDAD EDUCATIVA #${numCod}`,
+                        dependencia: meta?.dependencia || 'FISCAL',
+                        subsistema: row.s || 'EDUCACIÓN REGULAR',
+                        nivel: row.n || 'INICIAL',
+                        cargo: row.m || 'DOCENTE',
+                        carga_horaria: cargaEach,
+                        horas_planilla: planEach,
+                        deficit_horas: defEach,
+                      });
+                    }
+                  });
+                });
+
+                ues = Array.from(localUesMap.values()).sort((a, b) => b.deficit_horas - a.deficit_horas);
+              }
+            } catch (eFallback) {
+              console.error('Error generando fallback UEs en especialidad-deficit:', eFallback);
+            }
+          }
+
           return NextResponse.json({
             especialidad: cached.especialidad,
             filtro: cached.filtro,
