@@ -7,6 +7,7 @@ import { UieDeficitView } from './views/UieDeficitView';
 import PertinenciaView from './views/PertinenciaView';
 import { BalancePredictivoView } from './views/BalancePredictivoView';
 import MapaUeView from './views/MapaUeView';
+import InscritosEsfmView from './views/InscritosEsfmView';
 import Image from 'next/image';
 import { ShieldCheck, Menu, Sun, Moon } from 'lucide-react';
 import { ExecutiveDashboardView } from './views/ExecutiveDashboardView';
@@ -53,6 +54,11 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
       title: 'Balance Predictivo de Admisión ESFM 2031',
       subtitle: 'Matriz multicriterio de oferta docente, egresados en formación y proyecciones de aula',
       tag: 'DECISIÓN ESFM',
+    },
+    inscritos: {
+      title: 'Matrícula Histórica ESFM (2022–2026)',
+      subtitle: 'Desglose dinámico por Departamento, ESFM/UA habilitada, Especialidad y Año de formación',
+      tag: 'MATRÍCULA ESFM',
     },
   };
 
@@ -160,6 +166,7 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
           {currentTab === 'pertinencia' && <PertinenciaView />}
           {currentTab === 'mapa' && <MapaUeView />}
           {currentTab === 'balance' && <BalancePredictivoView />}
+          {currentTab === 'inscritos' && <InscritosEsfmView />}
         </main>
       </div>
     </div>

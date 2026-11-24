@@ -802,7 +802,7 @@ export default function PertinenciaView() {
             title="Descargar Reporte Ejecutivo con Gráficos (.xlsx)"
           >
             <FileSpreadsheet className={`w-4 h-4 text-emerald-600 ${exporting ? 'animate-pulse' : ''}`} />
-            <span>{exporting ? 'Generando...' : 'Reporte General (con Gráficos)'}</span>
+            <span>{exporting ? 'Generando...' : 'Reporte General'}</span>
           </button>
 
           <button
@@ -813,10 +813,7 @@ export default function PertinenciaView() {
             title="Descargar consolidado por Unidad Educativa / UA en Excel (.xlsx) con Nivel Autorizado, Subsistema, Turno, Dirección, Coordenadas y Enlace a Google Maps"
           >
             <FileSpreadsheet className={`w-4 h-4 text-emerald-700 ${exportingUE ? 'animate-pulse' : ''}`} />
-            <span>{exportingUE ? 'Generando...' : 'Exportar Pertinencia por UE / UA'}</span>
-            <span className="text-[9px] bg-emerald-200/60 text-emerald-900 px-1.5 py-0.5 rounded font-black">
-              Geolocalizado
-            </span>
+            <span>{exportingUE ? 'Generando...' : 'Exportar UE / UA'}</span>
           </button>
         </div>
       </div>

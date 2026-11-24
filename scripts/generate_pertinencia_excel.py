@@ -94,10 +94,216 @@ def adjust_column_widths(ws, min_width=11, padding=3):
         ws.column_dimensions[col_letter].width = max(max_len + padding, min_width)
 
 
+def create_sheet_ficha_tecnica(wb, data):
+    """Hoja 0: Ficha Técnica, Metodología, Fuentes y Reglas de Clasificación (Respuesta EIEE)."""
+    ws = wb.active
+    ws.title = "0. Ficha Técnica y Metodología"
+    ws.views.sheetView[0].showGridLines = True
+
+    resumen = data.get("resumen", {})
+    tot_v = resumen.get("V", {}).get("docentes", 127560)
+    tot_a = resumen.get("A", {}).get("docentes", 23585)
+    tot_n = resumen.get("N", {}).get("docentes", 13931)
+    tot_sin = resumen.get("SIN", {}).get("docentes", 3682)
+
+    apply_header_banner(
+        ws,
+        "MINISTERIO DE EDUCACIÓN - ESTADO PLURINACIONAL DE BOLIVIA",
+        "DOCUMENTO TÉCNICO PRELIMINAR · FICHA METODOLÓGICA DE PERTINENCIA CURRICULAR DOCENTE (CORTE PLANILLA OCTUBRE 2026)",
+        max_col=8
+    )
+
+    # ── Bloque 1: Definiciones Conceptuales, Unidad de Análisis y Temporalidad
+    ws.cell(row=5, column=1, value="1. Marco Conceptual, Unidad de Análisis y Temporalidad").font = font_section
+    ficha_rows = [
+        ("Estatus del Documento", "Documento Técnico Preliminar (insumo analítico para revisión de EIEE / DGP, no constituye estadística oficial)."),
+        ("Gestión y Fecha de Corte", "Gestión 2026 — Corte administrativo: Planilla Octubre 2026 (UIE)."),
+        ("Definición Conceptual", "Grado de correspondencia entre la especialidad y nivel de formación académica del docente y el cargo, área curricular y nivel ejercido."),
+        ("Definición Operacional", "Cruce SQL entre formación registrada (UIE - formacion) y cargo en planilla (UIE Oct. 2026), evaluado mediante matriz PROFE (4.923 reglas)."),
+        ("Unidad de Análisis", "Asignación Docente (par Cargo–Unidad Educativa–Especialidad): 168.758 registros evaluados en Planilla Octubre 2026."),
+        ("Universo de Maestros Únicos", "148.997 docentes físicos únicos identificados por Cédula de Identidad (CI)."),
+        ("Múltiples Asignaciones", "19.761 registros corresponden a docentes con múltiples asignaciones (distintas UEs, niveles o áreas). Cada asignación se evalúa por separado."),
+        ("Cobertura (Subsistema/Dependencia)", "Regular (159.947), Alternativa y Especial (8.647) y 164 sin dato de subsistema. Dependencia y Cargo constan en el padrón base y hoja por UE."),
+        ("Tratamiento de Datos Faltantes", "Sin especialidad/formación ESFM (3.682, cond. OTRO) se asignan a SIN; 164 sin subsistema se conservan en total; 1.121 UEs sin lengua figuran 'Sin Registro'."),
+    ]
+    r_curr = 6
+    for idx, (campo, desc) in enumerate(ficha_rows):
+        c1 = ws.cell(row=r_curr, column=1, value=campo)
+        c1.font = font_bold
+        c1.alignment = align_left
+        c1.border = border_cell
+        c1.fill = fill_gold_light
+        ws.merge_cells(start_row=r_curr, start_column=2, end_row=r_curr, end_column=8)
+        c2 = ws.cell(row=r_curr, column=2, value=desc)
+        c2.font = font_data
+        c2.alignment = Alignment(horizontal="left", vertical="center", wrap_text=True)
+        for c_i in range(2, 9):
+            cell_m = ws.cell(row=r_curr, column=c_i)
+            cell_m.border = border_cell
+            if idx % 2 == 1:
+                cell_m.fill = fill_zebra
+        ws.row_dimensions[r_curr].height = 22
+        r_curr += 1
+
+    # ── Bloque 2: Fuentes de Información Integradas
+    r_curr += 1
+    ws.cell(row=r_curr, column=1, value="2. Fuentes de Información, Registros Administrativos y Variables Utilizadas").font = font_section
+    r_curr += 1
+    h_fuentes = ["Instancia", "Base de Datos / Fuente", "Total Registros", "Variables Clave Integradas", "Mecanismo / Observación Técnica"]
+    for c_i, h in enumerate(h_fuentes, start=1):
+        col_end = c_i if c_i < 4 else (5 if c_i == 4 else 8)
+        col_start = c_i if c_i <= 4 else 6
+        if col_start < col_end:
+            ws.merge_cells(start_row=r_curr, start_column=col_start, end_row=r_curr, end_column=col_end)
+        c = ws.cell(row=r_curr, column=col_start, value=h)
+        c.font = font_header
+        c.fill = fill_navy
+        c.alignment = align_center
+        for k in range(col_start, col_end + 1):
+            ws.cell(row=r_curr, column=k).border = border_cell
+            ws.cell(row=r_curr, column=k).fill = fill_navy
+    ws.row_dimensions[r_curr].height = 22
+    r_curr += 1
+
+    fuentes_rows = [
+        ("UIE", "formacion", 1166218, "Especialidad de formación docente", "Fórmula SQL de homologación por CI"),
+        ("UIE", "PLANILLA OCTUBRE 2026", 168758, "ID_UE, CI, Cargo, Nivel, Horas, Sexo, Edad", "Fuente actual de asignaciones evaluadas (148.997 CIs)"),
+        ("PROFE", "matriz_especialidad", 4923, "Reglas de clasificación V, A, N, SIN", "Limpieza PROFE y matriz cargo vs. especialidad"),
+        ("UIE", "prejubilados", 9355, "Nómina de prejubilación docente", "8.874 prejubilados cruzados en Planilla Oct. 2026"),
+        ("SIE", "reportes.sie.gob.bo/reporteestadistico", 17502, "Dependencia, Subsistema, Turno, Nivel Aut., Dir., Cord X/Y", "Cruce territorial por Código SIE (16.308 UEs activas)"),
+        ("PLANIFICACIONES", "UES_MATRI_PARALELO-DOCENTES2026.xlsx", 171350, "1º LENGUA ENSEÑANZA, Total estudiantes", "Cruce por Código SIE"),
+        ("PLANILLAS", "matricula_ser_2026.xlsx", 126270, "Total estudiantes matriculados", "Validación de matrícula escolar por UE"),
+    ]
+    for idx, (inst, bdd, tot_r, vars_k, obs_t) in enumerate(fuentes_rows):
+        ws.merge_cells(start_row=r_curr, start_column=4, end_row=r_curr, end_column=5)
+        ws.merge_cells(start_row=r_curr, start_column=6, end_row=r_curr, end_column=8)
+        ws.cell(row=r_curr, column=1, value=inst).alignment = align_center
+        ws.cell(row=r_curr, column=2, value=bdd).alignment = align_left
+        c_num = ws.cell(row=r_curr, column=3, value=tot_r)
+        c_num.alignment = align_right
+        c_num.number_format = "#,##0"
+        ws.cell(row=r_curr, column=4, value=vars_k).alignment = align_left
+        ws.cell(row=r_curr, column=6, value=obs_t).alignment = align_left
+        for k in range(1, 9):
+            cell = ws.cell(row=r_curr, column=k)
+            cell.font = font_data
+            cell.border = border_cell
+            if idx % 2 == 1:
+                cell.fill = fill_zebra
+        ws.row_dimensions[r_curr].height = 20
+        r_curr += 1
+
+    # ── Bloque 3: Categorías Mutuamente Excluyentes y Exhaustivas
+    r_curr += 1
+    ws.cell(row=r_curr, column=1, value="3. Categorías de Pertinencia Curricular (Mutuamente Excluyentes y Exhaustivas)").font = font_section
+    r_curr += 1
+    h_cat = ["Código", "Categoría Estandarizada", "Asignaciones", "% Universo", "Condición Operacional y Criterio de Inclusión"]
+    ws.merge_cells(start_row=r_curr, start_column=5, end_row=r_curr, end_column=8)
+    for col_s, col_e, h in [(1, 1, h_cat[0]), (2, 2, h_cat[1]), (3, 3, h_cat[2]), (4, 4, h_cat[3]), (5, 8, h_cat[4])]:
+        c = ws.cell(row=r_curr, column=col_s, value=h)
+        c.font = font_header
+        c.alignment = align_center
+        for k in range(col_s, col_e + 1):
+            ws.cell(row=r_curr, column=k).fill = fill_navy
+            ws.cell(row=r_curr, column=k).border = border_cell
+    ws.row_dimensions[r_curr].height = 22
+    r_curr += 1
+
+    cat_start = r_curr
+    cat_tot_row = cat_start + 4
+    cats_info = [
+        ("V", "Alta Pertinencia", tot_v, "Titulado/egresado ESFM cuya especialidad de formación coincide exactamente con el cargo y nivel asignado."),
+        ("A", "Media Pertinencia (Afín)", tot_a, "Titulado/egresado ESFM con afinidad disciplinar o de nivel validada en matriz PROFE (4.923 reglas)."),
+        ("N", "Baja Pertinencia (Sin correspondencia con el cargo)", tot_n, "Docente ESFM cuya especialidad no corresponde al cargo/área o nivel que ejerce en planilla."),
+        ("SIN", "T/U - Técnico Sup., Universitario y Otros (Sin Pert. ESFM)", tot_sin, "Condición OTRO (no normalista/ESFM). SÍ se incluye en el denominador total (168.758) por ocupar cargo activo en planilla."),
+    ]
+    for idx, (cod, nom, val, crit) in enumerate(cats_info):
+        ws.merge_cells(start_row=r_curr, start_column=5, end_row=r_curr, end_column=8)
+        ws.cell(row=r_curr, column=1, value=cod).alignment = align_center
+        ws.cell(row=r_curr, column=2, value=nom).alignment = align_left
+        c_v = ws.cell(row=r_curr, column=3, value=val)
+        c_v.alignment = align_right
+        c_v.number_format = "#,##0"
+        c_p = ws.cell(row=r_curr, column=4, value=f"=C{r_curr}/$C${cat_tot_row}")
+        c_p.alignment = align_right
+        c_p.number_format = "0.00%"
+        ws.cell(row=r_curr, column=5, value=crit).alignment = Alignment(horizontal="left", vertical="center", wrap_text=True)
+        for k in range(1, 9):
+            cell = ws.cell(row=r_curr, column=k)
+            cell.font = font_data
+            cell.border = border_cell
+            if idx % 2 == 1:
+                cell.fill = fill_zebra
+        ws.row_dimensions[r_curr].height = 24
+        r_curr += 1
+
+    # Fila total categorías con fórmula viva
+    ws.merge_cells(start_row=r_curr, start_column=5, end_row=r_curr, end_column=8)
+    ws.cell(row=r_curr, column=1, value="TOTAL").alignment = align_center
+    ws.cell(row=r_curr, column=2, value="UNIVERSO DE ASIGNACIONES EVALUADAS (100% EXHAUSTIVO)").alignment = align_left
+    c_tot_c = ws.cell(row=r_curr, column=3, value=f"=SUM(C{cat_start}:C{cat_tot_row-1})")
+    c_tot_c.alignment = align_right
+    c_tot_c.number_format = "#,##0"
+    c_tot_p = ws.cell(row=r_curr, column=4, value=f"=SUM(D{cat_start}:D{cat_tot_row-1})")
+    c_tot_p.alignment = align_right
+    c_tot_p.number_format = "0.00%"
+    ws.cell(row=r_curr, column=5, value="Fórmula: % Alta = V / Total  |  % Pertinencia Vigente (V+A) = (V + A) / Total").alignment = align_left
+    for k in range(1, 9):
+        cell = ws.cell(row=r_curr, column=k)
+        cell.font = font_bold
+        cell.fill = fill_gold_light
+        cell.border = border_double_bottom
+    ws.row_dimensions[r_curr].height = 22
+
+    # ── Bloque 4: Referencia Comparativa Inicial vs EIEE 2025
+    r_curr += 2
+    ws.cell(row=r_curr, column=1, value="4. Explicación Metodológica de Diferencias vs. Comparación Inicial EIEE (2025)").font = font_section
+    r_curr += 1
+    h_comp = ["Nivel", "Pertinentes EIEE (2025)", "Total EIEE (2025)", "Pertinencia Oct. 2026 (V + A)", "Total Oct. 2026", "Dif. Pertinentes (V+A)", "Dif. Total", "Causa Metodológica / Temporal"]
+    for c_i, h in enumerate(h_comp, start=1):
+        c = ws.cell(row=r_curr, column=c_i, value=h)
+        c.font = font_header
+        c.fill = fill_navy
+        c.alignment = align_center
+        c.border = border_cell
+    ws.row_dimensions[r_curr].height = 24
+    r_curr += 1
+
+    comp_rows = [
+        ("Inicial", 8829, 10717, 10556, 11169, "Corte Oct. 2026 vs 2025 + inclusión de 1.707 afines A (matriz PROFE)."),
+        ("Primaria", 64362, 68707, 66099, 71446, "Corte Oct. 2026 vs 2025 + unidad por asignación (múltiples cargos)."),
+        ("Secundaria", 50526, 64926, 67836, 77484, "Corte Oct. 2026 + multiasignaciones de áreas/horas en Secundaria + matriz PROFE."),
+    ]
+    for idx, (niv, p_eiee, t_eiee, p_prop, t_prop, causa) in enumerate(comp_rows):
+        ws.cell(row=r_curr, column=1, value=niv).alignment = align_left
+        for c_i, val in [(2, p_eiee), (3, t_eiee), (4, p_prop), (5, t_prop)]:
+            c = ws.cell(row=r_curr, column=c_i, value=val)
+            c.alignment = align_right
+            c.number_format = "#,##0"
+        c_dp = ws.cell(row=r_curr, column=6, value=f"=D{r_curr}-B{r_curr}")
+        c_dp.alignment = align_right
+        c_dp.number_format = "+#,##0;-#,##0;0"
+        c_dt = ws.cell(row=r_curr, column=7, value=f"=E{r_curr}-C{r_curr}")
+        c_dt.alignment = align_right
+        c_dt.number_format = "+#,##0;-#,##0;0"
+        ws.cell(row=r_curr, column=8, value=causa).alignment = Alignment(horizontal="left", vertical="center", wrap_text=True)
+        for k in range(1, 9):
+            cell = ws.cell(row=r_curr, column=k)
+            cell.font = font_data
+            cell.border = border_cell
+            if idx % 2 == 1:
+                cell.fill = fill_zebra
+        ws.row_dimensions[r_curr].height = 24
+        r_curr += 1
+
+    widths = {"A": 26, "B": 34, "C": 16, "D": 18, "E": 20, "F": 16, "G": 16, "H": 48}
+    for col_l, w in widths.items():
+        ws.column_dimensions[col_l].width = w
+
+
 def create_sheet_resumen(wb, data):
     """Hoja 1: Resumen Ejecutivo, Rangos y Desalineación."""
-    ws = wb.active
-    ws.title = "1. Resumen y Rangos"
+    ws = wb.create_sheet(title="1. Resumen y Rangos")
     ws.views.sheetView[0].showGridLines = True
 
     resumen = data.get("resumen", {})
@@ -107,16 +313,16 @@ def create_sheet_resumen(wb, data):
     apply_header_banner(
         ws,
         "MINISTERIO DE EDUCACIÓN - ESTADO PLURINACIONAL DE BOLIVIA",
-        "DIAGNÓSTICO INTEGRAL DE PERTINENCIA CURRICULAR DOCENTE - SEP (BID COMPONENTE 2)",
+        "DOCUMENTO TÉCNICO PRELIMINAR · PERTINENCIA CURRICULAR DOCENTE (CORTE PLANILLA OCTUBRE 2026)",
         max_col=18
     )
 
     # ── Tarjetas KPI Ejecutivos (Filas 5-6)
     kpis = [
-        ("UNIVERSO DE REGISTROS", totales.get("docentes", 0), 1, 2),
-        ("PERTINENCIA IDÓNEA (SI)", resumen.get("V", {}).get("docentes", 0) + resumen.get("A", {}).get("docentes", 0), 3, 4),
+        ("ASIGNACIONES EVALUADAS (CARGO-UE)", totales.get("docentes", 0), 1, 2),
+        ("PERTINENCIA VIGENTE (V+A)", resumen.get("V", {}).get("docentes", 0) + resumen.get("A", {}).get("docentes", 0), 3, 4),
         ("UNIDADES EDUCATIVAS", totales.get("ues", 0), 5, 6),
-        ("HORAS TOTALES IMPARTIDAS", totales.get("horas_total", 0), 7, 8),
+        ("DOCENTES ÚNICOS (CI)", 148997, 7, 8),
     ]
 
     for title, val, c1, c2 in kpis:
@@ -146,8 +352,8 @@ def create_sheet_resumen(wb, data):
     ws.cell(row=8, column=1, value="1. Distribución Nacional por Rango de Pertinencia").font = font_section
 
     headers_rangos = [
-        "Rango", "Denominación Oficial", "Docentes", "% Docentes",
-        "Asignaciones", "UEs", "Horas Impartidas", "Estudiantes"
+        "Rango", "Denominación de Categoría", "Asignaciones", "% Universo",
+        "Docentes / Reg.", "UEs", "Estudiantes"
     ]
     start_r = 9
     for col_idx, h in enumerate(headers_rangos, start=1):
@@ -159,32 +365,29 @@ def create_sheet_resumen(wb, data):
     ws.row_dimensions[start_r].height = 22
 
     rangos_info = [
-        ("V", "Rango V · Alta Pertinencia (Idóneo)", resumen.get("V", {})),
-        ("A", "Rango A · Media Pertinencia (Afín)", resumen.get("A", {})),
+        ("V", "Rango V · Alta Pertinencia (Coincidencia exacta)", resumen.get("V", {})),
+        ("A", "Rango A · Media Pertinencia (Afín PROFE)", resumen.get("A", {})),
         ("N", "Rango N · Baja Pertinencia (Sin correspondencia con el cargo)", resumen.get("N", {})),
-        ("SIN", "Rango SIN · Técnico Sup. / Universitario / Otros", resumen.get("SIN", {})),
+        ("SIN", "Rango SIN · T/U (Técnico Sup., Universitario y Otros)", resumen.get("SIN", {})),
     ]
 
-    total_doc = totales.get("docentes", 1)
+    tot_row_rangos = start_r + 5
     curr_r = start_r + 1
     for r_code, r_denom, r_data in rangos_info:
         docs = r_data.get("docentes", 0)
         asigs = r_data.get("asignaciones", 0)
         ues = r_data.get("ues", 0)
-        horas = r_data.get("horas_total", 0)
         est = r_data.get("estudiantes_atendidos", 0)
-        pct = docs / total_doc if total_doc > 0 else 0
 
         ws.cell(row=curr_r, column=1, value=r_code).alignment = align_center
         ws.cell(row=curr_r, column=2, value=r_denom).alignment = align_left
         ws.cell(row=curr_r, column=3, value=docs).number_format = "#,##0"
-        ws.cell(row=curr_r, column=4, value=pct).number_format = "0.0%"
+        ws.cell(row=curr_r, column=4, value=f"=C{curr_r}/$C${tot_row_rangos}").number_format = "0.0%"
         ws.cell(row=curr_r, column=5, value=asigs).number_format = "#,##0"
         ws.cell(row=curr_r, column=6, value=ues).number_format = "#,##0"
-        ws.cell(row=curr_r, column=7, value=horas).number_format = "#,##0"
-        ws.cell(row=curr_r, column=8, value=est).number_format = "#,##0"
+        ws.cell(row=curr_r, column=7, value=est).number_format = "#,##0"
 
-        for c in range(1, 9):
+        for c in range(1, 8):
             cell = ws.cell(row=curr_r, column=c)
             cell.font = font_data
             cell.border = border_cell
@@ -205,17 +408,16 @@ def create_sheet_resumen(wb, data):
         ws.row_dimensions[curr_r].height = 20
         curr_r += 1
 
-    # Fila Total
+    # Fila Total (Fórmulas vivas)
     ws.cell(row=curr_r, column=1, value="TOTAL").alignment = align_center
-    ws.cell(row=curr_r, column=2, value="TOTAL GENERAL NACIONAL").alignment = align_left
-    ws.cell(row=curr_r, column=3, value=totales.get("docentes", 0)).number_format = "#,##0"
-    ws.cell(row=curr_r, column=4, value=1.0).number_format = "0.0%"
-    ws.cell(row=curr_r, column=5, value=totales.get("asignaciones", 0)).number_format = "#,##0"
+    ws.cell(row=curr_r, column=2, value="TOTAL ASIGNACIONES EVALUADAS").alignment = align_left
+    ws.cell(row=curr_r, column=3, value=f"=SUM(C{start_r+1}:C{curr_r-1})").number_format = "#,##0"
+    ws.cell(row=curr_r, column=4, value=f"=SUM(D{start_r+1}:D{curr_r-1})").number_format = "0.0%"
+    ws.cell(row=curr_r, column=5, value=f"=SUM(E{start_r+1}:E{curr_r-1})").number_format = "#,##0"
     ws.cell(row=curr_r, column=6, value=totales.get("ues", 0)).number_format = "#,##0"
-    ws.cell(row=curr_r, column=7, value=totales.get("horas_total", 0)).number_format = "#,##0"
-    ws.cell(row=curr_r, column=8, value=totales.get("estudiantes_atendidos", 0)).number_format = "#,##0"
+    ws.cell(row=curr_r, column=7, value=f"=SUM(G{start_r+1}:G{curr_r-1})").number_format = "#,##0"
 
-    for c in range(1, 9):
+    for c in range(1, 8):
         cell = ws.cell(row=curr_r, column=c)
         cell.font = font_bold
         cell.fill = fill_gold_light
@@ -248,101 +450,6 @@ def create_sheet_resumen(wb, data):
     # Ubicado a la derecha de la tabla en J8 (sin solaparse con nada)
     ws.add_chart(chart_pie, "J8")
 
-    # ── Bloque 2: Desalineación Curricular Crítica (Fila 17)
-    row_desal = 17
-    ws.cell(row=row_desal, column=1, value="2. Análisis de Desalineación Curricular").font = font_section
-
-    headers_desal = ["Tipo de Desalineación Curricular", "Asignaciones", "% Padrón"]
-    for col_idx, h in enumerate(headers_desal, start=1):
-        c = ws.cell(row=row_desal + 1, column=col_idx, value=h)
-        c.font = font_header
-        c.fill = fill_navy
-        c.alignment = align_center
-        c.border = border_cell
-    ws.row_dimensions[row_desal + 1].height = 22
-
-    desal_items = [
-        ("Fuera de especialidad de egreso",
-         desalineacion.get("fuera_especialidad", 0),
-         desalineacion.get("pct_fuera_especialidad", 0) / 100.0),
-        ("Fuera de nivel de enseñanza",
-         desalineacion.get("fuera_nivel", 0),
-         desalineacion.get("pct_fuera_nivel", 0) / 100.0),
-        ("Desalineación combinada (Ambos factores)",
-         desalineacion.get("fuera_ambos", 0),
-         desalineacion.get("pct_fuera_ambos", 0) / 100.0),
-    ]
-
-    for idx, (label, val, pct_v) in enumerate(desal_items):
-        r_num = row_desal + 2 + idx
-        c1 = ws.cell(row=r_num, column=1, value=label)
-        c2 = ws.cell(row=r_num, column=2, value=val)
-        c3 = ws.cell(row=r_num, column=3, value=pct_v)
-
-        c1.alignment = align_left
-        c2.alignment = align_right
-        c3.alignment = align_right
-
-        c2.number_format = "#,##0"
-        c3.number_format = "0.00%"
-
-        for c_idx in [1, 2, 3]:
-            c = ws.cell(row=r_num, column=c_idx)
-            c.font = font_data
-            c.border = border_cell
-            if idx % 2 == 1:
-                c.fill = fill_zebra
-        ws.row_dimensions[r_num].height = 20
-
-    # Fila Total Desalineación
-    row_total_desal = row_desal + 2 + len(desal_items)
-    tot_desal_asigs = desalineacion.get("total_asignaciones_desalineadas", 0)
-    pct_total_desal = tot_desal_asigs / totales.get("asignaciones", 1)
-
-    c1 = ws.cell(row=row_total_desal, column=1, value="TOTAL ASIGNACIONES DESALINEADAS")
-    c2 = ws.cell(row=row_total_desal, column=2, value=tot_desal_asigs)
-    c3 = ws.cell(row=row_total_desal, column=3, value=pct_total_desal)
-
-    c1.alignment = align_left
-    c2.alignment = align_right
-    c3.alignment = align_right
-
-    c2.number_format = "#,##0"
-    c3.number_format = "0.00%"
-
-    for c_idx in [1, 2, 3]:
-        c = ws.cell(row=row_total_desal, column=c_idx)
-        c.font = font_bold
-        c.fill = fill_gold_light
-        c.border = border_double_bottom
-    ws.row_dimensions[row_total_desal].height = 22
-
-    # ── Gráfico 2: Columnas Verticales de Desalineación (En J20, SIN solapamiento con J8)
-    chart_desal = BarChart()
-    chart_desal.type = "col"
-    chart_desal.title = "Causas de Desalineación Curricular Docente"
-    chart_desal.width = 17
-    chart_desal.height = 8.5
-    chart_desal.legend = None
-
-    # Solo las 3 causas individuales (excluye fila total para no distorsionar escala)
-    data_desal_ref = Reference(ws, min_col=2, min_row=row_desal + 1, max_row=row_desal + 4)
-    cats_desal_ref = Reference(ws, min_col=1, min_row=row_desal + 2, max_row=row_desal + 4)
-    chart_desal.add_data(data_desal_ref, titles_from_data=True)
-    chart_desal.set_categories(cats_desal_ref)
-
-    chart_desal.y_axis.title = "Asignaciones"
-    chart_desal.x_axis.title = "Causa"
-
-    chart_desal.dataLabels = DataLabelList()
-    chart_desal.dataLabels.showVal = True
-
-    if chart_desal.series:
-        chart_desal.series[0].graphicalProperties.solidFill = COLOR_N
-
-    # Ubicado a la derecha de la tabla de desalineación en E18 (utiliza columnas E a I sin tocar el gráfico 1 en J6)
-    ws.add_chart(chart_desal, "E18")
-
     adjust_column_widths(ws)
     ws.column_dimensions["B"].width = 44
     ws.column_dimensions["I"].width = 4  # Columna separadora
@@ -370,10 +477,9 @@ def create_sheet_departamentos(wb, data):
         "Media (A)",
         "Baja (N)",
         "Sin Pert. (SIN)",
-        "Total Docentes",
-        "% Alta",
-        "% Idóneo (V+A)",
-        "Total Horas",
+        "Total Asignaciones",
+        "% Alta (V)",
+        "% Pertinencia Vigente (V+A)",
         "UEs"
     ]
 
@@ -386,8 +492,6 @@ def create_sheet_departamentos(wb, data):
         c.border = border_cell
     ws.row_dimensions[start_r].height = 22
 
-    tot_v = tot_a = tot_n = tot_sin = tot_doc = tot_hrs = tot_ues = 0
-
     curr_r = start_r + 1
     for d in deptos:
         d_name = d.get("departamento", "")
@@ -398,32 +502,19 @@ def create_sheet_departamentos(wb, data):
         sin_doc = r.get("SIN", {}).get("docentes", 0)
         total_d = v_doc + a_doc + n_doc + sin_doc
 
-        hrs_d = sum(r.get(k, {}).get("horas", 0) for k in ["V", "A", "N", "SIN"])
         ues_d = d.get("ues", max(r.get(k, {}).get("ues", 0) for k in ["V", "A", "N", "SIN"])) if total_d > 0 else 0
-
-        tot_v += v_doc
-        tot_a += a_doc
-        tot_n += n_doc
-        tot_sin += sin_doc
-        tot_doc += total_d
-        tot_hrs += hrs_d
-        tot_ues += ues_d
-
-        pct_alta = v_doc / total_d if total_d > 0 else 0
-        pct_idoneo = (v_doc + a_doc) / total_d if total_d > 0 else 0
 
         ws.cell(row=curr_r, column=1, value=d_name).alignment = align_left
         ws.cell(row=curr_r, column=2, value=v_doc).number_format = "#,##0"
         ws.cell(row=curr_r, column=3, value=a_doc).number_format = "#,##0"
         ws.cell(row=curr_r, column=4, value=n_doc).number_format = "#,##0"
         ws.cell(row=curr_r, column=5, value=sin_doc).number_format = "#,##0"
-        ws.cell(row=curr_r, column=6, value=total_d).number_format = "#,##0"
-        ws.cell(row=curr_r, column=7, value=pct_alta).number_format = "0.0%"
-        ws.cell(row=curr_r, column=8, value=pct_idoneo).number_format = "0.0%"
-        ws.cell(row=curr_r, column=9, value=hrs_d).number_format = "#,##0"
-        ws.cell(row=curr_r, column=10, value=ues_d).number_format = "#,##0"
+        ws.cell(row=curr_r, column=6, value=f"=SUM(B{curr_r}:E{curr_r})").number_format = "#,##0"
+        ws.cell(row=curr_r, column=7, value=f"=IF(F{curr_r}>0,B{curr_r}/F{curr_r},0)").number_format = "0.0%"
+        ws.cell(row=curr_r, column=8, value=f"=IF(F{curr_r}>0,(B{curr_r}+C{curr_r})/F{curr_r},0)").number_format = "0.0%"
+        ws.cell(row=curr_r, column=9, value=ues_d).number_format = "#,##0"
 
-        for col_i in range(1, 11):
+        for col_i in range(1, 10):
             cell = ws.cell(row=curr_r, column=col_i)
             cell.font = font_data
             cell.border = border_cell
@@ -435,22 +526,18 @@ def create_sheet_departamentos(wb, data):
         ws.row_dimensions[curr_r].height = 20
         curr_r += 1
 
-    # Fila Total General
-    pct_alta_nac = tot_v / tot_doc if tot_doc > 0 else 0
-    pct_id_nac = (tot_v + tot_a) / tot_doc if tot_doc > 0 else 0
-
+    # Fila Total General (Fórmulas vivas)
     ws.cell(row=curr_r, column=1, value="TOTAL GENERAL NACIONAL").alignment = align_left
-    ws.cell(row=curr_r, column=2, value=tot_v).number_format = "#,##0"
-    ws.cell(row=curr_r, column=3, value=tot_a).number_format = "#,##0"
-    ws.cell(row=curr_r, column=4, value=tot_n).number_format = "#,##0"
-    ws.cell(row=curr_r, column=5, value=tot_sin).number_format = "#,##0"
-    ws.cell(row=curr_r, column=6, value=tot_doc).number_format = "#,##0"
-    ws.cell(row=curr_r, column=7, value=pct_alta_nac).number_format = "0.0%"
-    ws.cell(row=curr_r, column=8, value=pct_id_nac).number_format = "0.0%"
-    ws.cell(row=curr_r, column=9, value=tot_hrs).number_format = "#,##0"
-    ws.cell(row=curr_r, column=10, value=tot_ues).number_format = "#,##0"
+    ws.cell(row=curr_r, column=2, value=f"=SUM(B{start_r+1}:B{curr_r-1})").number_format = "#,##0"
+    ws.cell(row=curr_r, column=3, value=f"=SUM(C{start_r+1}:C{curr_r-1})").number_format = "#,##0"
+    ws.cell(row=curr_r, column=4, value=f"=SUM(D{start_r+1}:D{curr_r-1})").number_format = "#,##0"
+    ws.cell(row=curr_r, column=5, value=f"=SUM(E{start_r+1}:E{curr_r-1})").number_format = "#,##0"
+    ws.cell(row=curr_r, column=6, value=f"=SUM(F{start_r+1}:F{curr_r-1})").number_format = "#,##0"
+    ws.cell(row=curr_r, column=7, value=f"=IF(F{curr_r}>0,B{curr_r}/F{curr_r},0)").number_format = "0.0%"
+    ws.cell(row=curr_r, column=8, value=f"=IF(F{curr_r}>0,(B{curr_r}+C{curr_r})/F{curr_r},0)").number_format = "0.0%"
+    ws.cell(row=curr_r, column=9, value=f"=SUM(I{start_r+1}:I{curr_r-1})").number_format = "#,##0"
 
-    for col_i in range(1, 11):
+    for col_i in range(1, 10):
         cell = ws.cell(row=curr_r, column=col_i)
         cell.font = font_bold
         cell.fill = fill_gold_light
@@ -512,10 +599,9 @@ def create_sheet_niveles(wb, data):
         "Media (A)",
         "Baja (N)",
         "Sin Pert. (SIN)",
-        "Total Docentes",
-        "% Alta",
-        "% Idóneo (V+A)",
-        "Total Horas",
+        "Total Asignaciones",
+        "% Alta (V)",
+        "% Pertinencia Vigente (V+A)",
         "UEs"
     ]
 
@@ -528,8 +614,6 @@ def create_sheet_niveles(wb, data):
         c.border = border_cell
     ws.row_dimensions[start_r].height = 22
 
-    tot_v = tot_a = tot_n = tot_sin = tot_doc = tot_hrs = tot_ues = 0
-
     curr_r = start_r + 1
     for n in niveles:
         n_name = n.get("nivel", "")
@@ -540,31 +624,19 @@ def create_sheet_niveles(wb, data):
         sin_doc = r.get("SIN", {}).get("docentes", 0)
         total_n = v_doc + a_doc + n_doc + sin_doc
 
-        hrs_n = sum(r.get(k, {}).get("horas", 0) for k in ["V", "A", "N", "SIN"])
         ues_n = n.get("ues", max(r.get(k, {}).get("ues", 0) for k in ["V", "A", "N", "SIN"])) if total_n > 0 else 0
-
-        tot_v += v_doc
-        tot_a += a_doc
-        tot_n += n_doc
-        tot_sin += sin_doc
-        tot_doc += total_n
-        tot_hrs += hrs_n
-
-        pct_alta = v_doc / total_n if total_n > 0 else 0
-        pct_idoneo = (v_doc + a_doc) / total_n if total_n > 0 else 0
 
         ws.cell(row=curr_r, column=1, value=n_name).alignment = align_left
         ws.cell(row=curr_r, column=2, value=v_doc).number_format = "#,##0"
         ws.cell(row=curr_r, column=3, value=a_doc).number_format = "#,##0"
         ws.cell(row=curr_r, column=4, value=n_doc).number_format = "#,##0"
         ws.cell(row=curr_r, column=5, value=sin_doc).number_format = "#,##0"
-        ws.cell(row=curr_r, column=6, value=total_n).number_format = "#,##0"
-        ws.cell(row=curr_r, column=7, value=pct_alta).number_format = "0.0%"
-        ws.cell(row=curr_r, column=8, value=pct_idoneo).number_format = "0.0%"
-        ws.cell(row=curr_r, column=9, value=hrs_n).number_format = "#,##0"
-        ws.cell(row=curr_r, column=10, value=ues_n).number_format = "#,##0"
+        ws.cell(row=curr_r, column=6, value=f"=SUM(B{curr_r}:E{curr_r})").number_format = "#,##0"
+        ws.cell(row=curr_r, column=7, value=f"=IF(F{curr_r}>0,B{curr_r}/F{curr_r},0)").number_format = "0.0%"
+        ws.cell(row=curr_r, column=8, value=f"=IF(F{curr_r}>0,(B{curr_r}+C{curr_r})/F{curr_r},0)").number_format = "0.0%"
+        ws.cell(row=curr_r, column=9, value=ues_n).number_format = "#,##0"
 
-        for col_i in range(1, 11):
+        for col_i in range(1, 10):
             cell = ws.cell(row=curr_r, column=col_i)
             cell.font = font_data
             cell.border = border_cell
@@ -576,23 +648,20 @@ def create_sheet_niveles(wb, data):
         ws.row_dimensions[curr_r].height = 20
         curr_r += 1
 
-    # Fila Total General
-    pct_alta_nac = tot_v / tot_doc if tot_doc > 0 else 0
-    pct_id_nac = (tot_v + tot_a) / tot_doc if tot_doc > 0 else 0
+    # Fila Total General (Fórmulas vivas)
     tot_ues_nac = data.get("resumen", {}).get("TOTAL", {}).get("ues", 16308)
 
     ws.cell(row=curr_r, column=1, value="TOTAL GENERAL NACIONAL").alignment = align_left
-    ws.cell(row=curr_r, column=2, value=tot_v).number_format = "#,##0"
-    ws.cell(row=curr_r, column=3, value=tot_a).number_format = "#,##0"
-    ws.cell(row=curr_r, column=4, value=tot_n).number_format = "#,##0"
-    ws.cell(row=curr_r, column=5, value=tot_sin).number_format = "#,##0"
-    ws.cell(row=curr_r, column=6, value=tot_doc).number_format = "#,##0"
-    ws.cell(row=curr_r, column=7, value=pct_alta_nac).number_format = "0.0%"
-    ws.cell(row=curr_r, column=8, value=pct_id_nac).number_format = "0.0%"
-    ws.cell(row=curr_r, column=9, value=tot_hrs).number_format = "#,##0"
-    ws.cell(row=curr_r, column=10, value=tot_ues_nac).number_format = "#,##0"
+    ws.cell(row=curr_r, column=2, value=f"=SUM(B{start_r+1}:B{curr_r-1})").number_format = "#,##0"
+    ws.cell(row=curr_r, column=3, value=f"=SUM(C{start_r+1}:C{curr_r-1})").number_format = "#,##0"
+    ws.cell(row=curr_r, column=4, value=f"=SUM(D{start_r+1}:D{curr_r-1})").number_format = "#,##0"
+    ws.cell(row=curr_r, column=5, value=f"=SUM(E{start_r+1}:E{curr_r-1})").number_format = "#,##0"
+    ws.cell(row=curr_r, column=6, value=f"=SUM(F{start_r+1}:F{curr_r-1})").number_format = "#,##0"
+    ws.cell(row=curr_r, column=7, value=f"=IF(F{curr_r}>0,B{curr_r}/F{curr_r},0)").number_format = "0.0%"
+    ws.cell(row=curr_r, column=8, value=f"=IF(F{curr_r}>0,(B{curr_r}+C{curr_r})/F{curr_r},0)").number_format = "0.0%"
+    ws.cell(row=curr_r, column=9, value=tot_ues_nac).number_format = "#,##0"
 
-    for col_i in range(1, 11):
+    for col_i in range(1, 10):
         cell = ws.cell(row=curr_r, column=col_i)
         cell.font = font_bold
         cell.fill = fill_gold_light
@@ -603,8 +672,8 @@ def create_sheet_niveles(wb, data):
 
     # Nota técnica aclaratoria
     curr_r += 1
-    ws.merge_cells(start_row=curr_r, start_column=1, end_row=curr_r, end_column=10)
-    note_cell = ws.cell(row=curr_r, column=1, value="* NOTA TÉCNICA: Los establecimientos educativos en Bolivia suelen impartir múltiples niveles (Inicial, Primaria, Secundaria). La columna 'UEs' reporta los establecimientos con presencia en cada nivel; el Total Nacional corresponde a las 16.308 Unidades Educativas únicas del país (Padrón Oficial SIE).")
+    ws.merge_cells(start_row=curr_r, start_column=1, end_row=curr_r, end_column=9)
+    note_cell = ws.cell(row=curr_r, column=1, value="* NOTA TÉCNICA: Los establecimientos educativos en Bolivia suelen impartir múltiples niveles (Inicial, Primaria, Secundaria). La columna 'UEs' reporta los establecimientos con presencia en cada nivel; el Total Nacional corresponde a las 16.308 Unidades Educativas únicas del país (Catálogo SIE).")
     note_cell.font = Font(name="Segoe UI", size=8, italic=True, color="64748B")
     note_cell.alignment = align_left
 
@@ -652,15 +721,14 @@ def create_sheet_especialidades(wb, data):
     ws.cell(row=5, column=1, value="Matriz Analítica de Especialidades de Egresados ESFM/Normal").font = font_section
 
     headers = [
-        "Especialidad Oficial",
+        "Especialidad de Formación",
         "Alta (V)",
         "Media (A)",
         "Baja (N)",
         "Sin Pert. (SIN)",
-        "Total Docentes",
-        "% Alta",
-        "% Idóneo (V+A)",
-        "Horas Totales",
+        "Total Asignaciones",
+        "% Alta (V)",
+        "% Pertinencia Vigente (V+A)",
         "UEs"
     ]
 
@@ -673,43 +741,27 @@ def create_sheet_especialidades(wb, data):
         c.border = border_cell
     ws.row_dimensions[start_r].height = 22
 
-    tot_v = tot_a = tot_n = tot_sin = tot_doc = tot_hrs = tot_ues = 0
-
     curr_r = start_r + 1
     for esp in especialidades:
         esp_name = esp.get("especialidad", "")
-        r = esp.get("rangos", {})
+        r = esp.get("rangos") or esp
         v_doc = r.get("V", {}).get("docentes", 0)
         a_doc = r.get("A", {}).get("docentes", 0)
         n_doc = r.get("N", {}).get("docentes", 0)
         sin_doc = r.get("SIN", {}).get("docentes", 0)
-        total_e = esp.get("docentes", v_doc + a_doc + n_doc + sin_doc)
-        hrs_e = esp.get("horas", 0)
         ues_e = esp.get("ues", 0)
-
-        tot_v += v_doc
-        tot_a += a_doc
-        tot_n += n_doc
-        tot_sin += sin_doc
-        tot_doc += total_e
-        tot_hrs += hrs_e
-        tot_ues += ues_e
-
-        pct_alta = v_doc / total_e if total_e > 0 else 0
-        pct_idoneo = (v_doc + a_doc) / total_e if total_e > 0 else 0
 
         ws.cell(row=curr_r, column=1, value=esp_name).alignment = align_left
         ws.cell(row=curr_r, column=2, value=v_doc).number_format = "#,##0"
         ws.cell(row=curr_r, column=3, value=a_doc).number_format = "#,##0"
         ws.cell(row=curr_r, column=4, value=n_doc).number_format = "#,##0"
         ws.cell(row=curr_r, column=5, value=sin_doc).number_format = "#,##0"
-        ws.cell(row=curr_r, column=6, value=total_e).number_format = "#,##0"
-        ws.cell(row=curr_r, column=7, value=pct_alta).number_format = "0.0%"
-        ws.cell(row=curr_r, column=8, value=pct_idoneo).number_format = "0.0%"
-        ws.cell(row=curr_r, column=9, value=hrs_e).number_format = "#,##0"
-        ws.cell(row=curr_r, column=10, value=ues_e).number_format = "#,##0"
+        ws.cell(row=curr_r, column=6, value=f"=SUM(B{curr_r}:E{curr_r})").number_format = "#,##0"
+        ws.cell(row=curr_r, column=7, value=f"=IF(F{curr_r}>0,B{curr_r}/F{curr_r},0)").number_format = "0.0%"
+        ws.cell(row=curr_r, column=8, value=f"=IF(F{curr_r}>0,(B{curr_r}+C{curr_r})/F{curr_r},0)").number_format = "0.0%"
+        ws.cell(row=curr_r, column=9, value=ues_e).number_format = "#,##0"
 
-        for col_i in range(1, 11):
+        for col_i in range(1, 10):
             cell = ws.cell(row=curr_r, column=col_i)
             cell.font = font_data
             cell.border = border_cell
@@ -721,22 +773,18 @@ def create_sheet_especialidades(wb, data):
         ws.row_dimensions[curr_r].height = 20
         curr_r += 1
 
-    # Total General
-    pct_alta_nac = tot_v / tot_doc if tot_doc > 0 else 0
-    pct_id_nac = (tot_v + tot_a) / tot_doc if tot_doc > 0 else 0
-
+    # Total General (Fórmulas vivas)
     ws.cell(row=curr_r, column=1, value="TOTAL GENERAL").alignment = align_left
-    ws.cell(row=curr_r, column=2, value=tot_v).number_format = "#,##0"
-    ws.cell(row=curr_r, column=3, value=tot_a).number_format = "#,##0"
-    ws.cell(row=curr_r, column=4, value=tot_n).number_format = "#,##0"
-    ws.cell(row=curr_r, column=5, value=tot_sin).number_format = "#,##0"
-    ws.cell(row=curr_r, column=6, value=tot_doc).number_format = "#,##0"
-    ws.cell(row=curr_r, column=7, value=pct_alta_nac).number_format = "0.0%"
-    ws.cell(row=curr_r, column=8, value=pct_id_nac).number_format = "0.0%"
-    ws.cell(row=curr_r, column=9, value=tot_hrs).number_format = "#,##0"
-    ws.cell(row=curr_r, column=10, value=tot_ues).number_format = "#,##0"
+    ws.cell(row=curr_r, column=2, value=f"=SUM(B{start_r+1}:B{curr_r-1})").number_format = "#,##0"
+    ws.cell(row=curr_r, column=3, value=f"=SUM(C{start_r+1}:C{curr_r-1})").number_format = "#,##0"
+    ws.cell(row=curr_r, column=4, value=f"=SUM(D{start_r+1}:D{curr_r-1})").number_format = "#,##0"
+    ws.cell(row=curr_r, column=5, value=f"=SUM(E{start_r+1}:E{curr_r-1})").number_format = "#,##0"
+    ws.cell(row=curr_r, column=6, value=f"=SUM(F{start_r+1}:F{curr_r-1})").number_format = "#,##0"
+    ws.cell(row=curr_r, column=7, value=f"=IF(F{curr_r}>0,B{curr_r}/F{curr_r},0)").number_format = "0.0%"
+    ws.cell(row=curr_r, column=8, value=f"=IF(F{curr_r}>0,(B{curr_r}+C{curr_r})/F{curr_r},0)").number_format = "0.0%"
+    ws.cell(row=curr_r, column=9, value=f"=SUM(I{start_r+1}:I{curr_r-1})").number_format = "#,##0"
 
-    for col_i in range(1, 11):
+    for col_i in range(1, 10):
         cell = ws.cell(row=curr_r, column=col_i)
         cell.font = font_bold
         cell.fill = fill_gold_light
@@ -793,7 +841,7 @@ def create_sheet_cruzada(wb, data):
 
     ws.cell(row=5, column=1, value="Distribución Geográfica de Docentes por Especialidad").font = font_section
 
-    headers = ["Especialidad Oficial"] + deptos + ["TOTAL NACIONAL"]
+    headers = ["Especialidad de Formación"] + deptos + ["TOTAL NACIONAL"]
     start_r = 6
     for c_idx, h in enumerate(headers, start=1):
         c = ws.cell(row=start_r, column=c_idx, value=h)
@@ -862,7 +910,7 @@ def create_sheet_ue(wb, ue_data):
     apply_header_banner(
         ws,
         "MINISTERIO DE EDUCACIÓN - ESTADO PLURINACIONAL DE BOLIVIA",
-        "DIAGNÓSTICO OFICIAL DE PERTINENCIA CURRICULAR POR UNIDAD EDUCATIVA / UNIDAD ACADÉMICA (UE / UA)",
+        "DOCUMENTO TÉCNICO PRELIMINAR · PERTINENCIA CURRICULAR POR UNIDAD EDUCATIVA / UA (CORTE OCT. 2026)",
         max_col=18
     )
 
@@ -888,7 +936,7 @@ def create_sheet_ue(wb, ue_data):
         "Total Docentes",
         "% Pertinencia Alta",
         "No Prejubilados No Pertinentes",
-        "Diagnóstico Oficial"
+        "Diagnóstico Preliminar"
     ]
 
     start_r = 6
@@ -968,7 +1016,7 @@ def create_sheet_ue(wb, ue_data):
         (16, tot_doc, "#,##0"),
         (17, tot_pct, "0.0%"),
         (18, tot_no_prejub_np, "#,##0"),
-        (19, "Padrón Evaluado 100%", "@")
+        (19, "Asignaciones Evaluadas 100%", "@")
     ]
 
     for c_i, val, num_fmt in tot_vals:
@@ -1069,7 +1117,7 @@ def create_sheet_rural_urbano(wb, data: dict):
     # Tabla de Datos por Departamento
     headers = [
         "Departamento",
-        "Padrón Total",
+        "Asignaciones Evaluadas",
         "Doc. Rural",
         "% Rural",
         "Alta Rural (%)",
@@ -1201,14 +1249,14 @@ def create_sheet_jubilacion(wb, data):
     apply_header_banner(
         ws,
         "MINISTERIO DE EDUCACIÓN - ESTADO PLURINACIONAL DE BOLIVIA",
-        "ESTADÍSTICAS DE PREJUBILACIÓN Y JUBILACIÓN DOCENTE - CORTE OFICIAL (SEP)",
+        "DOCUMENTO TÉCNICO PRELIMINAR · PREJUBILACIÓN Y JUBILACIÓN DOCENTE (CORTE PLANILLA OCT. 2026)",
         max_col=12
     )
 
     # KPIs Nacionales (fila 5-6)
     tot_nacional = nacional.get("total", 1)
     kpis = [
-        ("UNIVERSO DOCENTE", tot_nacional, 1, 2),
+        ("ASIGNACIONES EVALUADAS", tot_nacional, 1, 2),
         ("EN JUBILACIÓN (SI)", nacional.get("jubilacion", 0), 3, 4),
         ("EN PREJUBILACIÓN (SI)", nacional.get("prejubilacion", 0), 5, 6),
         ("% JUBILACIÓN", round(nacional.get("jubilacion", 0) / tot_nacional * 100, 2) if tot_nacional > 0 else 0.0, 7, 8),
@@ -1398,7 +1446,7 @@ def create_sheet_prejub_genero(wb, data):
 
     # Tarjetas KPI (Filas 5-6)
     kpis = [
-        ("UNIVERSO DOCENTE", tot_padron, "#,##0", 1, 2),
+        ("ASIGNACIONES EVALUADAS", tot_padron, "#,##0", 1, 2),
         ("DOCENTES ACTIVOS (NO PREJUBILADOS)", no_prejub.get("total", 0), "#,##0", 3, 4),
         ("NO PREJUBILADOS NO PERTINENTES (N+SIN)", nac_pj.get("no_prejubilados_no_pertinentes", 0), "#,##0", 5, 7),
         ("% NO PERTINENTE EN SERVICIO ACTIVO", nac_pj.get("pct_no_prejubilados_no_pertinentes_sobre_no_prejub", 0) / 100.0, "0.00%", 8, 9),
@@ -1699,7 +1747,8 @@ def main():
 
     wb = openpyxl.Workbook()
 
-    # Construir hojas según disponibilidad de datos
+    # Construir hojas según disponibilidad de datos (Hoja 0: Ficha Técnica EIEE)
+    create_sheet_ficha_tecnica(wb, data)
     create_sheet_resumen(wb, data)
     create_sheet_rural_urbano(wb, data)
     create_sheet_departamentos(wb, data)

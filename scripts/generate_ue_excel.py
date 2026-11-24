@@ -66,7 +66,7 @@ def generate_ue_excel(output_path=None):
     cant_ue = f"{len(ue_data):,}".replace(",", ".")
 
     # Banner
-    max_col_letter = "W"
+    max_col_letter = "X"
     ws.merge_cells(f"A1:{max_col_letter}1")
     c1 = ws["A1"]
     c1.value = "MINISTERIO DE EDUCACIÓN · ESTADO PLURINACIONAL DE BOLIVIA"
@@ -94,6 +94,7 @@ def generate_ue_excel(output_path=None):
         "Departamento",
         "Distrito Educativo",
         "Unidad Educativa / UA",
+        "1º Lengua Enseñanza",
         "Subsistema",
         "Nivel Autorizado",
         "Turno",
@@ -157,6 +158,7 @@ def generate_ue_excel(output_path=None):
             (item.get("departamento", ""), align_left, "@", False),
             (item.get("distrito", ""), align_left, "@", False),
             (item.get("ue", ""), align_left, "@", False),
+            (item.get("lengua_ensenanza", "Sin Registro"), align_left, "@", False),
             (item.get("subsistema", "Regular"), align_left, "@", False),
             (item.get("nivel_autorizado", ""), align_left, "@", False),
             (item.get("turno", ""), align_center, "@", False),
@@ -195,33 +197,33 @@ def generate_ue_excel(output_path=None):
         curr_r += 1
 
     # Fila de Totales Consolidados Nacionales
-    ws.merge_cells(start_row=curr_r, start_column=1, end_row=curr_r, end_column=12)
+    ws.merge_cells(start_row=curr_r, start_column=1, end_row=curr_r, end_column=13)
     c_tot = ws.cell(row=curr_r, column=1, value="TOTAL CONSOLIDADO NACIONAL")
     c_tot.font = font_bold
     c_tot.alignment = align_center
 
     tot_pct = (tot_v / tot_doc) if tot_doc > 0 else 0.0
     tot_vals = [
-        (13, tot_est, "#,##0"),
-        (14, tot_v, "#,##0"),
-        (15, tot_a, "#,##0"),
-        (16, tot_n, "#,##0"),
-        (17, tot_sin, "#,##0"),
-        (18, tot_doc, "#,##0"),
-        (19, tot_pct, "0.0%"),
-        (20, tot_prejub, "#,##0"),
-        (21, tot_no_prejub_no_pert, "#,##0"),
-        (22, tot_jub, "#,##0"),
-        (23, "Padrón Auditado 100%", "@")
+        (14, tot_est, "#,##0"),
+        (15, tot_v, "#,##0"),
+        (16, tot_a, "#,##0"),
+        (17, tot_n, "#,##0"),
+        (18, tot_sin, "#,##0"),
+        (19, tot_doc, "#,##0"),
+        (20, tot_pct, "0.0%"),
+        (21, tot_prejub, "#,##0"),
+        (22, tot_no_prejub_no_pert, "#,##0"),
+        (23, tot_jub, "#,##0"),
+        (24, "Padrón Auditado 100%", "@")
     ]
 
     for c_i, val, num_fmt in tot_vals:
         cell = ws.cell(row=curr_r, column=c_i, value=val)
         cell.font = font_bold
-        cell.alignment = align_right if c_i < 23 else align_center
+        cell.alignment = align_right if c_i < 24 else align_center
         cell.number_format = num_fmt
 
-    for c_i in range(1, 24):
+    for c_i in range(1, 25):
         cell = ws.cell(row=curr_r, column=c_i)
         cell.fill = fill_gold_light
         cell.border = border_double_bottom
@@ -231,9 +233,9 @@ def generate_ue_excel(output_path=None):
 
     # Anchos de columna balanceados
     widths = {
-        "A": 13, "B": 15, "C": 20, "D": 36, "E": 18, "F": 28, "G": 12, "H": 14,
-        "I": 30, "J": 16, "K": 16, "L": 18, "M": 14, "N": 18, "O": 18, "P": 18,
-        "Q": 18, "R": 15, "S": 16, "T": 14, "U": 26, "V": 14, "W": 28
+        "A": 13, "B": 15, "C": 20, "D": 36, "E": 22, "F": 18, "G": 28, "H": 12, "I": 14,
+        "J": 30, "K": 16, "L": 16, "M": 18, "N": 14, "O": 18, "P": 18, "Q": 18,
+        "R": 18, "S": 15, "T": 16, "U": 14, "V": 26, "W": 14, "X": 28
     }
     for col_letter, w in widths.items():
         ws.column_dimensions[col_letter].width = w

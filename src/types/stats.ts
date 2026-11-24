@@ -1,5 +1,5 @@
 
-export type SourceTab = 'dashboard' | 'uie' | 'pertinencia' | 'mapa' | 'balance';
+export type SourceTab = 'dashboard' | 'uie' | 'pertinencia' | 'mapa' | 'balance' | 'inscritos';
 
 export interface Departamento {
   id: number;

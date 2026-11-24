@@ -12,6 +12,7 @@ import {
   ChevronRight,
   ShieldCheck,
   Sparkles,
+  GraduationCap,
 } from 'lucide-react';
 import Image from 'next/image';
 
@@ -61,19 +62,8 @@ export function Sidebar({
       metric: `${(counts.uie ?? 16273).toLocaleString('es-BO')} UEs`,
     },
     {
-      id: 'pertinencia' as SourceTab,
-      number: '03',
-      label: 'Pertinencia Docente',
-      sublabel: 'Padrón Oficial por Especialidad',
-      badge: '168.7K DOC.',
-      badgeColor: 'bg-amber-50 text-amber-900 border-amber-200',
-      activeColor: 'from-amber-600 to-amber-700',
-      icon: <Compass size={19} />,
-      metric: 'Rangos V · A · N · SIN',
-    },
-    {
       id: 'mapa' as SourceTab,
-      number: '04',
+      number: '03',
       label: 'Cartografía Oficial',
       sublabel: 'Georreferenciación Leaflet',
       badge: '16.2K UEs',
@@ -84,7 +74,7 @@ export function Sidebar({
     },
     {
       id: 'balance' as SourceTab,
-      number: '05',
+      number: '04',
       label: 'Balance Predictivo',
       sublabel: 'Admisión ESFM 2031',
       badge: 'DECISIÓN',
@@ -92,6 +82,17 @@ export function Sidebar({
       activeColor: 'from-purple-600 to-indigo-800',
       icon: <TrendingUp size={19} />,
       metric: 'Demanda Multicriterio',
+    },
+    {
+      id: 'inscritos' as SourceTab,
+      number: '05',
+      label: 'Matrícula ESFM',
+      sublabel: 'Inscritos por Año y Especialidad',
+      badge: '2022-2026',
+      badgeColor: 'bg-amber-50 text-amber-800 border-amber-200',
+      activeColor: 'from-amber-600 to-orange-700',
+      icon: <GraduationCap size={19} />,
+      metric: '46 ESFMs · 22 Esp.',
     },
   ];
 
@@ -114,9 +115,8 @@ export function Sidebar({
 
       {/* Sidebar contenedor con ancho óptimo */}
       <aside
-        className={`fixed top-0 bottom-0 left-0 z-50 w-80 bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-100 flex flex-col shadow-2xl lg:shadow-xl border-r border-slate-200 dark:border-slate-800/80 transition-all duration-300 ease-out select-none ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        className={`fixed top-0 bottom-0 left-0 z-50 w-80 bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-100 flex flex-col shadow-2xl lg:shadow-xl border-r border-slate-200 dark:border-slate-800/80 transition-all duration-300 ease-out select-none ${isOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
       >
         {/* Cabecera Institucional con diseño sobrio */}
         <div className="p-5 border-b border-slate-200 dark:border-slate-800/80 bg-linear-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-950 relative">
@@ -183,11 +183,10 @@ export function Sidebar({
               <button
                 key={item.id}
                 onClick={() => handleSelect(item.id)}
-                className={`w-full text-left p-3 rounded-2xl transition-all flex items-center justify-between gap-3 group relative cursor-pointer border ${
-                  isActive
-                    ? 'bg-linear-to-r from-amber-500/10 via-amber-500/5 to-transparent dark:from-slate-900 dark:to-slate-800 border-[#c9a751] shadow-md text-slate-900 dark:text-white ring-1 ring-[#c9a751]/50'
-                    : 'bg-slate-50/70 hover:bg-slate-100/90 dark:bg-slate-900/40 dark:hover:bg-slate-900/90 border-slate-200/80 hover:border-slate-300 dark:border-slate-800/70 dark:hover:border-slate-700 text-slate-700 dark:text-slate-300'
-                }`}
+                className={`w-full text-left p-3 rounded-2xl transition-all flex items-center justify-between gap-3 group relative cursor-pointer border ${isActive
+                  ? 'bg-linear-to-r from-amber-500/10 via-amber-500/5 to-transparent dark:from-slate-900 dark:to-slate-800 border-[#c9a751] shadow-md text-slate-900 dark:text-white ring-1 ring-[#c9a751]/50'
+                  : 'bg-slate-50/70 hover:bg-slate-100/90 dark:bg-slate-900/40 dark:hover:bg-slate-900/90 border-slate-200/80 hover:border-slate-300 dark:border-slate-800/70 dark:hover:border-slate-700 text-slate-700 dark:text-slate-300'
+                  }`}
               >
                 {/* Indicador de barra vertical activa en el borde izquierdo */}
                 {isActive && (
@@ -197,11 +196,10 @@ export function Sidebar({
                 <div className="flex items-center gap-3 min-w-0 pl-1">
                   {/* Contenedor del ícono con color distintivo */}
                   <div
-                    className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all ${
-                      isActive
-                        ? 'bg-[#c9a751] text-slate-950 shadow-md shadow-[#c9a751]/30 font-black'
-                        : 'bg-white dark:bg-slate-800/80 text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100 group-hover:bg-slate-100 dark:group-hover:bg-slate-800 border border-slate-200 dark:border-slate-700/60 shadow-2xs'
-                    }`}
+                    className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all ${isActive
+                      ? 'bg-[#c9a751] text-slate-950 shadow-md shadow-[#c9a751]/30 font-black'
+                      : 'bg-white dark:bg-slate-800/80 text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100 group-hover:bg-slate-100 dark:group-hover:bg-slate-800 border border-slate-200 dark:border-slate-700/60 shadow-2xs'
+                      }`}
                   >
                     {item.icon}
                   </div>
@@ -228,20 +226,18 @@ export function Sidebar({
                 {/* Badge lateral y flecha */}
                 <div className="flex flex-col items-end gap-1 shrink-0">
                   <span
-                    className={`text-[9px] font-black px-2 py-0.5 rounded-md border shrink-0 uppercase tracking-wider ${
-                      isActive
-                        ? 'bg-[#c9a751]/15 text-[#85681c] border-[#c9a751]/30 dark:bg-[#c9a751]/20 dark:text-[#f3d484] dark:border-[#c9a751]/40'
-                        : 'bg-slate-100 text-slate-600 border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700'
-                    }`}
+                    className={`text-[9px] font-black px-2 py-0.5 rounded-md border shrink-0 uppercase tracking-wider ${isActive
+                      ? 'bg-[#c9a751]/15 text-[#85681c] border-[#c9a751]/30 dark:bg-[#c9a751]/20 dark:text-[#f3d484] dark:border-[#c9a751]/40'
+                      : 'bg-slate-100 text-slate-600 border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700'
+                      }`}
                   >
                     {item.badge}
                   </span>
                   <ChevronRight
-                    className={`w-3.5 h-3.5 transition-transform ${
-                      isActive
-                        ? 'text-[#c9a751] translate-x-0.5'
-                        : 'text-slate-400 group-hover:text-slate-600 dark:text-slate-600 dark:group-hover:text-slate-400'
-                    }`}
+                    className={`w-3.5 h-3.5 transition-transform ${isActive
+                      ? 'text-[#c9a751] translate-x-0.5'
+                      : 'text-slate-400 group-hover:text-slate-600 dark:text-slate-600 dark:group-hover:text-slate-400'
+                      }`}
                   />
                 </div>
               </button>

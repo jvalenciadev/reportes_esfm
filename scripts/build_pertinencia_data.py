@@ -15,6 +15,84 @@ import openpyxl
 import sqlite3
 from collections import defaultdict, Counter
 
+ESPECIALIDADES_22_OFICIALES = [
+    (1, "EDUCACIÓN INICIAL EN FAMILIA COMUNITARIA"),
+    (2, "EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL"),
+    (3, "ARTES PLÁSTICAS Y VISUALES"),
+    (4, "CIENCIAS NATURALES: BIOLOGÍA - GEOGRAFÍA"),
+    (5, "CIENCIAS NATURALES: FÍSICA - QUÍMICA"),
+    (6, "CIENCIAS SOCIALES"),
+    (7, "COMUNICACIÓN Y LENGUAJES: LENGUA CASTELLANA"),
+    (8, "COMUNICACIÓN Y LENGUAJES: LENGUA EXTRANJERA (INGLÉS)"),
+    (9, "COSMOVISIONES, FILOSOFÍAS Y SICOLOGÍA"),
+    (10, "EDUCACIÓN FÍSICA Y DEPORTES"),
+    (11, "EDUCACIÓN MUSICAL"),
+    (12, "MATEMÁTICA"),
+    (13, "VALORES, ESPIRITUALIDAD Y RELIGIONES"),
+    (14, "AGROPECUARIA"),
+    (15, "CARPINTERÍA INDUSTRIAL EN MADERA Y METAL"),
+    (16, "ELECTRICIDAD Y ELECTRÓNICA"),
+    (17, "ELECTROMECÁNICA"),
+    (18, "INDUSTRIA TEXTIL Y CONFECCIÓN"),
+    (19, "MECÁNICA AUTOMOTRIZ"),
+    (20, "MECÁNICA INDUSTRIAL"),
+    (21, "TRANSFORMACIÓN DE ALIMENTOS Y GASTRONOMÍA"),
+    (22, "EDUCACIÓN ESPECIAL PARA PERSONAS CON DISCAPACIDAD"),
+]
+
+
+def normalize_especialidad_22(esp_raw: str) -> tuple[int, str] | None:
+    """Normaliza la especialidad de formación a una de las 22 especialidades oficiales ESFM."""
+    s = (esp_raw or "").strip().upper()
+    if not s or s == "SIN ESPECIALIDAD ESPECIFICADA":
+        return None
+    if any(k in s for k in ["DISCAPACIDAD", "ED ESPECIAL", "ED. ESPECIAL", "EDUCACIÓN ESPECIAL", "EDUCACION ESPECIAL", "AUDITIVA", "INTELECTUAL"]):
+        return (22, "EDUCACIÓN ESPECIAL PARA PERSONAS CON DISCAPACIDAD")
+    if any(k in s for k in ["AGROPEC", "AGRONOM", "VETERINAR"]):
+        return (14, "AGROPECUARIA")
+    if any(k in s for k in ["CARPINTER", "MADERA Y METAL", "EBANISTER"]):
+        return (15, "CARPINTERÍA INDUSTRIAL EN MADERA Y METAL")
+    if "ELECTROMEC" in s:
+        return (17, "ELECTROMECÁNICA")
+    if any(k in s for k in ["ELECTRIC", "ELECTRÓNIC", "ELECTRONIC"]):
+        return (16, "ELECTRICIDAD Y ELECTRÓNICA")
+    if any(k in s for k in ["TEXTIL", "CONFECC", "COSTURA", "SASTRER"]):
+        return (18, "INDUSTRIA TEXTIL Y CONFECCIÓN")
+    if "AUTOMOT" in s:
+        return (19, "MECÁNICA AUTOMOTRIZ")
+    if "MECÁNICA IND" in s or "MECANICA IND" in s:
+        return (20, "MECÁNICA INDUSTRIAL")
+    if any(k in s for k in ["ALIMENT", "GASTRONOM", "NUTRIC"]):
+        return (21, "TRANSFORMACIÓN DE ALIMENTOS Y GASTRONOMÍA")
+    if any(k in s for k in ["ARTES PLÁST", "ARTES PLAST", "PLÁSTICAS", "PLASTICAS", "VISUALES", "DIBUJO"]):
+        return (3, "ARTES PLÁSTICAS Y VISUALES")
+    if any(k in s for k in ["FÍSICA Y DEP", "FISICA Y DEP", "ED. FISICA", "ED FISICA", "EDUCACIÓN FÍSICA", "EDUCACION FISICA", "DEPORTE"]):
+        return (10, "EDUCACIÓN FÍSICA Y DEPORTES")
+    if any(k in s for k in ["MUSICAL", "MÚSICA", "MUSICA"]):
+        return (11, "EDUCACIÓN MUSICAL")
+    if any(k in s for k in ["VALORES", "ESPIRITUAL", "RELIGION"]):
+        return (13, "VALORES, ESPIRITUALIDAD Y RELIGIONES")
+    if any(k in s for k in ["COSMOVIS", "FILOSOF", "SICOLOG", "PSICOLOG"]):
+        return (9, "COSMOVISIONES, FILOSOFÍAS Y SICOLOGÍA")
+    if any(k in s for k in ["EXTRANJ", "INGLÉS", "INGLES", "FRANCÉS", "FRANCES"]):
+        return (8, "COMUNICACIÓN Y LENGUAJES: LENGUA EXTRANJERA (INGLÉS)")
+    if any(k in s for k in ["CASTELLAN", "LITERATURA", "LENGUAJE", "LENGUAS", "COMUNICACIÓN", "COMUNICACION"]):
+        return (7, "COMUNICACIÓN Y LENGUAJES: LENGUA CASTELLANA")
+    if any(k in s for k in ["FÍSICA - QUÍMICA", "FISICA - QUIMICA", "FÍSICA Y QUÍMICA", "FISICA Y QUIMICA", "QUÍMICA", "QUIMICA", "FÍSICA", "FISICA"]):
+        return (5, "CIENCIAS NATURALES: FÍSICA - QUÍMICA")
+    if any(k in s for k in ["BIOLOG", "GEOGRAF", "CIENCIAS NATURALES"]):
+        return (4, "CIENCIAS NATURALES: BIOLOGÍA - GEOGRAFÍA")
+    if any(k in s for k in ["CIENCIAS SOCIALES", "HISTORIA", "CÍVICA", "CIVICA", "ESTUDIOS SOCIALES"]):
+        return (6, "CIENCIAS SOCIALES")
+    if "MATEMÁT" in s or "MATEMAT" in s:
+        return (12, "MATEMÁTICA")
+    if any(k in s for k in ["INICIAL", "PARVULAR", "PREESCOLAR"]):
+        return (1, "EDUCACIÓN INICIAL EN FAMILIA COMUNITARIA")
+    if any(k in s for k in ["PRIMARIA", "BÁSICA", "BASICA", "PRIMER Y SEGUNDO", "MAESTRO DE AULA", "PROFESOR DE CURSO"]):
+        return (2, "EDUCACIÓN PRIMARIA COMUNITARIA VOCACIONAL")
+    return None
+
+
 def build_pertinencia_oficial():
     root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     xlsx_path = os.path.join(root_dir, "public", "datos", "Pertinencia_oficial - copia.xlsx")
@@ -186,6 +264,7 @@ def build_pertinencia_oficial():
         'distrito': '',
         'distritos': Counter(),
         'ue': '',
+        'lenguas': Counter(),
         'subsistema': '',
         'subsistemas': Counter(),
         'turno': '',
@@ -213,31 +292,32 @@ def build_pertinencia_oficial():
 
     total_filas = 0
 
-    # 30 columnas verificadas:
+    # 31 columnas verificadas:
     # 0: dep_id, 1: departamento, 2: dis_id, 3: distrito, 4: ID_UE, 5: ue,
-    # 6: cantidad_est, 7: Dependencia, 8: Subsistema, 9: Dependencia_dup, 10: Turno,
-    # 11: Nivel Autorizado, 12: Dirección, 13: Cord X, 14: Cord Y, 15: ci,
-    # 16: fecha_naci, 17: sexo, 18: años, 19: codigo_cargo, 20: cargo,
-    # 21: cod_especialidad, 22: especialidad_formacion, 23: condicion_formacion,
-    # 24: caso_aplicado, 25: detalle_caso, 26: pertinencia, 27: nivel,
-    # 28: Jubilacion, 29: PreJubilacion
+    # 6: 1º LENGUA ENSEÑANZA, 7: cantidad_est, 8: Dependencia, 9: Subsistema, 10: Dependencia_dup, 11: Turno,
+    # 12: Nivel Autorizado, 13: Dirección, 14: Cord X, 15: Cord Y, 16: ci,
+    # 17: fecha_naci, 18: sexo, 19: años, 20: codigo_cargo, 21: cargo,
+    # 22: cod_especialidad, 23: especialidad_formacion, 24: condicion_formacion,
+    # 25: caso_aplicado, 26: detalle_caso, 27: pertinencia, 28: nivel,
+    # 29: Jubilacion, 30: PreJubilacion
     for r in ws.iter_rows(min_row=2, values_only=True):
         total_filas += 1
         depto = str(r[1]).strip().upper() if r[1] else 'DESCONOCIDO'
         distrito = str(r[3]).strip().upper() if r[3] else 'DESCONOCIDO'
         id_ue = int(r[4]) if r[4] and str(r[4]).isdigit() else (r[4] or 0)
         ue = str(r[5]).strip().upper() if r[5] else 'SIN NOMBRE'
-        cantidad_est = int(r[6]) if r[6] and str(r[6]).isdigit() else (int(r[6]) if isinstance(r[6], (int, float)) else 0)
-        dependencia = str(r[7]).strip() if r[7] else 'FISCAL'
-        subsistema = str(r[8]).strip() if r[8] else 'Regular'
-        turno = str(r[10]).strip() if r[10] else 'Mañana'
-        nivel_aut = str(r[11]).strip() if r[11] else ''
-        direccion = str(r[12]).strip() if r[12] else ''
-        cord_x = r[13] if isinstance(r[13], (int, float)) else None
-        cord_y = r[14] if isinstance(r[14], (int, float)) else None
+        lengua_ensenanza = str(r[6]).strip().upper() if r[6] else ''
+        cantidad_est = int(r[7]) if r[7] and str(r[7]).isdigit() else (int(r[7]) if isinstance(r[7], (int, float)) else 0)
+        dependencia = str(r[8]).strip() if r[8] else 'FISCAL'
+        subsistema = str(r[9]).strip() if r[9] else 'Regular'
+        turno = str(r[11]).strip() if r[11] else 'Mañana'
+        nivel_aut = str(r[12]).strip() if r[12] else ''
+        direccion = str(r[13]).strip() if r[13] else ''
+        cord_x = r[14] if isinstance(r[14], (int, float)) else None
+        cord_y = r[15] if isinstance(r[15], (int, float)) else None
 
         # Género (1: Masculino, 2: Femenino)
-        sexo_raw = str(r[17]).strip() if r[17] is not None else ''
+        sexo_raw = str(r[18]).strip() if r[18] is not None else ''
         if sexo_raw in ['2', 'F', 'FEMENINO']:
             gen_key = 'femenino'
         elif sexo_raw in ['1', 'M', 'MASCULINO']:
@@ -245,25 +325,25 @@ def build_pertinencia_oficial():
         else:
             gen_key = 'otro'
 
-        cargo = str(r[20]).strip().upper() if r[20] else ''
-        esp_form = str(r[22]).strip().upper() if r[22] else 'SIN ESPECIALIDAD ESPECIFICADA'
-        condicion = str(r[23]).strip().upper() if r[23] else 'OTRO'
-        caso = str(r[24]).strip() if r[24] else 'SIN CASO'
-        pert_raw = str(r[26]).strip().upper() if r[26] else 'SIN PERTINENCIA'
-        nivel = str(r[27]).strip() if r[27] else 'OTRO'
-        # Jubilación: Columna 28 (Padrón Oficial: =IF(S>=60, "SI", "NO"))
+        cargo = str(r[21]).strip().upper() if r[21] else ''
+        esp_form = str(r[23]).strip().upper() if r[23] else 'SIN ESPECIALIDAD ESPECIFICADA'
+        condicion = str(r[24]).strip().upper() if r[24] else 'OTRO'
+        caso = str(r[25]).strip() if r[25] else 'SIN CASO'
+        pert_raw = str(r[27]).strip().upper() if r[27] else 'SIN PERTINENCIA'
+        nivel = str(r[28]).strip() if r[28] else 'OTRO'
+        # Jubilación: Columna 29 (Padrón Oficial: =IF(T>=60, "SI", "NO"))
         is_jub = False
-        jub_val = str(r[28]).strip().upper() if r[28] is not None else ''
+        jub_val = str(r[29]).strip().upper() if r[29] is not None else ''
         if jub_val == 'SI':
             is_jub = True
         else:
             try:
-                if r[18] is not None and float(r[18]) >= 60:
+                if r[19] is not None and float(r[19]) >= 60:
                     is_jub = True
             except (ValueError, TypeError):
                 pass
         jubilacion = 'SI' if is_jub else 'NO'
-        prejubilacion = str(r[29]).strip().upper() if r[29] is not None else 'NO'
+        prejubilacion = str(r[30]).strip().upper() if r[30] is not None else 'NO'
 
         # Mapeo oficial de rangos
         if 'ALTA' in pert_raw or pert_raw == 'V':
@@ -331,14 +411,16 @@ def build_pertinencia_oficial():
             if not is_prejub and is_no_pert:
                 genero_depto[depto][gen_key]['no_prejub_no_pert'] += 1
 
-        # Acumular Especialidad
-        if esp_form:
-            especialidades_data[esp_form]['docentes'] += 1
-            especialidades_data[esp_form][color] += 1
+        # Acumular Especialidad (normalizada a las 22 Especialidades Oficiales ESFM)
+        norm_esp = normalize_especialidad_22(esp_form)
+        if norm_esp:
+            _, esp_canon = norm_esp
+            especialidades_data[esp_canon]['docentes'] += 1
+            especialidades_data[esp_canon][color] += 1
             if id_ue:
-                especialidades_data[esp_form]['ues'].add(id_ue)
-            especialidades_data[esp_form]['por_departamento'][depto][color] += 1
-            especialidades_data[esp_form]['por_departamento'][depto]['total'] += 1
+                especialidades_data[esp_canon]['ues'].add(id_ue)
+            especialidades_data[esp_canon]['por_departamento'][depto][color] += 1
+            especialidades_data[esp_canon]['por_departamento'][depto]['total'] += 1
 
         # Acumular datos enriquecidos por UE / UA
         u_rec = ue_map[id_ue]
@@ -348,6 +430,7 @@ def build_pertinencia_oficial():
         u_rec['total'] += 1
         u_rec[color] += 1
         u_rec['estudiantes'] = cantidad_est
+        if lengua_ensenanza: u_rec['lenguas'][lengua_ensenanza] += 1
         if subsistema: u_rec['subsistemas'][subsistema] += 1
         if turno: u_rec['turnos'][turno] += 1
         if dependencia: u_rec['dependencias'][dependencia] += 1
@@ -644,9 +727,10 @@ def build_pertinencia_oficial():
             }
         })
 
-    # Especialidades destacadas
+    # 22 Especialidades Oficiales ESFM
     top_esp_list = []
-    for esp_nom, esp_val in sorted(especialidades_data.items(), key=lambda x: x[1]['docentes'], reverse=True)[:100]:
+    for esp_id, esp_nom in ESPECIALIDADES_22_OFICIALES:
+        esp_val = especialidades_data[esp_nom]
         tot_esp = esp_val['docentes']
         dept_dict = {}
         for d_name in deptos_orden:
@@ -814,6 +898,7 @@ def build_pertinencia_oficial():
             diagnostico = "Baja Pertinencia / Sin Pertinencia"
 
         distrito_principal = max(counts['distritos'].items(), key=lambda x: x[1])[0] if counts['distritos'] else 'DESCONOCIDO'
+        lengua_principal = max(counts['lenguas'].items(), key=lambda x: x[1])[0] if counts['lenguas'] else 'Sin Registro'
         subsistema_principal = max(counts['subsistemas'].items(), key=lambda x: x[1])[0] if counts['subsistemas'] else 'Regular'
         turno_principal = max(counts['turnos'].items(), key=lambda x: x[1])[0] if counts['turnos'] else 'Mañana'
         dependencia_principal = max(counts['dependencias'].items(), key=lambda x: x[1])[0] if counts['dependencias'] else 'Fiscal'
@@ -827,6 +912,7 @@ def build_pertinencia_oficial():
             'departamento': counts['depto'],
             'distrito': distrito_principal,
             'ue': counts['ue'],
+            'lengua_ensenanza': lengua_principal,
             'subsistema': subsistema_principal,
             'nivel_autorizado': counts['nivel_autorizado'] or 'Sin Registro',
             'turno': turno_principal,
