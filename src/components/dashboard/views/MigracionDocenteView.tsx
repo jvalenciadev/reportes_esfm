@@ -81,22 +81,20 @@ export default function MigracionDocenteView() {
         <div className="flex flex-wrap items-center gap-2">
           <button
             onClick={() => setPestañaPrincipal('estudiantes')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-black transition-all ${
-              pestañaPrincipal === 'estudiantes'
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-black transition-all ${pestañaPrincipal === 'estudiantes'
                 ? 'bg-indigo-700 text-white shadow-sm ring-2 ring-indigo-500/20'
                 : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-            }`}
+              }`}
           >
             <GraduationCap className="w-4 h-4 text-amber-300" />
             <span>Trazabilidad de Titulados ESFM (35.474 Estudiantes 2014–2025)</span>
           </button>
           <button
             onClick={() => setPestañaPrincipal('planilla')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-black transition-all ${
-              pestañaPrincipal === 'planilla'
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-black transition-all ${pestañaPrincipal === 'planilla'
                 ? 'bg-cyan-700 text-white shadow-sm ring-2 ring-cyan-500/20'
                 : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-            }`}
+              }`}
           >
             <ArrowLeftRight className="w-4 h-4 text-cyan-300" />
             <span>Dinámica de Planilla Docente SEP (2024–2026)</span>
@@ -126,31 +124,31 @@ export default function MigracionDocenteView() {
             </div>
 
             <div className="flex items-center gap-4 flex-wrap text-[11px]">
-              <span className="flex items-center gap-1.5" title="Docentes que continúan ejerciendo en el mismo departamento de la ESFM">
+              <span className="flex items-center gap-1.5" title="Docentes que ingresaron a ejercer en el mismo departamento de la ESFM">
                 <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                <span className="text-slate-500">Retención en Sede:</span>
-                <strong className="text-emerald-700 font-black">
+                <span className="text-slate-500 dark:text-slate-400">Retención en Sede:</span>
+                <strong className="text-emerald-700 dark:text-emerald-400 font-black">
                   {kpisEst.retencion_sede_esfm.toLocaleString('es-BO')} ({kpisEst.pct_retencion_sede}%)
                 </strong>
               </span>
-              <span className="flex items-center gap-1.5" title="Egresados que en su 1er año laboral salieron a otro departamento (retorno a departamento de origen)">
+              <span className="flex items-center gap-1.5" title="Egresados que salieron a ejercer a otro departamento (retorno a departamento de origen)">
                 <span className="w-2 h-2 rounded-full bg-amber-500" />
-                <span className="text-slate-500">Retorno Inmediato a su Depto:</span>
-                <strong className="text-amber-700 font-black">
+                <span className="text-slate-500 dark:text-slate-400">Retorno / Emigración:</span>
+                <strong className="text-amber-700 dark:text-amber-400 font-black">
                   {kpisEst.emigracion_retorno_inmediato.toLocaleString('es-BO')} ({kpisEst.pct_emigracion_retorno}%)
                 </strong>
               </span>
-              <span className="flex items-center gap-1.5" title="Egresados que iniciaron en la sede y migraron en años posteriores">
+              <span className="flex items-center gap-1.5" title="Egresados que iniciaron en la sede y migraron a otro departamento en años posteriores">
                 <span className="w-2 h-2 rounded-full bg-sky-500" />
-                <span className="text-slate-500">Emigración Tardía:</span>
-                <strong className="text-sky-700 font-black">
+                <span className="text-slate-500 dark:text-slate-400">Movilidad Tardía:</span>
+                <strong className="text-sky-700 dark:text-sky-400 font-black">
                   {kpisEst.emigracion_tardia.toLocaleString('es-BO')} ({kpisEst.pct_emigracion_tardia}%)
                 </strong>
               </span>
               <span className="flex items-center gap-1.5" title="Titulados de las ESFM sin ítem en planilla SEP">
                 <span className="w-2 h-2 rounded-full bg-slate-400" />
-                <span className="text-slate-500">Sin Inserción en SEP:</span>
-                <strong className="text-slate-700 font-black">
+                <span className="text-slate-500 dark:text-slate-400">Sin Inserción en SEP:</span>
+                <strong className="text-slate-700 dark:text-slate-300 font-black">
                   {kpisEst.sin_insercion_sep.toLocaleString('es-BO')} ({kpisEst.pct_sin_insercion}%)
                 </strong>
               </span>
@@ -208,21 +206,21 @@ export default function MigracionDocenteView() {
                       </div>
                     </div>
                     {/* Barra Apilada */}
-                    <div className="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden flex">
+                    <div className="w-full bg-slate-100 dark:bg-slate-800 h-2.5 rounded-full overflow-hidden flex">
                       <div
                         style={{ width: `${sg.pct_quedan_sede}%` }}
                         className="bg-emerald-500 hover:bg-emerald-600 transition-all"
-                        title={`Retención en Sede: ${sg.quedan_sede.toLocaleString('es-BO')} (${sg.pct_quedan_sede}%)`}
+                        title={`Sede ESFM: ${sg.quedan_sede.toLocaleString('es-BO')} (${sg.pct_quedan_sede}%)`}
                       />
                       <div
                         style={{ width: `${sg.pct_emigran_retornan}%` }}
                         className="bg-amber-500 hover:bg-amber-600 transition-all"
-                        title={`Retorno / Emigración Inmediata: ${sg.emigran_retornan_inmediato.toLocaleString('es-BO')} (${sg.pct_emigran_retornan}%)`}
+                        title={`Retorno / Emigración: ${sg.emigran_retornan_inmediato.toLocaleString('es-BO')} (${sg.pct_emigran_retornan}%)`}
                       />
                       <div
                         style={{ width: `${sg.pct_sin_ejercer}%` }}
-                        className="bg-slate-300 hover:bg-slate-400 transition-all"
-                        title={`Sin Inserción en Planilla: ${sg.sin_ejercer.toLocaleString('es-BO')} (${sg.pct_sin_ejercer}%)`}
+                        className="bg-slate-300 dark:bg-slate-600 hover:bg-slate-400 dark:hover:bg-slate-500 transition-all"
+                        title={`Sin Inserción en SEP: ${sg.sin_ejercer.toLocaleString('es-BO')} (${sg.pct_sin_ejercer}%)`}
                       />
                     </div>
                   </div>
@@ -266,18 +264,22 @@ export default function MigracionDocenteView() {
                   if (!dSel) return null;
                   return (
                     <div className="space-y-3 mt-3">
-                      <div className="grid grid-cols-3 gap-2 text-center">
-                        <div className="bg-slate-50 p-2 rounded-xl border border-slate-200">
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
+                        <div className="bg-slate-50 dark:bg-slate-800 p-2 rounded-xl border border-slate-200 dark:border-slate-700">
                           <span className="text-[9px] uppercase font-bold text-slate-400 block">Titulados</span>
-                          <span className="text-sm font-black text-slate-800">{dSel.total_titulados.toLocaleString('es-BO')}</span>
+                          <span className="text-sm font-black text-slate-800 dark:text-slate-100">{dSel.total_titulados.toLocaleString('es-BO')}</span>
                         </div>
-                        <div className="bg-emerald-50 p-2 rounded-xl border border-emerald-200">
-                          <span className="text-[9px] uppercase font-bold text-emerald-600 block">Quedan en Sede</span>
-                          <span className="text-sm font-black text-emerald-800">{dSel.pct_quedan_sede}%</span>
+                        <div className="bg-emerald-50 dark:bg-emerald-950/40 p-2 rounded-xl border border-emerald-200 dark:border-emerald-800">
+                          <span className="text-[9px] uppercase font-bold text-emerald-600 dark:text-emerald-400 block">Quedan en Sede</span>
+                          <span className="text-sm font-black text-emerald-800 dark:text-emerald-200">{dSel.pct_quedan_sede}%</span>
                         </div>
-                        <div className="bg-amber-50 p-2 rounded-xl border border-amber-200">
-                          <span className="text-[9px] uppercase font-bold text-amber-600 block">Vuelven / Salen</span>
-                          <span className="text-sm font-black text-amber-800">{dSel.pct_emigran_inmediato}%</span>
+                        <div className="bg-amber-50 dark:bg-amber-950/40 p-2 rounded-xl border border-amber-200 dark:border-amber-800">
+                          <span className="text-[9px] uppercase font-bold text-amber-600 dark:text-amber-400 block">Vuelven / Salen</span>
+                          <span className="text-sm font-black text-amber-800 dark:text-amber-200">{dSel.pct_emigran_inmediato}%</span>
+                        </div>
+                        <div className="bg-slate-100 dark:bg-slate-800/80 p-2 rounded-xl border border-slate-200 dark:border-slate-700">
+                          <span className="text-[9px] uppercase font-bold text-slate-500 dark:text-slate-400 block">Sin Inserción</span>
+                          <span className="text-sm font-black text-slate-700 dark:text-slate-300">{dSel.pct_sin_ejercer}%</span>
                         </div>
                       </div>
 
@@ -515,11 +517,10 @@ export default function MigracionDocenteView() {
                               -{d.salientes.toLocaleString('es-BO')}
                             </span>
                             <span
-                              className={`ml-1 text-[10px] font-black px-1.5 py-0.5 rounded ${
-                                saldoPositivo
+                              className={`ml-1 text-[10px] font-black px-1.5 py-0.5 rounded ${saldoPositivo
                                   ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
                                   : 'bg-rose-50 text-rose-800 border border-rose-200'
-                              }`}
+                                }`}
                             >
                               {saldoPositivo ? `+${d.saldo}` : d.saldo}
                             </span>
@@ -568,7 +569,7 @@ export default function MigracionDocenteView() {
                   <div>
                     <h3 className="text-sm font-black text-slate-900 flex items-center gap-1.5">
                       <Compass className="w-4 h-4 text-amber-600" />
-                      Top Corredores de Traslado
+                      Top Corredores de Traslado de Maestros en Ejercicio
                     </h3>
                     <p className="text-[11px] text-slate-500">
                       Rutas más transitadas entre departamentos
@@ -579,21 +580,19 @@ export default function MigracionDocenteView() {
                   <div className="flex items-center gap-1 bg-slate-100 p-0.5 rounded-xl border border-slate-200 text-[10px] font-bold">
                     <button
                       onClick={() => setPeriodoFlujo('2024_2025')}
-                      className={`px-2 py-1 rounded-lg transition-all ${
-                        periodoFlujo === '2024_2025'
+                      className={`px-2 py-1 rounded-lg transition-all ${periodoFlujo === '2024_2025'
                           ? 'bg-white text-slate-900 shadow-2xs font-extrabold'
                           : 'text-slate-500 hover:text-slate-800'
-                      }`}
+                        }`}
                     >
                       2024→25
                     </button>
                     <button
                       onClick={() => setPeriodoFlujo('2025_2026')}
-                      className={`px-2 py-1 rounded-lg transition-all ${
-                        periodoFlujo === '2025_2026'
+                      className={`px-2 py-1 rounded-lg transition-all ${periodoFlujo === '2025_2026'
                           ? 'bg-white text-slate-900 shadow-2xs font-extrabold'
                           : 'text-slate-500 hover:text-slate-800'
-                      }`}
+                        }`}
                     >
                       2025→26
                     </button>
@@ -648,19 +647,17 @@ export default function MigracionDocenteView() {
                     return (
                       <div
                         key={dep}
-                        className={`p-2 rounded-xl text-center border transition-all ${
-                          esPos
+                        className={`p-2 rounded-xl text-center border transition-all ${esPos
                             ? 'bg-emerald-50/60 border-emerald-200'
                             : 'bg-rose-50/60 border-rose-200'
-                        }`}
+                          }`}
                       >
                         <span className="text-[10px] font-extrabold text-slate-600 block truncate">
                           {dep}
                         </span>
                         <span
-                          className={`text-xs font-black block mt-0.5 ${
-                            esPos ? 'text-emerald-700' : 'text-rose-700'
-                          }`}
+                          className={`text-xs font-black block mt-0.5 ${esPos ? 'text-emerald-700' : 'text-rose-700'
+                            }`}
                         >
                           {esPos ? `+${bal}` : bal}
                         </span>

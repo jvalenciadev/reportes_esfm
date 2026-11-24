@@ -2,25 +2,27 @@
   "fuente": "datos_migracion_estudiantes.xlsx (Corte 35.474 titulados ESFM 2014-2025)",
   "kpis_globales": {
     "total_titulados": 35468,
-    "retencion_sede_esfm": 21921,
-    "pct_retencion_sede": 61.8,
-    "emigracion_retorno_inmediato": 6103,
-    "pct_emigracion_retorno": 17.2,
-    "emigracion_tardia": 1959,
-    "pct_emigracion_tardia": 5.5,
-    "retorno_tardio_esfm": 1671,
-    "itinerantes": 1178,
+    "retencion_sede_esfm": 23880,
+    "pct_retencion_sede": 67.3,
+    "emigracion_retorno_inmediato": 8952,
+    "pct_emigracion_retorno": 25.3,
     "sin_insercion_sep": 2636,
-    "pct_sin_insercion": 7.4
+    "pct_sin_insercion": 7.4,
+    "emigracion_tardia": 877,
+    "pct_emigracion_tardia": 2.5,
+    "retorno_tardio_esfm": 1671,
+    "pct_retorno_tardio": 4.7,
+    "itinerantes": 646,
+    "pct_itinerantes": 1.8
   },
   "series_por_gestion": [
     {
       "gestion": 2014,
       "total_titulados": 6025,
-      "quedan_sede": 3964,
-      "pct_quedan_sede": 65.8,
-      "emigran_retornan_inmediato": 807,
-      "pct_emigran_retornan": 13.4,
+      "quedan_sede": 4435,
+      "pct_quedan_sede": 73.6,
+      "emigran_retornan_inmediato": 1284,
+      "pct_emigran_retornan": 21.3,
       "sin_ejercer": 306,
       "pct_sin_ejercer": 5.1,
       "espera_promedio_anos": 2.6
@@ -28,10 +30,10 @@
     {
       "gestion": 2015,
       "total_titulados": 5709,
-      "quedan_sede": 3331,
-      "pct_quedan_sede": 58.3,
-      "emigran_retornan_inmediato": 1063,
-      "pct_emigran_retornan": 18.6,
+      "quedan_sede": 3731,
+      "pct_quedan_sede": 65.4,
+      "emigran_retornan_inmediato": 1703,
+      "pct_emigran_retornan": 29.8,
       "sin_ejercer": 275,
       "pct_sin_ejercer": 4.8,
       "espera_promedio_anos": 2.5
@@ -39,10 +41,10 @@
     {
       "gestion": 2016,
       "total_titulados": 581,
-      "quedan_sede": 408,
-      "pct_quedan_sede": 70.2,
-      "emigran_retornan_inmediato": 66,
-      "pct_emigran_retornan": 11.4,
+      "quedan_sede": 452,
+      "pct_quedan_sede": 77.8,
+      "emigran_retornan_inmediato": 101,
+      "pct_emigran_retornan": 17.4,
       "sin_ejercer": 28,
       "pct_sin_ejercer": 4.8,
       "espera_promedio_anos": 1.8
@@ -50,10 +52,10 @@
     {
       "gestion": 2017,
       "total_titulados": 3573,
-      "quedan_sede": 2184,
-      "pct_quedan_sede": 61.1,
-      "emigran_retornan_inmediato": 588,
-      "pct_emigran_retornan": 16.5,
+      "quedan_sede": 2418,
+      "pct_quedan_sede": 67.7,
+      "emigran_retornan_inmediato": 1062,
+      "pct_emigran_retornan": 29.7,
       "sin_ejercer": 93,
       "pct_sin_ejercer": 2.6,
       "espera_promedio_anos": 1.8
@@ -61,10 +63,10 @@
     {
       "gestion": 2018,
       "total_titulados": 279,
-      "quedan_sede": 141,
-      "pct_quedan_sede": 50.5,
-      "emigran_retornan_inmediato": 47,
-      "pct_emigran_retornan": 16.8,
+      "quedan_sede": 163,
+      "pct_quedan_sede": 58.4,
+      "emigran_retornan_inmediato": 95,
+      "pct_emigran_retornan": 34.1,
       "sin_ejercer": 21,
       "pct_sin_ejercer": 7.5,
       "espera_promedio_anos": 1.4
@@ -72,10 +74,10 @@
     {
       "gestion": 2019,
       "total_titulados": 2888,
-      "quedan_sede": 1719,
-      "pct_quedan_sede": 59.5,
-      "emigran_retornan_inmediato": 570,
-      "pct_emigran_retornan": 19.7,
+      "quedan_sede": 1877,
+      "pct_quedan_sede": 65.0,
+      "emigran_retornan_inmediato": 925,
+      "pct_emigran_retornan": 32.0,
       "sin_ejercer": 86,
       "pct_sin_ejercer": 3.0,
       "espera_promedio_anos": 2.1
@@ -83,10 +85,10 @@
     {
       "gestion": 2020,
       "total_titulados": 2229,
-      "quedan_sede": 1428,
-      "pct_quedan_sede": 64.1,
-      "emigran_retornan_inmediato": 398,
-      "pct_emigran_retornan": 17.9,
+      "quedan_sede": 1540,
+      "pct_quedan_sede": 69.1,
+      "emigran_retornan_inmediato": 635,
+      "pct_emigran_retornan": 28.5,
       "sin_ejercer": 54,
       "pct_sin_ejercer": 2.4,
       "espera_promedio_anos": 1.3
@@ -94,10 +96,10 @@
     {
       "gestion": 2021,
       "total_titulados": 2445,
-      "quedan_sede": 1590,
-      "pct_quedan_sede": 65.0,
-      "emigran_retornan_inmediato": 439,
-      "pct_emigran_retornan": 18.0,
+      "quedan_sede": 1724,
+      "pct_quedan_sede": 70.5,
+      "emigran_retornan_inmediato": 646,
+      "pct_emigran_retornan": 26.4,
       "sin_ejercer": 75,
       "pct_sin_ejercer": 3.1,
       "espera_promedio_anos": 1.2
@@ -105,10 +107,10 @@
     {
       "gestion": 2022,
       "total_titulados": 2799,
-      "quedan_sede": 1859,
-      "pct_quedan_sede": 66.4,
-      "emigran_retornan_inmediato": 542,
-      "pct_emigran_retornan": 19.4,
+      "quedan_sede": 1975,
+      "pct_quedan_sede": 70.6,
+      "emigran_retornan_inmediato": 700,
+      "pct_emigran_retornan": 25.0,
       "sin_ejercer": 124,
       "pct_sin_ejercer": 4.4,
       "espera_promedio_anos": 1.1
@@ -116,10 +118,10 @@
     {
       "gestion": 2023,
       "total_titulados": 2770,
-      "quedan_sede": 1833,
-      "pct_quedan_sede": 66.2,
-      "emigran_retornan_inmediato": 555,
-      "pct_emigran_retornan": 20.0,
+      "quedan_sede": 1936,
+      "pct_quedan_sede": 69.9,
+      "emigran_retornan_inmediato": 676,
+      "pct_emigran_retornan": 24.4,
       "sin_ejercer": 158,
       "pct_sin_ejercer": 5.7,
       "espera_promedio_anos": 1.1
@@ -127,10 +129,10 @@
     {
       "gestion": 2024,
       "total_titulados": 2988,
-      "quedan_sede": 1956,
-      "pct_quedan_sede": 65.5,
-      "emigran_retornan_inmediato": 567,
-      "pct_emigran_retornan": 19.0,
+      "quedan_sede": 2045,
+      "pct_quedan_sede": 68.5,
+      "emigran_retornan_inmediato": 664,
+      "pct_emigran_retornan": 22.2,
       "sin_ejercer": 279,
       "pct_sin_ejercer": 9.3,
       "espera_promedio_anos": 1.0
@@ -138,8 +140,8 @@
     {
       "gestion": 2025,
       "total_titulados": 3182,
-      "quedan_sede": 1508,
-      "pct_quedan_sede": 47.4,
+      "quedan_sede": 1584,
+      "pct_quedan_sede": 49.8,
       "emigran_retornan_inmediato": 461,
       "pct_emigran_retornan": 14.5,
       "sin_ejercer": 1137,
@@ -150,12 +152,12 @@
   "por_departamento": {
     "BENI": {
       "total_titulados": 2223,
-      "quedan_sede": 1408,
-      "pct_quedan_sede": 63.3,
-      "emigran_inmediato": 347,
-      "pct_emigran_inmediato": 15.6,
+      "quedan_sede": 1657,
+      "pct_quedan_sede": 74.5,
+      "emigran_inmediato": 505,
+      "pct_emigran_inmediato": 22.7,
       "sin_ejercer": 61,
-      "pct_sin_ejercer": 2.7,
+      "pct_sin_ejercer": 2.8,
       "principales_destinos_retorno": [
         {
           "depto": "PANDO",
@@ -208,10 +210,10 @@
     },
     "CHUQUISACA": {
       "total_titulados": 3018,
-      "quedan_sede": 1166,
-      "pct_quedan_sede": 38.6,
-      "emigran_inmediato": 1203,
-      "pct_emigran_inmediato": 39.9,
+      "quedan_sede": 1359,
+      "pct_quedan_sede": 45.0,
+      "emigran_inmediato": 1458,
+      "pct_emigran_inmediato": 48.3,
       "sin_ejercer": 201,
       "pct_sin_ejercer": 6.7,
       "principales_destinos_retorno": [
@@ -266,12 +268,12 @@
     },
     "COCHABAMBA": {
       "total_titulados": 4428,
-      "quedan_sede": 3192,
-      "pct_quedan_sede": 72.1,
-      "emigran_inmediato": 401,
-      "pct_emigran_inmediato": 9.1,
+      "quedan_sede": 3371,
+      "pct_quedan_sede": 76.1,
+      "emigran_inmediato": 710,
+      "pct_emigran_inmediato": 16.0,
       "sin_ejercer": 347,
-      "pct_sin_ejercer": 7.8,
+      "pct_sin_ejercer": 7.9,
       "principales_destinos_retorno": [
         {
           "depto": "SANTA CRUZ",
@@ -324,10 +326,10 @@
     },
     "LA PAZ": {
       "total_titulados": 9575,
-      "quedan_sede": 6629,
-      "pct_quedan_sede": 69.2,
-      "emigran_inmediato": 695,
-      "pct_emigran_inmediato": 7.3,
+      "quedan_sede": 7148,
+      "pct_quedan_sede": 74.7,
+      "emigran_inmediato": 1487,
+      "pct_emigran_inmediato": 15.5,
       "sin_ejercer": 940,
       "pct_sin_ejercer": 9.8,
       "principales_destinos_retorno": [
@@ -382,10 +384,10 @@
     },
     "ORURO": {
       "total_titulados": 3152,
-      "quedan_sede": 1051,
-      "pct_quedan_sede": 33.3,
-      "emigran_inmediato": 1187,
-      "pct_emigran_inmediato": 37.7,
+      "quedan_sede": 1125,
+      "pct_quedan_sede": 35.7,
+      "emigran_inmediato": 1621,
+      "pct_emigran_inmediato": 51.4,
       "sin_ejercer": 406,
       "pct_sin_ejercer": 12.9,
       "principales_destinos_retorno": [
@@ -440,10 +442,10 @@
     },
     "PANDO": {
       "total_titulados": 1376,
-      "quedan_sede": 659,
-      "pct_quedan_sede": 47.9,
-      "emigran_inmediato": 386,
-      "pct_emigran_inmediato": 28.1,
+      "quedan_sede": 882,
+      "pct_quedan_sede": 64.1,
+      "emigran_inmediato": 454,
+      "pct_emigran_inmediato": 33.0,
       "sin_ejercer": 40,
       "pct_sin_ejercer": 2.9,
       "principales_destinos_retorno": [
@@ -498,10 +500,10 @@
     },
     "POTOSI": {
       "total_titulados": 3949,
-      "quedan_sede": 1888,
-      "pct_quedan_sede": 47.8,
-      "emigran_inmediato": 1100,
-      "pct_emigran_inmediato": 27.9,
+      "quedan_sede": 2115,
+      "pct_quedan_sede": 53.6,
+      "emigran_inmediato": 1517,
+      "pct_emigran_inmediato": 38.4,
       "sin_ejercer": 317,
       "pct_sin_ejercer": 8.0,
       "principales_destinos_retorno": [
@@ -556,10 +558,10 @@
     },
     "SANTA CRUZ": {
       "total_titulados": 5680,
-      "quedan_sede": 4945,
-      "pct_quedan_sede": 87.1,
-      "emigran_inmediato": 231,
-      "pct_emigran_inmediato": 4.1,
+      "quedan_sede": 5185,
+      "pct_quedan_sede": 91.3,
+      "emigran_inmediato": 344,
+      "pct_emigran_inmediato": 6.0,
       "sin_ejercer": 151,
       "pct_sin_ejercer": 2.7,
       "principales_destinos_retorno": [
@@ -614,10 +616,10 @@
     },
     "TARIJA": {
       "total_titulados": 2067,
-      "quedan_sede": 983,
-      "pct_quedan_sede": 47.6,
-      "emigran_inmediato": 553,
-      "pct_emigran_inmediato": 26.8,
+      "quedan_sede": 1038,
+      "pct_quedan_sede": 50.2,
+      "emigran_inmediato": 856,
+      "pct_emigran_inmediato": 41.4,
       "sin_ejercer": 173,
       "pct_sin_ejercer": 8.4,
       "principales_destinos_retorno": [
