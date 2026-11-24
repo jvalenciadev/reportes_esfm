@@ -358,23 +358,6 @@ export default function DeficitMateriaDinamicoView() {
 
           <div className="bg-white rounded-2xl p-4 border border-slate-200/90 shadow-2xs flex flex-col justify-between">
             <div className="flex items-center justify-between text-slate-500">
-              <span className="text-[11px] font-bold uppercase tracking-wider">Cobertura Docente</span>
-              <span className="p-1.5 rounded-lg bg-emerald-50 text-emerald-600 border border-emerald-100">
-                <CheckCircle2 className="w-4 h-4" />
-              </span>
-            </div>
-            <div className="mt-2">
-              <span className="text-2xl font-black text-emerald-700 tracking-tight">
-                {totalesPais.pct_cobertura}%
-              </span>
-              <span className="text-[11px] text-slate-400 font-semibold block mt-0.5">
-                {totalesPais.horas_planilla.toLocaleString('es-BO')}h pagadas en planilla
-              </span>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-2xl p-4 border border-slate-200/90 shadow-2xs flex flex-col justify-between">
-            <div className="flex items-center justify-between text-slate-500">
               <span className="text-[11px] font-bold uppercase tracking-wider">UEs con Déficit</span>
               <span className="p-1.5 rounded-lg bg-amber-50 text-amber-700 border border-amber-100">
                 <Building2 className="w-4 h-4" />
@@ -390,22 +373,7 @@ export default function DeficitMateriaDinamicoView() {
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl p-4 border border-rose-200 bg-rose-50/30 shadow-2xs flex flex-col justify-between">
-            <div className="flex items-center justify-between text-rose-700">
-              <span className="text-[11px] font-extrabold uppercase tracking-wider">Mayor Brecha País</span>
-              <span className="p-1.5 rounded-lg bg-rose-100 text-rose-700">
-                <AlertTriangle className="w-4 h-4" />
-              </span>
-            </div>
-            <div className="mt-2">
-              <span className="text-sm font-black text-rose-900 line-clamp-1">
-                {especialidades[0]?.nombre}
-              </span>
-              <span className="text-xs font-black text-rose-600 block mt-0.5">
-                {especialidades[0]?.items_deficit_equiv.toLocaleString('es-BO')} ítems ({especialidades[0]?.deficit_horas.toLocaleString('es-BO')} hrs)
-              </span>
-            </div>
-          </div>
+
         </div>
       )}
 
@@ -690,7 +658,6 @@ export default function DeficitMateriaDinamicoView() {
               <div className="flex items-center gap-4">
                 <span>Déficit: <strong>{hoverCell.defHoras.toLocaleString('es-BO')} hrs</strong></span>
                 <span className="text-amber-400 font-bold">Ítems requeridos: {hoverCell.items}</span>
-                <span className="text-emerald-400">Cobertura: {hoverCell.cob}%</span>
               </div>
             </div>
           )}

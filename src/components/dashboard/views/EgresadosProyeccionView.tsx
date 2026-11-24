@@ -837,7 +837,7 @@ export default function EgresadosProyeccionView() {
             <div>
               <h3 className="text-sm font-black text-slate-900 flex items-center gap-2">
                 <BarChart3 className="w-4 h-4 text-emerald-600" />
-                Estudiantes por Especialidad Oficial ESFM y Gestión de Egreso (2027–2031)
+                Estudiantes egresados ESFM/UA por especialida (Incorporación)
               </h3>
               <p className="text-xs text-slate-500 mt-0.5">
                 Cuadro institucional consolidado por nivel educativo y volumen de estudiantes en formación activa.

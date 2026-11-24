@@ -68,7 +68,8 @@ export function ExecutiveDashboardView({ data }: ExecutiveDashboardViewProps) {
               }`}
           >
             <Scale className="w-4 h-4 text-indigo-300" />
-            <span>Déficit por Materia (SIE / UIE)</span>
+            <span>Matriz de Calor: Déficit de Ítems Docentes por Especialidad y Departamento
+            </span>
           </button>
 
           <button

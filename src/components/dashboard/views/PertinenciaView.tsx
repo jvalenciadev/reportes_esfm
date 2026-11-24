@@ -741,8 +741,8 @@ export default function PertinenciaView() {
             type="button"
             onClick={() => setActiveTab('preguntas')}
             className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 border ${activeTab === 'preguntas'
-                ? 'bg-emerald-700 text-white border-emerald-700 shadow-xs'
-                : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50 hover:text-slate-900'
+              ? 'bg-emerald-700 text-white border-emerald-700 shadow-xs'
+              : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50 hover:text-slate-900'
               }`}
           >
             <BarChart3 className="w-4 h-4 text-emerald-500" />
@@ -753,15 +753,15 @@ export default function PertinenciaView() {
             type="button"
             onClick={() => setActiveTab('rural_urbano')}
             className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 border ${activeTab === 'rural_urbano'
-                ? 'bg-emerald-700 text-white border-emerald-700 shadow-xs'
-                : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50 hover:text-slate-900'
+              ? 'bg-emerald-700 text-white border-emerald-700 shadow-xs'
+              : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50 hover:text-slate-900'
               }`}
           >
             <TrendingUp className="w-4 h-4 text-emerald-500" />
             <span>Rural vs Urbano por Departamento</span>
             <span className={`text-[9px] font-black uppercase px-1.5 py-0.5 rounded border ${activeTab === 'rural_urbano'
-                ? 'bg-emerald-800 text-emerald-100 border-emerald-600'
-                : 'bg-emerald-50 text-emerald-700 border-emerald-200'
+              ? 'bg-emerald-800 text-emerald-100 border-emerald-600'
+              : 'bg-emerald-50 text-emerald-700 border-emerald-200'
               }`}>
               Gráficos
             </span>
@@ -771,8 +771,8 @@ export default function PertinenciaView() {
             type="button"
             onClick={() => setActiveTab('territorial')}
             className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 border ${activeTab === 'territorial'
-                ? 'bg-emerald-700 text-white border-emerald-700 shadow-xs'
-                : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50 hover:text-slate-900'
+              ? 'bg-emerald-700 text-white border-emerald-700 shadow-xs'
+              : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50 hover:text-slate-900'
               }`}
           >
             <MapPin className="w-4 h-4 text-emerald-500" />
@@ -783,8 +783,8 @@ export default function PertinenciaView() {
             type="button"
             onClick={() => setActiveTab('especialidad')}
             className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 border ${activeTab === 'especialidad'
-                ? 'bg-emerald-700 text-white border-emerald-700 shadow-xs'
-                : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50 hover:text-slate-900'
+              ? 'bg-emerald-700 text-white border-emerald-700 shadow-xs'
+              : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50 hover:text-slate-900'
               }`}
           >
             <BookOpen className="w-4 h-4 text-emerald-500" />
@@ -1616,15 +1616,15 @@ export default function PertinenciaView() {
                       key={d.departamento}
                       onClick={() => setSelectedDeptArea(d.departamento)}
                       className={`p-3.5 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${isSelected
-                          ? 'bg-slate-50 border-slate-400 ring-1 ring-slate-300 shadow-xs'
-                          : 'bg-white border-slate-200/80 hover:border-slate-300'
+                        ? 'bg-slate-50 border-slate-400 ring-1 ring-slate-300 shadow-xs'
+                        : 'bg-white border-slate-200/80 hover:border-slate-300'
                         }`}
                     >
                       <div className="flex items-center justify-between">
                         <span className="text-xs font-black text-slate-900">{d.departamento}</span>
                         <span className={`text-[10px] font-black px-2 py-0.5 rounded-md ${favorableRural
-                            ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
-                            : 'bg-blue-50 text-blue-800 border border-blue-200'
+                          ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+                          : 'bg-blue-50 text-blue-800 border border-blue-200'
                           }`}>
                           {brecha > 0 ? `+${brecha}pp Urbano` : `${brecha}pp Rural`}
                         </span>
@@ -1780,8 +1780,8 @@ export default function PertinenciaView() {
                       key={dept.departamento}
                       onClick={() => setSelectedDeptDetail(isSelected ? null : dept.departamento)}
                       className={`p-4 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${isSelected
-                          ? 'bg-slate-50 border-blue-500 ring-2 ring-blue-500/20 shadow-sm'
-                          : 'bg-white border-slate-200/80 hover:border-slate-300 hover:shadow-xs'
+                        ? 'bg-slate-50 border-blue-500 ring-2 ring-blue-500/20 shadow-sm'
+                        : 'bg-white border-slate-200/80 hover:border-slate-300 hover:shadow-xs'
                         }`}
                     >
                       <div>
@@ -1876,12 +1876,9 @@ export default function PertinenciaView() {
                     <BookOpen className="w-5 h-5" />
                   </div>
                   <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-                    Matriz de Pertinencia por Especialidad Oficial ESFM
+                    Matriz de Pertinencia del SEP agrupada con base en las especialidades que oferta las ESFM
                   </h3>
                 </div>
-                <p className="text-xs sm:text-sm text-slate-500 mt-1 ml-10">
-                  Analiza el estado de pertinencia en cada una de las 22 especialidades oficiales de las ESFM/SEP y cruza los datos por departamento.
-                </p>
               </div>
 
               {/* Controles de filtro */}

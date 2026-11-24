@@ -907,7 +907,7 @@ export function BalancePredictivoView() {
               {/* Variable 2: Reemplazo de Jubilados (Ajustable de 1 en 1) */}
               <div className="space-y-1.5 bg-white p-3 rounded-xl border border-slate-200 shadow-2xs">
                 <div className="flex justify-between items-center">
-                  <span className="font-bold text-slate-700">Reemplazo Jubilados:</span>
+                  <span className="font-bold text-slate-700">Candidatos a Jubilación:</span>
                   <div className="flex items-center gap-0.5">
                     <input
                       type="number"
@@ -1246,7 +1246,7 @@ export function BalancePredictivoView() {
                   </span>
                 </th>
                 <th rowSpan={2} className="py-3 px-2 text-right w-20 border-r border-slate-700 text-rose-300 align-bottom">
-                  <span>Jubilados</span>
+                  <span>Candidatos a Jubilación</span>
                   <span className="block text-[8px] font-medium text-rose-400 normal-case">({tasaJubilacion}%)</span>
                 </th>
                 <th rowSpan={2} className="py-3 px-2 text-right w-20 border-r border-slate-700 text-orange-300 align-bottom">
@@ -1308,7 +1308,7 @@ export function BalancePredictivoView() {
                 >
                   <div className="flex items-center justify-end gap-1">
                     {tipoAsignacionEgresados === 'radicacion' && <span className="w-1.5 h-1.5 rounded-full bg-amber-300" />}
-                    <span>1. Radicación Real</span>
+                    <span>1. Ejercicio Docente</span>
                   </div>
                   <span className="block text-[7.5px] font-normal opacity-80 normal-case">Retorno a Depto</span>
                 </th>
@@ -1324,7 +1324,7 @@ export function BalancePredictivoView() {
                 >
                   <div className="flex items-center justify-end gap-1">
                     {tipoAsignacionEgresados === 'local' && <span className="w-1.5 h-1.5 rounded-full bg-amber-300" />}
-                    <span>2. Sede Física</span>
+                    <span>2. Lugar de Egreso</span>
                   </div>
                   <span className="block text-[7.5px] font-normal opacity-80 normal-case">Formados en ESFM</span>
                 </th>
@@ -1374,18 +1374,16 @@ export function BalancePredictivoView() {
                         <tr
                           key={esp.especialidad_id}
                           onClick={() => setSelectedEspId(isSelected ? null : esp.especialidad_id)}
-                          className={`cursor-pointer transition-all border-b ${
-                            isSelected
-                              ? 'bg-amber-500/15 dark:bg-amber-400/20 ring-2 ring-inset ring-amber-500 dark:ring-amber-400 border-amber-300 dark:border-amber-700 font-medium'
-                              : 'border-slate-200 dark:border-slate-800/80 hover:bg-slate-50/90 dark:hover:bg-slate-800/60'
-                          }`}
+                          className={`cursor-pointer transition-all border-b ${isSelected
+                            ? 'bg-amber-500/15 dark:bg-amber-400/20 ring-2 ring-inset ring-amber-500 dark:ring-amber-400 border-amber-300 dark:border-amber-700 font-medium'
+                            : 'border-slate-200 dark:border-slate-800/80 hover:bg-slate-50/90 dark:hover:bg-slate-800/60'
+                            }`}
                         >
                           {/* Especialidad */}
-                          <td className={`py-2 px-3 border-r ${
-                            isSelected
-                              ? 'border-amber-400/50 dark:border-amber-600/50 border-l-[6px] border-l-amber-500 dark:border-l-amber-400 bg-amber-200/40 dark:bg-amber-900/40 text-slate-900 dark:text-white font-bold'
-                              : `border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 ${estilo.borderLeft}`
-                          }`}>
+                          <td className={`py-2 px-3 border-r ${isSelected
+                            ? 'border-amber-400/50 dark:border-amber-600/50 border-l-[6px] border-l-amber-500 dark:border-l-amber-400 bg-amber-200/40 dark:bg-amber-900/40 text-slate-900 dark:text-white font-bold'
+                            : `border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 ${estilo.borderLeft}`
+                            }`}>
                             <div className="flex items-center gap-2">
                               {isSelected && (
                                 <span className="w-2.5 h-2.5 rounded-full bg-amber-500 dark:bg-amber-400 animate-pulse shrink-0 ring-4 ring-amber-400/40" />
@@ -1410,9 +1408,8 @@ export function BalancePredictivoView() {
                           </td>
 
                           {/* Déficit SIE con Absorción BTH */}
-                          <td className={`py-2 px-2 text-right border-r font-semibold tabular-nums ${
-                            isSelected ? 'border-amber-400/50 dark:border-amber-600/50 text-slate-950 dark:text-white' : 'border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200'
-                          }`}>
+                          <td className={`py-2 px-2 text-right border-r font-semibold tabular-nums ${isSelected ? 'border-amber-400/50 dark:border-amber-600/50 text-slate-950 dark:text-white' : 'border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200'
+                            }`}>
                             <div>
                               <span>{fmt(m.deficit_calculado)}</span>
                               {esBth && m.items_bth_absorbidos > 0 && (
@@ -1446,13 +1443,12 @@ export function BalancePredictivoView() {
                                 <span className="text-slate-300 dark:text-slate-600 mx-0.5">/</span>
                                 <span className="text-rose-700 dark:text-rose-400 font-bold">-{fmt(m.migracion_salientes)}</span>
                               </span>
-                              <span className={`text-[9px] font-black mt-0.5 ${
-                                m.saldo_mig_aplicado > 0
-                                  ? 'text-rose-700 dark:text-rose-400'
-                                  : m.saldo_mig_aplicado < 0
+                              <span className={`text-[9px] font-black mt-0.5 ${m.saldo_mig_aplicado > 0
+                                ? 'text-rose-700 dark:text-rose-400'
+                                : m.saldo_mig_aplicado < 0
                                   ? 'text-emerald-700 dark:text-emerald-400'
                                   : 'text-slate-400 dark:text-slate-500'
-                              }`}>
+                                }`}>
                                 {m.saldo_mig_aplicado > 0 ? `+${m.saldo_mig_aplicado} rep.` : (m.saldo_mig_aplicado < 0 ? `${m.saldo_mig_aplicado} lle.` : '0 saldo')}
                               </span>
                             </div>
@@ -1470,42 +1466,36 @@ export function BalancePredictivoView() {
                           </td>
 
                           {/* Demanda Bruta */}
-                          <td className={`py-2 px-2 text-right border-r font-black tabular-nums ${
-                            isSelected
-                              ? 'border-amber-400/50 dark:border-amber-600/50 bg-amber-200/50 dark:bg-amber-900/50 text-indigo-950 dark:text-indigo-200'
-                              : 'border-slate-200 dark:border-slate-800 text-indigo-950 dark:text-indigo-200 bg-indigo-50/30 dark:bg-indigo-950/30'
-                          }`}>
+                          <td className={`py-2 px-2 text-right border-r font-black tabular-nums ${isSelected
+                            ? 'border-amber-400/50 dark:border-amber-600/50 bg-amber-200/50 dark:bg-amber-900/50 text-indigo-950 dark:text-indigo-200'
+                            : 'border-slate-200 dark:border-slate-800 text-indigo-950 dark:text-indigo-200 bg-indigo-50/30 dark:bg-indigo-950/30'
+                            }`}>
                             {fmt(m.demanda_total)}
                           </td>
 
                           {/* 1. Egresados Radicación Real (Retorno de Estudiantes) */}
-                          <td className={`py-2 px-2 text-right border-r tabular-nums font-mono text-[11px] ${
-                            isSelected ? 'border-amber-400/50 dark:border-amber-600/50' : 'border-slate-200 dark:border-slate-800'
-                          } ${
-                            tipoAsignacionEgresados === 'radicacion'
+                          <td className={`py-2 px-2 text-right border-r tabular-nums font-mono text-[11px] ${isSelected ? 'border-amber-400/50 dark:border-amber-600/50' : 'border-slate-200 dark:border-slate-800'
+                            } ${tipoAsignacionEgresados === 'radicacion'
                               ? 'bg-indigo-50/80 dark:bg-indigo-950/80 text-indigo-950 dark:text-indigo-200 font-black ring-1 ring-inset ring-indigo-300 dark:ring-indigo-700'
                               : 'text-slate-600 dark:text-slate-300 font-semibold'
-                          }`}>
+                            }`}>
                             <span>{fmt(m.egresados_radicacion_calc || 0)}</span>
                           </td>
 
                           {/* 2. Egresados Sede Física (Formados en ESFM) */}
-                          <td className={`py-2 px-2 text-right border-r tabular-nums font-mono text-[11px] ${
-                            isSelected ? 'border-amber-400/50 dark:border-amber-600/50' : 'border-slate-200 dark:border-slate-800'
-                          } ${
-                            tipoAsignacionEgresados === 'local'
+                          <td className={`py-2 px-2 text-right border-r tabular-nums font-mono text-[11px] ${isSelected ? 'border-amber-400/50 dark:border-amber-600/50' : 'border-slate-200 dark:border-slate-800'
+                            } ${tipoAsignacionEgresados === 'local'
                               ? 'bg-emerald-50/80 dark:bg-emerald-950/80 text-emerald-950 dark:text-emerald-200 font-black ring-1 ring-inset ring-emerald-300 dark:ring-emerald-700'
                               : 'text-slate-600 dark:text-slate-300 font-semibold'
-                          }`}>
+                            }`}>
                             <span>{fmt(m.egresados_local_calc || 0)}</span>
                           </td>
 
                           {/* Brecha Neta */}
-                          <td className={`py-2 px-3 text-center font-black text-xs tabular-nums ${
-                            esSuperavit
-                              ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-200 border-l border-emerald-200 dark:border-emerald-800'
-                              : 'bg-rose-50 dark:bg-rose-950/40 text-rose-900 dark:text-rose-200 border-l border-rose-200 dark:border-rose-800'
-                          }`}>
+                          <td className={`py-2 px-3 text-center font-black text-xs tabular-nums ${esSuperavit
+                            ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-200 border-l border-emerald-200 dark:border-emerald-800'
+                            : 'bg-rose-50 dark:bg-rose-950/40 text-rose-900 dark:text-rose-200 border-l border-rose-200 dark:border-rose-800'
+                            }`}>
                             <div className="flex items-center justify-center gap-1.5">
                               {esSuperavit ? (
                                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
