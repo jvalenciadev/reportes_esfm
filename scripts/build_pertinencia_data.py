@@ -237,7 +237,9 @@ def build_pertinencia_oficial():
     # Prejubilacion (SI / NO) x Rango (V, A, N, SIN)
     prejub_pert_nac = {
         'prejubilados': {'total': 0, 'V': 0, 'A': 0, 'N': 0, 'SIN': 0, 'no_pertinentes': 0},
-        'no_prejubilados': {'total': 0, 'V': 0, 'A': 0, 'N': 0, 'SIN': 0, 'no_pertinentes': 0}
+        'no_prejubilados': {'total': 0, 'V': 0, 'A': 0, 'N': 0, 'SIN': 0, 'no_pertinentes': 0},
+        'candidatos_jubilacion': {'total': 0, 'V': 0, 'A': 0, 'N': 0, 'SIN': 0, 'no_pertinentes': 0},
+        'en_ejercicio': {'total': 0, 'V': 0, 'A': 0, 'N': 0, 'SIN': 0, 'no_pertinentes': 0},
     }
     prejub_pert_depto = defaultdict(lambda: {
         'total': 0,
@@ -245,6 +247,7 @@ def build_pertinencia_oficial():
         'no_prejubilados': 0,
         'prejub_v': 0, 'prejub_a': 0, 'prejub_n': 0, 'prejub_sin': 0, 'prejub_no_pert': 0,
         'no_prejub_v': 0, 'no_prejub_a': 0, 'no_prejub_n': 0, 'no_prejub_sin': 0, 'no_prejub_no_pert': 0,
+        'jub_total': 0, 'jub_v': 0, 'jub_a': 0, 'jub_n': 0, 'jub_sin': 0,
     })
 
     # NUEVO: Estructura de Género (Femenino / Masculino / Otro)
@@ -278,7 +281,9 @@ def build_pertinencia_oficial():
         'estudiantes': 0,
         'V': 0, 'A': 0, 'N': 0, 'SIN': 0, 'total': 0,
         'prejubilados': 0,
+        'prejub_v': 0, 'prejub_a': 0, 'prejub_n': 0, 'prejub_sin': 0,
         'a_jubilar': 0,
+        'jub_v': 0, 'jub_a': 0, 'jub_n': 0, 'jub_sin': 0,
         'no_prejub_no_pert': 0,
         'genero_fem': 0,
         'genero_masc': 0
@@ -397,6 +402,19 @@ def build_pertinencia_oficial():
             if is_no_pert:
                 prejub_pert_depto[depto]['no_prejub_no_pert'] += 1
 
+            if jubilacion == 'SI':
+                prejub_pert_nac['candidatos_jubilacion']['total'] += 1
+                prejub_pert_nac['candidatos_jubilacion'][color] += 1
+                if is_no_pert:
+                    prejub_pert_nac['candidatos_jubilacion']['no_pertinentes'] += 1
+                prejub_pert_depto[depto]['jub_total'] += 1
+                prejub_pert_depto[depto][f'jub_{color.lower()}'] += 1
+            else:
+                prejub_pert_nac['en_ejercicio']['total'] += 1
+                prejub_pert_nac['en_ejercicio'][color] += 1
+                if is_no_pert:
+                    prejub_pert_nac['en_ejercicio']['no_pertinentes'] += 1
+
         # Acumular Género
         genero_nac[gen_key]['total'] += 1
         genero_nac[gen_key][color] += 1
@@ -438,8 +456,12 @@ def build_pertinencia_oficial():
         if direccion and not u_rec['direccion']: u_rec['direccion'] = direccion
         if cord_x is not None and u_rec['cord_x'] is None: u_rec['cord_x'] = cord_x
         if cord_y is not None and u_rec['cord_y'] is None: u_rec['cord_y'] = cord_y
-        if is_prejub: u_rec['prejubilados'] += 1
-        if jubilacion == 'SI': u_rec['a_jubilar'] += 1
+        if is_prejub:
+            u_rec['prejubilados'] += 1
+            u_rec[f'prejub_{color.lower()}'] += 1
+        if jubilacion == 'SI':
+            u_rec['a_jubilar'] += 1
+            u_rec[f'jub_{color.lower()}'] += 1
         if not is_prejub and is_no_pert: u_rec['no_prejub_no_pert'] += 1
         if gen_key == 'femenino': u_rec['genero_fem'] += 1
         elif gen_key == 'masculino': u_rec['genero_masc'] += 1
@@ -793,6 +815,24 @@ def build_pertinencia_oficial():
                 'pct_no_pertinentes': round((tot_no_prejub_no_pert / tot_no_prejub) * 100, 2) if tot_no_prejub > 0 else 0.0,
                 'pct_alta': round((prejub_pert_nac['no_prejubilados']['V'] / tot_no_prejub) * 100, 2) if tot_no_prejub > 0 else 0.0
             },
+            'candidatos_jubilacion': {
+                'total': prejub_pert_nac['candidatos_jubilacion']['total'],
+                'V': prejub_pert_nac['candidatos_jubilacion']['V'],
+                'A': prejub_pert_nac['candidatos_jubilacion']['A'],
+                'N': prejub_pert_nac['candidatos_jubilacion']['N'],
+                'SIN': prejub_pert_nac['candidatos_jubilacion']['SIN'],
+                'no_pertinentes': prejub_pert_nac['candidatos_jubilacion']['no_pertinentes'],
+                'pct_alta': round((prejub_pert_nac['candidatos_jubilacion']['V'] / prejub_pert_nac['candidatos_jubilacion']['total']) * 100, 2) if prejub_pert_nac['candidatos_jubilacion']['total'] > 0 else 0.0,
+            },
+            'en_ejercicio': {
+                'total': prejub_pert_nac['en_ejercicio']['total'],
+                'V': prejub_pert_nac['en_ejercicio']['V'],
+                'A': prejub_pert_nac['en_ejercicio']['A'],
+                'N': prejub_pert_nac['en_ejercicio']['N'],
+                'SIN': prejub_pert_nac['en_ejercicio']['SIN'],
+                'no_pertinentes': prejub_pert_nac['en_ejercicio']['no_pertinentes'],
+                'pct_alta': round((prejub_pert_nac['en_ejercicio']['V'] / prejub_pert_nac['en_ejercicio']['total']) * 100, 2) if prejub_pert_nac['en_ejercicio']['total'] > 0 else 0.0,
+            },
             'no_prejubilados_no_pertinentes': tot_no_prejub_no_pert,
             'pct_no_prejubilados_no_pertinentes_sobre_total': round((tot_no_prejub_no_pert / total_filas) * 100, 2) if total_filas > 0 else 0.0,
             'pct_no_prejubilados_no_pertinentes_sobre_no_prejub': round((tot_no_prejub_no_pert / tot_no_prejub) * 100, 2) if tot_no_prejub > 0 else 0.0,
@@ -804,12 +844,21 @@ def build_pertinencia_oficial():
                 'prejubilados': prejub_pert_depto[d]['prejubilados'],
                 'no_prejubilados': prejub_pert_depto[d]['no_prejubilados'],
                 'prejub_no_pert': prejub_pert_depto[d]['prejub_no_pert'],
+                'prejub_v': prejub_pert_depto[d]['prejub_v'],
+                'prejub_a': prejub_pert_depto[d]['prejub_a'],
+                'prejub_n': prejub_pert_depto[d]['prejub_n'],
+                'prejub_sin': prejub_pert_depto[d]['prejub_sin'],
                 'no_prejub_no_pert': prejub_pert_depto[d]['no_prejub_no_pert'],
                 'pct_no_prejub_no_pert': round((prejub_pert_depto[d]['no_prejub_no_pert'] / prejub_pert_depto[d]['no_prejubilados']) * 100, 2) if prejub_pert_depto[d]['no_prejubilados'] > 0 else 0.0,
                 'no_prejub_v': prejub_pert_depto[d]['no_prejub_v'],
                 'no_prejub_a': prejub_pert_depto[d]['no_prejub_a'],
                 'no_prejub_n': prejub_pert_depto[d]['no_prejub_n'],
                 'no_prejub_sin': prejub_pert_depto[d]['no_prejub_sin'],
+                'jub_total': prejub_pert_depto[d]['jub_total'],
+                'jub_v': prejub_pert_depto[d]['jub_v'],
+                'jub_a': prejub_pert_depto[d]['jub_a'],
+                'jub_n': prejub_pert_depto[d]['jub_n'],
+                'jub_sin': prejub_pert_depto[d]['jub_sin'],
             }
             for d in all_deptos
         ]
@@ -929,9 +978,15 @@ def build_pertinencia_oficial():
             'total_docentes': total,
             'pct_alta_pertinencia': pct_alta,
             'prejubilados': counts['prejubilados'],
-            'no_prejubilados_no_pertinentes': counts['no_prejub_no_pert'],
+            'prejub_v': counts['prejub_v'],
+            'prejub_a': counts['prejub_a'],
+            'prejub_spc': counts['prejub_n'],
+            'prejub_sfm': counts['prejub_sin'],
             'a_jubilar': counts['a_jubilar'],
-            'jubilacion': counts['a_jubilar'],
+            'jub_v': counts['jub_v'],
+            'jub_a': counts['jub_a'],
+            'jub_spc': counts['jub_n'],
+            'jub_sfm': counts['jub_sin'],
             'genero_femenino': counts['genero_fem'],
             'genero_masculino': counts['genero_masc'],
             'diagnostico': diagnostico

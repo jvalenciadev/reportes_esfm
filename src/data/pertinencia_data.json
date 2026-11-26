@@ -3175,62 +3175,62 @@
   ],
   "jubilacion": {
     "nacional": {
-      "jubilacion": 25409,
+      "jubilacion": 25852,
       "prejubilacion": 8874,
       "total": 168758
     },
     "por_departamento": [
       {
         "departamento": "BENI",
-        "jubilacion": 1329,
+        "jubilacion": 1388,
         "prejubilacion": 562,
         "total": 8289
       },
       {
         "departamento": "CHUQUISACA",
-        "jubilacion": 1363,
+        "jubilacion": 1376,
         "prejubilacion": 132,
         "total": 10197
       },
       {
         "departamento": "COCHABAMBA",
-        "jubilacion": 4487,
+        "jubilacion": 4544,
         "prejubilacion": 2101,
         "total": 30663
       },
       {
         "departamento": "LA PAZ",
-        "jubilacion": 7100,
+        "jubilacion": 7210,
         "prejubilacion": 2587,
         "total": 45120
       },
       {
         "departamento": "ORURO",
-        "jubilacion": 2158,
+        "jubilacion": 2170,
         "prejubilacion": 851,
         "total": 9549
       },
       {
         "departamento": "PANDO",
-        "jubilacion": 209,
+        "jubilacion": 224,
         "prejubilacion": 56,
         "total": 2727
       },
       {
         "departamento": "POTOSI",
-        "jubilacion": 2480,
+        "jubilacion": 2505,
         "prejubilacion": 792,
         "total": 16734
       },
       {
         "departamento": "SANTA CRUZ",
-        "jubilacion": 4966,
+        "jubilacion": 5089,
         "prejubilacion": 1058,
         "total": 35829
       },
       {
         "departamento": "TARIJA",
-        "jubilacion": 1317,
+        "jubilacion": 1346,
         "prejubilacion": 735,
         "total": 9650
       }
@@ -3239,7 +3239,7 @@
       {
         "departamento": "BENI",
         "distrito": "BAURES",
-        "jubilacion": 19,
+        "jubilacion": 23,
         "prejubilacion": 19,
         "total": 135
       },
@@ -3253,28 +3253,28 @@
       {
         "departamento": "BENI",
         "distrito": "GUAYARAMERIN",
-        "jubilacion": 145,
+        "jubilacion": 148,
         "prejubilacion": 37,
         "total": 922
       },
       {
         "departamento": "BENI",
         "distrito": "HUACARAJE",
-        "jubilacion": 12,
+        "jubilacion": 15,
         "prejubilacion": 11,
         "total": 51
       },
       {
         "departamento": "BENI",
         "distrito": "LORETO",
-        "jubilacion": 10,
+        "jubilacion": 11,
         "prejubilacion": 4,
         "total": 81
       },
       {
         "departamento": "BENI",
         "distrito": "MAGDALENA",
-        "jubilacion": 71,
+        "jubilacion": 78,
         "prejubilacion": 58,
         "total": 357
       },
@@ -3288,35 +3288,35 @@
       {
         "departamento": "BENI",
         "distrito": "REYES",
-        "jubilacion": 27,
+        "jubilacion": 28,
         "prejubilacion": 3,
         "total": 315
       },
       {
         "departamento": "BENI",
         "distrito": "RIBERALTA",
-        "jubilacion": 299,
+        "jubilacion": 304,
         "prejubilacion": 41,
         "total": 1513
       },
       {
         "departamento": "BENI",
         "distrito": "RURRENABAQUE",
-        "jubilacion": 23,
+        "jubilacion": 24,
         "prejubilacion": 5,
         "total": 369
       },
       {
         "departamento": "BENI",
         "distrito": "SAN ANDRES",
-        "jubilacion": 69,
+        "jubilacion": 72,
         "prejubilacion": 37,
         "total": 368
       },
       {
         "departamento": "BENI",
         "distrito": "SAN BORJA",
-        "jubilacion": 109,
+        "jubilacion": 113,
         "prejubilacion": 54,
         "total": 807
       },
@@ -3330,7 +3330,7 @@
       {
         "departamento": "BENI",
         "distrito": "SAN JAVIER",
-        "jubilacion": 15,
+        "jubilacion": 16,
         "prejubilacion": 7,
         "total": 141
       },
@@ -3344,14 +3344,14 @@
       {
         "departamento": "BENI",
         "distrito": "SAN RAMON",
-        "jubilacion": 19,
+        "jubilacion": 20,
         "prejubilacion": 10,
         "total": 109
       },
       {
         "departamento": "BENI",
         "distrito": "SANTA ANA",
-        "jubilacion": 66,
+        "jubilacion": 68,
         "prejubilacion": 41,
         "total": 321
       },
@@ -3365,7 +3365,7 @@
       {
         "departamento": "BENI",
         "distrito": "TRINIDAD",
-        "jubilacion": 351,
+        "jubilacion": 374,
         "prejubilacion": 211,
         "total": 1728
       },
@@ -3379,14 +3379,14 @@
       {
         "departamento": "CHUQUISACA",
         "distrito": "CAMARGO",
-        "jubilacion": 33,
+        "jubilacion": 34,
         "prejubilacion": 9,
         "total": 283
       },
       {
         "departamento": "CHUQUISACA",
         "distrito": "CULPINA",
-        "jubilacion": 16,
+        "jubilacion": 17,
         "prejubilacion": 3,
         "total": 292
       },
@@ -3407,21 +3407,21 @@
       {
         "departamento": "CHUQUISACA",
         "distrito": "ICLA",
-        "jubilacion": 6,
+        "jubilacion": 7,
         "prejubilacion": 1,
         "total": 158
       },
       {
         "departamento": "CHUQUISACA",
         "distrito": "INCAHUASI",
-        "jubilacion": 3,
+        "jubilacion": 4,
         "prejubilacion": 1,
         "total": 225
       },
       {
         "departamento": "CHUQUISACA",
         "distrito": "MACHARETI",
-        "jubilacion": 11,
+        "jubilacion": 12,
         "prejubilacion": 3,
         "total": 151
       },
@@ -3435,7 +3435,7 @@
       {
         "departamento": "CHUQUISACA",
         "distrito": "MONTEAGUDO",
-        "jubilacion": 56,
+        "jubilacion": 59,
         "prejubilacion": 7,
         "total": 517
       },
@@ -3449,7 +3449,7 @@
       {
         "departamento": "CHUQUISACA",
         "distrito": "POROMA",
-        "jubilacion": 19,
+        "jubilacion": 20,
         "prejubilacion": 2,
         "total": 254
       },
@@ -3477,7 +3477,7 @@
       {
         "departamento": "CHUQUISACA",
         "distrito": "SUCRE",
-        "jubilacion": 966,
+        "jubilacion": 969,
         "prejubilacion": 82,
         "total": 4511
       },
@@ -3491,7 +3491,7 @@
       {
         "departamento": "CHUQUISACA",
         "distrito": "TARVITA",
-        "jubilacion": 11,
+        "jubilacion": 12,
         "prejubilacion": 1,
         "total": 249
       },
@@ -3561,7 +3561,7 @@
       {
         "departamento": "COCHABAMBA",
         "distrito": "AIQUILE",
-        "jubilacion": 52,
+        "jubilacion": 54,
         "prejubilacion": 32,
         "total": 617
       },
@@ -3624,21 +3624,21 @@
       {
         "departamento": "COCHABAMBA",
         "distrito": "CLIZA",
-        "jubilacion": 35,
+        "jubilacion": 37,
         "prejubilacion": 12,
         "total": 357
       },
       {
         "departamento": "COCHABAMBA",
         "distrito": "COCHABAMBA 1",
-        "jubilacion": 1254,
+        "jubilacion": 1273,
         "prejubilacion": 730,
         "total": 3582
       },
       {
         "departamento": "COCHABAMBA",
         "distrito": "COCHABAMBA 2",
-        "jubilacion": 1113,
+        "jubilacion": 1126,
         "prejubilacion": 543,
         "total": 5993
       },
@@ -3659,7 +3659,7 @@
       {
         "departamento": "COCHABAMBA",
         "distrito": "ENTRE RIOS",
-        "jubilacion": 17,
+        "jubilacion": 18,
         "prejubilacion": 3,
         "total": 732
       },
@@ -3673,7 +3673,7 @@
       {
         "departamento": "COCHABAMBA",
         "distrito": "MOROCHATA",
-        "jubilacion": 27,
+        "jubilacion": 28,
         "prejubilacion": 6,
         "total": 463
       },
@@ -3708,7 +3708,7 @@
       {
         "departamento": "COCHABAMBA",
         "distrito": "PUERTO VILLARROEL",
-        "jubilacion": 34,
+        "jubilacion": 35,
         "prejubilacion": 8,
         "total": 1205
       },
@@ -3736,7 +3736,7 @@
       {
         "departamento": "COCHABAMBA",
         "distrito": "SACABA",
-        "jubilacion": 324,
+        "jubilacion": 328,
         "prejubilacion": 191,
         "total": 2239
       },
@@ -3764,7 +3764,7 @@
       {
         "departamento": "COCHABAMBA",
         "distrito": "SIPE SIPE",
-        "jubilacion": 112,
+        "jubilacion": 115,
         "prejubilacion": 32,
         "total": 985
       },
@@ -3778,28 +3778,28 @@
       {
         "departamento": "COCHABAMBA",
         "distrito": "TAPACARI",
-        "jubilacion": 31,
+        "jubilacion": 32,
         "prejubilacion": 6,
         "total": 383
       },
       {
         "departamento": "COCHABAMBA",
         "distrito": "TARATA",
-        "jubilacion": 31,
+        "jubilacion": 36,
         "prejubilacion": 16,
         "total": 235
       },
       {
         "departamento": "COCHABAMBA",
         "distrito": "TIQUIPAYA",
-        "jubilacion": 169,
+        "jubilacion": 170,
         "prejubilacion": 74,
         "total": 937
       },
       {
         "departamento": "COCHABAMBA",
         "distrito": "TIRAQUE",
-        "jubilacion": 26,
+        "jubilacion": 28,
         "prejubilacion": 11,
         "total": 444
       },
@@ -3848,14 +3848,14 @@
       {
         "departamento": "COCHABAMBA",
         "distrito": "VILLA TUNARI",
-        "jubilacion": 55,
+        "jubilacion": 56,
         "prejubilacion": 19,
         "total": 1708
       },
       {
         "departamento": "COCHABAMBA",
         "distrito": "VINTO",
-        "jubilacion": 137,
+        "jubilacion": 138,
         "prejubilacion": 45,
         "total": 993
       },
@@ -3876,14 +3876,14 @@
       {
         "departamento": "LA PAZ",
         "distrito": "ANCORAIMES",
-        "jubilacion": 43,
+        "jubilacion": 44,
         "prejubilacion": 5,
         "total": 264
       },
       {
         "departamento": "LA PAZ",
         "distrito": "APOLO",
-        "jubilacion": 44,
+        "jubilacion": 47,
         "prejubilacion": 17,
         "total": 412
       },
@@ -3918,7 +3918,7 @@
       {
         "departamento": "LA PAZ",
         "distrito": "CAIROMA",
-        "jubilacion": 33,
+        "jubilacion": 34,
         "prejubilacion": 5,
         "total": 222
       },
@@ -3953,7 +3953,7 @@
       {
         "departamento": "LA PAZ",
         "distrito": "CARANAVI",
-        "jubilacion": 102,
+        "jubilacion": 104,
         "prejubilacion": 22,
         "total": 1021
       },
@@ -3981,7 +3981,7 @@
       {
         "departamento": "LA PAZ",
         "distrito": "CHULUMANI (C. VILLA DE LA LIBERTAD)",
-        "jubilacion": 21,
+        "jubilacion": 22,
         "prejubilacion": 4,
         "total": 324
       },
@@ -3995,14 +3995,14 @@
       {
         "departamento": "LA PAZ",
         "distrito": "CIUDAD EL ALTO 1",
-        "jubilacion": 918,
+        "jubilacion": 929,
         "prejubilacion": 296,
         "total": 7394
       },
       {
         "departamento": "LA PAZ",
         "distrito": "CIUDAD EL ALTO 2",
-        "jubilacion": 1111,
+        "jubilacion": 1134,
         "prejubilacion": 398,
         "total": 6275
       },
@@ -4086,7 +4086,7 @@
       {
         "departamento": "LA PAZ",
         "distrito": "EL ALTO 3",
-        "jubilacion": 220,
+        "jubilacion": 222,
         "prejubilacion": 57,
         "total": 2637
       },
@@ -4163,28 +4163,28 @@
       {
         "departamento": "LA PAZ",
         "distrito": "LA PAZ 1",
-        "jubilacion": 1009,
+        "jubilacion": 1023,
         "prejubilacion": 504,
         "total": 3092
       },
       {
         "departamento": "LA PAZ",
         "distrito": "LA PAZ 2",
-        "jubilacion": 1108,
+        "jubilacion": 1137,
         "prejubilacion": 632,
         "total": 3029
       },
       {
         "departamento": "LA PAZ",
         "distrito": "LA PAZ 3",
-        "jubilacion": 778,
+        "jubilacion": 794,
         "prejubilacion": 388,
         "total": 2628
       },
       {
         "departamento": "LA PAZ",
         "distrito": "LAJA",
-        "jubilacion": 41,
+        "jubilacion": 42,
         "prejubilacion": 11,
         "total": 463
       },
@@ -4198,7 +4198,7 @@
       {
         "departamento": "LA PAZ",
         "distrito": "LURIBAY",
-        "jubilacion": 23,
+        "jubilacion": 24,
         "prejubilacion": 3,
         "total": 206
       },
@@ -4240,14 +4240,14 @@
       {
         "departamento": "LA PAZ",
         "distrito": "PALCA",
-        "jubilacion": 35,
+        "jubilacion": 36,
         "prejubilacion": 6,
         "total": 356
       },
       {
         "departamento": "LA PAZ",
         "distrito": "PALOS BLANCOS",
-        "jubilacion": 24,
+        "jubilacion": 26,
         "prejubilacion": 7,
         "total": 509
       },
@@ -4429,7 +4429,7 @@
       {
         "departamento": "LA PAZ",
         "distrito": "VIACHA",
-        "jubilacion": 149,
+        "jubilacion": 151,
         "prejubilacion": 39,
         "total": 1365
       },
@@ -4471,7 +4471,7 @@
       {
         "departamento": "ORURO",
         "distrito": "CHALLAPATA",
-        "jubilacion": 49,
+        "jubilacion": 50,
         "prejubilacion": 10,
         "total": 729
       },
@@ -4541,7 +4541,7 @@
       {
         "departamento": "ORURO",
         "distrito": "ORURO",
-        "jubilacion": 1725,
+        "jubilacion": 1735,
         "prejubilacion": 729,
         "total": 5627
       },
@@ -4590,7 +4590,7 @@
       {
         "departamento": "ORURO",
         "distrito": "SANTIAGO DE HUARI",
-        "jubilacion": 6,
+        "jubilacion": 7,
         "prejubilacion": 3,
         "total": 140
       },
@@ -4625,7 +4625,7 @@
       {
         "departamento": "PANDO",
         "distrito": "ARROYO GRANDE C.FILADELFIA",
-        "jubilacion": 15,
+        "jubilacion": 18,
         "prejubilacion": 7,
         "total": 240
       },
@@ -4639,14 +4639,14 @@
       {
         "departamento": "PANDO",
         "distrito": "CAMPO ANA (C.PORVENIR)",
-        "jubilacion": 15,
+        "jubilacion": 17,
         "prejubilacion": 4,
         "total": 275
       },
       {
         "departamento": "PANDO",
         "distrito": "COBIJA",
-        "jubilacion": 101,
+        "jubilacion": 109,
         "prejubilacion": 34,
         "total": 951
       },
@@ -4660,7 +4660,7 @@
       {
         "departamento": "PANDO",
         "distrito": "MUKDEN (C. BOLPEBRA)",
-        "jubilacion": 4,
+        "jubilacion": 5,
         "prejubilacion": 1,
         "total": 77
       },
@@ -4681,14 +4681,14 @@
       {
         "departamento": "PANDO",
         "distrito": "VICTORIA (C. PUERTO RICO)",
-        "jubilacion": 20,
+        "jubilacion": 21,
         "prejubilacion": 4,
         "total": 264
       },
       {
         "departamento": "POTOSI",
         "distrito": "ACASIO",
-        "jubilacion": 5,
+        "jubilacion": 6,
         "prejubilacion": 2,
         "total": 105
       },
@@ -4709,7 +4709,7 @@
       {
         "departamento": "POTOSI",
         "distrito": "BETANZOS",
-        "jubilacion": 62,
+        "jubilacion": 63,
         "prejubilacion": 10,
         "total": 649
       },
@@ -4751,7 +4751,7 @@
       {
         "departamento": "POTOSI",
         "distrito": "COLCHA \"K\" (C.VILLA MARTIN)",
-        "jubilacion": 41,
+        "jubilacion": 42,
         "prejubilacion": 6,
         "total": 341
       },
@@ -4772,7 +4772,7 @@
       {
         "departamento": "POTOSI",
         "distrito": "LLALLAGUA",
-        "jubilacion": 180,
+        "jubilacion": 181,
         "prejubilacion": 90,
         "total": 839
       },
@@ -4807,7 +4807,7 @@
       {
         "departamento": "POTOSI",
         "distrito": "POTOSI",
-        "jubilacion": 1286,
+        "jubilacion": 1302,
         "prejubilacion": 451,
         "total": 5071
       },
@@ -4842,7 +4842,7 @@
       {
         "departamento": "POTOSI",
         "distrito": "SAN PEDRO (C. S.P. DE BUENA VISTA)",
-        "jubilacion": 22,
+        "jubilacion": 24,
         "prejubilacion": 7,
         "total": 455
       },
@@ -4877,7 +4877,7 @@
       {
         "departamento": "POTOSI",
         "distrito": "TUPIZA",
-        "jubilacion": 178,
+        "jubilacion": 180,
         "prejubilacion": 69,
         "total": 1063
       },
@@ -4919,14 +4919,14 @@
       {
         "departamento": "POTOSI",
         "distrito": "YOCALLA",
-        "jubilacion": 38,
+        "jubilacion": 39,
         "prejubilacion": 19,
         "total": 228
       },
       {
         "departamento": "SANTA CRUZ",
         "distrito": "ASCENCION DE GUARAYOS",
-        "jubilacion": 36,
+        "jubilacion": 37,
         "prejubilacion": 10,
         "total": 495
       },
@@ -4940,14 +4940,14 @@
       {
         "departamento": "SANTA CRUZ",
         "distrito": "BOYUIBE",
-        "jubilacion": 5,
+        "jubilacion": 6,
         "prejubilacion": 1,
         "total": 76
       },
       {
         "departamento": "SANTA CRUZ",
         "distrito": "BUENA VISTA",
-        "jubilacion": 30,
+        "jubilacion": 32,
         "prejubilacion": 4,
         "total": 277
       },
@@ -4961,14 +4961,14 @@
       {
         "departamento": "SANTA CRUZ",
         "distrito": "CAMIRI",
-        "jubilacion": 148,
+        "jubilacion": 150,
         "prejubilacion": 36,
         "total": 693
       },
       {
         "departamento": "SANTA CRUZ",
         "distrito": "CHARAGUA",
-        "jubilacion": 55,
+        "jubilacion": 57,
         "prejubilacion": 15,
         "total": 527
       },
@@ -4989,7 +4989,7 @@
       {
         "departamento": "SANTA CRUZ",
         "distrito": "COTOCA",
-        "jubilacion": 93,
+        "jubilacion": 99,
         "prejubilacion": 22,
         "total": 1036
       },
@@ -5017,7 +5017,7 @@
       {
         "departamento": "SANTA CRUZ",
         "distrito": "EL TORNO",
-        "jubilacion": 83,
+        "jubilacion": 84,
         "prejubilacion": 25,
         "total": 844
       },
@@ -5031,42 +5031,42 @@
       {
         "departamento": "SANTA CRUZ",
         "distrito": "GUTIERREZ",
-        "jubilacion": 24,
+        "jubilacion": 25,
         "prejubilacion": 4,
         "total": 288
       },
       {
         "departamento": "SANTA CRUZ",
         "distrito": "LA GUARDIA",
-        "jubilacion": 143,
+        "jubilacion": 144,
         "prejubilacion": 14,
         "total": 1471
       },
       {
         "departamento": "SANTA CRUZ",
         "distrito": "LAGUNILLAS",
-        "jubilacion": 21,
+        "jubilacion": 22,
         "prejubilacion": 2,
         "total": 170
       },
       {
         "departamento": "SANTA CRUZ",
         "distrito": "MAIRANA",
-        "jubilacion": 24,
+        "jubilacion": 25,
         "prejubilacion": 13,
         "total": 218
       },
       {
         "departamento": "SANTA CRUZ",
         "distrito": "MINEROS",
-        "jubilacion": 71,
+        "jubilacion": 75,
         "prejubilacion": 7,
         "total": 804
       },
       {
         "departamento": "SANTA CRUZ",
         "distrito": "MONTERO",
-        "jubilacion": 293,
+        "jubilacion": 295,
         "prejubilacion": 14,
         "total": 1614
       },
@@ -5101,7 +5101,7 @@
       {
         "departamento": "SANTA CRUZ",
         "distrito": "PLAN 3000",
-        "jubilacion": 557,
+        "jubilacion": 569,
         "prejubilacion": 125,
         "total": 4131
       },
@@ -5122,7 +5122,7 @@
       {
         "departamento": "SANTA CRUZ",
         "distrito": "PUCARA",
-        "jubilacion": 11,
+        "jubilacion": 12,
         "prejubilacion": 3,
         "total": 49
       },
@@ -5157,14 +5157,14 @@
       {
         "departamento": "SANTA CRUZ",
         "distrito": "SAIPINA",
-        "jubilacion": 7,
+        "jubilacion": 10,
         "prejubilacion": 3,
         "total": 120
       },
       {
         "departamento": "SANTA CRUZ",
         "distrito": "SAMAIPATA",
-        "jubilacion": 24,
+        "jubilacion": 26,
         "prejubilacion": 9,
         "total": 213
       },
@@ -5185,14 +5185,14 @@
       {
         "departamento": "SANTA CRUZ",
         "distrito": "SAN IGNACIO (C. S.IGN. DE VELASCO)",
-        "jubilacion": 129,
+        "jubilacion": 134,
         "prejubilacion": 42,
         "total": 950
       },
       {
         "departamento": "SANTA CRUZ",
         "distrito": "SAN JAVIER",
-        "jubilacion": 24,
+        "jubilacion": 26,
         "prejubilacion": 4,
         "total": 404
       },
@@ -5241,21 +5241,21 @@
       {
         "departamento": "SANTA CRUZ",
         "distrito": "SANTA CRUZ 1",
-        "jubilacion": 655,
+        "jubilacion": 672,
         "prejubilacion": 164,
         "total": 2844
       },
       {
         "departamento": "SANTA CRUZ",
         "distrito": "SANTA CRUZ 2",
-        "jubilacion": 940,
+        "jubilacion": 973,
         "prejubilacion": 306,
         "total": 4049
       },
       {
         "departamento": "SANTA CRUZ",
         "distrito": "SANTA CRUZ 3",
-        "jubilacion": 543,
+        "jubilacion": 559,
         "prejubilacion": 150,
         "total": 3482
       },
@@ -5283,14 +5283,14 @@
       {
         "departamento": "SANTA CRUZ",
         "distrito": "VALLE GRANDE (C.JESUS DE VALLE GRANDE)",
-        "jubilacion": 75,
+        "jubilacion": 77,
         "prejubilacion": 11,
         "total": 411
       },
       {
         "departamento": "SANTA CRUZ",
         "distrito": "WARNES",
-        "jubilacion": 156,
+        "jubilacion": 161,
         "prejubilacion": 23,
         "total": 1928
       },
@@ -5311,63 +5311,63 @@
       {
         "departamento": "TARIJA",
         "distrito": "CARAPARI",
-        "jubilacion": 17,
+        "jubilacion": 18,
         "prejubilacion": 7,
         "total": 331
       },
       {
         "departamento": "TARIJA",
         "distrito": "EL PUENTE",
-        "jubilacion": 30,
+        "jubilacion": 31,
         "prejubilacion": 15,
         "total": 194
       },
       {
         "departamento": "TARIJA",
         "distrito": "ENTRE RIOS",
-        "jubilacion": 36,
+        "jubilacion": 39,
         "prejubilacion": 20,
         "total": 454
       },
       {
         "departamento": "TARIJA",
         "distrito": "PADCAYA",
-        "jubilacion": 46,
+        "jubilacion": 48,
         "prejubilacion": 30,
         "total": 391
       },
       {
         "departamento": "TARIJA",
         "distrito": "SAN LORENZO (C. VILLA SAN LORENZO)",
-        "jubilacion": 80,
+        "jubilacion": 83,
         "prejubilacion": 51,
         "total": 481
       },
       {
         "departamento": "TARIJA",
         "distrito": "TARIJA",
-        "jubilacion": 734,
+        "jubilacion": 746,
         "prejubilacion": 437,
         "total": 4102
       },
       {
         "departamento": "TARIJA",
         "distrito": "URIONDO (A. CONCEPCION)",
-        "jubilacion": 45,
+        "jubilacion": 46,
         "prejubilacion": 21,
         "total": 299
       },
       {
         "departamento": "TARIJA",
         "distrito": "VILLA MONTES",
-        "jubilacion": 74,
+        "jubilacion": 76,
         "prejubilacion": 30,
         "total": 983
       },
       {
         "departamento": "TARIJA",
         "distrito": "YACUIBA",
-        "jubilacion": 158,
+        "jubilacion": 162,
         "prejubilacion": 69,
         "total": 1525
       },
@@ -5405,6 +5405,24 @@
         "pct_no_pertinentes": 10.2,
         "pct_alta": 76.83
       },
+      "candidatos_jubilacion": {
+        "total": 16978,
+        "V": 10528,
+        "A": 4571,
+        "N": 1377,
+        "SIN": 502,
+        "no_pertinentes": 1879,
+        "pct_alta": 62.01
+      },
+      "en_ejercicio": {
+        "total": 142906,
+        "V": 112309,
+        "A": 16172,
+        "N": 11476,
+        "SIN": 2949,
+        "no_pertinentes": 14425,
+        "pct_alta": 78.59
+      },
       "no_prejubilados_no_pertinentes": 16304,
       "pct_no_prejubilados_no_pertinentes_sobre_total": 9.66,
       "pct_no_prejubilados_no_pertinentes_sobre_no_prejub": 10.2
@@ -5416,12 +5434,21 @@
         "prejubilados": 562,
         "no_prejubilados": 7727,
         "prejub_no_pert": 77,
+        "prejub_v": 305,
+        "prejub_a": 180,
+        "prejub_n": 56,
+        "prejub_sin": 21,
         "no_prejub_no_pert": 1346,
         "pct_no_prejub_no_pert": 17.42,
         "no_prejub_v": 5194,
         "no_prejub_a": 1187,
         "no_prejub_n": 985,
-        "no_prejub_sin": 361
+        "no_prejub_sin": 361,
+        "jub_total": 826,
+        "jub_v": 474,
+        "jub_a": 255,
+        "jub_n": 81,
+        "jub_sin": 16
       },
       {
         "departamento": "CHUQUISACA",
@@ -5429,12 +5456,21 @@
         "prejubilados": 132,
         "no_prejubilados": 10065,
         "prejub_no_pert": 15,
+        "prejub_v": 65,
+        "prejub_a": 52,
+        "prejub_n": 15,
+        "prejub_sin": 0,
         "no_prejub_no_pert": 973,
         "pct_no_prejub_no_pert": 9.67,
         "no_prejub_v": 7483,
         "no_prejub_a": 1609,
         "no_prejub_n": 713,
-        "no_prejub_sin": 260
+        "no_prejub_sin": 260,
+        "jub_total": 1244,
+        "jub_v": 641,
+        "jub_a": 461,
+        "jub_n": 109,
+        "jub_sin": 33
       },
       {
         "departamento": "COCHABAMBA",
@@ -5442,12 +5478,21 @@
         "prejubilados": 2101,
         "no_prejubilados": 28562,
         "prejub_no_pert": 364,
+        "prejub_v": 1022,
+        "prejub_a": 715,
+        "prejub_n": 294,
+        "prejub_sin": 70,
         "no_prejub_no_pert": 3301,
         "pct_no_prejub_no_pert": 11.56,
         "no_prejub_v": 22147,
         "no_prejub_a": 3114,
         "no_prejub_n": 2528,
-        "no_prejub_sin": 773
+        "no_prejub_sin": 773,
+        "jub_total": 2443,
+        "jub_v": 1584,
+        "jub_a": 589,
+        "jub_n": 176,
+        "jub_sin": 94
       },
       {
         "departamento": "LA PAZ",
@@ -5455,12 +5500,21 @@
         "prejubilados": 2587,
         "no_prejubilados": 42533,
         "prejub_no_pert": 353,
+        "prejub_v": 1548,
+        "prejub_a": 686,
+        "prejub_n": 302,
+        "prejub_sin": 51,
         "no_prejub_no_pert": 2803,
         "pct_no_prejub_no_pert": 6.59,
         "no_prejub_v": 35741,
         "no_prejub_a": 3989,
         "no_prejub_n": 2583,
-        "no_prejub_sin": 220
+        "no_prejub_sin": 220,
+        "jub_total": 4623,
+        "jub_v": 3406,
+        "jub_a": 826,
+        "jub_n": 324,
+        "jub_sin": 67
       },
       {
         "departamento": "ORURO",
@@ -5468,12 +5522,21 @@
         "prejubilados": 851,
         "no_prejubilados": 8698,
         "prejub_no_pert": 162,
+        "prejub_v": 338,
+        "prejub_a": 351,
+        "prejub_n": 146,
+        "prejub_sin": 16,
         "no_prejub_no_pert": 1124,
         "pct_no_prejub_no_pert": 12.92,
         "no_prejub_v": 6093,
         "no_prejub_a": 1481,
         "no_prejub_n": 1091,
-        "no_prejub_sin": 33
+        "no_prejub_sin": 33,
+        "jub_total": 1319,
+        "jub_v": 701,
+        "jub_a": 497,
+        "jub_n": 101,
+        "jub_sin": 20
       },
       {
         "departamento": "PANDO",
@@ -5481,12 +5544,21 @@
         "prejubilados": 56,
         "no_prejubilados": 2671,
         "prejub_no_pert": 7,
+        "prejub_v": 28,
+        "prejub_a": 21,
+        "prejub_n": 7,
+        "prejub_sin": 0,
         "no_prejub_no_pert": 468,
         "pct_no_prejub_no_pert": 17.52,
         "no_prejub_v": 1795,
         "no_prejub_a": 408,
         "no_prejub_n": 356,
-        "no_prejub_sin": 112
+        "no_prejub_sin": 112,
+        "jub_total": 168,
+        "jub_v": 94,
+        "jub_a": 49,
+        "jub_n": 20,
+        "jub_sin": 5
       },
       {
         "departamento": "POTOSI",
@@ -5494,12 +5566,21 @@
         "prejubilados": 792,
         "no_prejubilados": 15942,
         "prejub_no_pert": 103,
+        "prejub_v": 357,
+        "prejub_a": 332,
+        "prejub_n": 77,
+        "prejub_sin": 26,
         "no_prejub_no_pert": 1547,
         "pct_no_prejub_no_pert": 9.7,
         "no_prejub_v": 12298,
         "no_prejub_a": 2097,
         "no_prejub_n": 1243,
-        "no_prejub_sin": 304
+        "no_prejub_sin": 304,
+        "jub_total": 1713,
+        "jub_v": 1027,
+        "jub_a": 518,
+        "jub_n": 86,
+        "jub_sin": 82
       },
       {
         "departamento": "SANTA CRUZ",
@@ -5507,12 +5588,21 @@
         "prejubilados": 1058,
         "no_prejubilados": 34771,
         "prejub_no_pert": 151,
+        "prejub_v": 570,
+        "prejub_a": 337,
+        "prejub_n": 112,
+        "prejub_sin": 39,
         "no_prejub_no_pert": 3990,
         "pct_no_prejub_no_pert": 11.48,
         "no_prejub_v": 24921,
         "no_prejub_a": 5860,
         "no_prejub_n": 2758,
-        "no_prejub_sin": 1232
+        "no_prejub_sin": 1232,
+        "jub_total": 4031,
+        "jub_v": 2199,
+        "jub_a": 1227,
+        "jub_n": 447,
+        "jub_sin": 158
       },
       {
         "departamento": "TARIJA",
@@ -5520,12 +5610,21 @@
         "prejubilados": 735,
         "no_prejubilados": 8915,
         "prejub_no_pert": 77,
+        "prejub_v": 490,
+        "prejub_a": 168,
+        "prejub_n": 69,
+        "prejub_sin": 8,
         "no_prejub_no_pert": 752,
         "pct_no_prejub_no_pert": 8.44,
         "no_prejub_v": 7165,
         "no_prejub_a": 998,
         "no_prejub_n": 596,
-        "no_prejub_sin": 156
+        "no_prejub_sin": 156,
+        "jub_total": 611,
+        "jub_v": 402,
+        "jub_a": 149,
+        "jub_n": 33,
+        "jub_sin": 27
       }
     ]
   },

@@ -24,10 +24,10 @@ COLOR_BORDER = "CBD5E1"     # Borde gris claro
 COLOR_BORDER_DARK = "94A3B8"# Borde gris medio
 
 # Colores de Rangos de Pertinencia
-COLOR_V = "059669"   # Verde - Alta Pertinencia
-COLOR_A = "2563EB"   # Azul - Media Pertinencia
-COLOR_N = "EA580C"   # Naranja - Baja Pertinencia
-COLOR_SIN = "64748B" # Pizarra - Sin Pertinencia
+COLOR_V = "059669"   # Verde - Rango V: Alta Pertinencia (Coincidencia exacta)
+COLOR_A = "2563EB"   # Azul - Rango A: Media Pertinencia (Afín PROFE)
+COLOR_N = "EA580C"   # Naranja - Rango SPC: Sin Pertinencia al Cargo
+COLOR_SIN = "64748B" # Pizarra - Rango SFM: Sin Formación de Maestro
 
 # Estilos reutilizables
 font_title = Font(name="Segoe UI", size=14, bold=True, color="FFFFFF")
@@ -92,6 +92,21 @@ def adjust_column_widths(ws, min_width=11, padding=3):
                 if len(txt) > max_len and len(txt) < 55:
                     max_len = len(txt)
         ws.column_dimensions[col_letter].width = max(max_len + padding, min_width)
+
+
+def add_table_footer(ws, row_idx: int, max_col: int, fuente: str, nota: str):
+    """Inserta las filas estandarizadas FUENTE y NOTA al pie de cada tabla."""
+    ws.merge_cells(start_row=row_idx, start_column=1, end_row=row_idx, end_column=max_col)
+    c_f = ws.cell(row=row_idx, column=1, value=f"FUENTE: {fuente}")
+    c_f.font = Font(name="Segoe UI", size=8, bold=True, color="334155")
+    c_f.alignment = align_left
+    ws.row_dimensions[row_idx].height = 16
+
+    ws.merge_cells(start_row=row_idx + 1, start_column=1, end_row=row_idx + 1, end_column=max_col)
+    c_n = ws.cell(row=row_idx + 1, column=1, value=f"NOTA: {nota}")
+    c_n.font = Font(name="Segoe UI", size=8, italic=True, color="64748B")
+    c_n.alignment = Alignment(horizontal="left", vertical="center", wrap_text=True)
+    ws.row_dimensions[row_idx + 1].height = 20
 
 
 def create_sheet_ficha_tecnica(wb, data):
@@ -212,10 +227,10 @@ def create_sheet_ficha_tecnica(wb, data):
     cat_start = r_curr
     cat_tot_row = cat_start + 4
     cats_info = [
-        ("V", "Alta Pertinencia", tot_v, "Titulado/egresado ESFM cuya especialidad de formación coincide exactamente con el cargo y nivel asignado."),
-        ("A", "Media Pertinencia (Afín)", tot_a, "Titulado/egresado ESFM con afinidad disciplinar o de nivel validada en matriz PROFE (4.923 reglas)."),
-        ("N", "Baja Pertinencia (Sin correspondencia con el cargo)", tot_n, "Docente ESFM cuya especialidad no corresponde al cargo/área o nivel que ejerce en planilla."),
-        ("SIN", "T/U - Técnico Sup., Universitario y Otros (Sin Pert. ESFM)", tot_sin, "Condición OTRO (no normalista/ESFM). SÍ se incluye en el denominador total (168.758) por ocupar cargo activo en planilla."),
+        ("V", "Rango V · Alta Pertinencia (Coincidencia exacta)", tot_v, "Titulado/egresado ESFM cuya especialidad de formación coincide exactamente con el cargo y nivel asignado."),
+        ("A", "Rango A · Media Pertinencia (Afín PROFE)", tot_a, "Titulado/egresado ESFM con afinidad disciplinar o de nivel validada en matriz PROFE (4.923 reglas)."),
+        ("SPC", "Rango SPC · (Sin Pertinencia al Cargo)", tot_n, "Docente con formación de maestro cuya especialidad no corresponde al cargo/área o nivel que ejerce en planilla."),
+        ("SFM", "Rango SFM · (Sin Formación de Maestro)", tot_sin, "Condición OTRO (sin formación normalista/ESFM). SÍ se incluye en el denominador total (168.758) por ocupar cargo activo en planilla."),
     ]
     for idx, (cod, nom, val, crit) in enumerate(cats_info):
         ws.merge_cells(start_row=r_curr, start_column=5, end_row=r_curr, end_column=8)
@@ -300,6 +315,12 @@ def create_sheet_ficha_tecnica(wb, data):
     for col_l, w in widths.items():
         ws.column_dimensions[col_l].width = w
 
+    add_table_footer(
+        ws, r_curr + 1, 8,
+        "UIE (Planilla Octubre 2026: 168.758 asignaciones) · PROFE (matriz_especialidad: 4.923 reglas) · SIE (17.502 UEs) · PLANIFICACIONES (171.350 registros)",
+        "Ficha metodológica elaborada para revisión técnica EIEE / DGP. Gestión 2026, corte Planilla Octubre 2026. Documento Técnico Preliminar."
+    )
+
 
 def create_sheet_resumen(wb, data):
     """Hoja 1: Resumen Ejecutivo, Rangos y Desalineación."""
@@ -367,8 +388,8 @@ def create_sheet_resumen(wb, data):
     rangos_info = [
         ("V", "Rango V · Alta Pertinencia (Coincidencia exacta)", resumen.get("V", {})),
         ("A", "Rango A · Media Pertinencia (Afín PROFE)", resumen.get("A", {})),
-        ("N", "Rango N · Baja Pertinencia (Sin correspondencia con el cargo)", resumen.get("N", {})),
-        ("SIN", "Rango SIN · T/U (Técnico Sup., Universitario y Otros)", resumen.get("SIN", {})),
+        ("SPC", "Rango SPC · (Sin Pertinencia al Cargo)", resumen.get("N", {})),
+        ("SFM", "Rango SFM · (Sin Formación de Maestro)", resumen.get("SIN", {})),
     ]
 
     tot_row_rangos = start_r + 5
@@ -426,6 +447,14 @@ def create_sheet_resumen(wb, data):
             cell.alignment = align_right
     ws.row_dimensions[curr_r].height = 22
 
+    add_table_footer(
+        ws,
+        curr_r + 1,
+        7,
+        "UIE (Planilla Octubre 2026: 168.758 asignaciones y Formación: 1.166.218 registros) · PROFE (matriz_especialidad: 4.923 reglas) · SIE (17.502 UEs).",
+        "Unidad de análisis: Asignación Cargo–UE (148.997 docentes únicos por CI). Clasificación exhaustiva: V + A + SPC + SFM = 100% del universo evaluado."
+    )
+
     # ── Gráfico 1: PieChart de Distribución de Pertinencia (Limpio, en J8)
     chart_pie = PieChart()
     chart_pie.title = "Distribución de Docentes por Rango de Pertinencia"
@@ -473,10 +502,10 @@ def create_sheet_departamentos(wb, data):
 
     headers = [
         "Departamento",
-        "Alta (V)",
-        "Media (A)",
-        "Baja (N)",
-        "Sin Pert. (SIN)",
+        "V · Alta Pertinencia",
+        "A · Media Pertinencia",
+        "SPC · Sin Pert. al Cargo",
+        "SFM · Sin Form. Maestro",
         "Total Asignaciones",
         "% Alta (V)",
         "% Pertinencia Vigente (V+A)",
@@ -576,6 +605,12 @@ def create_sheet_departamentos(wb, data):
     ws.column_dimensions["A"].width = 22
     ws.column_dimensions["K"].width = 4  # Separador visual
 
+    add_table_footer(
+        ws, curr_r + 1, 9,
+        "UIE (Planilla Octubre 2026: 168.758 asignaciones) · PROFE (matriz_especialidad: 4.923 reglas) · SIE (17.502 UEs) · PLANIFICACIONES (171.350 registros)",
+        "Unidad de análisis: Asignación Cargo–UE (148.997 docentes únicos por CI). Gestión 2026, corte Planilla Octubre 2026. Documento Técnico Preliminar."
+    )
+
 
 def create_sheet_niveles(wb, data):
     """Hoja 3: Pertinencia por Nivel Educativo con Gráfico al Lado."""
@@ -595,10 +630,10 @@ def create_sheet_niveles(wb, data):
 
     headers = [
         "Nivel Educativo",
-        "Alta (V)",
-        "Media (A)",
-        "Baja (N)",
-        "Sin Pert. (SIN)",
+        "V · Alta Pertinencia",
+        "A · Media Pertinencia",
+        "SPC · Sin Pert. al Cargo",
+        "SFM · Sin Form. Maestro",
         "Total Asignaciones",
         "% Alta (V)",
         "% Pertinencia Vigente (V+A)",
@@ -677,6 +712,12 @@ def create_sheet_niveles(wb, data):
     note_cell.font = Font(name="Segoe UI", size=8, italic=True, color="64748B")
     note_cell.alignment = align_left
 
+    add_table_footer(
+        ws, curr_r + 1, 9,
+        "UIE (Planilla Octubre 2026: 168.758 asignaciones) · PROFE (matriz_especialidad: 4.923 reglas) · SIE (17.502 UEs) · PLANIFICACIONES (171.350 registros)",
+        "Unidad de análisis: Asignación Cargo–UE (148.997 docentes únicos por CI). Gestión 2026, corte Planilla Octubre 2026. Documento Técnico Preliminar."
+    )
+
     # ── Gráfico 4: Columna agrupada colocado a la DERECHA en L5
     chart = BarChart()
     chart.type = "col"
@@ -722,10 +763,10 @@ def create_sheet_especialidades(wb, data):
 
     headers = [
         "Especialidad de Formación",
-        "Alta (V)",
-        "Media (A)",
-        "Baja (N)",
-        "Sin Pert. (SIN)",
+        "V · Alta Pertinencia",
+        "A · Media Pertinencia",
+        "SPC · Sin Pert. al Cargo",
+        "SFM · Sin Form. Maestro",
         "Total Asignaciones",
         "% Alta (V)",
         "% Pertinencia Vigente (V+A)",
@@ -823,6 +864,12 @@ def create_sheet_especialidades(wb, data):
     ws.column_dimensions["A"].width = 48
     ws.column_dimensions["K"].width = 4  # Separador visual
 
+    add_table_footer(
+        ws, curr_r + 1, 9,
+        "UIE (Planilla Octubre 2026: 168.758 asignaciones) · PROFE (matriz_especialidad: 4.923 reglas) · SIE (17.502 UEs) · PLANIFICACIONES (171.350 registros)",
+        "Unidad de análisis: Asignación Cargo–UE agrupada en 22 especialidades oficiales ESFM. Gestión 2026, corte Planilla Octubre 2026. Documento Técnico Preliminar."
+    )
+
 
 def create_sheet_cruzada(wb, data):
     """Hoja 5: Matriz Territorial Cruzada Especialidad x Departamento."""
@@ -901,6 +948,12 @@ def create_sheet_cruzada(wb, data):
     adjust_column_widths(ws)
     ws.column_dimensions["A"].width = 48
 
+    add_table_footer(
+        ws, curr_r + 1, len(deptos) + 2,
+        "UIE (Planilla Octubre 2026: 168.758 asignaciones) · PROFE (matriz_especialidad: 4.923 reglas) · SIE (17.502 UEs)",
+        "Distribución territorial de docentes por especialidad ESFM y departamento. Gestión 2026, corte Planilla Octubre 2026. Documento Técnico Preliminar."
+    )
+
 
 def create_sheet_ue(wb, ue_data):
     """Hoja 4: Padrón Consolidado de Pertinencia por Unidad Educativa / UA con Geolocalización."""
@@ -911,45 +964,64 @@ def create_sheet_ue(wb, ue_data):
         ws,
         "MINISTERIO DE EDUCACIÓN - ESTADO PLURINACIONAL DE BOLIVIA",
         "DOCUMENTO TÉCNICO PRELIMINAR · PERTINENCIA CURRICULAR POR UNIDAD EDUCATIVA / UA (CORTE OCT. 2026)",
-        max_col=18
+        max_col=28
     )
 
     cant_ue = f"{len(ue_data):,}".replace(",", ".")
     ws.cell(row=5, column=1, value=f"Padrón Consolidado por Unidad Educativa / UA ({cant_ue} Establecimientos)").font = font_section
 
-    headers = [
-        "Código SIE",
-        "Departamento",
-        "Distrito Educativo",
-        "Unidad Educativa / UA",
-        "Subsistema",
-        "Nivel Autorizado",
-        "Turno",
-        "Dependencia",
-        "Dirección",
-        "Cord X",
-        "Cord Y",
-        "Alta Pertinencia (V)",
-        "Media Pertinencia (A)",
-        "Baja Pertinencia (N)",
-        "Sin Pertinencia (SIN)",
-        "Total Docentes",
-        "% Pertinencia Alta",
-        "No Prejubilados No Pertinentes",
-        "Diagnóstico Preliminar"
-    ]
+    # Colores de encabezado por grupo temático
+    fill_grp_pert = PatternFill(start_color="1E3A5F", end_color="1E3A5F", fill_type="solid")   # Azul oscuro - rangos
+    fill_grp_prejub = PatternFill(start_color="92400E", end_color="92400E", fill_type="solid")  # Ámbar oscuro - prejub
+    fill_grp_jub = PatternFill(start_color="065F46", end_color="065F46", fill_type="solid")     # Verde oscuro - a jubilar
 
-    start_r = 6
+    # Fila 6: Grupos de cabecera (merge)
+    GRP_ROW = 6
+    DATA_ROW = 7
+
+    # Definición de grupos: (texto, col_inicio, col_fin, fill)
+    grupos = [
+        ("Identificación UE / UA", 1, 12, fill_navy),
+        ("Rangos de Pertinencia", 13, 18, fill_grp_pert),
+        ("Prejubilados por Rango", 19, 23, fill_grp_prejub),
+        ("A Jubilar (≥59 años) por Rango", 24, 28, fill_grp_jub),
+    ]
+    for txt, c1, c2, fill in grupos:
+        ws.merge_cells(start_row=GRP_ROW, start_column=c1, end_row=GRP_ROW, end_column=c2)
+        c = ws.cell(row=GRP_ROW, column=c1, value=txt)
+        c.font = font_header
+        c.fill = fill
+        c.alignment = align_center
+        c.border = border_cell
+    ws.row_dimensions[GRP_ROW].height = 18
+
+    # Fila 7: Cabeceras detalladas
+    headers = [
+        # Identificación (1-12) - Columna G: 1º Lengua Enseñanza
+        "Código SIE", "Departamento", "Distrito Educativo", "Unidad Educativa / UA",
+        "Subsistema", "Nivel Autorizado", "1º Lengua Enseñanza", "Turno", "Dependencia", "Dirección",
+        "Cord X", "Cord Y",
+        # Rangos (13-18)
+        "Estudiantes", "V · Alta", "A · Media", "SPC · Sin Pert.", "SFM · Sin Form.", "Total Doc.",
+        # Prejubilados (19-23)
+        "Prejub. Total", "Prejub. V", "Prejub. A", "Prejub. SPC", "Prejub. SFM",
+        # A Jubilar (24-28)
+        "A Jubilar Total", "Jub. V", "Jub. A", "Jub. SPC", "Jub. SFM",
+    ]
     for c_idx, h in enumerate(headers, start=1):
-        c = ws.cell(row=start_r, column=c_idx, value=h)
+        c = ws.cell(row=DATA_ROW, column=c_idx, value=h)
         c.font = font_header
         c.fill = fill_navy
         c.alignment = align_center
         c.border = border_cell
-    ws.row_dimensions[start_r].height = 24
+    ws.row_dimensions[DATA_ROW].height = 28
+    ws.freeze_panes = f"A{DATA_ROW + 1}"
 
-    tot_v = tot_a = tot_n = tot_sin = tot_doc = tot_no_prejub_np = 0
-    curr_r = start_r + 1
+    # Totales acumuladores
+    tot_est = tot_v = tot_a = tot_n = tot_sin = tot_doc = 0
+    tot_pj = tot_pj_v = tot_pj_a = tot_pj_n = tot_pj_sin = 0
+    tot_jb = tot_jb_v = tot_jb_a = tot_jb_n = tot_jb_sin = 0
+    curr_r = DATA_ROW + 1
 
     for row_idx, item in enumerate(ue_data):
         fill_curr = fill_zebra if row_idx % 2 == 1 else None
@@ -958,15 +1030,21 @@ def create_sheet_ue(wb, ue_data):
         n = item.get("docentes_baja_n", 0)
         sin = item.get("docentes_sin_pertinencia", 0)
         total = item.get("total_docentes", 0)
-        pct = (v / total) if total > 0 else 0.0
-        no_prejub_np = item.get("no_prejubilados_no_pertinentes", 0)
+        est = item.get("estudiantes", 0)
+        pj = item.get("prejubilados", 0)
+        pj_v = item.get("prejub_v", 0)
+        pj_a = item.get("prejub_a", 0)
+        pj_n = item.get("prejub_spc", 0)
+        pj_sin = item.get("prejub_sfm", 0)
+        jb = item.get("a_jubilar", 0)
+        jb_v = item.get("jub_v", 0)
+        jb_a = item.get("jub_a", 0)
+        jb_n = item.get("jub_spc", 0)
+        jb_sin = item.get("jub_sfm", 0)
 
-        tot_v += v
-        tot_a += a
-        tot_n += n
-        tot_sin += sin
-        tot_doc += total
-        tot_no_prejub_np += no_prejub_np
+        tot_est += est; tot_v += v; tot_a += a; tot_n += n; tot_sin += sin; tot_doc += total
+        tot_pj += pj; tot_pj_v += pj_v; tot_pj_a += pj_a; tot_pj_n += pj_n; tot_pj_sin += pj_sin
+        tot_jb += jb; tot_jb_v += jb_v; tot_jb_a += jb_a; tot_jb_n += jb_n; tot_jb_sin += jb_sin
 
         vals = [
             (item.get("cod_ue", ""), align_center, "@"),
@@ -975,19 +1053,31 @@ def create_sheet_ue(wb, ue_data):
             (item.get("ue", ""), align_left, "@"),
             (item.get("subsistema", "Regular"), align_left, "@"),
             (item.get("nivel_autorizado", ""), align_left, "@"),
+            (item.get("lengua_ensenanza", "Sin Registro"), align_left, "@"),  # COLUMNA G
             (item.get("turno", ""), align_center, "@"),
             (item.get("dependencia", ""), align_center, "@"),
             (item.get("direccion", ""), align_left, "@"),
             (item.get("cord_x"), align_right, "0.0000000"),
             (item.get("cord_y"), align_right, "0.0000000"),
+            # Rangos
+            (est, align_right, "#,##0"),
             (v, align_right, "#,##0"),
             (a, align_right, "#,##0"),
             (n, align_right, "#,##0"),
             (sin, align_right, "#,##0"),
             (total, align_right, "#,##0"),
-            (pct, align_right, "0.0%"),
-            (no_prejub_np, align_right, "#,##0"),
-            (item.get("diagnostico", ""), align_center, "@")
+            # Prejubilados
+            (pj, align_right, "#,##0"),
+            (pj_v, align_right, "#,##0"),
+            (pj_a, align_right, "#,##0"),
+            (pj_n, align_right, "#,##0"),
+            (pj_sin, align_right, "#,##0"),
+            # A Jubilar
+            (jb, align_right, "#,##0"),
+            (jb_v, align_right, "#,##0"),
+            (jb_a, align_right, "#,##0"),
+            (jb_n, align_right, "#,##0"),
+            (jb_sin, align_right, "#,##0"),
         ]
 
         for col_i, (val, al, num_fmt) in enumerate(vals, start=1):
@@ -1003,56 +1093,58 @@ def create_sheet_ue(wb, ue_data):
         curr_r += 1
 
     # Fila de Totales
-    ws.merge_cells(start_row=curr_r, start_column=1, end_row=curr_r, end_column=11)
+    ws.merge_cells(start_row=curr_r, start_column=1, end_row=curr_r, end_column=12)
     ws.cell(row=curr_r, column=1, value="TOTAL CONSOLIDADO NACIONAL").font = font_bold
     ws.cell(row=curr_r, column=1).alignment = align_center
 
-    tot_pct = (tot_v / tot_doc) if tot_doc > 0 else 0.0
     tot_vals = [
-        (12, tot_v, "#,##0"),
-        (13, tot_a, "#,##0"),
-        (14, tot_n, "#,##0"),
-        (15, tot_sin, "#,##0"),
-        (16, tot_doc, "#,##0"),
-        (17, tot_pct, "0.0%"),
-        (18, tot_no_prejub_np, "#,##0"),
-        (19, "Asignaciones Evaluadas 100%", "@")
+        (13, tot_est, "#,##0"),
+        (14, tot_v, "#,##0"),
+        (15, tot_a, "#,##0"),
+        (16, tot_n, "#,##0"),
+        (17, tot_sin, "#,##0"),
+        (18, tot_doc, "#,##0"),
+        (19, tot_pj, "#,##0"),
+        (20, tot_pj_v, "#,##0"),
+        (21, tot_pj_a, "#,##0"),
+        (22, tot_pj_n, "#,##0"),
+        (23, tot_pj_sin, "#,##0"),
+        (24, tot_jb, "#,##0"),
+        (25, tot_jb_v, "#,##0"),
+        (26, tot_jb_a, "#,##0"),
+        (27, tot_jb_n, "#,##0"),
+        (28, tot_jb_sin, "#,##0"),
     ]
-
     for c_i, val, num_fmt in tot_vals:
         cell = ws.cell(row=curr_r, column=c_i, value=val)
         cell.font = font_bold
-        cell.alignment = align_right if c_i < 19 else align_center
+        cell.alignment = align_right
         cell.number_format = num_fmt
 
-    for c_i in range(1, 20):
+    for c_i in range(1, 29):
         cell = ws.cell(row=curr_r, column=c_i)
         cell.fill = fill_gold_light
         cell.border = border_double_bottom
 
     ws.row_dimensions[curr_r].height = 24
+    ws.auto_filter.ref = f"A{DATA_ROW}:AB{curr_r - 1}"
 
-    ws.auto_filter.ref = f"A{start_r}:S{curr_r - 1}"
+    add_table_footer(
+        ws, curr_r + 1, 28,
+        "UIE (Planilla Octubre 2026: 168.758 asignaciones) · PROFE (matriz_especialidad: 4.923 reglas) · SIE (17.502 UEs) · PLANIFICACIONES (171.350 registros)",
+        "Padrón consolidado por UE/UA. Prejubilación = docentes con trámite de Compensación de Cotizaciones sin aporte a la Gestora. A Jubilar = docentes de 59 años en adelante. Documento Técnico Preliminar."
+    )
 
-    ws.column_dimensions["A"].width = 13
-    ws.column_dimensions["B"].width = 15
-    ws.column_dimensions["C"].width = 20
-    ws.column_dimensions["D"].width = 34
-    ws.column_dimensions["E"].width = 16
-    ws.column_dimensions["F"].width = 24
-    ws.column_dimensions["G"].width = 12
-    ws.column_dimensions["H"].width = 14
-    ws.column_dimensions["I"].width = 26
-    ws.column_dimensions["J"].width = 14
-    ws.column_dimensions["K"].width = 14
-    ws.column_dimensions["L"].width = 18
-    ws.column_dimensions["M"].width = 18
-    ws.column_dimensions["N"].width = 18
-    ws.column_dimensions["O"].width = 18
-    ws.column_dimensions["P"].width = 15
-    ws.column_dimensions["Q"].width = 16
-    ws.column_dimensions["R"].width = 24
-    ws.column_dimensions["S"].width = 28
+    # Anchos de columna (Col G: 1º Lengua Enseñanza)
+    col_widths = {
+        "A": 13, "B": 15, "C": 20, "D": 34, "E": 16, "F": 24,
+        "G": 20, "H": 12, "I": 14, "J": 26, "K": 14, "L": 14,
+        "M": 14, "N": 12, "O": 12, "P": 14, "Q": 14, "R": 14,
+        "S": 14, "T": 12, "U": 12, "V": 12, "W": 12,
+        "X": 14, "Y": 12, "Z": 12, "AA": 12, "AB": 12,
+    }
+    for col_letter, width in col_widths.items():
+        ws.column_dimensions[col_letter].width = width
 
 
 def create_sheet_rural_urbano(wb, data: dict):
@@ -1192,6 +1284,12 @@ def create_sheet_rural_urbano(wb, data: dict):
 
     ws.row_dimensions[total_r].height = 22
     ws.auto_filter.ref = f"A{start_r}:J{total_r - 1}"
+
+    add_table_footer(
+        ws, total_r + 1, 10,
+        "UIE (Planilla Octubre 2026: 168.758 asignaciones) · SIE (17.502 UEs con georreferencia Rural/Urbano) · PROFE (4.923 reglas)",
+        "Brecha calculada en puntos porcentuales (Urbano - Rural) sobre tasa de Alta Pertinencia (V). Gestión 2026. Documento Técnico Preliminar."
+    )
 
     # Gráfico Nativo de Excel: Barras Comparativas Rural vs Urbano (% Alta Pertinencia)
     chart = BarChart()
@@ -1340,7 +1438,12 @@ def create_sheet_jubilacion(wb, data):
             cell.number_format = "#,##0"
     ws.row_dimensions[curr_r].height = 22
     depto_end_r = curr_r
-    curr_r += 2
+    add_table_footer(
+        ws, curr_r + 1, 7,
+        "UIE (Planilla Octubre 2026: indicadores de Jubilación y Prejubilación) · SIE (Distritos Educativos)",
+        "Cobertura nacional de docentes en edad o trámite de jubilación y prejubilación por departamento. Corte Octubre 2026."
+    )
+    curr_r += 4
 
     # --- Tabla Top 20 Distritos por Jubilación ---
     ws.cell(row=curr_r, column=1, value="2. Top 20 Distritos con Mayor Jubilación Docente").font = font_section
@@ -1381,6 +1484,12 @@ def create_sheet_jubilacion(wb, data):
                 cell.fill = fill_zebra
         ws.row_dimensions[curr_r].height = 20
         curr_r += 1
+
+    add_table_footer(
+        ws, curr_r + 1, 7,
+        "UIE (Planilla Octubre 2026: indicadores de Jubilación y Prejubilación) · SIE (Distritos Educativos)",
+        "Top 20 distritos educativos ordenados por mayor volumen absoluto de docentes con condición de jubilación."
+    )
 
     # --- Gráfico: Jubilación vs Prejubilación por Departamento ---
     chart = BarChart()
@@ -1448,7 +1557,7 @@ def create_sheet_prejub_genero(wb, data):
     kpis = [
         ("ASIGNACIONES EVALUADAS", tot_padron, "#,##0", 1, 2),
         ("DOCENTES ACTIVOS (NO PREJUBILADOS)", no_prejub.get("total", 0), "#,##0", 3, 4),
-        ("NO PREJUBILADOS NO PERTINENTES (N+SIN)", nac_pj.get("no_prejubilados_no_pertinentes", 0), "#,##0", 5, 7),
+        ("NO PREJUBILADOS NO PERTINENTES (SPC+SFM)", nac_pj.get("no_prejubilados_no_pertinentes", 0), "#,##0", 5, 7),
         ("% NO PERTINENTE EN SERVICIO ACTIVO", nac_pj.get("pct_no_prejubilados_no_pertinentes_sobre_no_prejub", 0) / 100.0, "0.00%", 8, 9),
         ("DOCENTES MUJERES", fem.get("total", 0), "#,##0", 10, 11),
         ("DOCENTES VARONES", masc.get("total", 0), "#,##0", 12, 13)
@@ -1475,14 +1584,17 @@ def create_sheet_prejub_genero(wb, data):
     ws.row_dimensions[5].height = 18
     ws.row_dimensions[6].height = 26
 
-    # ── Tabla 1: Matriz Cruzada Prejubilación x Pertinencia (Fila 8)
+    # ── Tabla 1: Matriz Nacional: Condición de Prejubilación y Jubilación vs Pertinencia (Fila 8)
     curr_r = 8
-    ws.cell(row=curr_r, column=1, value="1. Matriz Cruzada Nacional: Condición de Prejubilación vs Pertinencia Curricular").font = font_section
+    ws.cell(row=curr_r, column=1, value="1. Matriz Nacional: Condición de Prejubilación y Jubilación vs Pertinencia Curricular").font = font_section
     curr_r += 1
 
+    en_ejercicio = nac_pj.get("en_ejercicio", {})
+    cand_jub = nac_pj.get("candidatos_jubilacion", {})
+
     h_matriz = [
-        "Condición Docente", "Total", "Alta (V)", "Media (A)", "Baja (N)", "Sin Pert. (SIN)",
-        "No Pertinentes (N+SIN)", "% No Pertinente", "% Alta Pertinencia"
+        "Condición Docente", "Total Planillas SEP", "V · Alta", "A · Media", "SPC · Sin Pert. Cargo", "SFM · Sin Form. Maestro",
+        "% Alta Pertinencia"
     ]
     for c_i, h in enumerate(h_matriz, start=1):
         c = ws.cell(row=curr_r, column=c_i, value=h)
@@ -1494,8 +1606,9 @@ def create_sheet_prejub_genero(wb, data):
     curr_r += 1
 
     filas_matriz = [
-        ("Docentes en Servicio Activo (No Prejubilados)", no_prejub),
-        ("Docentes en Proceso de Prejubilación (SI)", prejub),
+        ("Docentes en Ejercicio", en_ejercicio),
+        ("Docentes Candidatos a Jubilación (≥59 años)", cand_jub),
+        ("Docentes en Proceso de Prejubilación", prejub),
     ]
 
     for label, item in filas_matriz:
@@ -1504,18 +1617,16 @@ def create_sheet_prejub_genero(wb, data):
         a = item.get("A", 0)
         n = item.get("N", 0)
         sin = item.get("SIN", 0)
-        np = item.get("no_pertinentes", n + sin)
-        pct_np = (np / t) if t > 0 else 0.0
         pct_v = (v / t) if t > 0 else 0.0
 
-        vals = [label, t, v, a, n, sin, np, pct_np, pct_v]
+        vals = [label, t, v, a, n, sin, pct_v]
         for c_i, val in enumerate(vals, start=1):
             cell = ws.cell(row=curr_r, column=c_i, value=val)
             cell.font = font_data
             cell.border = border_cell
             if c_i == 1:
                 cell.alignment = align_left
-            elif c_i in [8, 9]:
+            elif c_i == 7:
                 cell.alignment = align_right
                 cell.number_format = "0.00%"
             else:
@@ -1526,15 +1637,13 @@ def create_sheet_prejub_genero(wb, data):
 
     # Total Nacional Matriz
     t_tot = tot_padron
-    v_tot = no_prejub.get("V", 0) + prejub.get("V", 0)
-    a_tot = no_prejub.get("A", 0) + prejub.get("A", 0)
-    n_tot = no_prejub.get("N", 0) + prejub.get("N", 0)
-    sin_tot = no_prejub.get("SIN", 0) + prejub.get("SIN", 0)
-    np_tot = n_tot + sin_tot
-    pct_np_tot = (np_tot / t_tot) if t_tot > 0 else 0.0
+    v_tot = en_ejercicio.get("V", 0) + cand_jub.get("V", 0) + prejub.get("V", 0)
+    a_tot = en_ejercicio.get("A", 0) + cand_jub.get("A", 0) + prejub.get("A", 0)
+    n_tot = en_ejercicio.get("N", 0) + cand_jub.get("N", 0) + prejub.get("N", 0)
+    sin_tot = en_ejercicio.get("SIN", 0) + cand_jub.get("SIN", 0) + prejub.get("SIN", 0)
     pct_v_tot = (v_tot / t_tot) if t_tot > 0 else 0.0
 
-    tot_vals_m = ["TOTAL GENERAL NACIONAL", t_tot, v_tot, a_tot, n_tot, sin_tot, np_tot, pct_np_tot, pct_v_tot]
+    tot_vals_m = ["TOTAL GENERAL NACIONAL", t_tot, v_tot, a_tot, n_tot, sin_tot, pct_v_tot]
     for c_i, val in enumerate(tot_vals_m, start=1):
         cell = ws.cell(row=curr_r, column=c_i, value=val)
         cell.font = font_bold
@@ -1542,24 +1651,29 @@ def create_sheet_prejub_genero(wb, data):
         cell.border = border_double_bottom
         if c_i == 1:
             cell.alignment = align_left
-        elif c_i in [8, 9]:
+        elif c_i == 7:
             cell.alignment = align_right
             cell.number_format = "0.00%"
         else:
             cell.alignment = align_right
             cell.number_format = "#,##0"
     ws.row_dimensions[curr_r].height = 22
-    curr_r += 2
+    add_table_footer(
+        ws, curr_r + 1, 7,
+        "UIE (Planilla Octubre 2026: 168.758 asignaciones) · PROFE (4.923 reglas)",
+        "Desglose nacional: Docentes en Ejercicio, Candidatos a Jubilación (≥59 años) y Prejubilados (trámite Compensación de Cotizaciones sin aporte a Gestora). Documento Técnico Preliminar."
+    )
+    curr_r += 4
 
-    # ── Tabla 2: Desglose Departamental de No Prejubilados No Pertinentes
-    ws.cell(row=curr_r, column=1, value="2. Población Objetivo Activa: No Prejubilados No Pertinentes por Departamento").font = font_section
+    # ── Tabla 2: Prejubilados por Departamento y Rango de Pertinencia
+    ws.cell(row=curr_r, column=1, value="2. Docentes en Proceso de Prejubilación por Departamento y Rango de Pertinencia").font = font_section
     curr_r += 1
 
-    h_depto_np = [
-        "Departamento", "Total Docentes", "No Prejubilados", "No Pertinentes Activos (N+SIN)",
-        "% No Pertinentes Activos", "No Prejubilados V (Alta)", "No Prejubilados A (Media)", "Prejubilados No Pertinentes"
+    h_depto_pj = [
+        "Departamento", "Total Planillas SEP", "Total Prejubilados",
+        "V · Alta", "A · Media", "SPC · Sin Pert. Cargo", "SFM · Sin Form. Maestro"
     ]
-    for c_i, h in enumerate(h_depto_np, start=1):
+    for c_i, h in enumerate(h_depto_pj, start=1):
         c = ws.cell(row=curr_r, column=c_i, value=h)
         c.font = font_header
         c.fill = fill_navy
@@ -1569,28 +1683,25 @@ def create_sheet_prejub_genero(wb, data):
     start_depto_r = curr_r
     curr_r += 1
 
+    sum_pj_tot = sum_pj_v = sum_pj_a = sum_pj_n = sum_pj_sin = 0
     for idx, d in enumerate(depto_pj):
         d_nom = d.get("departamento", "")
         tot_d = d.get("total", 0)
-        no_pj = d.get("no_prejubilados", 0)
-        no_pj_np = d.get("no_prejub_no_pert", 0)
-        pct_np_act = (no_pj_np / no_pj) if no_pj > 0 else 0.0
-        v_act = d.get("no_prejub_v", 0)
-        a_act = d.get("no_prejub_a", 0)
-        pj_np = d.get("prejub_no_pert", 0)
+        pj_t = d.get("prejubilados", 0)
+        pj_v = d.get("prejub_v", 0)
+        pj_a = d.get("prejub_a", 0)
+        pj_n = d.get("prejub_n", 0)
+        pj_sin = d.get("prejub_sin", 0)
 
-        row_vals = [d_nom, tot_d, no_pj, no_pj_np, pct_np_act, v_act, a_act, pj_np]
+        sum_pj_tot += pj_t; sum_pj_v += pj_v; sum_pj_a += pj_a; sum_pj_n += pj_n; sum_pj_sin += pj_sin
+
+        row_vals = [d_nom, tot_d, pj_t, pj_v, pj_a, pj_n, pj_sin]
         for c_i, val in enumerate(row_vals, start=1):
             cell = ws.cell(row=curr_r, column=c_i, value=val)
             cell.font = font_data
             cell.border = border_cell
-            if c_i == 1:
-                cell.alignment = align_left
-            elif c_i == 5:
-                cell.alignment = align_right
-                cell.number_format = "0.00%"
-            else:
-                cell.alignment = align_right
+            cell.alignment = align_left if c_i == 1 else align_right
+            if c_i > 1:
                 cell.number_format = "#,##0"
             if idx % 2 == 1:
                 cell.fill = fill_zebra
@@ -1599,32 +1710,84 @@ def create_sheet_prejub_genero(wb, data):
 
     end_depto_r = curr_r - 1
 
-    # Fila Total Departamental
-    tot_pj_np = sum(d.get("prejub_no_pert", 0) for d in depto_pj)
-    tot_row_d = [
-        "TOTAL NACIONAL", tot_padron, no_prejub.get("total", 0),
-        nac_pj.get("no_prejubilados_no_pertinentes", 0),
-        nac_pj.get("pct_no_prejubilados_no_pertinentes_sobre_no_prejub", 0) / 100.0,
-        no_prejub.get("V", 0), no_prejub.get("A", 0), tot_pj_np
-    ]
-    for c_i, val in enumerate(tot_row_d, start=1):
+    tot_row_pj = ["TOTAL NACIONAL", tot_padron, sum_pj_tot, sum_pj_v, sum_pj_a, sum_pj_n, sum_pj_sin]
+    for c_i, val in enumerate(tot_row_pj, start=1):
         cell = ws.cell(row=curr_r, column=c_i, value=val)
         cell.font = font_bold
         cell.fill = fill_gold_light
         cell.border = border_double_bottom
-        if c_i == 1:
-            cell.alignment = align_left
-        elif c_i == 5:
-            cell.alignment = align_right
-            cell.number_format = "0.00%"
-        else:
-            cell.alignment = align_right
+        cell.alignment = align_left if c_i == 1 else align_right
+        if c_i > 1:
             cell.number_format = "#,##0"
     ws.row_dimensions[curr_r].height = 22
-    curr_r += 2
+    add_table_footer(
+        ws, curr_r + 1, 7,
+        "UIE (Planilla Octubre 2026) · PROFE (matriz_especialidad)",
+        "Prejubilados (trámite de Compensación de Cotizaciones sin aporte a Gestora) desglosados por departamento y rango (V, A, SPC, SFM)."
+    )
+    curr_r += 4
 
-    # ── Tabla 3: Composición por Género y Desempeño Curricular por Departamento
-    ws.cell(row=curr_r, column=1, value="3. Composición y Desempeño Curricular por Género por Departamento").font = font_section
+    # ── Tabla 3: Candidatos a Jubilación (≥59 años) por Departamento y Rango de Pertinencia
+    ws.cell(row=curr_r, column=1, value="3. Docentes Candidatos a Jubilación (≥59 años) por Departamento y Rango de Pertinencia").font = font_section
+    curr_r += 1
+
+    h_depto_jb = [
+        "Departamento", "Total Planillas SEP", "Total A Jubilar",
+        "V · Alta", "A · Media", "SPC · Sin Pert. Cargo", "SFM · Sin Form. Maestro"
+    ]
+    for c_i, h in enumerate(h_depto_jb, start=1):
+        c = ws.cell(row=curr_r, column=c_i, value=h)
+        c.font = font_header
+        c.fill = fill_navy
+        c.alignment = align_center
+        c.border = border_cell
+    ws.row_dimensions[curr_r].height = 22
+    curr_r += 1
+
+    sum_jb_tot = sum_jb_v = sum_jb_a = sum_jb_n = sum_jb_sin = 0
+    for idx, d in enumerate(depto_pj):
+        d_nom = d.get("departamento", "")
+        tot_d = d.get("total", 0)
+        jb_t = d.get("jub_total", 0)
+        jb_v = d.get("jub_v", 0)
+        jb_a = d.get("jub_a", 0)
+        jb_n = d.get("jub_n", 0)
+        jb_sin = d.get("jub_sin", 0)
+
+        sum_jb_tot += jb_t; sum_jb_v += jb_v; sum_jb_a += jb_a; sum_jb_n += jb_n; sum_jb_sin += jb_sin
+
+        row_vals = [d_nom, tot_d, jb_t, jb_v, jb_a, jb_n, jb_sin]
+        for c_i, val in enumerate(row_vals, start=1):
+            cell = ws.cell(row=curr_r, column=c_i, value=val)
+            cell.font = font_data
+            cell.border = border_cell
+            cell.alignment = align_left if c_i == 1 else align_right
+            if c_i > 1:
+                cell.number_format = "#,##0"
+            if idx % 2 == 1:
+                cell.fill = fill_zebra
+        ws.row_dimensions[curr_r].height = 20
+        curr_r += 1
+
+    tot_row_jb = ["TOTAL NACIONAL", tot_padron, sum_jb_tot, sum_jb_v, sum_jb_a, sum_jb_n, sum_jb_sin]
+    for c_i, val in enumerate(tot_row_jb, start=1):
+        cell = ws.cell(row=curr_r, column=c_i, value=val)
+        cell.font = font_bold
+        cell.fill = fill_gold_light
+        cell.border = border_double_bottom
+        cell.alignment = align_left if c_i == 1 else align_right
+        if c_i > 1:
+            cell.number_format = "#,##0"
+    ws.row_dimensions[curr_r].height = 22
+    add_table_footer(
+        ws, curr_r + 1, 7,
+        "UIE (Planilla Octubre 2026) · PROFE (matriz_especialidad)",
+        "Docentes de 59 años en adelante (A Jubilar) desglosados por departamento y rango de pertinencia (V, A, SPC, SFM)."
+    )
+    curr_r += 4
+
+    # ── Tabla 4: Composición por Género y Desempeño Curricular por Departamento
+    ws.cell(row=curr_r, column=1, value="4. Composición y Desempeño Curricular por Género por Departamento").font = font_section
     curr_r += 1
 
     h_gen = [
@@ -1690,18 +1853,23 @@ def create_sheet_prejub_genero(wb, data):
             cell.alignment = align_right
             cell.number_format = "#,##0"
     ws.row_dimensions[curr_r].height = 22
+    add_table_footer(
+        ws, curr_r + 1, 7,
+        "UIE (Planilla Octubre 2026: variable sexo/género) · PROFE (matriz_especialidad)",
+        "Desempeño de pertinencia curricular desagregado por género y departamento. Corte Planilla Octubre 2026."
+    )
 
-    # Gráfico de Barras: No Prejubilados No Pertinentes por Departamento
+    # Gráfico de Barras: Prejubilados por Departamento (Total Prejubilados - Columna C)
     chart = BarChart()
     chart.type = "col"
-    chart.title = "Docentes Activos No Pertinentes (N+SIN) por Departamento"
-    chart.y_axis.title = "Docentes Prioritarios"
+    chart.title = "Docentes en Proceso de Prejubilación por Departamento"
+    chart.y_axis.title = "Docentes Prejubilados"
     chart.x_axis.title = "Departamento"
     chart.width = 18
     chart.height = 10
     chart.legend = None
 
-    data_ref_np = Reference(ws, min_col=4, min_row=start_depto_r, max_row=end_depto_r)
+    data_ref_np = Reference(ws, min_col=3, min_row=start_depto_r, max_row=end_depto_r)
     cats_ref_np = Reference(ws, min_col=1, min_row=start_depto_r + 1, max_row=end_depto_r)
     chart.add_data(data_ref_np, titles_from_data=True)
     chart.set_categories(cats_ref_np)

@@ -251,53 +251,53 @@ const RANGO_INFO: Record<Rango, {
 }> = {
   V: {
     code: 'V',
-    badgeText: 'Rango V · Alta',
+    badgeText: 'Rango V · Alta Pertinencia (Coincidencia exacta)',
     hex: '#059669', // Emerald 600
     accentBg: 'bg-emerald-50',
     accentBorder: 'border-emerald-200/80',
     pillBg: 'bg-emerald-50 text-emerald-800 border-emerald-200',
     pillText: 'text-emerald-700',
     label: 'Alta Pertinencia',
-    subtitle: 'Docente Idóneo en Aula',
+    subtitle: 'Coincidencia exacta',
     queSignifica: 'Especialidad y nivel del título normalista coinciden plenamente con la materia impartida.',
     intensidadFormacion: 'Formación Corta / Actualización Continua',
   },
   A: {
     code: 'A',
-    badgeText: 'Rango A · Media',
+    badgeText: 'Rango A · Media Pertinencia (Afín PROFE)',
     hex: '#2563eb', // Blue 600
     accentBg: 'bg-blue-50',
     accentBorder: 'border-blue-200/80',
     pillBg: 'bg-blue-50 text-blue-800 border-blue-200',
     pillText: 'text-blue-700',
     label: 'Media Pertinencia',
-    subtitle: 'Alineación Parcial / Afín',
+    subtitle: 'Afín PROFE',
     queSignifica: 'Formación en área afín o planes anteriores. Requiere nivelación modular y actualización.',
     intensidadFormacion: 'Formación Media / Nivelación Modular',
   },
   N: {
     code: 'N',
-    badgeText: 'Rango N · Baja',
+    badgeText: 'Rango SPC · (Sin Pertinencia al Cargo)',
     hex: '#ea580c', // Orange 600
     accentBg: 'bg-amber-50',
     accentBorder: 'border-amber-200/80',
     pillBg: 'bg-amber-50 text-amber-800 border-amber-200',
     pillText: 'text-amber-700',
-    label: 'Baja Pertinencia',
-    subtitle: 'Sin Correspondencia con el Cargo',
+    label: 'Sin Pertinencia al Cargo',
+    subtitle: 'Sin Pertinencia al Cargo',
     queSignifica: 'Docente normalista asignado a una materia o cargo sin relación con su especialidad de egreso.',
     intensidadFormacion: 'Formación Larga / Reconversión Profunda',
   },
   SIN: {
     code: 'SIN',
-    badgeText: 'Rango SIN · Técnico / Univ. / Otros',
+    badgeText: 'Rango SFM · (Sin Formación de Maestro)',
     hex: '#64748b', // Slate 500
     accentBg: 'bg-slate-100',
     accentBorder: 'border-slate-200',
     pillBg: 'bg-slate-100 text-slate-700 border-slate-200',
     pillText: 'text-slate-700',
-    label: 'Sin Pertinencia Normalista',
-    subtitle: 'Técnico Superior · Universitario · Otros',
+    label: 'Sin Formación de Maestro',
+    subtitle: 'Sin Formación de Maestro',
     queSignifica: 'Docentes en aula con formación de Técnico Superior, Grado Universitario, interinos u otros perfiles no normalistas.',
     intensidadFormacion: 'Profesionalización / Homologación Pedagógica',
   },
@@ -524,8 +524,8 @@ export default function PertinenciaView() {
     return [
       { rango: 'V' as Rango, cantidad: data.resumen.V?.docentes ?? 0, color: '#059669', label: 'Alta Pertinencia' },
       { rango: 'A' as Rango, cantidad: data.resumen.A?.docentes ?? 0, color: '#2563eb', label: 'Media Pertinencia' },
-      { rango: 'N' as Rango, cantidad: data.resumen.N?.docentes ?? 0, color: '#ea580c', label: 'Baja Pertinencia' },
-      { rango: 'SIN' as Rango, cantidad: data.resumen.SIN?.docentes ?? 0, color: '#64748b', label: 'Técnico / Univ. / Otros' },
+      { rango: 'N' as Rango, cantidad: data.resumen.N?.docentes ?? 0, color: '#ea580c', label: 'Sin Pert. al Cargo (SPC)' },
+      { rango: 'SIN' as Rango, cantidad: data.resumen.SIN?.docentes ?? 0, color: '#64748b', label: 'Sin Form. Maestro (SFM)' },
     ];
   }, [data]);
 
@@ -1152,7 +1152,7 @@ export default function PertinenciaView() {
                             </span>
                           </div>
                           <div className="flex items-baseline justify-between text-xs mb-1.5">
-                            <span className="text-slate-500 font-semibold">Docentes activos N+SIN:</span>
+                            <span className="text-slate-500 font-semibold">Docentes activos SPC+SFM:</span>
                             <span className="font-black text-slate-900">{fmt(dep.no_prejub_no_pert)}</span>
                           </div>
                           <div className="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden">
@@ -1163,7 +1163,7 @@ export default function PertinenciaView() {
                           </div>
                           <div className="flex items-center justify-between text-[10px] text-slate-400 mt-2 font-medium">
                             <span>Total activos: {fmt(dep.no_prejubilados)}</span>
-                            <span>Prejubilados N+SIN: {fmt(dep.prejub_no_pert)}</span>
+                            <span>Prejubilados SPC+SFM: {fmt(dep.prejub_no_pert)}</span>
                           </div>
                         </div>
                       );
@@ -1229,7 +1229,7 @@ export default function PertinenciaView() {
                         <span className="text-[10px] text-slate-500 font-medium block">{fmt(data.genero.nacional.femenino.V)} idóneas</span>
                       </div>
                       <div className="p-2.5 rounded-xl bg-white border border-indigo-100/80">
-                        <span className="text-[10px] text-slate-400 font-bold block uppercase">Activas N+SIN</span>
+                        <span className="text-[10px] text-slate-400 font-bold block uppercase">Activas SPC+SFM</span>
                         <span className="text-base font-black text-rose-700">{fmt(data.genero.nacional.femenino.no_prejub_no_pert)}</span>
                         <span className="text-[10px] text-slate-500 font-medium block">a capacitar/reconversión</span>
                       </div>
@@ -1260,7 +1260,7 @@ export default function PertinenciaView() {
                         <span className="text-[10px] text-slate-500 font-medium block">{fmt(data.genero.nacional.masculino.V)} idóneos</span>
                       </div>
                       <div className="p-2.5 rounded-xl bg-white border border-slate-200/80">
-                        <span className="text-[10px] text-slate-400 font-bold block uppercase">Activos N+SIN</span>
+                        <span className="text-[10px] text-slate-400 font-bold block uppercase">Activos SPC+SFM</span>
                         <span className="text-base font-black text-rose-700">{fmt(data.genero.nacional.masculino.no_prejub_no_pert)}</span>
                         <span className="text-[10px] text-slate-500 font-medium block">a capacitar/reconversión</span>
                       </div>
@@ -1812,8 +1812,8 @@ export default function PertinenciaView() {
                           <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden flex">
                             <div style={{ width: `${pV}%` }} className="bg-emerald-600 h-full" title={`Alta: ${pV.toFixed(1)}%`} />
                             <div style={{ width: `${pA}%` }} className="bg-blue-600 h-full" title={`Media: ${pA.toFixed(1)}%`} />
-                            <div style={{ width: `${pN}%` }} className="bg-amber-600 h-full" title={`Baja: ${pN.toFixed(1)}%`} />
-                            <div style={{ width: `${pSIN}%` }} className="bg-slate-400 h-full" title={`Sin: ${pSIN.toFixed(1)}%`} />
+                            <div style={{ width: `${pN}%` }} className="bg-amber-600 h-full" title={`SPC: ${pN.toFixed(1)}%`} />
+                            <div style={{ width: `${pSIN}%` }} className="bg-slate-400 h-full" title={`SFM: ${pSIN.toFixed(1)}%`} />
                           </div>
                         </div>
                       </div>
@@ -1839,11 +1839,11 @@ export default function PertinenciaView() {
                               {fmt(dept.a)}
                             </div>
                             <div className="bg-amber-50 text-amber-800 p-1 rounded">
-                              <span className="block text-[9px] text-amber-600 uppercase">N (Baja)</span>
+                              <span className="block text-[9px] text-amber-600 uppercase">SPC · Sin Pert.</span>
                               {fmt(dept.n)}
                             </div>
                             <div className="bg-slate-100 text-slate-700 p-1 rounded">
-                              <span className="block text-[9px] text-slate-500 uppercase">SIN</span>
+                              <span className="block text-[9px] text-slate-500 uppercase">SFM</span>
                               {fmt(dept.sin)}
                             </div>
                           </div>
@@ -1946,8 +1946,8 @@ export default function PertinenciaView() {
                     <th className="py-3 px-2 text-center w-16 border-r border-slate-700">Ítem</th>
                     <th className="py-3 px-3 text-right w-24 text-emerald-400 border-r border-slate-700">Alta (V)</th>
                     <th className="py-3 px-3 text-right w-24 text-blue-400 border-r border-slate-700">Media (A)</th>
-                    <th className="py-3 px-3 text-right w-24 text-amber-400 border-r border-slate-700">Baja (N)</th>
-                    <th className="py-3 px-3 text-right w-20 text-slate-400 border-r border-slate-700">Sin Pert.</th>
+                    <th className="py-3 px-3 text-right w-24 text-amber-400 border-r border-slate-700">SPC · Sin Pert.</th>
+                    <th className="py-3 px-3 text-right w-20 text-slate-400 border-r border-slate-700">SFM</th>
                     <th className="py-3 px-3 text-right w-28 bg-slate-900 text-amber-300 font-black border-r border-slate-700">Total Doc.</th>
                     <th className="py-3 px-3 text-right w-20 text-slate-300 border-r border-slate-700">UEs</th>
                     <th className="py-3 px-4 text-center w-32 border-r border-slate-700">Distribución %</th>
@@ -2060,8 +2060,8 @@ export default function PertinenciaView() {
                                   <div className="w-28 bg-slate-100 rounded-full h-2.5 overflow-hidden flex mx-auto">
                                     <div style={{ width: `${pV}%` }} className="bg-emerald-600 h-full" title={`Alta: ${pV.toFixed(1)}%`} />
                                     <div style={{ width: `${pA}%` }} className="bg-blue-600 h-full" title={`Media: ${pA.toFixed(1)}%`} />
-                                    <div style={{ width: `${pN}%` }} className="bg-amber-600 h-full" title={`Baja: ${pN.toFixed(1)}%`} />
-                                    <div style={{ width: `${pSIN}%` }} className="bg-slate-400 h-full" title={`Sin Pert: ${pSIN.toFixed(1)}%`} />
+                                    <div style={{ width: `${pN}%` }} className="bg-amber-600 h-full" title={`SPC: ${pN.toFixed(1)}%`} />
+                                    <div style={{ width: `${pSIN}%` }} className="bg-slate-400 h-full" title={`SFM: ${pSIN.toFixed(1)}%`} />
                                   </div>
                                 </td>
 
@@ -2110,11 +2110,11 @@ export default function PertinenciaView() {
                                                   <span>{fmt(stats.A)}</span>
                                                 </div>
                                                 <div className="flex justify-between text-amber-700 font-bold">
-                                                  <span>Baja:</span>
+                                                  <span>SPC:</span>
                                                   <span>{fmt(stats.N)}</span>
                                                 </div>
                                                 <div className="flex justify-between text-slate-500">
-                                                  <span>Sin:</span>
+                                                  <span>SFM:</span>
                                                   <span>{fmt(stats.SIN)}</span>
                                                 </div>
                                               </div>
@@ -2193,11 +2193,11 @@ export default function PertinenciaView() {
                       <strong>{fmt(n.rangos.A?.docentes)}</strong>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-amber-700 font-bold">Baja Pertinencia:</span>
+                      <span className="text-amber-700 font-bold">Sin Pert. al Cargo (SPC):</span>
                       <strong>{fmt(n.rangos.N?.docentes)}</strong>
                     </div>
                     <div className="flex justify-between text-slate-500">
-                      <span>Técnico / Univ. / Otros:</span>
+                      <span>Sin Form. de Maestro (SFM):</span>
                       <strong>{fmt(n.rangos.SIN?.docentes)}</strong>
                     </div>
                   </div>

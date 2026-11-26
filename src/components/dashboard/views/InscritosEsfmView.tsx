@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useMemo, useState } from 'react';
+import { createPortal } from 'react-dom';
 import {
   BarChart3,
   Building2,
@@ -72,6 +73,97 @@ const ANIO_COLORS: Record<1 | 2 | 3 | 4 | 5, { bg: string; hex: string; label: s
   5: { bg: 'bg-[#64748b]', hex: '#64748b', label: '5º Año' },
 };
 
+type NivelEspecialidad = 'INICIAL' | 'PRIMARIA' | 'SECUNDARIA' | 'TECNICA' | 'ESPECIAL';
+
+const NIVEL_ORDER: NivelEspecialidad[] = ['INICIAL', 'PRIMARIA', 'SECUNDARIA', 'TECNICA', 'ESPECIAL'];
+
+const NIVEL_WEIGHT: Record<NivelEspecialidad, number> = {
+  INICIAL: 1,
+  PRIMARIA: 2,
+  SECUNDARIA: 3,
+  TECNICA: 4,
+  ESPECIAL: 5,
+};
+
+const NIVEL_META: Record<
+  NivelEspecialidad,
+  {
+    label: string;
+    shortLabel: string;
+    pillActive: string;
+    badge: string;
+    cardHeader: string;
+    chipActive: string;
+    dot: string;
+  }
+> = {
+  INICIAL: {
+    label: 'Educación Inicial',
+    shortLabel: 'Inicial',
+    pillActive: 'bg-emerald-600 text-white border-emerald-600',
+    badge: 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800',
+    cardHeader: 'bg-emerald-50/90 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-200 border-emerald-200 dark:border-emerald-800',
+    chipActive: 'bg-emerald-600 text-white border-emerald-600',
+    dot: 'bg-emerald-500',
+  },
+  PRIMARIA: {
+    label: 'Educación Primaria',
+    shortLabel: 'Primaria',
+    pillActive: 'bg-blue-600 text-white border-blue-600',
+    badge: 'bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800',
+    cardHeader: 'bg-blue-50/90 dark:bg-blue-950/40 text-blue-900 dark:text-blue-200 border-blue-200 dark:border-blue-800',
+    chipActive: 'bg-blue-600 text-white border-blue-600',
+    dot: 'bg-blue-500',
+  },
+  SECUNDARIA: {
+    label: 'Educación Secundaria',
+    shortLabel: 'Secundaria',
+    pillActive: 'bg-[#0f2942] text-white border-[#0f2942]',
+    badge: 'bg-slate-100 text-[#0f2942] border-slate-300 dark:bg-slate-800 dark:text-slate-200 dark:border-slate-700',
+    cardHeader: 'bg-[#0f2942]/5 dark:bg-slate-800/80 text-[#0f2942] dark:text-white border-slate-200 dark:border-slate-700',
+    chipActive: 'bg-[#0f2942] text-white border-[#0f2942]',
+    dot: 'bg-[#0f2942] dark:bg-sky-400',
+  },
+  TECNICA: {
+    label: 'Técnica Tecnológica (BTH)',
+    shortLabel: 'Técnica',
+    pillActive: 'bg-[#c9a751] text-[#0f172a] border-[#c9a751] font-black',
+    badge: 'bg-[#faf5e8] text-[#937527] border-[#e5d4a4] dark:bg-amber-950/50 dark:text-[#c9a751] dark:border-[#c9a751]/40',
+    cardHeader: 'bg-[#faf5e8] dark:bg-amber-950/30 text-[#937527] dark:text-[#c9a751] border-[#e5d4a4] dark:border-[#c9a751]/40',
+    chipActive: 'bg-[#c9a751] text-[#0f172a] border-[#c9a751] font-black',
+    dot: 'bg-[#c9a751]',
+  },
+  ESPECIAL: {
+    label: 'Educación Especial',
+    shortLabel: 'Especial',
+    pillActive: 'bg-purple-600 text-white border-purple-600',
+    badge: 'bg-purple-50 text-purple-700 border-purple-200 dark:bg-purple-950/60 dark:text-purple-300 dark:border-purple-800',
+    cardHeader: 'bg-purple-50/90 dark:bg-purple-950/40 text-purple-900 dark:text-purple-200 border-purple-200 dark:border-purple-800',
+    chipActive: 'bg-purple-600 text-white border-purple-600',
+    dot: 'bg-purple-500',
+  },
+};
+
+const TECNICA_SET = new Set([
+  'AGROPECUARIA',
+  'CARPINTERÍA INDUSTRIAL EN MADERA Y METAL',
+  'ELECTRICIDAD Y ELECTRÓNICA',
+  'ELECTROMECÁNICA',
+  'INDUSTRIA TEXTIL Y CONFECCIÓN',
+  'MECÁNICA AUTOMOTRIZ',
+  'MECÁNICA INDUSTRIAL',
+  'TRANSFORMACIÓN DE ALIMENTOS Y GASTRONOMÍA',
+]);
+
+function getNivelEspecialidad(especialidad: string): NivelEspecialidad {
+  const s = especialidad.trim().toUpperCase();
+  if (s.includes('INICIAL')) return 'INICIAL';
+  if (s.includes('PRIMARIA')) return 'PRIMARIA';
+  if (s.includes('ESPECIAL') || s.includes('DISCAPACIDAD')) return 'ESPECIAL';
+  if (TECNICA_SET.has(s)) return 'TECNICA';
+  return 'SECUNDARIA';
+}
+
 function emptyAnios(): AnioCounts {
   return { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, total: 0 };
 }
@@ -142,7 +234,18 @@ export default function InscritosEsfmView() {
   // Filtros: por defecto gestión 2026 y todos los años (1° a 5°)
   const [selectedGestion, setSelectedGestion] = useState<number | 'TODAS'>(2026);
   const [selectedAnio, setSelectedAnio] = useState<number | 'TODOS'>('TODOS');
+  const [selectedNivel, setSelectedNivel] = useState<NivelEspecialidad | 'TODOS'>('TODOS');
+  const [selectedEspecialidades, setSelectedEspecialidades] = useState<Set<string>>(new Set());
+  const [showEspPanel, setShowEspPanel] = useState<boolean>(false);
+  const [popoverTab, setPopoverTab] = useState<NivelEspecialidad | 'TODOS'>('TODOS');
+  const [espQuickSearch, setEspQuickSearch] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [espSortMode, setEspSortMode] = useState<'nivel' | 'matricula' | 'alfabetico'>('nivel');
+  const [mounted, setMounted] = useState<boolean>(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Drill-down dinámico en tabla
   const [expandedDeptos, setExpandedDeptos] = useState<Set<string>>(new Set());
@@ -169,6 +272,44 @@ export default function InscritosEsfmView() {
   }, []);
 
   const fmt = (n: number) => n.toLocaleString('es-BO');
+
+  // Catálogo agrupado de especialidades por nivel (Inicial, Primaria, Secundaria, Técnica, Especial)
+  const especialidadesByNivel = useMemo(() => {
+    const groups: Record<NivelEspecialidad, { especialidad: string; total: number }[]> = {
+      INICIAL: [],
+      PRIMARIA: [],
+      SECUNDARIA: [],
+      TECNICA: [],
+      ESPECIAL: [],
+    };
+    const totalsByNivel: Record<NivelEspecialidad, number> = {
+      INICIAL: 0,
+      PRIMARIA: 0,
+      SECUNDARIA: 0,
+      TECNICA: 0,
+      ESPECIAL: 0,
+    };
+    if (!dataset) return { groups, totalsByNivel };
+
+    const espCounts = new Map<string, number>();
+    for (const r of dataset.registros) {
+      if (selectedGestion !== 'TODAS' && r.g !== selectedGestion) continue;
+      if (selectedAnio !== 'TODOS' && r.a !== selectedAnio) continue;
+      espCounts.set(r.s, (espCounts.get(r.s) || 0) + r.c);
+    }
+
+    for (const [esp, total] of espCounts.entries()) {
+      const nivel = getNivelEspecialidad(esp);
+      groups[nivel].push({ especialidad: esp, total });
+      totalsByNivel[nivel] += total;
+    }
+
+    for (const niv of NIVEL_ORDER) {
+      groups[niv].sort((a, b) => b.total - a.total);
+    }
+
+    return { groups, totalsByNivel };
+  }, [dataset, selectedGestion, selectedAnio]);
 
   // Construcción jerárquica dinámica: Departamento -> ESFM -> Especialidad x Anio_Que_Cursa
   const { deptosTree, nationalTotals, totalEsfms, totalEspecialidades } = useMemo(() => {
@@ -198,6 +339,8 @@ export default function InscritosEsfmView() {
     for (const r of dataset.registros) {
       if (selectedGestion !== 'TODAS' && r.g !== selectedGestion) continue;
       if (selectedAnio !== 'TODOS' && r.a !== selectedAnio) continue;
+      if (selectedNivel !== 'TODOS' && getNivelEspecialidad(r.s) !== selectedNivel) continue;
+      if (selectedEspecialidades.size > 0 && !selectedEspecialidades.has(r.s)) continue;
       if (term) {
         const match =
           r.d.includes(term) || r.e.includes(term) || r.s.includes(term);
@@ -240,7 +383,19 @@ export default function InscritosEsfmView() {
                 especialidad,
                 anios: sAnios,
               }))
-              .sort((a, b) => b.anios.total - a.anios.total);
+              .sort((a, b) => {
+                if (espSortMode === 'matricula') {
+                  return b.anios.total - a.anios.total;
+                }
+                if (espSortMode === 'alfabetico') {
+                  return a.especialidad.localeCompare(b.especialidad, 'es');
+                }
+                // 'nivel' (Por defecto): Agrupado por orden de Nivel (Inicial -> Primaria -> Secundaria -> Técnica -> Especial) y alfabético
+                const nivA = NIVEL_WEIGHT[getNivelEspecialidad(a.especialidad)];
+                const nivB = NIVEL_WEIGHT[getNivelEspecialidad(b.especialidad)];
+                if (nivA !== nivB) return nivA - nivB;
+                return a.especialidad.localeCompare(b.especialidad, 'es');
+              });
 
             return {
               esfm,
@@ -265,7 +420,7 @@ export default function InscritosEsfmView() {
       totalEsfms: allEsfms.size,
       totalEspecialidades: allEsps.size,
     };
-  }, [dataset, selectedGestion, selectedAnio, searchTerm]);
+  }, [dataset, selectedGestion, selectedAnio, selectedNivel, selectedEspecialidades, searchTerm, espSortMode]);
 
   // Datos para los 4 gráficos analíticos
   const chartAnalytics = useMemo(() => {
@@ -283,6 +438,8 @@ export default function InscritosEsfmView() {
 
     for (const r of dataset.registros) {
       if (selectedAnio !== 'TODOS' && r.a !== selectedAnio) continue;
+      if (selectedNivel !== 'TODOS' && getNivelEspecialidad(r.s) !== selectedNivel) continue;
+      if (selectedEspecialidades.size > 0 && !selectedEspecialidades.has(r.s)) continue;
       if (chartDepto && r.d !== chartDepto) continue;
       if (chartEsfm && r.e !== chartEsfm) continue;
       if (term && !(r.d.includes(term) || r.e.includes(term) || r.s.includes(term))) continue;
@@ -330,7 +487,21 @@ export default function InscritosEsfmView() {
       .sort((a, b) => b.anios.total - a.anios.total);
 
     return { trendByGestion, esfmChartList, espChartList };
-  }, [dataset, deptosTree, selectedAnio, searchTerm, chartDepto, chartEsfm]);
+  }, [dataset, deptosTree, selectedAnio, selectedNivel, selectedEspecialidades, searchTerm, chartDepto, chartEsfm]);
+
+  const toggleEspecialidad = (esp: string) => {
+    setSelectedEspecialidades((prev) => {
+      const next = new Set(prev);
+      if (next.has(esp)) next.delete(esp);
+      else next.add(esp);
+      return next;
+    });
+  };
+
+  const clearEspecialidadFilters = () => {
+    setSelectedNivel('TODOS');
+    setSelectedEspecialidades(new Set());
+  };
 
   const toggleDepto = (depto: string) => {
     setExpandedDeptos((prev) => {
@@ -459,11 +630,10 @@ export default function InscritosEsfmView() {
             <button
               type="button"
               onClick={() => setSelectedGestion('TODAS')}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
-                selectedGestion === 'TODAS'
-                  ? 'bg-[#0f2942] text-white border-[#0f2942] shadow-xs'
-                  : 'bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-[#faf5e8] dark:hover:bg-slate-700'
-              }`}
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border ${selectedGestion === 'TODAS'
+                ? 'bg-[#0f2942] text-white border-[#0f2942] shadow-xs'
+                : 'bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-[#faf5e8] dark:hover:bg-slate-700'
+                }`}
             >
               Todas (2022–2026)
             </button>
@@ -472,11 +642,10 @@ export default function InscritosEsfmView() {
                 key={g}
                 type="button"
                 onClick={() => setSelectedGestion(g)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
-                  selectedGestion === g
-                    ? 'bg-[#c9a751] text-[#0f172a] border-[#c9a751] font-black shadow-xs'
-                    : 'bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-[#faf5e8] dark:hover:bg-slate-700'
-                }`}
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border ${selectedGestion === g
+                  ? 'bg-[#c9a751] text-[#0f172a] border-[#c9a751] font-black shadow-xs'
+                  : 'bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-[#faf5e8] dark:hover:bg-slate-700'
+                  }`}
               >
                 {g}
               </button>
@@ -490,11 +659,10 @@ export default function InscritosEsfmView() {
               <button
                 type="button"
                 onClick={() => setViewMode('tabla')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
-                  viewMode === 'tabla'
-                    ? 'bg-[#0f2942] text-white shadow-xs'
-                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900'
-                }`}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${viewMode === 'tabla'
+                  ? 'bg-[#0f2942] text-white shadow-xs'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900'
+                  }`}
               >
                 <Table2 className="w-3.5 h-3.5 text-[#c9a751]" />
                 Tabla Dinámica
@@ -502,11 +670,10 @@ export default function InscritosEsfmView() {
               <button
                 type="button"
                 onClick={() => setViewMode('graficos')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
-                  viewMode === 'graficos'
-                    ? 'bg-[#c9a751] text-[#0f172a] font-black shadow-xs'
-                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900'
-                }`}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${viewMode === 'graficos'
+                  ? 'bg-[#c9a751] text-[#0f172a] font-black shadow-xs'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900'
+                  }`}
               >
                 <BarChart3 className="w-3.5 h-3.5" />
                 Gráficos
@@ -555,11 +722,10 @@ export default function InscritosEsfmView() {
           <button
             type="button"
             onClick={() => setSelectedAnio('TODOS')}
-            className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer border ${
-              selectedAnio === 'TODOS'
-                ? 'bg-[#0f2942] text-white border-[#0f2942] shadow-2xs'
-                : 'bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-[#faf5e8]'
-            }`}
+            className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer border ${selectedAnio === 'TODOS'
+              ? 'bg-[#0f2942] text-white border-[#0f2942] shadow-2xs'
+              : 'bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-[#faf5e8]'
+              }`}
           >
             Todos (1º a 5º)
           </button>
@@ -568,15 +734,281 @@ export default function InscritosEsfmView() {
               key={a}
               type="button"
               onClick={() => setSelectedAnio(a)}
-              className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer border ${
-                selectedAnio === a
-                  ? 'bg-[#c9a751] text-[#0f172a] border-[#c9a751] font-black shadow-2xs'
-                  : 'bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-[#faf5e8]'
-              }`}
+              className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer border ${selectedAnio === a
+                ? 'bg-[#c9a751] text-[#0f172a] border-[#c9a751] font-black shadow-2xs'
+                : 'bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-[#faf5e8]'
+                }`}
             >
               {a}º Año
             </button>
           ))}
+        </div>
+
+        {/* Filtro Creativo por Nivel y Especialidad (Inicial · Primaria · Secundaria · Técnica · Especial) */}
+        <div className="pt-3 border-t border-slate-100 dark:border-slate-800 space-y-3">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-[11px] font-black uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-1.5 mr-1">
+                <BookOpen className="w-3.5 h-3.5 text-[#0f2942] dark:text-[#c9a751]" />
+                Nivel / Área:
+              </span>
+              <button
+                type="button"
+                onClick={() => setSelectedNivel('TODOS')}
+                className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer border ${selectedNivel === 'TODOS'
+                  ? 'bg-[#0f2942] text-white border-[#0f2942] shadow-2xs'
+                  : 'bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-[#faf5e8]'
+                  }`}
+              >
+                Todas (22)
+              </button>
+              {NIVEL_ORDER.map((niv) => {
+                const meta = NIVEL_META[niv];
+                const count = especialidadesByNivel.groups[niv].length;
+                const isActive = selectedNivel === niv;
+                return (
+                  <button
+                    key={niv}
+                    type="button"
+                    onClick={() => setSelectedNivel(isActive ? 'TODOS' : niv)}
+                    className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer border inline-flex items-center gap-1.5 ${isActive
+                      ? meta.pillActive
+                      : 'bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-[#faf5e8]'
+                      }`}
+                  >
+                    <span className={`w-2 h-2 rounded-full ${isActive ? 'bg-white' : meta.dot}`} />
+                    <span>{meta.shortLabel}</span>
+                    <span className="opacity-75 text-[10px]">({count})</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="flex items-center gap-2">
+              {(selectedNivel !== 'TODOS' || selectedEspecialidades.size > 0) && (
+                <button
+                  type="button"
+                  onClick={clearEspecialidadFilters}
+                  className="px-2.5 py-1 rounded-lg text-[11px] font-bold text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 hover:bg-rose-100 transition-colors cursor-pointer inline-flex items-center gap-1"
+                >
+                  <X className="w-3 h-3" />
+                  Limpiar
+                </button>
+              )}
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setPopoverTab(selectedNivel);
+                    setShowEspPanel((v) => !v);
+                  }}
+                  className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer border inline-flex items-center gap-1.5 ${showEspPanel || selectedEspecialidades.size > 0
+                    ? 'bg-[#c9a751] text-[#0f172a] border-[#c9a751] font-black shadow-2xs'
+                    : 'bg-[#faf5e8] dark:bg-slate-800 text-[#937527] dark:text-[#c9a751] border-[#e5d4a4] dark:border-[#c9a751]/40 hover:bg-[#f3e7c6]'
+                    }`}
+                >
+                  <Filter className="w-3.5 h-3.5" />
+                  <span>
+                    {selectedEspecialidades.size > 0
+                      ? `${selectedEspecialidades.size} Especialidad${selectedEspecialidades.size > 1 ? 'es' : ''} sel.`
+                      : 'Explorar Especialidades'}
+                  </span>
+                  {showEspPanel ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronRight className="w-3.5 h-3.5" />}
+                </button>
+
+                {/* Modal Diálogo Centrado para Explorar Especialidades (Montado en Portal a document.body) */}
+                {showEspPanel && mounted && createPortal(
+                  <div className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-5 bg-slate-950/70 backdrop-blur-xs">
+                    <div
+                      className="absolute inset-0"
+                      onClick={() => setShowEspPanel(false)}
+                    />
+                    <div
+                      style={{
+                        width: 'min(92vw, 750px)',
+                        height: '60vh',
+                        maxHeight: '60vh',
+                      }}
+                      className="relative z-10 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col overflow-hidden"
+                    >
+                      {/* Header + Buscador interno (Fijo al tope) */}
+                      <div className="px-5 py-3 bg-[#0f2942] text-white flex items-center justify-between gap-3 shrink-0">
+                        <div className="flex items-center gap-2">
+                          <BookOpen className="w-4 h-4 text-[#c9a751]" />
+                          <h3 className="text-sm font-black tracking-tight">
+                            Especialidades
+                          </h3>
+                        </div>
+                        <div className="flex items-center gap-2.5">
+                          <div className="relative w-48 sm:w-60">
+                            <Search className="w-3.5 h-3.5 text-slate-300 absolute left-2.5 top-1/2 -translate-y-1/2" />
+                            <input
+                              type="text"
+                              value={espQuickSearch}
+                              onChange={(e) => setEspQuickSearch(e.target.value)}
+                              placeholder="Buscar especialidad..."
+                              autoFocus
+                              className="w-full pl-8 pr-2.5 py-1.5 rounded-lg bg-white/10 text-xs text-white placeholder:text-slate-300 border border-white/20 focus:outline-none focus:ring-1 focus:ring-[#c9a751]"
+                            />
+                          </div>
+                          {selectedEspecialidades.size > 0 && (
+                            <button
+                              type="button"
+                              onClick={() => setSelectedEspecialidades(new Set())}
+                              className="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-[#c9a751] text-[#0f172a] hover:bg-[#d8b65e] cursor-pointer shrink-0 transition-colors shadow-xs"
+                            >
+                              Limpiar
+                            </button>
+                          )}
+                          <button
+                            type="button"
+                            onClick={() => setShowEspPanel(false)}
+                            className="p-1.5 rounded-lg hover:bg-white/15 text-slate-200 hover:text-white cursor-pointer transition-colors"
+                            title="Cerrar ventana"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Pestañas por Nivel (Fijo) */}
+                      <div className="px-4 py-2 bg-slate-50 dark:bg-slate-950/80 border-b border-slate-200 dark:border-slate-800 flex flex-wrap items-center gap-1.5 shrink-0">
+                        <button
+                          type="button"
+                          onClick={() => setPopoverTab('TODOS')}
+                          className={`px-3 py-1 rounded-lg text-xs font-bold cursor-pointer transition-all border ${popoverTab === 'TODOS'
+                            ? 'bg-[#0f2942] text-white border-[#0f2942] shadow-xs'
+                            : 'text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-[#c9a751]'
+                            }`}
+                        >
+                          Todas (22)
+                        </button>
+                        {NIVEL_ORDER.map((niv) => {
+                          const meta = NIVEL_META[niv];
+                          const isTabActive = popoverTab === niv;
+                          return (
+                            <button
+                              key={niv}
+                              type="button"
+                              onClick={() => setPopoverTab(niv)}
+                              className={`px-2.5 py-1 rounded-lg text-xs font-bold cursor-pointer transition-all border inline-flex items-center gap-1.5 ${isTabActive
+                                ? meta.pillActive + ' shadow-xs'
+                                : 'text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-[#c9a751]'
+                                }`}
+                            >
+                              <span className={`w-1.5 h-1.5 rounded-full ${isTabActive ? 'bg-white' : meta.dot}`} />
+                              <span>{meta.shortLabel}</span>
+                              <span className="opacity-75 text-[10px]">
+                                ({especialidadesByNivel.groups[niv].length})
+                              </span>
+                            </button>
+                          );
+                        })}
+                      </div>
+
+                      {/* Contenedor central con scrollbar estricto (deslizador nativo y visible) */}
+                      <div
+                        style={{
+                          flex: '1 1 0px',
+                          minHeight: 0,
+                          overflowY: 'auto',
+                        }}
+                        className="p-3.5 space-y-1.5 bg-slate-50/50 dark:bg-slate-900/40 custom-scrollbar"
+                      >
+                        {(popoverTab === 'TODOS' ? NIVEL_ORDER : [popoverTab]).flatMap((niv) => {
+                          const meta = NIVEL_META[niv];
+                          const q = espQuickSearch.trim().toUpperCase();
+                          return especialidadesByNivel.groups[niv]
+                            .filter((item) => !q || item.especialidad.includes(q))
+                            .map((item) => {
+                              const isSelected = selectedEspecialidades.has(item.especialidad);
+                              return (
+                                <button
+                                  key={item.especialidad}
+                                  type="button"
+                                  onClick={() => toggleEspecialidad(item.especialidad)}
+                                  className={`w-full text-left px-3 py-2 rounded-xl border transition-all cursor-pointer flex items-center justify-between gap-3 shadow-2xs ${isSelected
+                                    ? meta.chipActive
+                                    : 'bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 border-slate-200 dark:border-slate-700 hover:border-[#c9a751] hover:bg-[#faf5e8]'
+                                    }`}
+                                >
+                                  <div className="flex items-center gap-2.5 min-w-0">
+                                    <span
+                                      className={`w-2 h-2 rounded-full shrink-0 ${isSelected ? 'bg-white' : meta.dot
+                                        }`}
+                                    />
+                                    <span className="text-xs font-bold leading-normal truncate" title={item.especialidad}>
+                                      {item.especialidad}
+                                    </span>
+                                    <span
+                                      className={`text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded border shrink-0 ${isSelected
+                                        ? 'border-white/40 text-white'
+                                        : meta.badge
+                                        }`}
+                                    >
+                                      {meta.shortLabel}
+                                    </span>
+                                  </div>
+                                  <span
+                                    className={`text-xs font-black tabular-nums shrink-0 ml-2 ${isSelected ? 'text-white' : 'text-[#0f2942] dark:text-[#c9a751]'
+                                      }`}
+                                  >
+                                    {fmt(item.total)}{' '}
+                                    <span
+                                      className={`text-[10px] font-medium ${isSelected ? 'text-white/80' : 'text-slate-400'
+                                        }`}
+                                    >
+                                      est.
+                                    </span>
+                                  </span>
+                                </button>
+                              );
+                            });
+                        })}
+                      </div>
+
+                      {/* Footer Modal fijo al pie */}
+                      <div className="px-5 py-2.5 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between shrink-0">
+                        <span className="text-xs text-slate-500 font-semibold truncate mr-2">
+                          {selectedEspecialidades.size > 0
+                            ? `${selectedEspecialidades.size} especialidad(es) seleccionada(s)`
+                            : 'Mostrando todas las especialidades'}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => setShowEspPanel(false)}
+                          className="px-5 py-1.5 rounded-lg text-xs font-black bg-[#0f2942] text-white hover:bg-[#1b3d5e] cursor-pointer shadow-xs transition-colors shrink-0"
+                        >
+                          Aplicar
+                        </button>
+                      </div>
+                    </div>
+                  </div>,
+                  document.body
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Chips rápidos de especialidades seleccionadas */}
+          {selectedEspecialidades.size > 0 && (
+            <div className="flex flex-wrap items-center gap-1.5">
+              {Array.from(selectedEspecialidades).map((esp) => {
+                const meta = NIVEL_META[getNivelEspecialidad(esp)];
+                return (
+                  <button
+                    key={esp}
+                    type="button"
+                    onClick={() => toggleEspecialidad(esp)}
+                    className={`px-2.5 py-0.5 rounded-full text-[11px] font-bold border inline-flex items-center gap-1.5 cursor-pointer ${meta.badge}`}
+                  >
+                    <span>{esp}</span>
+                    <X className="w-3 h-3" />
+                  </button>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
 
@@ -645,7 +1077,7 @@ export default function InscritosEsfmView() {
          ═══════════════════════════════════════════════════════════════════ */}
       {viewMode === 'tabla' && (
         <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs overflow-hidden">
-          <div className="px-5 py-3.5 border-b border-[#e5d4a4]/60 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-[#faf5e8]/60 dark:bg-slate-950/40">
+          <div className="px-5 py-3.5 border-b border-[#e5d4a4]/60 dark:border-slate-800 flex flex-col xl:flex-row xl:items-center justify-between gap-3 bg-[#faf5e8]/60 dark:bg-slate-950/40">
             <div>
               <h2 className="text-sm font-black text-[#0f2942] dark:text-white flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-[#c9a751]" />
@@ -656,9 +1088,67 @@ export default function InscritosEsfmView() {
                 <strong>ESFM</strong> para desagregar por Especialidad y Año (1º a 5º).
               </p>
             </div>
-            <span className="text-[11px] font-black bg-[#0f2942] text-[#c9a751] px-2.5 py-1 rounded-lg border border-[#c9a751]/40">
-              {deptosTree.length} Departamentos
-            </span>
+
+            {/* Controles de Jerarquía: Leyenda de Colores + Ordenador de Especialidades */}
+            <div className="flex flex-wrap items-center gap-2 shrink-0">
+              {/* Leyenda de Niveles */}
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[10px] font-bold">
+                <span className="text-slate-400 font-medium">Nivel:</span>
+                <span className="inline-flex items-center gap-1 text-[#0f2942] dark:text-white">
+                  <span className="w-2 h-2 rounded-full bg-[#0f2942]" /> Depto
+                </span>
+                <span className="text-slate-300">|</span>
+                <span className="inline-flex items-center gap-1 text-[#937527] dark:text-[#c9a751]">
+                  <span className="w-2 h-2 rounded-full bg-[#c9a751]" /> ESFM
+                </span>
+                <span className="text-slate-300">|</span>
+                <span className="inline-flex items-center gap-1 text-slate-600 dark:text-slate-300">
+                  <span className="w-2 h-2 rounded-full bg-blue-500" /> Especialidad
+                </span>
+              </div>
+
+              {/* Selector de Orden de Especialidades */}
+              <div className="inline-flex items-center gap-1 bg-white dark:bg-slate-800 p-0.5 rounded-lg border border-slate-200 dark:border-slate-700 text-[11px]">
+                <span className="text-slate-400 font-bold px-1.5 text-[10px]">Ordenar Esp:</span>
+                <button
+                  type="button"
+                  onClick={() => setEspSortMode('nivel')}
+                  title="Agrupar por Nivel (Inicial, Primaria, Secundaria, Técnica, Especial) y luego alfabético"
+                  className={`px-2 py-0.5 rounded text-[10px] font-bold transition-all cursor-pointer ${espSortMode === 'nivel'
+                    ? 'bg-[#0f2942] text-white shadow-2xs'
+                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900'
+                    }`}
+                >
+                  Por Nivel
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setEspSortMode('matricula')}
+                  title="Ordenar por mayor cantidad de estudiantes matriculados"
+                  className={`px-2 py-0.5 rounded text-[10px] font-bold transition-all cursor-pointer ${espSortMode === 'matricula'
+                    ? 'bg-[#c9a751] text-[#0f172a] font-black shadow-2xs'
+                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900'
+                    }`}
+                >
+                  Mayor Matrícula
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setEspSortMode('alfabetico')}
+                  title="Ordenar alfabéticamente A-Z todas las especialidades"
+                  className={`px-2 py-0.5 rounded text-[10px] font-bold transition-all cursor-pointer ${espSortMode === 'alfabetico'
+                    ? 'bg-[#0f2942] text-white shadow-2xs'
+                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900'
+                    }`}
+                >
+                  A-Z
+                </button>
+              </div>
+
+              <span className="text-[11px] font-black bg-[#0f2942] text-[#c9a751] px-2.5 py-1 rounded-lg border border-[#c9a751]/40">
+                {deptosTree.length} Departamentos
+              </span>
+            </div>
           </div>
 
           <div className="overflow-x-auto">
@@ -696,53 +1186,56 @@ export default function InscritosEsfmView() {
 
                     return (
                       <React.Fragment key={depto.departamento}>
-                        {/* NIVEL 1: DEPARTAMENTO */}
+                        {/* NIVEL 1: DEPARTAMENTO (Azul Marino Institucional) */}
                         <tr
                           onClick={() => toggleDepto(depto.departamento)}
-                          className="bg-white dark:bg-slate-900 hover:bg-[#faf5e8]/80 dark:hover:bg-slate-800/70 transition-colors cursor-pointer font-bold"
+                          className="bg-slate-100/95 dark:bg-slate-800/90 hover:bg-slate-200/90 dark:hover:bg-slate-800 transition-colors cursor-pointer font-bold border-l-[6px] border-l-[#0f2942] border-t-2 border-slate-300 dark:border-slate-700"
                         >
                           <td className="py-3 px-4 text-[#0f2942] dark:text-white">
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-2.5">
                               {isDeptoOpen ? (
-                                <ChevronDown className="w-4 h-4 text-[#c9a751] shrink-0" />
+                                <ChevronDown className="w-4 h-4 text-[#0f2942] dark:text-[#c9a751] shrink-0" />
                               ) : (
                                 <ChevronRight className="w-4 h-4 text-slate-400 shrink-0" />
                               )}
-                              <span>{depto.departamento}</span>
+                              <span className="px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-[#0f2942] text-white shrink-0 shadow-2xs">
+                                DEPARTAMENTO
+                              </span>
+                              <span className="text-xs font-black uppercase tracking-wide">{depto.departamento}</span>
                             </div>
                           </td>
                           <td className="py-3 px-3 text-center">
-                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-extrabold bg-[#faf5e8] dark:bg-slate-800 text-[#937527] dark:text-[#c9a751] border border-[#e5d4a4] dark:border-[#c9a751]/40">
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-black bg-white dark:bg-slate-900 text-[#0f2942] dark:text-[#c9a751] border border-slate-300 dark:border-slate-700 shadow-2xs">
                               {depto.esfms.length} ESFM · {depto.especialidadesCount} Esp.
                             </span>
                           </td>
                           {visibleAnios.map((a) => (
                             <td
                               key={a}
-                              className="py-3 px-3 text-right tabular-nums text-slate-700 dark:text-slate-300"
+                              className="py-3 px-3 text-right tabular-nums font-bold text-slate-800 dark:text-slate-200"
                             >
                               {fmt(depto.anios[a])}
                             </td>
                           ))}
-                          <td className="py-3 px-4 text-right tabular-nums font-black text-[#0f2942] dark:text-white bg-slate-50/80 dark:bg-slate-800/40">
+                          <td className="py-3 px-4 text-right tabular-nums font-black text-[#0f2942] dark:text-white bg-slate-200 dark:bg-slate-700">
                             {fmt(depto.anios.total)}
                           </td>
                           <td className="py-3 px-4 text-right tabular-nums">
                             <div className="flex items-center justify-end gap-2">
-                              <div className="w-14 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden hidden sm:block">
+                              <div className="w-14 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden hidden sm:block">
                                 <div
-                                  className="h-full bg-[#c9a751] rounded-full"
+                                  className="h-full bg-[#0f2942] dark:bg-[#c9a751] rounded-full"
                                   style={{ width: `${Math.min(pctNac, 100)}%` }}
                                 />
                               </div>
-                              <span className="text-[11px] font-bold text-slate-600 dark:text-slate-300">
+                              <span className="text-[11px] font-bold text-slate-700 dark:text-slate-300">
                                 {pctNac.toFixed(1)}%
                               </span>
                             </div>
                           </td>
                         </tr>
 
-                        {/* NIVEL 2: ESFM / UA DEL DEPARTAMENTO */}
+                        {/* NIVEL 2: ESFM / UA DEL DEPARTAMENTO (Dorado Institucional) */}
                         {isDeptoOpen &&
                           depto.esfms.map((esfm) => {
                             const esfmKey = `${depto.departamento}::${esfm.esfm}`;
@@ -756,21 +1249,24 @@ export default function InscritosEsfmView() {
                               <React.Fragment key={esfmKey}>
                                 <tr
                                   onClick={() => toggleEsfm(depto.departamento, esfm.esfm)}
-                                  className="bg-slate-50/90 dark:bg-slate-800/40 hover:bg-[#faf5e8]/60 dark:hover:bg-slate-800/70 transition-colors cursor-pointer border-l-4 border-l-[#0f2942] dark:border-l-[#c9a751]"
+                                  className="bg-[#faf5e8] dark:bg-amber-950/25 hover:bg-[#f3e7c6] dark:hover:bg-amber-950/40 transition-colors cursor-pointer border-l-[6px] border-l-[#c9a751] border-t border-[#e5d4a4]/60 dark:border-amber-900/30"
                                 >
-                                  <td className="py-2.5 pl-9 pr-4 font-bold text-[#0f2942] dark:text-[#faf5e8]">
+                                  <td className="py-2.5 pl-8 pr-4 font-bold text-[#0f172a] dark:text-[#faf5e8]">
                                     <div className="flex items-center gap-2">
                                       {isEsfmOpen ? (
                                         <ChevronDown className="w-3.5 h-3.5 text-[#c9a751] shrink-0" />
                                       ) : (
                                         <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
                                       )}
-                                      <Building2 className="w-3.5 h-3.5 text-[#0f2942] dark:text-[#c9a751] shrink-0" />
-                                      <span>{esfm.esfm}</span>
+                                      <span className="px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-[#c9a751] text-[#0f172a] border border-[#b8953f] shrink-0 shadow-2xs">
+                                        ESFM / UA
+                                      </span>
+                                      <Building2 className="w-3.5 h-3.5 text-[#937527] dark:text-[#c9a751] shrink-0" />
+                                      <span className="text-xs">{esfm.esfm}</span>
                                     </div>
                                   </td>
                                   <td className="py-2.5 px-3 text-center">
-                                    <span className="inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-[#0f2942]/10 dark:bg-slate-700 text-[#0f2942] dark:text-[#c9a751] border border-[#0f2942]/20 dark:border-slate-600">
+                                    <span className="inline-block px-2 py-0.5 rounded text-[10px] font-black bg-white dark:bg-slate-800 text-[#937527] dark:text-[#c9a751] border border-[#e5d4a4] dark:border-amber-800 shadow-2xs">
                                       {esfm.especialidades.length} Especialidades
                                     </span>
                                   </td>
@@ -782,7 +1278,7 @@ export default function InscritosEsfmView() {
                                       {fmt(esfm.anios[a])}
                                     </td>
                                   ))}
-                                  <td className="py-2.5 px-4 text-right tabular-nums font-black text-[#0f2942] dark:text-white bg-slate-100/70 dark:bg-slate-800/70">
+                                  <td className="py-2.5 px-4 text-right tabular-nums font-black text-[#937527] dark:text-[#c9a751] bg-[#f3e7c6] dark:bg-amber-950/50">
                                     {fmt(esfm.anios.total)}
                                   </td>
                                   <td className="py-2.5 px-4 text-right tabular-nums text-[11px] font-bold text-[#937527] dark:text-[#c9a751]">
@@ -790,26 +1286,40 @@ export default function InscritosEsfmView() {
                                   </td>
                                 </tr>
 
-                                {/* NIVEL 3: ESPECIALIDADES DE LA ESFM */}
+                                {/* NIVEL 3: ESPECIALIDADES DE LA ESFM (Codificado por Nivel Pedagógico) */}
                                 {isEsfmOpen &&
                                   esfm.especialidades.map((esp) => {
                                     const pctEsfm =
                                       esfm.anios.total > 0
                                         ? (esp.anios.total / esfm.anios.total) * 100
                                         : 0;
+                                    const nivel = getNivelEspecialidad(esp.especialidad);
+                                    const meta = NIVEL_META[nivel];
                                     return (
                                       <tr
                                         key={`${esfmKey}::${esp.especialidad}`}
-                                        className="bg-[#faf5e8]/30 dark:bg-slate-900/60 hover:bg-[#faf5e8]/70 dark:hover:bg-slate-800/50 transition-colors border-l-4 border-l-[#c9a751]"
+                                        className="bg-white dark:bg-slate-900 hover:bg-[#faf5e8]/50 dark:hover:bg-slate-800/50 transition-colors border-l-[6px] border-l-slate-200 dark:border-slate-800 hover:border-l-[#c9a751]"
                                       >
-                                        <td className="py-2 pl-16 pr-4 font-medium text-slate-700 dark:text-slate-300">
-                                          <div className="flex items-center gap-2">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-[#c9a751] shrink-0" />
-                                            <span>{esp.especialidad}</span>
+                                        <td className="py-2 pl-14 pr-4 font-medium text-slate-700 dark:text-slate-300">
+                                          <div className="flex items-center gap-2 flex-wrap">
+                                            <span className="text-slate-300 dark:text-slate-600 font-mono text-xs select-none">└─</span>
+                                            <span
+                                              className={`w-2 h-2 rounded-full shrink-0 ${meta.dot}`}
+                                            />
+                                            <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">
+                                              {esp.especialidad}
+                                            </span>
+                                            <span
+                                              className={`px-1.5 py-0.5 rounded text-[9px] font-extrabold uppercase tracking-wide border shadow-2xs ${meta.badge}`}
+                                            >
+                                              {meta.shortLabel}
+                                            </span>
                                           </div>
                                         </td>
-                                        <td className="py-2 px-3 text-center text-[10px] font-semibold text-slate-400">
-                                          Especialidad
+                                        <td className="py-2 px-3 text-center">
+                                          <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+                                            Especialidad
+                                          </span>
                                         </td>
                                         {visibleAnios.map((a) => (
                                           <td
@@ -819,7 +1329,7 @@ export default function InscritosEsfmView() {
                                             {esp.anios[a] > 0 ? fmt(esp.anios[a]) : '—'}
                                           </td>
                                         ))}
-                                        <td className="py-2 px-4 text-right tabular-nums font-bold text-slate-800 dark:text-slate-100 bg-slate-50/50 dark:bg-slate-800/30">
+                                        <td className="py-2 px-4 text-right tabular-nums font-bold text-slate-800 dark:text-slate-100 bg-slate-50/70 dark:bg-slate-800/30">
                                           {fmt(esp.anios.total)}
                                         </td>
                                         <td className="py-2 px-4 text-right tabular-nums text-[10px] font-semibold text-slate-500 dark:text-slate-400">
@@ -937,11 +1447,10 @@ export default function InscritosEsfmView() {
                         setChartDepto(isSel ? null : d.departamento);
                         setChartEsfm(null);
                       }}
-                      className={`w-full text-left p-2 rounded-xl transition-all cursor-pointer border ${
-                        isSel
-                          ? 'bg-[#faf5e8] dark:bg-slate-800 border-[#c9a751] ring-1 ring-[#c9a751]'
-                          : 'border-transparent hover:bg-slate-50 dark:hover:bg-slate-800/50'
-                      }`}
+                      className={`w-full text-left p-2 rounded-xl transition-all cursor-pointer border ${isSel
+                        ? 'bg-[#faf5e8] dark:bg-slate-800 border-[#c9a751] ring-1 ring-[#c9a751]'
+                        : 'border-transparent hover:bg-slate-50 dark:hover:bg-slate-800/50'
+                        }`}
                     >
                       <div className="flex items-center justify-between text-xs mb-1">
                         <span className="font-bold text-[#0f2942] dark:text-white">
@@ -995,11 +1504,10 @@ export default function InscritosEsfmView() {
                       </span>
                       {item.diffPct !== null && (
                         <span
-                          className={`text-[9px] font-bold px-1.5 py-0.5 rounded ${
-                            item.diffPct >= 0
-                              ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300'
-                              : 'bg-rose-50 text-rose-700 dark:bg-rose-950/60 dark:text-rose-300'
-                          }`}
+                          className={`text-[9px] font-bold px-1.5 py-0.5 rounded ${item.diffPct >= 0
+                            ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300'
+                            : 'bg-rose-50 text-rose-700 dark:bg-rose-950/60 dark:text-rose-300'
+                            }`}
                         >
                           {item.diffPct >= 0 ? '+' : ''}
                           {item.diffPct.toFixed(1)}%
@@ -1008,19 +1516,17 @@ export default function InscritosEsfmView() {
                       <div className="w-full max-w-[54px] flex-1 flex items-end">
                         <div
                           style={{ height: `${hPct}%` }}
-                          className={`w-full rounded-t-xl transition-all ${
-                            isCurrent
-                              ? 'bg-[#c9a751] shadow-md'
-                              : 'bg-[#0f2942] group-hover:bg-[#c9a751]'
-                          }`}
+                          className={`w-full rounded-t-xl transition-all ${isCurrent
+                            ? 'bg-[#c9a751] shadow-md'
+                            : 'bg-[#0f2942] group-hover:bg-[#c9a751]'
+                            }`}
                         />
                       </div>
                       <span
-                        className={`text-xs font-black ${
-                          selectedGestion === item.gestion
-                            ? 'text-[#c9a751]'
-                            : 'text-slate-600 dark:text-slate-300'
-                        }`}
+                        className={`text-xs font-black ${selectedGestion === item.gestion
+                          ? 'text-[#c9a751]'
+                          : 'text-slate-600 dark:text-slate-300'
+                          }`}
                       >
                         {item.gestion}
                       </span>
@@ -1054,11 +1560,10 @@ export default function InscritosEsfmView() {
                       key={`${e.depto}::${e.esfm}`}
                       type="button"
                       onClick={() => setChartEsfm(isSel ? null : e.esfm)}
-                      className={`w-full text-left p-2 rounded-xl transition-all cursor-pointer border ${
-                        isSel
-                          ? 'bg-[#faf5e8] dark:bg-slate-800 border-[#c9a751] ring-1 ring-[#c9a751]'
-                          : 'border-transparent hover:bg-slate-50 dark:hover:bg-slate-800/50'
-                      }`}
+                      className={`w-full text-left p-2 rounded-xl transition-all cursor-pointer border ${isSel
+                        ? 'bg-[#faf5e8] dark:bg-slate-800 border-[#c9a751] ring-1 ring-[#c9a751]'
+                        : 'border-transparent hover:bg-slate-50 dark:hover:bg-slate-800/50'
+                        }`}
                     >
                       <div className="flex items-center justify-between text-[11px] mb-1 gap-2">
                         <span className="font-bold text-[#0f2942] dark:text-white truncate">
@@ -1096,8 +1601,8 @@ export default function InscritosEsfmView() {
                   {chartEsfm
                     ? `Especialidades en ${chartEsfm}`
                     : chartDepto
-                    ? `Especialidades en ${chartDepto}`
-                    : 'Consolidado Nacional por Especialidad'}
+                      ? `Especialidades en ${chartDepto}`
+                      : 'Consolidado Nacional por Especialidad'}
                 </p>
               </div>
 
