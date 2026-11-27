@@ -140,6 +140,7 @@ export function BalancePredictivoView({
   const [tipoAsignacionEgresados, setTipoAsignacionEgresados] = useState<'radicacion' | 'local'>('radicacion'); // 1. Radicación Real (Retorno) vs 2. Egresados Sede Física
   const [aplicarArima, setAplicarArima] = useState<boolean>(true);            // Aplicar ajuste de matrícula ARIMA
   const [anioCorte, setAnioCorte] = useState<2027 | 2028 | 2029 | 2030 | 2031>(2031); // Horizonte de proyección Titulación ESFM (2027 hasta anioCorte)
+  const [cupoPorPlaza, setCupoPorPlaza] = useState<number>(30);              // Estudiantes por plaza / paralelo ESFM (ej. 30 o 35)
 
   // Control de interfaz: Panel de variables y Glosario
   const [mostrarVariables, setMostrarVariables] = useState<boolean>(true);
@@ -347,6 +348,9 @@ export function BalancePredictivoView({
     return especialidadesCalculadas.find((e) => e.especialidad_id === selectedEspId) || null;
   }, [especialidadesCalculadas, selectedEspId]);
 
+  const calcPlazasAbrir = (brecha: number, cupo: number): number =>
+    brecha > 0 && cupo > 0 ? Math.ceil(brecha / cupo) : 0;
+
   // Totales de Cabecera y Resumen
   const totales = useMemo(() => {
     let totDeficit = 0;
@@ -361,6 +365,7 @@ export function BalancePredictivoView({
     let totEgrRadicacion = 0;
     let totEgrLocal = 0;
     let totBrecha = 0;
+    let totPlazasDeficit = 0;
 
     for (const esp of especialidadesCalculadas) {
       totDeficit += esp.metrics.deficit_calculado;
@@ -375,6 +380,7 @@ export function BalancePredictivoView({
       totEgrLocal += esp.metrics.egresados_local_calc || 0;
       totBrecha += esp.metrics.brecha_neta;
       totEgresados += esp.metrics.egresados_2027_2031;
+      totPlazasDeficit += calcPlazasAbrir(esp.metrics.brecha_neta, cupoPorPlaza);
     }
 
     return {
@@ -389,9 +395,10 @@ export function BalancePredictivoView({
       totEgresados,
       totEgrRadicacion,
       totEgrLocal,
-      totBrecha
+      totBrecha,
+      totPlazasDeficit
     };
-  }, [especialidadesCalculadas]);
+  }, [especialidadesCalculadas, cupoPorPlaza]);
 
   const fmt = (n?: number | null) => (n ?? 0).toLocaleString('es-BO');
 
@@ -560,7 +567,9 @@ export function BalancePredictivoView({
               {totales.totBrecha > 0 ? `+${fmt(totales.totBrecha)}` : fmt(totales.totBrecha)}
             </span>
             <span className={`text-[10px] font-bold ${totales.totBrecha > 0 ? 'text-rose-700' : 'text-emerald-700'}`}>
-              {totales.totBrecha > 0 ? 'Apertura de Cupos Necesaria' : 'Oferta Cubierta / Saturación'}
+              {totales.totPlazasDeficit > 0
+                ? `${totales.totBrecha > 0 ? 'Necesita abrir' : 'En esp. con déficit:'} ${fmt(totales.totPlazasDeficit)} ${totales.totPlazasDeficit === 1 ? 'plaza' : 'plazas'} (${cupoPorPlaza} est./u)`
+                : 'Oferta Cubierta / Saturación'}
             </span>
           </div>
         </div>
@@ -1118,6 +1127,73 @@ export function BalancePredictivoView({
             </span>
           </div>
 
+          {/* Simulador Dinámico de Estudiantes por Plaza / Paralelo ESFM */}
+          <div className="flex flex-wrap items-center justify-between gap-3 pt-2.5 pb-2 border-t border-slate-100 bg-amber-50/60 dark:bg-amber-950/20 -mx-2 px-3 rounded-xl border border-amber-200/70 dark:border-amber-800/40">
+            <div className="flex items-center gap-2">
+              <GraduationCap className="w-4 h-4 text-amber-700 dark:text-amber-400 shrink-0" />
+              <div>
+                <span className="text-[11px] font-black text-slate-800 dark:text-slate-100 uppercase tracking-wider">
+                  Estudiantes por Plaza / Paralelo ESFM:
+                </span>
+                <span className="hidden sm:inline text-[10px] text-slate-600 dark:text-slate-400 ml-1.5">
+                  (Calcula cuántas plazas abrir según Brecha Neta positiva)
+                </span>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2.5">
+              <div className="flex items-center gap-1">
+                {[25, 30, 35, 40].map((preset) => (
+                  <button
+                    key={preset}
+                    type="button"
+                    onClick={() => setCupoPorPlaza(preset)}
+                    className={`px-2 py-0.5 rounded-lg text-[10px] font-black transition-all cursor-pointer ${
+                      cupoPorPlaza === preset
+                        ? 'bg-amber-600 text-white shadow-xs'
+                        : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-amber-100'
+                    }`}
+                  >
+                    {preset} est.
+                  </button>
+                ))}
+              </div>
+
+              <input
+                type="range"
+                min={15}
+                max={50}
+                step={1}
+                value={cupoPorPlaza}
+                onChange={(e) => setCupoPorPlaza(Number(e.target.value))}
+                className="w-32 sm:w-44 accent-amber-600 cursor-pointer"
+                aria-label="Estudiantes por plaza ESFM"
+              />
+
+              <div className="flex items-center gap-1">
+                <input
+                  type="number"
+                  min={10}
+                  max={60}
+                  step={1}
+                  value={cupoPorPlaza}
+                  onChange={(e) => {
+                    const val = Number(e.target.value);
+                    if (!Number.isNaN(val)) setCupoPorPlaza(Math.min(60, Math.max(10, val)));
+                  }}
+                  className="w-12 text-center font-black text-amber-800 dark:text-amber-300 font-mono bg-white dark:bg-slate-800 px-1 py-0.5 rounded-lg border border-amber-300 dark:border-amber-700 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500"
+                />
+                <span className="text-[10px] font-bold text-slate-600 dark:text-slate-300">est./plaza</span>
+              </div>
+
+              <span className="text-[11px] font-black text-rose-800 dark:text-rose-300 bg-rose-100/90 dark:bg-rose-950/60 px-2.5 py-1 rounded-lg border border-rose-200 dark:border-rose-800">
+                {totales.totPlazasDeficit > 0
+                  ? `Necesita abrir ${fmt(totales.totPlazasDeficit)} ${totales.totPlazasDeficit === 1 ? 'plaza' : 'plazas'}`
+                  : '0 plazas por abrir'}
+              </span>
+            </div>
+          </div>
+
           {/* Barra Rápida de Selección de Territorio (Consolidado Nacional o por Departamento) */}
           <div className="flex flex-wrap items-center gap-1.5 pt-3 pb-1 border-t border-slate-100">
             <div className="flex items-center gap-1 mr-1 text-[11px] font-black text-slate-500 uppercase tracking-wider shrink-0">
@@ -1274,9 +1350,11 @@ export function BalancePredictivoView({
                   </span>
                 </th>
 
-                <th rowSpan={2} className="py-3 px-3 text-center w-28 bg-slate-900 text-amber-300 font-black align-bottom">
+                <th rowSpan={2} className="py-3 px-3 text-center w-36 bg-slate-900 text-amber-300 font-black align-bottom">
                   <span>Brecha Neta</span>
-                  <span className="block text-[8px] font-medium text-amber-400 normal-case">Admisión ESFM</span>
+                  <span className="block text-[8px] font-medium text-amber-400 normal-case">
+                    Admisión ESFM ({cupoPorPlaza} est./plaza)
+                  </span>
                 </th>
               </tr>
 
@@ -1327,6 +1405,7 @@ export function BalancePredictivoView({
                 const totalGrupoRadicacion = grupo.items.reduce((acc, it) => acc + (it.metrics.egresados_radicacion_calc || 0), 0);
                 const totalGrupoLocal = grupo.items.reduce((acc, it) => acc + (it.metrics.egresados_local_calc || 0), 0);
                 const totalGrupoBrecha = grupo.items.reduce((acc, it) => acc + it.metrics.brecha_neta, 0);
+                const totalGrupoPlazas = grupo.items.reduce((acc, it) => acc + calcPlazasAbrir(it.metrics.brecha_neta, cupoPorPlaza), 0);
 
                 return (
                   <React.Fragment key={grupo.nivelCodigo}>
@@ -1342,7 +1421,13 @@ export function BalancePredictivoView({
                             ({grupo.items.length} esp. · Demanda: {fmt(totalGrupoDemanda)} · Oferta [Radic: {fmt(totalGrupoRadicacion)} | Sede Fís: {fmt(totalGrupoLocal)}] · Brecha:{' '}
                             <strong className="text-current font-black">
                               {totalGrupoBrecha > 0 ? `+${fmt(totalGrupoBrecha)}` : fmt(totalGrupoBrecha)}
-                            </strong>)
+                            </strong>
+                            {totalGrupoPlazas > 0 && (
+                              <span className="ml-1.5 text-rose-800 dark:text-rose-300 font-black">
+                                · Abrir {fmt(totalGrupoPlazas)} {totalGrupoPlazas === 1 ? 'plaza' : 'plazas'}
+                              </span>
+                            )}
+                            )
                           </span>
                         </div>
                       </td>
@@ -1352,6 +1437,7 @@ export function BalancePredictivoView({
                     {grupo.items.map((esp) => {
                       const m = esp.metrics;
                       const esSuperavit = m.brecha_neta <= 0;
+                      const plazasNecesarias = calcPlazasAbrir(m.brecha_neta, cupoPorPlaza);
                       const esBth = BTH_SPECIALTY_IDS.has(esp.especialidad_id);
                       const isSelected = selectedEspId === esp.especialidad_id;
 
@@ -1470,8 +1556,10 @@ export function BalancePredictivoView({
                               )}
                               <span>{m.brecha_neta > 0 ? `+${fmt(m.brecha_neta)}` : fmt(m.brecha_neta)}</span>
                             </div>
-                            <span className="block text-[8px] font-bold mt-0.5 opacity-80 uppercase tracking-tighter">
-                              {esSuperavit ? 'Oferta Cubierta' : 'Abrir Plazas ESFM'}
+                            <span className="block text-[8px] font-bold mt-0.5 opacity-90 uppercase tracking-tighter">
+                              {esSuperavit
+                                ? 'Oferta Cubierta'
+                                : `Necesita abrir ${fmt(plazasNecesarias)} ${plazasNecesarias === 1 ? 'plaza' : 'plazas'}`}
                             </span>
                           </td>
                         </tr>
@@ -1534,6 +1622,11 @@ export function BalancePredictivoView({
                   <span className="block text-[8px] font-normal uppercase opacity-80 mt-0.5">
                     {totales.totBrecha > 0 ? 'Déficit Neto Global' : 'Superávit Global'}
                   </span>
+                  {totales.totPlazasDeficit > 0 && (
+                    <span className="block text-[9px] font-black text-amber-300 mt-0.5">
+                      Abrir {fmt(totales.totPlazasDeficit)} {totales.totPlazasDeficit === 1 ? 'plaza' : 'plazas'} ({cupoPorPlaza} est./u)
+                    </span>
+                  )}
                 </td>
               </tr>
             </tfoot>
