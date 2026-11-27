@@ -13,6 +13,7 @@ import {
   ShieldCheck,
   Sparkles,
   GraduationCap,
+  BarChart3,
 } from 'lucide-react';
 import Image from 'next/image';
 
@@ -93,6 +94,17 @@ export function Sidebar({
       activeColor: 'from-[#0f2942] to-[#c9a751]',
       icon: <GraduationCap size={19} />,
       metric: '46 ESFMs · 22 Esp.',
+    },
+    {
+      id: 'resumen_depto' as SourceTab,
+      number: '06',
+      label: 'Resumen Departamental',
+      sublabel: 'Jubilación, Prejub. y ARIMA',
+      badge: '9 DEPTOS',
+      badgeColor: 'bg-indigo-50 text-indigo-800 border-indigo-200',
+      activeColor: 'from-indigo-700 to-slate-900',
+      icon: <BarChart3 size={19} />,
+      metric: '2027–2031 Anual',
     },
   ];
 

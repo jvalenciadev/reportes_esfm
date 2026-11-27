@@ -1113,7 +1113,7 @@ export default function MapaUeView() {
 
       {/* ── Panel Flotante Desplegable de Niveles (No empuja el mapa) ─────────── */}
       {isFilterPanelOpen && (
-        <div className="absolute top-16 left-3 z-20 w-[470px] max-w-[calc(100vw-1.5rem)] max-h-[calc(100vh-85px)] overflow-y-auto bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-2xl shadow-2xl border border-slate-200/90 dark:border-slate-800 p-4 space-y-3 animate-in fade-in slide-in-from-top-2 duration-200">
+        <div className="absolute top-16 left-3 z-20 w-[470px] max-w-[calc(100vw-1.5rem)] max-h-[calc(100%-4.75rem)] overflow-y-auto bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-2xl shadow-2xl border border-slate-200/90 dark:border-slate-800 p-4 space-y-3 animate-in fade-in slide-in-from-top-2 duration-200">
           {/* Cabecera del Panel Flotante */}
           <div className="flex items-center justify-between pb-2 border-b border-slate-100">
             <div>
@@ -1362,30 +1362,40 @@ export default function MapaUeView() {
 
       {/* ── Modal Flotante: Guía y Detalle de Colores, Números y Racimos ───────── */}
       {isLegendOpen && (
-        <div className="absolute top-16 right-3 z-30 w-[460px] max-w-[calc(100vw-1.5rem)] max-h-[calc(100vh-85px)] overflow-y-auto bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-2xl shadow-2xl border border-slate-200/90 dark:border-slate-800 p-4 space-y-3.5 animate-in fade-in slide-in-from-top-2 duration-200">
-          {/* Cabecera */}
-          <div className="flex items-center justify-between pb-2.5 border-b border-slate-100 dark:border-slate-800">
-            <div className="flex items-center gap-2">
-              <div className="p-1.5 bg-indigo-50 dark:bg-indigo-950/70 rounded-lg text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800">
-                <HelpCircle className="w-4 h-4" />
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/45 backdrop-blur-[2px] animate-in fade-in duration-150"
+          onClick={() => setIsLegendOpen(false)}
+        >
+          <div
+            className="w-full max-w-[500px] max-h-[calc(100dvh-2rem)] flex flex-col overflow-hidden bg-white/98 dark:bg-slate-900/98 backdrop-blur-md rounded-2xl shadow-2xl border border-slate-200/90 dark:border-slate-800 animate-in zoom-in-95 fade-in duration-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Cabecera */}
+            <div className="flex items-center justify-between px-4 py-3 border-b border-slate-100 dark:border-slate-800 shrink-0">
+              <div className="flex items-center gap-2">
+                <div className="p-1.5 bg-indigo-50 dark:bg-indigo-950/70 rounded-lg text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800">
+                  <HelpCircle className="w-4 h-4" />
+                </div>
+                <div>
+                  <h3 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">
+                    Guía de Colores y Números del Mapa
+                  </h3>
+                  <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">
+                    Interpretación de racimos (clusters) y pines individuales de UEs
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">
-                  Guía de Colores y Números del Mapa
-                </h3>
-                <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">
-                  Interpretación de racimos (clusters) y pines individuales de UEs
-                </p>
-              </div>
+              <button
+                type="button"
+                onClick={() => setIsLegendOpen(false)}
+                className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors cursor-pointer"
+                aria-label="Cerrar guía de detalle"
+              >
+                <X className="w-4 h-4" />
+              </button>
             </div>
-            <button
-              type="button"
-              onClick={() => setIsLegendOpen(false)}
-              className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors cursor-pointer"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          </div>
+
+            <div className="p-4 space-y-3.5 overflow-y-auto flex-1">
 
           {/* Bloque 1: Racimos Geográficos (Zoom Alejado) */}
           <div className="space-y-2">
@@ -1537,6 +1547,8 @@ export default function MapaUeView() {
             <p className="text-[10px] text-slate-600 dark:text-slate-300 leading-relaxed">
               Al tocar un pin se abre la ficha con el <strong>Código SIE</strong>, matrícula, total de docentes y desglose por pertinencia (Alta, Media, Baja, Sin Pertinencia) y retiros previstos.
             </p>
+          </div>
+          </div>
           </div>
         </div>
       )}

@@ -56,7 +56,7 @@ export function ExecutiveDashboardView({ data }: ExecutiveDashboardViewProps) {
               }`}
           >
             <TrendingUp className="w-4 h-4 text-emerald-400" />
-            <span>Proyección de Matrícula (2011–2034)</span>
+            <span>Proyección de Matrícula (2011–2031)</span>
           </button>
 
           <button
@@ -123,7 +123,7 @@ export function ExecutiveDashboardView({ data }: ExecutiveDashboardViewProps) {
 
           <span className="hidden xl:inline-block text-[11px] font-semibold text-slate-400 bg-slate-50 px-3 py-1.5 rounded-full border border-slate-100">
             {moduloPrincipal === 'matricula'
-              ? 'Fuente: INE 2024-2034 + Cierre Auditado Aula SIE 2026'
+              ? 'Fuente: INE 2024-2031 + Cierre Auditado Aula SIE 2026'
               : moduloPrincipal === 'deficit_materia'
                 ? 'Fuente: UIE / SIE UE (Octubre 2026) · Especialidades Oficiales BD'
                 : moduloPrincipal === 'egresados_esfm'

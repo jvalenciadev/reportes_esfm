@@ -38,7 +38,10 @@ export interface EgresadosDistribucionExacta {
   // [esp_id] -> total nacional
   nacionalPorEspecialidad: Record<number, number>;
   totalNacionalGlobal: number;
+  totalInscritosGlobalCorte: number;
 }
+
+const COHORTES_EGRESO = [2027, 2028, 2029, 2030, 2031] as const;
 
 export function computeDistribucionExactaEgresados(
   factorTit: number,
@@ -46,29 +49,46 @@ export function computeDistribucionExactaEgresados(
     especialidad_id: number;
     nacional: { deficit_materia: number };
     por_departamento: Record<string, { deficit_materia: number }>;
-  }>
+  }>,
+  anioCorte: number = 2031
 ): EgresadosDistribucionExacta {
-  const TOTAL_INSCRITOS_GLOBAL = 17597;
-  const totalNacionalGlobal = Math.round(TOTAL_INSCRITOS_GLOBAL * (factorTit / 100));
+  const activeYears = COHORTES_EGRESO.filter((y) => y <= anioCorte).map(String);
 
   const cohorteEsps = egresadosProyeccionData.especialidades as Array<{
     especialidad_id: number;
     total_inscritos_2022_2026: number;
     por_dpto: Record<string, number>;
+    cohortes_inscritos?: Record<string, number>;
+    cohortes_por_dpto?: Record<string, Record<string, number>>;
   }>;
 
-  // Mapa de inscritos por carrera y depto: [esp_id][depto]
+  // Inscritos acumulados por especialidad hasta anioCorte (2027..anioCorte)
+  const inscritosPorEsp: number[] = cohorteEsps.map((esp) => {
+    if (esp.cohortes_inscritos) {
+      return activeYears.reduce((sum, yr) => sum + (esp.cohortes_inscritos?.[yr] ?? 0), 0);
+    }
+    return esp.total_inscritos_2022_2026;
+  });
+
+  const totalInscritosGlobalCorte = inscritosPorEsp.reduce((a, b) => a + b, 0);
+  const totalNacionalGlobal = Math.round(totalInscritosGlobalCorte * (factorTit / 100));
+
+  // Mapa de inscritos por carrera y depto acumulados hasta anioCorte: [esp_id][depto]
   const I: Record<number, Record<string, number>> = {};
   cohorteEsps.forEach((esp) => {
     I[esp.especialidad_id] = {};
     DEPARTAMENTOS_LIST.forEach((dep) => {
-      I[esp.especialidad_id][dep] = esp.por_dpto[normDeptoKey(dep)] || 0;
+      const depCohortes = esp.cohortes_por_dpto?.[dep] ?? esp.cohortes_por_dpto?.[normDeptoKey(dep)];
+      if (depCohortes) {
+        I[esp.especialidad_id][dep] = activeYears.reduce((sum, yr) => sum + (depCohortes[yr] ?? 0), 0);
+      } else {
+        I[esp.especialidad_id][dep] = esp.por_dpto[normDeptoKey(dep)] || 0;
+      }
     });
   });
 
   // 1. Repartir totalNacionalGlobal a las 22 carreras de forma exacta
-  const weightsEsp = cohorteEsps.map((esp) => esp.total_inscritos_2022_2026);
-  const nacPorEspArray = distributeInteger(totalNacionalGlobal, weightsEsp);
+  const nacPorEspArray = distributeInteger(totalNacionalGlobal, inscritosPorEsp);
 
   const nacionalPorEspecialidad: Record<number, number> = {};
   cohorteEsps.forEach((esp, idx) => {
@@ -115,6 +135,7 @@ export function computeDistribucionExactaEgresados(
     porEspecialidadYDeptoRadicacion,
     porEspecialidadYDeptoLocal,
     nacionalPorEspecialidad,
-    totalNacionalGlobal
+    totalNacionalGlobal,
+    totalInscritosGlobalCorte
   };
 }

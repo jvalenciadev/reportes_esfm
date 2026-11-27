@@ -11,6 +11,7 @@
  */
 
 import React, { useState, useRef, useCallback, useEffect } from "react";
+import { getSerieDepartamentalCalibrada } from "@/lib/demografiaProyeccion";
 import {
   TrendingUp,
   Maximize2,
@@ -232,20 +233,32 @@ function GraficoPremium({
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent<SVGSVGElement>) => {
-      const rect = svgRef.current?.getBoundingClientRect();
-      if (!rect) return;
-      const mx = e.clientX - rect.left - PAD.left;
+      const svg = svgRef.current;
+      if (!svg) return;
+      const ctm = svg.getScreenCTM();
+      let svgX: number;
+      if (ctm) {
+        const pt = svg.createSVGPoint();
+        pt.x = e.clientX;
+        pt.y = e.clientY;
+        svgX = pt.matrixTransform(ctm.inverse()).x;
+      } else {
+        const rect = svg.getBoundingClientRect();
+        if (!rect.width) return;
+        svgX = ((e.clientX - rect.left) / rect.width) * CHART_W;
+      }
+      const mx = svgX - PAD.left;
       const rawAnio = minAnio + (mx / INNER_W) * (maxAnio - minAnio);
       const closest = serie.reduce((prev, cur) =>
         Math.abs(cur.anio - rawAnio) < Math.abs(prev.anio - rawAnio) ? cur : prev
       );
       setHoverPunto(closest);
     },
-    [serie, minAnio, maxAnio]
+    [serie, minAnio, maxAnio, PAD.left, INNER_W, CHART_W]
   );
 
   const puntoActivo = hoverPunto ?? serie.find((p) => p.anio === anioSeleccionado) ?? serie[0];
-  const aniosClave = new Set([2012, 2018, 2022, 2023, 2024, 2026, 2031, 2034]);
+  const aniosClave = new Set([2012, 2018, 2022, 2023, 2024, 2026, 2028, 2031]);
 
   return (
     <div className="relative w-full h-full select-none">
@@ -351,7 +364,7 @@ function GraficoPremium({
             textAnchor="middle"
             letterSpacing="0.03em"
           >
-            ▲ PROYECCIÓN PLANIFICADA (2027–2034)
+            ▲ PROYECCIÓN PLANIFICADA (2027–2031)
           </text>
         </g>
 
@@ -708,9 +721,9 @@ export default function MatriculaEvolucionView() {
   const serieActiva = React.useMemo(() => {
     let base: PuntoSerie[] = data.serie_nacional;
 
-    // 1. Base por Departamento, Nivel o Área
+    // 1. Base por Departamento, Nivel o Área (calibrado para Consenso Híbrido exacto por departamento)
     if (filtroDep !== "todos" && data.desagregaciones?.por_departamento?.[filtroDep]) {
-      base = data.desagregaciones.por_departamento[filtroDep];
+      base = getSerieDepartamentalCalibrada(filtroDep, data.desagregaciones.por_departamento[filtroDep]) as PuntoSerie[];
     } else if (filtroNivel !== "todos" && data.desagregaciones?.por_nivel?.[filtroNivel]) {
       base = data.desagregaciones.por_nivel[filtroNivel];
     } else if (filtroArea !== "todos" && data.desagregaciones?.por_area?.[filtroArea]) {
@@ -720,7 +733,8 @@ export default function MatriculaEvolucionView() {
     // 2. Combinación Departamento + Nivel
     if (filtroDep !== "todos" && filtroNivel !== "todos" && data.desagregaciones?.por_departamento?.[filtroDep]) {
       const shareNivel = filtroNivel === "primaria" ? 0.4655 : filtroNivel === "secundaria" ? 0.4390 : 0.0955;
-      base = data.desagregaciones.por_departamento[filtroDep].map((p) => ({
+      const depCalibrado = getSerieDepartamentalCalibrada(filtroDep, data.desagregaciones.por_departamento[filtroDep]) as PuntoSerie[];
+      base = depCalibrado.map((p) => ({
         ...p,
         matricula_real: p.matricula_real ? Math.round(p.matricula_real * shareNivel) : null,
         modelo_1_ine: p.modelo_1_ine ? Math.round(p.modelo_1_ine * shareNivel) : null,
@@ -743,7 +757,7 @@ export default function MatriculaEvolucionView() {
       }));
     }
 
-    return base;
+    return base.filter((p) => p.anio <= 2031);
   }, [data, filtroDep, filtroNivel, filtroArea]);
 
   const toggleSerie = (key: string) => {
@@ -842,10 +856,10 @@ export default function MatriculaEvolucionView() {
             DIRECCIÓN GENERAL DE FORMACIÓN DE MAESTROS (DGFM)
           </div>
           <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-            Evolución y Proyección de la Matrícula Escolar con Tasa de Cobertura (2011–2034)
+            Evolución y Proyección de la Matrícula Escolar con Tasa de Cobertura (2011–2031)
           </h2>
           <p className="text-xs text-slate-500 mt-0.5">
-            Registro Oficial del SIE hasta la fecha (2011–2026) y Proyección Planificada hacia 2034.
+            Registro Oficial del SIE hasta la fecha (2011–2026) y Proyección Planificada hacia 2031.
           </p>
         </div>
 

@@ -8,6 +8,7 @@ export interface ExportPdfParams {
   pctAbsorcionBth: number;
   tipoAsignacionEgresados: 'radicacion' | 'local';
   aplicarArima: boolean;
+  anioCorte?: number;
   pctMigracion?: number;
   totales: {
     totDeficit: number;
@@ -49,9 +50,11 @@ export function exportBalancePredictivoPdf(params: ExportPdfParams) {
     pctAbsorcionBth,
     tipoAsignacionEgresados,
     aplicarArima,
+    anioCorte = 2031,
     totales,
     especialidades
   } = params;
+  const rangoAnios = anioCorte === 2027 ? '2027' : `2027–${anioCorte}`;
 
   const fechaHoy = new Date().toLocaleDateString('es-BO', {
     day: '2-digit',
@@ -149,7 +152,7 @@ export function exportBalancePredictivoPdf(params: ExportPdfParams) {
       <!-- PARÁMETROS ACTIVOS EN LA SIMULACIÓN -->
       <div class="params">
         <strong>Variables de Simulación Activas:</strong>
-        Titulación ESFM: <b>${factorTit}%</b> |
+        Titulación ESFM (Hasta ${anioCorte}): <b>${factorTit}%</b> (Cohortes ${rangoAnios}) |
         Jubilación Docente: <b>${tasaJubilacion}%</b> |
         Prejubilación 26-31: <b>${tasaPrejubilacion}%</b> |
         Reemplazo No Pertinentes: <b>${tasaReemplazoNoPert}%</b> |
@@ -180,9 +183,9 @@ export function exportBalancePredictivoPdf(params: ExportPdfParams) {
           <div class="kpi-sub">Aulas requeridas al 2031</div>
         </div>
         <div class="kpi" style="background:#ecfdf5;">
-          <div class="kpi-title" style="color:#065f46;">Oferta Egresados ESFM</div>
+          <div class="kpi-title" style="color:#065f46;">Oferta Egresados ESFM (${rangoAnios})</div>
           <div class="kpi-val" style="color:#047857;">${fmt(totales.totEgresados)}</div>
-          <div class="kpi-sub">Cohortes activas (factor ${factorTit}%)</div>
+          <div class="kpi-sub">Cohortes ${rangoAnios} (factor ${factorTit}%)</div>
         </div>
         <div class="kpi" style="background:${totales.totBrecha > 0 ? '#fef2f2' : '#ecfdf5'};">
           <div class="kpi-title" style="color:${totales.totBrecha > 0 ? '#991b1b' : '#065f46'};">

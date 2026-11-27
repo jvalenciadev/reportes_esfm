@@ -8,6 +8,7 @@ import PertinenciaView from './views/PertinenciaView';
 import { BalancePredictivoView } from './views/BalancePredictivoView';
 import MapaUeView from './views/MapaUeView';
 import InscritosEsfmView from './views/InscritosEsfmView';
+import { ResumenDepartamentalView } from './views/ResumenDepartamentalView';
 import Image from 'next/image';
 import { ShieldCheck, Menu, Sun, Moon } from 'lucide-react';
 import { ExecutiveDashboardView } from './views/ExecutiveDashboardView';
@@ -21,6 +22,10 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
   const [currentTab, setCurrentTab] = useState<SourceTab>('dashboard');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const { theme, toggleTheme } = useTheme();
+
+  // Estado compartido de simulación entre Balance Predictivo y Resumen Departamental
+  const [tasaJubilacion, setTasaJubilacion] = useState<number>(20);
+  const [tasaPrejubilacion, setTasaPrejubilacion] = useState<number>(10);
 
   // Conteos consolidados
   const counts = useMemo(() => {
@@ -59,6 +64,11 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
       title: 'Matrícula Histórica ESFM (2022–2026)',
       subtitle: 'Desglose dinámico por Departamento, ESFM/UA habilitada, Especialidad y Año de formación',
       tag: 'MATRÍCULA ESFM',
+    },
+    resumen_depto: {
+      title: 'Resumen Departamental: Jubilación, Prejubilados y ARIMA',
+      subtitle: 'Predicciones territoriales de retiro docente (SICH) y tasa anual de crecimiento/decrecimiento escolar (2027–2031)',
+      tag: 'RESUMEN DEPTO',
     },
   };
 
@@ -165,8 +175,25 @@ export function DashboardShell({ initialData }: DashboardShellProps) {
           {currentTab === 'uie' && <UieDeficitView data={initialData} />}
           {currentTab === 'pertinencia' && <PertinenciaView />}
           {currentTab === 'mapa' && <MapaUeView />}
-          {currentTab === 'balance' && <BalancePredictivoView />}
+          {currentTab === 'balance' && (
+            <BalancePredictivoView
+              onOpenResumenDepto={() => setCurrentTab('resumen_depto')}
+              tasaJubilacion={tasaJubilacion}
+              setTasaJubilacion={setTasaJubilacion}
+              tasaPrejubilacion={tasaPrejubilacion}
+              setTasaPrejubilacion={setTasaPrejubilacion}
+            />
+          )}
           {currentTab === 'inscritos' && <InscritosEsfmView />}
+          {currentTab === 'resumen_depto' && (
+            <ResumenDepartamentalView
+              onBackToBalance={() => setCurrentTab('balance')}
+              tasaJubilacion={tasaJubilacion}
+              setTasaJubilacion={setTasaJubilacion}
+              tasaPrejubilacion={tasaPrejubilacion}
+              setTasaPrejubilacion={setTasaPrejubilacion}
+            />
+          )}
         </main>
       </div>
     </div>

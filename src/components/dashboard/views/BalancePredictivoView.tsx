@@ -30,12 +30,14 @@ import {
   Wrench,
   Calculator,
   Download,
-  Printer
+  Printer,
+  Calendar
 } from 'lucide-react';
 import { getNivelEspecialidad, NivelCodigo, NIVELES_CONFIG } from '@/lib/constants/especialidadNiveles';
 import egresadosProyeccionData from '@/data/egresados_esfm_proyeccion.json';
 import { exportBalancePredictivoPdf } from '@/lib/exportBalancePdf';
 import { computeDistribucionExactaEgresados } from '@/lib/egresadosAllocation';
+import { getVariacionDemograficaPct, NivelDemografico } from '@/lib/demografiaProyeccion';
 
 // ─── Interfaces ──────────────────────────────────────────────────────────────
 
@@ -99,7 +101,21 @@ interface BalancePayload {
 
 const BTH_SPECIALTY_IDS = new Set([7, 13, 14, 15, 16, 18, 21, 22]);
 
-export function BalancePredictivoView() {
+interface BalancePredictivoViewProps {
+  onOpenResumenDepto?: () => void;
+  tasaJubilacion?: number;
+  setTasaJubilacion?: (v: number) => void;
+  tasaPrejubilacion?: number;
+  setTasaPrejubilacion?: (v: number) => void;
+}
+
+export function BalancePredictivoView({
+  onOpenResumenDepto,
+  tasaJubilacion: propTasaJub,
+  setTasaJubilacion: propSetTasaJub,
+  tasaPrejubilacion: propTasaPrejub,
+  setTasaPrejubilacion: propSetTasaPrejub,
+}: BalancePredictivoViewProps = {}) {
   const [data, setData] = useState<BalancePayload | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -111,19 +127,24 @@ export function BalancePredictivoView() {
   const [selectedEspId, setSelectedEspId] = useState<number | null>(null);
 
   // Variables Dinámicas del Tráfico / Simulación (Ajustables de 1 en 1)
-  const [tasaJubilacion, setTasaJubilacion] = useState<number>(20);         // % de jubilados que se retiran (de 1 en 1)
-  const [tasaPrejubilacion, setTasaPrejubilacion] = useState<number>(10);     // % de prejubilados que se retiran en 2026-2031 (de 1 en 1)
+  const [localTasaJub, setLocalTasaJub] = useState<number>(20);
+  const [localTasaPrejub, setLocalTasaPrejub] = useState<number>(10);
+  const tasaJubilacion = propTasaJub ?? localTasaJub;
+  const setTasaJubilacion = propSetTasaJub ?? setLocalTasaJub;
+  const tasaPrejubilacion = propTasaPrejub ?? localTasaPrejub;
+  const setTasaPrejubilacion = propSetTasaPrejub ?? setLocalTasaPrejub;
   const [tasaReemplazoNoPert, setTasaReemplazoNoPert] = useState<number>(30); // % de no pertinentes a sustituir (de 1 en 1)
   const [reemplazarMedia, setReemplazarMedia] = useState<boolean>(false);     // Incluir Media Pertinencia (A)
   const [factorTit, setFactorTit] = useState<number>(82);                     // Factor de titulación de egresados ESFM (70 a 100%, de 1 en 1)
   const [pctAbsorcionBth, setPctAbsorcionBth] = useState<number>(70);         // % de absorción de las 88,063 horas BTH (Default 70%)
   const [tipoAsignacionEgresados, setTipoAsignacionEgresados] = useState<'radicacion' | 'local'>('radicacion'); // 1. Radicación Real (Retorno) vs 2. Egresados Sede Física
   const [aplicarArima, setAplicarArima] = useState<boolean>(true);            // Aplicar ajuste de matrícula ARIMA
+  const [anioCorte, setAnioCorte] = useState<2027 | 2028 | 2029 | 2030 | 2031>(2031); // Horizonte de proyección Titulación ESFM (2027 hasta anioCorte)
 
   // Control de interfaz: Panel de variables y Glosario
   const [mostrarVariables, setMostrarVariables] = useState<boolean>(true);
   const [mostrarGuia, setMostrarGuia] = useState<boolean>(false);
-  const [mostrarEjercicio, setMostrarEjercicio] = useState<boolean>(true);
+  const [mostrarEjercicio, setMostrarEjercicio] = useState<boolean>(false);
 
   // Cargar datos
   useEffect(() => {
@@ -189,8 +210,17 @@ export function BalancePredictivoView() {
   // Cálculo de Distribución Exacta Entera (Hamilton) para que los 9 departamentos sumen exactamente el Nacional
   const distribucionExacta = useMemo(() => {
     if (!data?.especialidades) return null;
-    return computeDistribucionExactaEgresados(factorTit, data.especialidades);
-  }, [data, factorTit]);
+    return computeDistribucionExactaEgresados(factorTit, data.especialidades, anioCorte);
+  }, [data, factorTit, anioCorte]);
+
+  const rangoAniosLabel = anioCorte === 2027 ? '2027' : `2027–${anioCorte}`;
+
+  // Tasa Consenso Híbrido (INE + ARIMA) unificada por departamento, nivel y año de corte (2027..2031)
+  // Cuadra 100% con Dashboard Ejecutivo (Evolución de Matrícula) y Resumen Departamental
+  const tasaArimaDinamica = useMemo(() => {
+    const nivelParam = (filtroNivel || 'TODOS') as NivelDemografico;
+    return getVariacionDemograficaPct(filtroDepto, anioCorte, 'hibrido', nivelParam);
+  }, [filtroDepto, anioCorte, filtroNivel]);
 
   // Cálculo Dinámico Multivariable por Especialidad
   const especialidadesCalculadas = useMemo(() => {
@@ -206,6 +236,7 @@ export function BalancePredictivoView() {
       .map((esp) => {
         const m = filtroDepto === 'TODOS' ? esp.nacional : (esp.por_departamento[filtroDepto] || esp.nacional);
         const esBth = BTH_SPECIALTY_IDS.has(esp.especialidad_id);
+        const nivelEsp = getNivelEspecialidad(esp.especialidad_id, esp.nombre).nivelCodigo as NivelDemografico;
 
         // 1. Absorción equitativa (1/8) de las 88,063 horas BTH a las 8 carreras técnicas
         const itemsBthAbsorbidos = esBth ? Math.round((m.items_bth_bolsa || 0) * (pctAbsorcionBth / 100)) : 0;
@@ -241,8 +272,9 @@ export function BalancePredictivoView() {
 
         const egresadosAjustados = tipoAsignacionEgresados === 'local' ? egrLocalAjustado : egrRadicacionAjustado;
 
-        // 5. Parámetros exógenos: Demografía ARIMA (INE 2031)
-        const tasaArima = aplicarArima ? m.crecimiento_arima_pct : 0.0;
+        // 5. Parámetros exógenos: Demografía Consenso Híbrido por Nivel de Especialidad (INE + ARIMA 2027..anioCorte)
+        const tasaArimaNivel = getVariacionDemograficaPct(filtroDepto, anioCorte, 'hibrido', nivelEsp);
+        const tasaArima = aplicarArima ? tasaArimaNivel : 0.0;
         const saldoMig = 0;
 
         // 6. Necesidad Bruta:
@@ -283,6 +315,7 @@ export function BalancePredictivoView() {
     factorTit,
     tipoAsignacionEgresados,
     aplicarArima,
+    tasaArimaDinamica,
     distribucionExacta
   ]);
 
@@ -414,6 +447,7 @@ export function BalancePredictivoView() {
                 pctAbsorcionBth,
                 tipoAsignacionEgresados,
                 aplicarArima,
+                anioCorte,
                 totales,
                 especialidades: especialidadesCalculadas
               })}
@@ -423,6 +457,19 @@ export function BalancePredictivoView() {
               <Download className="w-4 h-4 text-emerald-200" />
               <span>Descargar Informe PDF</span>
             </button>
+
+            {/* Botón Resumen Departamental (Jubilación, Prejubilados y ARIMA) */}
+            {onOpenResumenDepto && (
+              <button
+                type="button"
+                onClick={onOpenResumenDepto}
+                title="Abrir módulo de Resumen por Departamento: Jubilación, Prejubilación y ARIMA Anual (2027-2031)"
+                className="flex items-center gap-2 px-3.5 py-2 rounded-2xl text-xs font-bold transition-all bg-[#0f2942] hover:bg-[#1a3a5c] text-[#f1d07c] shadow-sm border border-[#c9a751]/40 cursor-pointer"
+              >
+                <Building2 className="w-4 h-4 text-[#c9a751]" />
+                <span>Resumen por Depto (Jub. / ARIMA)</span>
+              </button>
+            )}
 
             {/* Botón para abrir Ejercicio Demanda Bruta */}
             <button
@@ -487,7 +534,7 @@ export function BalancePredictivoView() {
 
           <div className="bg-blue-50/70 rounded-2xl p-4 border border-blue-200">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-black text-blue-700 uppercase tracking-wider">4. Egresados ESFM ({factorTit}%)</span>
+              <span className="text-[10px] font-black text-blue-700 uppercase tracking-wider">4. Egresados ESFM ({rangoAniosLabel} · {factorTit}%)</span>
               <GraduationCap className="w-3.5 h-3.5 text-blue-500" />
             </div>
             <span className="text-xl font-black text-blue-900 mt-1 block tabular-nums">{fmt(totales.totEgresados)}</span>
@@ -992,7 +1039,9 @@ export function BalancePredictivoView() {
               {/* Variable 5: Titulación ESFM y Asignación de Egresados */}
               <div className="space-y-1.5 bg-white p-3 rounded-xl border border-slate-200 shadow-2xs">
                 <div className="flex justify-between items-center">
-                  <span className="font-bold text-slate-700">Titulación ESFM:</span>
+                  <span className="font-bold text-slate-700" title={`Proyección acumulada de egresados titulados ESFM (${rangoAniosLabel})`}>
+                    Titulación ESFM ({rangoAniosLabel}):
+                  </span>
                   <div className="flex items-center gap-0.5">
                     <input
                       type="number"
@@ -1015,6 +1064,9 @@ export function BalancePredictivoView() {
                   onChange={(e) => setFactorTit(Number(e.target.value))}
                   className="w-full accent-blue-600 cursor-pointer"
                 />
+                <div className="flex items-center justify-between text-[9px] text-slate-500">
+                  <span>Base cohortes {rangoAniosLabel}: <strong className="text-blue-700">{fmt(distribucionExacta?.totalInscritosGlobalCorte ?? 17597)}</strong> insc.</span>
+                </div>
                 <div className="flex items-center justify-between text-[9px]">
                   <span className="font-bold text-slate-600">Egresados:</span>
                   <div className="flex rounded overflow-hidden border border-slate-200">
@@ -1039,6 +1091,32 @@ export function BalancePredictivoView() {
               </div>
             </div>
           )}
+
+          {/* Barra de Proyección por Año de Egreso ESFM (2027 -> 2031) */}
+          <div className="flex flex-wrap items-center justify-between gap-2 pt-3 pb-2 border-t border-slate-100">
+            <div className="flex flex-wrap items-center gap-1.5">
+              <div className="flex items-center gap-1.5 mr-1 text-[11px] font-black text-blue-800 uppercase tracking-wider shrink-0">
+                <Calendar className="w-3.5 h-3.5 text-blue-600" />
+                <span>Proyección (Titulación ESFM + ARIMA) hasta:</span>
+              </div>
+              {([2027, 2028, 2029, 2030, 2031] as const).map((yr) => (
+                <button
+                  key={yr}
+                  type="button"
+                  onClick={() => setAnioCorte(yr)}
+                  className={`px-3 py-1.5 rounded-xl text-xs transition-all cursor-pointer ${anioCorte === yr
+                    ? 'bg-blue-700 text-white font-black shadow-xs ring-2 ring-blue-500/30'
+                    : 'bg-white text-slate-600 hover:bg-blue-50 border border-slate-200 font-semibold'
+                    }`}
+                >
+                  {yr === 2027 ? '2027' : `Hasta ${yr}`}
+                </button>
+              ))}
+            </div>
+            <span className="text-[11px] font-bold text-blue-800 bg-blue-50 px-3 py-1 rounded-xl border border-blue-200">
+              Cohortes acumuladas: <strong>{rangoAniosLabel}</strong> · Base: <strong>{fmt(distribucionExacta?.totalInscritosGlobalCorte ?? 17597)}</strong> inscritos → <strong>{fmt(totales.totEgresados)}</strong> titulados ({factorTit}%)
+            </span>
+          </div>
 
           {/* Barra Rápida de Selección de Territorio (Consolidado Nacional o por Departamento) */}
           <div className="flex flex-wrap items-center gap-1.5 pt-3 pb-1 border-t border-slate-100">
@@ -1107,7 +1185,7 @@ export function BalancePredictivoView() {
                     onChange={(e) => setAplicarArima(e.target.checked)}
                     className="accent-indigo-600 rounded cursor-pointer"
                   />
-                  Ajuste Demográfico ARIMA (INE 2031)
+                  Ajuste Demográfico ARIMA (INE {anioCorte})
                 </label>
               </div>
             </div>
@@ -1170,7 +1248,7 @@ export function BalancePredictivoView() {
                 </th>
                 <th rowSpan={2} className="py-3 px-1 text-center w-16 border-r border-slate-700 text-indigo-300 align-bottom">
                   <span>ARIMA</span>
-                  <span className="block text-[8px] font-medium text-indigo-400 normal-case">2031</span>
+                  <span className="block text-[8px] font-medium text-indigo-400 normal-case">{anioCorte}</span>
                 </th>
                 <th
                   rowSpan={2}
@@ -1189,7 +1267,7 @@ export function BalancePredictivoView() {
                 <th colSpan={2} className="py-1.5 px-2 text-center border-r border-slate-700 bg-slate-900/90 text-blue-200 border-b border-slate-700">
                   <div className="flex items-center justify-center gap-2">
                     <GraduationCap className="w-3.5 h-3.5 text-amber-300" />
-                    <span className="font-black">Oferta Egresados ESFM (Titulación: {factorTit}%)</span>
+                    <span className="font-black">Oferta Egresados ESFM {rangoAniosLabel} (Titulación: {factorTit}%)</span>
                   </div>
                   <span className="block text-[8px] font-normal text-slate-300 normal-case tracking-normal">
                     Radicación Real vs Sede Física · Clic para alternar cálculo en Brecha Neta
@@ -1426,7 +1504,11 @@ export function BalancePredictivoView() {
                   {fmt(totales.totNoPert)}
                 </td>
                 <td className="py-3 px-1 text-center border-r border-slate-800 text-indigo-300 font-mono text-[10px]">
-                  {!aplicarArima ? '0%' : (filtroDepto === 'TODOS' ? '-6.8%' : `${data.crecimiento_arima_por_depto[filtroDepto] || 0}%`)}
+                  {!aplicarArima
+                    ? '0%'
+                    : filtroNivel === 'TODOS'
+                    ? `Por Nivel (${tasaArimaDinamica >= 0 ? '+' : ''}${tasaArimaDinamica.toFixed(1)}%)`
+                    : `${tasaArimaDinamica >= 0 ? '+' : ''}${tasaArimaDinamica.toFixed(2)}%`}
                 </td>
                 <td className="py-3 px-2 text-right border-r border-slate-800 text-indigo-200 font-black tabular-nums bg-indigo-950/80">
                   {fmt(totales.totDemanda)}
